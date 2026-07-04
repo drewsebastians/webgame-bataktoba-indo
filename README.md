@@ -100,6 +100,8 @@ Di GitHub repo:
 4. Push branch `main`.
 5. Tunggu workflow selesai.
 
+Jika workflow gagal dengan pesan bahwa plan saat ini tidak mendukung GitHub Pages, repo kemungkinan masih `Private`. Untuk GitHub Pages publik pada plan gratis, ubah repo menjadi `Public` terlebih dahulu atau gunakan plan GitHub yang mendukung private Pages.
+
 URL target:
 
 ```text
