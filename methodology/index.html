@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Methodology Data Batak Toba Indonesia</title>
+    <meta name="description" content="Metodologi filtering data untuk game belajar Bahasa Batak Toba - Indonesia berbasis corpus alignment engine.">
+    <link rel="canonical" href="https://drewsebastians.github.io/webgame-bataktoba-indo/methodology/">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+  </head>
+  <body data-page="methodology">
+    <header class="site-header"><nav class="nav" aria-label="Navigasi utama"><a class="brand" href="../index.html"><span class="brand-mark">BT</span><span>Batak Toba Play</span></a><div class="nav-links"><a data-nav="home" href="../index.html">Home</a><a data-nav="games" href="../games/">Games</a><a data-nav="dictionary" href="../dictionary/">Dictionary</a><a data-nav="flashcards" href="../flashcards/">Flashcards</a><a data-nav="methodology" href="../methodology/">Methodology</a></div></nav></header>
+    <main class="main content">
+      <section class="page-heading">
+        <p class="eyebrow">Methodology</p>
+        <h1>Bagaimana subset data dipilih</h1>
+      </section>
+      <p>Data berasal dari repo <a href="https://github.com/drewsebastians/batak-indo-alignment-engine">batak-indo-alignment-engine</a>. Untuk MVP ini, website memakai subset kecil dari kandidat alignment yang punya label high confidence atau medium confidence.</p>
+      <h2>Kriteria filtering</h2>
+      <ul>
+        <li>Batak dan Indonesia sama-sama terisi.</li>
+        <li>Hanya kandidat high_confidence dan medium_confidence dari pipeline co-occurrence.</li>
+        <li>Stopword, tanda baca, duplikat, token terlalu pendek, token terlalu panjang, dan simbol aneh dibuang.</li>
+        <li>Nama diri yang jelas dibuang secara konservatif agar latihan lebih condong ke kosakata.</li>
+        <li>Kalimat pendek dipakai sebagai fitur beta dengan batas panjang ketat.</li>
+      </ul>
+      <h2>Batasan penting</h2>
+      <p>Confidence adalah sinyal statistik dari corpus, bukan jaminan arti. Pasangan terjemahan bisa punya variasi, konteks khusus, atau error. Website ini adalah alat belajar dan eksplorasi, bukan otoritas linguistik final.</p>
+      <p>Label kualitas di dictionary memakai istilah sederhana: high confidence, medium confidence, dan corpus-derived.</p>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><span>Transparan dulu, sempurna nanti.</span><div class="footer-links"><a href="../data-source/">Data Source</a><a href="../dictionary/">Dictionary</a></div></div></footer>
+    <script type="module" src="../assets/js/app.js"></script>
+  </body>
+</html>
+

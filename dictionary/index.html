@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mini Dictionary Batak Toba Indonesia</title>
+    <meta name="description" content="Cari pasangan kata Batak Toba - Indonesia dari subset corpus static dengan label kualitas sederhana.">
+    <link rel="canonical" href="https://drewsebastians.github.io/webgame-bataktoba-indo/dictionary/">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+  </head>
+  <body data-page="dictionary">
+    <header class="site-header">
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="../index.html"><span class="brand-mark">BT</span><span>Batak Toba Play</span></a>
+        <div class="nav-links">
+          <a data-nav="home" href="../index.html">Home</a><a data-nav="games" href="../games/">Games</a><a data-nav="dictionary" href="../dictionary/">Dictionary</a><a data-nav="flashcards" href="../flashcards/">Flashcards</a><a data-nav="methodology" href="../methodology/">Methodology</a>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <section class="page-heading">
+        <p class="eyebrow">Mini dictionary</p>
+        <h1>Cari kata Batak Toba atau Indonesia</h1>
+        <p class="lead">Hasil dibatasi agar tetap ringan. Label kualitas membantu membedakan kandidat confidence tinggi, medium, dan corpus-derived.</p>
+      </section>
+      <section class="game-panel" id="app-error">
+        <div class="search-box">
+          <input class="input" id="dictionary-search" type="search" placeholder="Contoh: miskin, pogos, pedang, podang" aria-label="Cari kata">
+        </div>
+        <div class="results" id="dictionary-results" aria-live="polite"></div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><span>Pasangan kata adalah kandidat belajar, bukan kamus final.</span><div class="footer-links"><a href="../methodology/">Methodology</a><a href="../games/">Games</a></div></div></footer>
+    <script type="module" src="../assets/js/app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Bahasa Batak Toba Indonesia</title>
+    <meta name="description" content="Mainkan tebak arti, reverse quiz, matching pairs, dan latihan kalimat pendek Batak Toba - Indonesia.">
+    <link rel="canonical" href="https://drewsebastians.github.io/webgame-bataktoba-indo/games/">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+  </head>
+  <body data-page="games">
+    <header class="site-header">
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="../index.html"><span class="brand-mark">BT</span><span>Batak Toba Play</span></a>
+        <div class="nav-links">
+          <a data-nav="home" href="../index.html">Home</a>
+          <a data-nav="games" href="../games/">Games</a>
+          <a data-nav="dictionary" href="../dictionary/">Dictionary</a>
+          <a data-nav="flashcards" href="../flashcards/">Flashcards</a>
+          <a data-nav="methodology" href="../methodology/">Methodology</a>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <section class="page-heading">
+        <p class="eyebrow">Game latihan</p>
+        <h1>Mode latihan Bahasa Batak Toba - Indonesia</h1>
+        <p class="lead">Pilih mode, jawab, lihat feedback, lalu lanjut ronde berikutnya. Progress total tersimpan di browser ini.</p>
+      </section>
+      <section class="tool-shell" id="app-error">
+        <aside class="side-panel">
+          <h2>Mode</h2>
+          <div class="mode-list">
+            <button class="mode-button" type="button" data-mode="meaning">Tebak Arti <span>4 opsi</span></button>
+            <button class="mode-button" type="button" data-mode="reverse">Reverse Quiz <span>4 opsi</span></button>
+            <button class="mode-button" type="button" data-mode="matching">Matching Pairs <span>5 pasang</span></button>
+            <button class="mode-button" type="button" data-mode="sentence">Kalimat Pendek <span>beta</span></button>
+          </div>
+          <div class="scorebar" style="margin-top:1rem">
+            <span class="pill">Total <span data-progress-answered>0</span></span>
+            <span class="pill">Benar <span data-progress-correct>0</span></span>
+          </div>
+        </aside>
+        <section class="game-panel" id="game-panel" aria-live="polite">
+          <p>Memuat game...</p>
+        </section>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner"><span>Subset awal untuk validasi pengalaman bermain.</span><div class="footer-links"><a href="../methodology/">Methodology</a><a href="../data-source/">Data Source</a></div></div>
+    </footer>
+    <script type="module" src="../assets/js/app.js"></script>
+  </body>
+</html>
+

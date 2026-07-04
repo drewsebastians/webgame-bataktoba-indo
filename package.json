@@ -1,0 +1,12 @@
+{
+  "name": "webgame-bataktoba-indo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:data": "python tools/build-learning-data.py",
+    "check": "node tools/check-site.mjs",
+    "start": "python -m http.server 4173"
+  }
+}
+
