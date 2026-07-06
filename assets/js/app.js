@@ -38,7 +38,7 @@ async function initHome() {
     const { metadata } = await loadLearningItems();
     statNode.innerHTML = `
       <div class="stat"><strong>${metadata.counts.wordPairs}</strong><span>pasangan kata</span></div>
-      <div class="stat"><strong>${metadata.counts.sampleSentences}</strong><span>kalimat beta</span></div>
+      <div class="stat"><strong>${metadata.counts.phrasePairs}</strong><span>frasa pendek</span></div>
       <div class="stat"><strong>5</strong><span>mode latihan</span></div>
       <div class="stat"><strong>0</strong><span>login dibutuhkan</span></div>
     `;
@@ -48,6 +48,15 @@ async function initHome() {
 }
 
 function formatQuality(item) {
+  if (item.source_flag === "beta-unreviewed") {
+    return "Beta - sumber corpus keagamaan, belum direview";
+  }
+  if (item.source_flag === "reviewed") {
+    return "reviewed";
+  }
+  if (item.source_flag === "corpus-derived") {
+    return item.quality || "corpus-derived";
+  }
   return item.quality || "corpus-derived";
 }
 
@@ -78,7 +87,7 @@ async function initDictionary() {
           <article class="result-row">
             <strong>${item.batak}</strong>
             <span>${item.indonesia}</span>
-            <small class="pill">${formatQuality(item)}</small>
+            <small class="pill" data-source-flag="${item.source_flag || "corpus-derived"}">${formatQuality(item)}</small>
           </article>
         `,
       )
@@ -164,7 +173,7 @@ async function initGames() {
       <p class="feedback" aria-live="polite" id="feedback"></p>
       <div class="action-row">
         <button class="button" type="button" id="next-question" disabled>Next</button>
-        <span class="pill">${formatQuality(current)}</span>
+        <span class="pill" data-source-flag="${current.source_flag || "corpus-derived"}">${formatQuality(current)}</span>
       </div>
     `;
 
@@ -288,7 +297,7 @@ async function initFlashcards() {
       <div class="scorebar">
         <span class="pill">${index + 1}/${items.length}</span>
         <span class="pill">Diketahui <span data-progress-known>${getProgress().known.length}</span></span>
-        <span class="pill">${formatQuality(item)}</span>
+        <span class="pill" data-source-flag="${item.source_flag || "corpus-derived"}">${formatQuality(item)}</span>
       </div>
       <button class="flashcard" type="button" id="flashcard">
         <strong>${flipped ? item.indonesia : item.batak}</strong>
@@ -348,4 +357,3 @@ main().catch((error) => {
     target.insertAdjacentHTML("afterbegin", `<div class="card">Data belum bisa dimuat: ${error.message}</div>`);
   }
 });
-
