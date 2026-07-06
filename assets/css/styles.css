@@ -360,6 +360,24 @@ h3 {
   padding: 0.25rem 0.7rem;
 }
 
+.pill[data-source-flag="reviewed"] {
+  border-color: rgba(19, 111, 99, 0.35);
+  background: rgba(19, 111, 99, 0.1);
+  color: var(--teal);
+}
+
+.pill[data-source-flag="corpus-derived"] {
+  border-color: rgba(47, 95, 152, 0.32);
+  background: rgba(47, 95, 152, 0.08);
+  color: var(--blue);
+}
+
+.pill[data-source-flag="beta-unreviewed"] {
+  border-color: rgba(217, 154, 36, 0.45);
+  background: rgba(217, 154, 36, 0.12);
+  color: #7c520c;
+}
+
 .prompt {
   margin: 1rem 0;
   border: 1px solid var(--line);
@@ -535,6 +553,13 @@ h3 {
   margin-top: 0.45rem;
 }
 
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   background: #fff;
@@ -590,7 +615,8 @@ h3 {
 
   .options,
   .matching-board,
-  .result-row {
+  .result-row,
+  .article-list {
     grid-template-columns: 1fr;
   }
 }
@@ -618,4 +644,3 @@ h3 {
     width: 100%;
   }
 }
-
