@@ -237,6 +237,22 @@ h3 {
   padding: clamp(2.5rem, 6vw, 5rem) 0;
 }
 
+.ad-slot {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  margin: clamp(2rem, 5vw, 4rem) 0;
+  border: 1px dashed rgba(95, 101, 111, 0.35);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.ad-slot::before {
+  content: "Ruang iklan";
+}
+
 .section.band {
   width: 100vw;
   margin-left: calc(50% - 50vw);
