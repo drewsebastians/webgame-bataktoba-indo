@@ -1,6 +1,6 @@
 # Batak Toba Play
 
-Website game belajar Bahasa Batak Toba - Indonesia yang berjalan full static di GitHub Pages.
+Website game belajar Bahasa Batak Toba - Indonesia yang berjalan full static di Cloudflare Pages.
 
 Fokus MVP ini sengaja kecil: website jadi, game playable, dan data memakai subset corpus yang lebih mudah diaudit. Corpus besar bisa menjadi tahap berikutnya setelah struktur produk terbukti enak dipakai.
 
@@ -86,27 +86,31 @@ Alternatif tanpa `npm`:
 node tools/check-site.mjs
 ```
 
-Check ini memastikan file penting ada, data minimal terisi, dan link asset tidak memakai root absolute path yang rawan pecah di GitHub Pages repo path.
+Check ini memastikan file penting ada, data minimal terisi, dan link asset tidak memakai root absolute path yang rawan pecah saat dipublish sebagai static website.
 
-## Deploy GitHub Pages
+## Deploy Cloudflare Pages
 
-Workflow `.github/workflows/deploy-pages.yml` akan deploy otomatis saat push ke `main`.
+Repo ini disiapkan untuk Cloudflare Pages. File `wrangler.toml` memakai output folder root karena website adalah static HTML/CSS/JS tanpa build output terpisah.
 
-Di GitHub repo:
+Di Cloudflare Pages:
 
-1. Buka Settings.
-2. Masuk Pages.
-3. Pilih Source: GitHub Actions.
-4. Push branch `main`.
-5. Tunggu workflow selesai.
+1. Hubungkan repo GitHub `drewsebastians/webgame-bataktoba-indo`.
+2. Pilih production branch: `main`.
+3. Pilih framework preset: `None` atau static HTML.
+4. Build command: kosongkan, atau isi `npm run check` jika ingin validasi saat deploy.
+5. Build output directory: `.`.
+6. Root directory: `/`.
+7. Simpan dan deploy.
 
-Jika workflow gagal dengan pesan bahwa plan saat ini tidak mendukung GitHub Pages, repo kemungkinan masih `Private`. Untuk GitHub Pages publik pada plan gratis, ubah repo menjadi `Public` terlebih dahulu atau gunakan plan GitHub yang mendukung private Pages.
+Cloudflare juga akan membaca `_headers` untuk security/cache headers dan `_redirects` untuk mengarahkan path lama `/webgame-bataktoba-indo/*` ke path root Cloudflare.
 
 URL target:
 
 ```text
-https://drewsebastians.github.io/webgame-bataktoba-indo/
+https://webgame-bataktoba-indo.pages.dev/
 ```
+
+Jika Cloudflare memakai project name berbeda, update canonical URL di halaman HTML, `sitemap.xml`, dan `robots.txt` ke domain final tersebut.
 
 ## Struktur
 

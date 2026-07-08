@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Public trust, guide, and learning pages are included in sitemap.xml.
-Sitemap: https://drewsebastians.github.io/webgame-bataktoba-indo/sitemap.xml
+Sitemap: https://webgame-bataktoba-indo.pages.dev/sitemap.xml
