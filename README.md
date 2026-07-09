@@ -104,6 +104,14 @@ Di Cloudflare Pages:
 
 Cloudflare juga akan membaca `_headers` untuk security/cache headers dan `_redirects` untuk mengarahkan path lama `/webgame-bataktoba-indo/*` ke path root Cloudflare.
 
+Jika dashboard menampilkan field Deploy command, gunakan:
+
+```bash
+npx wrangler pages deploy . --project-name=webgame-bataktoba-indo
+```
+
+Jangan gunakan `npx wrangler deploy` untuk Cloudflare Pages. File `wrangler.toml` tetap diberi fallback `[assets]` agar command tersebut tidak gagal membaca folder asset, tetapi jalur yang benar untuk Pages adalah `wrangler pages deploy`.
+
 URL target:
 
 ```text

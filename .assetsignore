@@ -1,0 +1,13 @@
+.assetsignore
+.git/
+.github/
+.gitignore
+README.md
+node_modules/
+package.json
+package-lock.json
+bun.lock
+pnpm-lock.yaml
+tools/
+wrangler.toml
+*.log
