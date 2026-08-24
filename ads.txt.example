@@ -1,0 +1,9 @@
+# ads.txt untuk Batak Toba Play
+#
+# JANGAN rename file ini menjadi ads.txt sampai AdSense benar-benar aktif
+# dengan Publisher ID valid. Placeholder pub-0000000000000000 akan gagal
+# verifikasi Google dan tidak boleh dideploy sebagai ads.txt asli.
+#
+# Format: google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Ganti pub-XXXXXXXXXXXXXXXX dengan Publisher ID dari akun AdSense Anda.
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

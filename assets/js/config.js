@@ -10,10 +10,11 @@ export const SITE_CONFIG = Object.freeze({
   baseUrl: "https://webgame-bataktoba-indo.pages.dev/",
   repositoryIssuesUrl: "https://github.com/drewsebastians/webgame-bataktoba-indo/issues/new",
   dataDir: "../../data/published/",
+  adsensePublisherId: "",
   features: Object.freeze({
     analytics: false,
     ads: false,
-    pwa: false,
+    pwa: true,
   }),
 });
 

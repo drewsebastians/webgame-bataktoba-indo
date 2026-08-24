@@ -1,0 +1,29 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      # The project has zero npm dependencies, so no install step is needed.
+      # Corpus databases are NOT rebuilt in CI (they require the 1.6 GB local
+      # alignment DB); CI validates the committed published data instead.
+
+      - name: Site check (links, data schema, SEO, sitemap)
+        run: npm run check
+
+      - name: Unit and data tests
+        run: npm test
+
+      - name: E2E smoke
+        run: npm run e2e

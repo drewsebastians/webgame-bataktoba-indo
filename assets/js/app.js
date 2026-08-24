@@ -1,10 +1,13 @@
 ﻿import { loadLearningItems, loadLessons, loadSentences, loadWordPairs } from "./data.js";
+import { SITE_CONFIG } from "./config.js";
 import { getProgress, initProgress, markFlashcard, recordAnswer, saveProgress } from "./progress.js";
 import { el, replaceChildren } from "./utils/dom.js";
 import { normalizeSearch } from "./utils/normalize.js";
 import { buildCorrectionUrl } from "./utils/corrections.js";
 import { createQuizRunner } from "./game/question-engine.js";
 import { buildDailyQueue, computeStreak, summarizeSession } from "./game/session.js";
+import { track } from "./analytics.js";
+import { sweepPlaceholders } from "./ads.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -24,6 +27,16 @@ function sample(items, count) {
 
 function pill(text, extraClass = "", attrs = {}) {
   return el("span", { className: `pill ${extraClass}`.trim(), text, attrs });
+}
+
+function initNavToggle() {
+  const toggle = $(".nav-toggle");
+  const links = $("#nav-links-list");
+  if (!toggle || !links) return;
+  toggle.addEventListener("click", () => {
+    const open = links.classList.toggle("nav-open");
+    toggle.setAttribute("aria-expanded", String(open));
+  });
 }
 
 function setActiveNav() {
@@ -302,6 +315,11 @@ async function initGames() {
     else nextQuestion();
   }
 
+  function setModeWithTracking(mode) {
+    track("game_start", { mode });
+    startSession({ mode });
+  }
+
   function setMode(mode) {
     startSession({ mode });
   }
@@ -370,9 +388,15 @@ async function initGames() {
     recordAnswer(result.isCorrect, state.mode, result.itemId);
     $$(".option", panel).forEach((option) => {
       option.disabled = true;
-      if (option.dataset.answer === result.correctOptionId) option.classList.add("correct");
+      if (option.dataset.answer === result.correctOptionId) {
+        option.classList.add("correct");
+        option.dataset.state = "correct";
+      }
     });
-    if (!result.isCorrect) button.classList.add("wrong");
+    if (!result.isCorrect) {
+      button.classList.add("wrong");
+      button.dataset.state = "wrong";
+    }
     const correctLabel = state.current.options.find(
       (option) => option.id === result.correctOptionId,
     )?.label;
@@ -417,7 +441,30 @@ async function initGames() {
     }
     state = { ...state, current: question, locked: false };
     renderQuiz();
+    const promptNode = $(".prompt-text", panel);
+    if (promptNode && state.answered > 0) {
+      promptNode.setAttribute("tabindex", "-1");
+      promptNode.focus({ preventScroll: false });
+    }
   }
+
+  function handleQuizKeyboard(event) {
+    if (state.mode === "matching") return;
+    if (!["1", "2", "3", "4"].includes(event.key)) return;
+    const target = event.target;
+    if (target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) {
+      return;
+    }
+    const options = $$(".option", panel);
+    const index = Number(event.key) - 1;
+    const option = options[index];
+    if (option && !option.disabled && !state.locked) {
+      event.preventDefault();
+      option.click();
+    }
+  }
+
+  document.addEventListener("keydown", handleQuizKeyboard);
 
   function renderMatching() {
     const pairs = sample(wordPool, 5);
@@ -503,6 +550,12 @@ async function initGames() {
   function renderSummary({ finishedReview = false } = {}) {
     const summary = summarizeSession(state.sessionAnswers);
     if (!finishedReview) recordCompletedSession(summary);
+    track(finishedReview ? "mistake_review_complete" : "session_complete", {
+      mode: state.mode,
+      answered: String(summary.answered),
+      correct: String(summary.correct),
+      meaningful: String(summary.isMeaningful),
+    });
     renderSummaryPanel(summary, finishedReview);
   }
 
@@ -635,7 +688,7 @@ async function initGames() {
   }
 
   $$(".mode-button[data-mode]").forEach((button) =>
-    button.addEventListener("click", () => setMode(button.dataset.mode)),
+    button.addEventListener("click", () => setModeWithTracking(button.dataset.mode)),
   );
   $$(".session-size-button").forEach((button) =>
     button.addEventListener("click", () => {
@@ -923,14 +976,27 @@ function renderMiniPractice(root, themeItems, fullPool) {
 
 async function main() {
   await initProgress();
+  initNavToggle();
   setActiveNav();
   updateProgressBadges();
+  registerServiceWorker();
+  sweepPlaceholders();
   const page = document.body.dataset.page;
   if (page === "home") await initHome();
   if (page === "dictionary") await initDictionary();
   if (page === "games") await initGames();
   if (page === "flashcards") await initFlashcards();
   if (page === "learn-topic") await initLearn();
+}
+
+function registerServiceWorker() {
+  if (!SITE_CONFIG.features.pwa) return;
+  if (!("serviceWorker" in navigator)) return;
+  // Resolve relative to this module so the path is correct on every page depth.
+  const swUrl = new URL("../../sw.js", import.meta.url);
+  navigator.serviceWorker.register(swUrl).catch(() => {
+    /* offline support is progressive enhancement; never block the app */
+  });
 }
 
 main().catch((error) => {

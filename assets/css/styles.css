@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --ink: #202124;
   --muted: #5f656f;
   --paper: #fffaf2;
@@ -237,21 +237,6 @@ h3 {
   padding: clamp(2.5rem, 6vw, 5rem) 0;
 }
 
-.ad-slot {
-  display: grid;
-  place-items: center;
-  min-height: 96px;
-  margin: clamp(2rem, 5vw, 4rem) 0;
-  border: 1px dashed rgba(95, 101, 111, 0.35);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.55);
-  color: var(--muted);
-  font-size: 0.86rem;
-}
-
-.ad-slot::before {
-  content: "Ruang iklan";
-}
 
 .section.band {
   width: 100vw;
@@ -728,4 +713,85 @@ h3 {
 
 .result-row[aria-expanded="true"] {
   border-color: var(--gold);
+}
+
+/* --- Accessibility: skip link, nav toggle, reduced motion, touch targets --- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.nav-toggle[aria-expanded="true"] {
+  border-color: var(--gold);
+}
+
+@media (max-width: 720px) {
+  .nav {
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    display: inline-flex;
+  }
+  .nav-links {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    padding-bottom: 0.75rem;
+  }
+  .nav-links.nav-open {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.option,
+.match-card,
+.mode-button,
+.button {
+  min-height: 44px;
+}
+
+.option[data-state="correct"]::after {
+  content: " ?";
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.option[data-state="wrong"]::after {
+  content: " ?";
+  color: var(--red);
+  font-weight: 700;
 }

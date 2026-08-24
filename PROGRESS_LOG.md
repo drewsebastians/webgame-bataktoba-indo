@@ -96,19 +96,93 @@ Tests: 78 pass, 0 fail.
 
 ---
 
-## Belum dikerjakan (urutan berikutnya)
+## Status per 24 Agustus 2026 (OpenCode session 2)
 
-- Task 7–8: lesson system + konten halaman belajar substantif (angka, keluarga,
-  dll.) — butuh seleksi item tematik dari published pool; halaman tanpa materi
-  cukup harus noindex/draft.
-- Task 9: dictionary lanjutan (bidirectional normalized search, filter, detail,
-  study list, practice) + correction workflow (GitHub issue prefilled).
-- Task 10: SEO automation (sitemap generator dari registry, OG/Twitter
-  konsisten, breadcrumb).
-- Task 11: accessibility (skip link, keyboard 1–4, focus management, mobile nav).
-- Task 12: PWA + caching strategy (hapus `immutable` untuk asset unversioned).
-- Task 13: analytics adapter default-off.
-- Task 14: AdSense readiness (hapus placeholder "Ruang iklan", ad component
-  default-off, ads.txt contoh).
-- Task 15: CI GitHub Actions menjalankan `npm run verify` + e2e.
-- Task 16: final independent audit.
+### Task 7 — Lesson system: SELESAI
+
+- Tagging tema via `content/themes/keywords.json` (exact normalized match,
+  hanya melabeli item corpus yang sudah ada).
+- `data/published/lessons.json`: registry dengan aturan publikasi keras
+  (minimal 6 item corpus per tema), review rollup dihitung dari status anggota
+  (tidak ada klaim human review), draft terpisah dari published.
+- Suplemen editorial (`content/curated/draft-vocabulary.json`) berstatus
+  `needs-review`, dedupe otomatis terhadap pool, tidak pernah masuk game data.
+- Hasil jujur saat ini: 0 published lesson, 6 draft (corpus Bible-derived
+  memang tipis untuk tema umum).
+
+### Task 8 — Halaman belajar substantif: SELESAI
+
+- `angka/keluarga/sapaan/makanan` merender materi nyata: tabel item corpus
+  berlabel kualitas + suplemen draft dengan banner "menunggu review penutur".
+- Mini practice aktif bila pool >= 4 item, terhubung ke progress.
+- Halaman tanpa tema tetap editorial; tidak ada halaman kosong.
+
+### Task 9 — Dictionary v2 + koreksi: SELESAI
+
+- Pencarian dua arah ternormalisasi (NFC + casefold), filter arah dan tema,
+  hitung hasil, baris detail expandable (alternatives, confidence).
+- Simpan ke daftar latihan (bucket baru `saved` di progress v2).
+- Lapor koreksi: URL GitHub issue ter-prefill via URLSearchParams.
+
+### Task 10 — SEO automation: SELESAI
+
+- Sumber tunggal `tools/site.config.json`; parity dengan `assets/js/config.js`
+  diuji.
+- `tools/generate-sitemap.mjs` menghasilkan sitemap deterministik dari halaman
+  aktual (menghormati noindex); checker membandingkan sitemap vs halaman.
+- OG + Twitter card lengkap di semua halaman (codemod + manual homepage).
+
+### Task 11 — Accessibility: SELESAI
+
+- Skip link + `#main-content` di semua halaman; nav toggle mobile dengan
+  aria-expanded; shortcut keyboard 1-4 untuk opsi jawaban; fokus pindah ke
+  prompt setelah Next; state benar/salah diberi simbol selain warna;
+  reduced-motion CSS; target sentuh minimal 44px.
+
+### Task 12 — PWA + caching: SELESAI
+
+- `manifest.webmanifest` + ikon SVG + `offline.html`.
+- `sw.js`: navigasi network-first dengan fallback offline; assets & data
+  published stale-while-revalidate; request lintas origin (ads/analytics)
+  tidak pernah diintersepsi; cache lama dihapus on activate.
+- `_headers`: immutable 1-tahun untuk asset unversioned DIHAPUS, diganti
+  revalidate harian; sw.js no-cache; X-Frame-Options ditambah.
+
+### Task 13 — Analytics foundation: SELESAI
+
+- Adapter provider-neutral default-off + consent gate localStorage.
+- Whitelist event blueprint, penolakan field terlarang (PII), nilai primitif
+  dan terbatas panjangnya. Wiring minimal: session_complete /
+  mistake_review_complete / game_start (no-op sampai flag+consent aktif).
+
+### Task 14 — AdSense readiness: SELESAI
+
+- Semua placeholder "Ruang iklan" dihapus dari HTML dan CSS.
+- `assets/js/ads.js`: inert sampai flag + publisher ID valid (format
+  ca-pub-16 digit) + consent; sweep placeholder defensif.
+- `ads.txt.example` disertakan; ads.txt asli sengaja belum ada.
+
+### Task 15 — Test suite + CI: SELESAI
+
+- `tools/e2e-smoke.mjs`: server lokal + assert halaman kunci, manifest, sw,
+  robots, data published, lessons, sitemap.
+- `npm run verify` = check + tests + e2e.
+- `.github/workflows/verify.yml` menjalankan ketiganya di push main dan PR.
+
+### Hasil verify akhir
+
+```text
+Site check passed: 447 published items, 0 warnings.
+Tests: 110+ passing.
+E2E smoke passed.
+```
+
+---
+
+## Belum dikerjakan / eksternal
+
+- Task 16: final independent audit (disarankan sesi terpisah setelah deploy stabil).
+- Human linguistic review atas suplemen draft dan core vocabulary (eksternal).
+- Review lisensi corpus, custom domain, Search Console, AdSense account (eksternal).
+- Verifikasi URL produksi Cloudflare: Workers Builds hijau, tapi hostname
+  publik perlu dicek dari dashboard Cloudflare (wrangler login expired).

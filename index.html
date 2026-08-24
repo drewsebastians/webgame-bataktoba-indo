@@ -6,9 +6,14 @@
     <title>Belajar Bahasa Batak Toba Indonesia Lewat Game</title>
     <meta name="description" content="Game belajar Bahasa Batak Toba - Indonesia dengan tebak arti, reverse quiz, flashcards, matching pairs, latihan kalimat pendek, dan mini dictionary.">
     <meta property="og:title" content="Belajar Bahasa Batak Toba Indonesia Lewat Game">
-    <meta property="og:description" content="Latihan kosakata dan kalimat pendek Batak Toba - Indonesia yang berjalan full static di Cloudflare Pages.">
+    <meta property="og:description" content="Game belajar Bahasa Batak Toba - Indonesia dengan tebak arti, reverse quiz, flashcards, matching pairs, latihan kalimat pendek, dan mini dictionary.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://webgame-bataktoba-indo.pages.dev/">
+    <meta property="og:site_name" content="Batak Toba Play">
+    <meta property="og:locale" content="id_ID">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Belajar Bahasa Batak Toba Indonesia Lewat Game">
+    <meta name="twitter:description" content="Latihan kosakata dan kalimat pendek Batak Toba - Indonesia yang berjalan full static di Cloudflare Pages.">
     <link rel="canonical" href="https://webgame-bataktoba-indo.pages.dev/">
     <link rel="stylesheet" href="assets/css/styles.css">
     <script type="application/ld+json">
@@ -24,10 +29,13 @@
     </script>
   </head>
   <body data-page="home">
+    <a class="skip-link" href="#main-content">Langsung ke konten</a>
+
     <header class="site-header">
       <nav class="nav" aria-label="Navigasi utama">
         <a class="brand" href="index.html"><span class="brand-mark">BT</span><span>Batak Toba Play</span></a>
-        <div class="nav-links">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links-list">Menu</button>
+        <div class="nav-links" id="nav-links-list">
           <a data-nav="home" href="index.html">Home</a>
           <a data-nav="games" href="games/">Games</a>
           <a data-nav="dictionary" href="dictionary/">Dictionary</a>
@@ -37,7 +45,7 @@
       </nav>
     </header>
 
-    <main class="main">
+    <main id="main-content" tabindex="-1" class="main">
       <section class="hero">
         <div>
           <p class="eyebrow">Belajar bahasa lewat permainan</p>
@@ -63,7 +71,6 @@
         </aside>
       </section>
 
-      <div class="ad-slot" data-ad-position="in-content" aria-label="Ruang iklan kosong"></div>
 
       <section class="section band">
         <div class="section-inner">

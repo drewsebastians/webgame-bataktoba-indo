@@ -7,14 +7,15 @@ Fokus MVP ini sengaja kecil: website jadi, game playable, dan data memakai subse
 ## Fitur
 
 - Homepage SEO-friendly dengan ringkasan fitur dan internal links.
-- Game Tebak Arti: kata/frasa Batak Toba ke arti Indonesia.
-- Reverse Quiz: arti Indonesia ke padanan Batak Toba.
-- Flashcards dengan progress lokal di `localStorage`.
-- Matching Pairs 5 pasangan per ronde.
-- Latihan Kalimat Pendek beta.
-- Mini Dictionary dengan pencarian Batak atau Indonesia.
-- Static pages: `/`, `/games/`, `/dictionary/`, `/flashcards/`, `/about/`, `/methodology/`, `/data-source/`, `/learn/`.
-- `sitemap.xml`, `robots.txt`, OpenGraph meta, dan JSON-LD sederhana.
+- Game Tebak Arti, Reverse Quiz, Matching Pairs, dan Kalimat Pendek beta dengan question engine yang menjamin tepat satu jawaban benar dan opsi selalu unik secara visual.
+- Sesi terukur (5/10/20 soal), ringkasan akhir, review kesalahan, latihan harian berbasis prioritas review, dan streak harian.
+- Progress v2 per item dengan jadwal pengulangan (1/3/7/14/30 hari), migrasi otomatis dari storage lama, export/import/reset.
+- Lesson tematik (angka, keluarga, sapaan, makanan) dengan materi nyata + mini practice; suplemen editorial diberi label draft secara jujur.
+- Dictionary dua arah ternormalisasi dengan filter tema/arah, detail entri, simpan ke daftar latihan, dan lapor koreksi via GitHub issue.
+- PWA: dapat dipasang, halaman yang pernah dibuka tetap tersedia saat offline.
+- Skip link, navigasi mobile, shortcut keyboard 1-4, reduced motion, dan target sentuh >= 44px.
+- Analytics adapter dan komponen iklan default-off; tidak ada placeholder "Ruang iklan".
+- `sitemap.xml` dihasilkan otomatis dari daftar halaman (`npm run build:seo`).
 
 ## Data Source
 
@@ -91,16 +92,10 @@ npm run build:data
 ## Check
 
 ```bash
-npm run check
+npm run verify
 ```
 
-Alternatif tanpa `npm`:
-
-```bash
-node tools/check-site.mjs
-```
-
-Check ini memastikan file penting ada, data minimal terisi, dan link asset tidak memakai root absolute path yang rawan pecah saat dipublish sebagai static website.
+`verify` menjalankan tiga gerbang: site check (link, schema data, SEO, sitemap), unit + data tests (`node --test`), dan e2e smoke (server lokal + fetch halaman kunci). CI GitHub Actions menjalankan alur yang sama di setiap push dan pull request.
 
 ## Deploy Cloudflare Pages
 
@@ -137,20 +132,25 @@ Jika Cloudflare memakai project name berbeda, update canonical URL di halaman HT
 ## Struktur
 
 ```text
-assets/css/styles.css
-assets/js/app.js
-assets/js/data.js
-assets/js/progress.js
-data/*.json
-tools/build-learning-data.py
-tools/check-site.mjs
-games/index.html
-dictionary/index.html
-flashcards/index.html
-about/index.html
-methodology/index.html
-data-source/index.html
-learn/index.html
+assets/js/config.js        konfigurasi terpusat (URL, feature flags)
+assets/js/data.js          loader lapisan published
+assets/js/app.js           init halaman (home/games/dictionary/flashcards/learn)
+assets/js/progress.js      progress v2 + migration + review schedule
+assets/js/analytics.js     adapter analytics (default off, consent-aware)
+assets/js/ads.js           komponen iklan (default off)
+assets/js/game/question-engine.js  generator soal murni + session queue
+assets/js/game/session.js  sesi, latihan harian, streak
+assets/js/utils/           dom aman, normalizer, corrections
+content/lessons.json       definisi lesson (judul, deskripsi, level)
+content/themes/keywords.json  tagging tema untuk item corpus
+content/curated/           suplemen draft berlabel (tidak masuk game data)
+data/raw|candidates|published  pipeline editorial
+data/migration/id-map.json pemetaan ID legacy -> stable ID
+tools/build-learning-data.py   builder pipeline (butuh corpus DB lokal)
+tools/generate-sitemap.mjs     generator sitemap
+tools/e2e-smoke.mjs            smoke test e2e zero-dependency
+tests/                     unit, data, dan integrasi (node --test)
+.github/workflows/verify.yml   CI: check + tests + e2e
 ```
 
 ## Roadmap

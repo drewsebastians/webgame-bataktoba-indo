@@ -269,6 +269,9 @@ try {
   const seenTitles = new Map();
   for (const page of pages) {
     const text = readFileSync(page, "utf8");
+    // utility pages marked noindex are exempt from SEO meta requirements
+    const isNoindex = /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/.test(text);
+    if (isNoindex) continue;
     const titleMatch = text.match(/<title>([\s\S]*?)<\/title>/);
     if (!titleMatch) {
       failures.push(`Missing <title> in ${page}`);
@@ -285,26 +288,53 @@ try {
     if (!/rel="canonical"/.test(text)) {
       failures.push(`Missing canonical link in ${page}`);
     }
+    for (const required of [
+      'property="og:title"',
+      'property="og:description"',
+      'property="og:url"',
+      'name="twitter:card"',
+    ]) {
+      if (!text.includes(required)) {
+        failures.push(`Missing social meta ${required} in ${page}`);
+      }
+    }
     if (!/<html[^>]*\slang=/.test(text)) {
       failures.push(`Missing html lang attribute in ${page}`);
     }
   }
 }
 
-// --- Sitemap coverage --------------------------------------------------------
+// --- Sitemap coverage (must exactly match indexable pages) ------------------
 {
+  const siteConfig = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "utf8"));
   const sitemapText = readFileSync(join(root, "sitemap.xml"), "utf8");
   const urls = [...sitemapText.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-  for (const url of urls) {
-    const path = url.replace(/^https?:\/\/[^/]+\//, "");
-    const candidate = path.endsWith("/") ? join(root, path, "index.html") : join(root, path);
-    const resolved = extname(candidate) ? candidate : join(candidate, "index.html");
-    if (path && !existsSync(resolved)) {
-      failures.push(`Sitemap URL does not map to a local page: ${url}`);
-    }
+  const pages = [];
+  walk(root, (path) => {
+    if (extname(path) === ".html" && path.endsWith(join("index.html"))) pages.push(path);
+  });
+  const expectedUrls = new Set(
+    pages
+      .filter((page) => !/name="robots"\s+content="[^"]*noindex/.test(readFileSync(page, "utf8")))
+      .map((page) => {
+        const relative = page.slice(root.length).replace(/index\.html$/, "").replace(/\\/g, "/");
+        return new URL(relative, siteConfig.baseUrl).toString();
+      }),
+  );
+  const sitemapSet = new Set(urls);
+  for (const expected of expectedUrls) {
+    if (!sitemapSet.has(expected)) failures.push(`Sitemap missing page: ${expected}`);
   }
-  if (!urls.some((url) => url.replace(/^https?:\/\/[^/]+\/?$/, "") === "")) {
-    failures.push("Sitemap should include the homepage URL.");
+  for (const url of urls) {
+    if (!expectedUrls.has(url)) failures.push(`Sitemap has stale/unknown URL: ${url}`);
+    const path = url.replace(/^https?:\/\/[^/]+\//, "");
+    if (path) {
+      const candidate = path.endsWith("/") ? join(root, path, "index.html") : join(root, path);
+      const resolved = extname(candidate) ? candidate : join(candidate, "index.html");
+      if (!existsSync(resolved)) {
+        failures.push(`Sitemap URL does not map to a local page: ${url}`);
+      }
+    }
   }
 }
 
