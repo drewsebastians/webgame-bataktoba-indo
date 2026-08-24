@@ -1,0 +1,35 @@
+{
+  "comment": "Lesson definitions. A lesson publishes only when its theme has enough corpus pool items (see MIN_LESSON_POOL_ITEMS). Titles must match actual content - never overpromise.",
+  "lessons": {
+    "angka": {
+      "title": "Angka Batak Toba",
+      "description": "Angka dasar dari satu sampai seribu dalam Bahasa Batak Toba, dilengkapi latihan pengenalan.",
+      "level": 1
+    },
+    "keluarga": {
+      "title": "Kosakata Keluarga Batak Toba",
+      "description": "Istilah keluarga inti: ayah, ibu, anak, kakak, adik, kakek, nenek, dan istilah dalihan na tolu.",
+      "level": 1
+    },
+    "sapaan": {
+      "title": "Sapaan Dasar Batak Toba",
+      "description": "Salam dan ungkapan sopan dasar untuk memulai percakapan ringan.",
+      "level": 1
+    },
+    "makanan": {
+      "title": "Makanan dan Minuman",
+      "description": "Kosakata makanan, minuman, dan bahan dapur sehari-hari.",
+      "level": 1
+    },
+    "waktu": {
+      "title": "Waktu dan Hari",
+      "description": "Kata-kata untuk waktu, hari, dan penanda jadwal sehari-hari.",
+      "level": 2
+    },
+    "alam": {
+      "title": "Alam Sekitar",
+      "description": "Kosakata alam: langit, tanah, air, gunung, dan tanda-tanda cuaca.",
+      "level": 2
+    }
+  }
+}

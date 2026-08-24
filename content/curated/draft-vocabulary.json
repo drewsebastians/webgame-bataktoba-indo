@@ -1,0 +1,43 @@
+{
+  "comment": "DRAFT supplement vocabulary for lesson pages only. These entries are standard, uncontroversial basics added editorially because the word-level Bible corpus cannot supply them. They are NEVER merged into game pools or learning-items.json. reviewStatus stays needs-review until a human reviewer approves them.",
+  "sourceLabel": "Editorial draft - menunggu review penutur",
+  "themes": {
+    "angka": [
+      { "batak": "sada", "indonesia": "satu" },
+      { "batak": "dua", "indonesia": "dua" },
+      { "batak": "tolu", "indonesia": "tiga" },
+      { "batak": "opat", "indonesia": "empat" },
+      { "batak": "lima", "indonesia": "lima" },
+      { "batak": "onom", "indonesia": "enam" },
+      { "batak": "pitu", "indonesia": "tujuh" },
+      { "batak": "walu", "indonesia": "delapan" },
+      { "batak": "sia", "indonesia": "sembilan" },
+      { "batak": "sampulu", "indonesia": "sepuluh" },
+      { "batak": "saratus", "indonesia": "seratus" },
+      { "batak": "saribu", "indonesia": "seribu" }
+    ],
+    "keluarga": [
+      { "batak": "amang", "indonesia": "ayah / bapak" },
+      { "batak": "ina", "indonesia": "ibu" },
+      { "batak": "anak", "indonesia": "anak" },
+      { "batak": "boru", "indonesia": "anak perempuan / putri" },
+      { "batak": "lae", "indonesia": "kakak laki-laki" },
+      { "batak": "anggi", "indonesia": "adik" },
+      { "batak": "ompung", "indonesia": "kakek / nenek" },
+      { "batak": "tulang", "indonesia": "paman (kakak ibu)" },
+      { "batak": "iboto", "indonesia": "paman (kakak ayah)" },
+      { "batak": "namboru", "indonesia": "bibi (kakak ayah)" },
+      { "batak": "hula-hula", "indonesia": "keluarga pihak istri" }
+    ],
+    "sapaan": [
+      { "batak": "horas", "indonesia": "salam hormat khas Batak" },
+      { "batak": "mauliate", "indonesia": "terima kasih" }
+    ],
+    "makanan": [
+      { "batak": "itak", "indonesia": "makanan / lauk-pauk" },
+      { "batak": "mangan", "indonesia": "makan" },
+      { "batak": "minum", "indonesia": "minum" },
+      { "batak": "sauasur", "indonesia": "sayur rebus khas Batak" }
+    ]
+  }
+}

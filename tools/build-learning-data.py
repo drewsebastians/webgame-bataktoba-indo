@@ -34,9 +34,14 @@ CORPUS_ROOT = REPO_ROOT.parent / "batak-indo-alignment-engine"
 MASTER_DB = CORPUS_ROOT / "data" / "processed" / "master_alignment_bible_only.db"
 INPUT_DB = CORPUS_ROOT / "data" / "input" / "bible_batak_indo_v1.db"
 DATA_DIR = REPO_ROOT / "data"
+CONTENT_DIR = REPO_ROOT / "content"
 LEGACY_DIR = DATA_DIR / "legacy"
 
 SCHEMA_VERSION = 2
+
+# Lesson publication: a theme needs at least this many corpus pool items,
+# otherwise the lesson stays in draft and is excluded from the published list.
+MIN_LESSON_POOL_ITEMS = 6
 
 MAX_WORD_PAIRS = 720
 MAX_PHRASE_PAIRS = 120
@@ -532,6 +537,116 @@ def publish(stage_items: list[dict[str, object]]) -> tuple[list[dict[str, object
 
 
 # ---------------------------------------------------------------------------
+# Theme tagging and lesson registry
+# ---------------------------------------------------------------------------
+
+
+def load_content(name: str) -> dict:
+    path = CONTENT_DIR / name
+    if not path.exists():
+        raise SystemExit(f"Missing content file: {path}")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def apply_theme_tags(items: list[dict[str, object]], theme_keywords: dict) -> int:
+    """Tag published items with themes via exact normalized keyword match.
+    Returns number of items that received at least one tag."""
+    tagged = 0
+    for item in items:
+        batak_label = normalize_label(item.get("batak"))
+        indonesia_label = normalize_label(item.get("indonesia"))
+        tags: set[str] = set()
+        for theme_id, entry in theme_keywords.items():
+            keywords_batak = {normalize_label(k) for k in entry.get("batak", [])}
+            keywords_indo = {normalize_label(k) for k in entry.get("indonesia", [])}
+            if batak_label in keywords_batak or indonesia_label in keywords_indo:
+                tags.add(theme_id)
+        item["themes"] = sorted(tags)
+        if tags:
+            tagged += 1
+    return tagged
+
+
+def build_lesson_registry(
+    published_words: list[dict[str, object]],
+    published_phrases: list[dict[str, object]],
+    curated: dict,
+) -> dict[str, object]:
+    pool = [*published_words, *published_phrases]
+    by_theme: dict[str, list[dict[str, object]]] = {}
+    for item in pool:
+        for theme in item.get("themes") or []:
+            by_theme.setdefault(theme, []).append(item)
+
+    published_lessons = []
+    draft_lessons = []
+    existing_pairs = {
+        (normalize_label(i["batak"]), normalize_label(i["indonesia"])) for i in pool
+    }
+    for theme_id, entry in curated["lessons"].items():
+        theme_items = by_theme.get(theme_id, [])
+        supplements = []
+        skipped_supplements = 0
+        for s in curated["themes"].get(theme_id, []):
+            pair_key = (normalize_label(s["batak"]), normalize_label(s["indonesia"]))
+            if pair_key in existing_pairs:
+                # corpus already covers this pair; the draft copy would be redundant
+                skipped_supplements += 1
+                continue
+            supplements.append(
+                {
+                    "batak": s["batak"],
+                    "indonesia": s["indonesia"],
+                    "reviewStatus": "needs-review",
+                    "sourceType": "editorial-draft",
+                }
+            )
+        is_published = len(theme_items) >= MIN_LESSON_POOL_ITEMS
+
+        # review rollup computed from actual member statuses - never assumed
+        statuses = {item["reviewStatus"] for item in theme_items}
+        if not statuses:
+            rollup = "no-pool-items"
+        elif statuses == {"human-reviewed"}:
+            rollup = "human-reviewed"
+        else:
+            rollup = "corpus-derived-beta"
+
+        lesson = {
+            "id": f"lesson-{theme_id}",
+            "slug": theme_id,
+            "title": entry["title"],
+            "description": entry["description"],
+            "theme": theme_id,
+            "level": entry.get("level", 1),
+            "estMinutes": max(3, min(10, (len(theme_items) + 5) // 5)),
+            "itemIds": [item["id"] for item in theme_items],
+            "supplementItems": supplements,
+            "counts": {
+                "poolItems": len(theme_items),
+                "supplementItems": len(supplements),
+                "supplementSkippedAlreadyInPool": skipped_supplements,
+            },
+            "reviewRollup": rollup,
+            "publicationStatus": "published" if is_published else "draft",
+            "generatedAt": utc_now(),
+        }
+        (published_lessons if is_published else draft_lessons).append(lesson)
+
+    return {
+        "schemaVersion": SCHEMA_VERSION,
+        "generatedAt": utc_now(),
+        "minPoolItemsForPublication": MIN_LESSON_POOL_ITEMS,
+        "published": published_lessons,
+        "drafts": draft_lessons,
+        "counts": {
+            "publishedLessons": len(published_lessons),
+            "draftLessons": len(draft_lessons),
+        },
+    }
+
+
+# ---------------------------------------------------------------------------
 # Stage 4: migration map from legacy sequential ids
 # ---------------------------------------------------------------------------
 
@@ -660,6 +775,11 @@ def main() -> int:
             f"Publication rule rejects: words={words_rejected}, phrases={phrases_rejected}, sentences={sentences_rejected}."
         )
 
+    # theme tagging (editorial keyword curation over existing corpus items)
+    theme_keywords = load_content("themes/keywords.json")["themes"]
+    tagged_count = apply_theme_tags([*published_words, *published_phrases], theme_keywords)
+    report.notes.append(f"Theme tags applied to {tagged_count} items.")
+
     learning_items = published_words + published_phrases + published_sentences
 
     counts = {
@@ -680,6 +800,16 @@ def main() -> int:
     write_json(DATA_DIR / "published" / "phrase-pairs.json", {"metadata": common_meta, "items": published_phrases})
     write_json(DATA_DIR / "published" / "sample-sentences.json", {"metadata": common_meta, "items": published_sentences})
     write_json(DATA_DIR / "published" / "learning-items.json", {"metadata": common_meta, "items": learning_items})
+
+    lesson_definitions = load_content("lessons.json")
+    curated_drafts = load_content("curated/draft-vocabulary.json")
+    lessons_registry = build_lesson_registry(published_words, published_phrases, {
+        **lesson_definitions,
+        "themes": curated_drafts["themes"],
+    })
+    write_json(DATA_DIR / "published" / "lessons.json", lessons_registry)
+    counts["publishedLessons"] = lessons_registry["counts"]["publishedLessons"]
+    counts["draftLessons"] = lessons_registry["counts"]["draftLessons"]
 
     migration = build_migration_map(published_words, published_phrases, published_sentences)
     write_json(DATA_DIR / "migration" / "id-map.json", migration)

@@ -34,3 +34,7 @@ export async function loadPhrasePairs() {
 export async function loadSentences() {
   return loadDataset("sample-sentences.json");
 }
+
+export async function loadLessons() {
+  return loadDataset("lessons.json");
+}

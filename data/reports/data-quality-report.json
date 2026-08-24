@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T14:52:00+00:00",
+  "generatedAt": "2026-08-24T16:14:09+00:00",
   "stageCounts": {
     "rawWordRows": 764,
     "rawPhraseRows": 0,
@@ -11,7 +11,9 @@
     "wordPairs": 367,
     "phrasePairs": 0,
     "sampleSentences": 80,
-    "learningItems": 447
+    "learningItems": 447,
+    "publishedLessons": 0,
+    "draftLessons": 6
   },
   "excludedByReason": {
     "word.batak-token-not-clean": 152,
@@ -76,7 +78,9 @@
   ],
   "mergedDuplicateLabelTotal": 9,
   "phraseRejections": {},
-  "notes": [],
+  "notes": [
+    "Theme tags applied to 13 items."
+  ],
   "migration": {
     "mapped": 485,
     "unmapped": 91

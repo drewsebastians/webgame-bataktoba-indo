@@ -8,7 +8,8 @@
 export const SITE_CONFIG = Object.freeze({
   name: "Batak Toba Play",
   baseUrl: "https://webgame-bataktoba-indo.pages.dev/",
-  dataDir: "../../data/",
+  repositoryIssuesUrl: "https://github.com/drewsebastians/webgame-bataktoba-indo/issues/new",
+  dataDir: "../../data/published/",
   features: Object.freeze({
     analytics: false,
     ads: false,

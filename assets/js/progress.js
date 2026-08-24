@@ -120,7 +120,10 @@ function sanitizeItemStats(raw) {
       : null;
   stats.reviewStage = clampInt(raw.reviewStage, 0, REVIEW_INTERVAL_DAYS.length, 0);
   stats.bucket =
-    raw.bucket === "known" || raw.bucket === "review" || raw.bucket === "difficult"
+    raw.bucket === "known" ||
+    raw.bucket === "review" ||
+    raw.bucket === "difficult" ||
+    raw.bucket === "saved"
       ? raw.bucket
       : null;
   return stats;
@@ -376,14 +379,20 @@ export function getItemStats(itemId) {
 }
 
 export function markFlashcard(id, bucket) {
-  if (!id || !["known", "review", "difficult"].includes(bucket)) return;
+  if (!id || !["known", "review", "difficult", "saved"].includes(bucket)) return;
   const current = hydrateSync();
   const timestamp = nowMs();
   const next = { ...current, items: { ...current.items } };
   const stats = updateItemStats(next.items, id, bucket === "known", timestamp);
-  stats.bucket = bucket;
-  if (bucket === "known") stats.nextReviewAt = timestamp + 30 * DAY_MS;
-  else if (bucket === "review") stats.nextReviewAt = timestamp;
+  if (bucket === "saved") {
+    // saving marks intent to study later, not a correct/incorrect answer
+    stats.seen = Math.max(stats.seen - 1, 0);
+    stats.bucket = "saved";
+    stats.nextReviewAt = timestamp;
+  } else {
+    if (bucket === "known") stats.nextReviewAt = timestamp + 30 * DAY_MS;
+    else if (bucket === "review") stats.nextReviewAt = timestamp;
+  }
   enforceBoundedStorage(next.items);
   cached = next;
   persist(next);

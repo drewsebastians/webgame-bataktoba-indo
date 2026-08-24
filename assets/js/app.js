@@ -1,6 +1,8 @@
-import { loadLearningItems, loadSentences, loadWordPairs } from "./data.js";
+﻿import { loadLearningItems, loadLessons, loadSentences, loadWordPairs } from "./data.js";
 import { getProgress, initProgress, markFlashcard, recordAnswer, saveProgress } from "./progress.js";
 import { el, replaceChildren } from "./utils/dom.js";
+import { normalizeSearch } from "./utils/normalize.js";
+import { buildCorrectionUrl } from "./utils/corrections.js";
 import { createQuizRunner } from "./game/question-engine.js";
 import { buildDailyQueue, computeStreak, summarizeSession } from "./game/session.js";
 
@@ -69,44 +71,162 @@ function formatQuality(item) {
 async function initDictionary() {
   const input = $("#dictionary-search");
   const results = $("#dictionary-results");
+  const filtersRoot = $("#dictionary-filters");
   if (!input || !results) return;
   const { items } = await loadLearningItems();
+  const lessons = await loadLessons();
   const searchable = items.filter((item) => item.type !== "sentence");
 
-  function render() {
-    const query = input.value.trim().toLowerCase();
-    const matches = (
-      query
-        ? searchable.filter((item) =>
-            `${item.batak} ${item.indonesia}`.toLowerCase().includes(query),
-          )
-        : searchable
-    ).slice(0, 36);
+  const themes = [...new Set([...lessons.published, ...lessons.drafts].map((l) => l.slug))];
+  const filters = { direction: "both", theme: "all" };
+  let expandedId = null;
 
-    if (!matches.length) {
+  function buildFilters() {
+    if (!filtersRoot) return;
+    function select(id, label, options, value, onChange) {
+      const wrapper = el("label", { className: "filter-field" }, label + " ");
+      const selectEl = el("select", { className: "input filter-select", id });
+      for (const [val, text] of options) {
+        selectEl.append(el("option", { text, attrs: { value: val } }));
+      }
+      selectEl.value = value;
+      selectEl.addEventListener("change", () => onChange(selectEl.value));
+      wrapper.append(selectEl);
+      return wrapper;
+    }
+    replaceChildren(
+      filtersRoot,
+      select(
+        "dict-direction",
+        "Arah",
+        [
+          ["both", "Kedua arah"],
+          ["batak", "Batak Toba"],
+          ["indonesia", "Indonesia"],
+        ],
+        filters.direction,
+        (v) => {
+          filters.direction = v;
+          render();
+        },
+      ),
+      select(
+        "dict-theme",
+        "Tema",
+        [["all", "Semua tema"], ...themes.map((t) => [t, t])],
+        filters.theme,
+        (v) => {
+          filters.theme = v;
+          render();
+        },
+      ),
+    );
+  }
+
+  function matchesQuery(item) {
+    const query = normalizeSearch(input.value.trim());
+    if (!query) return true;
+    if (filters.direction === "batak") return normalizeSearch(item.batak).includes(query);
+    if (filters.direction === "indonesia") return normalizeSearch(item.indonesia).includes(query);
+    return normalizeSearch(item.batak).includes(query) || normalizeSearch(item.indonesia).includes(query);
+  }
+
+  function inSelectedTheme(item) {
+    if (filters.theme === "all") return true;
+    return (item.themes ?? []).includes(filters.theme);
+  }
+
+  function detailNode(item) {
+    const container = el("div", { className: "result-detail" });
+    container.append(el("p", {}, "Status: ", el("strong", { text: formatQuality(item) })));
+    const alternatives = [...(item.indonesianAlternatives ?? []), ...(item.batakAlternatives ?? [])];
+    if (alternatives.length > 0) {
+      container.append(el("p", { text: `Alternatif tercatat: ${alternatives.join(", ")}` }));
+    }
+    if (item.confidenceScore != null) {
+      container.append(
+        el("p", { text: `Confidence corpus: ${item.confidenceScore} (${item.confidenceLabel ?? "-"})` }),
+      );
+    }
+
+    const saveButton = el("button", {
+      className: "button secondary",
+      text: "Simpan ke daftar latihan",
+      attrs: { type: "button" },
+    });
+    saveButton.addEventListener("click", () => {
+      markFlashcard(item.id, "saved");
+      saveButton.textContent = "Tersimpan";
+      saveButton.disabled = true;
+    });
+
+    const correctionLink = el("a", {
+      className: "button secondary",
+      text: "Lapor koreksi",
+      attrs: {
+        href: buildCorrectionUrl({
+          itemId: item.id,
+          batak: item.batak,
+          indonesia: item.indonesia,
+          pagePath: "/dictionary/",
+        }),
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+    });
+
+    container.append(el("div", { className: "action-row" }, saveButton, correctionLink));
+    return container;
+  }
+
+  function resultRow(item) {
+    const row = el("article", { className: "result-row" });
+    row.append(
+      el("strong", { text: item.batak }),
+      el("span", { text: item.indonesia }),
+      pill(formatQuality(item), "", { "data-source-flag": item.sourceType || "corpus-derived" }),
+    );
+    row.setAttribute("role", "button");
+    row.tabIndex = 0;
+    row.setAttribute("aria-expanded", String(expandedId === item.id));
+    const toggle = () => {
+      expandedId = expandedId === item.id ? null : item.id;
+      render();
+    };
+    row.addEventListener("click", toggle);
+    row.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggle();
+      }
+    });
+    if (expandedId === item.id) row.append(detailNode(item));
+    return row;
+  }
+
+  function render() {
+    const matchesList = searchable
+      .filter((item) => matchesQuery(item) && inSelectedTheme(item))
+      .slice(0, 60);
+
+    if (!matchesList.length) {
+      expandedId = null;
       replaceChildren(results, el("div", { className: "card", text: "Belum ada hasil untuk pencarian itu." }));
       return;
     }
 
     replaceChildren(
       results,
-      matches.map((item) =>
-        el(
-          "article",
-          { className: "result-row" },
-          el("strong", { text: item.batak }),
-          el("span", { text: item.indonesia }),
-          el("small", {
-            className: "pill",
-            text: formatQuality(item),
-            attrs: { "data-source-flag": item.sourceType || "corpus-derived" },
-          }),
-        ),
-      ),
+      el("p", { className: "feedback", attrs: { role: "status" }, text: `${matchesList.length} hasil ditampilkan.` }),
+      matchesList.map(resultRow),
     );
   }
 
-  input.addEventListener("input", render);
+  input.addEventListener("input", () => {
+    expandedId = null;
+    render();
+  });
+  buildFilters();
   render();
 }
 
@@ -605,6 +725,202 @@ async function initFlashcards() {
   render();
 }
 
+async function initLearn() {
+  const root = $("#lesson-root");
+  const theme = document.body.dataset.lesson;
+  if (!root || !theme) return;
+
+  const [lessons, learning, words] = await Promise.all([loadLessons(), loadLearningItems(), loadWordPairs()]);
+  const lesson = [...lessons.published, ...lessons.drafts].find((entry) => entry.slug === theme);
+  if (!lesson) {
+    replaceChildren(root, el("p", { className: "feedback", text: "Materi untuk tema ini belum tersedia." }));
+    return;
+  }
+
+  const itemById = new Map(learning.items.map((item) => [item.id, item]));
+  const poolItems = lesson.itemIds.map((id) => itemById.get(id)).filter(Boolean);
+  const wordPool = words.items;
+
+  function vocabRow(batakText, indonesiaText, statusPill) {
+    return el(
+      "div",
+      { className: "vocab-row" },
+      el("strong", { text: batakText }),
+      el("span", { text: indonesiaText }),
+      statusPill,
+    );
+  }
+
+  const children = [];
+
+  children.push(
+    el("p", {
+      className: "feedback",
+      text:
+        lesson.publicationStatus === "published"
+          ? `Lesson latihan aktif: ${lesson.counts.poolItems} item corpus.`
+          : `Status: materi pelengkap editorial (draft). Lesson latihan penuh butuh minimal ${lessons.minPoolItemsForPublication} item corpus per tema; tema ini punya ${lesson.counts.poolItems}.`,
+    }),
+  );
+
+  if (poolItems.length > 0) {
+    children.push(el("h2", { text: "Dari corpus (corpus-derived)" }));
+    children.push(
+      el(
+        "div",
+        { className: "vocab-table" },
+        poolItems.map((item) =>
+          vocabRow(item.batak, item.indonesia, pill(formatQuality(item), "", {
+            "data-source-flag": item.sourceType || "corpus-derived",
+          })),
+        ),
+      ),
+    );
+  }
+
+  if (lesson.supplementItems.length > 0) {
+    children.push(
+      el("div", {
+        className: "draft-banner",
+        attrs: { role: "note" },
+      }, "Editorial draft - menunggu review penutur. Bukan kamus final; laporkan koreksi bila ada yang keliru."),
+    );
+    children.push(
+      el(
+        "div",
+        { className: "vocab-table" },
+        lesson.supplementItems.map((item) =>
+          vocabRow(
+            item.batak,
+            item.indonesia,
+            pill("draft - perlu review", "", { "data-source-flag": "editorial-draft" }),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Mini practice: only from real corpus items with enough distinct material.
+  const practiceRoot = el("section", { className: "mini-practice", id: "mini-practice" });
+  children.push(el("h2", { text: "Mini latihan" }), practiceRoot);
+
+  replaceChildren(root, children);
+
+  if (poolItems.length >= 4) {
+    renderMiniPractice(practiceRoot, poolItems, wordPool);
+  } else {
+    replaceChildren(
+      practiceRoot,
+      el("p", {
+        className: "feedback",
+        text: "Latihan interaktif untuk tema ini menyusul setelah cukup item corpus tereview.",
+      }),
+    );
+  }
+}
+
+function renderMiniPractice(root, themeItems, fullPool) {
+  const runner = createQuizRunner({
+    pool: fullPool.length >= 4 ? fullPool : themeItems,
+    from: "batak",
+    to: "indonesia",
+    initialIds: themeItems.map((item) => item.id),
+  });
+  let answered = 0;
+  let correct = 0;
+  let current = null;
+
+  function renderQuestion() {
+    const result = runner.nextQuestion();
+    current = result.question ?? null;
+    if (!current) {
+      replaceChildren(root, el("p", { className: "feedback", text: "Latihan selesai untuk sesi ini." }));
+      return;
+    }
+    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+    const optionButtons = current.options.map((option) => {
+      const button = el("button", {
+        className: "option",
+        text: option.label,
+        attrs: { type: "button", "data-answer": option.id },
+      });
+      button.addEventListener("click", () => {
+        if (answered >= themeItems.length || runner.isLocked()) return;
+        const outcome = runner.answer(option.id);
+        if (!outcome.accepted) return;
+        answered += 1;
+        correct += outcome.isCorrect ? 1 : 0;
+        recordAnswer(outcome.isCorrect, `lesson:${document.body.dataset.lesson}`, outcome.itemId);
+        $$(".option", root).forEach((other) => {
+          other.disabled = true;
+          if (other.dataset.answer === outcome.correctOptionId) other.classList.add("correct");
+        });
+        if (!outcome.isCorrect) button.classList.add("wrong");
+        feedback.textContent = outcome.isCorrect ? "Benar." : "Belum tepat.";
+        updateProgressBadges();
+        nextButton.disabled = false;
+        nextButton.textContent =
+          answered >= Math.min(themeItems.length, 5) ? "Lihat Hasil" : "Lanjut";
+      });
+      return button;
+    });
+
+    const nextButton = el("button", {
+      className: "button",
+      id: "mini-next",
+      text: "Lanjut",
+      attrs: { type: "button", disabled: true },
+    });
+    nextButton.addEventListener("click", () => {
+      if (answered >= Math.min(themeItems.length, 5)) {
+        renderSummaryMini();
+      } else {
+        renderQuestion();
+      }
+    });
+
+    replaceChildren(
+      root,
+      el(
+        "div",
+        { className: "scorebar" },
+        pill(`Mini latihan ${Math.min(answered + 1, themeItems.length)}/${Math.min(themeItems.length, 5)}`),
+        pill(formatQuality(current), "", { "data-source-flag": current.sourceFlag || "corpus-derived" }),
+      ),
+      el(
+        "div",
+        { className: "prompt" },
+        el("span", { className: "prompt-kicker", text: "Pilih arti yang cocok" }),
+        el("strong", { className: "prompt-text", text: current.prompt }),
+      ),
+      el("div", { className: "options" }, optionButtons),
+      feedback,
+      el("div", { className: "action-row" }, nextButton),
+    );
+  }
+
+  function renderSummaryMini() {
+    replaceChildren(
+      root,
+      el("p", {
+        className: "feedback",
+        text: `Mini latihan selesai: ${correct}/${answered} benar. Lanjutkan ke Games untuk latihan penuh.`,
+      }),
+      (() => {
+        const again = el("button", { className: "button secondary", text: "Ulangi", attrs: { type: "button" } });
+        again.addEventListener("click", () => {
+          answered = 0;
+          correct = 0;
+          renderQuestion();
+        });
+        return again;
+      })(),
+    );
+  }
+
+  renderQuestion();
+}
+
 async function main() {
   await initProgress();
   setActiveNav();
@@ -614,6 +930,7 @@ async function main() {
   if (page === "dictionary") await initDictionary();
   if (page === "games") await initGames();
   if (page === "flashcards") await initFlashcards();
+  if (page === "learn-topic") await initLearn();
 }
 
 main().catch((error) => {

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "schemaVersion": 2,
-    "generatedAt": "2026-08-24T14:52:00+00:00",
+    "generatedAt": "2026-08-24T16:14:09+00:00",
     "sourceRepository": "https://github.com/drewsebastians/batak-indo-alignment-engine",
     "sourceFiles": [
       "data/processed/master_alignment_bible_only.db",
@@ -582,7 +582,9 @@
       "indonesia": "besok",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "waktu"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "medium confidence",
@@ -1242,7 +1244,9 @@
       "indonesia": "enam",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "angka"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -1402,7 +1406,9 @@
       "indonesia": "sembilan",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "angka"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -1722,7 +1728,9 @@
       "indonesia": "siang",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "waktu"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -3160,7 +3168,9 @@
       "indonesia": "tujuh",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "angka"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -3380,7 +3390,9 @@
       "indonesia": "ikan",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "makanan"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -3440,7 +3452,9 @@
       "indonesia": "delapan",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "angka"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -3540,7 +3554,9 @@
       "indonesia": "tahun",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "waktu"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -3800,7 +3816,9 @@
       "indonesia": "hujan",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "alam"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -3960,7 +3978,9 @@
       "indonesia": "tiga",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "angka"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -5460,7 +5480,9 @@
       "indonesia": "kemarin",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "waktu"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -5660,7 +5682,9 @@
       "indonesia": "angin",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "alam"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",
@@ -5720,7 +5744,9 @@
       "indonesia": "madu",
       "indonesianAlternatives": [],
       "batakAlternatives": [],
-      "themes": [],
+      "themes": [
+        "makanan"
+      ],
       "difficulty": null,
       "sourceType": "corpus-derived",
       "quality": "corpus-derived",

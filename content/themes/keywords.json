@@ -1,0 +1,35 @@
+{
+  "comment": "Editorial keyword lists used ONLY to tag existing corpus items with themes (exact normalized match on either side). Curation of tags, not of meanings: an item keeps its corpus-derived status. Extend carefully.",
+  "themes": {
+    "angka": {
+      "label": "Angka",
+      "batak": ["sada", "dua", "tolu", "opat", "lima", "onom", "pitu", "walu", "ualu", "sia", "sampulu", "hopul", "ratus", "ribu", "saribu", "norotan"],
+      "indonesia": ["satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas", "dua puluh", "seratus", "ratus", "ribu", "seribu"]
+    },
+    "keluarga": {
+      "label": "Keluarga",
+      "batak": ["amang", "ina", "anak", "boru", "lae", "ompung", "tulang", "iboto", "hula", "pariban", "dongan", "pinang", "bere"],
+      "indonesia": ["ayah", "bapak", "ibu", "anak", "kakak", "adik", "kakek", "nenek", "paman", "om", "bibi", "tante", "keluarga", "suami", "istri", "saudara", "orangtua", "laki-laki", "perempuan", "puteri"]
+    },
+    "sapaan": {
+      "label": "Sapaan",
+      "batak": ["horas", "mauliate", "tabi"],
+      "indonesia": ["salam", "terima kasih", "selamat", "hormat", "izin", "tolong"]
+    },
+    "makanan": {
+      "label": "Makanan",
+      "batak": ["roti", "garam", "ikan", "dengke", "daging", "situak", "anggur", "minyak", "beras", "air", "tuak"],
+      "indonesia": ["roti", "garam", "ikan", "daging", "anggur", "minyak", "beras", "nasi", "air", "makanan", "minuman", "telur", "susu", "madu"]
+    },
+    "waktu": {
+      "label": "Waktu dan Hari",
+      "batak": ["ari", "sondar", "borngin", "siang", "taon", "fulan", "sior", "jam", "marsogot", "nantoari", "arian"],
+      "indonesia": ["hari", "malam", "siang", "pagi", "sore", "tahun", "bulan", "waktu", "jam", "besok", "kemarin", "sekarang", "hari ini", "sabat", "sabtu"]
+    },
+    "alam": {
+      "label": "Alam Sekitar",
+      "batak": ["langit", "tano", "aek", "laut", "bolon", "bulu", "hutan", "dolok", "batu", "bintang", "udan", "alogo"],
+      "indonesia": ["langit", "bumi", "tanah", "laut", "sungai", "gunung", "batu", "hutan", "kayu", "daun", "bintang", "matahari", "bulan", "hujan", "angin", "api", "air"]
+    }
+  }
+}
