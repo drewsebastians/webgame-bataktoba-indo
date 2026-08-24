@@ -1,0 +1,21 @@
+/**
+ * Central site configuration.
+ * Single source of truth for URLs, feature flags, and dataset locations.
+ * Feature flags default to false: analytics and ads must never activate
+ * without an explicit, reviewed configuration change.
+ */
+
+export const SITE_CONFIG = Object.freeze({
+  name: "Batak Toba Play",
+  baseUrl: "https://webgame-bataktoba-indo.pages.dev/",
+  dataDir: "../../data/",
+  features: Object.freeze({
+    analytics: false,
+    ads: false,
+    pwa: false,
+  }),
+});
+
+export function absoluteUrl(path = "") {
+  return new URL(path, SITE_CONFIG.baseUrl).toString();
+}

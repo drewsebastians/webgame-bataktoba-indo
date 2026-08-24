@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-24T14:52:00+00:00",
+  "stageCounts": {
+    "rawWordRows": 764,
+    "rawPhraseRows": 0,
+    "rawSentenceRows": 2000,
+    "wordCandidates": 367,
+    "phraseCandidates": 0,
+    "sentenceCandidates": 80,
+    "wordPairs": 367,
+    "phrasePairs": 0,
+    "sampleSentences": 80,
+    "learningItems": 447
+  },
+  "excludedByReason": {
+    "word.batak-token-not-clean": 152,
+    "word.probable-transliterated-name": 224,
+    "word.indonesia-token-not-clean": 12
+  },
+  "mergedDuplicateLabels": [
+    {
+      "field": "batak",
+      "label": "sadrak",
+      "keptId": "word-b1287f03c5",
+      "foldedAlternative": "abednego"
+    },
+    {
+      "field": "batak",
+      "label": "mesak",
+      "keptId": "word-12c69adb47",
+      "foldedAlternative": "abednego"
+    },
+    {
+      "field": "batak",
+      "label": "abednego",
+      "keptId": "word-aacb4d1dfd",
+      "foldedAlternative": "mesakh"
+    },
+    {
+      "field": "batak",
+      "label": "nidua",
+      "keptId": "word-4a50dc05c2",
+      "foldedAlternative": "benangnya"
+    },
+    {
+      "field": "batak",
+      "label": "marngalu",
+      "keptId": "word-bc3a1a32f7",
+      "foldedAlternative": "memamah"
+    },
+    {
+      "field": "batak",
+      "label": "bosenai",
+      "keptId": "word-b5cc5164b8",
+      "foldedAlternative": "syetar-boznai"
+    },
+    {
+      "field": "batak",
+      "label": "napis",
+      "keptId": "word-66bfba01c3",
+      "foldedAlternative": "nafish"
+    },
+    {
+      "field": "indonesia",
+      "label": "sadrakh",
+      "keptId": "word-12c69adb47",
+      "foldedAlternative": "abednego"
+    },
+    {
+      "field": "indonesia",
+      "label": "yaelam",
+      "keptId": "word-b9ef039f00",
+      "foldedAlternative": "jalam"
+    }
+  ],
+  "mergedDuplicateLabelTotal": 9,
+  "phraseRejections": {},
+  "notes": [],
+  "migration": {
+    "mapped": 485,
+    "unmapped": 91
+  }
+}

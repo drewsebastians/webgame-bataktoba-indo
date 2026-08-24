@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "schemaVersion": 2,
+    "generatedAt": "2026-08-24T14:52:00+00:00",
+    "sourceRepository": "https://github.com/drewsebastians/batak-indo-alignment-engine",
+    "sourceFiles": [
+      "data/processed/master_alignment_bible_only.db",
+      "data/input/bible_batak_indo_v1.db"
+    ],
+    "counts": {},
+    "filtering": [
+      "Use only high_confidence and medium_confidence translation candidates.",
+      "Exclude stopword candidates, punctuation, duplicates, empty values, over-short/over-long tokens, and noisy symbols.",
+      "Exclude a conservative list of obvious proper-name transliterations.",
+      "Merge duplicate visible labels into recorded alternatives instead of keeping ambiguous options.",
+      "Cap short-sentence beta subset with simple length limits."
+    ],
+    "editorialNotes": [
+      "Confidence is a statistical signal, not a linguistic guarantee.",
+      "All word data is corpus-derived; no item claims human review.",
+      "Sentence subset is beta-unreviewed parallel-corpus material.",
+      "Phrases must have at least two meaningful tokens per side; otherwise the phrase set stays empty."
+    ]
+  },
+  "items": []
+}

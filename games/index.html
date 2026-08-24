@@ -36,9 +36,19 @@
             <button class="mode-button" type="button" data-mode="matching">Matching Pairs <span>5 pasang</span></button>
             <button class="mode-button" type="button" data-mode="sentence">Kalimat Pendek <span>beta</span></button>
           </div>
+          <h2>Jumlah soal</h2>
+          <div class="mode-list" id="session-size-list">
+            <button class="mode-button session-size-button" type="button" data-size="5">5 soal</button>
+            <button class="mode-button session-size-button" type="button" data-size="10">10 soal</button>
+            <button class="mode-button session-size-button" type="button" data-size="20">20 soal</button>
+          </div>
+          <div class="action-row" style="margin-top:1rem">
+            <button class="button secondary" type="button" id="daily-practice">Latihan Harian</button>
+          </div>
           <div class="scorebar" style="margin-top:1rem">
             <span class="pill">Total <span data-progress-answered>0</span></span>
             <span class="pill">Benar <span data-progress-correct>0</span></span>
+            <span class="pill">Streak <span data-progress-streak>0</span> hari</span>
           </div>
         </aside>
         <section class="game-panel" id="game-panel" aria-live="polite">

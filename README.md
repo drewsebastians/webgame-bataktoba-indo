@@ -22,14 +22,27 @@ Data dibuat dari repo:
 
 https://github.com/drewsebastians/batak-indo-alignment-engine
 
-File static hasil preprocessing:
+Data mengalir melalui pipeline editorial eksplisit:
 
-- `data/learning-items.json`
-- `data/word-pairs.json`
-- `data/phrase-pairs.json`
-- `data/sample-sentences.json`
+```text
+data/raw/         hasil ekstraksi penuh dari corpus DB (tidak difilter destruktif)
+  -> data/candidates/   item bersih dengan stable ID + penggabungan label duplikat
+    -> data/published/  item yang lolos aturan publikasi (satu-satunya yang dibaca website)
+```
 
-Subset awal saat ini berisi 376 pasangan kata, 120 pasangan frasa, dan 80 kalimat pendek beta.
+File yang dipakai website (lapisan published):
+
+- `data/published/learning-items.json`
+- `data/published/word-pairs.json`
+- `data/published/phrase-pairs.json`
+- `data/published/sample-sentences.json`
+
+Setiap build juga menghasilkan:
+
+- `data/reports/data-quality-report.json` - jumlah per tahap, alasan eksklusi, duplikat yang digabung
+- `data/migration/id-map.json` - pemetaan ID legacy sequential ke stable ID (dipertahankan selamanya)
+
+Subset saat ini berisi 367 pasangan kata dan 80 kalimat pendek beta. Dataset phrase sengaja kosong: corpus word-level belum menghasilkan pasangan multi-token asli, dan aturan pipeline menolak "phrase" satu kata.
 
 ## Reliability Filtering
 
@@ -41,10 +54,11 @@ Script `tools/build-learning-data.py` membaca database lokal dari repo corpus:
 Kriteria utama:
 
 - memakai kandidat `high_confidence` dan `medium_confidence`;
-- membuang stopword candidate, tanda baca, duplikat, nilai kosong, token terlalu pendek, token terlalu panjang, dan simbol noisy;
-- membuang daftar konservatif nama diri yang jelas agar latihan lebih condong ke kosakata;
-- membatasi kalimat pendek beta dengan panjang sederhana;
-- tidak mengklaim pasangan corpus-derived sebagai kamus final.
+- membuang stopword candidate, tanda baca, duplikat, nilai kosong, token terlalu pendek/panjang, dan simbol noisy;
+- membuang daftar konservatif nama diri transliterasi;
+- menggabungkan label yang tampak sama menjadi `indonesianAlternatives` / `batakAlternatives` sehingga opsi soal tidak mungkin kembar;
+- phrase wajib memiliki minimal dua token bermakna di kedua sisi setelah normalisasi;
+- tidak ada item yang diklaim human-reviewed; semua word tetap `corpus-derived`.
 
 Confidence adalah sinyal statistik, bukan jaminan kebenaran linguistik. Materi ini adalah alat belajar dan eksplorasi.
 
