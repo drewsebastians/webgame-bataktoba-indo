@@ -169,19 +169,44 @@ Tests: 78 pass, 0 fail.
 - `npm run verify` = check + tests + e2e.
 - `.github/workflows/verify.yml` menjalankan ketiganya di push main dan PR.
 
-### Hasil verify akhir
+### Task 16 — Final independent audit: SELESAI
 
-```text
-Site check passed: 447 published items, 0 warnings.
-Tests: 110+ passing.
-E2E smoke passed.
-```
+Audit menyapu seluruh repository untuk kontradiksi integrasi. Temuan & tindakan:
+
+1. **KRITIS — crash `progress.known`**: badge UI masih membaca array lama
+   (`progress.known.length`) yang sudah tidak ada di schema v2 → TypeError di
+   semua halaman. Diperbaiki dengan helper `getBucketIds(bucket)`; bug ini
+   lolos karena e2e tidak mengeksekusi JS browser — kini jadi alasan kuat
+   menambah e2e berbasis browser di masa depan.
+2. **Sinkronisasi tanggal streak**: sesi dicatat pakai tanggal UTC sementara
+   streak dihitung lokal → off-by-one di sekitar tengah malam. Disatukan ke
+   tanggal lokal.
+3. **Fitur export/import/reset tidak punya UI** (blueprint 12.5) sementara
+   privacy sudah menyebutnya → dibuat halaman `/progres/` (statistik + ekspor
+   JSON download + impor tervalidasi + reset dua-langkah), nav "Progres"
+   ditambahkan ke semua halaman, sitemap regenerasi (17 URL).
+4. **Konsistensi privacy**: halaman privacy disegarkan agar persis mencerminkan
+   implementasi (progress per-item, service worker, koreksi GitHub issue,
+   analytics/ads nonaktif default).
+5. `.assetsignore` diperluas: content/, PROGRESS_LOG.md, ads.txt.example
+   tidak ikut ter-deploy.
+
+Hasil akhir: check 0 warnings, 110 tests pass, e2e green.
+
+### Klasifikasi kesiapan
+
+- **Teknis siap produksi (internal): YA** — semua kriteria blueprint §25 yang
+  dapat diverifikasi internal lulus; CI hijau; deploy otomatis aktif.
+- **Siap AdSense: BELUM** — butuh Publisher ID valid, ads.txt asli, UI consent
+  (CMP tersertifikasi bila wajib), dan konten core yang direview manusia.
+- **Eksternal yang tertunda**: verifikasi hostname produksi Cloudflare
+  (butuh dashboard/wrangler login), review penutur atas suplemen draft,
+  review lisensi corpus, Search Console, domain final.
 
 ---
 
-## Belum dikerjakan / eksternal
+## Eksternal yang tertunda
 
-- Task 16: final independent audit (disarankan sesi terpisah setelah deploy stabil).
 - Human linguistic review atas suplemen draft dan core vocabulary (eksternal).
 - Review lisensi corpus, custom domain, Search Console, AdSense account (eksternal).
 - Verifikasi URL produksi Cloudflare: Workers Builds hijau, tapi hostname

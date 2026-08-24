@@ -378,6 +378,12 @@ export function getItemStats(itemId) {
   return getProgress().items[itemId] ?? emptyItemStats();
 }
 
+/** Ids whose bucket matches ("known" | "review" | "difficult" | "saved"). */
+export function getBucketIds(bucket) {
+  const { items } = getProgress();
+  return Object.keys(items).filter((id) => items[id].bucket === bucket);
+}
+
 export function markFlashcard(id, bucket) {
   if (!id || !["known", "review", "difficult", "saved"].includes(bucket)) return;
   const current = hydrateSync();

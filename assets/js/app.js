@@ -1,6 +1,16 @@
 ﻿import { loadLearningItems, loadLessons, loadSentences, loadWordPairs } from "./data.js";
 import { SITE_CONFIG } from "./config.js";
-import { getProgress, initProgress, markFlashcard, recordAnswer, saveProgress } from "./progress.js";
+import {
+  exportProgress,
+  getBucketIds,
+  getProgress,
+  importProgress,
+  initProgress,
+  markFlashcard,
+  recordAnswer,
+  resetProgress,
+  saveProgress,
+} from "./progress.js";
 import { el, replaceChildren } from "./utils/dom.js";
 import { normalizeSearch } from "./utils/normalize.js";
 import { buildCorrectionUrl } from "./utils/corrections.js";
@@ -50,7 +60,7 @@ function updateProgressBadges() {
   const progress = getProgress();
   $$("[data-progress-answered]").forEach((node) => (node.textContent = progress.answered));
   $$("[data-progress-correct]").forEach((node) => (node.textContent = progress.correct));
-  $$("[data-progress-known]").forEach((node) => (node.textContent = progress.known.length));
+  $$("[data-progress-known]").forEach((node) => (node.textContent = getBucketIds("known").length));
 }
 
 async function initHome() {
@@ -676,7 +686,7 @@ async function initGames() {
     const sessions = [
       ...(current.sessions ?? []),
       {
-        dateKey: new Date().toISOString().slice(0, 10),
+        dateKey: localDateKey(),
         mode: state.mode,
         answered: summary.answered,
         correct: summary.correct,
@@ -759,7 +769,7 @@ async function initFlashcards() {
           "span",
           { className: "pill" },
           "Diketahui ",
-          el("span", { text: getProgress().known.length, attrs: { "data-progress-known": "" } }),
+          el("span", { text: getBucketIds("known").length, attrs: { "data-progress-known": "" } }),
         ),
         pill(formatQuality(item), "", { "data-source-flag": item.sourceType || "corpus-derived" }),
       ),
@@ -974,6 +984,118 @@ function renderMiniPractice(root, themeItems, fullPool) {
   renderQuestion();
 }
 
+function localDateKey(atMs = Date.now()) {
+  const date = new Date(atMs);
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+async function initProgressPage() {
+  const root = $("#progress-root");
+  if (!root) return;
+  const state = getProgress();
+
+  const answered = state.answered ?? 0;
+  const correct = state.correct ?? 0;
+  const accuracy = answered === 0 ? "-" : `${Math.round((100 * correct) / answered)}%`;
+  const streak = computeStreak((state.sessions ?? []).map((session) => session.dateKey));
+
+  const stats = el(
+    "div",
+    { className: "scorebar", attrs: { role: "list" } },
+    pill(`Total jawaban ${answered}`, "", { role: "listitem" }),
+    pill(`Benar ${correct}`, "", { role: "listitem" }),
+    pill(`Akurasi ${accuracy}`, "", { role: "listitem" }),
+    pill(`Streak ${streak} hari`, "", { role: "listitem" }),
+    pill(`Diketahui ${getBucketIds("known").length}`, "", { role: "listitem" }),
+    pill(`Perlu ulang ${getBucketIds("review").length}`, "", { role: "listitem" }),
+    pill(`Disimpan ${getBucketIds("saved").length}`, "", { role: "listitem" }),
+  );
+
+  const statusLine = el("p", { className: "feedback", attrs: { role: "status", "aria-live": "polite" } });
+
+  const exportButton = el("button", {
+    className: "button",
+    text: "Ekspor progress (JSON)",
+    attrs: { type: "button" },
+  });
+  exportButton.addEventListener("click", () => {
+    const blob = new Blob([exportProgress()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = el("a", {
+      attrs: { href: url, download: `batak-toba-progress-${localDateKey()}.json` },
+    });
+    link.click();
+    URL.revokeObjectURL(url);
+    statusLine.textContent = "Progress diekspor sebagai file JSON.";
+    track("progress_exported");
+  });
+
+  const fileInput = el("input", {
+    attrs: { type: "file", accept: "application/json,.json", id: "import-file" },
+  });
+  const importButton = el("button", {
+    className: "button secondary",
+    text: "Impor progress",
+    attrs: { type: "button" },
+  });
+  importButton.addEventListener("click", async () => {
+    const file = fileInput.files?.[0];
+    if (!file) {
+      statusLine.textContent = "Pilih file JSON terlebih dahulu.";
+      return;
+    }
+    const text = await file.text();
+    const result = importProgress(text);
+    statusLine.textContent = result.ok
+      ? "Progress berhasil diimpor. Halaman diperbarui."
+      : `Impor gagal: ${result.reason === "invalid-json" ? "file bukan JSON valid" : "schema tidak didukung"}.`;
+    if (result.ok) initProgressPage();
+  });
+
+  let resetArmed = false;
+  const resetButton = el("button", {
+    className: "button secondary",
+    text: "Reset progress",
+    attrs: { type: "button" },
+  });
+  resetButton.addEventListener("click", () => {
+    if (!resetArmed) {
+      resetArmed = true;
+      resetButton.textContent = "Yakin? Klik sekali lagi untuk hapus";
+      resetButton.classList.add("wrong");
+      setTimeout(() => {
+        resetArmed = false;
+        resetButton.textContent = "Reset progress";
+        resetButton.classList.remove("wrong");
+      }, 6000);
+      return;
+    }
+    resetProgress();
+    statusLine.textContent = "Progress dihapus.";
+    initProgressPage();
+  });
+
+  replaceChildren(
+    root,
+    stats,
+    el(
+      "div",
+      { className: "action-row" },
+      exportButton,
+      fileInput,
+      importButton,
+      resetButton,
+    ),
+    statusLine,
+    el("p", {
+      className: "feedback",
+      text: "Catatan: data tidak tersinkron otomatis antar perangkat. Ekspor secara berkala bila ingin menyimpannya.",
+    }),
+  );
+}
+
 async function main() {
   await initProgress();
   initNavToggle();
@@ -987,6 +1109,7 @@ async function main() {
   if (page === "games") await initGames();
   if (page === "flashcards") await initFlashcards();
   if (page === "learn-topic") await initLearn();
+  if (page === "progres") await initProgressPage();
 }
 
 function registerServiceWorker() {

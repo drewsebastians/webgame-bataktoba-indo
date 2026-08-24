@@ -67,6 +67,7 @@ async function main() {
     await expectPage("/flashcards/", ["flashcard-root"]);
     await expectPage("/learn/", []);
     await expectPage("/learn/angka/", ['data-lesson="angka"', "lesson-root"]);
+    await expectPage("/progres/", ["progress-root", 'data-page="progres"', "Lanjut Latihan"]);
     await expectPage("/learn/keluarga/", ['data-lesson="keluarga"', "lesson-root"]);
     await expectPage("/offline.html", ["Mode offline", "noindex"]);
     await expectPage("/sw.js", ["CACHE_VERSION", "offline.html"]);

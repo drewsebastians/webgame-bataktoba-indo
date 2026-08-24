@@ -795,3 +795,14 @@ h3 {
   color: var(--red);
   font-weight: 700;
 }
+
+/* Progress page controls */
+#progress-root .action-row {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#progress-root input[type="file"] {
+  max-width: 16rem;
+  font-size: 0.9rem;
+}
