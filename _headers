@@ -3,6 +3,14 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
+# Notes:
+# - 'unsafe-inline' for scripts exists ONLY because JSON-LD blocks are inline
+#   and non-executing; no eval is used anywhere.
+# - Third-party origins (ads/analytics) stay closed while those features are
+#   disabled. When AdSense is activated, pagead2.googlesyndication.com must be
+#   added explicitly to script-src/frame-src via configuration.
 
 # Filenames are not content-hashed yet, so long-lived immutable caching
 # would serve stale code after deploys. Revalidation instead; hashed assets

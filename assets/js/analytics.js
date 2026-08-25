@@ -130,12 +130,14 @@ export function track(event, props) {
   if (!readConsent()) return { sent: false, reason: "no-consent" };
   const decision = evaluateEvent(event, props ?? {});
   if (!decision.ok) return { sent: false, reason: decision.reason };
-  if (provider) {
-    try {
-      provider({ event: decision.event, props: decision.props });
-    } catch {
-      /* a broken analytics provider must never break the product */
-    }
+  // No registered provider means the event is NOT delivered: never report
+  // success without an actual consumer.
+  if (!provider) return { sent: false, reason: "no-provider" };
+  try {
+    provider({ event: decision.event, props: decision.props });
+  } catch {
+    /* a broken analytics provider must never break the product */
+    return { sent: false, reason: "provider-error" };
   }
   return { sent: true };
 }

@@ -49,14 +49,26 @@ export function adsActive() {
   );
 }
 
+/** Placement allowlist: ads may only ever mount inside these zones. */
+export const ALLOWED_PLACEMENTS = new Set([
+  "home-after-content",
+  "lesson-complete",
+  "session-summary",
+  "editorial-footer",
+]);
+
 /**
  * Mount a reserved-size slot at `container` for an allowed position.
  * Returns null unless ads are fully active; removes empty containers so no
  * blank boxes or "Ruang iklan" placeholders ever appear.
  */
-export function mountAd(container, { format = "auto" } = {}) {
+export function mountAd(container, { placement = null, format = "auto" } = {}) {
   if (!container) return null;
   if (!adsActive()) {
+    container.remove();
+    return null;
+  }
+  if (!placement || !ALLOWED_PLACEMENTS.has(placement)) {
     container.remove();
     return null;
   }
@@ -66,7 +78,24 @@ export function mountAd(container, { format = "auto" } = {}) {
   slot.dataset.adClient = SITE_CONFIG.adsensePublisherId;
   slot.dataset.adFormat = format;
   container.append(slot);
+  loadAdSenseScript();
+  (window.adsbygoogle = window.adsbygoogle || []).push({});
   return slot;
+}
+
+let scriptRequested = false;
+
+/** Loads the official AdSense script exactly once, only when fully active. */
+export function loadAdSenseScript() {
+  if (!adsActive()) return false;
+  if (scriptRequested) return true;
+  scriptRequested = true;
+  const script = document.createElement("script");
+  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE_CONFIG.adsensePublisherId}`;
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  document.head.append(script);
+  return true;
 }
 
 /** Safety sweep for pages that still carry server-rendered placeholders. */

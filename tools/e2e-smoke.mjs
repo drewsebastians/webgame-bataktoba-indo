@@ -1,4 +1,6 @@
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { once } from "node:events";
 
 /**
@@ -11,10 +13,12 @@ const PORT = 4178;
 const BASE = `http://127.0.0.1:${PORT}`;
 
 function startServer() {
-  const child = spawn("python", ["-m", "http.server", String(PORT), "--bind", "127.0.0.1"], {
+  const cwd = fileURLToPath(new URL("../", import.meta.url));
+  const child = spawn(process.execPath, [join("tools", "e2e-server.mjs"), String(PORT)], {
+    cwd,
     stdio: ["ignore", "ignore", "pipe"],
   });
-  child.stderr.resume();
+  child.stderr.on("data", (d) => console.error(String(d).trim()));
   return child;
 }
 
