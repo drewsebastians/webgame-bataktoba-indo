@@ -41,33 +41,35 @@ describe("lesson registry integrity", () => {
     }
   });
 
-  it("review rollups are honest - no lesson claims human review", () => {
+  it("no lesson claims human review without reviewed members", () => {
     for (const lesson of [...lessons.published, ...lessons.drafts]) {
       if (lesson.reviewRollup === "human-reviewed") {
         const allReviewed = lesson.itemIds.every(
           (id) => learning.get(id)?.reviewStatus === "human-reviewed",
         );
         assert.ok(allReviewed, `lesson ${lesson.slug} claims human review without reviewed members`);
-      } else {
-        assert.notEqual(lesson.reviewRollup, "human-reviewed");
       }
     }
   });
 
-  it("supplement drafts never leak into game data", () => {
-    const supplementKeys = new Set();
-    for (const lesson of [...lessons.published, ...lessons.drafts]) {
-      for (const s of lesson.supplementItems) {
-        supplementKeys.add(`${s.batak}|${s.indonesia}`);
-        assert.equal(s.reviewStatus, "needs-review");
-        assert.equal(s.sourceType, "editorial-draft");
-      }
+  it("supplement drafts never leak into the published layer", () => {
+    const { readFileSync, readdirSync } = require_fs();
+    const draftsFile = JSON.parse(
+      readFileSync(new URL("data/candidates/lesson-drafts.json", root), "utf8"),
+    );
+    for (const s of draftsFile.supplements) {
+      assert.equal(s.reviewStatus, "needs-review");
+      assert.equal(s.sourceType, "editorial-draft");
     }
-    for (const item of learning.values()) {
-      assert.ok(
-        !supplementKeys.has(`${item.batak}|${item.indonesia}`),
-        `draft supplement leaked into game pool: ${item.id}`,
-      );
+    // no published file may contain any draft marker
+    for (const file of readdirSync(new URL("data/published/", root))) {
+      const text = readFileSync(new URL(`data/published/${file}`, root), "utf8");
+      assert.ok(!text.includes('"needs-review"'), `draft status leaked into ${file}`);
+      assert.ok(!text.includes('"editorial-draft"'), `draft source leaked into ${file}`);
+    }
+    // the public registry must not carry supplement item content
+    for (const lesson of [...lessons.published, ...lessons.drafts]) {
+      assert.equal(lesson.supplementItems, undefined, "public lessons must not embed supplements");
     }
   });
 
@@ -82,3 +84,8 @@ describe("lesson registry integrity", () => {
     }
   });
 });
+
+function require_fs() {
+  return { readFileSync: fs.readFileSync, readdirSync: fs.readdirSync };
+}
+const fs = await import("node:fs");

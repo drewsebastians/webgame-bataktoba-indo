@@ -1,7 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T16:14:09+00:00",
+  "generatedAt": "2026-08-25T00:39:03+00:00",
   "minPoolItemsForPublication": 6,
+  "note": "Supplementary draft vocabulary is NOT included here; see data/candidates/lesson-drafts.json (internal editorial input).",
   "published": [],
   "drafts": [
     {
@@ -19,56 +20,6 @@
         "word-0880cf2284",
         "word-92add2f91e"
       ],
-      "supplementItems": [
-        {
-          "batak": "sada",
-          "indonesia": "satu",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "dua",
-          "indonesia": "dua",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "opat",
-          "indonesia": "empat",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "lima",
-          "indonesia": "lima",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "walu",
-          "indonesia": "delapan",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "sampulu",
-          "indonesia": "sepuluh",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "saratus",
-          "indonesia": "seratus",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "saribu",
-          "indonesia": "seribu",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        }
-      ],
       "counts": {
         "poolItems": 5,
         "supplementItems": 8,
@@ -76,7 +27,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-24T16:14:09+00:00"
+      "generatedAt": "2026-08-25T00:39:03+00:00"
     },
     {
       "id": "lesson-keluarga",
@@ -87,74 +38,6 @@
       "level": 1,
       "estMinutes": 3,
       "itemIds": [],
-      "supplementItems": [
-        {
-          "batak": "amang",
-          "indonesia": "ayah / bapak",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "ina",
-          "indonesia": "ibu",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "anak",
-          "indonesia": "anak",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "boru",
-          "indonesia": "anak perempuan / putri",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "lae",
-          "indonesia": "kakak laki-laki",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "anggi",
-          "indonesia": "adik",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "ompung",
-          "indonesia": "kakek / nenek",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "tulang",
-          "indonesia": "paman (kakak ibu)",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "iboto",
-          "indonesia": "paman (kakak ayah)",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "namboru",
-          "indonesia": "bibi (kakak ayah)",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "hula-hula",
-          "indonesia": "keluarga pihak istri",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        }
-      ],
       "counts": {
         "poolItems": 0,
         "supplementItems": 11,
@@ -162,7 +45,7 @@
       },
       "reviewRollup": "no-pool-items",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-24T16:14:09+00:00"
+      "generatedAt": "2026-08-25T00:39:03+00:00"
     },
     {
       "id": "lesson-sapaan",
@@ -173,20 +56,6 @@
       "level": 1,
       "estMinutes": 3,
       "itemIds": [],
-      "supplementItems": [
-        {
-          "batak": "horas",
-          "indonesia": "salam hormat khas Batak",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "mauliate",
-          "indonesia": "terima kasih",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        }
-      ],
       "counts": {
         "poolItems": 0,
         "supplementItems": 2,
@@ -194,7 +63,7 @@
       },
       "reviewRollup": "no-pool-items",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-24T16:14:09+00:00"
+      "generatedAt": "2026-08-25T00:39:03+00:00"
     },
     {
       "id": "lesson-makanan",
@@ -208,32 +77,6 @@
         "word-be83d23d14",
         "word-6a7710b417"
       ],
-      "supplementItems": [
-        {
-          "batak": "itak",
-          "indonesia": "makanan / lauk-pauk",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "mangan",
-          "indonesia": "makan",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "minum",
-          "indonesia": "minum",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        },
-        {
-          "batak": "sauasur",
-          "indonesia": "sayur rebus khas Batak",
-          "reviewStatus": "needs-review",
-          "sourceType": "editorial-draft"
-        }
-      ],
       "counts": {
         "poolItems": 2,
         "supplementItems": 4,
@@ -241,7 +84,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-24T16:14:09+00:00"
+      "generatedAt": "2026-08-25T00:39:03+00:00"
     },
     {
       "id": "lesson-waktu",
@@ -257,7 +100,6 @@
         "word-96cd17d1f0",
         "word-29ffff825b"
       ],
-      "supplementItems": [],
       "counts": {
         "poolItems": 4,
         "supplementItems": 0,
@@ -265,7 +107,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-24T16:14:09+00:00"
+      "generatedAt": "2026-08-25T00:39:03+00:00"
     },
     {
       "id": "lesson-alam",
@@ -279,7 +121,6 @@
         "word-dd4c2312e5",
         "word-c92b3480a5"
       ],
-      "supplementItems": [],
       "counts": {
         "poolItems": 2,
         "supplementItems": 0,
@@ -287,7 +128,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-24T16:14:09+00:00"
+      "generatedAt": "2026-08-25T00:39:03+00:00"
     }
   ],
   "counts": {

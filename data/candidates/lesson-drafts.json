@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-25T00:39:03+00:00",
+  "reviewStatusNote": "All entries are needs-review editorial inputs; never publish or render publicly.",
+  "supplements": [
+    {
+      "lessonSlug": "angka",
+      "batak": "sada",
+      "indonesia": "satu",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "dua",
+      "indonesia": "dua",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "opat",
+      "indonesia": "empat",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "lima",
+      "indonesia": "lima",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "walu",
+      "indonesia": "delapan",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "sampulu",
+      "indonesia": "sepuluh",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "saratus",
+      "indonesia": "seratus",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "angka",
+      "batak": "saribu",
+      "indonesia": "seribu",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "amang",
+      "indonesia": "ayah / bapak",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "ina",
+      "indonesia": "ibu",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "anak",
+      "indonesia": "anak",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "boru",
+      "indonesia": "anak perempuan / putri",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "lae",
+      "indonesia": "kakak laki-laki",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "anggi",
+      "indonesia": "adik",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "ompung",
+      "indonesia": "kakek / nenek",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "tulang",
+      "indonesia": "paman (kakak ibu)",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "iboto",
+      "indonesia": "paman (kakak ayah)",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "namboru",
+      "indonesia": "bibi (kakak ayah)",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "keluarga",
+      "batak": "hula-hula",
+      "indonesia": "keluarga pihak istri",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "sapaan",
+      "batak": "horas",
+      "indonesia": "salam hormat khas Batak",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "sapaan",
+      "batak": "mauliate",
+      "indonesia": "terima kasih",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "makanan",
+      "batak": "itak",
+      "indonesia": "makanan / lauk-pauk",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "makanan",
+      "batak": "mangan",
+      "indonesia": "makan",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "makanan",
+      "batak": "minum",
+      "indonesia": "minum",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    },
+    {
+      "lessonSlug": "makanan",
+      "batak": "sauasur",
+      "indonesia": "sayur rebus khas Batak",
+      "reviewStatus": "needs-review",
+      "sourceType": "editorial-draft"
+    }
+  ]
+}

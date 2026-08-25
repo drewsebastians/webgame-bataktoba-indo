@@ -822,7 +822,7 @@ async function initLearn() {
       text:
         lesson.publicationStatus === "published"
           ? `Lesson latihan aktif: ${lesson.counts.poolItems} item corpus.`
-          : `Status: materi pelengkap editorial (draft). Lesson latihan penuh butuh minimal ${lessons.minPoolItemsForPublication} item corpus per tema; tema ini punya ${lesson.counts.poolItems}.`,
+          : `Status: lesson latihan penuh belum terbit (butuh minimal ${lessons.minPoolItemsForPublication} item corpus per tema; tema ini punya ${lesson.counts.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
     }),
   );
 
@@ -841,25 +841,15 @@ async function initLearn() {
     );
   }
 
-  if (lesson.supplementItems.length > 0) {
+  // Editorial drafts are NEVER rendered publicly: they stay internal until a
+  // human reviewer approves them (see data/reviewed/README.md).
+  if (lesson.counts.supplementItems > 0 || lesson.publicationStatus !== "published") {
     children.push(
-      el("div", {
-        className: "draft-banner",
+      el("p", {
+        className: "feedback",
         attrs: { role: "note" },
-      }, "Editorial draft - menunggu review penutur. Bukan kamus final; laporkan koreksi bila ada yang keliru."),
-    );
-    children.push(
-      el(
-        "div",
-        { className: "vocab-table" },
-        lesson.supplementItems.map((item) =>
-          vocabRow(
-            item.batak,
-            item.indonesia,
-            pill("draft - perlu review", "", { "data-source-flag": "editorial-draft" }),
-          ),
-        ),
-      ),
+        text: `Materi tambahan untuk tema ini sedang menunggu review penutur (${lesson.counts.supplementItems} item). Kata-kata tersebut belum ditampilkan sebagai materi belajar.`,
+      }),
     );
   }
 

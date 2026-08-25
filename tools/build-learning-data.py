@@ -36,6 +36,7 @@ INPUT_DB = CORPUS_ROOT / "data" / "input" / "bible_batak_indo_v1.db"
 DATA_DIR = REPO_ROOT / "data"
 CONTENT_DIR = REPO_ROOT / "content"
 LEGACY_DIR = DATA_DIR / "legacy"
+REVIEWED_DIR = DATA_DIR / "reviewed"
 
 SCHEMA_VERSION = 2
 
@@ -571,7 +572,13 @@ def build_lesson_registry(
     published_words: list[dict[str, object]],
     published_phrases: list[dict[str, object]],
     curated: dict,
-) -> dict[str, object]:
+) -> tuple[dict[str, object], dict[str, object]]:
+    """Build the PUBLIC lesson registry plus an INTERNAL drafts file.
+
+    The public registry never contains needs-review/editorial-draft
+    vocabulary: supplements stay in the internal candidates layer as
+    editorial input for future human review.
+    """
     pool = [*published_words, *published_phrases]
     by_theme: dict[str, list[dict[str, object]]] = {}
     for item in pool:
@@ -580,6 +587,7 @@ def build_lesson_registry(
 
     published_lessons = []
     draft_lessons = []
+    internal_draft_supplements: list[dict[str, object]] = []
     existing_pairs = {
         (normalize_label(i["batak"]), normalize_label(i["indonesia"])) for i in pool
     }
@@ -595,12 +603,14 @@ def build_lesson_registry(
                 continue
             supplements.append(
                 {
+                    "lessonSlug": theme_id,
                     "batak": s["batak"],
                     "indonesia": s["indonesia"],
                     "reviewStatus": "needs-review",
                     "sourceType": "editorial-draft",
                 }
             )
+            internal_draft_supplements.append(supplements[-1])
         is_published = len(theme_items) >= MIN_LESSON_POOL_ITEMS
 
         # review rollup computed from actual member statuses - never assumed
@@ -621,7 +631,6 @@ def build_lesson_registry(
             "level": entry.get("level", 1),
             "estMinutes": max(3, min(10, (len(theme_items) + 5) // 5)),
             "itemIds": [item["id"] for item in theme_items],
-            "supplementItems": supplements,
             "counts": {
                 "poolItems": len(theme_items),
                 "supplementItems": len(supplements),
@@ -633,10 +642,14 @@ def build_lesson_registry(
         }
         (published_lessons if is_published else draft_lessons).append(lesson)
 
-    return {
+    public_registry = {
         "schemaVersion": SCHEMA_VERSION,
         "generatedAt": utc_now(),
         "minPoolItemsForPublication": MIN_LESSON_POOL_ITEMS,
+        "note": (
+            "Supplementary draft vocabulary is NOT included here; "
+            "see data/candidates/lesson-drafts.json (internal editorial input)."
+        ),
         "published": published_lessons,
         "drafts": draft_lessons,
         "counts": {
@@ -644,6 +657,93 @@ def build_lesson_registry(
             "draftLessons": len(draft_lessons),
         },
     }
+    internal_drafts = {
+        "schemaVersion": SCHEMA_VERSION,
+        "generatedAt": utc_now(),
+        "reviewStatusNote": (
+            "All entries are needs-review editorial inputs; "
+            "never publish or render publicly."
+        ),
+        "supplements": internal_draft_supplements,
+    }
+    return public_registry, internal_drafts
+
+
+# ---------------------------------------------------------------------------
+# Reviewed layer: human review overrides merged into candidates pre-publish.
+# The file is optional and currently expected to be empty - no reviewed data
+# may ever be manufactured by tooling.
+# ---------------------------------------------------------------------------
+
+
+def load_reviewed_overrides() -> list[dict[str, object]]:
+    path = REVIEWED_DIR / "overrides.json"
+    if not path.exists():
+        return []
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    overrides = payload.get("overrides", [])
+    known_decisions = {"approve", "reject", "revise"}
+    clean: list[dict[str, object]] = []
+    for entry in overrides:
+        if not isinstance(entry, dict):
+            raise SystemExit("reviewed/overrides.json: each override must be an object")
+        if entry.get("decision") not in known_decisions:
+            raise SystemExit(f"reviewed/overrides.json: invalid decision for {entry.get('itemId')}")
+        for required in ("itemId", "reviewer", "reviewedAt"):
+            if not entry.get(required):
+                raise SystemExit(f"reviewed/overrides.json: missing {required} on {entry.get('itemId')}")
+        clean.append(entry)
+    return clean
+
+
+def apply_review_overrides(
+    items: list[dict[str, object]], overrides: list[dict[str, object]], report: Report
+) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
+    """Apply explicit human-review decisions to candidate items.
+
+    approve -> item becomes human-reviewed with reviewer attribution;
+    reject  -> item removed before publication;
+    revise  -> stays candidate with reviewer notes recorded in report.
+    """
+    by_id = {item["id"]: item for item in items}
+    rejected: list[dict[str, object]] = []
+    overridden_ids: set[str] = set()
+    for entry in overrides:
+        item = by_id.get(entry["itemId"])
+        if item is None:
+            report.notes.append(
+                f"Review override targets unknown id {entry['itemId']}; ignored."
+            )
+            continue
+        decision = entry["decision"]
+        if decision == "reject":
+            rejected.append(item)
+            report.notes.append(
+                f"Item {item['id']} rejected by reviewer {entry['reviewer']}."
+            )
+            continue
+        item["reviewStatus"] = "human-reviewed"
+        item["reviewedBy"] = entry["reviewer"]
+        item["reviewedAt"] = entry["reviewedAt"]
+        if entry.get("approvedMeaning"):
+            item["indonesia"] = str(entry["approvedMeaning"]).strip().lower()
+        if isinstance(entry.get("approvedAlternatives"), list):
+            item["indonesianAlternatives"] = [
+                str(a).strip().lower() for a in entry["approvedAlternatives"]
+            ]
+        if isinstance(entry.get("themes"), list):
+            existing = set(item.get("themes") or [])
+            item["themes"] = sorted(existing | set(entry["themes"]))
+        if entry.get("difficulty") is not None:
+            item["difficulty"] = entry["difficulty"]
+        if entry.get("usageNote"):
+            item["usageNote"] = str(entry["usageNote"])
+        report.notes.append(
+            f"Item {item['id']} approved by reviewer {entry['reviewer']}."
+        )
+        overridden_ids.add(item["id"])
+    kept = [item for item in items if item["id"] not in {r["id"] for r in rejected}]
+    return kept, rejected
 
 
 # ---------------------------------------------------------------------------
@@ -775,6 +875,14 @@ def main() -> int:
             f"Publication rule rejects: words={words_rejected}, phrases={phrases_rejected}, sentences={sentences_rejected}."
         )
 
+    # reviewed layer: apply explicit human decisions (empty today - never faked)
+    overrides = load_reviewed_overrides()
+    published_words, _review_rejected = apply_review_overrides(published_words, overrides, report)
+    if _review_rejected:
+        report.notes.append(
+            f"Review rejections applied: {len(_review_rejected)} items removed pre-publish."
+        )
+
     # theme tagging (editorial keyword curation over existing corpus items)
     theme_keywords = load_content("themes/keywords.json")["themes"]
     tagged_count = apply_theme_tags([*published_words, *published_phrases], theme_keywords)
@@ -803,11 +911,12 @@ def main() -> int:
 
     lesson_definitions = load_content("lessons.json")
     curated_drafts = load_content("curated/draft-vocabulary.json")
-    lessons_registry = build_lesson_registry(published_words, published_phrases, {
+    lessons_registry, internal_lesson_drafts = build_lesson_registry(published_words, published_phrases, {
         **lesson_definitions,
         "themes": curated_drafts["themes"],
     })
     write_json(DATA_DIR / "published" / "lessons.json", lessons_registry)
+    write_json(DATA_DIR / "candidates" / "lesson-drafts.json", internal_lesson_drafts)
     counts["publishedLessons"] = lessons_registry["counts"]["publishedLessons"]
     counts["draftLessons"] = lessons_registry["counts"]["draftLessons"]
 

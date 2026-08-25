@@ -250,6 +250,22 @@ for (const [name, payload] of [
   }
 }
 
+// --- Draft leakage guard: published layer must be free of internal states ---
+{
+  const banned = ['"needs-review"', '"editorial-draft"'];
+  walk(join(root, "data", "published"), (path) => {
+    if (extname(path) !== ".json") return;
+    const text = readFileSync(path, "utf8");
+    for (const marker of banned) {
+      if (text.includes(marker)) {
+        failures.push(
+          `Draft leakage: data/published/${path.split("published").pop()} contains internal status ${marker}.`,
+        );
+      }
+    }
+  });
+}
+
 // --- Quality report sanity ---------------------------------------------------
 try {
   const report = JSON.parse(readFileSync(join(root, "data/reports/data-quality-report.json"), "utf8"));
