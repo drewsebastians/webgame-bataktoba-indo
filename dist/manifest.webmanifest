@@ -1,0 +1,31 @@
+{
+  "name": "Batak Toba Play",
+  "short_name": "Batak Play",
+  "description": "Game belajar Bahasa Batak Toba - Indonesia: tebak arti, reverse quiz, flashcards, dan kamus belajar.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#fffaf2",
+  "theme_color": "#b7352d",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

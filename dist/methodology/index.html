@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Methodology Data Batak Toba Indonesia</title>
+    <meta name="description" content="Metodologi filtering data untuk game belajar Bahasa Batak Toba - Indonesia berbasis corpus alignment engine.">
+    <link rel="canonical" href="https://webgame-bataktoba-indo.pages.dev/methodology/">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#b7352d">
+    <meta property="og:title" content="Methodology Data Batak Toba Indonesia">
+    <meta property="og:description" content="Metodologi filtering data untuk game belajar Bahasa Batak Toba - Indonesia berbasis corpus alignment engine.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://webgame-bataktoba-indo.pages.dev/assets/icons/og-image.png">
+    <meta property="og:url" content="https://webgame-bataktoba-indo.pages.dev/methodology/">
+    <meta property="og:site_name" content="Batak Toba Play">
+    <meta property="og:locale" content="id_ID">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://webgame-bataktoba-indo.pages.dev/assets/icons/og-image.png">
+    <meta name="twitter:title" content="Methodology Data Batak Toba Indonesia">
+    <meta name="twitter:description" content="Metodologi filtering data untuk game belajar Bahasa Batak Toba - Indonesia berbasis corpus alignment engine.">
+    <link rel="stylesheet" href="../assets/css/styles.f8c50966.css">
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://webgame-bataktoba-indo.pages.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Methodology Data Batak Toba Indonesia",
+            "item": "https://webgame-bataktoba-indo.pages.dev/methodology/"
+          }
+        ]
+      }
+    </script>
+      <meta name="last-modified" content="2026-08-25T15:39:25+07:00">
+  </head>
+  <body data-page="methodology">
+    <a class="skip-link" href="#main-content">Langsung ke konten</a>
+
+    <header class="site-header"><nav class="nav" aria-label="Navigasi utama"><a class="brand" href="../index.html"><span class="brand-mark">BT</span><span>Batak Toba Play</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links-list">Menu</button>
+        <div class="nav-links" id="nav-links-list"><a data-nav="home" href="../index.html">Home</a><a data-nav="games" href="../games/">Games</a><a data-nav="dictionary" href="../dictionary/">Dictionary</a><a data-nav="flashcards" href="../flashcards/">Flashcards</a>
+          <a data-nav="progres" href="../progres/">Progres</a><a data-nav="methodology" href="../methodology/">Methodology</a></div></nav></header>
+    <main id="main-content" tabindex="-1" class="main content">
+      <section class="page-heading">
+        <p class="eyebrow">Methodology</p>
+        <h1>Bagaimana subset data dipilih</h1>
+      </section>
+      <p>Data berasal dari repo <a href="https://github.com/drewsebastians/batak-indo-alignment-engine">batak-indo-alignment-engine</a>. Untuk MVP ini, website memakai subset kecil dari kandidat alignment yang punya label high confidence atau medium confidence.</p>
+      <h2>Kriteria filtering</h2>
+      <ul>
+        <li>Batak dan Indonesia sama-sama terisi.</li>
+        <li>Hanya kandidat high_confidence dan medium_confidence dari pipeline co-occurrence.</li>
+        <li>Stopword, tanda baca, duplikat, token terlalu pendek, token terlalu panjang, dan simbol aneh dibuang.</li>
+        <li>Nama diri yang jelas dibuang secara konservatif agar latihan lebih condong ke kosakata.</li>
+        <li>Kalimat pendek dipakai sebagai fitur beta dengan batas panjang ketat.</li>
+      </ul>
+      <h2>Batasan penting</h2>
+      <p>Confidence adalah sinyal statistik dari corpus, bukan jaminan arti. Pasangan terjemahan bisa punya variasi, konteks khusus, atau error. Website ini adalah alat belajar dan eksplorasi, bukan otoritas linguistik final.</p>
+      <p>Label kualitas di dictionary memakai istilah sederhana: high confidence, medium confidence, dan corpus-derived.</p>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><span>Transparan dulu, sempurna nanti.</span><div class="footer-links"><a href="../data-source/">Data Source</a><a href="../dictionary/">Dictionary</a><a href="../contact/">Contact</a><a href="../privacy/">Privacy</a></div></div></footer>
+    <script type="module" src="../assets/js/app.dc93ab9c.js"></script>
+  </body>
+</html>

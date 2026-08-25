@@ -1,0 +1,860 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-25T00:39:03+00:00",
+  "note": "Maps legacy sequential ids to stable content-hash ids. Keep this file forever.",
+  "mappingCount": 485,
+  "unmappedCount": 91,
+  "mappings": {
+    "word-0001": "word-f31f8d24f2",
+    "word-0002": "word-4e0cb8bd72",
+    "word-0003": "word-26e70b93eb",
+    "word-0004": "word-56899d3213",
+    "word-0005": "word-6ff8777946",
+    "word-0006": "word-475c88d1dd",
+    "word-0007": "word-0973879b7c",
+    "word-0008": "word-e467c11e92",
+    "word-0009": "word-7286023b75",
+    "word-0010": "word-7184720802",
+    "word-0011": "word-859aba639d",
+    "word-0012": "word-d884d80a6f",
+    "word-0013": "word-61045c0af8",
+    "word-0014": "word-0ba3eec852",
+    "word-0015": "word-8832a8589b",
+    "word-0016": "word-b4b8f4cd49",
+    "word-0017": "word-a7fa9742bd",
+    "word-0018": "word-27dce9eed3",
+    "word-0019": "word-3595d47211",
+    "word-0020": "word-b9aab94636",
+    "word-0021": "word-7d60a98799",
+    "word-0022": "word-1e35f10df3",
+    "word-0023": "word-d033aed968",
+    "word-0024": "word-da9b194ac8",
+    "word-0025": "word-b17629e7fe",
+    "word-0026": "word-014b2d384b",
+    "word-0027": "word-8e4f3bf731",
+    "word-0028": "word-859fe57a60",
+    "word-0029": "word-8102ab9929",
+    "word-0030": "word-1331d27113",
+    "word-0031": "word-6149c36d34",
+    "word-0032": "word-8b6eb3431b",
+    "word-0033": "word-f79aa2061c",
+    "word-0034": "word-8bbd15692d",
+    "word-0035": "word-9de6c9f266",
+    "word-0036": "word-a8c0f17259",
+    "word-0037": "word-b1eb5a8abe",
+    "word-0038": "word-e551db3710",
+    "word-0039": "word-caf60b46ca",
+    "word-0040": "word-ee0b1fffb9",
+    "word-0041": "word-7adf6c775a",
+    "word-0042": "word-98053b5bf3",
+    "word-0043": "word-3f52918bc9",
+    "word-0044": "word-92f682c43a",
+    "word-0045": "word-e79a38b3f8",
+    "word-0046": "word-5f9f3eec2b",
+    "word-0047": "word-616a4ad526",
+    "word-0048": "word-df867ed7c8",
+    "word-0049": "word-df04458042",
+    "word-0050": "word-99dcc1cafa",
+    "word-0051": "word-445b3c2d6a",
+    "word-0052": "word-2b037c531e",
+    "word-0053": "word-bb6a455a08",
+    "word-0054": "word-bbcb2084b7",
+    "word-0055": "word-5d877769a6",
+    "word-0056": "word-36ce9ca411",
+    "word-0057": "word-bf5d682e8b",
+    "word-0058": "word-cab6381101",
+    "word-0059": "word-5573dede34",
+    "word-0060": "word-c79c15e5c6",
+    "word-0061": "word-cda58024a5",
+    "word-0062": "word-72a5b2be73",
+    "word-0063": "word-df152d7d27",
+    "word-0064": "word-0f591c97f1",
+    "word-0065": "word-5564265c01",
+    "word-0066": "word-40e2bf82ee",
+    "word-0067": "word-63a8408771",
+    "word-0068": "word-fc77bca4de",
+    "word-0069": "word-141862f84e",
+    "word-0070": "word-82192a7093",
+    "word-0071": "word-2ffe980e86",
+    "word-0072": "word-6ef569f002",
+    "word-0073": "word-05c3b425ee",
+    "word-0074": "word-fe9f51eb1e",
+    "word-0075": "word-7f57364b9c",
+    "word-0076": "word-31f61dc596",
+    "word-0077": "word-a1b5aa46ed",
+    "word-0078": "word-793f30b05d",
+    "word-0079": "word-9ddcae5766",
+    "word-0080": "word-63dae0c3b7",
+    "word-0081": "word-9f37e6652e",
+    "word-0082": "word-9a37e0b270",
+    "word-0083": "word-d20dc50f68",
+    "word-0084": "word-011d36e84e",
+    "word-0085": "word-5ce31c337b",
+    "word-0086": "word-6157fc4831",
+    "word-0087": "word-9551542d99",
+    "word-0088": "word-e8655aab3e",
+    "word-0089": "word-a8ef2439b3",
+    "word-0090": "word-0765841447",
+    "word-0091": "word-33796c35b7",
+    "word-0092": "word-25bfd5ed71",
+    "word-0093": "word-7afa709af9",
+    "word-0094": "word-f84fc236bc",
+    "word-0095": "word-38aecb4709",
+    "word-0096": "word-f2026a2ad7",
+    "word-0097": "word-c2b6f87adb",
+    "word-0098": "word-3e59972330",
+    "word-0099": "word-f8f169f3a4",
+    "word-0100": "word-63daa85b28",
+    "word-0101": "word-557bcd8ab8",
+    "word-0102": "word-9c124a7296",
+    "word-0103": "word-511ac62834",
+    "word-0104": "word-77148c4dcb",
+    "word-0105": "word-59ae8e8e9a",
+    "word-0106": "word-0f100677d8",
+    "word-0107": "word-459b82b2b9",
+    "word-0108": "word-952e92d7ea",
+    "word-0109": "word-e14d99738b",
+    "word-0110": "word-3c058b79a5",
+    "word-0111": "word-4703b78447",
+    "word-0112": "word-195e524dd2",
+    "word-0113": "word-e9cdf29b02",
+    "word-0114": "word-4b78d91276",
+    "word-0115": "word-9ac27a4830",
+    "word-0116": "word-752a97ca34",
+    "word-0117": "word-109d5ae675",
+    "word-0118": "word-d87ff3391a",
+    "word-0119": "word-c51eb71d86",
+    "word-0120": "word-2580838080",
+    "word-0121": "word-b4ce3d9c58",
+    "word-0122": "word-62c445bae3",
+    "word-0123": "word-71bf0952a0",
+    "word-0124": "word-b1287f03c5",
+    "word-0126": "word-12c69adb47",
+    "word-0130": "word-3a6bda359e",
+    "word-0131": "word-fb0f24ec17",
+    "word-0132": "word-e4c30cb13c",
+    "word-0133": "word-1b1eb9816b",
+    "word-0134": "word-6ae3263205",
+    "word-0135": "word-b10a7ae29a",
+    "word-0136": "word-8ccdb4f123",
+    "word-0137": "word-750953a832",
+    "word-0138": "word-529ce3791f",
+    "word-0139": "word-01f07f8e22",
+    "word-0140": "word-469a9f14e8",
+    "word-0141": "word-28e069f9d7",
+    "word-0142": "word-295b234bad",
+    "word-0143": "word-5aab366978",
+    "word-0144": "word-9035a3c2ea",
+    "word-0145": "word-126a210574",
+    "word-0146": "word-61e247af94",
+    "word-0147": "word-81382539fd",
+    "word-0148": "word-1d122f2f5b",
+    "word-0149": "word-f5aee717ce",
+    "word-0150": "word-61d98b1635",
+    "word-0151": "word-35010fd1db",
+    "word-0152": "word-78fca84eaf",
+    "word-0153": "word-4a50dc05c2",
+    "word-0155": "word-b2c44b78d2",
+    "word-0156": "word-9a2a992b8d",
+    "word-0157": "word-3c8db9483e",
+    "word-0158": "word-8513379aeb",
+    "word-0159": "word-5643c18edc",
+    "word-0160": "word-5f5e764534",
+    "word-0161": "word-3991eb4b1f",
+    "word-0162": "word-d7fe67302f",
+    "word-0163": "word-0ebbc376e2",
+    "word-0164": "word-b90a259b87",
+    "word-0165": "word-5f34dea05d",
+    "word-0166": "word-c73aae18fd",
+    "word-0167": "word-3de4313b7e",
+    "word-0168": "word-5126a1d17b",
+    "word-0169": "word-696dfabc8b",
+    "word-0170": "word-431e90f9fa",
+    "word-0171": "word-7e037b5115",
+    "word-0172": "word-be83d23d14",
+    "word-0173": "word-d5d5665029",
+    "word-0174": "word-ac2f226c09",
+    "word-0175": "word-0880cf2284",
+    "word-0176": "word-5ce3d5b006",
+    "word-0177": "word-0ff3d7e61e",
+    "word-0178": "word-8ea6fb59a2",
+    "word-0179": "word-e9d64870c9",
+    "word-0180": "word-96cd17d1f0",
+    "word-0181": "word-ff440dc05e",
+    "word-0182": "word-8217e41ecb",
+    "word-0183": "word-1c784c6000",
+    "word-0184": "word-73b21b9b6b",
+    "word-0185": "word-cc3702b2b1",
+    "word-0186": "word-85d44cab95",
+    "word-0187": "word-ef42e568a1",
+    "word-0188": "word-701e110489",
+    "word-0189": "word-652e0a1e8b",
+    "word-0190": "word-be3d4b2e67",
+    "word-0191": "word-dbb6978760",
+    "word-0192": "word-2ee20b8118",
+    "word-0193": "word-dd4c2312e5",
+    "word-0194": "word-dc32e6962a",
+    "word-0195": "word-f37f68599b",
+    "word-0196": "word-78a450f240",
+    "word-0197": "word-a1fe44438a",
+    "word-0198": "word-05fc950b1f",
+    "word-0199": "word-74814aa8f3",
+    "word-0200": "word-b44e5d4138",
+    "word-0201": "word-92add2f91e",
+    "word-0202": "word-a56a840092",
+    "word-0203": "word-1227f26de9",
+    "word-0204": "word-15d069ae14",
+    "word-0205": "word-5ee3a8341d",
+    "word-0206": "word-a7df3e6cd0",
+    "word-0207": "word-317ddbf8d0",
+    "word-0208": "word-96254a4163",
+    "word-0209": "word-6d91043a71",
+    "word-0210": "word-08c4452030",
+    "word-0211": "word-32bf4f65c2",
+    "word-0212": "word-4dcdd80077",
+    "word-0213": "word-e19b78341c",
+    "word-0214": "word-f9e4150536",
+    "word-0215": "word-2523e1a060",
+    "word-0216": "word-94fc994f7d",
+    "word-0217": "word-828719eeaf",
+    "word-0218": "word-9fff457261",
+    "word-0219": "word-b362418848",
+    "word-0220": "word-51d9499e8a",
+    "word-0221": "word-8e6a258a7d",
+    "word-0222": "word-02ca84f938",
+    "word-0223": "word-eb43a7f0dc",
+    "word-0224": "word-172c3914e7",
+    "word-0225": "word-4b1f65a8df",
+    "word-0226": "word-8beddb63df",
+    "word-0227": "word-5582210d8b",
+    "word-0228": "word-837b98e7b3",
+    "word-0229": "word-d111b8e179",
+    "word-0230": "word-b1d892171d",
+    "word-0231": "word-4afe63be00",
+    "word-0232": "word-ada8486532",
+    "word-0233": "word-b50b7ac675",
+    "word-0234": "word-eae70e725b",
+    "word-0235": "word-4ff6b0d15a",
+    "word-0236": "word-ca50d41b47",
+    "word-0237": "word-aea73ab1bc",
+    "word-0238": "word-c79dc732a7",
+    "word-0239": "word-2a97da03ba",
+    "word-0240": "word-d26467a85c",
+    "word-0241": "word-7cded770ae",
+    "word-0242": "word-d84a229152",
+    "word-0243": "word-5df7f44fae",
+    "word-0244": "word-9a6a6d6ad3",
+    "word-0245": "word-b1dc7c2b91",
+    "word-0246": "word-d59ff0372a",
+    "word-0247": "word-0f99623764",
+    "word-0248": "word-2e8a82ace5",
+    "word-0249": "word-440dbde9b8",
+    "word-0250": "word-faead9df53",
+    "word-0251": "word-14353a7685",
+    "word-0252": "word-1dea1c577d",
+    "word-0253": "word-42a8299fdf",
+    "word-0254": "word-e4f237e66e",
+    "word-0255": "word-6902192bb1",
+    "word-0256": "word-ecc3dabaf1",
+    "word-0257": "word-8ea820734a",
+    "word-0258": "word-7697ce12db",
+    "word-0259": "word-a7b12d38db",
+    "word-0260": "word-b5ad1094ff",
+    "word-0261": "word-6eab8ee2dc",
+    "word-0262": "word-63f8e7d4a3",
+    "word-0263": "word-1367c6ef8d",
+    "word-0264": "word-1b6af4242d",
+    "word-0265": "word-ea16b7cebb",
+    "word-0266": "word-3fdd85ba35",
+    "word-0267": "word-4b4f3cff9d",
+    "word-0268": "word-bb01681142",
+    "word-0269": "word-6092b3b536",
+    "word-0270": "word-017195cd19",
+    "word-0271": "word-d09d9b4fd9",
+    "word-0272": "word-c699f39a40",
+    "word-0273": "word-d908438fa4",
+    "word-0274": "word-0ba8bc4aa8",
+    "word-0275": "word-084d7fd928",
+    "word-0276": "word-29ffff825b",
+    "word-0277": "word-3376729ada",
+    "word-0278": "word-8d539ec74b",
+    "word-0279": "word-98a75e3e4e",
+    "word-0280": "word-a6803f3e24",
+    "word-0281": "word-47d7fd009d",
+    "word-0282": "word-d7f62a155d",
+    "word-0283": "word-0ced835969",
+    "word-0284": "word-af7e561a83",
+    "word-0285": "word-f985f2f853",
+    "word-0286": "word-c92b3480a5",
+    "word-0287": "word-ac13bd9bd0",
+    "word-0288": "word-1657a9dc7d",
+    "word-0289": "word-6a7710b417",
+    "word-0290": "word-c0db2d546e",
+    "word-0291": "word-2d48fdfa86",
+    "word-0292": "word-157bc993d6",
+    "word-0293": "word-ce796e781b",
+    "word-0294": "word-1776f7a25f",
+    "word-0295": "word-eb4492cea3",
+    "word-0296": "word-69ce9560a2",
+    "word-0297": "word-37f928aec7",
+    "word-0298": "word-dce7f6359e",
+    "word-0299": "word-52bf5412fc",
+    "word-0300": "word-bc3a1a32f7",
+    "word-0302": "word-7d3e01522d",
+    "word-0303": "word-648bf7361d",
+    "word-0304": "word-c42b11f6ac",
+    "word-0305": "word-e58fad5b44",
+    "word-0306": "word-ab4c8f3c29",
+    "word-0307": "word-2168a5d763",
+    "word-0308": "word-ccebafd33d",
+    "word-0309": "word-b74dd90d48",
+    "word-0310": "word-f025d3dd72",
+    "word-0311": "word-4bfec0e40e",
+    "word-0312": "word-db62e10133",
+    "word-0313": "word-e3499e5cef",
+    "word-0314": "word-ffa84bc948",
+    "word-0315": "word-6eaf858e66",
+    "word-0316": "word-e701bd4be9",
+    "word-0317": "word-3cf4eb7e81",
+    "word-0318": "word-dd6cd26554",
+    "word-0319": "word-72d0c98c8e",
+    "word-0320": "word-8942fe6aca",
+    "word-0321": "word-b4ab55dfc8",
+    "word-0322": "word-15f4cbdf72",
+    "word-0323": "word-b9ef039f00",
+    "word-0325": "word-5c0b966007",
+    "word-0326": "word-c10929c13a",
+    "word-0327": "word-71922f6461",
+    "word-0328": "word-b5cc5164b8",
+    "word-0330": "word-adf9ee7c3b",
+    "word-0331": "word-cc69ffbad2",
+    "word-0332": "word-72a62d1aa2",
+    "word-0333": "word-e6c59dced9",
+    "word-0334": "word-678d3838a6",
+    "word-0335": "word-0c292e6ab1",
+    "word-0336": "word-ffe6435908",
+    "word-0337": "word-db2f747d2e",
+    "word-0338": "word-5e22d5d874",
+    "word-0339": "word-b7594fe1ce",
+    "word-0340": "word-6ae7763e51",
+    "word-0341": "word-f7b2feac71",
+    "word-0342": "word-85c97e590f",
+    "word-0343": "word-91702500cd",
+    "word-0344": "word-b99856c2e2",
+    "word-0345": "word-b0e8664736",
+    "word-0346": "word-750cf29e8f",
+    "word-0347": "word-4ccd8cf74e",
+    "word-0348": "word-d63a25e3e8",
+    "word-0349": "word-55e334c1f8",
+    "word-0350": "word-e07328f465",
+    "word-0351": "word-840f943d45",
+    "word-0352": "word-63d17d20be",
+    "word-0353": "word-20d0306618",
+    "word-0354": "word-ec50c440d9",
+    "word-0355": "word-183e9764cb",
+    "word-0356": "word-1a94ce65ac",
+    "word-0357": "word-a3315c487b",
+    "word-0358": "word-ec9522baac",
+    "word-0359": "word-4dd49e5f3b",
+    "word-0360": "word-7b66bca49c",
+    "word-0361": "word-00e1f2c815",
+    "word-0362": "word-8a7ad852e6",
+    "word-0363": "word-07c7208caf",
+    "word-0364": "word-3dc8cb4c7f",
+    "word-0365": "word-3b82b83bae",
+    "word-0366": "word-766d7f39f4",
+    "word-0367": "word-f88bbf4eee",
+    "word-0368": "word-e55fd6d233",
+    "word-0369": "word-66bfba01c3",
+    "word-0371": "word-a9a76c2d70",
+    "word-0372": "word-6b90faaea7",
+    "word-0373": "word-d309eb9316",
+    "word-0374": "word-57b56e44e8",
+    "word-0375": "word-3783fc0fba",
+    "word-0376": "word-29c7381b1f",
+    "phrase-0001": "word-f31f8d24f2",
+    "phrase-0002": "word-26e70b93eb",
+    "phrase-0003": "word-56899d3213",
+    "phrase-0004": "word-6ff8777946",
+    "phrase-0005": "word-0973879b7c",
+    "phrase-0006": "word-e467c11e92",
+    "phrase-0007": "word-7184720802",
+    "phrase-0008": "word-d884d80a6f",
+    "phrase-0009": "word-61045c0af8",
+    "phrase-0010": "word-0ba3eec852",
+    "phrase-0011": "word-27dce9eed3",
+    "phrase-0012": "word-3595d47211",
+    "phrase-0013": "word-1e35f10df3",
+    "phrase-0014": "word-da9b194ac8",
+    "phrase-0015": "word-8e4f3bf731",
+    "phrase-0016": "word-859fe57a60",
+    "phrase-0017": "word-8102ab9929",
+    "phrase-0018": "word-6149c36d34",
+    "phrase-0019": "word-8b6eb3431b",
+    "phrase-0020": "word-f79aa2061c",
+    "phrase-0021": "word-9de6c9f266",
+    "phrase-0022": "word-e551db3710",
+    "phrase-0023": "word-3f52918bc9",
+    "phrase-0024": "word-5f9f3eec2b",
+    "phrase-0025": "word-616a4ad526",
+    "phrase-0026": "word-df04458042",
+    "phrase-0027": "word-99dcc1cafa",
+    "phrase-0028": "word-445b3c2d6a",
+    "phrase-0029": "word-36ce9ca411",
+    "phrase-0030": "word-bf5d682e8b",
+    "phrase-0031": "word-cab6381101",
+    "phrase-0032": "word-c79c15e5c6",
+    "phrase-0033": "word-72a5b2be73",
+    "phrase-0034": "word-df152d7d27",
+    "phrase-0035": "word-0f591c97f1",
+    "phrase-0036": "word-5564265c01",
+    "phrase-0037": "word-63a8408771",
+    "phrase-0038": "word-82192a7093",
+    "phrase-0039": "word-2ffe980e86",
+    "phrase-0040": "word-6ef569f002",
+    "phrase-0041": "word-05c3b425ee",
+    "phrase-0042": "word-fe9f51eb1e",
+    "phrase-0043": "word-7f57364b9c",
+    "phrase-0044": "word-9f37e6652e",
+    "phrase-0045": "word-9551542d99",
+    "phrase-0046": "word-25bfd5ed71",
+    "phrase-0047": "word-7afa709af9",
+    "phrase-0048": "word-f84fc236bc",
+    "phrase-0049": "word-3e59972330",
+    "phrase-0050": "word-f8f169f3a4",
+    "phrase-0051": "word-557bcd8ab8",
+    "phrase-0052": "word-9c124a7296",
+    "phrase-0053": "word-59ae8e8e9a",
+    "phrase-0054": "word-e14d99738b",
+    "phrase-0055": "word-195e524dd2",
+    "phrase-0056": "word-e9cdf29b02",
+    "phrase-0057": "word-9ac27a4830",
+    "phrase-0058": "word-d87ff3391a",
+    "phrase-0059": "word-c51eb71d86",
+    "phrase-0060": "word-b4ce3d9c58",
+    "phrase-0061": "word-71bf0952a0",
+    "phrase-0064": "word-6ae3263205",
+    "phrase-0065": "word-b10a7ae29a",
+    "phrase-0066": "word-750953a832",
+    "phrase-0067": "word-01f07f8e22",
+    "phrase-0068": "word-28e069f9d7",
+    "phrase-0069": "word-295b234bad",
+    "phrase-0070": "word-5aab366978",
+    "phrase-0071": "word-9035a3c2ea",
+    "phrase-0072": "word-61e247af94",
+    "phrase-0073": "word-1d122f2f5b",
+    "phrase-0074": "word-f5aee717ce",
+    "phrase-0075": "word-78fca84eaf",
+    "phrase-0076": "word-b2c44b78d2",
+    "phrase-0077": "word-9a2a992b8d",
+    "phrase-0078": "word-3c8db9483e",
+    "phrase-0079": "word-8513379aeb",
+    "phrase-0080": "word-d7fe67302f",
+    "phrase-0081": "word-0ebbc376e2",
+    "phrase-0082": "word-3de4313b7e",
+    "phrase-0083": "word-696dfabc8b",
+    "phrase-0084": "word-7e037b5115",
+    "phrase-0085": "word-d5d5665029",
+    "phrase-0086": "word-ac2f226c09",
+    "phrase-0087": "word-5ce3d5b006",
+    "phrase-0088": "word-0ff3d7e61e",
+    "phrase-0089": "word-8ea6fb59a2",
+    "phrase-0090": "word-e9d64870c9",
+    "phrase-0091": "word-ff440dc05e",
+    "phrase-0092": "word-8217e41ecb",
+    "phrase-0093": "word-85d44cab95",
+    "phrase-0094": "word-ef42e568a1",
+    "phrase-0095": "word-be3d4b2e67",
+    "phrase-0096": "word-78a450f240",
+    "phrase-0097": "word-74814aa8f3",
+    "phrase-0098": "word-b44e5d4138",
+    "phrase-0099": "word-15d069ae14",
+    "phrase-0100": "word-5ee3a8341d",
+    "phrase-0101": "word-a7df3e6cd0",
+    "phrase-0102": "word-317ddbf8d0",
+    "phrase-0103": "word-f9e4150536",
+    "phrase-0104": "word-828719eeaf",
+    "phrase-0105": "word-9fff457261",
+    "phrase-0106": "word-b362418848",
+    "phrase-0107": "word-8e6a258a7d",
+    "phrase-0108": "word-02ca84f938",
+    "phrase-0109": "word-172c3914e7",
+    "phrase-0110": "word-4b1f65a8df",
+    "phrase-0111": "word-8beddb63df",
+    "phrase-0112": "word-5582210d8b",
+    "phrase-0113": "word-4afe63be00",
+    "phrase-0114": "word-b50b7ac675",
+    "phrase-0115": "word-5df7f44fae",
+    "phrase-0116": "word-0f99623764",
+    "phrase-0117": "word-440dbde9b8",
+    "phrase-0118": "word-6902192bb1",
+    "phrase-0119": "word-8ea820734a",
+    "phrase-0120": "word-7697ce12db"
+  },
+  "unmapped": [
+    {
+      "legacyId": "word-0125",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0127",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0128",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0129",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0154",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0301",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0324",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0329",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "word-0370",
+      "file": "word-pairs.json"
+    },
+    {
+      "legacyId": "phrase-0062",
+      "file": "phrase-pairs.json"
+    },
+    {
+      "legacyId": "phrase-0063",
+      "file": "phrase-pairs.json"
+    },
+    {
+      "legacyId": "sentence-0001",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0002",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0003",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0004",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0005",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0006",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0007",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0008",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0009",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0010",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0011",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0012",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0013",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0014",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0015",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0016",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0017",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0018",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0019",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0020",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0021",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0022",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0023",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0024",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0025",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0026",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0027",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0028",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0029",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0030",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0031",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0032",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0033",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0034",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0035",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0036",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0037",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0038",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0039",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0040",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0041",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0042",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0043",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0044",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0045",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0046",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0047",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0048",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0049",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0050",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0051",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0052",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0053",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0054",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0055",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0056",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0057",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0058",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0059",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0060",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0061",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0062",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0063",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0064",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0065",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0066",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0067",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0068",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0069",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0070",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0071",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0072",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0073",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0074",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0075",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0076",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0077",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0078",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0079",
+      "file": "sample-sentences.json"
+    },
+    {
+      "legacyId": "sentence-0080",
+      "file": "sample-sentences.json"
+    }
+  ]
+}
