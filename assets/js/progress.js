@@ -50,6 +50,7 @@ export function createEmptyProgress() {
     correct: 0,
     lastMode: "meaning",
     items: {},
+    lessons: {},
     sessions: [],
     migratedFromLegacy: false,
     migratedAt: null,
@@ -165,6 +166,24 @@ export function validateProgressPayload(payload) {
     progress.sessions = payload.sessions
       .filter((session) => session && typeof session === "object")
       .slice(-MAX_SESSIONS);
+  }
+  if (payload.lessons && typeof payload.lessons === "object") {
+    for (const [slug, raw] of Object.entries(payload.lessons).slice(0, 200)) {
+      if (!raw || typeof raw !== "object") continue;
+      progress.lessons[slug] = {
+        startedAt:
+          typeof raw.startedAt === "number" && Number.isFinite(raw.startedAt)
+            ? raw.startedAt
+            : null,
+        completedAt:
+          typeof raw.completedAt === "number" && Number.isFinite(raw.completedAt)
+            ? raw.completedAt
+            : null,
+        attempts: clampInt(raw.attempts, 0, 1e6, 0),
+        mistakesTotal: clampInt(raw.mistakesTotal, 0, 1e6, 0),
+        lastMistakeCount: clampInt(raw.lastMistakeCount ?? 0, 0, 1e4, 0),
+      };
+    }
   }
   if (payload.items && typeof payload.items === "object") {
     for (const [id, raw] of Object.entries(payload.items).slice(0, MAX_TRACKED_ITEMS)) {
@@ -486,8 +505,73 @@ export function importProgress(jsonText) {
   return { ok: true, progress: validated };
 }
 
+
+/* -------------------------------------------------------------------------
+ * Per-lesson progress (blueprint section 9.4 / residual Task 5)
+ * ---------------------------------------------------------------------- */
+
+export const LESSON_STATUSES = [
+  "not-started",
+  "learning",
+  "needs-review",
+  "nearly-mastered",
+  "completed",
+];
+
+export function getLessonState(slug) {
+  const entry = getProgress().lessons?.[slug];
+  if (!entry || !entry.startedAt) return { status: "not-started", attempts: 0 };
+  let status = "learning";
+  if (entry.completedAt) {
+    status =
+      entry.lastMistakeCount > 0 ? "needs-review" : "completed";
+  } else if (entry.mistakesTotal >= 5) {
+    status = "needs-review";
+  }
+  return { ...entry, status };
+}
+
+export function recordLessonStart(slug) {
+  if (!slug) return;
+  const current = hydrateSync();
+  const next = { ...current, lessons: { ...current.lessons } };
+  const prev = next.lessons[slug] ?? {};
+  next.lessons[slug] = {
+    startedAt: prev.startedAt ?? nowMs(),
+    completedAt: null,
+    attempts: (prev.attempts ?? 0) + 1,
+    mistakesTotal: prev.mistakesTotal ?? 0,
+    lastMistakeCount: 0,
+  };
+  cached = next;
+  persist(next);
+}
+
+export function recordLessonCompletion(slug, { mistakeCount = 0 } = {}) {
+  if (!slug) return;
+  const current = hydrateSync();
+  const timestamp = nowMs();
+  const next = { ...current, lessons: { ...current.lessons } };
+  const prev = next.lessons[slug] ?? {};
+  next.lessons[slug] = {
+    startedAt: prev.startedAt ?? timestamp,
+    completedAt: timestamp,
+    attempts: Math.max(prev.attempts ?? 0, 1),
+    mistakesTotal: (prev.mistakesTotal ?? 0) + mistakeCount,
+    lastMistakeCount: mistakeCount,
+  };
+  cached = next;
+  persist(next);
+}
+
+/** Reset handler support */
+function resetLessons(progressObj) {
+  progressObj.lessons = {};
+}
+
 export function resetProgress() {
   const fresh = createEmptyProgress();
+  resetLessons(fresh);
   cached = fresh;
   persist(fresh);
   storageRemove(`${V3_KEY}.corrupt-backup`);

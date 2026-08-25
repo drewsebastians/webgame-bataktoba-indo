@@ -1,0 +1,16 @@
+{
+  "lesson": {
+    "id": "lesson-fixture",
+    "slug": "fixture",
+    "title": "Fixture Lesson",
+    "description": "Test-only lesson used to exercise the full engine flow.",
+    "level": 1,
+    "publicationStatus": "published"
+  },
+  "items": [
+    { "id": "word-fx00000001", "batak": "fxsatu", "indonesia": "satu", "reviewStatus": "human-reviewed", "sourceType": "fixture" },
+    { "id": "word-fx00000002", "batak": "fxdua", "indonesia": "dua", "reviewStatus": "human-reviewed", "sourceType": "fixture" },
+    { "id": "word-fx00000003", "batak": "fxtiga", "indonesia": "tiga", "reviewStatus": "human-reviewed", "sourceType": "fixture" },
+    { "id": "word-fx00000004", "batak": "fxempat", "indonesia": "empat", "reviewStatus": "human-reviewed", "sourceType": "fixture" }
+  ]
+}

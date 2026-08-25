@@ -248,3 +248,18 @@ Hasil akhir: check 0 warnings, 110 tests pass, e2e green.
 
 Hasil akhir: check 0 warnings; 126 unit tests pass; e2e smoke pass;
 17 browser specs pass (termasuk axe).
+
+---
+
+## RESIDUAL CLOSURE PASS (session 4)
+
+- wrangler.toml -> dist/ (+ regression tests); artifact integrity test.
+- Matching Pairs dipulihkan sebagai mode terpisah dari Memory (kartu terbuka vs tertutup).
+- Lesson engine penuh + fixture test-only; initLearn menjalankan flow published lesson.
+- Per-lesson progress (additive v3): startedAt/completedAt/attempts/mistakes/status + browser persistence test.
+- Dictionary: filter tipe/status/difficulty(jujur-disabled), highlight aman, tombol Practice -> games seeded.
+- LearningResource generator + CLI + unit tests (draft/empty => null).
+- og:image/twitter:image absolut di semua halaman + checker regression.
+- Asset revisioning deterministik (14 file hashed, imports rewritten) + immutable cache.
+- verify = satu perintah lengkap termasuk browser+axe; CI strict npm ci.
+- Hasil: check 0 warnings; 139 node tests; e2e smoke; 23 browser specs lulus.

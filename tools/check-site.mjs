@@ -308,11 +308,16 @@ try {
       'property="og:title"',
       'property="og:description"',
       'property="og:url"',
+      'property="og:image"',
       'name="twitter:card"',
     ]) {
       if (!text.includes(required)) {
         failures.push(`Missing social meta ${required} in ${page}`);
       }
+    }
+    const ogImage = text.match(/property="og:image" content="([^"]*)"/)?.[1];
+    if (ogImage && !/^https:\/\//.test(ogImage)) {
+      failures.push(`og:image must be an absolute URL in ${page}`);
     }
     if (!/<html[^>]*\slang=/.test(text)) {
       failures.push(`Missing html lang attribute in ${page}`);

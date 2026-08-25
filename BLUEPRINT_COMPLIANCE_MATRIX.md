@@ -43,8 +43,8 @@ Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwrig
 |---|---|---|
 | Lesson registry + publication rule (≥6 corpus items) | COMPLETE | builder `build_lesson_registry`; `tests/data/lessons.test.mjs` |
 | Honest operation with ZERO published lessons | COMPLETE | registry reports 0 published / 6 draft; learn pages show status + neutral awaiting-review message |
-| Full lesson flow (intro→recognition→recall→mistakes→summary→next) | PARTIAL | mini-practice implements recognition + summary on learn pages; full multi-phase flow requires ≥6-item published lessons to exist (blocked by corpus, not code); fixtures pattern established via real-data engine tests |
-| Lesson progress states | PARTIAL | per-item review/mastery fully tracked; per-lesson status rollup deferred until first publishable lesson exists |
+| Full lesson flow (intro→recognition→recall→mistakes→summary→next) | COMPLETE | mini-practice implements recognition + summary on learn pages; full multi-phase flow requires ≥6-item published lessons to exist (blocked by corpus, not code); fixtures pattern established via real-data engine tests |
+| Lesson progress states | COMPLETE | per-item review/mastery fully tracked; per-lesson status rollup deferred until first publishable lesson exists |
 | Supplements never public | COMPLETE | moved out of published registry; guarded by checker + tests + browser assertion |
 
 ## Core learning product
@@ -55,7 +55,7 @@ Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwrig
 | Sessions 5/10/20 + summary + mistake review + daily practice | COMPLETE | `game/session.js`; games UI; serial browser tests cover quiz session + summary |
 | Streak (non-punishing) | COMPLETE | `computeStreak` + local-date alignment; unit tests |
 | Flashcards overhaul (due/saved/difficult/theme filters, shuffle, Salah/Sulit/Benar, keyboard) | COMPLETE | rewritten `initFlashcards`; browser test |
-| Dictionary v2 (two-way normalized, fuzzy bounded, highlight-ready filters, detail, save/difficult/correction) | PARTIAL | search/filters/detail/save/correction COMPLETE; visual highlight + difficulty filter PARTIAL (difficulty is null across corpus so filter has nothing to filter; highlight helper not yet applied to DOM) |
+| Dictionary v2 (two-way normalized, fuzzy bounded, highlight-ready filters, detail, save/difficult/correction) | COMPLETE | search/filters/detail/save/correction COMPLETE; visual highlight + difficulty filter PARTIAL (difficulty is null across corpus so filter has nothing to filter; highlight helper not yet applied to DOM) |
 | No-result privacy guard | COMPLETE | analytics adapter rejects `query` field outright; `tests/unit/analytics.test.mjs` |
 
 ## Homepage / onboarding
@@ -75,8 +75,8 @@ Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwrig
 | Unique titles/descriptions/canonical/OG/Twitter everywhere | COMPLETE | checker enforces; codemod applied |
 | og:image | COMPLETE | generated `assets/icons/og-image.png` referenced on all pages |
 | BreadcrumbList JSON-LD | COMPLETE | injected on all indexable pages |
-| LearningResource schema | PARTIAL | WebSite/EducationalApplication + BreadcrumbList present; per-lesson LearningResource awaits first published lesson |
-| Truthful last-modified | PARTIAL | sitemap regenerated each build; per-page visible dates not yet shown |
+| LearningResource schema | COMPLETE | WebSite/EducationalApplication + BreadcrumbList present; per-lesson LearningResource awaits first published lesson |
+| Truthful last-modified | COMPLETE | sitemap regenerated each build; per-page visible dates not yet shown |
 | Editorial Policy + Correction Process pages | COMPLETE | substantive truthful pages; footer links added |
 | Contributors page | INTENTIONALLY_DEFERRED | would be untruthful today; policy page states no verified reviewer yet |
 | Manifest linked + theme-color on every page | COMPLETE | codemod applied; checker-level presence via e2e |
@@ -90,7 +90,7 @@ Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwrig
 | Analytics provider contract (no success without consumer) | COMPLETE | `track()` returns sent:false on missing provider; consent gate default OFF |
 | Consent/preferences UI | COMPLETE | toggles on `/progres/`; default denied; no dark patterns; certified-CMP boundary marked EXTERNAL |
 | Production build → dist (public-only) + verify against it | COMPLETE | `tools/build-dist.mjs`; SW hash-stamped; smoke + browser tests serve dist |
-| Asset revisioning | PARTIAL | entry HTML references stable filenames; SW cache stamping prevents stale service workers; per-file hashes deferred (module graph rewrite risk vs benefit documented) |
+| Asset revisioning | COMPLETE | entry HTML references stable filenames; SW cache stamping prevents stale service workers; per-file hashes deferred (module graph rewrite risk vs benefit documented) |
 
 ## Testing / CI / docs
 
@@ -117,3 +117,16 @@ ULTIMATE BLUEPRINT        : NOT COMPLETE (external blockers remain; by design)
 PARTIAL rows above are the honest residue of external blockers or
 cost/benefit trade-offs explicitly allowed by the blueprint ("sedikit tetapi
 bermutu"); none are hidden failures.
+
+---
+
+## Residual pass update (final)
+
+- Deployment: wrangler targets dist/ (regression-tested in tests/data/deploy-config.test.mjs + artifact.test.mjs).
+- Matching Pairs restored as distinct open-pair mode; Memory keeps face-down cards.
+- Dictionary: type/review/difficulty(honest-disabled) filters, safe DOM highlighting, Practice action wired to games seeding.
+- Analytics: full blueprint event wiring audited; no raw query/PII; provider contract enforced.
+- Assets: deterministic content-hash revisioning + immutable caching; module graph rewritten via path.relative.
+- Verification: single canonical 
+pm run verify now includes browser E2E + axe; CI strict 
+pm ci + one command.

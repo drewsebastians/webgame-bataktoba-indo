@@ -20,8 +20,13 @@ import {
 import { el, replaceChildren } from "./utils/dom.js";
 import { normalizeSearch } from "./utils/normalize.js";
 import { buildCorrectionUrl } from "./utils/corrections.js";
-import { createQuizRunner, shuffleWith } from "./game/question-engine.js";
+import { createQuizRunner, makeQuestion, shuffleWith } from "./game/question-engine.js";
 import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.js";
+import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-engine.js";
+import {
+  recordLessonCompletion,
+  recordLessonStart,
+} from "./progress.js";
 import { getOnboarding, saveOnboarding, shouldOfferOnboarding } from "./onboarding.js";
 import {
   buildMemoryBoard,
@@ -249,7 +254,10 @@ async function initDictionary() {
   const searchable = items.filter((item) => item.type !== "sentence");
 
   const themes = [...new Set([...lessons.published, ...lessons.drafts].map((l) => l.slug))];
-  const filters = { direction: "both", theme: "all" };
+  const filters = { direction: "both", theme: "all", type: "all", review: "all", difficulty: "all" };
+  const difficultyAvailable = searchable.some(
+    (item) => item.difficulty !== null && item.difficulty !== undefined,
+  );
   let expandedId = null;
 
   function buildFilters() {
@@ -291,6 +299,63 @@ async function initDictionary() {
           render();
         },
       ),
+      select(
+        "dict-type",
+        "Tipe",
+        [["all", "Semua tipe"], ["word", "Kata"], ["phrase", "Frasa"]],
+        filters.type,
+        (v) => {
+          filters.type = v;
+          render();
+        },
+      ),
+      select(
+        "dict-review",
+        "Status",
+        [
+          ["all", "Semua status"],
+          ["corpus-derived", "corpus-derived"],
+          ["beta-unreviewed", "beta-unreviewed"],
+          ["human-reviewed", "human-reviewed"],
+        ],
+        filters.review,
+        (v) => {
+          filters.review = v;
+          render();
+        },
+      ),
+      (() => {
+        const disabledTitle =
+          "Filter kesulitan aktif otomatis setelah corpus menyediakan metadata difficulty.";
+        const wrapper = el("label", { className: "filter-field" }, "Kesulitan ");
+        const selectEl = el("select", {
+          className: "input filter-select",
+          id: "dict-difficulty",
+          attrs: {
+            disabled: difficultyAvailable ? undefined : true,
+            title: difficultyAvailable ? undefined : disabledTitle,
+          },
+        });
+        for (const [val, text] of [
+          ["all", "Semua level"],
+          ["1", "Level 1"],
+          ["2", "Level 2"],
+          ["3", "Level 3"],
+        ]) {
+          selectEl.append(el("option", { text, attrs: { value: val } }));
+        }
+        selectEl.value = filters.difficulty;
+        if (difficultyAvailable) {
+          selectEl.addEventListener("change", () => {
+            filters.difficulty = selectEl.value;
+            render();
+          });
+        } else {
+          wrapper.title = disabledTitle;
+        }
+        wrapper.append(selectEl);
+        return wrapper;
+      })(),
     );
   }
 
@@ -305,6 +370,30 @@ async function initDictionary() {
   function inSelectedTheme(item) {
     if (filters.theme === "all") return true;
     return (item.themes ?? []).includes(filters.theme);
+  }
+
+  function matchesExtraFilters(item) {
+    if (filters.type !== "all" && item.type !== filters.type) return false;
+    if (filters.review !== "all" && item.reviewStatus !== filters.review) return false;
+    if (filters.difficulty !== "all") {
+      const expected = Number(filters.difficulty);
+      if (item.difficulty === null || item.difficulty === undefined) return false;
+      if (Number(item.difficulty) !== expected) return false;
+    }
+    return true;
+  }
+
+  /** Safe DOM highlight: returns array of text/mark nodes. */
+  function highlightNodes(label, query) {
+    const raw = String(label ?? "");
+    if (!query || query.length < 2) return [raw];
+    const idx = raw.toLowerCase().indexOf(query.toLowerCase());
+    if (idx === -1) return [raw];
+    return [
+      raw.slice(0, idx),
+      el("mark", { text: raw.slice(idx, idx + query.length) }),
+      raw.slice(idx + query.length),
+    ];
   }
 
   function detailNode(item) {
@@ -351,8 +440,26 @@ async function initDictionary() {
         rel: "noopener noreferrer",
       },
     });
+    correctionLink.addEventListener("click", () => track("correction_opened"));
 
-    const actionsRow = el("div", { className: "action-row" }, saveButton, correctionLink);
+    const practiceButton = el("button", {
+      className: "button secondary",
+      text: "Latihan kata ini",
+      attrs: { type: "button" },
+    });
+    practiceButton.addEventListener("click", () => {
+      setSaved(item.id, true);
+      saveProgress({ practiceIds: [item.id], lastMode: "meaning" });
+      window.location.href = "../games/";
+    });
+
+    const actionsRow = el(
+      "div",
+      { className: "action-row" },
+      saveButton,
+      practiceButton,
+      correctionLink,
+    );
     // keep clicks on actions from bubbling to the row's expand/collapse toggle
     actionsRow.addEventListener("click", (event) => event.stopPropagation());
     container.append(actionsRow);
@@ -361,9 +468,10 @@ async function initDictionary() {
 
   function resultRow(item) {
     const row = el("article", { className: "result-row" });
+    const query = normalizeSearch(input.value.trim());
     row.append(
-      el("strong", { text: item.batak }),
-      el("span", { text: item.indonesia }),
+      el("strong", {}, ...highlightNodes(item.batak, query)),
+      el("span", {}, ...highlightNodes(item.indonesia, query)),
       pill(formatQuality(item), "", { "data-source-flag": item.sourceType || "corpus-derived" }),
     );
     row.setAttribute("role", "button");
@@ -389,8 +497,16 @@ async function initDictionary() {
 
   function render() {
     const matchesList = searchable
-      .filter((item) => matchesQuery(item) && inSelectedTheme(item))
+      .filter((item) => matchesQuery(item) && inSelectedTheme(item) && matchesExtraFilters(item))
       .slice(0, 60);
+
+    const query = normalizeSearch(input.value.trim());
+    if (query.length >= 2) {
+      // privacy: only the outcome bucket is sent, never the raw query
+      track(matchesList.length ? "dictionary_search" : "dictionary_no_result", {
+        results: String(matchesList.length),
+      });
+    }
 
     if (!matchesList.length) {
       expandedId = null;
@@ -428,7 +544,8 @@ async function initGames() {
     truefalse: { label: "Benar / Salah", prompt: "Pasangan ini benar?", from: "batak", to: "indonesia", pool: wordPool, kind: "truefalse" },
     daily: { label: "Daily Challenge", prompt: "Pilih arti Indonesia (challenge harian)", from: "batak", to: "indonesia", pool: wordPool, kind: "quiz" },
     sentence: { label: "Kalimat Pendek", prompt: "Pilih terjemahan yang paling cocok", from: "batak", to: "indonesia", pool: sentencePool, kind: "quiz" },
-    memory: { label: "Memory Game", prompt: "Cocokkan pasangan kartu", from: "batak", to: "indonesia", pool: wordPool, kind: "memory" },
+    matching: { label: "Matching Pairs", prompt: "Pasangkan kata dengan artinya", from: "batak", to: "indonesia", pool: wordPool, kind: "matching" },
+        memory: { label: "Memory Game", prompt: "Cocokkan pasangan kartu", from: "batak", to: "indonesia", pool: wordPool, kind: "memory" },
   };
 
   let state = {
@@ -492,6 +609,8 @@ async function initGames() {
     };
     if (config.kind === "memory") {
       renderMemory();
+    } else if (config.kind === "matching") {
+      renderMatchingPairs();
     } else {
       getRunner(mode, { fresh: true });
       nextQuestion();
@@ -573,6 +692,8 @@ async function initGames() {
     state.correct += result.isCorrect ? 1 : 0;
     state.sessionAnswers = [...state.sessionAnswers, { itemId: result.itemId, isCorrect: result.isCorrect }];
     recordAnswer(result.isCorrect, state.mode, result.itemId);
+    track("question_answered", { mode: state.mode });
+    track(result.isCorrect ? "answer_correct" : "answer_incorrect", { mode: state.mode });
     $$(".option", panel).forEach((option) => {
       option.disabled = true;
       if (option.dataset.answer === result.correctOptionId) {
@@ -863,9 +984,14 @@ async function initGames() {
 
     const cardButtons = state.options.map((card, index) => {
       const isMatched = state.matched.has(card.id);
+      const isSelected = state.selected.some((sel) => sel.id === card.id && sel.side === card.side);
+      const revealed = isMatched || isSelected;
       return el("button", {
-        className: `match-card${isMatched ? " matched" : ""}`,
-        text: card.text,
+        className: `match-card${isMatched ? " matched" : ""}${revealed ? "" : " face-down"}`,
+        text: revealed ? card.text : "?",
+        attrs: {
+          "aria-label": revealed ? undefined : "Kartu tertutup",
+        },
         attrs: {
           type: "button",
           "data-index": index,
@@ -931,7 +1057,7 @@ async function initGames() {
   }
 
   function handleQuizKeyboard(event) {
-    if (state.mode === "memory") return;
+    if (state.mode === "memory" || state.mode === "matching") return;
     if (!["1", "2", "3", "4"].includes(event.key)) return;
     const target = event.target;
     if (target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) {
@@ -948,15 +1074,120 @@ async function initGames() {
 
   document.addEventListener("keydown", handleQuizKeyboard);
 
+
+  /* ---- Matching Pairs (open pairs, distinct from Memory) ---------------- */
+
+  function renderMatchingPairs() {
+    const pairCount = state.matchingPairs ?? 6;
+    const { cards, pairs } = buildMemoryBoard(wordPool, { pairCount });
+    state = {
+      ...state,
+      mode: "matching",
+      options: cards,
+      matched: new Set(),
+      selected: [],
+      matchingTotalPairs: pairs,
+      startedAt: Date.now(),
+    };
+    paintMatchingPairs();
+  }
+
+  function paintMatchingPairs(message = "") {
+    const sizeButtons = [4, 6, 8].map((n) => {
+      const button = el("button", {
+        className: "mode-button matching-size-button",
+        text: `${n} pasang`,
+        attrs: {
+          type: "button",
+          "aria-pressed": String((state.matchingPairs ?? 6) === n),
+        },
+      });
+      button.addEventListener("click", () => {
+        state.matchingPairs = n;
+        renderMatchingPairs();
+      });
+      return button;
+    });
+
+    const cardButtons = state.options.map((card, index) => {
+      const isMatched = state.matched.has(card.id);
+      const button = el("button", {
+        className: `match-card${isMatched ? " matched" : ""}`,
+        text: card.text,
+        attrs: {
+          type: "button",
+          "data-index": index,
+          disabled: isMatched || undefined,
+        },
+      });
+      button.addEventListener("click", () => chooseMatchingCard(button));
+      return button;
+    });
+
+    const newRound = el("button", {
+      className: "button secondary",
+      id: "new-matching",
+      text: "Papan Baru",
+      attrs: { type: "button" },
+    });
+    newRound.addEventListener("click", renderMatchingPairs);
+
+    replaceChildren(
+      panel,
+      el(
+        "div",
+        { className: "scorebar" },
+        pill("Matching Pairs"),
+        pill(`${state.matched.size}/${state.matchingTotalPairs} cocok`),
+      ),
+      el("div", { className: "action-row" }, sizeButtons),
+      el("div", { className: "matching-board" }, cardButtons),
+      el("p", { className: "feedback", text: message, attrs: { "aria-live": "polite" } }),
+      el("div", { className: "action-row" }, newRound),
+    );
+  }
+
+  function chooseMatchingCard(button) {
+    const card = state.options[Number(button.dataset.index)];
+    if (state.matched.has(card.id)) return; // rapid re-click cannot double-score
+    state.selected = [...state.selected, card].slice(-2);
+    button.classList.add("selected");
+    if (state.selected.length < 2) return;
+
+    const [first, second] = state.selected;
+    const isMatch = first.id === second.id && first.side !== second.side;
+    if (isMatch) {
+      state.matched.add(first.id);
+      recordAnswer(true, "matching", first.id);
+      track("answer_correct", { mode: "matching" });
+      if (state.matched.size === state.matchingTotalPairs) {
+        paintMatchingPairs(`Selesai. ${state.matchingTotalPairs} pasangan cocok.`);
+      } else {
+        paintMatchingPairs("Cocok.");
+      }
+    } else {
+      recordAnswer(false, "matching", first.id);
+      track("answer_incorrect", { mode: "matching" });
+      paintMatchingPairs("Belum cocok.");
+    }
+    state.selected = [];
+    updateProgressBadges();
+  }
+
   function renderSummary({ finishedReview = false } = {}) {
     const summary = summarizeSession(state.sessionAnswers);
     if (!finishedReview) recordCompletedSession(summary);
-    track(finishedReview ? "mistake_review_complete" : "session_complete", {
-      mode: state.mode,
-      answered: String(summary.answered),
-      correct: String(summary.correct),
-      meaningful: String(summary.isMeaningful),
-    });
+    if (finishedReview) {
+      track("mistake_review_complete", { answered: String(summary.answered) });
+    } else if (state.startedViaDaily) {
+      track("daily_practice_complete", { answered: String(summary.answered) });
+    } else {
+      track("session_complete", {
+        mode: state.mode,
+        answered: String(summary.answered),
+        meaningful: String(summary.isMeaningful),
+      });
+    }
     renderSummaryPanel(summary, finishedReview);
   }
 
@@ -1035,11 +1266,13 @@ async function initGames() {
       inReviewMode: true,
       reviewTarget: uniqueIds.length,
     };
+    track("mistake_review_start", { count: String(uniqueIds.length) });
     getRunner(state.mode, { fresh: true, initialIds: uniqueIds });
     nextQuestion();
   }
 
   function startDailyPractice() {
+    state.startedViaDaily = true;
     const progressState = getProgress();
     const queueIds = buildDailyQueue(wordPool, progressState.items, {
       size: Math.min(state.sessionSize, wordPool.length),
@@ -1101,6 +1334,17 @@ async function initGames() {
     }),
   );
   $("#daily-practice")?.addEventListener("click", startDailyPractice);
+
+  const pendingPractice = getProgress().practiceIds;
+  if (Array.isArray(pendingPractice) && pendingPractice.length) {
+    saveProgress({ practiceIds: [] });
+    state.mode = "meaning";
+    startSession({ mode: "meaning", size: Math.max(pendingPractice.length, 5) });
+    getRunner("meaning", {
+      fresh: true,
+      initialIds: [...pendingPractice, ...shuffleWith(wordPool, Math.random).slice(0, 10).map((i) => i.id)],
+    }).nextQuestion();
+  }
 
   $$(".session-size-button").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.size === String(state.sessionSize)));
@@ -1500,6 +1744,7 @@ async function initProgressPage(notice = '') {
 
 async function main() {
   await initProgress();
+  showLastModified();
   initNavToggle();
   setActiveNav();
   updateProgressBadges();
@@ -1514,8 +1759,202 @@ async function main() {
   if (page === "progres") await initProgressPage();
 }
 
+
+async function initPublishedLesson(root, lesson, learningItems, wordPool, registry) {
+  const itemById = new Map(learningItems.map((item) => [item.id, item]));
+  const items = lesson.itemIds.map((id) => itemById.get(id)).filter(Boolean);
+  const plan = buildLessonPlan(
+    lesson,
+    items,
+    wordPool.length >= 4 ? wordPool : items,
+    makeQuestion,
+  );
+  let stepIndex = 0;
+  let mistakes = [];
+  let recallIndex = 0;
+
+  function finish() {
+    recordLessonCompletion(lesson.slug, { mistakeCount: mistakes.length });
+    track("lesson_complete", { slug: lesson.slug, mistakes: String(mistakes.length) });
+    const next = recommendNext(registry, lesson.slug);
+    const summary = el(
+      "section",
+      { className: "section band" },
+      el("h2", { text: "Lesson selesai" }),
+      el("p", { className: "lead", text: `${items.length} item dipelajari, ${mistakes.length} kesalahan dicatat untuk review.` }),
+      next
+        ? el("p", { className: "feedback", text: `Rekomendasi berikutnya: ${next}.` })
+        : el("p", { className: "feedback", text: "Belum ada lesson lain yang terbit." }),
+    );
+    const backToTop = root.closest("main")?.querySelector(".page-heading");
+    if (backToTop) backToTop.after(summary);
+    else root.append(summary);
+  }
+
+  function renderRecall() {
+    const step = plan[stepIndex];
+    const promptStep = step.prompts[recallIndex];
+    const item = itemById.get(promptStep.itemId);
+    const input = el("input", {
+      className: "input typed-answer-input",
+      attrs: { type: "text", autocomplete: "off", "aria-label": "Ketik arti", placeholder: "Ketik arti dalam Indonesia" },
+    });
+    const checkButton = el("button", { className: "button", text: "Periksa", attrs: { type: "button", disabled: true } });
+    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+    input.addEventListener("input", () => {
+      checkButton.disabled = input.value.trim().length === 0;
+    });
+    checkButton.addEventListener("click", () => {
+      const outcome = checkTypedAnswer(input.value, item);
+      if (!outcome.correct) mistakes.push(item.id);
+      feedback.textContent = outcome.correct
+        ? outcome.fuzzy ? "Benar (toleransi typo)." : "Benar."
+        : `Belum tepat. Yang benar: ${outcome.expected}.`;
+      checkButton.disabled = true;
+      input.disabled = true;
+      recallIndex += 1;
+      const nextButton = $("#lesson-next");
+      nextButton.disabled = false;
+      nextButton.focus();
+    });
+
+    replaceChildren(
+      root,
+      pill(`Recall ${recallIndex + 1}/${step.prompts.length}`),
+      el("div", { className: "prompt" }, el("strong", { className: "prompt-text", text: promptStep.prompt })),
+      el("div", { className: "action-row" }, input, checkButton),
+      feedback,
+      (() => {
+        const b = el("button", { className: "button", id: "lesson-next", text: "Lanjut", attrs: { type: "button", disabled: true } });
+        b.addEventListener("click", () => {
+          stepIndex += 1;
+          if (plan[stepIndex].type === "summary") finish();
+          else renderStep();
+        });
+        return b;
+      })(),
+    );
+  }
+
+  function renderRecognition() {
+    const step = plan[stepIndex];
+    let qIndex = 0;
+    function renderQ() {
+      if (qIndex >= step.questions.length) {
+        stepIndex += 1;
+        renderStep();
+        return;
+      }
+      const question = step.questions[qIndex];
+      const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+      const optionButtons = question.options.map((option) => {
+        const button = el("button", {
+          className: "option",
+          text: option.label,
+          attrs: { type: "button" },
+        });
+        button.addEventListener("click", () => {
+          if (button.disabled) return;
+          const correct = option.isCorrect;
+          if (!correct) {
+            mistakes.push(question.itemId);
+            button.classList.add("wrong");
+          }
+          [...root.querySelectorAll(".option")].forEach((o) => {
+            o.disabled = true;
+            if (o.textContent === question.options.find((opt) => opt.isCorrect)?.label) {
+              o.classList.add("correct");
+            }
+          });
+          recordAnswer(correct, `lesson:${lesson.slug}`, question.itemId);
+          feedback.textContent = correct ? "Benar." : "Belum tepat.";
+          qIndex += 1;
+          const nb = $("#lesson-next");
+          nb.disabled = false;
+          nb.focus();
+        });
+        return button;
+      });
+      const nb = el("button", { className: "button", id: "lesson-next", text: "Lanjut", attrs: { type: "button", disabled: true } });
+      nb.addEventListener("click", renderQ);
+      replaceChildren(
+        root,
+        pill(`Pengenalan ${qIndex + 1}/${step.questions.length}`),
+        el("div", { className: "prompt" }, el("strong", { className: "prompt-text", text: question.prompt })),
+        el("div", { className: "options" }, optionButtons),
+        feedback,
+        nb,
+      );
+    }
+    renderQ();
+  }
+
+  function renderMistakeReview() {
+    const unique = collectMistakes(mistakes);
+    if (!unique.length) {
+      stepIndex += 1;
+      renderStep();
+      return;
+    }
+    replaceChildren(
+      root,
+      pill("Review kesalahan"),
+      el(
+        "div",
+        { className: "vocab-table" },
+        unique.map((id) => {
+          const it = itemById.get(id);
+          return el("div", { className: "vocab-row" }, el("strong", { text: it.batak }), el("span", { text: it.indonesia }));
+        }),
+      ),
+      (() => {
+        const b = el("button", { className: "button", id: "lesson-next", text: "Lanjut ke ringkasan", attrs: { type: "button" } });
+        b.addEventListener("click", () => {
+          stepIndex += 1;
+          renderStep();
+        });
+        return b;
+      })(),
+    );
+  }
+
+  function renderIntro() {
+    replaceChildren(
+      root,
+      el("h2", { text: lesson.title }),
+      el("p", { className: "lead", text: lesson.description }),
+      el("p", { className: "feedback", text: `Estimasi ${lesson.estMinutes} menit - level ${lesson.level}. Status materi: ${lesson.reviewRollup}.` }),
+      (() => {
+        const correction = el("a", { className: "button secondary", text: "Lapor koreksi", attrs: { href: "../correction-process/", target: "_blank", rel: "noopener noreferrer" } });
+        correction.addEventListener("click", () => track("correction_opened"));
+        return el("div", { className: "action-row" }, correction);
+      })(),
+      (() => {
+        const b = el("button", { className: "button", id: "lesson-next", text: "Mulai belajar", attrs: { type: "button" } });
+        b.addEventListener("click", () => {
+          stepIndex += 1;
+          renderStep();
+        });
+        return b;
+      })(),
+    );
+  }
+
+  function renderStep() {
+    const step = plan[stepIndex];
+    if (step.type === "intro") renderIntro();
+    else if (step.type === "recognition") renderRecognition();
+    else if (step.type === "recall") renderRecall();
+    else if (step.type === "mistake-review") renderMistakeReview();
+    else finish();
+  }
+
+  renderStep();
+}
+
 async function initLearn() {
   const root = $("#lesson-root");
+  track("lesson_view", { slug: document.body.dataset.lesson ?? "" });
   const theme = document.body.dataset.lesson;
   if (!root || !theme) return;
 
@@ -1523,6 +1962,13 @@ async function initLearn() {
   const lesson = [...lessons.published, ...lessons.drafts].find((entry) => entry.slug === theme);
   if (!lesson) {
     replaceChildren(root, el("p", { className: "feedback", text: "Materi untuk tema ini belum tersedia." }));
+    return;
+  }
+
+  if (lesson.publicationStatus === "published") {
+    track("lesson_start", { slug: lesson.slug });
+    recordLessonStart(lesson.slug);
+    initPublishedLesson(root, lesson, learning.items, words.items, lessons);
     return;
   }
 
@@ -1694,6 +2140,13 @@ function renderMiniPractice(root, themeItems, fullPool) {
   renderQuestion();
 }
 
+function showLastModified() {
+  const meta = document.querySelector('meta[name="last-modified"]');
+  const footer = document.querySelector(".footer-inner");
+  if (!meta || !footer) return;
+  footer.prepend(el("span", { text: `Diperbarui: ${meta.content.slice(0, 10)}` }));
+}
+
 function registerServiceWorker() {
   if (!SITE_CONFIG.features.pwa) return;
   if (!("serviceWorker" in navigator)) return;
@@ -1715,6 +2168,9 @@ function registerServiceWorker() {
     .catch(() => {
       /* offline support is progressive enhancement; never block the app */
     });
+  if (!navigator.serviceWorker.controller) {
+    navigator.serviceWorker.ready.then(() => track("pwa_installed"));
+  }
   window.addEventListener("online", () => setOfflineBanner(false));
   window.addEventListener("offline", () => setOfflineBanner(true));
   if (navigator.onLine === false) setOfflineBanner(true);
@@ -1738,7 +2194,12 @@ function showUpdateBanner() {
   setTimeout(() => banner.remove(), 30000);
 }
 
+let offlineTracked = false;
 function setOfflineBanner(offline) {
+  if (offline && !offlineTracked) {
+    offlineTracked = true;
+    track("offline_session");
+  }
   const existing = $(".app-banner.offline-banner");
   if (offline && !existing) {
     const banner = el("div", {

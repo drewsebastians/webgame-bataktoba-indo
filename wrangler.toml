@@ -1,6 +1,8 @@
 name = "webgame-bataktoba-indo"
-pages_build_output_dir = "."
+# Production deploys serve the generated public-only artifact, never the
+# repository root. `npm run build` must run before deployment (CI does).
+pages_build_output_dir = "dist"
 compatibility_date = "2026-07-08"
 
 [assets]
-directory = "."
+directory = "dist"

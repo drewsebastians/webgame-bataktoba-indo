@@ -1,7 +1,9 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { join } from "node:path";
+import { dirname, extname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
+const require_shim = () => ({ execFileSync });
 
 /**
  * Deterministic production build -> dist/.
@@ -78,5 +80,129 @@ writeFileSync(swPath, sw, "utf8");
 // Production headers (CSP + caching) for Cloudflare Pages / test server.
 const headers = readFileSync(join(root, "_headers"), "utf8");
 writeFileSync(join(dist, "_headers"), headers, "utf8");
+
+
+// ---------------------------------------------------------------------------
+// Asset revisioning: hash every JS/CSS asset, rename, and rewrite references.
+// Deterministic: identical inputs produce identical hashes.
+// ---------------------------------------------------------------------------
+
+function revisionAssets(distDir) {
+  const manifest = new Map(); // "assets/js/app.js" -> "assets/js/app.<hash>.js"
+  const assetRoot = join(distDir, "assets");
+
+  function collect(dir, relBase) {
+    const found = [];
+    for (const name of readdirSync(dir)) {
+      const full = join(dir, name);
+      const rel = relBase ? `${relBase}/${name}` : name;
+      if (statSync(full).isDirectory()) found.push(...collect(full, rel));
+      else if (/\.(js|mjs|css)$/.test(name)) found.push([full, `assets/${rel}`]);
+    }
+    return found;
+  }
+
+  const files = collect(assetRoot, "");
+  for (const [full, rel] of files) {
+    const hash = createHash("sha256").update(readFileSync(full)).digest("hex").slice(0, 8);
+    const ext = extname(full);
+    const hashedRel = rel.replace(new RegExp(`\\${ext}$`), `.${hash}${ext}`);
+    const hashedFull = join(distDir, hashedRel);
+    renameSync(full, hashedFull);
+    manifest.set(rel, hashedRel);
+  }
+
+  // Rewrite ES module imports (static + dynamic strings) inside hashed JS.
+  function relOf(full) {
+    return full.slice(distDir.length + 1).replace(/\\/g, "/");
+  }
+
+  for (const [full] of files) {
+    const rel = relOf(full);
+    const target = join(distDir, manifest.get(rel));
+    let code = readFileSync(target, "utf8");
+    code = code.replace(
+      /((?:from\s*|import\s*\(\s*|import\s+)["'])(\.\.?\/[^"']+)(["'])/g,
+      (match, head, spec, quote) => {
+        const base = join(dirname(target), spec)
+          .slice(distDir.length + 1)
+          .replace(/\\/g, "/");
+        const mapped = manifest.get(base);
+        if (!mapped) return match;
+        let relSpec = relative(dirname(target), join(distDir, mapped)).replace(/\\/g, "/");
+        if (!relSpec.startsWith(".")) relSpec = "./" + relSpec;
+        return `${head}${relSpec}${quote}`;
+      },
+    );
+    writeFileSync(target, code, "utf8");
+  }
+
+
+  // Rewrite references in HTML pages (handles ./ and ../ prefixes).
+  function walkHtml(dir) {
+    for (const name of readdirSync(dir)) {
+      const full = join(dir, name);
+      if (statSync(full).isDirectory()) walkHtml(full);
+      else if (name.endsWith(".html")) {
+        let html = readFileSync(full, "utf8");
+        for (const [oldRel, newRel] of manifest) {
+          html = html.split(oldRel).join(newRel);
+        }
+        writeFileSync(full, html, "utf8");
+      }
+    }
+  }
+  walkHtml(distDir);
+
+  return manifest;
+}
+
+const manifest = revisionAssets(dist);
+console.log(`Revised ${manifest.size} asset files.`);
+
+// Truthful per-page last-modified from git history (deterministic).
+function injectLastModified(distDir) {
+  const { execFileSync } = require_shim();
+  function walk(dir) {
+    for (const name of readdirSync(dir)) {
+      const full = join(dir, name);
+      const rel = full.slice(distDir.length + 1);
+      if (statSync(full).isDirectory()) walk(full);
+      else if (name.endsWith(".html")) {
+        let iso;
+        try {
+          iso = execFileSync("git", ["log", "-1", "--format=%cI", "--", rel], {
+            cwd: root,
+          })
+            .toString()
+            .trim();
+        } catch {}
+        if (!iso) continue;
+        let html = readFileSync(full, "utf8");
+        if (html.includes('name="last-modified"')) continue;
+        html = html.replace(
+          /(<\/head>)/,
+          `    <meta name="last-modified" content="${iso}">\n  $1`,
+        );
+        writeFileSync(full, html, "utf8");
+      }
+    }
+  }
+  walk(distDir);
+}
+injectLastModified(dist);
+
+// Hashed assets are immutable; HTML/data keep their revalidation strategies.
+let headersOut = readFileSync(join(dist, "_headers"), "utf8");
+headersOut = headersOut.replace(
+  /\/assets\/\*\n\s*Cache-Control:[^\n]+/,
+  "/assets/*\n  Cache-Control: public, max-age=31536000, immutable",
+);
+// The service worker itself must never be cached.
+headersOut = headersOut.replace(
+  /(\/sw\.js\n\s*Cache-Control:\s*)[^\n]+/,
+  "$1no-cache",
+);
+writeFileSync(join(dist, "_headers"), headersOut, "utf8");
 
 console.log(`dist/ built. SW cache version: ${version}`);
