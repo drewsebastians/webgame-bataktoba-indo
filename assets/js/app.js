@@ -1,21 +1,36 @@
-﻿import { loadLearningItems, loadLessons, loadSentences, loadWordPairs } from "./data.js";
+import { loadLearningItems, loadLessons, loadSentences, loadWordPairs } from "./data.js";
 import { SITE_CONFIG } from "./config.js";
 import {
   exportProgress,
   getBucketIds,
+  getDifficultIds,
+  getDueItems,
+  getItemStats,
   getProgress,
+  getSavedIds,
   importProgress,
   initProgress,
   markFlashcard,
   recordAnswer,
   resetProgress,
   saveProgress,
+  setDifficult,
+  setSaved,
 } from "./progress.js";
 import { el, replaceChildren } from "./utils/dom.js";
 import { normalizeSearch } from "./utils/normalize.js";
 import { buildCorrectionUrl } from "./utils/corrections.js";
-import { createQuizRunner } from "./game/question-engine.js";
-import { buildDailyQueue, computeStreak, summarizeSession } from "./game/session.js";
+import { createQuizRunner, shuffleWith } from "./game/question-engine.js";
+import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.js";
+import { getOnboarding, saveOnboarding, shouldOfferOnboarding } from "./onboarding.js";
+import {
+  buildMemoryBoard,
+  buildTrueFalse,
+  checkTypedAnswer,
+  dailySeed,
+  mulberry32,
+  todayDateKey,
+} from "./game/modes.js";
 import { track } from "./analytics.js";
 import { sweepPlaceholders } from "./ads.js";
 
@@ -65,23 +80,155 @@ function updateProgressBadges() {
 
 async function initHome() {
   const statNode = $("[data-home-stats]");
-  if (!statNode) return;
+  const dynamicNode = $("#home-dynamic");
   try {
-    const { metadata } = await loadLearningItems();
-    const stats = [
-      [metadata.counts.wordPairs, "pasangan kata"],
-      [5, "mode latihan"],
-      [0, "login dibutuhkan"],
-    ];
-    replaceChildren(
-      statNode,
-      stats.map(([value, label]) =>
-        el("div", { className: "stat" }, el("strong", { text: value }), el("span", { text: label })),
+    const [learning, words] = await Promise.all([loadLearningItems(), loadWordPairs()]);
+    if (statNode) {
+      const stats = [
+        [learning.metadata.counts.wordPairs, "pasangan kata"],
+        [5, "mode latihan"],
+        [0, "login dibutuhkan"],
+      ];
+      replaceChildren(
+        statNode,
+        stats.map(([value, label]) =>
+          el("div", { className: "stat" }, el("strong", { text: value }), el("span", { text: label })),
+        ),
+      );
+    }
+    if (dynamicNode) {
+      renderHomeDynamic(dynamicNode, words.items);
+    }
+  } catch {
+    if (statNode) replaceChildren(statNode, el("p", { text: "Statistik data belum bisa dimuat." }));
+  }
+}
+
+function renderHomeDynamic(container, wordPool) {
+  const progressState = getProgress();
+  const onboardingRecord = getOnboarding();
+
+  function renderOnboarding() {
+    function choiceGroup(label, options, onPick) {
+      const group = el("fieldset", { className: "onboarding-group" });
+      group.append(el("legend", { text: label }));
+      const row = el("div", { className: "action-row" });
+      for (const option of options) {
+        const button = el("button", {
+          className: "button secondary",
+          text: option.label,
+          attrs: { type: "button" },
+        });
+        button.addEventListener("click", () => onPick(option));
+        row.append(button);
+      }
+      group.append(row);
+      return group;
+    }
+
+    let draft = {};
+    const panel = el("section", { className: "section band onboarding-panel" });
+    const body = el("div", { className: "section-inner" });
+    body.append(
+      el("h2", { text: "Mulai cepat (opsional)" }),
+      el("p", { className: "lead", text: "Tiga pertanyaan ringkas agar rekomendasi lebih pas. Semua tersimpan lokal dan bisa dilewati." }),
+    );
+
+    function renderStep() {
+      if (draft.durationMinutes) {
+        saveOnboarding({ ...draft, skipped: false });
+        track("lesson_start", { kind: "onboarding" });
+        renderHomeDynamic(container, wordPool);
+        return;
+      }
+      replaceChildren(body, el("h2", { text: "Mulai cepat (opsional)" }));
+      if (!draft.familiarity) {
+        body.append(
+          choiceGroup("Seberapa jauh Anda mengenal Bahasa Batak Toba?", [
+            { label: "Belum pernah", value: "belum" },
+            { label: "Beberapa kata", value: "beberapa-kata" },
+            { label: "Paham sedikit", value: "sedikit" },
+            { label: "Ingin review", value: "review" },
+          ], (option) => {
+            draft.familiarity = option.value;
+            renderStep();
+          }),
+        );
+      } else if (!draft.goal) {
+        body.append(
+          choiceGroup("Tujuan utama?", [
+            { label: "Keluarga", value: "keluarga" },
+            { label: "Percakapan dasar", value: "percakapan" },
+            { label: "Kosakata umum", value: "kosakata-umum" },
+            { label: "Koneksi budaya", value: "budaya" },
+            { label: "Latihan santai", value: "santai" },
+          ], (option) => {
+            draft.goal = option.value;
+            renderStep();
+          }),
+        );
+      } else {
+        body.append(
+          choiceGroup("Durasi sesi favorit?", [
+            { label: "3 menit", value: 3 },
+            { label: "5 menit", value: 5 },
+            { label: "10 menit", value: 10 },
+          ], (option) => {
+            draft.durationMinutes = option.value;
+            renderStep();
+          }),
+        );
+      }
+      const skip = el("button", { className: "button secondary", text: "Lewati", attrs: { type: "button" } });
+      skip.addEventListener("click", () => {
+        saveOnboarding({ ...draft, skipped: true });
+        renderHomeDynamic(container, wordPool);
+      });
+      body.append(el("div", { className: "action-row" }, skip));
+      replaceChildren(panel, body);
+    }
+
+    renderStep();
+    replaceChildren(container, panel);
+  }
+
+  function renderReturning() {
+    const dueCount = getDueItems(wordPool).length;
+    const streak = computeStreak((progressState.sessions ?? []).map((session) => session.dateKey));
+    const savedCount = getSavedIds().length;
+    const difficultCount = getDifficultIds().length;
+
+    const card = el("section", { className: "section band continue-card" });
+    const inner = el("div", { className: "section-inner" });
+    inner.append(el("h2", { text: "Lanjutkan Belajar" }));
+    inner.append(
+      el(
+        "div",
+        { className: "scorebar" },
+        pill(`${dueCount} kata jatuh tempo`),
+        pill(`Streak ${streak} hari`),
+        pill(`Terakhir: ${progressState.lastMode ?? "-"}`),
+        savedCount ? pill(`${savedCount} disimpan`) : null,
+        difficultCount ? pill(`${difficultCount} sulit`) : null,
       ),
     );
-  } catch {
-    replaceChildren(statNode, el("p", { text: "Statistik data belum bisa dimuat." }));
+    const actions = el("div", { className: "action-row" });
+    const dailyButton = el("a", { className: "button", text: "Latihan Harian", attrs: { href: "games/" } });
+    dailyButton.addEventListener("click", () => {
+      saveProgress({ startWithDaily: true });
+    });
+    actions.append(
+      dailyButton,
+      el("a", { className: "button secondary", text: "Lanjut mode terakhir", attrs: { href: "games/" } }),
+      el("a", { className: "button secondary", text: "Flashcards review", attrs: { href: "flashcards/" } }),
+    );
+    inner.append(actions);
+    card.append(inner);
+    replaceChildren(container, card);
   }
+
+  if (shouldOfferOnboarding(progressState)) renderOnboarding();
+  else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0) renderReturning();
 }
 
 function formatQuality(item) {
@@ -262,9 +409,13 @@ async function initGames() {
   const sentencePool = sentenceData.items;
   const idLookup = new Map([...wordPool, ...sentencePool].map((item) => [item.id, item]));
   const modes = {
-    meaning: { label: "Tebak Arti", prompt: "Pilih arti Indonesia", from: "batak", to: "indonesia", pool: wordPool },
-    reverse: { label: "Reverse Quiz", prompt: "Pilih padanan Batak Toba", from: "indonesia", to: "batak", pool: wordPool },
-    sentence: { label: "Kalimat Pendek", prompt: "Pilih terjemahan yang paling cocok", from: "batak", to: "indonesia", pool: sentencePool },
+    meaning: { label: "Tebak Arti", prompt: "Pilih arti Indonesia", from: "batak", to: "indonesia", pool: wordPool, kind: "quiz" },
+    reverse: { label: "Reverse Quiz", prompt: "Pilih padanan Batak Toba", from: "indonesia", to: "batak", pool: wordPool, kind: "quiz" },
+    typed: { label: "Ketik Jawaban", prompt: "Ketik arti Indonesia", from: "batak", to: "indonesia", pool: wordPool, kind: "typed" },
+    truefalse: { label: "Benar / Salah", prompt: "Pasangan ini benar?", from: "batak", to: "indonesia", pool: wordPool, kind: "truefalse" },
+    daily: { label: "Daily Challenge", prompt: "Pilih arti Indonesia (challenge harian)", from: "batak", to: "indonesia", pool: wordPool, kind: "quiz" },
+    sentence: { label: "Kalimat Pendek", prompt: "Pilih terjemahan yang paling cocok", from: "batak", to: "indonesia", pool: sentencePool, kind: "quiz" },
+    memory: { label: "Memory Game", prompt: "Cocokkan pasangan kartu", from: "batak", to: "indonesia", pool: wordPool, kind: "memory" },
   };
 
   let state = {
@@ -286,11 +437,20 @@ async function initGames() {
   function getRunner(mode, { fresh = false, poolOverride = null, initialIds = null } = {}) {
     if (fresh || !runners[mode]) {
       const config = modes[mode];
+      let random = Math.random;
+      if (mode === "daily") {
+        // Deterministic date-seeded challenge: identical for everyone on the
+        // same day with the same published dataset.
+        random = mulberry32(dailySeed(todayDateKey()));
+        const seededOrder = shuffleWith(config.pool, random).map((item) => item.id);
+        initialIds = initialIds ?? seededOrder.slice(0, 10);
+      }
       runners[mode] = createQuizRunner({
         pool: poolOverride ?? config.pool,
         from: config.from,
         to: config.to,
         initialIds,
+        ...(mode === "daily" ? { random } : {}),
       });
     }
     return runners[mode];
@@ -315,14 +475,18 @@ async function initGames() {
       sessionSize: size,
       sessionAnswers: [],
       inReviewMode: false,
+      typedValue: "",
     };
-    getRunner(mode, { fresh: true });
+    if (config.kind === "memory") {
+      renderMemory();
+    } else {
+      getRunner(mode, { fresh: true });
+      nextQuestion();
+    }
     saveProgress({ lastMode: mode });
     $$(".mode-button").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
     });
-    if (mode === "matching") renderMatching();
-    else nextQuestion();
   }
 
   function setModeWithTracking(mode) {
@@ -427,13 +591,22 @@ async function initGames() {
   }
 
   function nextQuestion() {
+    const kind = modes[state.mode].kind;
     const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
-    if (state.answered >= sessionLimit) {
+    if (kind !== "memory" && state.answered >= sessionLimit) {
       if (state.inReviewMode) {
         renderSummary({ finishedReview: true });
       } else {
         renderSummary();
       }
+      return;
+    }
+    if (kind === "typed") {
+      renderTypedQuestion();
+      return;
+    }
+    if (kind === "truefalse") {
+      renderTrueFalse();
       return;
     }
     const runner = getRunner(state.mode);
@@ -458,8 +631,294 @@ async function initGames() {
     }
   }
 
+  /* ---- Ketik Jawaban ---------------------------------------------------- */
+
+  function renderTypedQuestion() {
+    const config = modes[state.mode];
+    const runner = getRunner(state.mode);
+    const { question, error } = runner.nextQuestion();
+    if (error || !question) {
+      replaceChildren(panel, el("p", { className: "feedback", text: "Soal tidak tersedia." }));
+      return;
+    }
+    state = { ...state, current: question, locked: false };
+    const item = itemById(question.itemId);
+    const input = el("input", {
+      className: "input typed-answer-input",
+      attrs: {
+        type: "text",
+        autocomplete: "off",
+        autocapitalize: "none",
+        spellcheck: "false",
+        "aria-label": "Ketik jawaban",
+        placeholder: "Ketik di sini lalu Enter",
+      },
+    });
+    const checkButton = el("button", { className: "button", text: "Periksa", attrs: { type: "button", disabled: true } });
+    const nextButton = el("button", {
+      className: "button",
+      id: "next-question",
+      text: "Next",
+      attrs: { type: "button", disabled: true },
+    });
+    nextButton.addEventListener("click", nextQuestion);
+    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+
+    function grade() {
+      if (state.locked) return;
+      const result = checkTypedAnswer(input.value, item, { to: config.to });
+      state.locked = true;
+      state.answered += 1;
+      state.correct += result.correct ? 1 : 0;
+      state.sessionAnswers = [...state.sessionAnswers, { itemId: question.itemId, isCorrect: result.correct }];
+      recordAnswer(result.correct, state.mode, question.itemId);
+      track(result.correct ? "answer_correct" : "answer_incorrect", { mode: state.mode });
+      input.disabled = true;
+      checkButton.disabled = true;
+      feedback.textContent = result.correct
+        ? result.fuzzy
+          ? `Benar (toleransi typo). Jawaban tercatat: ${result.expected}.`
+          : "Benar."
+        : `Belum tepat. Jawaban yang dicari: ${result.expected}.`;
+      nextButton.disabled = false;
+      nextButton.focus();
+      updateProgressBadges();
+    }
+
+    input.addEventListener("input", () => {
+      checkButton.disabled = input.value.trim().length === 0;
+    });
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        if (!state.locked && input.value.trim()) grade();
+      }
+    });
+    checkButton.addEventListener("click", grade);
+
+    replaceChildren(
+      panel,
+      el(
+        "div",
+        { className: "scorebar" },
+        pill(config.label),
+        pill(`Ronde ${state.answered + 1}`),
+        pill(`Skor ${state.correct}/${state.answered}`),
+      ),
+      el(
+        "div",
+        { className: "prompt" },
+        el("span", { className: "prompt-kicker", text: config.prompt }),
+        el("strong", { className: "prompt-text", text: question.prompt }),
+      ),
+      el("div", { className: "action-row" }, input, checkButton),
+      feedback,
+      el(
+        "div",
+        { className: "action-row" },
+        nextButton,
+        pill(formatQuality(question), "", { "data-source-flag": question.sourceFlag || "corpus-derived" }),
+      ),
+    );
+    input.focus();
+  }
+
+  /* ---- Benar / Salah ----------------------------------------------------- */
+
+  function renderTrueFalse() {
+    const config = modes[state.mode];
+    const runner = getRunner(state.mode);
+    const { question, error } = runner.nextQuestion();
+    if (error || !question) {
+      replaceChildren(panel, el("p", { className: "feedback", text: "Soal tidak tersedia." }));
+      return;
+    }
+    const item = itemById(question.itemId);
+    const tf = buildTrueFalse(item, config.pool, { to: config.to });
+    state = { ...state, current: { ...question, prompt: tf.statement }, locked: false };
+
+    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
+
+    function answer(userSaysTrue) {
+      if (state.locked) return;
+      state.locked = true;
+      const isCorrect = userSaysTrue === tf.isTrueStatement;
+      state.answered += 1;
+      state.correct += isCorrect ? 1 : 0;
+      state.sessionAnswers = [...state.sessionAnswers, { itemId: tf.itemId, isCorrect }];
+      recordAnswer(isCorrect, state.mode, tf.itemId);
+      track(isCorrect ? "answer_correct" : "answer_incorrect", { mode: state.mode });
+      $$(".option", panel).forEach((option) => {
+        option.disabled = true;
+        option.dataset.state =
+          (option.dataset.saystrue === "true") === tf.isTrueStatement ? "correct" : "";
+      });
+      feedback.textContent = isCorrect
+        ? "Benar."
+        : tf.isTrueStatement
+          ? "Sebenarnya pasangan itu benar."
+          : `Sebenarnya salah. ${item.batak} = ${item[config.to]}.`;
+      const nextButton = $("#next-question", panel);
+      nextButton.disabled = false;
+      nextButton.textContent = state.answered >= sessionLimit ? "Lihat Hasil" : "Next";
+      nextButton.focus();
+      updateProgressBadges();
+    }
+
+    const trueButton = el("button", {
+      className: "option",
+      text: "Pasangan BENAR",
+      attrs: { type: "button", "data-saystrue": "true" },
+    });
+    trueButton.addEventListener("click", () => answer(true));
+    const falseButton = el("button", {
+      className: "option",
+      text: "Pasangan SALAH",
+      attrs: { type: "button", "data-saystrue": "false" },
+    });
+    falseButton.addEventListener("click", () => answer(false));
+    const nextButton = el("button", {
+      className: "button",
+      id: "next-question",
+      text: "Next",
+      attrs: { type: "button", disabled: true },
+    });
+    nextButton.addEventListener("click", nextQuestion);
+
+    replaceChildren(
+      panel,
+      el(
+        "div",
+        { className: "scorebar" },
+        pill(config.label),
+        pill(`Ronde ${state.answered + 1}`),
+        pill(`Skor ${state.correct}/${state.answered}`),
+      ),
+      el(
+        "div",
+        { className: "prompt" },
+        el("span", { className: "prompt-kicker", text: config.prompt }),
+        el("strong", { className: "prompt-text", text: tf.statement }),
+      ),
+      el("div", { className: "options" }, trueButton, falseButton),
+      feedback,
+      el(
+        "div",
+        { className: "action-row" },
+        nextButton,
+        pill(formatQuality({ ...item, sourceType: item.sourceType }), "", {
+          "data-source-flag": item.sourceType || "corpus-derived",
+        }),
+      ),
+    );
+  }
+
+  /* ---- Memory Game ------------------------------------------------------- */
+
+  function renderMemory() {
+    const pairCount = state.memoryPairs ?? 6;
+    const { cards, pairs } = buildMemoryBoard(wordPool, { pairCount });
+    state = {
+      ...state,
+      mode: "memory",
+      options: cards,
+      matched: new Set(),
+      selected: [],
+      memoryTotalPairs: pairs,
+      startedAt: Date.now(),
+    };
+    paintMemory();
+  }
+
+  function paintMemory(message = "") {
+    const sizeButtons = [4, 6, 8].map((n) => {
+      const button = el("button", {
+        className: "mode-button memory-size-button",
+        text: `${n} pasang`,
+        attrs: {
+          type: "button",
+          "aria-pressed": String((state.memoryPairs ?? 6) === n),
+        },
+      });
+      button.addEventListener("click", () => {
+        state.memoryPairs = n;
+        renderMemory();
+      });
+      return button;
+    });
+
+    const cardButtons = state.options.map((card, index) => {
+      const isMatched = state.matched.has(card.id);
+      return el("button", {
+        className: `match-card${isMatched ? " matched" : ""}`,
+        text: card.text,
+        attrs: {
+          type: "button",
+          "data-index": index,
+          disabled: isMatched || undefined,
+        },
+      });
+    });
+    cardButtons.forEach((button) =>
+      button.addEventListener("click", () => chooseMemoryCard(button)),
+    );
+
+    const elapsedSeconds = Math.round((Date.now() - state.startedAt) / 1000);
+    const newRound = el("button", {
+      className: "button secondary",
+      id: "new-memory",
+      text: "Papan Baru",
+      attrs: { type: "button" },
+    });
+    newRound.addEventListener("click", renderMemory);
+
+    replaceChildren(
+      panel,
+      el(
+        "div",
+        { className: "scorebar" },
+        pill("Memory Game"),
+        pill(`${state.matched.size}/${state.memoryTotalPairs} cocok`),
+        pill(`Waktu ${elapsedSeconds} dtk (opsional)`),
+      ),
+      el("div", { className: "action-row" }, sizeButtons),
+      el("div", { className: "matching-board" }, cardButtons),
+      el("p", { className: "feedback", text: message, attrs: { "aria-live": "polite" } }),
+      el("div", { className: "action-row" }, newRound),
+    );
+  }
+
+  function chooseMemoryCard(button) {
+    const card = state.options[Number(button.dataset.index)];
+    if (state.matched.has(card.id)) return;
+    state.selected = [...state.selected, card].slice(-2);
+    button.classList.add("selected");
+    if (state.selected.length < 2) return;
+
+    const [first, second] = state.selected;
+    const isMatch = first.id === second.id && first.side !== second.side;
+    if (isMatch) {
+      state.matched.add(first.id);
+      recordAnswer(true, "memory", first.id);
+      track("answer_correct", { mode: "memory" });
+      if (state.matched.size === state.memoryTotalPairs) {
+        const seconds = Math.round((Date.now() - state.startedAt) / 1000);
+        paintMemory(`Selesai. Semua ${state.memoryTotalPairs} pasangan cocok dalam ${seconds} detik.`);
+      } else {
+        paintMemory("Cocok.");
+      }
+    } else {
+      recordAnswer(false, "memory", first.id);
+      track("answer_incorrect", { mode: "memory" });
+      paintMemory("Belum cocok. Coba pasangan lain.");
+    }
+    state.selected = [];
+    updateProgressBadges();
+  }
+
   function handleQuizKeyboard(event) {
-    if (state.mode === "matching") return;
+    if (state.mode === "memory") return;
     if (!["1", "2", "3", "4"].includes(event.key)) return;
     const target = event.target;
     if (target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) {
@@ -475,87 +934,6 @@ async function initGames() {
   }
 
   document.addEventListener("keydown", handleQuizKeyboard);
-
-  function renderMatching() {
-    const pairs = sample(wordPool, 5);
-    const cards = shuffle([
-      ...pairs.map((item) => ({ id: item.id, side: "batak", text: item.batak })),
-      ...pairs.map((item) => ({ id: item.id, side: "indonesia", text: item.indonesia })),
-    ]);
-    state = {
-      ...state,
-      mode: "matching",
-      current: pairs,
-      options: cards,
-      matched: new Set(),
-      selected: [],
-      startedAt: Date.now(),
-    };
-    paintMatching();
-  }
-
-  function paintMatching(message = "") {
-    const cardButtons = state.options.map((card, index) => {
-      const isMatched = state.matched.has(card.id);
-      return el("button", {
-        className: `match-card${isMatched ? " matched" : ""}`,
-        text: card.text,
-        attrs: {
-          type: "button",
-          "data-index": index,
-          disabled: isMatched || undefined,
-        },
-      });
-    });
-    cardButtons.forEach((button) => button.addEventListener("click", () => chooseMatch(button)));
-
-    const newRound = el("button", {
-      className: "button secondary",
-      id: "new-match",
-      text: "Ronde Baru",
-      attrs: { type: "button" },
-    });
-    newRound.addEventListener("click", renderMatching);
-
-    replaceChildren(
-      panel,
-      el(
-        "div",
-        { className: "scorebar" },
-        pill("Matching Pairs"),
-        pill(`${state.matched.size}/5 cocok`),
-      ),
-      el("div", { className: "matching-board" }, cardButtons),
-      el("p", { className: "feedback", text: message, attrs: { "aria-live": "polite" } }),
-      el("div", { className: "action-row" }, newRound),
-    );
-  }
-
-  function chooseMatch(button) {
-    const card = state.options[Number(button.dataset.index)];
-    if (state.matched.has(card.id)) return;
-    state.selected = [...state.selected, card].slice(-2);
-    button.classList.add("selected");
-    if (state.selected.length < 2) return;
-
-    const [first, second] = state.selected;
-    const isMatch = first.id === second.id && first.side !== second.side;
-    if (isMatch) {
-      state.matched.add(first.id);
-      recordAnswer(true, "matching", first.id);
-      if (state.matched.size === 5) {
-        const seconds = Math.round((Date.now() - state.startedAt) / 1000);
-        paintMatching(`Selesai. Semua pasangan cocok dalam ${seconds} detik.`);
-      } else {
-        paintMatching("Cocok.");
-      }
-    } else {
-      recordAnswer(false, "matching", first.id);
-      paintMatching("Belum cocok. Coba pasangan lain.");
-    }
-    state.selected = [];
-    updateProgressBadges();
-  }
 
   function renderSummary({ finishedReview = false } = {}) {
     const summary = summarizeSession(state.sessionAnswers);
@@ -706,7 +1084,7 @@ async function initGames() {
       $$(".session-size-button").forEach((other) =>
         other.setAttribute("aria-pressed", String(other.dataset.size === String(state.sessionSize))),
       );
-      if (state.mode !== "matching") startSession({ size: state.sessionSize });
+      if (modes[state.mode]?.kind !== "memory") startSession({ size: state.sessionSize });
     }),
   );
   $("#daily-practice")?.addEventListener("click", startDailyPractice);
@@ -722,55 +1100,178 @@ async function initFlashcards() {
   const root = $("#flashcard-root");
   if (!root) return;
   const { items } = await loadWordPairs();
+  const lessons = await loadLessons();
+  const themes = [...new Set([...lessons.published, ...lessons.drafts].map((l) => l.slug))];
+
+  let filter = "all";
+  let theme = "all";
+  let shuffled = false;
+  let deck = [];
   let index = 0;
   let flipped = false;
 
-  function render() {
-    const item = items[index % items.length];
+  function rebuildDeck() {
+    const progressState = getProgress();
+    const statsById = progressState.items;
+    let source = items;
+    if (theme !== "all") {
+      source = source.filter((item) => (item.themes ?? []).includes(theme));
+    }
+    if (filter === "due") {
+      source = getDueItems(source);
+    } else if (filter === "saved") {
+      const saved = new Set(getSavedIds());
+      source = source.filter((item) => saved.has(item.id));
+    } else if (filter === "difficult") {
+      const difficult = new Set(getDifficultIds());
+      source = source.filter((item) => difficult.has(item.id));
+    }
+    deck = shuffled ? shuffleWith(source) : [...source];
+    index = 0;
+    flipped = false;
+  }
+
+  function setFilter(nextFilter) {
+    filter = nextFilter;
+    rebuildDeck();
+    renderToolbar();
+    renderCard();
+  }
+
+  function currentItem() {
+    return deck.length ? deck[index % deck.length] : null;
+  }
+
+  function renderToolbar() {
+    const toolbar = $("#flashcard-toolbar");
+    if (!toolbar) return;
+    function select(id, label, options, value, onChange) {
+      const wrapper = el("label", { className: "filter-field" }, label + " ");
+      const selectEl = el("select", { className: "input filter-select", id });
+      for (const [val, text] of options) selectEl.append(el("option", { text, attrs: { value: val } }));
+      selectEl.value = value;
+      selectEl.addEventListener("change", () => onChange(selectEl.value));
+      wrapper.append(selectEl);
+      return wrapper;
+    }
+    replaceChildren(
+      toolbar,
+      select(
+        "fc-filter",
+        "Tumpukan",
+        [
+          ["all", "Semua kata"],
+          ["due", "Jatuh tempo review"],
+          ["saved", "Disimpan"],
+          ["difficult", "Sulit"],
+        ],
+        filter,
+        setFilter,
+      ),
+      select(
+        "fc-theme",
+        "Tema",
+        [["all", "Semua tema"], ...themes.map((t) => [t, t])],
+        theme,
+        (v) => {
+          theme = v;
+          rebuildDeck();
+          renderCard();
+        },
+      ),
+      (() => {
+        const shuffleButton = el("button", {
+          className: `button secondary${shuffled ? "" : ""}`,
+          text: shuffled ? "Shuffle: aktif" : "Shuffle",
+          attrs: { type: "button", "aria-pressed": String(shuffled) },
+        });
+        shuffleButton.addEventListener("click", () => {
+          shuffled = !shuffled;
+          rebuildDeck();
+          renderToolbar();
+          renderCard();
+        });
+        return shuffleButton;
+      })(),
+      el("span", { className: "pill", text: `${deck.length} kartu` }),
+    );
+  }
+
+  function advance(step, action = null) {
+    const item = currentItem();
+    if (!item) return;
+    if (action === "wrong") recordAnswer(false, "flashcards", item.id);
+    else if (action === "correct") recordAnswer(true, "flashcards", item.id);
+    else if (action === "difficult") setDifficult(item.id, true);
+    index = (index + step + deck.length) % deck.length;
+    flipped = false;
+    renderCard();
+    updateProgressBadges();
+  }
+
+  function handleKeydown(event) {
+    if (event.target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(event.target.tagName)) {
+      return;
+    }
+    if (event.key === " ") {
+      event.preventDefault();
+      flipped = !flipped;
+      renderCard();
+    } else if (event.key === "1") advance(1, "wrong");
+    else if (event.key === "2") advance(1, "difficult");
+    else if (event.key === "3") advance(1, "correct");
+    else if (event.key === "ArrowRight") advance(1);
+    else if (event.key === "ArrowLeft") advance(-1);
+  }
+
+  function renderCard() {
+    const cardRoot = $("#flashcard-card");
+    if (!cardRoot) return;
+    const item = currentItem();
+    if (!item) {
+      replaceChildren(
+        cardRoot,
+        el("p", {
+          className: "feedback",
+          text: "Tidak ada kartu untuk filter ini. Coba tumpukan lain atau tandai beberapa kata di dictionary.",
+        }),
+      );
+      return;
+    }
+    const stats = getItemStats(item.id);
+    void stats;
 
     const card = el(
       "button",
-      {
-        className: "flashcard",
-        id: "flashcard",
-        attrs: { type: "button" },
-      },
+      { className: "flashcard", id: "flashcard", attrs: { type: "button" } },
       el("strong", { text: flipped ? item.indonesia : item.batak }),
-      el("span", { text: `${flipped ? "Indonesia" : "Batak Toba"} - klik untuk balik` }),
+      el("span", { text: `${flipped ? "Indonesia" : "Batak Toba"} - klik atau tekan spasi untuk balik` }),
     );
     card.addEventListener("click", () => {
       flipped = !flipped;
-      render();
+      renderCard();
     });
 
-    function advance(step, bucket) {
-      if (bucket) markFlashcard(item.id, bucket);
-      index = (index + step + items.length) % items.length;
-      flipped = false;
-      render();
-    }
-
-    const prevButton = el("button", { className: "button secondary", id: "prev-card", text: "Previous", attrs: { type: "button" } });
+    const wrongButton = el("button", { className: "button secondary", text: "1 Salah", attrs: { type: "button" } });
+    wrongButton.addEventListener("click", () => advance(1, "wrong"));
+    const difficultButton = el("button", { className: "button secondary", text: "2 Sulit", attrs: { type: "button" } });
+    difficultButton.addEventListener("click", () => advance(1, "difficult"));
+    const correctButton = el("button", { className: "button", text: "3 Benar", attrs: { type: "button" } });
+    correctButton.addEventListener("click", () => advance(1, "correct"));
+    const prevButton = el("button", { className: "button secondary", text: "< Sebelumnya", attrs: { type: "button" } });
     prevButton.addEventListener("click", () => advance(-1));
-    const knownButton = el("button", { className: "button", id: "known-card", text: "Saya tahu", attrs: { type: "button" } });
-    knownButton.addEventListener("click", () => advance(1, "known"));
-    const reviewButton = el("button", { className: "button secondary", id: "review-card", text: "Ulangi lagi", attrs: { type: "button" } });
-    reviewButton.addEventListener("click", () => advance(1, "review"));
-    const nextButton = el("button", { className: "button secondary", id: "next-card", text: "Next", attrs: { type: "button" } });
+    const nextButton = el("button", { className: "button secondary", text: "Berikutnya >", attrs: { type: "button" } });
     nextButton.addEventListener("click", () => advance(1));
 
     replaceChildren(
-      root,
+      cardRoot,
       el(
         "div",
         { className: "scorebar" },
-        pill(`${index + 1}/${items.length}`),
-        el(
-          "span",
-          { className: "pill" },
-          "Diketahui ",
-          el("span", { text: getBucketIds("known").length, attrs: { "data-progress-known": "" } }),
-        ),
+        pill(`${index + 1}/${deck.length}`),
+        pill(`Tahap ${stats.reviewStage ?? 0} - ${masteryLabel(stats)}`),
+        stats.saved ? pill("disimpan") : null,
+        stats.difficult ? pill("sulit") : null,
         pill(formatQuality(item), "", { "data-source-flag": item.sourceType || "corpus-derived" }),
       ),
       card,
@@ -778,328 +1279,29 @@ async function initFlashcards() {
         "div",
         { className: "action-row" },
         prevButton,
-        knownButton,
-        reviewButton,
+        wrongButton,
+        difficultButton,
+        correctButton,
         nextButton,
       ),
     );
   }
 
-  render();
-}
-
-async function initLearn() {
-  const root = $("#lesson-root");
-  const theme = document.body.dataset.lesson;
-  if (!root || !theme) return;
-
-  const [lessons, learning, words] = await Promise.all([loadLessons(), loadLearningItems(), loadWordPairs()]);
-  const lesson = [...lessons.published, ...lessons.drafts].find((entry) => entry.slug === theme);
-  if (!lesson) {
-    replaceChildren(root, el("p", { className: "feedback", text: "Materi untuk tema ini belum tersedia." }));
-    return;
-  }
-
-  const itemById = new Map(learning.items.map((item) => [item.id, item]));
-  const poolItems = lesson.itemIds.map((id) => itemById.get(id)).filter(Boolean);
-  const wordPool = words.items;
-
-  function vocabRow(batakText, indonesiaText, statusPill) {
-    return el(
-      "div",
-      { className: "vocab-row" },
-      el("strong", { text: batakText }),
-      el("span", { text: indonesiaText }),
-      statusPill,
-    );
-  }
-
-  const children = [];
-
-  children.push(
-    el("p", {
-      className: "feedback",
-      text:
-        lesson.publicationStatus === "published"
-          ? `Lesson latihan aktif: ${lesson.counts.poolItems} item corpus.`
-          : `Status: lesson latihan penuh belum terbit (butuh minimal ${lessons.minPoolItemsForPublication} item corpus per tema; tema ini punya ${lesson.counts.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
-    }),
-  );
-
-  if (poolItems.length > 0) {
-    children.push(el("h2", { text: "Dari corpus (corpus-derived)" }));
-    children.push(
-      el(
-        "div",
-        { className: "vocab-table" },
-        poolItems.map((item) =>
-          vocabRow(item.batak, item.indonesia, pill(formatQuality(item), "", {
-            "data-source-flag": item.sourceType || "corpus-derived",
-          })),
-        ),
-      ),
-    );
-  }
-
-  // Editorial drafts are NEVER rendered publicly: they stay internal until a
-  // human reviewer approves them (see data/reviewed/README.md).
-  if (lesson.counts.supplementItems > 0 || lesson.publicationStatus !== "published") {
-    children.push(
-      el("p", {
-        className: "feedback",
-        attrs: { role: "note" },
-        text: `Materi tambahan untuk tema ini sedang menunggu review penutur (${lesson.counts.supplementItems} item). Kata-kata tersebut belum ditampilkan sebagai materi belajar.`,
-      }),
-    );
-  }
-
-  // Mini practice: only from real corpus items with enough distinct material.
-  const practiceRoot = el("section", { className: "mini-practice", id: "mini-practice" });
-  children.push(el("h2", { text: "Mini latihan" }), practiceRoot);
-
-  replaceChildren(root, children);
-
-  if (poolItems.length >= 4) {
-    renderMiniPractice(practiceRoot, poolItems, wordPool);
-  } else {
-    replaceChildren(
-      practiceRoot,
-      el("p", {
-        className: "feedback",
-        text: "Latihan interaktif untuk tema ini menyusul setelah cukup item corpus tereview.",
-      }),
-    );
-  }
-}
-
-function renderMiniPractice(root, themeItems, fullPool) {
-  const runner = createQuizRunner({
-    pool: fullPool.length >= 4 ? fullPool : themeItems,
-    from: "batak",
-    to: "indonesia",
-    initialIds: themeItems.map((item) => item.id),
-  });
-  let answered = 0;
-  let correct = 0;
-  let current = null;
-
-  function renderQuestion() {
-    const result = runner.nextQuestion();
-    current = result.question ?? null;
-    if (!current) {
-      replaceChildren(root, el("p", { className: "feedback", text: "Latihan selesai untuk sesi ini." }));
-      return;
-    }
-    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
-    const optionButtons = current.options.map((option) => {
-      const button = el("button", {
-        className: "option",
-        text: option.label,
-        attrs: { type: "button", "data-answer": option.id },
-      });
-      button.addEventListener("click", () => {
-        if (answered >= themeItems.length || runner.isLocked()) return;
-        const outcome = runner.answer(option.id);
-        if (!outcome.accepted) return;
-        answered += 1;
-        correct += outcome.isCorrect ? 1 : 0;
-        recordAnswer(outcome.isCorrect, `lesson:${document.body.dataset.lesson}`, outcome.itemId);
-        $$(".option", root).forEach((other) => {
-          other.disabled = true;
-          if (other.dataset.answer === outcome.correctOptionId) other.classList.add("correct");
-        });
-        if (!outcome.isCorrect) button.classList.add("wrong");
-        feedback.textContent = outcome.isCorrect ? "Benar." : "Belum tepat.";
-        updateProgressBadges();
-        nextButton.disabled = false;
-        nextButton.textContent =
-          answered >= Math.min(themeItems.length, 5) ? "Lihat Hasil" : "Lanjut";
-      });
-      return button;
-    });
-
-    const nextButton = el("button", {
-      className: "button",
-      id: "mini-next",
-      text: "Lanjut",
-      attrs: { type: "button", disabled: true },
-    });
-    nextButton.addEventListener("click", () => {
-      if (answered >= Math.min(themeItems.length, 5)) {
-        renderSummaryMini();
-      } else {
-        renderQuestion();
-      }
-    });
-
-    replaceChildren(
-      root,
-      el(
-        "div",
-        { className: "scorebar" },
-        pill(`Mini latihan ${Math.min(answered + 1, themeItems.length)}/${Math.min(themeItems.length, 5)}`),
-        pill(formatQuality(current), "", { "data-source-flag": current.sourceFlag || "corpus-derived" }),
-      ),
-      el(
-        "div",
-        { className: "prompt" },
-        el("span", { className: "prompt-kicker", text: "Pilih arti yang cocok" }),
-        el("strong", { className: "prompt-text", text: current.prompt }),
-      ),
-      el("div", { className: "options" }, optionButtons),
-      feedback,
-      el("div", { className: "action-row" }, nextButton),
-    );
-  }
-
-  function renderSummaryMini() {
-    replaceChildren(
-      root,
-      el("p", {
-        className: "feedback",
-        text: `Mini latihan selesai: ${correct}/${answered} benar. Lanjutkan ke Games untuk latihan penuh.`,
-      }),
-      (() => {
-        const again = el("button", { className: "button secondary", text: "Ulangi", attrs: { type: "button" } });
-        again.addEventListener("click", () => {
-          answered = 0;
-          correct = 0;
-          renderQuestion();
-        });
-        return again;
-      })(),
-    );
-  }
-
-  renderQuestion();
-}
-
-function localDateKey(atMs = Date.now()) {
-  const date = new Date(atMs);
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${date.getFullYear()}-${month}-${day}`;
-}
-
-async function initProgressPage() {
-  const root = $("#progress-root");
-  if (!root) return;
-  const state = getProgress();
-
-  const answered = state.answered ?? 0;
-  const correct = state.correct ?? 0;
-  const accuracy = answered === 0 ? "-" : `${Math.round((100 * correct) / answered)}%`;
-  const streak = computeStreak((state.sessions ?? []).map((session) => session.dateKey));
-
-  const stats = el(
-    "div",
-    { className: "scorebar", attrs: { role: "list" } },
-    pill(`Total jawaban ${answered}`, "", { role: "listitem" }),
-    pill(`Benar ${correct}`, "", { role: "listitem" }),
-    pill(`Akurasi ${accuracy}`, "", { role: "listitem" }),
-    pill(`Streak ${streak} hari`, "", { role: "listitem" }),
-    pill(`Diketahui ${getBucketIds("known").length}`, "", { role: "listitem" }),
-    pill(`Perlu ulang ${getBucketIds("review").length}`, "", { role: "listitem" }),
-    pill(`Disimpan ${getBucketIds("saved").length}`, "", { role: "listitem" }),
-  );
-
-  const statusLine = el("p", { className: "feedback", attrs: { role: "status", "aria-live": "polite" } });
-
-  const exportButton = el("button", {
-    className: "button",
-    text: "Ekspor progress (JSON)",
-    attrs: { type: "button" },
-  });
-  exportButton.addEventListener("click", () => {
-    const blob = new Blob([exportProgress()], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = el("a", {
-      attrs: { href: url, download: `batak-toba-progress-${localDateKey()}.json` },
-    });
-    link.click();
-    URL.revokeObjectURL(url);
-    statusLine.textContent = "Progress diekspor sebagai file JSON.";
-    track("progress_exported");
-  });
-
-  const fileInput = el("input", {
-    attrs: { type: "file", accept: "application/json,.json", id: "import-file" },
-  });
-  const importButton = el("button", {
-    className: "button secondary",
-    text: "Impor progress",
-    attrs: { type: "button" },
-  });
-  importButton.addEventListener("click", async () => {
-    const file = fileInput.files?.[0];
-    if (!file) {
-      statusLine.textContent = "Pilih file JSON terlebih dahulu.";
-      return;
-    }
-    const text = await file.text();
-    const result = importProgress(text);
-    statusLine.textContent = result.ok
-      ? "Progress berhasil diimpor. Halaman diperbarui."
-      : `Impor gagal: ${result.reason === "invalid-json" ? "file bukan JSON valid" : "schema tidak didukung"}.`;
-    if (result.ok) initProgressPage();
-  });
-
-  let resetArmed = false;
-  const resetButton = el("button", {
-    className: "button secondary",
-    text: "Reset progress",
-    attrs: { type: "button" },
-  });
-  resetButton.addEventListener("click", () => {
-    if (!resetArmed) {
-      resetArmed = true;
-      resetButton.textContent = "Yakin? Klik sekali lagi untuk hapus";
-      resetButton.classList.add("wrong");
-      setTimeout(() => {
-        resetArmed = false;
-        resetButton.textContent = "Reset progress";
-        resetButton.classList.remove("wrong");
-      }, 6000);
-      return;
-    }
-    resetProgress();
-    statusLine.textContent = "Progress dihapus.";
-    initProgressPage();
-  });
+  rebuildDeck();
 
   replaceChildren(
     root,
-    stats,
-    el(
-      "div",
-      { className: "action-row" },
-      exportButton,
-      fileInput,
-      importButton,
-      resetButton,
-    ),
-    statusLine,
+    el("div", { className: "dictionary-filters", id: "flashcard-toolbar" }),
+    el("div", { id: "flashcard-card" }),
     el("p", {
       className: "feedback",
-      text: "Catatan: data tidak tersinkron otomatis antar perangkat. Ekspor secara berkala bila ingin menyimpannya.",
+      text: "Pintasan keyboard: spasi = balik kartu, 1 = salah, 2 = sulit, 3 = benar, panah kiri/kanan = navigasi.",
     }),
   );
-}
 
-async function main() {
-  await initProgress();
-  initNavToggle();
-  setActiveNav();
-  updateProgressBadges();
-  registerServiceWorker();
-  sweepPlaceholders();
-  const page = document.body.dataset.page;
-  if (page === "home") await initHome();
-  if (page === "dictionary") await initDictionary();
-  if (page === "games") await initGames();
-  if (page === "flashcards") await initFlashcards();
-  if (page === "learn-topic") await initLearn();
-  if (page === "progres") await initProgressPage();
+  renderToolbar();
+  renderCard();
+  document.addEventListener("keydown", handleKeydown);
 }
 
 function registerServiceWorker() {

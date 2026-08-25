@@ -12,10 +12,10 @@
  *   (stage 0, due immediately).
  */
 
-const V2_KEY = "batakTobaPlay.progress.v2";
+const V3_KEY = "batakTobaPlay.progress.v2";
 const LEGACY_KEY = "batakTobaGameProgress";
 
-export const PROGRESS_SCHEMA_VERSION = 2;
+export const PROGRESS_SCHEMA_VERSION = 3;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 export const REVIEW_INTERVAL_DAYS = [1, 3, 7, 14, 30];
@@ -37,7 +37,9 @@ function emptyItemStats() {
     lastReviewedAt: null,
     nextReviewAt: null,
     reviewStage: 0,
-    bucket: null,
+    bucket: null, // "known" | "review" (review-schedule semantics only)
+    saved: false, // independent user flag
+    difficult: false, // independent user flag
   };
 }
 
@@ -119,18 +121,36 @@ function sanitizeItemStats(raw) {
       ? raw.nextReviewAt
       : null;
   stats.reviewStage = clampInt(raw.reviewStage, 0, REVIEW_INTERVAL_DAYS.length, 0);
-  stats.bucket =
-    raw.bucket === "known" ||
-    raw.bucket === "review" ||
-    raw.bucket === "difficult" ||
-    raw.bucket === "saved"
-      ? raw.bucket
-      : null;
+  // v3: bucket carries only review semantics; saved/difficult are independent
+  stats.bucket = raw.bucket === "known" || raw.bucket === "review" ? raw.bucket : null;
+  if (typeof raw.saved === "boolean") stats.saved = raw.saved;
+  if (typeof raw.difficult === "boolean") stats.difficult = raw.difficult;
   return stats;
+}
+
+/** v2 -> v3 migration: single `bucket` value split into independent flags. */
+export function migrateV2ToV3(payload) {
+  if (!payload || payload.schemaVersion !== 2) return null;
+  const promoted = { ...payload, schemaVersion: PROGRESS_SCHEMA_VERSION };
+  promoted.items = {};
+  for (const [id, raw] of Object.entries(payload.items ?? {})) {
+    const stats = sanitizeItemStats(raw); // keeps known/review buckets
+    if (raw?.bucket === "saved") {
+      stats.saved = true;
+      stats.bucket = null;
+    }
+    if (raw?.bucket === "difficult") {
+      stats.difficult = true;
+      stats.bucket = null;
+    }
+    promoted.items[id] = stats;
+  }
+  return validateProgressPayload(promoted);
 }
 
 export function validateProgressPayload(payload) {
   if (!payload || typeof payload !== "object") return null;
+  if (payload.schemaVersion === 2) return migrateV2ToV3(payload);
   if (payload.schemaVersion !== PROGRESS_SCHEMA_VERSION) return null;
   const progress = createEmptyProgress();
   progress.answered = clampInt(payload.answered, 0, 1e9, 0);
@@ -228,7 +248,7 @@ function getIdMap() {
 
 function persist(progress) {
   progress.savedAt = nowMs();
-  storageSet(V2_KEY, JSON.stringify(progress));
+  storageSet(V3_KEY, JSON.stringify(progress));
 }
 
 function parseStoredV2(raw) {
@@ -243,14 +263,14 @@ function parseStoredV2(raw) {
 function quarantineCorrupted(raw) {
   if (!raw) return;
   try {
-    storageSet(`${V2_KEY}.corrupt-backup`, raw);
+    storageSet(`${V3_KEY}.corrupt-backup`, raw);
   } catch {
     /* ignore */
   }
 }
 
 async function ensureMigrated() {
-  let stored = storageGet(V2_KEY);
+  let stored = storageGet(V3_KEY);
   let progress = parseStoredV2(stored);
   if (!progress && stored) {
     quarantineCorrupted(stored);
@@ -278,7 +298,7 @@ let hydration = null;
 function hydrateSync() {
   // Fast path used by sync APIs: read whatever is persisted right now.
   if (cached) return cached;
-  const stored = storageGet(V2_KEY);
+  const stored = storageGet(V3_KEY);
   cached = parseStoredV2(stored) ?? createEmptyProgress();
   return cached;
 }
@@ -378,27 +398,55 @@ export function getItemStats(itemId) {
   return getProgress().items[itemId] ?? emptyItemStats();
 }
 
-/** Ids whose bucket matches ("known" | "review" | "difficult" | "saved"). */
+/** Ids whose bucket matches ("known" | "review" - review semantics only). */
 export function getBucketIds(bucket) {
   const { items } = getProgress();
   return Object.keys(items).filter((id) => items[id].bucket === bucket);
 }
 
+/** Independent user flags: saved / difficult. */
+export function getSavedIds() {
+  const { items } = getProgress();
+  return Object.keys(items).filter((id) => items[id].saved);
+}
+
+export function getDifficultIds() {
+  const { items } = getProgress();
+  return Object.keys(items).filter((id) => items[id].difficult);
+}
+
+function setItemFlag(id, field, value) {
+  if (!id) return;
+  const current = hydrateSync();
+  const next = { ...current, items: { ...current.items } };
+  const stats = sanitizeItemStats(next.items[id] ?? null);
+  stats[field] = Boolean(value);
+  stats.seen = Math.max(stats.seen, 1);
+  stats.lastReviewedAt = nowMs();
+  next.items[id] = stats;
+  enforceBoundedStorage(next.items);
+  cached = next;
+  persist(next);
+}
+
+export function setSaved(id, value = true) {
+  setItemFlag(id, "saved", value);
+}
+
+export function setDifficult(id, value = true) {
+  setItemFlag(id, "difficult", value);
+}
+
 export function markFlashcard(id, bucket) {
-  if (!id || !["known", "review", "difficult", "saved"].includes(bucket)) return;
+  if (!id || !["known", "review"].includes(bucket)) return;
   const current = hydrateSync();
   const timestamp = nowMs();
   const next = { ...current, items: { ...current.items } };
-  const stats = updateItemStats(next.items, id, bucket === "known", timestamp);
-  if (bucket === "saved") {
-    // saving marks intent to study later, not a correct/incorrect answer
-    stats.seen = Math.max(stats.seen - 1, 0);
-    stats.bucket = "saved";
-    stats.nextReviewAt = timestamp;
-  } else {
-    if (bucket === "known") stats.nextReviewAt = timestamp + 30 * DAY_MS;
-    else if (bucket === "review") stats.nextReviewAt = timestamp;
-  }
+  updateItemStats(next.items, id, bucket === "known", timestamp);
+  const stats = next.items[id];
+  stats.bucket = bucket;
+  if (bucket === "known") stats.nextReviewAt = timestamp + 30 * DAY_MS;
+  else stats.nextReviewAt = timestamp;
   enforceBoundedStorage(next.items);
   cached = next;
   persist(next);
@@ -442,6 +490,6 @@ export function resetProgress() {
   const fresh = createEmptyProgress();
   cached = fresh;
   persist(fresh);
-  storageRemove(`${V2_KEY}.corrupt-backup`);
+  storageRemove(`${V3_KEY}.corrupt-backup`);
   return fresh;
 }

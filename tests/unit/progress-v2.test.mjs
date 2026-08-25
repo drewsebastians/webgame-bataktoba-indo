@@ -34,10 +34,10 @@ beforeEach(async () => {
   return mod.initProgress();
 });
 
-describe("progress v2 basics", () => {
+describe("progress v3 basics", () => {
   it("starts with an empty versioned payload", async () => {
     const state = progress.getProgress();
-    assert.equal(state.schemaVersion, 2);
+    assert.equal(state.schemaVersion, 3);
     assert.equal(state.answered, 0);
     assert.deepEqual(state.items, {});
   });
@@ -49,6 +49,58 @@ describe("progress v2 basics", () => {
     assert.equal(state.answered, 2);
     assert.equal(state.correct, 1);
     assert.equal(state.lastMode, "meaning");
+  });
+
+  it("saved and difficult are independent flags", () => {
+    const id = "word-flags00001";
+    progress.recordAnswer(true, "meaning", id); // stage 1
+    progress.setSaved(id, true);
+    progress.setDifficult(id, true);
+    let stats = progress.getItemStats(id);
+    assert.equal(stats.saved, true);
+    assert.equal(stats.difficult, true);
+    assert.equal(stats.reviewStage, 1, "flags must not reset review stage");
+
+    // answering wrong keeps flags but resets schedule
+    progress.recordAnswer(false, "meaning", id);
+    stats = progress.getItemStats(id);
+    assert.equal(stats.saved, true);
+    assert.equal(stats.difficult, true);
+    assert.equal(stats.reviewStage, 0);
+
+    progress.setSaved(id, false);
+    stats = progress.getItemStats(id);
+    assert.equal(stats.saved, false);
+    assert.equal(stats.difficult, true);
+
+    assert.ok(progress.getSavedIds().includes(id) === false);
+    assert.ok(progress.getDifficultIds().includes(id));
+  });
+});
+
+describe("v2 -> v3 migration", () => {
+  it("promotes bucket saved/difficult into independent flags", async () => {
+    const fresh = await import(`../../assets/js/progress.js?v23=${Math.random()}`);
+    const v2Payload = {
+      schemaVersion: 2,
+      answered: 4,
+      correct: 2,
+      lastMode: "meaning",
+      items: {
+        "word-aaaaaaaaaa": { seen: 2, correctCount: 1, bucket: "saved" },
+        "word-bbbbbbbbbb": { seen: 3, incorrectCount: 2, bucket: "difficult" },
+        "word-cccccccccc": { seen: 5, correctCount: 5, bucket: "known" },
+        "word-dddddddddd": { seen: 1, incorrectCount: 1, bucket: "review" },
+      },
+    };
+    const migrated = fresh.validateProgressPayload(v2Payload);
+    assert.equal(migrated.schemaVersion, 3);
+    assert.equal(migrated.items["word-aaaaaaaaaa"].saved, true);
+    assert.equal(migrated.items["word-aaaaaaaaaa"].bucket, null);
+    assert.equal(migrated.items["word-bbbbbbbbbb"].difficult, true);
+    assert.equal(migrated.items["word-bbbbbbbbbb"].bucket, null);
+    assert.equal(migrated.items["word-cccccccccc"].bucket, "known");
+    assert.equal(migrated.items["word-dddddddddd"].bucket, "review");
   });
 });
 
@@ -150,7 +202,7 @@ describe("corrupted storage handling", () => {
 
     const fresh = await import(`../../assets/js/progress.js?corrupt=${Math.random()}`);
     const state = await fresh.initProgress();
-    assert.equal(state.schemaVersion, 2);
+    assert.equal(state.schemaVersion, 3);
     assert.ok(
       store.getItem("batakTobaPlay.progress.v2.corrupt-backup")?.includes("not-a-number"),
       "corrupt payload must be preserved as backup",
