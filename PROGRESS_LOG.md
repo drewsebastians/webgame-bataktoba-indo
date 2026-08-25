@@ -211,3 +211,40 @@ Hasil akhir: check 0 warnings, 110 tests pass, e2e green.
 - Review lisensi corpus, custom domain, Search Console, AdSense account (eksternal).
 - Verifikasi URL produksi Cloudflare: Workers Builds hijau, tapi hostname
   publik perlu dicek dari dashboard Cloudflare (wrangler login expired).
+
+---
+
+## ULTIMATE BLUEPRINT COMPLETION PASS (session 3)
+
+- Reviewed layer diimplementasi penuh (overrides.json + apply/validate) tanpa
+  membuat data review palsu; layer kosong saat ini.
+- Draft supplements dikeluarkan dari published registry (pindah ke internal
+  candidates) - halaman publik kini menampilkan pesan netral "menunggu review";
+  checker hard-fail bila status internal muncul di data/published.
+- Klaim frasa dibersihkan dari seluruh copy; dataset frasa kosong dinyatakan
+  eksplisit di halaman Data Source.
+- Mode baru: Ketik Jawaban (toleransi typo transparan), Benar/Salah (false pair
+  terbukti bukan alternatif), Memory 4/6/8, Daily Challenge date-seeded.
+- Progress v3: flag saved/difficult independen + migrasi v2->v3 dengan test;
+  flashcards overhaul (filter due/saved/difficult/tema, shuffle, aksi
+  Salah/Sulit/Benar, pintasan keyboard).
+- Homepage: onboarding opsional 3-langkah + area Lanjutkan Belajar untuk user
+  returning (due/streak/saved/sulit) + jalur belajar tanpa fabrikasi konten.
+- Trust pages: Editorial Policy & Correction Process substantif dan jujur.
+- Consent/preferences UI di /progres/ (analytics+ads default OFF).
+- Analytics: kontrak provider ketat (tanpa consumer = tidak terkirim), event
+  wiring pada aksi nyata.
+- Ads: loader sekali-jalan ber-gate flag+ID+consent, placement allowlist,
+  generator ads.txt yang menolak placeholder.
+- PWA: manifest+theme-color semua halaman, ikon PNG 192/512 deterministik,
+  og:image 1200x630, SW update toast, offline banner.
+- Security: CSP ketat (tanpa eval/wildcard) via _headers, server uji
+  header-aware, batas impor 512KB.
+- Build produksi: npm run build -> dist/ public-only, versi cache SW dari hash
+  konten; verify + browser tests menjalankan dist.
+- Testing: Playwright chromium 17 spec (alur inti, zero third-party, headers,
+  draft-leak, axe serious/critical = 0 pada 6 halaman). CI di-update penuh.
+- Dokumen: BLUEPRINT_COMPLIANCE_MATRIX.md menjadi catatan otoritatif.
+
+Hasil akhir: check 0 warnings; 126 unit tests pass; e2e smoke pass;
+17 browser specs pass (termasuk axe).

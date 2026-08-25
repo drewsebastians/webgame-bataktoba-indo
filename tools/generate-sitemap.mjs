@@ -16,7 +16,7 @@ const config = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "ut
 function collectHtmlPages(dir, base = "") {
   const pages = [];
   for (const name of readdirSync(dir)) {
-    if (name === ".git" || name === "node_modules") continue;
+    if (name === ".git" || name === "node_modules" || name === "dist" || name === "test-results") continue;
     const path = join(dir, name);
     if (statSync(path).isDirectory()) {
       pages.push(...collectHtmlPages(path, `${base}${name}/`));

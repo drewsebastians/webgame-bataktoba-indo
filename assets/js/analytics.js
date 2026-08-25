@@ -66,9 +66,11 @@ export function isAnalyticsEnabled() {
   return Boolean(SITE_CONFIG.features.analytics);
 }
 
-export function hasConsent() {
+export function hasAnalyticsConsent() {
   return readConsent();
 }
+
+export const hasConsent = hasAnalyticsConsent;
 
 export function grantAnalyticsConsent() {
   try {

@@ -11,8 +11,13 @@
     "test": "node --test \"tests/**/*.test.mjs\"",
     "e2e": "node tools/e2e-smoke.mjs",
     "serve:e2e": "node tools/e2e-server.mjs 4179",
+    "test:browser": "playwright test",
     "verify": "npm run check && npm run test && npm run build && npm run e2e",
+    "verify:full": "npm run verify && npm run test:browser",
     "start": "python -m http.server 4173"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1"
   }
 }
-

@@ -870,3 +870,25 @@ h3 {
   height: 1.25rem;
   margin-top: 0.2rem;
 }
+
+/* Keep auto-scrolled targets clear of the sticky site header */
+.result-detail,
+.result-row,
+.option,
+.match-card,
+.button,
+[tabindex="-1"] {
+  scroll-margin-top: 96px;
+}
+
+.result-detail .action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.result-detail .action-row > * {
+  position: relative;
+  z-index: 1;
+}

@@ -15,15 +15,27 @@ jobs:
         with:
           node-version: 24
 
-      # The project has zero npm dependencies, so no install step is needed.
-      # Corpus databases are NOT rebuilt in CI (they require the 1.6 GB local
-      # alignment DB); CI validates the committed published data instead.
+      # Runtime stays dependency-free; only devDependencies (Playwright) install.
+      - name: Install dependencies
+        run: npm ci || npm install
 
-      - name: Site check (links, data schema, SEO, sitemap)
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      # Corpus databases are NOT rebuilt in CI (they require the 1.6 GB local
+      # alignment DB); CI validates the committed published outputs instead.
+
+      - name: Site check (links, schema, SEO, sitemap, draft-leak guard)
         run: npm run check
 
-      - name: Unit and data tests
+      - name: Unit / data / migration tests
         run: npm test
 
-      - name: E2E smoke
+      - name: Production build
+        run: npm run build
+
+      - name: E2E smoke against dist
         run: npm run e2e
+
+      - name: Browser E2E + axe accessibility (against dist)
+        run: npx playwright test

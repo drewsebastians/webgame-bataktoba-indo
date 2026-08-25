@@ -41,7 +41,7 @@ function walk(dir, callback) {
     const path = join(dir, name);
     const stat = statSync(path);
     if (stat.isDirectory()) {
-      if (name === ".git" || name === "node_modules") continue;
+      if (name === ".git" || name === "node_modules" || name === "dist" || name === "test-results") continue;
       walk(path, callback);
     } else {
       callback(path);

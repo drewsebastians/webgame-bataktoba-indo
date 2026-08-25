@@ -229,6 +229,7 @@ function renderHomeDynamic(container, wordPool) {
 
   if (shouldOfferOnboarding(progressState)) renderOnboarding();
   else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0) renderReturning();
+  else replaceChildren(container);
 }
 
 function formatQuality(item) {
@@ -325,9 +326,15 @@ async function initDictionary() {
       attrs: { type: "button" },
     });
     saveButton.addEventListener("click", () => {
-      markFlashcard(item.id, "saved");
-      saveButton.textContent = "Tersimpan";
-      saveButton.disabled = true;
+      try {
+        console.log("SAVE HANDLER RAN for", item.id);
+        setSaved(item.id, true);
+        saveButton.textContent = "Tersimpan";
+        saveButton.disabled = true;
+        track("word_saved");
+      } catch (error) {
+        console.error("SAVE FAILED", String(error));
+      }
     });
 
     const correctionLink = el("a", {
@@ -345,7 +352,10 @@ async function initDictionary() {
       },
     });
 
-    container.append(el("div", { className: "action-row" }, saveButton, correctionLink));
+    const actionsRow = el("div", { className: "action-row" }, saveButton, correctionLink);
+    // keep clicks on actions from bubbling to the row's expand/collapse toggle
+    actionsRow.addEventListener("click", (event) => event.stopPropagation());
+    container.append(actionsRow);
     return container;
   }
 
@@ -363,7 +373,10 @@ async function initDictionary() {
       expandedId = expandedId === item.id ? null : item.id;
       render();
     };
-    row.addEventListener("click", toggle);
+    row.addEventListener("click", (event) => {
+      if (event.target.closest(".result-detail")) { console.log("ROW GUARD ignored click on", event.target.tagName); return; } // action clicks must not collapse the detail
+      toggle(event);
+    });
     row.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
@@ -662,7 +675,7 @@ async function initGames() {
       attrs: { type: "button", disabled: true },
     });
     nextButton.addEventListener("click", nextQuestion);
-    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+    const feedback = el("p", { className: "feedback", id: "feedback", attrs: { "aria-live": "polite" } });
 
     function grade() {
       if (state.locked) return;
@@ -1311,7 +1324,7 @@ function localDateKey(atMs = Date.now()) {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
-async function initProgressPage() {
+async function initProgressPage(notice = '') {
   const root = $("#progress-root");
   if (!root) return;
   const state = getProgress();
@@ -1354,7 +1367,12 @@ async function initProgressPage() {
   });
 
   const fileInput = el("input", {
-    attrs: { type: "file", accept: "application/json,.json", id: "import-file" },
+    attrs: {
+      type: "file",
+      accept: "application/json,.json",
+      id: "import-file",
+      "aria-label": "Impor file progress JSON",
+    },
   });
   const importButton = el("button", {
     className: "button secondary",
@@ -1373,9 +1391,13 @@ async function initProgressPage() {
     }
     const text = await file.text();
     const result = importProgress(text);
-    statusLine.textContent = result.ok
-      ? "Progress berhasil diimpor."
-      : `Impor gagal: ${result.reason === "invalid-json" ? "file bukan JSON valid" : "schema tidak didukung"}.`;
+    if (result.ok) {
+      initProgressPage("Progress berhasil diimpor.");
+      return;
+    }
+    statusLine.textContent = `Impor gagal: ${
+      result.reason === "invalid-json" ? "file bukan JSON valid" : "schema tidak didukung"
+    }.`;
   });
 
   let resetArmed = false;
@@ -1397,8 +1419,7 @@ async function initProgressPage() {
       return;
     }
     resetProgress();
-    statusLine.textContent = "Progress dihapus.";
-    initProgressPage();
+    initProgressPage("Progress dihapus.");
   });
 
   function buildConsentRow(idSuffix, title, description, checked, onChange) {
@@ -1455,6 +1476,8 @@ async function initProgressPage() {
     return section;
   })();
 
+  if (notice) statusLine.textContent = notice;
+
   replaceChildren(
     root,
     stats,
@@ -1489,6 +1512,186 @@ async function main() {
   if (page === "flashcards") await initFlashcards();
   if (page === "learn-topic") await initLearn();
   if (page === "progres") await initProgressPage();
+}
+
+async function initLearn() {
+  const root = $("#lesson-root");
+  const theme = document.body.dataset.lesson;
+  if (!root || !theme) return;
+
+  const [lessons, learning, words] = await Promise.all([loadLessons(), loadLearningItems(), loadWordPairs()]);
+  const lesson = [...lessons.published, ...lessons.drafts].find((entry) => entry.slug === theme);
+  if (!lesson) {
+    replaceChildren(root, el("p", { className: "feedback", text: "Materi untuk tema ini belum tersedia." }));
+    return;
+  }
+
+  const itemById = new Map(learning.items.map((item) => [item.id, item]));
+  const poolItems = lesson.itemIds.map((id) => itemById.get(id)).filter(Boolean);
+  const wordPool = words.items;
+
+  function vocabRow(batakText, indonesiaText, statusPill) {
+    return el(
+      "div",
+      { className: "vocab-row" },
+      el("strong", { text: batakText }),
+      el("span", { text: indonesiaText }),
+      statusPill,
+    );
+  }
+
+  const children = [];
+
+  children.push(
+    el("p", {
+      className: "feedback",
+      text:
+        lesson.publicationStatus === "published"
+          ? `Lesson latihan aktif: ${lesson.counts.poolItems} item corpus.`
+          : `Status: lesson latihan penuh belum terbit (butuh minimal ${lessons.minPoolItemsForPublication} item corpus per tema; tema ini punya ${lesson.counts.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
+    }),
+  );
+
+  if (poolItems.length > 0) {
+    children.push(el("h2", { text: "Dari corpus (corpus-derived)" }));
+    children.push(
+      el(
+        "div",
+        { className: "vocab-table" },
+        poolItems.map((item) =>
+          vocabRow(item.batak, item.indonesia, pill(formatQuality(item), "", {
+            "data-source-flag": item.sourceType || "corpus-derived",
+          })),
+        ),
+      ),
+    );
+  }
+
+  // Editorial drafts are NEVER rendered publicly: they stay internal until a
+  // human reviewer approves them (see data/reviewed/README.md).
+  if (lesson.counts.supplementItems > 0 || lesson.publicationStatus !== "published") {
+    children.push(
+      el("p", {
+        className: "feedback",
+        attrs: { role: "note" },
+        text: `Materi tambahan untuk tema ini sedang menunggu review penutur (${lesson.counts.supplementItems} item). Kata-kata tersebut belum ditampilkan sebagai materi belajar.`,
+      }),
+    );
+  }
+
+  const practiceRoot = el("section", { className: "mini-practice", id: "mini-practice" });
+  children.push(el("h2", { text: "Mini latihan" }), practiceRoot);
+
+  replaceChildren(root, children);
+
+  if (poolItems.length >= 4) {
+    renderMiniPractice(practiceRoot, poolItems, wordPool);
+  } else {
+    replaceChildren(
+      practiceRoot,
+      el("p", {
+        className: "feedback",
+        text: "Latihan interaktif untuk tema ini menyusul setelah cukup item corpus tereview.",
+      }),
+    );
+  }
+}
+
+function renderMiniPractice(root, themeItems, fullPool) {
+  const runner = createQuizRunner({
+    pool: fullPool.length >= 4 ? fullPool : themeItems,
+    from: "batak",
+    to: "indonesia",
+    initialIds: themeItems.map((item) => item.id),
+  });
+  let answered = 0;
+  let correct = 0;
+  const maxQuestions = Math.min(themeItems.length, 5);
+
+  function renderQuestion() {
+    const result = runner.nextQuestion();
+    const question = result.question ?? null;
+    if (!question) {
+      replaceChildren(root, el("p", { className: "feedback", text: "Latihan selesai untuk sesi ini." }));
+      return;
+    }
+
+    const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+    const optionButtons = question.options.map((option) => {
+      const button = el("button", {
+        className: "option",
+        text: option.label,
+        attrs: { type: "button", "data-answer": option.id },
+      });
+      button.addEventListener("click", () => {
+        if (answered >= maxQuestions || runner.isLocked()) return;
+        const outcome = runner.answer(option.id);
+        if (!outcome.accepted) return;
+        answered += 1;
+        correct += outcome.isCorrect ? 1 : 0;
+        recordAnswer(outcome.isCorrect, `lesson:${document.body.dataset.lesson}`, outcome.itemId);
+        [...root.querySelectorAll(".option")].forEach((other) => {
+          other.disabled = true;
+          if (other.dataset.answer === outcome.correctOptionId) other.classList.add("correct");
+        });
+        if (!outcome.isCorrect) button.classList.add("wrong");
+        feedback.textContent = outcome.isCorrect ? "Benar." : "Belum tepat.";
+        updateProgressBadges();
+        nextButton.disabled = false;
+        nextButton.textContent = answered >= maxQuestions ? "Lihat Hasil" : "Lanjut";
+      });
+      return button;
+    });
+
+    const nextButton = el("button", {
+      className: "button",
+      id: "mini-next",
+      text: "Lanjut",
+      attrs: { type: "button", disabled: true },
+    });
+    nextButton.addEventListener("click", () => {
+      if (answered >= maxQuestions) renderSummary();
+      else renderQuestion();
+    });
+
+    replaceChildren(
+      root,
+      el(
+        "div",
+        { className: "scorebar" },
+        pill(`Mini latihan ${Math.min(answered + 1, maxQuestions)}/${maxQuestions}`),
+        pill(formatQuality(question), "", { "data-source-flag": question.sourceFlag || "corpus-derived" }),
+      ),
+      el(
+        "div",
+        { className: "prompt" },
+        el("span", { className: "prompt-kicker", text: "Pilih arti yang cocok" }),
+        el("strong", { className: "prompt-text", text: question.prompt }),
+      ),
+      el("div", { className: "options" }, optionButtons),
+      feedback,
+      el("div", { className: "action-row" }, nextButton),
+    );
+  }
+
+  function renderSummaryMini() {
+    const again = el("button", { className: "button secondary", text: "Ulangi", attrs: { type: "button" } });
+    again.addEventListener("click", () => {
+      answered = 0;
+      correct = 0;
+      renderQuestion();
+    });
+    replaceChildren(
+      root,
+      el("p", {
+        className: "feedback",
+        text: `Mini latihan selesai: ${correct}/${answered} benar. Lanjutkan ke Games untuk latihan penuh.`,
+      }),
+      again,
+    );
+  }
+
+  renderQuestion();
 }
 
 function registerServiceWorker() {
@@ -1553,3 +1756,5 @@ main().catch((error) => {
     showError($("main"), error && error.message ? error.message : "Kesalahan tidak diketahui.");
   });
 });
+
+// BUILD_MARKER_TEST_12345
