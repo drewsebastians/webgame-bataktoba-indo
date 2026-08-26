@@ -205,4 +205,22 @@ headersOut = headersOut.replace(
 );
 writeFileSync(join(dist, "_headers"), headersOut, "utf8");
 
+// Normalize text files to LF so committed dist matches Linux CI builds.
+function normalizeEol(dir) {
+  const textExt = new Set([".html", ".js", ".css", ".json", ".xml", ".txt", ".webmanifest"]);
+  function walk(d) {
+    for (const name of readdirSync(d)) {
+      const full = join(d, name);
+      if (statSync(full).isDirectory()) walk(full);
+      else if (textExt.has(extname(full))) {
+        const buf = readFileSync(full);
+        const normalized = Buffer.from(buf.toString("utf8").replace(/\r\n/g, "\n"), "utf8");
+        if (!buf.equals(normalized)) writeFileSync(full, normalized);
+      }
+    }
+  }
+  walk(dist);
+}
+normalizeEol(dist);
+
 console.log(`dist/ built. SW cache version: ${version}`);
