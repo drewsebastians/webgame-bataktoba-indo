@@ -27,3 +27,6 @@ jobs:
 
       - name: Full verification (check + unit + build + smoke + browser + axe)
         run: npm run verify
+
+      - name: Committed dist drift gate
+        run: git diff --exit-code -- dist
