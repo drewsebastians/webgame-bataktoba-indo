@@ -212,7 +212,7 @@ function normalizeEol(dir) {
     for (const name of readdirSync(d)) {
       const full = join(d, name);
       if (statSync(full).isDirectory()) walk(full);
-      else if (textExt.has(extname(full))) {
+      else if (name === "_redirects" || name === ".nojekyll" || textExt.has(extname(full))) {
         const buf = readFileSync(full);
         const normalized = Buffer.from(buf.toString("utf8").replace(/\r\n/g, "\n"), "utf8");
         if (!buf.equals(normalized)) writeFileSync(full, normalized);
