@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-26T01:39:46+00:00",
+  "generatedAt": "2026-08-26T03:09:58+00:00",
   "reviewStatusNote": "All entries are needs-review editorial inputs; never publish or render publicly.",
   "supplements": [
     {
@@ -202,7 +202,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-26T01:39:46+00:00"
+      "generatedAt": "2026-08-26T03:09:58+00:00"
     },
     {
       "id": "lesson-keluarga",
@@ -220,7 +220,7 @@
       },
       "reviewRollup": "no-pool-items",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-26T01:39:46+00:00"
+      "generatedAt": "2026-08-26T03:09:58+00:00"
     },
     {
       "id": "lesson-sapaan",
@@ -238,7 +238,7 @@
       },
       "reviewRollup": "no-pool-items",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-26T01:39:46+00:00"
+      "generatedAt": "2026-08-26T03:09:58+00:00"
     },
     {
       "id": "lesson-makanan",
@@ -259,7 +259,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-26T01:39:46+00:00"
+      "generatedAt": "2026-08-26T03:09:58+00:00"
     },
     {
       "id": "lesson-waktu",
@@ -282,7 +282,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-26T01:39:46+00:00"
+      "generatedAt": "2026-08-26T03:09:58+00:00"
     },
     {
       "id": "lesson-alam",
@@ -303,7 +303,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-08-26T01:39:46+00:00"
+      "generatedAt": "2026-08-26T03:09:58+00:00"
     }
   ]
 }

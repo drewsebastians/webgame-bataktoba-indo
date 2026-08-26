@@ -37,7 +37,7 @@ describe("public lesson registry (published-only)", () => {
   it("topics registry is public-safe and carries published item ids per theme", () => {
     for (const topic of topics.topics) {
       assert.ok(topic.slug && topic.title);
-      assert.ok(["published", "draft"].includes(topic.publicationStatus));
+      assert.ok(["public-indexable", "public-noindex"].includes(topic.pageStatus));
       for (const id of topic.itemIds) {
         assert.ok(learning.has(id), `topic ${topic.slug} references missing item ${id}`);
       }

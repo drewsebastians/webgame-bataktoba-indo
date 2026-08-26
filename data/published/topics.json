@@ -14,7 +14,8 @@
         "word-92add2f91e",
         "word-cda58024a5"
       ],
-      "publicationStatus": "draft",
+      "pageStatus": "public-noindex",
+      "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -24,7 +25,8 @@
       "level": 1,
       "poolItems": 0,
       "itemIds": [],
-      "publicationStatus": "draft",
+      "pageStatus": "public-noindex",
+      "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -34,7 +36,8 @@
       "level": 1,
       "poolItems": 0,
       "itemIds": [],
-      "publicationStatus": "draft",
+      "pageStatus": "public-noindex",
+      "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -47,7 +50,8 @@
         "word-6a7710b417",
         "word-be83d23d14"
       ],
-      "publicationStatus": "draft",
+      "pageStatus": "public-noindex",
+      "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -62,7 +66,8 @@
         "word-859fe57a60",
         "word-96cd17d1f0"
       ],
-      "publicationStatus": "draft",
+      "pageStatus": "public-noindex",
+      "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -75,7 +80,8 @@
         "word-c92b3480a5",
         "word-dd4c2312e5"
       ],
-      "publicationStatus": "draft",
+      "pageStatus": "public-noindex",
+      "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
     }
   ]

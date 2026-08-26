@@ -1,5 +1,5 @@
 ﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.cfd4b3c2.js";
-import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.8fa81f43.js";
+import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.4b18e606.js";
 import {
   exportProgress,
   getBucketIds,
@@ -16,7 +16,7 @@ import {
   saveProgress,
   setDifficult,
   setSaved,
-} from "./progress.13e44f48.js";
+} from "./progress.b6453878.js";
 import { el, replaceChildren } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.2eedd2fd.js";
@@ -26,7 +26,7 @@ import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-e
 import {
   recordLessonCompletion,
   recordLessonStart,
-} from "./progress.13e44f48.js";
+} from "./progress.b6453878.js";
 import { getOnboarding, saveOnboarding, shouldOfferOnboarding } from "./onboarding.2babc419.js";
 import {
   buildMemoryBoard,
@@ -2017,7 +2017,7 @@ async function initLearn() {
     el("p", {
       className: "feedback",
       text:
-        topicMeta.publicationStatus === "published"
+        topicMeta.pageStatus === "public-indexable"
           ? `Lesson latihan aktif: ${topicMeta.poolItems} item corpus.`
           : `Status: lesson latihan penuh belum terbit (butuh minimal ${MIN_LESSON_POOL_ITEMS} item corpus per tema; tema ini punya ${topicMeta.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
     }),
@@ -2197,9 +2197,6 @@ function registerServiceWorker() {
     .catch(() => {
       /* offline support is progressive enhancement; never block the app */
     });
-  if (!navigator.serviceWorker.controller) {
-    navigator.serviceWorker.ready.then(() => track("pwa_installed"));
-  }
   window.addEventListener("online", () => setOfflineBanner(false));
   window.addEventListener("offline", () => setOfflineBanner(true));
   if (navigator.onLine === false) setOfflineBanner(true);

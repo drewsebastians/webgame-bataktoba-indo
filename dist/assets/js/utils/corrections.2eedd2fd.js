@@ -4,7 +4,7 @@
  * encoded via URLSearchParams so corpus text can never break the URL.
  */
 
-import { SITE_CONFIG } from "../config.8fa81f43.js";
+import { SITE_CONFIG } from "../config.4b18e606.js";
 
 export function buildCorrectionUrl({ itemId, batak, indonesia, pagePath, category = "lainnya" }) {
   const params = new URLSearchParams();

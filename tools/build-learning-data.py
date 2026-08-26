@@ -42,7 +42,7 @@ SCHEMA_VERSION = 2
 
 # Lesson publication: a theme needs at least this many corpus pool items,
 # otherwise the lesson stays in draft and is excluded from the published list.
-MIN_LESSON_POOL_ITEMS = 6
+MIN_LESSON_POOL_ITEMS = 8
 
 MAX_WORD_PAIRS = 720
 MAX_PHRASE_PAIRS = 120
@@ -935,8 +935,15 @@ def main() -> int:
                 "level": entry.get("level", 1),
                 "poolItems": len(ids),
                 "itemIds": ids,
-                "publicationStatus": (
-                    "published" if len(ids) >= MIN_LESSON_POOL_ITEMS else "draft"
+                "pageStatus": (
+                    "public-indexable"
+                    if len(ids) >= MIN_LESSON_POOL_ITEMS
+                    else "public-noindex"
+                ),
+                "indexability": (
+                    "noindex,follow"
+                    if len(ids) < MIN_LESSON_POOL_ITEMS
+                    else "index"
                 ),
                 "reviewRollup": "corpus-derived-beta",
             }

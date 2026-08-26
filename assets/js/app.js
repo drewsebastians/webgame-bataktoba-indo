@@ -2017,7 +2017,7 @@ async function initLearn() {
     el("p", {
       className: "feedback",
       text:
-        topicMeta.publicationStatus === "published"
+        topicMeta.pageStatus === "public-indexable"
           ? `Lesson latihan aktif: ${topicMeta.poolItems} item corpus.`
           : `Status: lesson latihan penuh belum terbit (butuh minimal ${MIN_LESSON_POOL_ITEMS} item corpus per tema; tema ini punya ${topicMeta.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
     }),
@@ -2197,9 +2197,6 @@ function registerServiceWorker() {
     .catch(() => {
       /* offline support is progressive enhancement; never block the app */
     });
-  if (!navigator.serviceWorker.controller) {
-    navigator.serviceWorker.ready.then(() => track("pwa_installed"));
-  }
   window.addEventListener("online", () => setOfflineBanner(false));
   window.addEventListener("offline", () => setOfflineBanner(true));
   if (navigator.onLine === false) setOfflineBanner(true);

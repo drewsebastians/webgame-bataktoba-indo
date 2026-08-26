@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "./config.8fa81f43.js";
+import { SITE_CONFIG } from "./config.4b18e606.js";
 
 const DATA_BASE = new URL(SITE_CONFIG.dataDir, import.meta.url);
 

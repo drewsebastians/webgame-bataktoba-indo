@@ -523,8 +523,9 @@ export function getLessonState(slug) {
   if (!entry || !entry.startedAt) return { status: "not-started", attempts: 0 };
   let status = "learning";
   if (entry.completedAt) {
-    status =
-      entry.lastMistakeCount > 0 ? "needs-review" : "completed";
+    if (entry.lastMistakeCount > 0) status = "needs-review";
+    else if ((entry.attempts ?? 1) >= 3) status = "completed";
+    else status = "nearly-mastered";
   } else if (entry.mistakesTotal >= 5) {
     status = "needs-review";
   }

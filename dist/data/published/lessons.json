@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-26T01:39:46+00:00",
-  "minPoolItemsForPublication": 6,
+  "generatedAt": "2026-08-26T03:09:58+00:00",
+  "minPoolItemsForPublication": 8,
   "note": "Published lessons only. Draft definitions live in data/candidates/lesson-drafts.json (internal editorial input); public topic pages are driven by topics.json.",
   "published": [],
   "counts": {
