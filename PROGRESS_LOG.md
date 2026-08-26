@@ -263,3 +263,76 @@ Hasil akhir: check 0 warnings; 126 unit tests pass; e2e smoke pass;
 - Asset revisioning deterministik (14 file hashed, imports rewritten) + immutable cache.
 - verify = satu perintah lengkap termasuk browser+axe; CI strict npm ci.
 - Hasil: check 0 warnings; 139 node tests; e2e smoke; 23 browser specs lulus.
+---
+
+## CURRENT STATE — 26 Agustus 2026 (Long-Running Determinism Repair & Ultimate Closure Pass)
+
+**Authoritative — menggantikan klaim COMPLETE historis di atas sampai HEAD terbaru. Session historis di atas dipertahankan apa adanya.**
+
+### HEAD & CI
+- Starting SHA (prompt): `b2f07abe671b73175131b8f278adb4d0192689ed` (chore: sync dist) — CI RED (drift gate `git diff --exit-code -- dist` gagal, Run ID 32974358945).
+- Current HEAD (setelah pass ini): lihat `git rev-parse HEAD` — commit akan berisi `fix: deterministic build, explicit lastModified, truthful homepage, contributors`.
+- Latest GitHub Actions Verify (expected green setelah push): `npm run verify` = `verify:core` (check+build+unit+smoke+browser) + `verify:drift` (git diff). Drift gate sekarang reproduksibel lokal 1:1.
+
+### Root cause dist-drift
+- **Before:** `tools/build-dist.mjs` inject `meta last-modified` via `git log -1 --format=%cI -- <path>` → non-deterministik:
+  1) shallow checkout (CI depth 1) → semua file dapat timestamp HEAD seragam vs full history per-file (per-page 2026-08-25 vs HEAD 2026-08-26);
+  2) self-referential: `edit source → build → commit source+dist → CI rebuild after commit sees new commit time → drift → sync commit menutupi gejala sementara`;
+  3) EOL hashing order: normalize setelah hash → Windows CRLF vs Linux LF menghasilkan hash aset berbeda (`styles.f8c50966.css` vs `styles.940b46b4.css`, `progress.b6453878.js` vs `fa26cbf8.js`, SW `btp-91b...` vs `btp-4a3...`).
+- **After:** explicit `tools/site.config.json:lastModified` (`2026-08-26` untuk 16 halaman indexable + `/contributors/`), EOL normalize **sebelum** hashTree/revision, tidak ada `git log` dalam build. Dua build berurutan → `git diff --exit-code -- dist` clean; shallow/full clone identik (diuji file:// shallow).
+- Files yang drift sebelumnya (contoh): semua `dist/**/index.html` (meta timestamp), `dist/assets/css/styles.*.css`, `dist/assets/js/*.js` (hash), `dist/sw.js` (cache version), `dist/sitemap.xml` (tanpa lastmod sebelumnya).
+
+### Determinism architecture
+- Preferred: explicit version-controlled page metadata di `site.config.json:lastModified`.
+- Flow: `site.config lastModified → visible <time datetime> → meta last-modified → sitemap <lastmod> → LearningResource dateModified` satu sumber.
+- Generator sitemap `tools/generate-sitemap.mjs` sekarang emit `<lastmod>` dari sumber yang sama.
+- Build `tools/build-dist.mjs` inject visible `<p class="content-meta"><time datetime="2026-08-26">Terakhir diperbarui: 26 Agustus 2026</time></p>` untuk semua halaman di map kecuali `/progres/` dan `/offline.html` (dynamic). Idempotent update bila sudah ada.
+- Fallback git-history dihapus; tidak ada `current build time`/`fs mtime`/random.
+
+### Visible last-modified UI
+- Ditambahkan untuk: `/`, `/about/`, `/methodology/`, `/data-source/`, `/editorial-policy/`, `/correction-process/`, `/privacy/`, `/contact/`, `/dictionary/`, `/flashcards/`, `/games/`, `/learn/`, `/learn/angka/`, `/learn/keluarga/`, `/learn/sapaan/`, `/learn/makanan/`, `/learn/adat-ringan/`, `/learn/tips-diaspora/`, `/contributors/` (dan future lessons). Dikecualikan: `/progres/` (personal dynamic).
+
+### Cross-platform EOL
+- `.gitattributes`: `* text=auto eol=lf`, `dist/** -text`, `*.png binary` dipertahankan (dist bytes exact, tidak dikonversi saat checkout).
+- Build normalize LF **sebelum** hashing; zero-byte `.nojekyll` tetap zero; `_redirects` deterministik LF; tidak ada `patch-script residue` (`tools/add-eol.py`, `tools/fix-extless.py` dihapus; logic terintegrasi ke build).
+
+### Drift gate canonical
+- `package.json`: `verify:core` (check+build+test+e2e+test:browser), `verify:drift` (git diff), `verify` = ambos. Satu perintah lokal reproduksi CI; CI tetap eksplisit `git diff --exit-code -- dist` untuk diagnose; tidak ada rebuild ganda.
+
+### Docs sinkron
+- `README.md` ditulis ulang dari arsitektur aktual (hapus klaim Progress v2, raw→candidates→published lama, verify 3 gates, deploy root `.`, `wrangler pages deploy .`); kini mencakup: product purpose, modes, counts, 0 published lessons + threshold 8, indexability policy, progress v3 (key `batakTobaPlay.progress.v2`, schema 3), pipeline reviewed, build/verify/browser/axe/PWA, ads/analytics OFF, dist artifact, Cloudflare `dist/`, CI drift gate, external blockers.
+- `BLUEPRINT_COMPLIANCE_MATRIX.md` dibangun ulang dari evidence; perbaiki: lesson threshold 8, Matching vs Memory, lesson flow fixture, per-lesson rollup, Dictionary highlight now applied, LearningResource via build injection, last-modified visible, asset revisioning immutable, counts 136/23, stray \npm, contributors COMPLETE.
+- `CURRENT_STATE_AUDIT.md` historis (24 Aug baseline) dipertahankan; bagian ini adalah authoritative current.
+
+### Production counts (truthful, tidak difaked)
+- word pairs 367, genuine phrases 0, sample sentences 80, published lessons 0, draft lessons 6, human-reviewed 0, min publication pool 8.
+
+### Homepage & prose
+- Homepage `Tebak Arti` copy diperbaiki: "Pilih arti Indonesia yang tepat untuk kata Batak Toba (pilihan ganda 4 opsi, tanpa timer wajib)" (was matching 4-8).
+- Path cards `Keluarga`/`Sapaan` dibuat jujur: "Panduan ...; lesson penuh belum terbit, materi menunggu review penutur".
+- Topic prose diaudit: tidak ada klaim linguistik spesifik tanpa evidence (dalihan na tolu etc. di-soften ke generic guidance).
+
+### Tool residue
+- Dihapus: `tools/add-eol.py`, `tools/fix-extless.py`. Valid tools: `build-dist.mjs`, `generate-sitemap.mjs`, `check-site.mjs`, `build-learning-data.py`, etc. Semua punya tujuan durable.
+
+### Build/deploy contract
+- `wrangler.toml` `pages_build_output_dir = dist`, `[assets] directory = dist` (tidak pernah repo root). `dist/` hanya: `index.html`, `games/`, `dictionary/`, `flashcards/`, `learn/`, `about/`, `contact/`, `privacy/`, `methodology/`, `data-source/`, `editorial-policy/`, `correction-process/`, `progres/`, `contributors/`, `assets/` hashed, `data/published`, `data/migration`, `sw.js`, `manifest.webmanifest`, `offline.html`, `robots.txt`, `sitemap.xml`, `_headers`, `_redirects`, `.nojekyll`.
+
+### Test commands (canonical)
+```bash
+npm ci
+npm run build:seo
+npm run verify      # green = check + build + unit (136) + smoke + browser (23 incl axe) + drift clean
+npm run build; git diff --exit-code -- dist   # idempotence second build
+```
+
+### External blockers (tetap, tidak difake)
+- Human linguistic review words/phrases/sentences/6 drafts
+- Corpus licensing/legal review
+- Audio licensing/recording/review (listening mode deferred)
+- Custom domain/DNS, Search Console
+- AdSense Publisher ID + ads.txt + CMP certification if required
+- Production hostname Cloudflare verification
+
+Semua repository-solvable gap ditutup; sisa hanya external.
+

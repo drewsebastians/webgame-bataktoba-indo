@@ -1,9 +1,13 @@
 /**
- * Progress schema v2 with migration, per-item review scheduling,
+ * Progress schema v3 with migration, per-item review scheduling,
  * bounded storage, safe export/import, and localStorage-failure resilience.
  *
+ * Storage key name != schema version: for backward compatibility the
+ * persisted key remains "batakTobaPlay.progress.v2" while the payload
+ * declares schemaVersion = 3.
+ *
  * Storage layout:
- *   - "batakTobaPlay.progress.v2"  -> versioned v2 payload (current)
+ *   - "batakTobaPlay.progress.v2"  -> versioned v3 payload (current, key is legacy name)
  *   - "batakTobaGameProgress"      -> legacy v1 payload (read once for migration)
  *
  * Review schedule (deterministic):

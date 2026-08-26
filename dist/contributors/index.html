@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kontributor &amp; Reviewer — Batak Toba Play</title>
+    <meta name="description" content="Status kontributor dan reviewer Bahasa Batak Toba untuk Batak Toba Play. Saat ini belum ada reviewer terverifikasi; semua materi berstatus corpus-derived/beta.">
+    <link rel="canonical" href="https://webgame-bataktoba-indo.pages.dev/contributors/">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#b7352d">
+    <meta property="og:title" content="Kontributor &amp; Reviewer — Batak Toba Play">
+    <meta property="og:description" content="Status kontributor dan reviewer Bahasa Batak Toba. Belum ada reviewer terverifikasi; materi berstatus corpus-derived/beta.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://webgame-bataktoba-indo.pages.dev/assets/icons/og-image.png">
+    <meta property="og:url" content="https://webgame-bataktoba-indo.pages.dev/contributors/">
+    <meta property="og:site_name" content="Batak Toba Play">
+    <meta property="og:locale" content="id_ID">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://webgame-bataktoba-indo.pages.dev/assets/icons/og-image.png">
+    <meta name="twitter:title" content="Kontributor &amp; Reviewer — Batak Toba Play">
+    <meta name="twitter:description" content="Status kontributor dan reviewer Bahasa Batak Toba. Belum ada reviewer terverifikasi.">
+    <link rel="stylesheet" href="../assets/css/styles.940b46b4.css">
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://webgame-bataktoba-indo.pages.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Kontributor & Reviewer",
+            "item": "https://webgame-bataktoba-indo.pages.dev/contributors/"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body data-page="contributors">
+    <a class="skip-link" href="#main-content">Langsung ke konten</a>
+
+    <header class="site-header"><nav class="nav" aria-label="Navigasi utama"><a class="brand" href="../index.html"><span class="brand-mark">BT</span><span>Batak Toba Play</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links-list">Menu</button>
+        <div class="nav-links" id="nav-links-list"><a data-nav="home" href="../index.html">Home</a><a data-nav="games" href="../games/">Games</a><a data-nav="dictionary" href="../dictionary/">Dictionary</a><a data-nav="flashcards" href="../flashcards/">Flashcards</a>
+          <a data-nav="progres" href="../progres/">Progres</a><a data-nav="methodology" href="../methodology/">Methodology</a></div></nav></header>
+    <main id="main-content" tabindex="-1" class="main content">
+      <section class="page-heading">
+        <p class="eyebrow">Transparansi</p>
+        <h1>Kontributor &amp; Reviewer</h1>
+      </section>
+      <p><strong>Belum ada reviewer Bahasa Batak Toba yang diverifikasi untuk rilis publik.</strong> Materi saat ini tetap berstatus <code>corpus-derived</code> / <code>beta-unreviewed</code> sesuai metadata setiap entri di dictionary dan laporan kualitas. Website tidak menampilkan nama reviewer palsu, kredensial organisasi, atau endorsement.</p>
+      <h2>Apa artinya “human-reviewed”</h2>
+      <p>Entri akan menyandang <code>human-reviewed</code> hanya bila penutur yang diverifikasi memeriksa pasangan kata/frasa/kalimat, memberikan persetujuan eksplisit, dan dicatat dalam <code>data/reviewed/overrides.json</code> dengan atribusi <code>reviewedBy</code> yang valid. Pipeline menolak klaim <code>human-reviewed</code> tanpa reviewer (checker hard-fail).</p>
+      <h2>Bagaimana review dicatat</h2>
+      <ul>
+        <li>Review disimpan di layer <code>data/reviewed/</code> (override file) dan digabungkan saat <code>tools/build-learning-data.py</code> berjalan.</li>
+        <li>Setiap override harus memiliki <code>id</code> stabil yang ada di <code>data/published</code>, <code>reviewStatus: human-reviewed</code>, dan <code>reviewedBy: "Nama (afiliasi, opsional)"</code>.</li>
+        <li>Build berikutnya menghasilkan <code>data/published/*</code> yang baru; website hanya membaca published.</li>
+        <li>Halaman ini akan diperbarui dengan daftar reviewer terverifikasi (nama + peran) saat review pertama tersedia, tanpa inventing.</li>
+      </ul>
+      <h2>Cara berkontribusi &amp; koreksi</h2>
+      <ul>
+        <li>Gunakan tombol <strong>Lapor koreksi</strong> di dictionary atau <strong>Correction Process</strong> untuk membuka GitHub issue ter-prefill (menuju <code>github.com/drewsebastians/webgame-bataktoba-indo/issues/new</code>). Isi tidak otomatis terkirim sebagai analytics; hanya URL yang dibuka.</li>
+        <li>Sertakan <code>itemId</code>, pasangan kata, konteks, dan sumber bila ada. Tidak ada data pribadi yang dikirim.</li>
+        <li>Kontributor kode dapat membuka pull request; perubahan data memerlukan review editorial dan tidak memalsukan data.</li>
+      </ul>
+      <h2>Atribusi ke depan</h2>
+      <p>Saat reviewer tersedia, setiap entri <code>human-reviewed</code> akan menampilkan atribusi di detail dictionary dan JSON-LD <code>LearningResource</code> yang jujur (tidak ada rating/review palsu). Halaman ini akan mencantumkan nama, peran, dan tanggal review, serta tautan ke laporan kualitas.</p>
+      <div class="action-row"><a class="button" href="../editorial-policy/">Editorial Policy</a><a class="button secondary" href="../correction-process/">Correction Process</a><a class="button secondary" href="../methodology/">Methodology</a></div>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><span>Belum ada reviewer terverifikasi; semua materi masih beta corpus-derived.</span><div class="footer-links"><a href="../about/">About</a><a href="../contact/">Contact</a><a href="../privacy/">Privacy</a><a href="../data-source/">Data Source</a><a href="../contributors/">Contributors</a></div></div></footer>
+    <script type="module" src="../assets/js/app.b3856467.js"></script>
+  </body>
+</html>

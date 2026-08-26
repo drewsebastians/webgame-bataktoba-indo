@@ -1164,7 +1164,7 @@ async function initGames() {
       el("div", { className: "action-row" }, sizeButtons),
       el("div", { className: "matching-board" }, cardButtons),
       el("p", { className: "feedback", text: message, attrs: { "aria-live": "polite" } }),
-      el("div", { className: "action-row" }, newRound),
+      el("div", { className: "action-row" }, newRound, timerToggle),
     );
   }
 

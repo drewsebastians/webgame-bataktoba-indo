@@ -27,21 +27,30 @@ function collectHtmlPages(dir, base = "") {
   return pages;
 }
 
+const lastModified = config.lastModified ?? {};
+
 const pages = collectHtmlPages(root)
   .filter(({ path }) => !path.includes(`${join(root, "tools")}`))
   .map(({ path, urlPath }) => {
     const html = readFileSync(path, "utf8");
     const noindex = /<meta[^>]+name="robots"[^>]+noindex/.test(html);
-    return { urlPath, noindex };
+    return { path, urlPath, noindex };
   })
   .filter((page) => !page.noindex)
-  .map((page) => new URL(page.urlPath, config.baseUrl).toString())
-  .sort();
+  .map((page) => ({
+    url: new URL(page.urlPath, config.baseUrl).toString(),
+    lastmod: lastModified[page.urlPath] ?? null,
+  }))
+  .sort((a, b) => a.url.localeCompare(b.url));
 
 const lines = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...pages.map((url) => `  <url><loc>${url}</loc></url>`),
+  ...pages.map((p) =>
+    p.lastmod
+      ? `  <url><loc>${p.url}</loc><lastmod>${p.lastmod}</lastmod></url>`
+      : `  <url><loc>${p.url}</loc></url>`,
+  ),
   "</urlset>",
 ];
 

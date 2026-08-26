@@ -1,8 +1,6 @@
 # Blueprint Compliance Matrix
 
-Authoritative completion record for `01_BLUEPRINT_ULTIMATE_WEBSITE_BATAK_TOBA_PLAY.md`
-versus the actual repository state at commit recorded in PROGRESS_LOG.
-Legend: **COMPLETE** · PARTIAL · BLOCKED_EXTERNAL · NOT_IMPLEMENTED · INTENTIONALLY_DEFERRED
+Authoritative completion record for `01_BLUEPRINT_ULTIMATE_WEBSITE_BATAK_TOBA_PLAY.md` versus the actual repository state at HEAD. Legend: **COMPLETE** · PARTIAL · BLOCKED_EXTERNAL · NOT_IMPLEMENTED · INTENTIONALLY_DEFERRED
 
 Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwright test`), checker rules (`npm run check`).
 
@@ -12,121 +10,117 @@ Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwrig
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| raw → candidate → reviewed → published layers | COMPLETE | `data/{raw,candidates,reviewed,published}/`; builder stages in `tools/build-learning-data.py`; `data/reviewed/README.md` documents override schema |
-| Human-review workflow without faking data | COMPLETE | `load_reviewed_overrides()` + `apply_review_overrides()`; layer currently EMPTY by design; zero `human-reviewed` items exist |
-| Stable content-hash IDs | COMPLETE | `stable_id()` sha256-based; format enforced by `tests/data/data-quality.test.mjs` |
-| Legacy ID migration map | COMPLETE | `data/migration/id-map.json` (485 mapped); consumed by progress migration; `tests/unit/progress-v2.test.mjs` |
-| Draft leakage guard | COMPLETE | supplements live ONLY in internal `data/candidates/lesson-drafts.json`; checker hard-fails on `needs-review`/`editorial-draft` inside `data/published/`; browser test "draft vocabulary never renders publicly" |
-| Phrase token rule (≥2 meaningful tokens) | COMPLETE | enforced at candidate stage AND published stage; checker + `tests/data` coverage |
-| Zero phrases ⇒ zero phrase claims | COMPLETE | dataset empty; homepage stat removed; copy fixed in `index.html`, `data-source/`; no numeric phrase claims anywhere |
-| Data quality report per build | COMPLETE | `data/reports/data-quality-report.json` validated by checker/tests |
+| raw → candidate → reviewed → published layers | COMPLETE | `data/{raw,candidates,reviewed,published}/`; builder stages in `tools/build-learning-data.py`; `data/reviewed/README.md` documents override schema; `reviewed` layer kosong hari ini (truthful, no fake) |
+| Human-review workflow without faking data | COMPLETE | `load_reviewed_overrides()` + `apply_review_overrides()`; layer EMPTY by design; zero `human-reviewed` items; checker hard-fails human claim without `reviewedBy` |
+| Stable content-hash IDs | COMPLETE | `stable_id()` sha256-based `word-<10hex>`; format enforced by `tests/data/data-quality.test.mjs`; 367 words |
+| Legacy ID migration map | COMPLETE | `data/migration/id-map.json` (485 mapped); consumed by progress migration; `tests/unit/progress-v2.test.mjs` incl. v2→v3 |
+| Draft leakage guard | COMPLETE | supplements live ONLY in `data/candidates/lesson-drafts.json` + `content/curated/` internal; checker hard-fails on `needs-review`/`editorial-draft` in `data/published/`; browser "draft vocabulary never renders publicly" |
+| Phrase token rule (≥2 meaningful tokens) | COMPLETE | enforced at candidate AND published stage; checker + `tests/data` coverage; phrase set empty truthfully |
+| Zero phrases ⇒ zero phrase claims | COMPLETE | dataset empty; homepage stat shows 0 genuine phrases; copy fixed in `index.html`, `data-source/`; no numeric phrase claims |
+| Data quality report per build | COMPLETE | `data/reports/data-quality-report.json` validated by checker/tests; stageCounts.wordPairs 367 |
 
 ## Question & game engines
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Exactly one correct option; unique visible labels | COMPLETE | `assets/js/game/question-engine.js`; unit + real-data suites (500+ rounds) |
-| Distractors exclude answer alternatives | COMPLETE | engine `reservedLabels`; `tests/unit/question-engine*.test.mjs` |
-| No immediate repeats / cycle-safe queue | COMPLETE | `QuestionQueue`; adjacent-pair property tests |
-| Rapid-click guard | COMPLETE | runner `answer()` lock; browser test asserts disabled options |
-| Typed Answer (normalization + transparent typo tolerance) | COMPLETE | `game/modes.js#checkTypedAnswer`; `tests/unit/modes.test.mjs`; UI in games page |
-| True/False (false pairs provably not alternatives) | COMPLETE | `buildTrueFalse`; property test over 200 seeds; UI wired |
-| Memory Game 4/6/8 pairs, keyboard accessible | COMPLETE | `buildMemoryBoard`; size selector buttons are native `<button>`s; browser test counts cards |
+| Exactly one correct option; unique visible labels | COMPLETE | `assets/js/game/question-engine.js`; unit + real-data suites 500+ rounds; `normalizeLabel` dedupe |
+| Distractors exclude answer alternatives | COMPLETE | engine `reservedLabels` includes `indonesianAlternatives`/`batakAlternatives`; `tests/unit/question-engine*.test.mjs` |
+| No immediate repeats / cycle-safe queue | COMPLETE | `QuestionQueue`; adjacent-pair property tests including cycle boundaries |
+| Rapid-click guard | COMPLETE | runner `answer()` lock; browser asserts disabled options after answer |
+| Typed Answer (normalization + transparent typo tolerance) | COMPLETE | `game/modes.js#checkTypedAnswer` boundedLevenshtein; `tests/unit/modes.test.mjs`; UI in games page |
+| True/False (false pairs provably not alternatives) | COMPLETE | `buildTrueFalse`; property test 200 seeds; UI wired |
+| Memory Game 4/6/8 pairs, keyboard accessible | COMPLETE | `buildMemoryBoard`; size buttons native `<button>` `aria-pressed`; face-down `face-down` + `aria-label`; browser counts cards 8/12/16 |
+| Matching Pairs 4/6/8 open board, distinct from Memory | COMPLETE | `buildMemoryBoard` reused with open cards (no face-down), selector 4/6/8, `matching-size-button`; tested distinct from Memory |
+| Matching timer optional | COMPLETE | toggle `aria-pressed` false→true, time pill appears, advances; persistence isolated per mode; new board resets; browser test `matching-timer` |
 | Daily Challenge (date-seeded, serverless) | COMPLETE | `dailySeed`+`mulberry32`; determinism tests; UI mode |
-| Matching sizes | COMPLETE | replaced legacy 5-pair mode with memory-mode sizes 4/6/8 |
-| Sentence Reordering / Fill-in-Blank | INTENTIONALLY_DEFERRED | gated on publication-eligible sentences; current beta-unreviewed sentences do not qualify |
+| Sentence Reordering / Fill-in-Blank | INTENTIONALLY_DEFERRED | gated on publication-eligible sentences; current 80 beta-unreviewed do not qualify (blueprint §10) |
 | Listening mode | INTENTIONALLY_DEFERRED | disabled until licensed + reviewed audio exists (blueprint §10.11) |
 
 ## Lessons
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Lesson registry + publication rule (≥6 corpus items) | COMPLETE | builder `build_lesson_registry`; `tests/data/lessons.test.mjs` |
-| Honest operation with ZERO published lessons | COMPLETE | registry reports 0 published / 6 draft; learn pages show status + neutral awaiting-review message |
-| Full lesson flow (intro→recognition→recall→mistakes→summary→next) | COMPLETE | mini-practice implements recognition + summary on learn pages; full multi-phase flow requires ≥6-item published lessons to exist (blocked by corpus, not code); fixtures pattern established via real-data engine tests |
-| Lesson progress states | COMPLETE | per-item review/mastery fully tracked; per-lesson status rollup deferred until first publishable lesson exists |
+| Lesson registry + publication rule (≥8 corpus items) | COMPLETE | `tools/build-learning-data.py` `MIN_LESSON_POOL_ITEMS=8`; `data/published/lessons.json` `minPoolItemsForPublication:8`; `tests/data/lessons.test.mjs` enforces ≥8 |
+| Honest operation with ZERO published lessons | COMPLETE | registry 0 published / 6 draft; `data/published/topics.json` poolItems 0-5 all <8; learn pages show neutral "menunggu review penutur" |
+| Full lesson flow (intro→recognition→recall→mistakes→summary→next) | COMPLETE | `assets/js/game/lesson-engine.js` + `progress.js` per-lesson states; mini-practice on learn pages; full multi-phase flow proven via synthetic fixture (route interception, 8–12 items, never in dist) — `tests/browser/lesson-fixture.spec.mjs` |
+| Lesson progress states (5) | COMPLETE | `progress.js:LESSON_STATUSES not-started/learning/needs-review/nearly-mastered/completed`; `getLessonState` + `recordLessonStart`/`recordLessonCompletion`; `tests/unit/lesson-progress.test.mjs` covers each state + transitions (`not-started→learning→needs-review→nearly-mastered→completed`, mistake after completed → needs-review) |
 | Supplements never public | COMPLETE | moved out of published registry; guarded by checker + tests + browser assertion |
 
 ## Core learning product
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Progress v3: independent saved/difficult flags + review schedule | COMPLETE | `progress.js` v2→v3 migration (`migrateV2ToV3`); interval table 1/3/7/14/30; `tests/unit/progress-v2.test.mjs` |
-| Sessions 5/10/20 + summary + mistake review + daily practice | COMPLETE | `game/session.js`; games UI; serial browser tests cover quiz session + summary |
-| Streak (non-punishing) | COMPLETE | `computeStreak` + local-date alignment; unit tests |
-| Flashcards overhaul (due/saved/difficult/theme filters, shuffle, Salah/Sulit/Benar, keyboard) | COMPLETE | rewritten `initFlashcards`; browser test |
-| Dictionary v2 (two-way normalized, fuzzy bounded, highlight-ready filters, detail, save/difficult/correction) | COMPLETE | search/filters/detail/save/correction COMPLETE; visual highlight + difficulty filter PARTIAL (difficulty is null across corpus so filter has nothing to filter; highlight helper not yet applied to DOM) |
-| No-result privacy guard | COMPLETE | analytics adapter rejects `query` field outright; `tests/unit/analytics.test.mjs` |
+| Progress v3: independent saved/difficult flags + review schedule | COMPLETE | `progress.js` `PROGRESS_SCHEMA_VERSION=3` but key remains `batakTobaPlay.progress.v2` (key != version, documented); `migrateV2ToV3`; interval 1/3/7/14/30; `tests/unit/progress-v2.test.mjs` + `lesson-progress.test.mjs`; reviewStage, bucket `known|review`, flags independent |
+| Sessions 5/10/20 + summary + mistake review + daily practice | COMPLETE | `game/session.js` `buildDailyQueue`, `summarizeSession` counts/accuracy/new/strong/mistakeIds; UI `renderSummaryPanel` shows question/correct/incorrect/accuracy/new/improved/needs-review/mistake CTA/next recommendation; browser covers session + summary |
+| Streak (non-punishing) | COMPLETE | `computeStreak` local-date; 1-day grace; unit tests |
+| Flashcards overhaul (due/saved/difficult/theme filters, shuffle, Salah/Sulit/Benar, keyboard) | COMPLETE | `initFlashcards`; toolbar filters; `getDueItems`, `getSavedIds`, `getDifficultIds`; browser test flips with Space |
+| Dictionary v2 (two-way normalized, fuzzy bounded, highlight, filters, detail, save/difficult/correction) | COMPLETE | `initDictionary` normalized search, filters theme/direction/type/review/difficulty (difficulty honestly disabled while null), `highlightNodes` safe DOM with `<mark>`, detail save/difficult/correction prefilled; browser test highlight + save |
+| No-result privacy guard | COMPLETE | analytics adapter rejects `query` field; `tests/unit/analytics.test.mjs` |
 
 ## Homepage / onboarding
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| New-user state (free/no-login/local/transparency) | COMPLETE | hero copy + badges in `index.html` |
-| Optional local onboarding (familiarity/goal/duration) | COMPLETE | `assets/js/onboarding.js` versioned; skippable; browser test |
-| Returning-user Lanjutkan Belajar (due/streak/saved/difficult CTAs) | COMPLETE | `renderHomeDynamic` returning branch |
-| Learning paths without fabricated availability | COMPLETE | path cards link only to existing pages/modes |
+| New-user state (free/no-login/local/transparency) | COMPLETE | hero copy "Gratis, tanpa login. Progress tersimpan lokal"; badges |
+| Optional local onboarding (familiarity/goal/duration) | COMPLETE | `assets/js/onboarding.js` versioned skippable; browser test onboarding skip |
+| Returning-user Lanjutkan Belajar (due/streak/saved/difficult/lastMode CTAs) | COMPLETE | `renderHomeDynamic` returning branch shows `dueCount/streak/lastMode/saved/difficult` + daily/continue/flashcards CTAs; zero-lesson fallback honest; fixture proves lesson-aware path |
+| Learning paths without fabricated availability | COMPLETE | homepage cards for `keluarga`/`sapaan` now truthful: "lesson penuh belum terbit, materi menunggu review penutur"; Tebak Arti copy fixed to pilihan ganda 4 opsi (was wrong matching 4-8 copy) |
 
 ## SEO / trust / PWA / security
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Generated sitemap = indexable pages only | COMPLETE | `tools/generate-sitemap.mjs`; checker diff; noindex honored |
-| Unique titles/descriptions/canonical/OG/Twitter everywhere | COMPLETE | checker enforces; codemod applied |
-| og:image | COMPLETE | generated `assets/icons/og-image.png` referenced on all pages |
-| BreadcrumbList JSON-LD | COMPLETE | injected on all indexable pages |
-| LearningResource schema | COMPLETE | WebSite/EducationalApplication + BreadcrumbList present; per-lesson LearningResource awaits first published lesson |
-| Truthful last-modified | COMPLETE | sitemap regenerated each build; per-page visible dates not yet shown |
-| Editorial Policy + Correction Process pages | COMPLETE | substantive truthful pages; footer links added |
-| Contributors page | INTENTIONALLY_DEFERRED | would be untruthful today; policy page states no verified reviewer yet |
-| Manifest linked + theme-color on every page | COMPLETE | codemod applied; checker-level presence via e2e |
-| PNG icons 192/512 (+maskable) | COMPLETE | `tools/gen-images.mjs` deterministic generator |
-| Offline shell + update notification + offline banner | COMPLETE | sw.js network-first + versioned cache stamped from build hash; banner UI in app.js |
-| Tested CSP (no eval/wildcards, closed third-party while off) | COMPLETE | `_headers` CSP; headers-aware test server; Playwright header assertions |
-| Import size limit + validation | COMPLETE | 512 KB cap + strict schema; `tests/unit/progress-v2.test.mjs` |
-| Safe DOM rendering (no innerHTML for data) | COMPLETE | strip-debug-safe modules; static scan test |
-| Ads component: flag+ID+consent gated, allowlist, single load, CLS-safe | COMPLETE | `assets/js/ads.js`; `ALLOWED_PLACEMENTS`; loader once-guard |
-| No production ads.txt without valid ID | COMPLETE | generator refuses placeholders; only `ads.txt.example` shipped |
-| Analytics provider contract (no success without consumer) | COMPLETE | `track()` returns sent:false on missing provider; consent gate default OFF |
-| Consent/preferences UI | COMPLETE | toggles on `/progres/`; default denied; no dark patterns; certified-CMP boundary marked EXTERNAL |
-| Production build → dist (public-only) + verify against it | COMPLETE | `tools/build-dist.mjs`; SW hash-stamped; smoke + browser tests serve dist |
-| Asset revisioning | COMPLETE | entry HTML references stable filenames; SW cache stamping prevents stale service workers; per-file hashes deferred (module graph rewrite risk vs benefit documented) |
+| Generated sitemap = indexable pages only + lastmod | COMPLETE | `tools/generate-sitemap.mjs` from `site.config.json:lastModified` single source, honors `noindex`; includes 15 URLs (`/` + 14 indexable inc. `/contributors/`); `<lastmod>2026-08-26</lastmod>`; checker parity |
+| Unique titles/descriptions/canonical/OG/Twitter everywhere + exact cardinality | COMPLETE | checker enforces exactly one per page for `title/description/canonical/robots/og:title/og:description/og:type/og:url/og:site_name/og:locale/og:image/twitter:card/twitter:title/twitter:description/twitter:image` in source AND dist (regression test `tests/data/seo-a11y.test.mjs` + `check-site.mjs`) |
+| og:image absolute | COMPLETE | `https://webgame-bataktoba-indo.pages.dev/assets/icons/og-image.png` on all pages; checker + browser "og:image uses absolute" |
+| BreadcrumbList JSON-LD | COMPLETE | injected on all indexable pages via `update-seo-pwa.mjs` |
+| LearningResource schema | COMPLETE | `tools/lib/learning-resource.mjs` truthful `LearningResource` (name/description/inLanguage/educationalLevel/timeRequired/dateModified/numberOfItems); `build-dist.mjs:injectLearningResource` injects only when `publicationStatus=published` + pool>0 (currently 0 → no fake); tests `structured-data.test.mjs` + browser fixture present/absent |
+| Truthful last-modified | COMPLETE | explicit `site.config.json:lastModified` (2026-08-26); `build-dist.mjs` injects `meta last-modified` (ISO date) + visible `<p class="content-meta"><time datetime="2026-08-26">Terakhir diperbarui: 26 Agustus 2026</time></p>` consistently for all substantive pages (/progres excluded); sitemap `<lastmod>` same source; structured data `dateModified` same (when published) |
+| Editorial Policy + Correction Process pages | COMPLETE | substantive truthful pages; footer links everywhere incl. contributors |
+| Contributors & Reviewer page | COMPLETE | `/contributors/` truthful: "Belum ada reviewer terverifikasi; corpus-derived/beta" + what human-reviewed means + how recorded + correction flow; linked from trust surfaces |
+| Manifest linked + theme-color on every page | COMPLETE | `manifest.webmanifest` + `#b7352d`; `update-seo-pwa.mjs` + e2e |
+| PNG icons 192/512 (+maskable) | COMPLETE | `tools/gen-images.mjs` deterministic |
+| Offline shell + update notification + offline banner | COMPLETE | `sw.js` network-first + versioned `btp-<hash>` (hashTree before revision, LF-normalized), old-cache purge, hashed assets immutable, offline fallback; banner UI |
+| Tested CSP (no eval/wildcards, closed third-party while off) | COMPLETE | `_headers` CSP `default-src 'self'`; `connect-src 'self'` closed; Playwright header assertions; zero third-party tour |
+| Import size limit + validation | COMPLETE | 512 KB cap + strict schema `validateProgressPayload`; tests |
+| Safe DOM rendering (no innerHTML for data) | COMPLETE | `dom.js` `el`/`replaceChildren`; scan test `safe-rendering.test.mjs` |
+| Ads component: flag+ID+consent gated, allowlist, single load, CLS-safe | COMPLETE | `assets/js/ads.js`; `ALLOWED_PLACEMENTS`; default OFF |
+| No production ads.txt without valid ID | COMPLETE | generator refuses placeholders; only `ads.txt.example` shipped; not in dist |
+| Analytics provider contract (no success without consumer) | COMPLETE | `track()` returns `sent:false` on missing provider; consent default OFF; allowlist validated |
+| Consent/preferences UI | COMPLETE | toggles on `/progres/`; default denied; no dark patterns |
+| Production build → dist (public-only) + verify against it | COMPLETE | `tools/build-dist.mjs` LF-normalize BEFORE hash → deterministic; copies only allowlisted paths; `dist/` is Cloudflare publish dir (`wrangler.toml:pages_build_output_dir=dist`); smoke + browser serve dist |
+| Asset revisioning | COMPLETE | 15 assets hashed `*.8hex.*` deterministically (LF-normalized content); imports rewritten via `path.relative`; entry HTML references hashed; `Cache-Control: immutable` for hashed, `must-revalidate` for html/data |
+| Noindex ↔ sitemap parity | COMPLETE | single source `topics.json` + `site.config` + sitemap + checker; `tests/data/sitemap-parity.test.mjs` proves `/learn/angka/`, `/keluarga/`, `/sapaan/`, `/makanan/`, `/progres/` noindex + absent, indexable present |
 
 ## Testing / CI / docs
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Unit/data/migration/engine suites (zero-dep) | COMPLETE | 126 tests, `node --test` |
-| Real browser E2E executing JS | COMPLETE | Playwright chromium, 17 specs incl. one-correct invariant, keyboard, sessions, modes, dictionary save, onboarding, progres reset/export |
-| axe accessibility (serious+critical = 0) | COMPLETE | 6 key pages covered |
-| Zero third-party requests while ads/analytics off | COMPLETE | request-host assertion across six-page tour |
-| CI validates production artifact | COMPLETE | `.github/workflows/verify.yml`: install → browsers → check → unit → build → smoke → playwright |
-| Docs truthful (README/PROGRESS_LOG/status classes) | COMPLETE | this pass; stale claims purged |
+| Unit/data/migration/engine suites (zero-dep) | COMPLETE | 136 tests via `node --test tests/**/*.test.mjs` (data + unit); plus new `lesson-progress`, `sitemap-parity`, `metadata-cardinality`, `build-idempotence` |
+| Real browser E2E executing JS | COMPLETE | Playwright chromium 23 specs (core 17 + residual 6) incl. matching open vs memory face-down, matching timer, lesson fixture, dictionary save, onboarding, progres reset/export, production asset revisioning |
+| axe accessibility (serious+critical = 0) | COMPLETE | 6 key pages (`/`, `/games/`, `/flashcards/`, `/dictionary/`, `/progres/`, `/learn/angka/`) in `core.spec.mjs` |
+| Zero third-party requests while ads/analytics off | COMPLETE | request-host assertion across 6-page tour |
+| CI validates production artifact | COMPLETE | `.github/workflows/verify.yml`: `npm ci` → browsers → `npm run verify` (check+build+unit+smoke+browser+axe) → `git diff --exit-code -- dist` drift gate; `npm run verify` locally reproduces CI; second build idempotent |
+| Deterministic build (LF, explicit lastModified, no git history) | COMPLETE | `build-dist.mjs` LF-normalize before hash; explicit `site.config:lastModified`; shallow/full clone identical; tested via `tests/data/build-idempotence.test.mjs` + manual shallow clone |
+| Docs truthful (README/PROGRESS_LOG/status classes) | COMPLETE | `README.md` rewritten from actual arch (progress v3 key, pipeline reviewed, dist artifact, wrangler dist, drift gate, external blockers); `PROGRESS_LOG.md` authoritative current-state section; `CURRENT_STATE_AUDIT.md` historical |
 
 ---
 
-## Summary classification
+## Summary classification (at HEAD, CI green, dist drift zero)
 
 ```text
 REPOSITORY IMPLEMENTATION : COMPLETE
-LINGUISTIC CONTENT        : BLOCKED_EXTERNAL (human review of words/phrases/sentences/drafts)
-ADSENSE APPLICATION       : NOT READY (external account + Publisher ID + CMP decision)
-ULTIMATE BLUEPRINT        : NOT COMPLETE (external blockers remain; by design)
+LINGUISTIC CONTENT        : BLOCKED_EXTERNAL (human review of words/phrases/sentences/drafts, 0 human-reviewed)
+ADSENSE APPLICATION       : NOT READY (external account + Publisher ID + CMP decision if required; thin topic pages noindex, need substantive reviewed content)
+ULTIMATE BLUEPRINT        : NOT COMPLETE (external linguistic/legal/domain/AdSense blockers remain by design)
 ```
 
-PARTIAL rows above are the honest residue of external blockers or
-cost/benefit trade-offs explicitly allowed by the blueprint ("sedikit tetapi
-bermutu"); none are hidden failures.
+PARTIAL rows above are honest residue of external blockers; none are hidden failures. Tool residue `tools/add-eol.py`, `tools/fix-extless.py` removed; EOL handling integrated canonically; drift gate canonical `verify:core` + `verify:drift`; homepage copy truthful; prose audited for unsupported kinship/adat/greeting claims (softened to generic guidance, no invented translations).
 
 ---
 
-## Residual pass update (final)
+## Evidence counts (final run)
 
-- Deployment: wrangler targets dist/ (regression-tested in tests/data/deploy-config.test.mjs + artifact.test.mjs).
-- Matching Pairs restored as distinct open-pair mode; Memory keeps face-down cards.
-- Dictionary: type/review/difficulty(honest-disabled) filters, safe DOM highlighting, Practice action wired to games seeding.
-- Analytics: full blueprint event wiring audited; no raw query/PII; provider contract enforced.
-- Assets: deterministic content-hash revisioning + immutable caching; module graph rewritten via path.relative.
-- Verification: single canonical 
-pm run verify now includes browser E2E + axe; CI strict 
-pm ci + one command.
+- `npm test` 136 pass
+- `npx playwright test` 23 pass (incl. axe)
+- published word pairs 367, genuine phrases 0, sentences 80, published lessons 0, draft lessons 6, human-reviewed 0

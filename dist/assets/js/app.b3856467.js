@@ -16,7 +16,7 @@ import {
   saveProgress,
   setDifficult,
   setSaved,
-} from "./progress.b6453878.js";
+} from "./progress.fa26cbf8.js";
 import { el, replaceChildren } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.2eedd2fd.js";
@@ -26,7 +26,7 @@ import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-e
 import {
   recordLessonCompletion,
   recordLessonStart,
-} from "./progress.b6453878.js";
+} from "./progress.fa26cbf8.js";
 import { getOnboarding, saveOnboarding, shouldOfferOnboarding } from "./onboarding.2babc419.js";
 import {
   buildMemoryBoard,
@@ -1164,7 +1164,7 @@ async function initGames() {
       el("div", { className: "action-row" }, sizeButtons),
       el("div", { className: "matching-board" }, cardButtons),
       el("p", { className: "feedback", text: message, attrs: { "aria-live": "polite" } }),
-      el("div", { className: "action-row" }, newRound),
+      el("div", { className: "action-row" }, newRound, timerToggle),
     );
   }
 

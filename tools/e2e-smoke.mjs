@@ -114,6 +114,11 @@ async function main() {
     }
   } finally {
     server.kill();
+    try {
+      await once(server, "exit");
+    } catch {}
+    // Give stdio pipes time to close on Windows to avoid UV_HANDLE_CLOSING assert
+    await new Promise((r) => setTimeout(r, 200));
   }
 
   if (failures.length) {
@@ -122,10 +127,10 @@ async function main() {
   } else {
     console.log("e2e smoke passed: pages, PWA assets, and published data OK.");
   }
-  process.exit(exitCode);
+  process.exitCode = exitCode;
 }
 
 main().catch((error) => {
   console.error(`e2e smoke crashed: ${error.message}`);
-  process.exit(1);
+  process.exitCode = 1;
 });

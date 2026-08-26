@@ -13,7 +13,9 @@
     "e2e": "node tools/e2e-smoke.mjs",
     "serve:e2e": "node tools/e2e-server.mjs 4179",
     "test:browser": "playwright test",
-    "verify": "npm run check && npm run build && npm run test && npm run e2e && npm run test:browser",
+    "verify:core": "npm run check && npm run build && npm run test && npm run e2e && npm run test:browser",
+    "verify:drift": "git diff --exit-code -- dist",
+    "verify": "npm run verify:core && npm run verify:drift",
     "start": "python -m http.server 4173"
   },
   "devDependencies": {
