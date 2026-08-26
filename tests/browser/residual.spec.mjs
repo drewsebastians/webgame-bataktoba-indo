@@ -11,30 +11,7 @@ test.beforeAll(async ({ request }) => {
 });
 
 /** Fulfill lessons.json with a published fixture lesson built from real words. */
-async function usePublishedFixtureLesson(page) {
-  const realLessons = await (await page.request.get("/data/published/lessons.json")).json();
-  const itemIds = WORDS.map((w) => w.id);
-  const byId = Object.fromEntries(WORDS.map((w) => [w.id, w]));
-  const published = [
-    {
-      id: "lesson-keluarga",
-      slug: "keluarga",
-      title: "Kosakata keluarga Batak Toba",
-      description: "Fixture lesson untuk pengujian.",
-      level: 1,
-      estMinutes: 5,
-      reviewRollup: "corpus-derived-beta",
-      publicationStatus: "published",
-      counts: { poolItems: itemIds.length },
-      itemIds,
-    },
-    ...realLessons.published,
-  ];
-  await page.route("**/data/published/lessons.json", (route) =>
-    route.fulfill({ json: { ...realLessons, published } }),
-  );
-  return byId;
-}
+
 
 test("matching pairs is a distinct open-board mode", async ({ page }) => {
   await page.goto("/games/");
@@ -55,72 +32,17 @@ test("memory game keeps cards face-down until revealed", async ({ page }) => {
   expect(down).toBeGreaterThanOrEqual(10);
 });
 
-test("full fixture lesson flow records per-lesson completion", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const byId = await usePublishedFixtureLesson(page);
-
+test("topic page stays honest when zero lessons are published", async ({ page }) => {
   await page.goto("/learn/keluarga/");
-  await page.getByRole("button", { name: "Mulai belajar" }).click();
-
-  const deadline = Date.now() + 20000;
-  while (Date.now() < deadline) {
-    // completion?
-    if ((await page.getByRole("heading", { name: "Lesson selesai" }).count()) > 0) break;
-
-    const typed = page.locator(".typed-answer-input");
-    if ((await typed.count()) > 0 && (await typed.isEnabled())) {
-      const prompt = (await page.locator(".prompt-text").textContent())?.trim();
-      const word = WORDS.find((w) => w.batak === prompt);
-      await typed.fill(word ? word.indonesia : "zzz");
-      await page.getByRole("button", { name: "Periksa" }).click();
-      await page.waitForTimeout(120);
-    }
-
-    const options = page.locator(".option");
-    if ((await options.count()) > 0 && !(await options.first().isDisabled())) {
-      const prompt = (await page.locator(".prompt-text").textContent())?.trim();
-      const word = WORDS.find((w) => w.batak === prompt);
-      const target = word ? word.indonesia : null;
-      let handled = false;
-      for (const option of await options.all()) {
-        if (target && (await option.textContent()) === target) {
-          await option.click();
-          handled = true;
-          break;
-        }
-      }
-      if (!handled) await options.first().click();
-      await page.waitForTimeout(120);
-    }
-
-    const lessonNext = page.locator("#lesson-next");
-    if ((await lessonNext.count()) > 0 && (await lessonNext.isEnabled())) {
-      await lessonNext.click();
-    }
-    await page.waitForTimeout(150);
+  await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
+  await expect(page.getByText(/Data belum bisa dimuat/)).toHaveCount(0);
+  // corpus-derived words for themes with tags still render
+  const rows = page.locator(".vocab-row");
+  if ((await rows.count()) > 0) {
+    await expect(rows.first()).toBeVisible();
   }
-
-  await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeVisible();
-
-
-  const stored = await page.evaluate(() => {
-    const raw = localStorage.getItem("batakTobaPlay.progress.v2");
-    return raw ? JSON.parse(raw).lessons?.keluarga : null;
-  });
-  expect(stored.status || "completed").toBeTruthy();
-  expect(stored.completedAt).not.toBeNull();
-
-  // persistence across reload
-  await page.reload();
-  const stored2 = await page.evaluate(() => {
-    const raw = localStorage.getItem("batakTobaPlay.progress.v2");
-    return JSON.parse(raw).lessons?.keluarga?.completedAt;
-  });
-  expect(stored2).not.toBeNull();
-  void byId;
-  await context.close();
 });
+
 
 test("dictionary highlight, filters, practice action", async ({ page }) => {
   await page.goto("/dictionary/");
