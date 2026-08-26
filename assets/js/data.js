@@ -38,3 +38,7 @@ export async function loadSentences() {
 export async function loadLessons() {
   return loadDataset("lessons.json");
 }
+
+export async function loadTopics() {
+  return loadDataset("topics.json");
+}

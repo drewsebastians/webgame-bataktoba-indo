@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "./config.88c50a36.js";
+import { SITE_CONFIG } from "./config.8fa81f43.js";
 
 const DATA_BASE = new URL(SITE_CONFIG.dataDir, import.meta.url);
 
@@ -37,4 +37,8 @@ export async function loadSentences() {
 
 export async function loadLessons() {
   return loadDataset("lessons.json");
+}
+
+export async function loadTopics() {
+  return loadDataset("topics.json");
 }

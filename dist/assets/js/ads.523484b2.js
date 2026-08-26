@@ -9,7 +9,7 @@
  * No script is loaded, no network request is made, no auto-refresh exists.
  */
 
-import { SITE_CONFIG } from "./config.88c50a36.js";
+import { SITE_CONFIG } from "./config.8fa81f43.js";
 
 const ADSENSE_PUBLISHER_RE = /^ca-pub-\d{16}$/;
 const CONSENT_KEY = "batakTobaPlay.consent.ads";

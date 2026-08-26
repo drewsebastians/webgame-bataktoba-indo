@@ -319,6 +319,26 @@ try {
     if (ogImage && !/^https:\/\//.test(ogImage)) {
       failures.push(`og:image must be an absolute URL in ${page}`);
     }
+    for (const marker of [
+      'rel="canonical"',
+      'name="description"',
+      'property="og:title"',
+      'property="og:description"',
+      'property="og:type"',
+      'property="og:url"',
+      'property="og:image"',
+      'name="twitter:card"',
+      'name="twitter:title"',
+      'name="twitter:description"',
+      'name="twitter:image"',
+    ]) {
+      const occurrences = text.split(marker).length - 1;
+      if (occurrences !== 1) {
+        failures.push(
+          `${page}: expected exactly one ${marker}, found ${occurrences}`,
+        );
+      }
+    }
     if (!/<html[^>]*\slang=/.test(text)) {
       failures.push(`Missing html lang attribute in ${page}`);
     }

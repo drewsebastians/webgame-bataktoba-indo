@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-25T00:39:03+00:00",
+  "generatedAt": "2026-08-25T12:24:55+00:00",
   "reviewStatusNote": "All entries are needs-review editorial inputs; never publish or render publicly.",
   "supplements": [
     {
@@ -177,6 +177,133 @@
       "indonesia": "sayur rebus khas Batak",
       "reviewStatus": "needs-review",
       "sourceType": "editorial-draft"
+    }
+  ],
+  "draftLessons": [
+    {
+      "id": "lesson-angka",
+      "slug": "angka",
+      "title": "Angka Batak Toba",
+      "description": "Angka dasar dari satu sampai seribu dalam Bahasa Batak Toba, dilengkapi latihan pengenalan.",
+      "theme": "angka",
+      "level": 1,
+      "estMinutes": 3,
+      "itemIds": [
+        "word-cda58024a5",
+        "word-141862f84e",
+        "word-3991eb4b1f",
+        "word-0880cf2284",
+        "word-92add2f91e"
+      ],
+      "counts": {
+        "poolItems": 5,
+        "supplementItems": 8,
+        "supplementSkippedAlreadyInPool": 4
+      },
+      "reviewRollup": "corpus-derived-beta",
+      "publicationStatus": "draft",
+      "generatedAt": "2026-08-25T12:24:55+00:00"
+    },
+    {
+      "id": "lesson-keluarga",
+      "slug": "keluarga",
+      "title": "Kosakata Keluarga Batak Toba",
+      "description": "Istilah keluarga inti: ayah, ibu, anak, kakak, adik, kakek, nenek, dan istilah dalihan na tolu.",
+      "theme": "keluarga",
+      "level": 1,
+      "estMinutes": 3,
+      "itemIds": [],
+      "counts": {
+        "poolItems": 0,
+        "supplementItems": 11,
+        "supplementSkippedAlreadyInPool": 0
+      },
+      "reviewRollup": "no-pool-items",
+      "publicationStatus": "draft",
+      "generatedAt": "2026-08-25T12:24:55+00:00"
+    },
+    {
+      "id": "lesson-sapaan",
+      "slug": "sapaan",
+      "title": "Sapaan Dasar Batak Toba",
+      "description": "Salam dan ungkapan sopan dasar untuk memulai percakapan ringan.",
+      "theme": "sapaan",
+      "level": 1,
+      "estMinutes": 3,
+      "itemIds": [],
+      "counts": {
+        "poolItems": 0,
+        "supplementItems": 2,
+        "supplementSkippedAlreadyInPool": 0
+      },
+      "reviewRollup": "no-pool-items",
+      "publicationStatus": "draft",
+      "generatedAt": "2026-08-25T12:24:55+00:00"
+    },
+    {
+      "id": "lesson-makanan",
+      "slug": "makanan",
+      "title": "Makanan dan Minuman",
+      "description": "Kosakata makanan, minuman, dan bahan dapur sehari-hari.",
+      "theme": "makanan",
+      "level": 1,
+      "estMinutes": 3,
+      "itemIds": [
+        "word-be83d23d14",
+        "word-6a7710b417"
+      ],
+      "counts": {
+        "poolItems": 2,
+        "supplementItems": 4,
+        "supplementSkippedAlreadyInPool": 0
+      },
+      "reviewRollup": "corpus-derived-beta",
+      "publicationStatus": "draft",
+      "generatedAt": "2026-08-25T12:24:55+00:00"
+    },
+    {
+      "id": "lesson-waktu",
+      "slug": "waktu",
+      "title": "Waktu dan Hari",
+      "description": "Kata-kata untuk waktu, hari, dan penanda jadwal sehari-hari.",
+      "theme": "waktu",
+      "level": 2,
+      "estMinutes": 3,
+      "itemIds": [
+        "word-859fe57a60",
+        "word-5ce31c337b",
+        "word-96cd17d1f0",
+        "word-29ffff825b"
+      ],
+      "counts": {
+        "poolItems": 4,
+        "supplementItems": 0,
+        "supplementSkippedAlreadyInPool": 0
+      },
+      "reviewRollup": "corpus-derived-beta",
+      "publicationStatus": "draft",
+      "generatedAt": "2026-08-25T12:24:55+00:00"
+    },
+    {
+      "id": "lesson-alam",
+      "slug": "alam",
+      "title": "Alam Sekitar",
+      "description": "Kosakata alam: langit, tanah, air, gunung, dan tanda-tanda cuaca.",
+      "theme": "alam",
+      "level": 2,
+      "estMinutes": 3,
+      "itemIds": [
+        "word-dd4c2312e5",
+        "word-c92b3480a5"
+      ],
+      "counts": {
+        "poolItems": 2,
+        "supplementItems": 0,
+        "supplementSkippedAlreadyInPool": 0
+      },
+      "reviewRollup": "corpus-derived-beta",
+      "publicationStatus": "draft",
+      "generatedAt": "2026-08-25T12:24:55+00:00"
     }
   ]
 }

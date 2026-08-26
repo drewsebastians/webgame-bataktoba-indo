@@ -1,5 +1,5 @@
-import { loadLearningItems, loadLessons, loadSentences, loadWordPairs } from "./data.js";
-import { SITE_CONFIG } from "./config.js";
+﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.js";
+import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.js";
 import {
   exportProgress,
   getBucketIds,
@@ -91,7 +91,7 @@ async function initHome() {
     if (statNode) {
       const stats = [
         [learning.metadata.counts.wordPairs, "pasangan kata"],
-        [5, "mode latihan"],
+        [PRACTICE_MODES.length, "mode latihan"],
         [0, "login dibutuhkan"],
       ];
       replaceChildren(
@@ -142,7 +142,6 @@ function renderHomeDynamic(container, wordPool) {
     function renderStep() {
       if (draft.durationMinutes) {
         saveOnboarding({ ...draft, skipped: false });
-        track("lesson_start", { kind: "onboarding" });
         renderHomeDynamic(container, wordPool);
         return;
       }
@@ -250,10 +249,10 @@ async function initDictionary() {
   const filtersRoot = $("#dictionary-filters");
   if (!input || !results) return;
   const { items } = await loadLearningItems();
-  const lessons = await loadLessons();
+  const topics = await loadTopics();
   const searchable = items.filter((item) => item.type !== "sentence");
 
-  const themes = [...new Set([...lessons.published, ...lessons.drafts].map((l) => l.slug))];
+  const themes = [...new Set(topics.topics.map((t) => t.slug))];
   const filters = { direction: "both", theme: "all", type: "all", review: "all", difficulty: "all" };
   const difficultyAvailable = searchable.some(
     (item) => item.difficulty !== null && item.difficulty !== undefined,
@@ -1357,8 +1356,8 @@ async function initFlashcards() {
   const root = $("#flashcard-root");
   if (!root) return;
   const { items } = await loadWordPairs();
-  const lessons = await loadLessons();
-  const themes = [...new Set([...lessons.published, ...lessons.drafts].map((l) => l.slug))];
+  const topics = await loadTopics();
+  const themes = [...new Set(topics.topics.map((t) => t.slug))];
 
   let filter = "all";
   let theme = "all";
@@ -1958,22 +1957,26 @@ async function initLearn() {
   const theme = document.body.dataset.lesson;
   if (!root || !theme) return;
 
-  const [lessons, learning, words] = await Promise.all([loadLessons(), loadLearningItems(), loadWordPairs()]);
-  const lesson = [...lessons.published, ...lessons.drafts].find((entry) => entry.slug === theme);
-  if (!lesson) {
+  const [topics, learning, words] = await Promise.all([loadTopics(), loadLearningItems(), loadWordPairs()]);
+  const lessonsRegistry = await loadLessons();
+  const lesson = lessonsRegistry.published.find((entry) => entry.slug === theme);
+  const topicMeta = topics.topics.find((entry) => entry.slug === theme);
+  if (lesson && lesson.publicationStatus === "published") {
+    track("lesson_start", { slug: lesson.slug });
+    recordLessonStart(lesson.slug);
+    initPublishedLesson(root, lesson, learning.items, words.items, { published: topics.topics.filter((t) => t.publicationStatus === 'published').map((t) => ({ slug: t.slug })) });
+    return;
+  }
+  if (!topicMeta) {
     replaceChildren(root, el("p", { className: "feedback", text: "Materi untuk tema ini belum tersedia." }));
     return;
   }
 
-  if (lesson.publicationStatus === "published") {
-    track("lesson_start", { slug: lesson.slug });
-    recordLessonStart(lesson.slug);
-    initPublishedLesson(root, lesson, learning.items, words.items, lessons);
-    return;
-  }
-
   const itemById = new Map(learning.items.map((item) => [item.id, item]));
-  const poolItems = lesson.itemIds.map((id) => itemById.get(id)).filter(Boolean);
+  const poolItemIds = lesson
+    ? lesson.itemIds
+    : (topicMeta?.itemIds ?? []);
+  const poolItems = poolItemIds.map((id) => itemById.get(id)).filter(Boolean);
   const wordPool = words.items;
 
   function vocabRow(batakText, indonesiaText, statusPill) {
@@ -1992,9 +1995,9 @@ async function initLearn() {
     el("p", {
       className: "feedback",
       text:
-        lesson.publicationStatus === "published"
-          ? `Lesson latihan aktif: ${lesson.counts.poolItems} item corpus.`
-          : `Status: lesson latihan penuh belum terbit (butuh minimal ${lessons.minPoolItemsForPublication} item corpus per tema; tema ini punya ${lesson.counts.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
+        topicMeta.publicationStatus === "published"
+          ? `Lesson latihan aktif: ${topicMeta.poolItems} item corpus.`
+          : `Status: lesson latihan penuh belum terbit (butuh minimal ${MIN_LESSON_POOL_ITEMS} item corpus per tema; tema ini punya ${topicMeta.poolItems}). Latihan mandiri di bawah tetap tersedia.`,
     }),
   );
 
@@ -2015,15 +2018,13 @@ async function initLearn() {
 
   // Editorial drafts are NEVER rendered publicly: they stay internal until a
   // human reviewer approves them (see data/reviewed/README.md).
-  if (lesson.counts.supplementItems > 0 || lesson.publicationStatus !== "published") {
-    children.push(
-      el("p", {
-        className: "feedback",
-        attrs: { role: "note" },
-        text: `Materi tambahan untuk tema ini sedang menunggu review penutur (${lesson.counts.supplementItems} item). Kata-kata tersebut belum ditampilkan sebagai materi belajar.`,
-      }),
-    );
-  }
+  children.push(
+    el("p", {
+      className: "feedback",
+      attrs: { role: "note" },
+      text: "Materi tambahan menunggu review penutur dan tidak ditampilkan sebagai materi belajar.",
+    }),
+  );
 
   const practiceRoot = el("section", { className: "mini-practice", id: "mini-practice" });
   children.push(el("h2", { text: "Mini latihan" }), practiceRoot);

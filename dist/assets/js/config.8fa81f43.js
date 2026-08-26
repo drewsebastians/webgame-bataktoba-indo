@@ -18,6 +18,10 @@ export const SITE_CONFIG = Object.freeze({
   }),
 });
 
+export const MIN_LESSON_POOL_ITEMS = 6;
+
+export const PRACTICE_MODES = Object.freeze(["meaning", "reverse", "typed", "truefalse", "matching", "memory", "daily", "sentence"]);
+
 export function absoluteUrl(path = "") {
   return new URL(path, SITE_CONFIG.baseUrl).toString();
 }
