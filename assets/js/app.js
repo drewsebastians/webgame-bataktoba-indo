@@ -91,6 +91,7 @@ async function initHome() {
     if (statNode) {
       const stats = [
         [learning.metadata.counts.wordPairs, "pasangan kata"],
+        [learning.metadata.counts.publishedLessons ?? 0, "lesson terbit"],
         [PRACTICE_MODES.length, "mode latihan"],
         [0, "login dibutuhkan"],
       ];
@@ -606,6 +607,14 @@ async function initGames() {
       inReviewMode: false,
       typedValue: "",
     };
+    if (state.matchingTimerId) {
+      clearInterval(state.matchingTimerId);
+      state.matchingTimerId = null;
+    }
+    if (state.matchingTimerId) {
+      clearInterval(state.matchingTimerId);
+      state.matchingTimerId = null;
+    }
     if (config.kind === "memory") {
       renderMemory();
     } else if (config.kind === "matching") {
@@ -1129,6 +1138,16 @@ async function initGames() {
       text: "Papan Baru",
       attrs: { type: "button" },
     });
+    const timerToggle = el("button", {
+      className: "button secondary",
+      text: state.matchingTimerOn ? "Timer: aktif" : "Timer: mati",
+      attrs: { type: "button", "aria-pressed": String(Boolean(state.matchingTimerOn)) },
+    });
+    timerToggle.addEventListener("click", () => {
+      state.matchingTimerOn = !state.matchingTimerOn;
+      paintMatchingPairs();
+    });
+
     newRound.addEventListener("click", renderMatchingPairs);
 
     replaceChildren(
@@ -1138,6 +1157,9 @@ async function initGames() {
         { className: "scorebar" },
         pill("Matching Pairs"),
         pill(`${state.matched.size}/${state.matchingTotalPairs} cocok`),
+        state.matchingTimerOn
+          ? pill(`Waktu ${Math.round((Date.now() - state.startedAt) / 1000)} dtk`)
+          : null,
       ),
       el("div", { className: "action-row" }, sizeButtons),
       el("div", { className: "matching-board" }, cardButtons),
@@ -2145,7 +2167,13 @@ function showLastModified() {
   const meta = document.querySelector('meta[name="last-modified"]');
   const footer = document.querySelector(".footer-inner");
   if (!meta || !footer) return;
-  footer.prepend(el("span", { text: `Diperbarui: ${meta.content.slice(0, 10)}` }));
+    const date = new Date(meta.content);
+  if (Number.isNaN(date.getTime())) return;
+  const long = date.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+  footer.prepend(
+    el("span", {}, "Terakhir diperbarui: ",
+      el("time", { text: long, attrs: { datetime: meta.content } })),
+  );
 }
 
 function registerServiceWorker() {
