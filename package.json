@@ -27,6 +27,8 @@
     "review:import": "node tools/review-import.mjs",
     "content:publish": "node tools/content-publish.mjs",
     "editorial:status": "node tools/editorial-status.mjs",
+    "source:validate": "node tools/source-validate.mjs",
+    "source:preview": "node tools/source-preview.mjs",
     "start": "python -m http.server 4173"
   },
   "devDependencies": {

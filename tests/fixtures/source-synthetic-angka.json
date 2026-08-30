@@ -1,0 +1,30 @@
+{
+  "sourceId": "synthetic-test-angka",
+  "licenseStatus": "APPROVED_FOR_INGESTION",
+  "records": [
+    {
+      "externalRecordId": "syn-001",
+      "batak": "zalpha",
+      "indonesian": "satu-sintetik",
+      "sourceReference": "synthetic fixture for test, not production",
+      "sourceType": "synthetic-test",
+      "notes": null
+    },
+    {
+      "externalRecordId": "syn-002",
+      "batak": "zbeta",
+      "indonesian": "dua-sintetik",
+      "sourceReference": "synthetic fixture",
+      "sourceType": "synthetic-test",
+      "notes": null
+    },
+    {
+      "externalRecordId": "syn-003",
+      "batak": "zgamma",
+      "indonesian": "tiga-sintetik",
+      "sourceReference": "synthetic fixture",
+      "sourceType": "synthetic-test",
+      "notes": null
+    }
+  ]
+}

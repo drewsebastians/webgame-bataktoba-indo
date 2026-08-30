@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "sources": [
+    {
+      "sourceId": "bible-batak-indo-v1",
+      "name": "Bible Batak Toba — Indonesian Parallel (31k verses)",
+      "type": "parallel-corpus",
+      "version": "v1",
+      "checksum": "sha256:16211968 bytes (bible_batak_indo_v1.db) — not computed",
+      "licenseStatus": "REQUIRES_LEGAL_REVIEW",
+      "redistributionStatus": "REQUIRES_LEGAL_REVIEW",
+      "commercialUseStatus": "REQUIRES_LEGAL_REVIEW",
+      "attribution": "Bible translation publisher unknown — see CORPUS_LICENSING_STATUS",
+      "ingestionStatus": "INGESTED_VIA_MASTER_DB (master not present locally)",
+      "notes": "Current 367 words derived from this corpus via master_alignment_bible_only.db (1.6GB, missing locally)"
+    },
+    {
+      "sourceId": "batak-indo-alignment-engine-phase2",
+      "name": "Batak-Indo Alignment Engine Phase 2 (co-occurrence)",
+      "type": "alignment-pipeline",
+      "version": "phase2",
+      "checksum": null,
+      "licenseStatus": "APPROVED_FOR_INGESTION",
+      "redistributionStatus": "APPROVED_FOR_INGESTION",
+      "commercialUseStatus": "APPROVED_FOR_INGESTION",
+      "attribution": "drewsebastians/batak-indo-alignment-engine",
+      "ingestionStatus": "INGESTED",
+      "notes": "Pipeline code, not corpus text"
+    }
+  ]
+}
