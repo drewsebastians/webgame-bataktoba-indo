@@ -23,6 +23,8 @@
     "review:topic-gaps": "node tools/review-topic-gaps.mjs",
     "review:validate": "node tools/review-validate.mjs",
     "review:preview": "node tools/review-preview.mjs",
+    "review:round1": "node tools/review-round1.mjs",
+    "review:import": "node tools/review-import.mjs",
     "content:publish": "node tools/content-publish.mjs",
     "editorial:status": "node tools/editorial-status.mjs",
     "start": "python -m http.server 4173"
