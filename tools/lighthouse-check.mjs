@@ -8,8 +8,9 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const root = join(new URL(".", import.meta.url).pathname, "..");
+const root = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 const checklist = join(root, "..", "docs", "RELEASE_CHECKLIST.md");
 const hasChecklist = existsSync(join(process.cwd(), "docs/RELEASE_CHECKLIST.md")) || existsSync(checklist);
 

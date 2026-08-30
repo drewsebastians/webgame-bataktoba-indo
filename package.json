@@ -18,6 +18,13 @@
     "verify": "npm run verify:core && npm run verify:drift",
     "lighthouse:check": "node tools/lighthouse-check.mjs",
     "verify:release": "npm run verify && npm run lighthouse:check",
+    "review:queue": "node tools/review-queue.mjs",
+    "review:lesson-gaps": "node tools/review-lesson-gaps.mjs",
+    "review:topic-gaps": "node tools/review-topic-gaps.mjs",
+    "review:validate": "node tools/review-validate.mjs",
+    "review:preview": "node tools/review-preview.mjs",
+    "content:publish": "node tools/content-publish.mjs",
+    "editorial:status": "node tools/editorial-status.mjs",
     "start": "python -m http.server 4173"
   },
   "devDependencies": {

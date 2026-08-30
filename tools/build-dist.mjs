@@ -221,7 +221,7 @@ function urlPathForDistFile(distFile) {
   const rel = distFile.slice(dist.length + 1).replace(/\\/g, "/");
   if (rel === "index.html") return "/";
   if (rel === "offline.html") return "/offline.html";
-  if (rel.endsWith("/index.html")) return `/${rel.slice(0, -10)}/`;
+  if (rel.endsWith("/index.html")) return `/${rel.slice(0, -11)}/`;
   if (rel.endsWith(".html")) return `/${rel.slice(0, -5)}/`;
   return `/${rel}`;
 }
