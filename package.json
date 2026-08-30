@@ -16,6 +16,8 @@
     "verify:core": "npm run check && npm run build && npm run test && npm run e2e && npm run test:browser",
     "verify:drift": "git diff --exit-code -- dist",
     "verify": "npm run verify:core && npm run verify:drift",
+    "lighthouse:check": "node tools/lighthouse-check.mjs",
+    "verify:release": "npm run verify && npm run lighthouse:check",
     "start": "python -m http.server 4173"
   },
   "devDependencies": {

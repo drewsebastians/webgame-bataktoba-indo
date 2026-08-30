@@ -335,4 +335,37 @@ npm run build; git diff --exit-code -- dist   # idempotence second build
 - Production hostname Cloudflare verification
 
 Semua repository-solvable gap ditutup; sisa hanya external.
+---
+
+## ADVERSARIAL TRACEABILITY & GAP CLOSURE PASS — 30 Agustus 2026
+
+**Focus:** Section-by-section adversarial audit §§1-28 vs production truth, fix repository-solvable gaps that survived earlier green CI.
+
+### Topics & Prose Contradiction Closed (P0)
+- `data/published/topics.json` `keluarga` 0 pool description `Istilah keluarga inti: ayah… dalihan na tolu` → `Panduan tema keluarga; materi terverifikasi belum tersedia untuk lesson penuh.`
+- `sapaan` 0 pool `Salam dan ungkapan sopan…` → `Panduan tema sapaan; materi masih menunggu sumber/review yang memadai.`
+- Mirrored in `content/lessons.json` (source of truth for regeneration).
+- `learn/keluarga/index.html` prose: removed `Bahasa Batak Toba punya sistem sapaan dan relasi yang kaya` and softened home-like claims to bounded `Materi terverifikasi masih terbatas. Gunakan dictionary…` + generic flashcards guidance.
+- `learn/sapaan/index.html`: replaced 5 paragraphs claiming `akrab/hormat/tergantung relasi`, `orang lebih tua/acara adat`, `sapaan cocok membuka obrolan / formal-akrab` with bounded `Materi terverifikasi masih terbatas. Gunakan dictionary… tanyakan penutur terpercaya` + note-taking guidance.
+- Added deterministic guard `tests/data/topic-registry-truth.test.mjs` (3 tests): pool 0 ⇒ must contain bounded phrase, must not contain risky lexemes, lessons.json mirrored.
+
+### Lighthouse & Release Ops Closed (P1)
+- Created `tools/lighthouse-check.mjs` deterministic (dist/_headers/checklist existence, fallback when CLI absent) and `docs/RELEASE_CHECKLIST.md` manual checklist (Lighthouse Performance ≥90, 320px/200% etc. per §24.2).
+- `package.json: lighthouse:check` + `verify:release` (`verify && lighthouse:check`).
+- `BLUEPRINT_COMPLIANCE_MATRIX.md` updated: unit 153→156, Playwright 32, Lighthouse row COMPLETE, prose audit note updated, edition traceability doc referenced.
+- `ULTIMATE_BLUEPRINT_TRACEABILITY_2026-08-30.md` created fresh adversarial §1-28 table (REALIZED/IMPLEMENTED_GATED/BLOCKED_CONTENT etc.), distinguishes capability vs production.
+
+### Verification
+- `npm run build` → `b135d8881b50e` → `git diff --stat -- dist` shows only topics/prose/sw hash (deterministic).
+- `npm run verify:core` → check PASS, build PASS, test 156 PASS, e2e PASS, browser 32 PASS (axe 0, third-party 0).
+- `npm run lighthouse:check` PASS.
+- `npm run verify` + `git diff --exit-code -- dist` clean; second build clean (see previous run).
+
+### Classification Impact
+- Adversarial audit reclassified many former `COMPLETE` as `IMPLEMENTED_GATED`/`BLOCKED_CONTENT` (0 lessons, SEO intent, lesson loop, AdSense, analytics live KPIs) — honest per §5 distinction.
+- Repository code capability now COMPLETE (Lighthouse added); production learning experience remains `BLOCKED_CONTENT` (0 published lessons); SEO final `BLOCKED_CONTENT`; technical artifact READY, production hostname BLOCKED_EXTERNAL per §25 strict wording.
+
+### Remaining Content/External
+- Still 0 published lessons (need 8 pool + human review), thin topics noindex, domain/DNS, AdSense publisher/ads.txt/CMP, corpus licensing, audio — not faked.
+
 

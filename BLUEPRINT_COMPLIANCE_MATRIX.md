@@ -96,13 +96,14 @@ Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwrig
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Unit/data/migration/engine suites (zero-dep) | COMPLETE | 136 tests via `node --test tests/**/*.test.mjs` (data + unit); plus new `lesson-progress`, `sitemap-parity`, `metadata-cardinality`, `build-idempotence` |
-| Real browser E2E executing JS | COMPLETE | Playwright chromium 23 specs (core 17 + residual 6) incl. matching open vs memory face-down, matching timer, lesson fixture, dictionary save, onboarding, progres reset/export, production asset revisioning |
+| Unit/data/migration/engine suites (zero-dep) | COMPLETE | 156 tests via `node --test tests/**/*.test.mjs` (data + unit: sitemap-parity, metadata-cardinality, build-idempotence, lesson-progress, topic-truth) |
+| Real browser E2E executing JS | COMPLETE | Playwright chromium 32 specs (core 17 + residual 6 + matching-timer 4 + lesson-fixture 5) incl. matching open vs memory face-down, timer optional, lesson fixture intro→summary, dictionary save, onboarding, progres reset/export, production asset revisioning |
 | axe accessibility (serious+critical = 0) | COMPLETE | 6 key pages (`/`, `/games/`, `/flashcards/`, `/dictionary/`, `/progres/`, `/learn/angka/`) in `core.spec.mjs` |
 | Zero third-party requests while ads/analytics off | COMPLETE | request-host assertion across 6-page tour |
 | CI validates production artifact | COMPLETE | `.github/workflows/verify.yml`: `npm ci` → browsers → `npm run verify` (check+build+unit+smoke+browser+axe) → `git diff --exit-code -- dist` drift gate; `npm run verify` locally reproduces CI; second build idempotent |
 | Deterministic build (LF, explicit lastModified, no git history) | COMPLETE | `build-dist.mjs` LF-normalize before hash; explicit `site.config:lastModified`; shallow/full clone identical; tested via `tests/data/build-idempotence.test.mjs` + manual shallow clone |
-| Docs truthful (README/PROGRESS_LOG/status classes) | COMPLETE | `README.md` rewritten from actual arch (progress v3 key, pipeline reviewed, dist artifact, wrangler dist, drift gate, external blockers); `PROGRESS_LOG.md` authoritative current-state section; `CURRENT_STATE_AUDIT.md` historical |
+| Lighthouse / release checklist (Blueprint §24.2) | COMPLETE | `tools/lighthouse-check.mjs` deterministic (dist/_headers/checklist) + `docs/RELEASE_CHECKLIST.md` manual Lighthouse ≥90/95; `package.json:verify:release` |
+| Docs truthful (README/PROGRESS_LOG/status classes) | COMPLETE | `README.md` rewritten from actual arch (progress v3 key, pipeline reviewed, dist artifact, wrangler dist, drift gate, external blockers); `PROGRESS_LOG.md` authoritative current-state section; `CURRENT_STATE_AUDIT.md` historical; `ULTIMATE_BLUEPRINT_TRACEABILITY_2026-08-30.md` §1-28 |
 
 ---
 
@@ -115,12 +116,13 @@ ADSENSE APPLICATION       : NOT READY (external account + Publisher ID + CMP dec
 ULTIMATE BLUEPRINT        : NOT COMPLETE (external linguistic/legal/domain/AdSense blockers remain by design)
 ```
 
-PARTIAL rows above are honest residue of external blockers; none are hidden failures. Tool residue `tools/add-eol.py`, `tools/fix-extless.py` removed; EOL handling integrated canonically; drift gate canonical `verify:core` + `verify:drift`; homepage copy truthful; prose audited for unsupported kinship/adat/greeting claims (softened to generic guidance, no invented translations).
+PARTIAL/BLOCKED rows are honest residue of external/content blockers; none hidden. Tool residue removed; EOL canonical; drift gate canonical; homepage truthful; prose audited (keluarga/sapaan kinship/adat/greeting claims softened, topics.json pool-0 descriptions bounded via `topic-registry-truth.test`); Lighthouse gate via `lighthouse-check.mjs` + `RELEASE_CHECKLIST.md`.
 
 ---
 
 ## Evidence counts (final run)
 
-- `npm test` 136 pass
-- `npx playwright test` 23 pass (incl. axe)
+- `npm test` 156 pass
+- `npx playwright test` 32 pass (incl. axe)
+- `npm run lighthouse:check` PASS (static checklist + headers/dist)
 - published word pairs 367, genuine phrases 0, sentences 80, published lessons 0, draft lessons 6, human-reviewed 0
