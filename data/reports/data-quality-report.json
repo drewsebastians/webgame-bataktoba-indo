@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-26T03:09:58+00:00",
+  "generatedAt": "2026-08-31T09:50:38.280Z",
   "stageCounts": {
     "rawWordRows": 764,
     "rawPhraseRows": 0,
@@ -84,5 +84,11 @@
   "migration": {
     "mapped": 485,
     "unmapped": 91
+  },
+  "incrementalPublish": {
+    "stagingRecords": 0,
+    "reviewOverrides": 0,
+    "changedItems": 0,
+    "note": "DB-independent incremental; full rebuild via content:rebuild-full if needed"
   }
 }

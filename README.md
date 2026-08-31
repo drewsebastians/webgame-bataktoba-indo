@@ -59,16 +59,20 @@ Homepage menampilkan copy jujur: `learn/keluarga/` dan `learn/sapaan/` diakui be
 
 ## Editorial pipeline
 ```
-batak-indo-alignment-engine (1.6 GB DB lokal, tidak di CI)
+batak-indo-alignment-engine (1.6 GB DB historis, tidak di CI untuk incremental)
   data/input/bible_batak_indo_v1.db
-  data/processed/master_alignment_bible_only.db
+  data/processed/master_alignment_bible_only.db (hanya untuk content:rebuild-full)
         │
+        ▼ (historis)
+tools/build-learning-data.py  (Python, butuh master DB) — via npm run content:rebuild-full
+
+Normal incremental (tanpa master DB, yang dipakai sehari-hari):
+  data/sources/staging/*.json (external source, license gate) ─┐
+  data/reviewed/overrides.json (human review) ─────────────────┤
         ▼
-tools/build-learning-data.py  (Python, corpus DB lokal)
-  data/raw/          raw berprovenance
-    → data/candidates/  cleaning, proper-name filter, stable content-hash id (sha256 10 hex), alternatives merge
-      → data/reviewed/    overrides.json (kosong hari ini, skema terdokumentasi di data/reviewed/README.md)
-        → data/published/  hanya yang lolos aturan publikasi (satu-satunya dibaca website)
+  npm run content:publish  (Node, DB-independent: validasi → apply review → recompute topics/lessons → quality report)
+        ▼
+  data/published/  hanya yang lolos aturan publikasi (satu-satunya dibaca website)
           • learning-items.json
           • word-pairs.json (367)
           • phrase-pairs.json (0, hard rule ≥2 token per sisi)
@@ -98,10 +102,16 @@ npm run verify:drift        # git diff --exit-code -- dist  (gagal jika committe
 
 # granular
 npm run check       # tools/check-site.mjs (link, schema, SEO, sitemap coverage, metadata counts, reviewStatus)
-npm run test        # node --test "tests/**/*.test.mjs"  (136 tests: data, question-engine, progress v3, session, analytics, ads, PWA)
+npm run test        # node --test "tests/**/*.test.mjs"  (193 tests: data, question-engine, progress v3, session, analytics, ads, PWA, source-expansion)
 npm run e2e         # node tools/e2e-smoke.mjs  (server dist di 4179, fetch halaman kunci, manifest, sw, data)
-npm run test:browser # playwright test (chromium, 23 specs: quiz, typed, true/false, memory/matching 4/6/8, flashcards, dictionary, progres, security headers, draft-leak, axe 6 halaman)
-npm run build:data  # butuh corpus DB lokal 1.6 GB, tidak di CI
+npm run test:browser # playwright test (chromium, 33 specs: quiz, typed, true/false, memory/matching 4/6/8, flashcards, dictionary, progres, security headers, draft-leak, axe 6 halaman, future-transition)
+npm run build:data  # historical full rebuild, butuh master DB 1.6 GB, tidak di CI — untuk incremental gunakan npm run content:publish (DB-independent)
+npm run content:publish       # DB-independent incremental (staging + review overrides → published, tanpa master DB)
+npm run content:rebuild-full  # full historis, butuh master DB 1.6 GB
+npm run review:queue / lesson-gaps / topic-gaps / validate / preview / round1 / import # human-review pipeline (lihat docs/HUMAN_LINGUISTIC_REVIEW_HANDOFF.md)
+npm run source:validate / preview / import # external source ingestion (staging → candidate, license gate)
+npm run editorial:status      # ringkasan editorial (published/human, lesson/topic blockers)
+npm run lighthouse:check      # release gate deterministic (dist/_headers/checklist)
 ```
 
 **Determinism:** `tools/build-dist.mjs` normalisasi EOL ke LF *sebelum* hashing/revision, menginject `meta last-modified` + visible `<time>` dari `tools/site.config.json: lastModified` (ISO date `2026-08-26` → `Terakhir diperbarui: 26 Agustus 2026`), serta mem-build `sitemap.xml` → `<lastmod>` dari sumber yang sama. Tidak ada `git log` history lookup; shallow/full clone, Windows/Linux menghasilkan byte identical (`npm run build` dua kali → `git diff --exit-code -- dist` clean).
@@ -170,10 +180,12 @@ assets/js/utils/{dom,normalize,corrections}
 content/lessons.json       definisi lesson (title/desc/level, tidak overpromise)
 data/{raw,candidates,reviewed,published}  editorial layers
 data/migration/id-map.json  legacy → stable
+data/sources/source-registry.json + staging/  source ingestion (license gate, stable IDs)
 tools/build-dist.mjs       deterministic dist build (LF normalize → hash → revision → inject meta/visible + sitemap lastmod + headers)
 tools/generate-sitemap.mjs generator dari halaman aktual + lastModified
 tools/check-site.mjs       checker komprehensif
-tests/{unit,data,browser}  136 unit/data + 23 browser (playwright + axe)
+tools/review-*.mjs + source-*.mjs + content-publish.mjs  human-review & source pipeline (DB-independent incremental)
+tests/{unit,data,browser}  193 unit/data + 33 browser (playwright + axe, future-transition, source-expansion)
 ```
 
 ## External blockers (tetap)
