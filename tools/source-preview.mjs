@@ -21,7 +21,7 @@ const conflicts = data.records.filter(r => {
   const nb = normalize(r.batak), ni = normalize(r.indonesian);
   return published.items.some(p => (normalize(p.batak) === nb && normalize(p.indonesia) !== ni) || (normalize(p.indonesia) === ni && normalize(p.batak) !== nb));
 });
-console.log(`- conflicts (same Batak→different Indonesian or vice versa): ${conflicts.length} (needs human review)`);
+console.log(`- conflicts (same Batak→different Indonesian or vice versa): ${conflicts.length} (needs evidence review)`);
 const affected = new Map();
 for (const rec of data.records) {
   const nb = normalize(rec.batak), ni = normalize(rec.indonesian);
@@ -44,5 +44,5 @@ console.log(`- potential SEO unlocks: ${[...affected].some(([_, add]) => {
   const t = topics.topics.find(x => x.slug === _.split("+")[0]); return false;
 }) ? "check per topic above" : "none until human review + publish"}`);
 console.log(`- licensing: ${data.licenseStatus} ${data.licenseStatus !== "APPROVED_FOR_INGESTION" ? "(would block import)" : ""}`);
-console.log(`- review queue delta: +${totalNewCandidates} (still need human review, not auto-published)`);
+console.log(`- review queue delta: +${totalNewCandidates} (still need source-evidence, not auto-published)`);
 console.log("Preview only — no files written.");

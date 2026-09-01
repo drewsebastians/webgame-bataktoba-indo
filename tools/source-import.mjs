@@ -57,7 +57,7 @@ for (const r of data.records) {
 console.log(`source:import preview for ${data.sourceId}: ${data.records.length} records validated, license OK, stable IDs deterministic`);
 
 if (!apply) {
-  console.log("Dry-run only. Re-run with --apply to stage for candidate (still needs human review, not auto-published).");
+  console.log("Dry-run only. Re-run with --apply to stage for candidate (still needs source-evidence, not auto-published).");
   process.exit(0);
 }
 

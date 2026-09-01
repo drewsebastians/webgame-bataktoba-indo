@@ -1,6 +1,6 @@
 {
-  "comment": "DRAFT supplement vocabulary for lesson pages only. These entries are standard, uncontroversial basics added editorially because the word-level Bible corpus cannot supply them. They are NEVER merged into game pools or learning-items.json. reviewStatus stays needs-review until a human reviewer approves them.",
-  "sourceLabel": "Editorial draft - menunggu review penutur",
+  "comment": "DRAFT supplement vocabulary for lesson pages only. These entries are standard, uncontroversial basics added editorially because the word-level Bible corpus cannot supply them. They are NEVER merged into game pools or learning-items.json. Status remains evidence-insufficient until source-evidence-qualified via automated gate.",
+  "sourceLabel": "Editorial draft - menunggu bukti sumber",
   "themes": {
     "angka": [
       { "batak": "sada", "indonesia": "satu" },

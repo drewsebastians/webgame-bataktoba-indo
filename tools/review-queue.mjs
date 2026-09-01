@@ -32,7 +32,7 @@ if (firstNeed) {
       topicMemberships: [firstNeed.slug],
       candidateLessons: [firstNeed.slug],
       publicationImpact: `would reduce gap for ${firstNeed.slug} by ~1 (needs ${firstNeed.need})`,
-      warnings: ["draft: needs human review before publish"],
+      warnings: ["draft: needs source evidence before publish"],
       reviewerFields: { decision: null, reviewer: null, reviewedAt: null },
     });
   }

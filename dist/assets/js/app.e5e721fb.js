@@ -2045,7 +2045,7 @@ async function initLearn() {
     el("p", {
       className: "feedback",
       attrs: { role: "note" },
-      text: "Materi tambahan menunggu review penutur dan tidak ditampilkan sebagai materi belajar.",
+      text: "Materi tambahan menunggu bukti sumber dan tidak ditampilkan sebagai materi belajar.",
     }),
   );
 

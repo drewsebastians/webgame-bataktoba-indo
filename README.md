@@ -2,12 +2,12 @@
 
 Website game belajar Bahasa Batak Toba – Indonesia yang berjalan full static di Cloudflare Pages. Dibangun untuk pemula (diaspora, keluarga, pembelajar mandiri) yang ingin mengenal kosakata dasar lewat latihan berulang yang playable.
 
-Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan lokal di browser, transparan soal status review.
+Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan lokal di browser, transparan soal status bukti sumber.
 
 ## Product purpose
 - Membuktikan dulu bahwa pengalaman belajar 5–10 menit nyaman dipakai di HP sebelum corpus diperbesar.
-- Menyediakan jalur belajar yang jujur: setiap entri menampilkan status `corpus-derived`/`beta-unreviewed`, tidak ada klaim `human-reviewed` sampai review penutur tersedia.
-- Menjadi fondasi editorial: pipeline `raw → candidates → reviewed → published` dengan hanya `data/published` yang dibaca website.
+- Menyediakan jalur belajar yang jujur: setiap entri menampilkan status `source-evidence-qualified` / `evidence-insufficient` / `corpus-derived` (otomatis via `tools/quality-gate.mjs` `source-evidence-v1`), bukan verifikasi manusia.
+- Menjadi fondasi editorial: pipeline `raw → candidate → source-evidence-qualified → published` dengan hanya `data/published` yang dibaca website. Tidak ada `human-reviewed` sebagai prasyarat publikasi (governance 2026-09-01).
 
 ## Practice modes
 | Mode | Deskripsi |
@@ -25,25 +25,25 @@ Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan
 | **Session** | Pilihan ukuran 5/10/20, ringkasan (soal, benar, salah, akurasi, daftar salah, CTA Review Kesalahan), daily queue (due → sering-salah → baru-salah → baru, tanpa duplikat prompt), streak non-punishing (1 hari libur tetap hidup, putus setelah 2 hari). |
 
 ## Data counts (production truth)
-- **Word pairs (published):** 367
+- **Word pairs (published):** 367 (semua `source-evidence-qualified` via `quality-gate` `0.4/1`; sebelumnya `corpus-derived` 367)
 - **Genuine phrase pairs:** 0 (corpus word-level belum menghasilkan pasangan multi-token ≥2 token per sisi; aturan phrase menolak 1 kata)
-- **Sample sentences (published):** 80 (`beta-unreviewed`)
-- **Published lessons:** 0 (threshold ≥8 item corpus per tema)
+- **Sample sentences (published):** 80 (otomatis `beta-unreviewed` → akan `source-evidence-qualified` setelah gate kalimat, masih menunggu)
+- **Published lessons:** 0 (threshold ≥8 item `source-evidence-qualified` per tema)
 - **Internal draft lessons:** 6 (tema: angka, keluarga, sapaan, makanan, waktu, alam)
-- **Human-reviewed items:** 0
-- **Lesson minimum publication pool:** 8 (`minPoolItemsForPublication` di `data/published/lessons.json` dan `tools/build-learning-data.py`)
+- **Source-evidence-qualified items:** 367 (human review tidak ada; `human-reviewed` = 0 legacy)
+- **Lesson minimum publication pool:** 8 (`minPoolItemsForPublication` di `data/published/lessons.json` dan `tools/quality-gate.mjs`)
 - **Legacy ID map:** 485 mappings (`data/migration/id-map.json`)
 
-Selalu bangkit dari `data/published` saja. `data/raw`, `data/candidates`, `data/reviewed`, `content/curated/draft-vocabulary.json` tidak pernah dibaca runtime atau di-deploy.
+Selalu bangkit dari `data/published` saja. `data/raw`, `data/candidates`, `data/sources/staging` (hanya jika `APPROVED_FOR_INGESTION`), `content/curated/draft-vocabulary.json` tidak pernah dibaca runtime atau di-deploy.
 
 ## Topic page indexability policy
 Single source: `data/published/topics.json` + `tools/site.config.json` + sitemap generator + `check-site.mjs`.
 
 - **Indexable (included in sitemap.xml + <lastmod>):** `/`, `/about/`, `/contact/`, `/correction-process/`, `/data-source/`, `/dictionary/`, `/editorial-policy/`, `/flashcards/`, `/games/`, `/learn/`, `/learn/adat-ringan/`, `/learn/tips-diaspora/`, `/methodology/`, `/privacy/` (14 URLs).
-- **Noindex (excluded from sitemap, `noindex,follow`):** `/learn/angka/` (5 items, need 8), `/learn/keluarga/` (0), `/learn/sapaan/` (0), `/learn/makanan/` (2), `/progres/` (personal), plus internal topics `waktu` (4), `alam` (2) yang belum punya halaman publik.
-- Promosi otomatis saat pool ≥8; demosi saat pool <8. `npm run build:seo` + `npm run build` menerbitkan perubahan.
+- **Noindex (excluded from sitemap, `noindex,follow`):** `/learn/angka/` (5 `source-evidence-qualified` need 8), `/learn/keluarga/` (0), `/learn/sapaan/` (0), `/learn/makanan/` (2), `/progres/` (personal), plus internal topics `waktu` (4), `alam` (2) yang belum punya halaman publik.
+- Promosi otomatis saat pool `source-evidence-qualified` ≥8; demosi saat <8. `npm run build:seo` + `npm run build` menerbitkan perubahan.
 
-Halaman tipis tetap jujur: menampilkan materi nyata + banner menunggu review, tidak memalsukan ketersediaan.
+Halaman tipis tetap jujur: menampilkan materi nyata + banner `menunggu bukti sumber`, tidak memalsukan ketersediaan.
 
 ## Progress schema v3
 - **Storage key (legacy name):** `batakTobaPlay.progress.v2` — nama key tidak diubah untuk kompatibilitas; `schemaVersion = 3`.
@@ -82,7 +82,7 @@ Normal incremental (tanpa master DB, yang dipakai sehari-hari):
         data/reports/data-quality-report.json
         data/migration/id-map.json
 ```
-Confidence = sinyal statistik co-occurrence, bukan jaminan linguistik. Semua word tetap `corpus-derived` sampai review manusia tersedia.
+Confidence = sinyal statistik co-occurrence, bukan jaminan linguistik. Semua word `source-evidence-qualified` via gate otomatis `0.4/1` (`quality-gate.mjs` `v1`), bukan verifikasi manusia. Status publik jujur: `source-evidence-qualified` ≠ `human verified`.
 
 ## Build, verify, tests
 ```bash
@@ -108,9 +108,10 @@ npm run test:browser # playwright test (chromium, 33 specs: quiz, typed, true/fa
 npm run build:data  # historical full rebuild, butuh master DB 1.6 GB, tidak di CI — untuk incremental gunakan npm run content:publish (DB-independent)
 npm run content:publish       # DB-independent incremental (staging + review overrides → published, tanpa master DB)
 npm run content:rebuild-full  # full historis, butuh master DB 1.6 GB
-npm run review:queue / lesson-gaps / topic-gaps / validate / preview / round1 / import # human-review pipeline (lihat docs/HUMAN_LINGUISTIC_REVIEW_HANDOFF.md)
-npm run source:validate / preview / import # external source ingestion (staging → candidate, license gate)
-npm run editorial:status      # ringkasan editorial (published/human, lesson/topic blockers)
+npm run review:queue / lesson-gaps / topic-gaps / validate / preview / round1 / import # LEGACY human-review (deprecated 2026-09-01, retained for migration compat)
+npm run quality:status / preview / gaps # source-evidence quality pipeline (gate otomatis, tanpa human)
+npm run source:validate / preview / import # external source ingestion (staging → candidate, license gate APPROVED_FOR_INGESTION)
+npm run editorial:status      # ringkasan editorial (published/qualified, lesson/topic blockers)
 npm run lighthouse:check      # release gate deterministic (dist/_headers/checklist)
 ```
 
@@ -188,12 +189,11 @@ tools/review-*.mjs + source-*.mjs + content-publish.mjs  human-review & source p
 tests/{unit,data,browser}  193 unit/data + 33 browser (playwright + axe, future-transition, source-expansion)
 ```
 
-## External blockers (tetap)
-- Human linguistic review (words/phrases/sentences, 6 draft lessons)
-- Review lisensi corpus
-- Audio licensing/recording/review (listening mode deferred)
+## External blockers (tetap, tanpa human review)
+- Lisensi corpus (`bible_batak_indo_v1.db` `REQUIRES_LEGAL_REVIEW` per `docs/CORPUS_LICENSING_STATUS.md` — `publicationAllowed false`)
+- Audio licensing/recording (listening mode deferred, butuh file+license+transcript)
 - Custom domain/DNS, Search Console, Cloudflare hostname verification
 - AdSense Publisher ID, ads.txt asli, CMP tersertifikasi bila wajib
-- Legal/korpus review
+- 6 draft lessons masih `evidence-insufficient` (butuh `source-evidence-qualified` 8, saat ini `angka` 5/8)
 
-Semua repository-solvable task ditutup. Blueprint eksternal tetap `BLOCKED_EXTERNAL` by design (jangan fake konten untuk hijau).
+Semua repository-solvable task ditutup. `Human review` **bukan lagi blocker** (governance 2026-09-01). Sisa blocker adalah lisensi/domain/AdSense/audio atau `insufficient evidence` (otomatis, bukan manual).
