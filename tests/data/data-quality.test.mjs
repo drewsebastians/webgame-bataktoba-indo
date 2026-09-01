@@ -96,10 +96,17 @@ describe("honest review statuses", () => {
   const allowed = new Set([
     "candidate",
     "corpus-derived",
+    "source-evidence-qualified",
     "machine-reviewed",
     "human-reviewed",
     "needs-revision",
     "beta-unreviewed",
+    "evidence-insufficient",
+    "conflicted",
+    "source-blocked",
+    "reported",
+    "rejected",
+    "archived",
   ]);
 
   it("no item carries an unknown reviewStatus", () => {

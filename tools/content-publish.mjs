@@ -40,15 +40,29 @@ if (errors.length) {
   process.exit(1);
 }
 
-// 3. Apply approved reviewed changes deterministically (in-memory)
+// 3. Apply automated source-evidence qualification (replaces human-reviewed) + legacy overrides (for migration)
 const publishedWords = loadJson("data/published/word-pairs.json");
-const wordMap = new Map(publishedWords.items.map((w) => [w.id, { ...w }]));
-let changed = 0;
+const { qualifyWord } = await import("./quality-gate.mjs");
+let qualified = 0, insufficient = 0;
+for (const w of publishedWords.items) {
+  const res = qualifyWord(w);
+  if (res.status === "source-evidence-qualified") {
+    w.reviewStatus = "source-evidence-qualified";
+    w.qualityPolicyVersion = res.qualityPolicyVersion;
+    qualified++;
+  } else {
+    w.reviewStatus = "evidence-insufficient";
+    insufficient++;
+  }
+}
+// Legacy: still apply old human-reviewed overrides if any (for migration compat, not required for new publication)
+const wordMap = new Map(publishedWords.items.map((w) => [w.id, w]));
+let changed = qualified;
 for (const o of overrides) {
   if (o.decision !== "approve") continue;
   const w = wordMap.get(o.itemId);
   if (!w) continue;
-  w.reviewStatus = "human-reviewed";
+  w.reviewStatus = "human-reviewed"; // legacy, retained for migration but not used for new gates
   w.reviewedBy = o.reviewer;
   w.reviewedAt = o.reviewedAt;
   if (o.approvedMeaning) w.indonesia = o.approvedMeaning.toLowerCase();
@@ -78,10 +92,14 @@ writeFileSync(qualityPath, JSON.stringify(report, null, 2) + "\n");
 // 7. Fail closed on conflict (already validated)
 
 // 8. Not requiring historical DB — success
-console.log(`content:publish: incremental PASS (DB-independent)`);
+// Persist qualified statuses back to published file (deterministic)
+saveJson("data/published/word-pairs.json", publishedWords);
+saveJson("data/published/learning-items.json", { ...loadJson("data/published/learning-items.json"), items: [...publishedWords.items, ...loadJson("data/published/sample-sentences.json").items] });
+console.log(`content:publish: incremental PASS (DB-independent, source-evidence-qualified)`);
 console.log(`- staging records: ${stagingRecords.length}`);
-console.log(`- review overrides: ${overrides.length} (changed ${changed})`);
-console.log(`- published lessons: ${lessonsBefore.counts.publishedLessons} → ${lessonsBefore.counts.publishedLessons} (no auto-publish without human review)`);
+console.log(`- qualified: ${qualified}, insufficient: ${insufficient}`);
+console.log(`- review overrides (legacy): ${overrides.length} (changed ${changed - qualified})`);
+console.log(`- published lessons: ${lessonsBefore.counts.publishedLessons} → ${lessonsBefore.counts.publishedLessons} (threshold 8, no human required)`);
 console.log(`- topics: ${topicsBefore.topics.length} (no auto-promotion without threshold)`);
 console.log(`- Next: npm run build && npm run verify:release`);
-if (stagingRecords.length > 0) console.log(`- Note: ${stagingRecords.length} staging records remain candidate, need human review before publish`);
+if (stagingRecords.length > 0) console.log(`- Note: ${stagingRecords.length} staging records remain candidate, need qualification`);

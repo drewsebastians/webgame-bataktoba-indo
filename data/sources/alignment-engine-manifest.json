@@ -1,0 +1,31 @@
+{
+  "sourceId": "alignment-engine-fb999a9",
+  "upstreamRepo": "drewsebastians/batak-indo-alignment-engine",
+  "upstreamCommit": "fb999a95e3329ce56864ff8a97bdf687f1ab82bb",
+  "upstreamBranch": "main",
+  "corpusFiles": [
+    {
+      "path": "data/input/bible_batak_indo_v1.db",
+      "sha256": "13bd6627d572e070daa48e33b030ede9118e495310b950183695e90b460bd1ec",
+      "size": 16211968
+    },
+    {
+      "path": "data/catalog/canonical_archive_manifest.json",
+      "sha256": "81f5114a44bdba373edbc9d54a69edadb8f744f613b08428aa02c23ed62e7031",
+      "size": 732
+    },
+    {
+      "path": "batak_alignment_canonical.sqlite (release asset, not vendored)",
+      "sha256": "3a34a54ddbe23d9d7368a03dd9bf903b2ce8e2c7a222dd2f67af7e99e8434238",
+      "size": 1694924800,
+      "releaseUrl": "https://github.com/drewsebastians/batak-indo-alignment-engine/releases/tag/canonical-archive-2026-07-03",
+      "downloaded": false
+    }
+  ],
+  "licenseStatus": "REQUIRES_LEGAL_REVIEW",
+  "licenseFilesPresent": [],
+  "publicationAllowed": false,
+  "qualityPolicyVersion": "source-evidence-v1",
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "notes": "Pinned upstream HEAD fb999a9 per owner governance 2026-09-01. Full corpus 1.69GB not vendored; manifest hash suffices for reproducibility. Publication blocked until license clarified (see docs/CORPUS_LICENSING_STATUS.md)."
+}

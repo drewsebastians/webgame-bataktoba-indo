@@ -51,8 +51,9 @@
       "cooccurrenceCount": 32,
       "corpusCandidateStatus": "exportable_candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4e0cb8bd72",
@@ -71,8 +72,9 @@
       "cooccurrenceCount": 44,
       "corpusCandidateStatus": "exportable_candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-26e70b93eb",
@@ -91,8 +93,9 @@
       "cooccurrenceCount": 70,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-56899d3213",
@@ -111,8 +114,9 @@
       "cooccurrenceCount": 15,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6ff8777946",
@@ -131,8 +135,9 @@
       "cooccurrenceCount": 45,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-475c88d1dd",
@@ -151,8 +156,9 @@
       "cooccurrenceCount": 40,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0973879b7c",
@@ -171,8 +177,9 @@
       "cooccurrenceCount": 119,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e467c11e92",
@@ -191,8 +198,9 @@
       "cooccurrenceCount": 16,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7286023b75",
@@ -211,8 +219,9 @@
       "cooccurrenceCount": 73,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7184720802",
@@ -231,8 +240,9 @@
       "cooccurrenceCount": 70,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-859aba639d",
@@ -251,8 +261,9 @@
       "cooccurrenceCount": 23,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d884d80a6f",
@@ -271,8 +282,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-61045c0af8",
@@ -291,8 +303,9 @@
       "cooccurrenceCount": 24,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0ba3eec852",
@@ -311,8 +324,9 @@
       "cooccurrenceCount": 36,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8832a8589b",
@@ -331,8 +345,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b4b8f4cd49",
@@ -351,8 +366,9 @@
       "cooccurrenceCount": 64,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a7fa9742bd",
@@ -371,8 +387,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-27dce9eed3",
@@ -391,8 +408,9 @@
       "cooccurrenceCount": 54,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3595d47211",
@@ -411,8 +429,9 @@
       "cooccurrenceCount": 33,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b9aab94636",
@@ -431,8 +450,9 @@
       "cooccurrenceCount": 163,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7d60a98799",
@@ -451,8 +471,9 @@
       "cooccurrenceCount": 41,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1e35f10df3",
@@ -471,8 +492,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d033aed968",
@@ -491,8 +513,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-da9b194ac8",
@@ -511,8 +534,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b17629e7fe",
@@ -531,8 +555,9 @@
       "cooccurrenceCount": 303,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-014b2d384b",
@@ -551,8 +576,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8e4f3bf731",
@@ -571,8 +597,9 @@
       "cooccurrenceCount": 46,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-859fe57a60",
@@ -593,8 +620,9 @@
       "cooccurrenceCount": 45,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8102ab9929",
@@ -613,8 +641,9 @@
       "cooccurrenceCount": 240,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1331d27113",
@@ -633,8 +662,9 @@
       "cooccurrenceCount": 123,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6149c36d34",
@@ -653,8 +683,9 @@
       "cooccurrenceCount": 151,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8b6eb3431b",
@@ -673,8 +704,9 @@
       "cooccurrenceCount": 140,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f79aa2061c",
@@ -693,8 +725,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8bbd15692d",
@@ -713,8 +746,9 @@
       "cooccurrenceCount": 28,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9de6c9f266",
@@ -733,8 +767,9 @@
       "cooccurrenceCount": 23,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a8c0f17259",
@@ -753,8 +788,9 @@
       "cooccurrenceCount": 39,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b1eb5a8abe",
@@ -773,8 +809,9 @@
       "cooccurrenceCount": 65,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e551db3710",
@@ -793,8 +830,9 @@
       "cooccurrenceCount": 313,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-caf60b46ca",
@@ -813,8 +851,9 @@
       "cooccurrenceCount": 390,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ee0b1fffb9",
@@ -833,8 +872,9 @@
       "cooccurrenceCount": 79,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7adf6c775a",
@@ -853,8 +893,9 @@
       "cooccurrenceCount": 174,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-98053b5bf3",
@@ -873,8 +914,9 @@
       "cooccurrenceCount": 86,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3f52918bc9",
@@ -893,8 +935,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-92f682c43a",
@@ -913,8 +956,9 @@
       "cooccurrenceCount": 104,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e79a38b3f8",
@@ -933,8 +977,9 @@
       "cooccurrenceCount": 41,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5f9f3eec2b",
@@ -953,8 +998,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-616a4ad526",
@@ -973,8 +1019,9 @@
       "cooccurrenceCount": 7,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-df867ed7c8",
@@ -993,8 +1040,9 @@
       "cooccurrenceCount": 59,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-df04458042",
@@ -1013,8 +1061,9 @@
       "cooccurrenceCount": 333,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-99dcc1cafa",
@@ -1033,8 +1082,9 @@
       "cooccurrenceCount": 96,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-445b3c2d6a",
@@ -1053,8 +1103,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2b037c531e",
@@ -1073,8 +1124,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-bb6a455a08",
@@ -1093,8 +1145,9 @@
       "cooccurrenceCount": 52,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-bbcb2084b7",
@@ -1113,8 +1166,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5d877769a6",
@@ -1133,8 +1187,9 @@
       "cooccurrenceCount": 43,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-36ce9ca411",
@@ -1153,8 +1208,9 @@
       "cooccurrenceCount": 41,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-bf5d682e8b",
@@ -1173,8 +1229,9 @@
       "cooccurrenceCount": 13,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-cab6381101",
@@ -1193,8 +1250,9 @@
       "cooccurrenceCount": 265,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5573dede34",
@@ -1213,8 +1271,9 @@
       "cooccurrenceCount": 28,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c79c15e5c6",
@@ -1233,8 +1292,9 @@
       "cooccurrenceCount": 35,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-cda58024a5",
@@ -1255,8 +1315,9 @@
       "cooccurrenceCount": 196,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-72a5b2be73",
@@ -1275,8 +1336,9 @@
       "cooccurrenceCount": 188,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-df152d7d27",
@@ -1295,8 +1357,9 @@
       "cooccurrenceCount": 21,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0f591c97f1",
@@ -1315,8 +1378,9 @@
       "cooccurrenceCount": 13,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5564265c01",
@@ -1335,8 +1399,9 @@
       "cooccurrenceCount": 32,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-40e2bf82ee",
@@ -1355,8 +1420,9 @@
       "cooccurrenceCount": 116,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-63a8408771",
@@ -1375,8 +1441,9 @@
       "cooccurrenceCount": 108,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-fc77bca4de",
@@ -1395,8 +1462,9 @@
       "cooccurrenceCount": 36,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-141862f84e",
@@ -1417,8 +1485,9 @@
       "cooccurrenceCount": 53,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-82192a7093",
@@ -1437,8 +1506,9 @@
       "cooccurrenceCount": 121,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2ffe980e86",
@@ -1457,8 +1527,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6ef569f002",
@@ -1477,8 +1548,9 @@
       "cooccurrenceCount": 25,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-05c3b425ee",
@@ -1497,8 +1569,9 @@
       "cooccurrenceCount": 43,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-fe9f51eb1e",
@@ -1517,8 +1590,9 @@
       "cooccurrenceCount": 26,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7f57364b9c",
@@ -1537,8 +1611,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-31f61dc596",
@@ -1557,8 +1632,9 @@
       "cooccurrenceCount": 223,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a1b5aa46ed",
@@ -1577,8 +1653,9 @@
       "cooccurrenceCount": 59,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-793f30b05d",
@@ -1597,8 +1674,9 @@
       "cooccurrenceCount": 112,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9ddcae5766",
@@ -1617,8 +1695,9 @@
       "cooccurrenceCount": 119,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-63dae0c3b7",
@@ -1637,8 +1716,9 @@
       "cooccurrenceCount": 16,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9f37e6652e",
@@ -1657,8 +1737,9 @@
       "cooccurrenceCount": 30,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9a37e0b270",
@@ -1677,8 +1758,9 @@
       "cooccurrenceCount": 48,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d20dc50f68",
@@ -1697,8 +1779,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-011d36e84e",
@@ -1717,8 +1800,9 @@
       "cooccurrenceCount": 31,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5ce31c337b",
@@ -1739,8 +1823,9 @@
       "cooccurrenceCount": 84,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6157fc4831",
@@ -1759,8 +1844,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9551542d99",
@@ -1779,8 +1865,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e8655aab3e",
@@ -1799,8 +1886,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a8ef2439b3",
@@ -1819,8 +1907,9 @@
       "cooccurrenceCount": 80,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0765841447",
@@ -1839,8 +1928,9 @@
       "cooccurrenceCount": 249,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-33796c35b7",
@@ -1859,8 +1949,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-25bfd5ed71",
@@ -1879,8 +1970,9 @@
       "cooccurrenceCount": 21,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7afa709af9",
@@ -1899,8 +1991,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f84fc236bc",
@@ -1919,8 +2012,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-38aecb4709",
@@ -1939,8 +2033,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f2026a2ad7",
@@ -1959,8 +2054,9 @@
       "cooccurrenceCount": 21,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c2b6f87adb",
@@ -1979,8 +2075,9 @@
       "cooccurrenceCount": 36,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3e59972330",
@@ -1999,8 +2096,9 @@
       "cooccurrenceCount": 99,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f8f169f3a4",
@@ -2019,8 +2117,9 @@
       "cooccurrenceCount": 53,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-63daa85b28",
@@ -2039,8 +2138,9 @@
       "cooccurrenceCount": 101,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-557bcd8ab8",
@@ -2059,8 +2159,9 @@
       "cooccurrenceCount": 133,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9c124a7296",
@@ -2079,8 +2180,9 @@
       "cooccurrenceCount": 22,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-511ac62834",
@@ -2099,8 +2201,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-77148c4dcb",
@@ -2119,8 +2222,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-59ae8e8e9a",
@@ -2139,8 +2243,9 @@
       "cooccurrenceCount": 24,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0f100677d8",
@@ -2159,8 +2264,9 @@
       "cooccurrenceCount": 89,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-459b82b2b9",
@@ -2179,8 +2285,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-952e92d7ea",
@@ -2199,8 +2306,9 @@
       "cooccurrenceCount": 19,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e14d99738b",
@@ -2219,8 +2327,9 @@
       "cooccurrenceCount": 7,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3c058b79a5",
@@ -2239,8 +2348,9 @@
       "cooccurrenceCount": 287,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4703b78447",
@@ -2259,8 +2369,9 @@
       "cooccurrenceCount": 68,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-195e524dd2",
@@ -2279,8 +2390,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e9cdf29b02",
@@ -2299,8 +2411,9 @@
       "cooccurrenceCount": 74,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4b78d91276",
@@ -2319,8 +2432,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9ac27a4830",
@@ -2339,8 +2453,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-752a97ca34",
@@ -2359,8 +2474,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-109d5ae675",
@@ -2379,8 +2495,9 @@
       "cooccurrenceCount": 357,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d87ff3391a",
@@ -2399,8 +2516,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c51eb71d86",
@@ -2419,8 +2537,9 @@
       "cooccurrenceCount": 7,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2580838080",
@@ -2439,8 +2558,9 @@
       "cooccurrenceCount": 13,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b4ce3d9c58",
@@ -2459,8 +2579,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-62c445bae3",
@@ -2479,8 +2600,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-71bf0952a0",
@@ -2499,8 +2621,9 @@
       "cooccurrenceCount": 137,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b1287f03c5",
@@ -2521,11 +2644,12 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "sadrak"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-12c69adb47",
@@ -2548,12 +2672,13 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "mesak",
         "sadrakh"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3a6bda359e",
@@ -2572,8 +2697,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-fb0f24ec17",
@@ -2592,8 +2718,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e4c30cb13c",
@@ -2612,8 +2739,9 @@
       "cooccurrenceCount": 21,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1b1eb9816b",
@@ -2632,8 +2760,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6ae3263205",
@@ -2652,8 +2781,9 @@
       "cooccurrenceCount": 276,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b10a7ae29a",
@@ -2672,8 +2802,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8ccdb4f123",
@@ -2692,8 +2823,9 @@
       "cooccurrenceCount": 45,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-750953a832",
@@ -2712,8 +2844,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-529ce3791f",
@@ -2732,8 +2865,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-01f07f8e22",
@@ -2752,8 +2886,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-469a9f14e8",
@@ -2772,8 +2907,9 @@
       "cooccurrenceCount": 13,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-28e069f9d7",
@@ -2792,8 +2928,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-295b234bad",
@@ -2812,8 +2949,9 @@
       "cooccurrenceCount": 95,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5aab366978",
@@ -2832,8 +2970,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9035a3c2ea",
@@ -2852,8 +2991,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-126a210574",
@@ -2872,8 +3012,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-61e247af94",
@@ -2892,8 +3033,9 @@
       "cooccurrenceCount": 275,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-81382539fd",
@@ -2912,8 +3054,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1d122f2f5b",
@@ -2932,8 +3075,9 @@
       "cooccurrenceCount": 425,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f5aee717ce",
@@ -2952,8 +3096,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-61d98b1635",
@@ -2972,8 +3117,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-35010fd1db",
@@ -2992,8 +3138,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-78fca84eaf",
@@ -3012,8 +3159,9 @@
       "cooccurrenceCount": 216,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4a50dc05c2",
@@ -3034,11 +3182,12 @@
       "cooccurrenceCount": 21,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "nidua"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b2c44b78d2",
@@ -3057,8 +3206,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9a2a992b8d",
@@ -3077,8 +3227,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3c8db9483e",
@@ -3097,8 +3248,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8513379aeb",
@@ -3117,8 +3269,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5643c18edc",
@@ -3137,8 +3290,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5f5e764534",
@@ -3157,8 +3311,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3991eb4b1f",
@@ -3179,8 +3334,9 @@
       "cooccurrenceCount": 331,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d7fe67302f",
@@ -3199,8 +3355,9 @@
       "cooccurrenceCount": 78,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0ebbc376e2",
@@ -3219,8 +3376,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b90a259b87",
@@ -3239,8 +3397,9 @@
       "cooccurrenceCount": 16,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5f34dea05d",
@@ -3259,8 +3418,9 @@
       "cooccurrenceCount": 124,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c73aae18fd",
@@ -3279,8 +3439,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3de4313b7e",
@@ -3299,8 +3460,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5126a1d17b",
@@ -3319,8 +3481,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-696dfabc8b",
@@ -3339,8 +3502,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-431e90f9fa",
@@ -3359,8 +3523,9 @@
       "cooccurrenceCount": 270,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7e037b5115",
@@ -3379,8 +3544,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-be83d23d14",
@@ -3401,8 +3567,9 @@
       "cooccurrenceCount": 36,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d5d5665029",
@@ -3421,8 +3588,9 @@
       "cooccurrenceCount": 15,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ac2f226c09",
@@ -3441,8 +3609,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0880cf2284",
@@ -3463,8 +3632,9 @@
       "cooccurrenceCount": 91,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5ce3d5b006",
@@ -3483,8 +3653,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0ff3d7e61e",
@@ -3503,8 +3674,9 @@
       "cooccurrenceCount": 8,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8ea6fb59a2",
@@ -3523,8 +3695,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e9d64870c9",
@@ -3543,8 +3716,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-96cd17d1f0",
@@ -3565,8 +3739,9 @@
       "cooccurrenceCount": 477,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ff440dc05e",
@@ -3585,8 +3760,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8217e41ecb",
@@ -3605,8 +3781,9 @@
       "cooccurrenceCount": 38,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1c784c6000",
@@ -3625,8 +3802,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-73b21b9b6b",
@@ -3645,8 +3823,9 @@
       "cooccurrenceCount": 58,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-cc3702b2b1",
@@ -3665,8 +3844,9 @@
       "cooccurrenceCount": 654,
       "corpusCandidateStatus": "withheld_ambiguous",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-85d44cab95",
@@ -3685,8 +3865,9 @@
       "cooccurrenceCount": 33,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ef42e568a1",
@@ -3705,8 +3886,9 @@
       "cooccurrenceCount": 285,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-701e110489",
@@ -3725,8 +3907,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-652e0a1e8b",
@@ -3745,8 +3928,9 @@
       "cooccurrenceCount": 32,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-be3d4b2e67",
@@ -3765,8 +3949,9 @@
       "cooccurrenceCount": 19,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-dbb6978760",
@@ -3785,8 +3970,9 @@
       "cooccurrenceCount": 65,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2ee20b8118",
@@ -3805,8 +3991,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-dd4c2312e5",
@@ -3827,8 +4014,9 @@
       "cooccurrenceCount": 98,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-dc32e6962a",
@@ -3847,8 +4035,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f37f68599b",
@@ -3867,8 +4056,9 @@
       "cooccurrenceCount": 22,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-78a450f240",
@@ -3887,8 +4077,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a1fe44438a",
@@ -3907,8 +4098,9 @@
       "cooccurrenceCount": 36,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-05fc950b1f",
@@ -3927,8 +4119,9 @@
       "cooccurrenceCount": 108,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-74814aa8f3",
@@ -3947,8 +4140,9 @@
       "cooccurrenceCount": 28,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b44e5d4138",
@@ -3967,8 +4161,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-92add2f91e",
@@ -3989,8 +4184,9 @@
       "cooccurrenceCount": 382,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a56a840092",
@@ -4009,8 +4205,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1227f26de9",
@@ -4029,8 +4226,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-15d069ae14",
@@ -4049,8 +4247,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5ee3a8341d",
@@ -4069,8 +4268,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a7df3e6cd0",
@@ -4089,8 +4289,9 @@
       "cooccurrenceCount": 30,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-317ddbf8d0",
@@ -4109,8 +4310,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-96254a4163",
@@ -4129,8 +4331,9 @@
       "cooccurrenceCount": 7,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6d91043a71",
@@ -4149,8 +4352,9 @@
       "cooccurrenceCount": 212,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-08c4452030",
@@ -4169,8 +4373,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-32bf4f65c2",
@@ -4189,8 +4394,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4dcdd80077",
@@ -4209,8 +4415,9 @@
       "cooccurrenceCount": 25,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e19b78341c",
@@ -4229,8 +4436,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f9e4150536",
@@ -4249,8 +4457,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2523e1a060",
@@ -4269,8 +4478,9 @@
       "cooccurrenceCount": 28,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-94fc994f7d",
@@ -4289,8 +4499,9 @@
       "cooccurrenceCount": 70,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-828719eeaf",
@@ -4309,8 +4520,9 @@
       "cooccurrenceCount": 61,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9fff457261",
@@ -4329,8 +4541,9 @@
       "cooccurrenceCount": 18,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b362418848",
@@ -4349,8 +4562,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-51d9499e8a",
@@ -4369,8 +4583,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8e6a258a7d",
@@ -4389,8 +4604,9 @@
       "cooccurrenceCount": 69,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-02ca84f938",
@@ -4409,8 +4625,9 @@
       "cooccurrenceCount": 30,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-eb43a7f0dc",
@@ -4429,8 +4646,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-172c3914e7",
@@ -4449,8 +4667,9 @@
       "cooccurrenceCount": 10,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4b1f65a8df",
@@ -4469,8 +4688,9 @@
       "cooccurrenceCount": 31,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8beddb63df",
@@ -4489,8 +4709,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5582210d8b",
@@ -4509,8 +4730,9 @@
       "cooccurrenceCount": 13,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-837b98e7b3",
@@ -4529,8 +4751,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d111b8e179",
@@ -4549,8 +4772,9 @@
       "cooccurrenceCount": 23,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b1d892171d",
@@ -4569,8 +4793,9 @@
       "cooccurrenceCount": 36,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4afe63be00",
@@ -4589,8 +4814,9 @@
       "cooccurrenceCount": 79,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ada8486532",
@@ -4609,8 +4835,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b50b7ac675",
@@ -4629,8 +4856,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-eae70e725b",
@@ -4649,8 +4877,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4ff6b0d15a",
@@ -4669,8 +4898,9 @@
       "cooccurrenceCount": 42,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ca50d41b47",
@@ -4689,8 +4919,9 @@
       "cooccurrenceCount": 187,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-aea73ab1bc",
@@ -4709,8 +4940,9 @@
       "cooccurrenceCount": 200,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c79dc732a7",
@@ -4729,8 +4961,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2a97da03ba",
@@ -4749,8 +4982,9 @@
       "cooccurrenceCount": 22,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d26467a85c",
@@ -4769,8 +5003,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7cded770ae",
@@ -4789,8 +5024,9 @@
       "cooccurrenceCount": 26,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d84a229152",
@@ -4809,8 +5045,9 @@
       "cooccurrenceCount": 27,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5df7f44fae",
@@ -4829,8 +5066,9 @@
       "cooccurrenceCount": 23,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-9a6a6d6ad3",
@@ -4849,8 +5087,9 @@
       "cooccurrenceCount": 20,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b1dc7c2b91",
@@ -4869,8 +5108,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d59ff0372a",
@@ -4889,8 +5129,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0f99623764",
@@ -4909,8 +5150,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2e8a82ace5",
@@ -4929,8 +5171,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-440dbde9b8",
@@ -4949,8 +5192,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-faead9df53",
@@ -4969,8 +5213,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-14353a7685",
@@ -4989,8 +5234,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1dea1c577d",
@@ -5009,8 +5255,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-42a8299fdf",
@@ -5029,8 +5276,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e4f237e66e",
@@ -5049,8 +5297,9 @@
       "cooccurrenceCount": 106,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6902192bb1",
@@ -5069,8 +5318,9 @@
       "cooccurrenceCount": 70,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ecc3dabaf1",
@@ -5089,8 +5339,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8ea820734a",
@@ -5109,8 +5360,9 @@
       "cooccurrenceCount": 53,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7697ce12db",
@@ -5129,8 +5381,9 @@
       "cooccurrenceCount": 37,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a7b12d38db",
@@ -5149,8 +5402,9 @@
       "cooccurrenceCount": 8,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b5ad1094ff",
@@ -5169,8 +5423,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6eab8ee2dc",
@@ -5189,8 +5444,9 @@
       "cooccurrenceCount": 30,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-63f8e7d4a3",
@@ -5209,8 +5465,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1367c6ef8d",
@@ -5229,8 +5486,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1b6af4242d",
@@ -5249,8 +5507,9 @@
       "cooccurrenceCount": 8,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ea16b7cebb",
@@ -5269,8 +5528,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3fdd85ba35",
@@ -5289,8 +5549,9 @@
       "cooccurrenceCount": 30,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4b4f3cff9d",
@@ -5309,8 +5570,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-bb01681142",
@@ -5329,8 +5591,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6092b3b536",
@@ -5349,8 +5612,9 @@
       "cooccurrenceCount": 57,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-017195cd19",
@@ -5369,8 +5633,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d09d9b4fd9",
@@ -5389,8 +5654,9 @@
       "cooccurrenceCount": 55,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c699f39a40",
@@ -5409,8 +5675,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d908438fa4",
@@ -5429,8 +5696,9 @@
       "cooccurrenceCount": 33,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0ba8bc4aa8",
@@ -5449,8 +5717,9 @@
       "cooccurrenceCount": 32,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-084d7fd928",
@@ -5469,8 +5738,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-29ffff825b",
@@ -5491,8 +5761,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3376729ada",
@@ -5511,8 +5782,9 @@
       "cooccurrenceCount": 37,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8d539ec74b",
@@ -5531,8 +5803,9 @@
       "cooccurrenceCount": 936,
       "corpusCandidateStatus": "withheld_ambiguous",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-98a75e3e4e",
@@ -5551,8 +5824,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a6803f3e24",
@@ -5571,8 +5845,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-47d7fd009d",
@@ -5591,8 +5866,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d7f62a155d",
@@ -5611,8 +5887,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0ced835969",
@@ -5631,8 +5908,9 @@
       "cooccurrenceCount": 7,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-af7e561a83",
@@ -5651,8 +5929,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f985f2f853",
@@ -5671,8 +5950,9 @@
       "cooccurrenceCount": 16,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c92b3480a5",
@@ -5693,8 +5973,9 @@
       "cooccurrenceCount": 103,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ac13bd9bd0",
@@ -5713,8 +5994,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1657a9dc7d",
@@ -5733,8 +6015,9 @@
       "cooccurrenceCount": 5,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6a7710b417",
@@ -5755,8 +6038,9 @@
       "cooccurrenceCount": 34,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c0db2d546e",
@@ -5775,8 +6059,9 @@
       "cooccurrenceCount": 38,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2d48fdfa86",
@@ -5795,8 +6080,9 @@
       "cooccurrenceCount": 67,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-157bc993d6",
@@ -5815,8 +6101,9 @@
       "cooccurrenceCount": 101,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ce796e781b",
@@ -5835,8 +6122,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1776f7a25f",
@@ -5855,8 +6143,9 @@
       "cooccurrenceCount": 6,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-eb4492cea3",
@@ -5875,8 +6164,9 @@
       "cooccurrenceCount": 19,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-69ce9560a2",
@@ -5895,8 +6185,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-37f928aec7",
@@ -5915,8 +6206,9 @@
       "cooccurrenceCount": 227,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-dce7f6359e",
@@ -5935,8 +6227,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-52bf5412fc",
@@ -5955,8 +6248,9 @@
       "cooccurrenceCount": 48,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-bc3a1a32f7",
@@ -5977,11 +6271,12 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "marngalu"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7d3e01522d",
@@ -6000,8 +6295,9 @@
       "cooccurrenceCount": 87,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-648bf7361d",
@@ -6020,8 +6316,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c42b11f6ac",
@@ -6040,8 +6337,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e58fad5b44",
@@ -6060,8 +6358,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ab4c8f3c29",
@@ -6080,8 +6379,9 @@
       "cooccurrenceCount": 292,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-2168a5d763",
@@ -6100,8 +6400,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ccebafd33d",
@@ -6120,8 +6421,9 @@
       "cooccurrenceCount": 21,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b74dd90d48",
@@ -6140,8 +6442,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f025d3dd72",
@@ -6160,8 +6463,9 @@
       "cooccurrenceCount": 24,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4bfec0e40e",
@@ -6180,8 +6484,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-db62e10133",
@@ -6200,8 +6505,9 @@
       "cooccurrenceCount": 260,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e3499e5cef",
@@ -6220,8 +6526,9 @@
       "cooccurrenceCount": 7,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ffa84bc948",
@@ -6240,8 +6547,9 @@
       "cooccurrenceCount": 37,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6eaf858e66",
@@ -6260,8 +6568,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e701bd4be9",
@@ -6280,8 +6589,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3cf4eb7e81",
@@ -6300,8 +6610,9 @@
       "cooccurrenceCount": 23,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-dd6cd26554",
@@ -6320,8 +6631,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-72d0c98c8e",
@@ -6340,8 +6652,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8942fe6aca",
@@ -6360,8 +6673,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b4ab55dfc8",
@@ -6380,8 +6694,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-15f4cbdf72",
@@ -6400,8 +6715,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b9ef039f00",
@@ -6422,11 +6738,12 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "yaelam"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5c0b966007",
@@ -6445,8 +6762,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-c10929c13a",
@@ -6465,8 +6783,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-71922f6461",
@@ -6485,8 +6804,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b5cc5164b8",
@@ -6507,11 +6827,12 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "bosenai"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-adf9ee7c3b",
@@ -6530,8 +6851,9 @@
       "cooccurrenceCount": 81,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-cc69ffbad2",
@@ -6550,8 +6872,9 @@
       "cooccurrenceCount": 27,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-72a62d1aa2",
@@ -6570,8 +6893,9 @@
       "cooccurrenceCount": 23,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e6c59dced9",
@@ -6590,8 +6914,9 @@
       "cooccurrenceCount": 33,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-678d3838a6",
@@ -6610,8 +6935,9 @@
       "cooccurrenceCount": 151,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-0c292e6ab1",
@@ -6630,8 +6956,9 @@
       "cooccurrenceCount": 310,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ffe6435908",
@@ -6650,8 +6977,9 @@
       "cooccurrenceCount": 50,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-db2f747d2e",
@@ -6670,8 +6998,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-5e22d5d874",
@@ -6690,8 +7019,9 @@
       "cooccurrenceCount": 37,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b7594fe1ce",
@@ -6710,8 +7040,9 @@
       "cooccurrenceCount": 8,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6ae7763e51",
@@ -6730,8 +7061,9 @@
       "cooccurrenceCount": 11,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f7b2feac71",
@@ -6750,8 +7082,9 @@
       "cooccurrenceCount": 12,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-85c97e590f",
@@ -6770,8 +7103,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-91702500cd",
@@ -6790,8 +7124,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b99856c2e2",
@@ -6810,8 +7145,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-b0e8664736",
@@ -6830,8 +7166,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-750cf29e8f",
@@ -6850,8 +7187,9 @@
       "cooccurrenceCount": 29,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4ccd8cf74e",
@@ -6870,8 +7208,9 @@
       "cooccurrenceCount": 99,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d63a25e3e8",
@@ -6890,8 +7229,9 @@
       "cooccurrenceCount": 16,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-55e334c1f8",
@@ -6910,8 +7250,9 @@
       "cooccurrenceCount": 716,
       "corpusCandidateStatus": "withheld_ambiguous",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e07328f465",
@@ -6930,8 +7271,9 @@
       "cooccurrenceCount": 53,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-840f943d45",
@@ -6950,8 +7292,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-63d17d20be",
@@ -6970,8 +7313,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-20d0306618",
@@ -6990,8 +7334,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ec50c440d9",
@@ -7010,8 +7355,9 @@
       "cooccurrenceCount": 25,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-183e9764cb",
@@ -7030,8 +7376,9 @@
       "cooccurrenceCount": 85,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-1a94ce65ac",
@@ -7050,8 +7397,9 @@
       "cooccurrenceCount": 251,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a3315c487b",
@@ -7070,8 +7418,9 @@
       "cooccurrenceCount": 115,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-ec9522baac",
@@ -7090,8 +7439,9 @@
       "cooccurrenceCount": 17,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-4dd49e5f3b",
@@ -7110,8 +7460,9 @@
       "cooccurrenceCount": 18,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-7b66bca49c",
@@ -7130,8 +7481,9 @@
       "cooccurrenceCount": 18,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-00e1f2c815",
@@ -7150,8 +7502,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-8a7ad852e6",
@@ -7170,8 +7523,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-07c7208caf",
@@ -7190,8 +7544,9 @@
       "cooccurrenceCount": 19,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3dc8cb4c7f",
@@ -7210,8 +7565,9 @@
       "cooccurrenceCount": 9,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3b82b83bae",
@@ -7230,8 +7586,9 @@
       "cooccurrenceCount": 14,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-766d7f39f4",
@@ -7250,8 +7607,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-f88bbf4eee",
@@ -7270,8 +7628,9 @@
       "cooccurrenceCount": 4,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-e55fd6d233",
@@ -7290,8 +7649,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-66bfba01c3",
@@ -7312,11 +7672,12 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
+      "reviewStatus": "source-evidence-qualified",
       "publicationStatus": "published",
       "mergedFrom": [
         "napis"
-      ]
+      ],
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-a9a76c2d70",
@@ -7335,8 +7696,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-6b90faaea7",
@@ -7355,8 +7717,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-d309eb9316",
@@ -7375,8 +7738,9 @@
       "cooccurrenceCount": 18,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-57b56e44e8",
@@ -7395,8 +7759,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-3783fc0fba",
@@ -7415,8 +7780,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "word-29c7381b1f",
@@ -7435,8 +7801,9 @@
       "cooccurrenceCount": 3,
       "corpusCandidateStatus": "candidate",
       "source": "batak-indo-alignment-engine phase2 Bible-only co-occurrence",
-      "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "reviewStatus": "source-evidence-qualified",
+      "publicationStatus": "published",
+      "qualityPolicyVersion": "source-evidence-v1"
     },
     {
       "id": "sentence-10fedcf820",

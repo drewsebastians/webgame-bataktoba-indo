@@ -1,45 +1,27 @@
-# First Lesson Unlock Plan — Batak Toba Play
+# First Lesson Unlock Plan — Batak Toba Play (Source-Evidence Model v2)
 
-**Safest candidate (low cultural risk, clear provenance):** `angka` (Angka Batak Toba).
+**Governance:** Human review removed 2026-09-01. Publication requires `source-evidence-qualified` deterministic gates, not `human-reviewed`.
+
+**Safest candidate:** `angka` (Angka Batak Toba) — still preferred low-risk.
 
 ## Why angka
-- Smallest gap to threshold: `pool 5 / 8 need 3` (vs keluarga 0 need 8, sapaan 0 need 8)
-- Review rollup currently `corpus-derived-beta`, provenance Bible corpus co-occurrence (high/medium confidence)
-- Beginner-friendly, low cultural sensitivity vs kinship/adat
-- Supplements available in `data/candidates/lesson-drafts.json:angka` 8 drafts (`sada, dua, opat, lima, walu, sampulu, saratus, saribu`) — but **not** used for unlock; need corpus items, not drafts.
+- Smallest gap: `pool 5 / 8 need 3` (vs keluarga 0, sapaan 0)
+- Current rollup `corpus-derived-beta`, provenance `alignment-engine` high/medium confidence
+- Supplements `lesson-drafts.json:angka` 8 `editorial-draft` not evidence (not used)
 
-## Recalculated Evidence (2026-08-30, `data/candidates/word-pairs.json` vs `data/published/word-pairs.json`)
-- Published words: 367
-- Candidates words: 367
-- Candidate-but-not-published: **0** (every candidate is already published; `notPublished = []`)
-- `angka` current published IDs (5): `word-0880cf2284`, `word-141862f84e`, `word-3991eb4b1f`, `word-92add2f91e`, `word-cda58024a5`
-- Additional source-backed candidate IDs that could raise 5→8: **0** (no genuinely additional, non-duplicate, source-backed candidate exists)
-- Draft supplements (`lesson-drafts.json:angka` 8) are `editorial-draft` without corpus provenance — explicitly excluded per safety rules
-- Duplicate visible labels: checked via `check-site` (0 duplicates)
-- Provenance for every candidate: `sourceType corpus-derived`, `confidenceLabel high/medium`
+## Recalculated Evidence (2026-09-01, alignment-engine `fb999a9`)
+- Published words 367, candidates 367, notPublished 0
+- `angka` IDs (5): `word-0880cf2284` (ualu→delapan), `word-141862f84e` (sia→sembilan), `word-3991eb4b1f` (pitu→tujuh), `word-92add2f91e` (tolu→tiga), `word-cda58024a5` (onom→enam)
+- Additional source-backed candidates in current DB snapshot: **0** (see `artifacts/source-expansion/angka-evidence-candidates.json`)
+- Drafts excluded per safety.
 
-## Outcome B — First Lesson Cannot Be Unlocked By Review Alone
-`5 remains 5` after reviewing only the existing five. **At least 3 genuinely additional, non-duplicate, source-backed candidate items must be acquired first.**
+## Path Forward (No Human Review)
+`5 remains 5` until **3 genuinely additional source-evidence-qualified items** are ingested from `drewsebastians/batak-indo-alignment-engine` pinned `fb999a9` or approved external source.
 
-**External/source work required:**
-- Re-run `tools/build-learning-data.py` with a relaxed proper-name/stopword filter that preserves additional angka candidates, OR curate new angka items with documented provenance (e.g., from a separate angka wordlist with `sourceReference`), OR import from an approved external angka list with licensing.
-- The existing `review:queue` `artifacts/review/review-queue.json` already prioritizes drafts, but drafts cannot unlock without source; new candidates must be added to `data/candidates/word-pairs.json` (or `data/reviewed/overrides.json` with `approvedMeaning` + `sourceType human-curated` + `reviewStatus human-reviewed`) before publication.
+**Next:** `npm run corpus:inspect` → `source:validate` → `source:preview` → `source:import --apply` (adds to candidate) → automated qualification (evidence gates) → `content:publish` (DB-independent) → `angka` 5→8 → `topics.json` `public-indexable` → `sitemap` +1 → `LearningResource`.
 
-## Exact IDs (current published pool for angka)
-`word-0880cf2284`, `word-141862f84e`, `word-3991eb4b1f`, `word-92add2f91e`, `word-cda58024a5` (5)
+**When batch exists:** No `reviewer`/`reviewedAt` needed; items become `source-evidence-qualified` via deterministic `qualityPolicyVersion` (see `SOURCE_EVIDENCE_PUBLICATION_POLICY`), then published if `published` + threshold.
 
-**Minimum review batch *if* 3 additional source-backed items existed:** 3 `human-reviewed` words that are angka-themed, each requiring `itemId`, `decision approve`, `reviewer`, `reviewedAt`, optional `approvedMeaning`/`alternatives`/`difficulty`.
+**Tests after:** `npm run verify:release` (no `review:validate` for human).
 
-## What reviewer would verify (when batch exists)
-For each of 3: Batak numeral vs Indonesian (`sada→satu` etc. if candidate), alternatives, no duplicate visible label, usage note optional — without pre-filled approval.
-
-## What would become public (when batch exists)
-- `data/published/lessons.json` `angka` `published` with `8` `itemIds` + `reviewRollup` maybe `mixed`/`human-reviewed` if 3 approved
-- `data/published/topics.json` `angka` `poolItems 8` + `pageStatus public-indexable` + `sitemap` `+1` with `<lastmod>` + `LearningResource` with `dateModified` from `site.config`
-- Topic page `learn/angka/` would gain mini-quiz eligibility (≥4 already) and lesson link, correction still.
-
-## Tests after approval
-`npm run review:validate && npm run review:preview && npm run content:publish (DB) && npm run verify:release`
-
-*Do not make linguistic judgments here; reviewer decides. This update corrects the prior plan that implied 3 additional candidates already existed.*
-
+*Source-evidence-qualified, not human-verified; see `GOVERNANCE_DECISION_NO_HUMAN_REVIEW.md`.*

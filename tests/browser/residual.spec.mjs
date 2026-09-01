@@ -49,8 +49,8 @@ test("dictionary highlight, filters, practice action", async ({ page }) => {
   await page.locator("#dictionary-search").fill("deng");
   await expect(page.locator(".result-row mark").first()).toHaveText(/deng/i);
 
-  // review-status filter excludes beta sentences pool already; corpus-derived stays
-  await page.locator("#dict-review").selectOption("corpus-derived");
+  // review-status filter excludes beta sentences pool already; source-evidence-qualified stays
+  await page.locator("#dict-review").selectOption("source-evidence-qualified");
   await expect(page.locator(".result-row").first()).toBeVisible();
 
   // difficulty filter exists but disabled while metadata is null

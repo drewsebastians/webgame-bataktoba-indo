@@ -172,15 +172,22 @@ if (learning.length < 100) {
   }
 }
 
-// --- Honest review statuses --------------------------------------------------
+// --- Honest review statuses (source-evidence model v2) ---------------------------
 {
   const allowedReviewStatus = new Set([
     "candidate",
     "corpus-derived",
+    "source-evidence-qualified",
     "machine-reviewed",
-    "human-reviewed",
+    "human-reviewed", // legacy, retained for migration
     "needs-revision",
     "beta-unreviewed",
+    "evidence-insufficient",
+    "conflicted",
+    "source-blocked",
+    "reported",
+    "rejected",
+    "archived",
   ]);
   const humanReviewedClaims = [];
   for (const item of [...words, ...phrases, ...sentences]) {

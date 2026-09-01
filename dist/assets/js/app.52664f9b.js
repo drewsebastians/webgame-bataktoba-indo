@@ -315,6 +315,7 @@ async function initDictionary() {
         [
           ["all", "Semua status"],
           ["corpus-derived", "corpus-derived"],
+          ["source-evidence-qualified", "source-evidence-qualified"],
           ["beta-unreviewed", "beta-unreviewed"],
           ["human-reviewed", "human-reviewed"],
         ],
