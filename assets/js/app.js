@@ -317,7 +317,6 @@ async function initDictionary() {
           ["corpus-derived", "corpus-derived"],
           ["source-evidence-qualified", "source-evidence-qualified"],
           ["beta-unreviewed", "beta-unreviewed"],
-          ["human-reviewed", "human-reviewed"],
         ],
         filters.review,
         (v) => {

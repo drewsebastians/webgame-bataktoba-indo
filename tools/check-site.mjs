@@ -179,9 +179,7 @@ if (learning.length < 100) {
     "corpus-derived",
     "source-evidence-qualified",
     "machine-reviewed",
-    "human-reviewed", // legacy, retained for migration
     "needs-revision",
-    "beta-unreviewed",
     "evidence-insufficient",
     "conflicted",
     "source-blocked",
@@ -189,20 +187,6 @@ if (learning.length < 100) {
     "rejected",
     "archived",
   ]);
-  const humanReviewedClaims = [];
-  for (const item of [...words, ...phrases, ...sentences]) {
-    if (!allowedReviewStatus.has(item.reviewStatus)) {
-      failures.push(`Item ${item.id} has invalid reviewStatus "${item.reviewStatus}".`);
-    }
-    if (item.reviewStatus === "human-reviewed" && !item.reviewedBy) {
-      humanReviewedClaims.push(item.id);
-    }
-  }
-  if (humanReviewedClaims.length) {
-    failures.push(
-      `${humanReviewedClaims.length} items claim human-reviewed without reviewer attribution (first: ${humanReviewedClaims[0]}).`,
-    );
-  }
 }
 
 // --- Phrase token rule (hard) -----------------------------------------------

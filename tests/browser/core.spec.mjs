@@ -83,8 +83,8 @@ test.describe("core learning flows", () => {
 
   test("dictionary: search opens detail with correction link; save persists", async ({ page }) => {
     await page.goto("/dictionary/");
-    // 'dengke -> ikan' is a real published pair; 'anak' intentionally is not.
-    await page.locator("#dictionary-search").fill("dengke");
+    // 'aek -> air' is a real published pair from canonical corpus.
+    await page.locator("#dictionary-search").fill("aek");
     const firstRow = page.locator(".result-row").first();
     await firstRow.click();
     const correction = page.getByRole("link", { name: "Lapor koreksi" }).first();
@@ -150,7 +150,8 @@ test.describe("security & privacy invariants", () => {
   });
 
   test("draft vocabulary never renders publicly", async ({ page }) => {
-    await page.goto("/learn/keluarga/");
+    // Use 'sapaan' which has 1 pool item and is not published
+    await page.goto("/learn/sapaan/");
     const body = (await page.textContent("body"))?.toLowerCase() ?? "";
     for (const banned of ["anggi", "namboru", "hula-hula"]) {
       expect(body).not.toContain(banned);

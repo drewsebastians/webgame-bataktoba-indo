@@ -6,16 +6,19 @@
       "title": "Angka Batak Toba",
       "description": "Angka dasar dari satu sampai seribu dalam Bahasa Batak Toba, dilengkapi latihan pengenalan.",
       "level": 1,
-      "poolItems": 5,
+      "poolItems": 8,
       "itemIds": [
+        "phrase-e7964a513a",
         "word-0880cf2284",
         "word-141862f84e",
+        "word-345dc8ebbc",
         "word-3991eb4b1f",
         "word-92add2f91e",
-        "word-cda58024a5"
+        "word-cda58024a5",
+        "word-cf2a15e39b"
       ],
-      "pageStatus": "public-noindex",
-      "indexability": "noindex,follow",
+      "pageStatus": "public-indexable",
+      "indexability": "index",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -23,10 +26,19 @@
       "title": "Kosakata Keluarga Batak Toba",
       "description": "Panduan tema keluarga; materi terverifikasi belum tersedia untuk lesson penuh.",
       "level": 1,
-      "poolItems": 0,
-      "itemIds": [],
-      "pageStatus": "public-noindex",
-      "indexability": "noindex,follow",
+      "poolItems": 8,
+      "itemIds": [
+        "word-0455b825fa",
+        "word-2268127948",
+        "word-4645a5dca2",
+        "word-65331c1f37",
+        "word-a5db3ef5fa",
+        "word-a8599d289d",
+        "word-af09240434",
+        "word-bbdcecbee6"
+      ],
+      "pageStatus": "public-indexable",
+      "indexability": "index",
       "reviewRollup": "corpus-derived-beta"
     },
     {
@@ -34,8 +46,10 @@
       "title": "Sapaan Dasar Batak Toba",
       "description": "Panduan tema sapaan; materi masih menunggu sumber/review yang memadai.",
       "level": 1,
-      "poolItems": 0,
-      "itemIds": [],
+      "poolItems": 1,
+      "itemIds": [
+        "word-afd0af457e"
+      ],
       "pageStatus": "public-noindex",
       "indexability": "noindex,follow",
       "reviewRollup": "corpus-derived-beta"
@@ -45,10 +59,13 @@
       "title": "Makanan dan Minuman",
       "description": "Kosakata makanan, minuman, dan bahan dapur sehari-hari.",
       "level": 1,
-      "poolItems": 2,
+      "poolItems": 5,
       "itemIds": [
-        "word-6a7710b417",
-        "word-be83d23d14"
+        "word-3d11131fd4",
+        "word-49ee738519",
+        "word-8d7a502f2b",
+        "word-9eec74e0f6",
+        "word-e3b8a06956"
       ],
       "pageStatus": "public-noindex",
       "indexability": "noindex,follow",
@@ -59,12 +76,14 @@
       "title": "Waktu dan Hari",
       "description": "Kata-kata untuk waktu, hari, dan penanda jadwal sehari-hari.",
       "level": 2,
-      "poolItems": 4,
+      "poolItems": 6,
       "itemIds": [
-        "word-29ffff825b",
-        "word-5ce31c337b",
         "word-859fe57a60",
-        "word-96cd17d1f0"
+        "word-96cd17d1f0",
+        "word-997a13221c",
+        "word-bb38bc7d65",
+        "word-e0866d9f68",
+        "word-f4daaf9983"
       ],
       "pageStatus": "public-noindex",
       "indexability": "noindex,follow",
@@ -75,13 +94,19 @@
       "title": "Alam Sekitar",
       "description": "Kosakata alam: langit, tanah, air, gunung, dan tanda-tanda cuaca.",
       "level": 2,
-      "poolItems": 2,
+      "poolItems": 8,
       "itemIds": [
+        "word-3a08645b4e",
+        "word-5feef46a2d",
+        "word-85ce40d2df",
+        "word-88ac945bb5",
         "word-c92b3480a5",
-        "word-dd4c2312e5"
+        "word-dd4c2312e5",
+        "word-e3b8a06956",
+        "word-f4d5d97c56"
       ],
-      "pageStatus": "public-noindex",
-      "indexability": "noindex,follow",
+      "pageStatus": "public-indexable",
+      "indexability": "index",
       "reviewRollup": "corpus-derived-beta"
     }
   ]

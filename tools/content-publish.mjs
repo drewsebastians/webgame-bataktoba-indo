@@ -15,6 +15,14 @@ const root = join(fileURLToPath(new URL("../", import.meta.url)));
 function loadJson(p) { return JSON.parse(readFileSync(join(root, p), "utf8")); }
 function saveJson(p, data) { writeFileSync(join(root, p), JSON.stringify(data, null, 2) + "\n", "utf8"); }
 
+// 0. Licensing hard gate — block any publication if upstream requires legal review
+const manifest = loadJson("data/sources/alignment-engine-manifest.json");
+if (manifest.licenseStatus === "REQUIRES_LEGAL_REVIEW" || manifest.publicationAllowed === false) {
+  console.error("content:publish blocked — upstream license REQUIRES_LEGAL_REVIEW, publicationAllowed=false");
+  console.error("Resolve licensing (see docs/CORPUS_LICENSING_STATUS.md) before publishing.");
+  process.exit(1);
+}
+
 // 1. Validate source registry and staging imports (if any)
 const stagingDir = join(root, "data/sources/staging");
 let stagingRecords = [];

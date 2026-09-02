@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T18:54:23Z",
+  "qualityPolicyVersion": "source-evidence-v2",
+  "canonicalSource": "batak_alignment_canonical.sqlite (SHA 3a34a54ddbe2)",
+  "totals": {
+    "wordCandidates": 678,
+    "phraseCandidates": 120,
+    "sentenceCandidates": 80,
+    "publishedWords": 591,
+    "publishedPhrases": 60,
+    "publishedSentences": 80
+  },
+  "qualityGateResults": {
+    "words": {
+      "qualified": 591,
+      "conflicted": 0,
+      "insufficient": 87
+    },
+    "phrases": {
+      "qualified": 60,
+      "conflicted": 14,
+      "insufficient": 46
+    },
+    "sentences": {
+      "qualified": 80,
+      "conflicted": 0,
+      "insufficient": 0
+    }
+  },
+  "conflictDetails": {
+    "words": [],
+    "phrases": [
+      {
+        "id": "phrase-eab8a6da35",
+        "batak": "aek na sumar",
+        "indonesia": "air bah",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-3dc94e9249",
+            "competitorIndonesia": "banjir bandang",
+            "scoreDiff": 0.16
+          }
+        ]
+      },
+      {
+        "id": "phrase-69c6c6a520",
+        "batak": "na bodari",
+        "indonesia": "tadi malam,bdk bot",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-777624cbcd",
+            "competitorIndonesia": "tadi malam",
+            "scoreDiff": 0
+          }
+        ]
+      },
+      {
+        "id": "phrase-777624cbcd",
+        "batak": "na bodari",
+        "indonesia": "tadi malam",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-69c6c6a520",
+            "competitorIndonesia": "tadi malam,bdk bot",
+            "scoreDiff": 0
+          }
+        ]
+      },
+      {
+        "id": "phrase-c833b20447",
+        "batak": "antu asu",
+        "indonesia": "sejenis anjing serigala",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-27f8ec2b74",
+            "competitorIndonesia": "sej anjing serigala",
+            "scoreDiff": 0.12
+          }
+        ]
+      },
+      {
+        "id": "phrase-7f6663e8c8",
+        "batak": "junggul meang",
+        "indonesia": "sejenis kumbang",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-8538e66d9a",
+            "competitorIndonesia": "sej kumbang",
+            "scoreDiff": 0.13
+          }
+        ]
+      },
+      {
+        "id": "phrase-1c902a6c29",
+        "batak": "on pe",
+        "indonesia": "maka, oleh sebab itu; bdk pe i; onsit:: jora; mangonsit, melarang, menghukum seseorang agar memperbaiki dirinya, menegur supaya mengubah sikap",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-33fc395838",
+            "competitorIndonesia": "oleh sebab itu",
+            "scoreDiff": 0
+          }
+        ]
+      },
+      {
+        "id": "phrase-33fc395838",
+        "batak": "on pe",
+        "indonesia": "oleh sebab itu",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-1c902a6c29",
+            "competitorIndonesia": "maka, oleh sebab itu; bdk pe i; onsit:: jora; mangonsit, melarang, menghukum seseorang agar memperbaiki dirinya, menegur supaya mengubah sikap",
+            "scoreDiff": 0
+          }
+        ]
+      },
+      {
+        "id": "phrase-e01d302074",
+        "batak": "ari logo",
+        "indonesia": "musim kering",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-06285feb1a",
+            "competitorIndonesia": "musim kemarau",
+            "scoreDiff": 0.1
+          }
+        ]
+      },
+      {
+        "id": "phrase-3dc94e9249",
+        "batak": "aek na sumar",
+        "indonesia": "banjir bandang",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-eab8a6da35",
+            "competitorIndonesia": "air bah",
+            "scoreDiff": 0.16
+          }
+        ]
+      },
+      {
+        "id": "phrase-7db798e197",
+        "batak": "anak siangkangan",
+        "indonesia": "anak pertama",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-ac0163b68d",
+            "competitorIndonesia": "anak sulung",
+            "scoreDiff": 0.09
+          }
+        ]
+      },
+      {
+        "id": "phrase-b6097f3663",
+        "batak": "bohi ampinan",
+        "indonesia": "wajah baik-baik",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-6605e27ce0",
+            "competitorIndonesia": "sifat ingin dikasihani",
+            "scoreDiff": 0.09
+          }
+        ]
+      },
+      {
+        "id": "phrase-c374009fd5",
+        "batak": "boru siampudan",
+        "indonesia": "putri terakhir",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-62e1a2cc6c",
+            "competitorIndonesia": "putri bungsu",
+            "scoreDiff": 0.1
+          }
+        ]
+      },
+      {
+        "id": "phrase-9477fb6766",
+        "batak": "hombar balok",
+        "indonesia": "tetangga di perladangan",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-d6c95e10cc",
+            "competitorIndonesia": "tetangga di perladangan atau di persawahan",
+            "scoreDiff": 0
+          }
+        ]
+      },
+      {
+        "id": "phrase-d6c95e10cc",
+        "batak": "hombar balok",
+        "indonesia": "tetangga di perladangan atau di persawahan",
+        "conflicts": [
+          {
+            "type": "batak-ambiguity",
+            "competitorId": "phrase-9477fb6766",
+            "competitorIndonesia": "tetangga di perladangan",
+            "scoreDiff": 0
+          }
+        ]
+      }
+    ],
+    "sentences": []
+  }
+}

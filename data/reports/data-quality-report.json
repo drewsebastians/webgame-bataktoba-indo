@@ -1,94 +1,36 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T02:02:34.629Z",
+  "generatedAt": "2026-09-01T18:54:23Z",
   "stageCounts": {
-    "rawWordRows": 764,
-    "rawPhraseRows": 0,
-    "rawSentenceRows": 2000,
-    "wordCandidates": 367,
-    "phraseCandidates": 0,
+    "rawWordRows": 7050,
+    "rawPhraseRows": 20974,
+    "rawSentenceRows": 764,
+    "wordCandidates": 678,
+    "phraseCandidates": 120,
     "sentenceCandidates": 80,
-    "wordPairs": 367,
-    "phrasePairs": 0,
+    "wordPairs": 591,
+    "phrasePairs": 60,
     "sampleSentences": 80,
-    "learningItems": 447,
-    "publishedLessons": 0,
-    "draftLessons": 6
+    "learningItems": 731,
+    "publishedLessons": 3,
+    "draftLessons": 3
   },
   "excludedByReason": {
-    "word.batak-token-not-clean": 152,
-    "word.probable-transliterated-name": 224,
-    "word.indonesia-token-not-clean": 12
+    "evidence-insufficient": 133,
+    "source-evidence-conflicted": 14
   },
-  "mergedDuplicateLabels": [
-    {
-      "field": "batak",
-      "label": "sadrak",
-      "keptId": "word-b1287f03c5",
-      "foldedAlternative": "abednego"
-    },
-    {
-      "field": "batak",
-      "label": "mesak",
-      "keptId": "word-12c69adb47",
-      "foldedAlternative": "abednego"
-    },
-    {
-      "field": "batak",
-      "label": "abednego",
-      "keptId": "word-aacb4d1dfd",
-      "foldedAlternative": "mesakh"
-    },
-    {
-      "field": "batak",
-      "label": "nidua",
-      "keptId": "word-4a50dc05c2",
-      "foldedAlternative": "benangnya"
-    },
-    {
-      "field": "batak",
-      "label": "marngalu",
-      "keptId": "word-bc3a1a32f7",
-      "foldedAlternative": "memamah"
-    },
-    {
-      "field": "batak",
-      "label": "bosenai",
-      "keptId": "word-b5cc5164b8",
-      "foldedAlternative": "syetar-boznai"
-    },
-    {
-      "field": "batak",
-      "label": "napis",
-      "keptId": "word-66bfba01c3",
-      "foldedAlternative": "nafish"
-    },
-    {
-      "field": "indonesia",
-      "label": "sadrakh",
-      "keptId": "word-12c69adb47",
-      "foldedAlternative": "abednego"
-    },
-    {
-      "field": "indonesia",
-      "label": "yaelam",
-      "keptId": "word-b9ef039f00",
-      "foldedAlternative": "jalam"
-    }
-  ],
-  "mergedDuplicateLabelTotal": 9,
+  "mergedDuplicateLabels": [],
   "phraseRejections": {},
   "notes": [
-    "Theme tags applied to 13 items."
+    "Canonical corpus: batak_alignment_canonical.sqlite (SHA 3a34a54ddbe2)",
+    "Quality gate: source-evidence-v2 tier-based",
+    "Words: 591 qualified, 0 conflicted, 87 insufficient",
+    "Phrases: 60 qualified, 14 conflicted, 46 insufficient",
+    "Sentences: 80 qualified, 0 conflicted, 0 insufficient",
+    "Theme tags applied to 35 items."
   ],
   "migration": {
-    "mapped": 485,
-    "unmapped": 91
-  },
-  "incrementalPublish": {
-    "stagingRecords": 0,
-    "reviewOverrides": 0,
-    "changedItems": 367,
-    "note": "DB-independent incremental; full rebuild via content:rebuild-full if needed"
+    "mapped": 0,
+    "unmapped": 0
   }
 }

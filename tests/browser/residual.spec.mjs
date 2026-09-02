@@ -33,7 +33,8 @@ test("memory game keeps cards face-down until revealed", async ({ page }) => {
 });
 
 test("topic page stays honest when zero lessons are published", async ({ page }) => {
-  await page.goto("/learn/keluarga/");
+  // Use 'sapaan' which has 1 pool item and is not published
+  await page.goto("/learn/sapaan/");
   await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
   await expect(page.getByText(/Data belum bisa dimuat/)).toHaveCount(0);
   // corpus-derived words for themes with tags still render
@@ -46,11 +47,11 @@ test("topic page stays honest when zero lessons are published", async ({ page })
 
 test("dictionary highlight, filters, practice action", async ({ page }) => {
   await page.goto("/dictionary/");
-  await page.locator("#dictionary-search").fill("deng");
-  await expect(page.locator(".result-row mark").first()).toHaveText(/deng/i);
+  await page.locator("#dictionary-search").fill("aek");
+  await expect(page.locator(".result-row mark").first()).toHaveText(/aek/i);
 
-  // review-status filter excludes beta sentences pool already; source-evidence-qualified stays
-  await page.locator("#dict-review").selectOption("source-evidence-qualified");
+  // review-status filter: corpus-derived items should show
+  await page.locator("#dict-review").selectOption("corpus-derived");
   await expect(page.locator(".result-row").first()).toBeVisible();
 
   // difficulty filter exists but disabled while metadata is null

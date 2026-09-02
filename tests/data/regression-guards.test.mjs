@@ -10,15 +10,32 @@ describe("regression guards for blockers", () => {
     const words = JSON.parse(readFileSync(join(root, "data/published/word-pairs.json"), "utf8"));
     assert.equal(words.items.filter((i) => i.reviewStatus === "human-reviewed").length, 0);
   });
-  it("no qualifying lesson => 0 published", () => {
+
+  it("published lessons only for topics with >= 8 pool items", () => {
     const lessons = JSON.parse(readFileSync(join(root, "data/published/lessons.json"), "utf8"));
-    assert.equal(lessons.counts.publishedLessons, 0);
-    assert.equal(lessons.published.length, 0);
+    const topics = JSON.parse(readFileSync(join(root, "data/published/topics.json"), "utf8")).topics;
+    const MIN_POOL = 8;
+
+    // Every published lesson must have >= 8 pool items
+    for (const lesson of lessons.published) {
+      const topic = topics.find(t => t.slug === lesson.slug);
+      assert.ok(topic, `Topic ${lesson.slug} not found`);
+      assert.ok(topic.poolItems >= MIN_POOL, `Lesson ${lesson.slug} published but poolItems=${topic.poolItems} < ${MIN_POOL}`);
+    }
+
+    // Every topic with >= 8 pool items should have a published lesson
+    for (const topic of topics) {
+      if (topic.poolItems >= MIN_POOL) {
+        const lesson = lessons.published.find(l => l.slug === topic.slug);
+        assert.ok(lesson, `Topic ${topic.slug} has ${topic.poolItems} pool items but no published lesson`);
+      }
+    }
   });
+
   it("thin topic => noindex + absent sitemap", () => {
-    const topics = JSON.parse(readFileSync(join(root, "data/published/topics.json"), "utf8"));
+    const topics = JSON.parse(readFileSync(join(root, "data/published/topics.json"), "utf8")).topics;
     const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
-    for (const t of topics.topics) {
+    for (const t of topics) {
       if (t.poolItems < 8) {
         assert.equal(t.pageStatus, "public-noindex");
         const url = `https://webgame-bataktoba-indo.pages.dev/learn/${t.slug}/`;
@@ -26,6 +43,7 @@ describe("regression guards for blockers", () => {
       }
     }
   });
+
   it("unreviewed sentences => no reorder/fill-blank activation", () => {
     const sents = JSON.parse(readFileSync(join(root, "data/published/sample-sentences.json"), "utf8"));
     assert.equal(sents.items.every((s) => s.reviewStatus === "beta-unreviewed"), true);
@@ -34,12 +52,14 @@ describe("regression guards for blockers", () => {
     // Only way to activate reorder is via reviewed gate — currently no activation in production
     assert.equal(appJs.includes("Susun Kalimat") && appJs.includes("10.6"), false); // not in UI mode list
   });
+
   it("no licensed audio => no Listening", () => {
     const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
     assert.equal(pkg.scripts["test"]?.includes("listening"), false);
     const html = readFileSync(join(root, "games/index.html"), "utf8");
     assert.equal(html.toLowerCase().includes("listening"), false);
   });
+
   it("no valid Publisher ID => no ads script + no production ads.txt", () => {
     const config = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "utf8"));
     assert.equal(config.adsensePublisherId || "", "");
@@ -55,6 +75,7 @@ describe("regression guards for blockers", () => {
     })();
     assert.equal(hasAdsTxt, false);
   });
+
   it("no consent => no analytics/ads network (verified via browser tour)", () => {
     // Unit: analytics adapter default OFF tested elsewhere; here ensure config
     const siteConfig = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "utf8"));
