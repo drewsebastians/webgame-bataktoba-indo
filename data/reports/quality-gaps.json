@@ -1,96 +1,55 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T18:54:23Z",
+  "generatedAt": "2026-09-02T07:30:00Z",
+  "note": "Licensing: REQUIRES_LEGAL_REVIEW - publicationAllowed: false. No themes are publishable pending rights resolution.",
   "themes": {
     "angka": {
       "title": "Angka Batak Toba",
-      "poolItems": 8,
+      "poolItems": 0,
       "needed": 8,
-      "shortfall": 0,
-      "publishable": true,
-      "itemIds": [
-        "word-92add2f91e",
-        "word-cf2a15e39b",
-        "word-cda58024a5",
-        "word-3991eb4b1f",
-        "word-345dc8ebbc",
-        "word-141862f84e",
-        "word-0880cf2284",
-        "phrase-e7964a513a"
-      ]
+      "shortfall": 8,
+      "publishable": false,
+      "itemIds": []
     },
     "keluarga": {
       "title": "Kosakata Keluarga Batak Toba",
-      "poolItems": 8,
+      "poolItems": 0,
       "needed": 8,
-      "shortfall": 0,
-      "publishable": true,
-      "itemIds": [
-        "word-a5db3ef5fa",
-        "word-2268127948",
-        "word-65331c1f37",
-        "word-bbdcecbee6",
-        "word-0455b825fa",
-        "word-4645a5dca2",
-        "word-a8599d289d",
-        "word-af09240434"
-      ]
+      "shortfall": 8,
+      "publishable": false,
+      "itemIds": []
     },
     "sapaan": {
       "title": "Sapaan Dasar Batak Toba",
-      "poolItems": 1,
+      "poolItems": 0,
       "needed": 8,
-      "shortfall": 7,
+      "shortfall": 8,
       "publishable": false,
-      "itemIds": [
-        "word-afd0af457e"
-      ]
+      "itemIds": []
     },
     "makanan": {
       "title": "Makanan dan Minuman",
-      "poolItems": 5,
+      "poolItems": 0,
       "needed": 8,
-      "shortfall": 3,
+      "shortfall": 8,
       "publishable": false,
-      "itemIds": [
-        "word-e3b8a06956",
-        "word-49ee738519",
-        "word-3d11131fd4",
-        "word-8d7a502f2b",
-        "word-9eec74e0f6"
-      ]
+      "itemIds": []
     },
     "waktu": {
       "title": "Waktu dan Hari",
-      "poolItems": 6,
+      "poolItems": 0,
       "needed": 8,
-      "shortfall": 2,
+      "shortfall": 8,
       "publishable": false,
-      "itemIds": [
-        "word-997a13221c",
-        "word-859fe57a60",
-        "word-bb38bc7d65",
-        "word-96cd17d1f0",
-        "word-f4daaf9983",
-        "word-e0866d9f68"
-      ]
+      "itemIds": []
     },
     "alam": {
       "title": "Alam Sekitar",
-      "poolItems": 8,
+      "poolItems": 0,
       "needed": 8,
-      "shortfall": 0,
-      "publishable": true,
-      "itemIds": [
-        "word-e3b8a06956",
-        "word-c92b3480a5",
-        "word-dd4c2312e5",
-        "word-3a08645b4e",
-        "word-88ac945bb5",
-        "word-f4d5d97c56",
-        "word-85ce40d2df",
-        "word-5feef46a2d"
-      ]
+      "shortfall": 8,
+      "publishable": false,
+      "itemIds": []
     }
   }
 }

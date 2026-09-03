@@ -1,15 +1,21 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T18:54:23Z",
+  "generatedAt": "2026-09-02T07:30:00Z",
   "qualityPolicyVersion": "source-evidence-v2",
   "canonicalSource": "batak_alignment_canonical.sqlite (SHA 3a34a54ddbe2)",
+  "licenseStatus": "REQUIRES_LEGAL_REVIEW",
+  "publicationAllowed": false,
+  "note": "INTERNAL ONLY - Canonical corpus not licensed for public redistribution. These qualified counts are for internal validation only and NOT published.",
   "totals": {
     "wordCandidates": 678,
     "phraseCandidates": 120,
     "sentenceCandidates": 80,
-    "publishedWords": 591,
-    "publishedPhrases": 60,
-    "publishedSentences": 80
+    "internallyQualifiedWords": 591,
+    "internallyQualifiedPhrases": 60,
+    "internallyQualifiedSentences": 80,
+    "publishedWords": 0,
+    "publishedPhrases": 0,
+    "publishedSentences": 0
   },
   "qualityGateResults": {
     "words": {

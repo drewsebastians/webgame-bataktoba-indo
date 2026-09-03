@@ -13,6 +13,9 @@ describe("topic registry truth (pool 0 must not claim lexical availability)", ()
       "materi terverifikasi belum tersedia",
       "masih menunggu sumber/review",
       "Panduan tema",
+      "unlicensed",
+      "licensing blocked",
+      "rights pending",
     ];
     for (const t of topics.topics) {
       if (t.poolItems === 0) {
@@ -26,7 +29,7 @@ describe("topic registry truth (pool 0 must not claim lexical availability)", ()
             `topic ${t.slug} pool 0 should not claim "${phrase}" — description: "${t.description}"`,
           );
         }
-        // Must contain bounded framing
+        // Must contain bounded framing or licensing note
         const hasBounded = boundedPhrases.some((p) => desc.includes(p.toLowerCase()));
         assert.ok(hasBounded, `topic ${t.slug} with 0 items must use bounded description, got "${t.description}"`);
       }
@@ -44,8 +47,16 @@ describe("topic registry truth (pool 0 must not claim lexical availability)", ()
           false,
           `lessons.json ${slug} must not claim dalihan na tolu when pool 0`,
         );
+        const boundedPhrases = [
+          "panduan tema", 
+          "materi terverifikasi", 
+          "masih menunggu", 
+          "unlicensed", 
+          "licensing blocked",
+          "rights pending"
+        ];
         assert.ok(
-          lower.includes("panduan tema") || lower.includes("materi terverifikasi") || lower.includes("masih menunggu"),
+          boundedPhrases.some(p => lower.includes(p)),
           `lessons.json ${slug} should be bounded, got "${def.description}"`,
         );
       }

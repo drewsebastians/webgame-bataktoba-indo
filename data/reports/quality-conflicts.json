@@ -1,6 +1,9 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T18:54:23Z",
+  "generatedAt": "2026-09-02T07:30:00Z",
+  "licenseStatus": "REQUIRES_LEGAL_REVIEW",
+  "publicationAllowed": false,
+  "note": "INTERNAL ONLY - Canonical corpus not licensed for public redistribution. These conflicts are tracked internally but NOT published.",
   "items": [
     {
       "id": "phrase-eab8a6da35",
@@ -22,7 +25,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-69c6c6a520",
@@ -44,7 +47,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-777624cbcd",
@@ -66,7 +69,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-c833b20447",
@@ -88,7 +91,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-7f6663e8c8",
@@ -110,7 +113,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-1c902a6c29",
@@ -132,7 +135,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-33fc395838",
@@ -154,7 +157,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-e01d302074",
@@ -176,7 +179,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-3dc94e9249",
@@ -198,7 +201,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-7db798e197",
@@ -220,7 +223,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-b6097f3663",
@@ -242,7 +245,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-c374009fd5",
@@ -264,7 +267,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-9477fb6766",
@@ -286,7 +289,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     },
     {
       "id": "phrase-d6c95e10cc",
@@ -308,7 +311,7 @@
       "corpusCandidateStatus": "canonical",
       "source": "batak_alignment_canonical.sqlite lexicon_pairs (btk->ind)",
       "reviewStatus": "corpus-derived",
-      "publicationStatus": "published"
+      "publicationStatus": "evidence-insufficient"
     }
   ]
 }

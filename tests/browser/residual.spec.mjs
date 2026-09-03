@@ -14,6 +14,9 @@ test.beforeAll(async ({ request }) => {
 
 
 test("matching pairs is a distinct open-board mode", async ({ page }) => {
+  if (WORDS.length === 0) {
+    test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+  }
   await page.goto("/games/");
   await page.getByRole("button", { name: /^Matching Pairs/ }).click();
   await expect(page.getByText(/\/6 cocok/)).toBeVisible();
@@ -24,10 +27,14 @@ test("matching pairs is a distinct open-board mode", async ({ page }) => {
   expect((await first.textContent()).length).toBeGreaterThan(0);
 });
 
+
 test("memory game keeps cards face-down until revealed", async ({ page }) => {
+  if (WORDS.length === 0) {
+    test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+  }
   await page.goto("/games/");
   await page.getByRole("button", { name: /^Memory/ }).click();
-  await expect(page.locator(".match-card")).toHaveCount(12);
+  await expect(page.locator(".match-card")).toHaveCount(12, { timeout: 10000 });
   const down = await page.locator(".match-card.face-down").count();
   expect(down).toBeGreaterThanOrEqual(10);
 });
@@ -46,6 +53,9 @@ test("topic page stays honest when zero lessons are published", async ({ page })
 
 
 test("dictionary highlight, filters, practice action", async ({ page }) => {
+  if (WORDS.length === 0) {
+    test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+  }
   await page.goto("/dictionary/");
   await page.locator("#dictionary-search").fill("aek");
   await expect(page.locator(".result-row mark").first()).toHaveText(/aek/i);

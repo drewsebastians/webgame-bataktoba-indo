@@ -1,9 +1,12 @@
 import { test, expect } from "@playwright/test";
 
+const PUBLIC_SAFE = true; // Licensing blocks publication of corpus-derived content
+
 test.describe.configure({ mode: "serial" });
 
 test.describe("Matching Pairs timer (optional)", () => {
   test.beforeEach(async ({ page }) => {
+    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
     await page.goto("/games/");
     await page.getByRole("button", { name: /^Matching Pairs/ }).click();
   });

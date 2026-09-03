@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 
-describe("synthetic source→review→publish e2e (DB-independent)", () => {
+describe("synthetic source→review→publish e2e (DB-independent, public-safe)", () => {
   const fixture = JSON.parse(readFileSync(join(process.cwd(), "tests/fixtures/source-synthetic-angka.json"), "utf8"));
   const topicsBefore = JSON.parse(readFileSync(join(process.cwd(), "data/published/topics.json"), "utf8")).topics.find((t) => t.slug === "angka");
   const lessonsBefore = JSON.parse(readFileSync(join(process.cwd(), "data/published/lessons.json"), "utf8"));
@@ -66,26 +66,26 @@ describe("synthetic source→review→publish e2e (DB-independent)", () => {
     assert.equal(typeof masterExists, "boolean"); // just check we can determine
   });
 
-  it("lesson pool threshold logic works", () => {
+  it("lesson pool threshold logic works (public-safe: 0 pool items)", () => {
     const MIN_LESSON_POOL_ITEMS = 8;
-    const before = topicsBefore.poolItems;
-    const after = before + fixture.records.length;
+    const before = topicsBefore.poolItems; // 0 in public-safe mode
+    const after = before + fixture.records.length; // 0 + 3 = 3
     // Verify the threshold logic: if pool reaches MIN_LESSON_POOL_ITEMS, it becomes indexable
     const wouldBeIndexable = after >= MIN_LESSON_POOL_ITEMS;
-    assert.ok(typeof wouldBeIndexable === "boolean");
+    assert.equal(wouldBeIndexable, false); // 3 < 8
   });
 
-  it("topic indexability logic works", () => {
+  it("topic indexability logic works (public-safe: 0 pool items)", () => {
     const MIN_LESSON_POOL_ITEMS = 8;
-    const afterPool = topicsBefore.poolItems + 3;
+    const afterPool = topicsBefore.poolItems + 3; // 0 + 3 = 3
     const wouldBeIndexable = afterPool >= MIN_LESSON_POOL_ITEMS;
     // The logic is correct regardless of current pool size
-    assert.equal(typeof wouldBeIndexable, "boolean");
+    assert.equal(wouldBeIndexable, false);
   });
 
-  it("sitemap and LearningResource logic works", () => {
+  it("sitemap and LearningResource logic works (public-safe: 0 published lessons)", () => {
     // The test verifies the logic: when lessons are published, sitemap and LearningResource appear
-    const publishedLessonsBefore = lessonsBefore.counts.publishedLessons;
+    const publishedLessonsBefore = lessonsBefore.counts.publishedLessons; // 0 in public-safe
     const wouldBePublished = publishedLessonsBefore + 1; // if angka lesson gets published
     assert.equal(typeof wouldBePublished, "number");
   });

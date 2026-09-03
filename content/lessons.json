@@ -1,34 +1,34 @@
 {
-  "comment": "Lesson definitions. A lesson publishes only when its theme has enough corpus pool items (see MIN_LESSON_POOL_ITEMS). Titles must match actual content - never overpromise.",
+  "comment": "Lesson definitions. A lesson publishes only when its theme has enough corpus pool items (see MIN_LESSON_POOL_ITEMS). Titles must match actual content - never overpromise. Licensing: REQUIRES_LEGAL_REVIEW - publicationAllowed: false. All descriptions bounded pending rights resolution.",
   "lessons": {
     "angka": {
       "title": "Angka Batak Toba",
-      "description": "Angka dasar dari satu sampai seribu dalam Bahasa Batak Toba, dilengkapi latihan pengenalan.",
+      "description": "Panduan tema angka; materi terverifikasi belum tersedia untuk lesson penuh (licensing: REQUIRES_LEGAL_REVIEW).",
       "level": 1
     },
     "keluarga": {
       "title": "Kosakata Keluarga Batak Toba",
-      "description": "Panduan tema keluarga; materi terverifikasi belum tersedia untuk lesson penuh.",
+      "description": "Panduan tema keluarga; materi terverifikasi belum tersedia untuk lesson penuh (licensing: REQUIRES_LEGAL_REVIEW).",
       "level": 1
     },
     "sapaan": {
       "title": "Sapaan Dasar Batak Toba",
-      "description": "Panduan tema sapaan; materi masih menunggu sumber/review yang memadai.",
+      "description": "Panduan tema sapaan; materi terverifikasi belum tersedia untuk lesson penuh (licensing: REQUIRES_LEGAL_REVIEW).",
       "level": 1
     },
     "makanan": {
       "title": "Makanan dan Minuman",
-      "description": "Kosakata makanan, minuman, dan bahan dapur sehari-hari.",
+      "description": "Panduan tema makanan; materi terverifikasi belum tersedia untuk lesson penuh (licensing: REQUIRES_LEGAL_REVIEW).",
       "level": 1
     },
     "waktu": {
       "title": "Waktu dan Hari",
-      "description": "Kata-kata untuk waktu, hari, dan penanda jadwal sehari-hari.",
+      "description": "Panduan tema waktu; materi terverifikasi belum tersedia untuk lesson penuh (licensing: REQUIRES_LEGAL_REVIEW).",
       "level": 2
     },
     "alam": {
       "title": "Alam Sekitar",
-      "description": "Kosakata alam: langit, tanah, air, gunung, dan tanda-tanda cuaca.",
+      "description": "Panduan tema alam; materi terverifikasi belum tersedia untuk lesson penuh (licensing: REQUIRES_LEGAL_REVIEW).",
       "level": 2
     }
   }

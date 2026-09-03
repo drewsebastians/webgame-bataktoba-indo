@@ -1,33 +1,31 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T18:54:23Z",
+  "generatedAt": "2026-09-02T07:30:00Z",
   "stageCounts": {
-    "rawWordRows": 7050,
-    "rawPhraseRows": 20974,
-    "rawSentenceRows": 764,
-    "wordCandidates": 678,
-    "phraseCandidates": 120,
-    "sentenceCandidates": 80,
-    "wordPairs": 591,
-    "phrasePairs": 60,
-    "sampleSentences": 80,
-    "learningItems": 731,
-    "publishedLessons": 3,
-    "draftLessons": 3
+    "rawWordRows": 0,
+    "rawPhraseRows": 0,
+    "rawSentenceRows": 0,
+    "wordCandidates": 0,
+    "phraseCandidates": 0,
+    "sentenceCandidates": 0,
+    "wordPairs": 0,
+    "phrasePairs": 0,
+    "sampleSentences": 0,
+    "learningItems": 0,
+    "publishedLessons": 0,
+    "draftLessons": 0
   },
   "excludedByReason": {
-    "evidence-insufficient": 133,
-    "source-evidence-conflicted": 14
+    "licensing-blocked": 0
   },
   "mergedDuplicateLabels": [],
   "phraseRejections": {},
   "notes": [
-    "Canonical corpus: batak_alignment_canonical.sqlite (SHA 3a34a54ddbe2)",
-    "Quality gate: source-evidence-v2 tier-based",
-    "Words: 591 qualified, 0 conflicted, 87 insufficient",
-    "Phrases: 60 qualified, 14 conflicted, 46 insufficient",
-    "Sentences: 80 qualified, 0 conflicted, 0 insufficient",
-    "Theme tags applied to 35 items."
+    "Licensing: REQUIRES_LEGAL_REVIEW - publicationAllowed: false",
+    "Canonical corpus (batak_alignment_canonical.sqlite) not licensed for public redistribution",
+    "Internal qualified inventory exists locally (591 words, 60 phrases, 80 sentences) but blocked from public exposure",
+    "Quality gate: source-evidence-v2 tier-based thresholds calibrated from canonical corpus",
+    "Internal qualified: 591 words, 60 phrases, 80 sentences (see local-only quality-status.json)"
   ],
   "migration": {
     "mapped": 0,

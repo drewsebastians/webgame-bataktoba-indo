@@ -6,7 +6,7 @@ import { join } from "node:path";
 const root = process.cwd();
 const isArticle = new Set(["/learn/adat-ringan/", "/learn/tips-diaspora/", "/methodology/", "/data-source/", "/editorial-policy/"]);
 
-describe("structured-data Article vs WebPage", () => {
+describe("structured-data Article vs WebPage (public-safe mode)", () => {
   it("true articles have Article-eligible JSON-LD, others use BreadcrumbList+WebSite", () => {
     const dist = join(root, "dist");
     for (const slug of ["/learn/adat-ringan/", "/learn/tips-diaspora/", "/methodology/"]) {
@@ -28,14 +28,13 @@ describe("structured-data Article vs WebPage", () => {
     assert.equal(html.includes('"@type": "Article"') && html.includes("games"), false);
   });
 
-  it("LearningResource only for published lessons", () => {
+  it("LearningResource only for published lessons (public-safe: 0 published)", () => {
     const lessons = JSON.parse(readFileSync(join(root, "data/published/lessons.json"), "utf8"));
-    // Published lessons count should match the topics with >= 8 pool items
-    // Current published lessons: 3 (angka, keluarga, alam)
-    assert.ok(lessons.counts.publishedLessons > 0);
-    // Dist should have LearningResource for published lessons
+    // Public-safe mode: 0 published lessons
+    assert.equal(lessons.counts.publishedLessons, 0);
+    assert.equal(lessons.published.length, 0);
+    // Dist should NOT have LearningResource for lessons (none published)
     const distHtml = readFileSync(join(root, "dist/learn/angka/index.html"), "utf8");
-    // angka is published, so it should have LearningResource when implemented
-    // For now, just verify the structure is correct
+    assert.equal(distHtml.includes('"@type": "LearningResource"'), false);
   });
 });

@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 
-describe("source expansion — synthetic fixture", () => {
+describe("source expansion — synthetic fixture (public-safe: 0 pool items)", () => {
   const fixture = JSON.parse(readFileSync(join(process.cwd(), "tests/fixtures/source-synthetic-angka.json"), "utf8"));
 
   it("source validate passes for synthetic approved source", () => {
@@ -19,18 +19,17 @@ describe("source expansion — synthetic fixture", () => {
     }
   });
 
-  it("candidate generation logic works with current pool sizes", () => {
+  it("candidate generation logic works with public-safe empty pool", () => {
     const topics = JSON.parse(readFileSync(join(process.cwd(), "data/published/topics.json"), "utf8"));
     const angka = topics.topics.find((t) => t.slug === "angka");
-    // angka now has 8 pool items (was 5 in old data)
-    assert.equal(angka.poolItems, 8);
-    // Fixture would add 3, but they're synthetic so they don't affect production
+    // Public-safe: angka has 0 pool items (no licensed content)
+    assert.equal(angka.poolItems, 0);
+    // Fixture would add 3, but they're synthetic and don't affect production
     const wouldBe = angka.poolItems + fixture.records.length;
-    // Just verify the logic: pool + fixture = new pool
-    assert.equal(wouldBe, 11);
-    // Production word pairs is now 591 (was 367 in old data)
+    assert.equal(wouldBe, 3);
+    // Production word pairs is 0 (public-safe mode, licensing blocked)
     const published = JSON.parse(readFileSync(join(process.cwd(), "data/published/word-pairs.json"), "utf8"));
-    assert.equal(published.items.length, 591);
+    assert.equal(published.items.length, 0);
   });
 
   it("fixture never leaks to published/dist", () => {
@@ -47,9 +46,9 @@ describe("source expansion — synthetic fixture", () => {
       return `word-${h}`;
     });
     assert.equal(new Set(ids).size, 3); // no dup
-    // Lesson gap would increase from current
+    // Lesson gap would increase from current (0)
     const topics = JSON.parse(readFileSync(join(process.cwd(), "data/published/topics.json"), "utf8"));
     const angka = topics.topics.find((t) => t.slug === "angka");
-    assert.equal(angka.poolItems + 3 >= 8, true);
+    assert.equal(angka.poolItems + 3 >= 8, false); // 3 < 8, not publishable
   });
 });

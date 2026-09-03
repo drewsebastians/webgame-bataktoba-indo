@@ -84,8 +84,12 @@ async function main() {
       failures.push(`published learning items: HTTP ${learningResponse.status}`);
     } else {
       const payload = await learningResponse.json();
-      if (!Array.isArray(payload.items) || payload.items.length < 100) {
-        failures.push("published learning-items.json should expose >=100 items");
+      if (!Array.isArray(payload.items)) {
+        failures.push("published learning-items.json items should be an array");
+      } else if (payload.items.length > 0 && payload.items.length < 100) {
+        // Public-safe mode: 0 items is acceptable (licensing blocks publication)
+        // If items exist, expect at least 100
+        failures.push("published learning-items.json should expose >=100 items when non-empty");
       }
     }
     for (const legacyPath of [

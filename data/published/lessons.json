@@ -1,93 +1,11 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T18:54:22Z",
+  "generatedAt": "2026-09-02T07:30:00Z",
   "minPoolItemsForPublication": 8,
-  "note": "Published lessons only. Draft definitions live in data/candidates/lesson-drafts.json (internal editorial input); public topic pages are driven by topics.json.",
-  "published": [
-    {
-      "id": "lesson-angka",
-      "slug": "angka",
-      "title": "Angka Batak Toba",
-      "description": "Angka dasar dari satu sampai seribu dalam Bahasa Batak Toba, dilengkapi latihan pengenalan.",
-      "theme": "angka",
-      "level": 1,
-      "estMinutes": 3,
-      "itemIds": [
-        "word-92add2f91e",
-        "word-cf2a15e39b",
-        "word-cda58024a5",
-        "word-3991eb4b1f",
-        "word-345dc8ebbc",
-        "word-141862f84e",
-        "word-0880cf2284",
-        "phrase-e7964a513a"
-      ],
-      "counts": {
-        "poolItems": 8,
-        "supplementItems": 6,
-        "supplementSkippedAlreadyInPool": 6
-      },
-      "reviewRollup": "corpus-derived-beta",
-      "publicationStatus": "published",
-      "generatedAt": "2026-09-01T18:54:22Z"
-    },
-    {
-      "id": "lesson-keluarga",
-      "slug": "keluarga",
-      "title": "Kosakata Keluarga Batak Toba",
-      "description": "Panduan tema keluarga; materi terverifikasi belum tersedia untuk lesson penuh.",
-      "theme": "keluarga",
-      "level": 1,
-      "estMinutes": 3,
-      "itemIds": [
-        "word-a5db3ef5fa",
-        "word-2268127948",
-        "word-65331c1f37",
-        "word-bbdcecbee6",
-        "word-0455b825fa",
-        "word-4645a5dca2",
-        "word-a8599d289d",
-        "word-af09240434"
-      ],
-      "counts": {
-        "poolItems": 8,
-        "supplementItems": 11,
-        "supplementSkippedAlreadyInPool": 0
-      },
-      "reviewRollup": "corpus-derived-beta",
-      "publicationStatus": "published",
-      "generatedAt": "2026-09-01T18:54:22Z"
-    },
-    {
-      "id": "lesson-alam",
-      "slug": "alam",
-      "title": "Alam Sekitar",
-      "description": "Kosakata alam: langit, tanah, air, gunung, dan tanda-tanda cuaca.",
-      "theme": "alam",
-      "level": 2,
-      "estMinutes": 3,
-      "itemIds": [
-        "word-e3b8a06956",
-        "word-c92b3480a5",
-        "word-dd4c2312e5",
-        "word-3a08645b4e",
-        "word-88ac945bb5",
-        "word-f4d5d97c56",
-        "word-85ce40d2df",
-        "word-5feef46a2d"
-      ],
-      "counts": {
-        "poolItems": 8,
-        "supplementItems": 0,
-        "supplementSkippedAlreadyInPool": 0
-      },
-      "reviewRollup": "corpus-derived-beta",
-      "publicationStatus": "published",
-      "generatedAt": "2026-09-01T18:54:22Z"
-    }
-  ],
+  "note": "Published lessons only. Draft definitions live in data/candidates/lesson-drafts.json (internal editorial input); public topic pages are driven by topics.json. Licensing: REQUIRES_LEGAL_REVIEW - publicationAllowed: false. No lessons published pending rights resolution.",
+  "published": [],
   "counts": {
-    "publishedLessons": 3,
-    "draftLessons": 3
+    "publishedLessons": 0,
+    "draftLessons": 0
   }
 }

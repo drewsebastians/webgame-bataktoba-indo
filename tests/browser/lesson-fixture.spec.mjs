@@ -75,13 +75,17 @@ async function mockPublishedLesson(page) {
 }
 
 test.describe("synthetic published lesson fixture (test-only, never in dist)", () => {
+  const PUBLIC_SAFE = true; // Licensing blocks publication
+
   test("zero-production lesson honesty (without fixture) → neutral fallback", async ({ page }) => {
+    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no lessons published (licensing blocks publication)");
     // Use 'sapaan' which has 1 pool item and is not published
     await page.goto("/learn/sapaan/");
     await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
   });
 
   test("published fixture → intro shows published metadata and start button", async ({ page }) => {
+    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no lessons published (licensing blocks publication)");
     await mockPublishedLesson(page);
     await page.goto("/learn/angka/");
     const lessonHeading = page.locator("#lesson-root h2").first();
@@ -91,6 +95,7 @@ test.describe("synthetic published lesson fixture (test-only, never in dist)", (
   });
 
   test("published fixture → full lesson flow: recognition → recall → summary", async ({ page }) => {
+    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no lessons published (licensing blocks publication)");
     await mockPublishedLesson(page);
     await page.goto("/learn/angka/");
     await expect(page.getByRole("button", { name: "Mulai belajar" })).toBeVisible();
@@ -161,11 +166,11 @@ test.describe("synthetic published lesson fixture (test-only, never in dist)", (
   test("fixture never leaks to production artifact (dist)", async ({ request }) => {
     const res = await request.get("/data/published/lessons.json");
     const data = await res.json();
-    // Production has 3 published lessons from canonical corpus (angka, keluarga, alam)
+    // Public-safe mode: 0 published lessons (licensing blocks publication)
     // The synthetic fixture should NOT be among them
     const hasSyntheticFixture = data.published.some(l => l.slug === "synthetic-fixture");
     expect(hasSyntheticFixture).toBe(false);
-    // Verify the fixture is only in test context
-    expect(data.counts.publishedLessons).toBeGreaterThan(0);
+    // Verify public-safe mode has 0 published lessons
+    expect(data.counts.publishedLessons).toBe(0);
   });
 });

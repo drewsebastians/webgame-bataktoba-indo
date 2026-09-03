@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T18:54:22Z",
+  "generatedAt": "2026-09-02T06:09:22Z",
   "reviewStatusNote": "All entries are needs-review editorial inputs; never publish or render publicly.",
   "supplements": [
     {
@@ -177,7 +177,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-09-01T18:54:22Z"
+      "generatedAt": "2026-09-02T06:09:22Z"
     },
     {
       "id": "lesson-makanan",
@@ -201,7 +201,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-09-01T18:54:22Z"
+      "generatedAt": "2026-09-02T06:09:22Z"
     },
     {
       "id": "lesson-waktu",
@@ -226,7 +226,7 @@
       },
       "reviewRollup": "corpus-derived-beta",
       "publicationStatus": "draft",
-      "generatedAt": "2026-09-01T18:54:22Z"
+      "generatedAt": "2026-09-02T06:09:22Z"
     }
   ]
 }
