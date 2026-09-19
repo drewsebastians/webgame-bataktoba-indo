@@ -11,7 +11,7 @@
  * The actual provider function is injected; none ships with this module.
  */
 
-import { SITE_CONFIG } from "./config.4b18e606.js";
+import { SITE_CONFIG } from "./config.6316db9b.js";
 
 const CONSENT_KEY = "batakTobaPlay.consent.analytics";
 

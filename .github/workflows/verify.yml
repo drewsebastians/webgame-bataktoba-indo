@@ -25,8 +25,8 @@ jobs:
       # Corpus databases are NOT rebuilt in CI (they require the 1.6 GB local
       # alignment DB); CI validates the committed published outputs instead.
 
-      - name: Full verification (check + unit + build + smoke + browser + axe)
-        run: npm run verify
+      - name: Full verification (check + unit + build + smoke + browser + axe + lighthouse)
+        run: npm run verify:release
 
       - name: Committed dist drift gate
         run: git diff --exit-code -- dist

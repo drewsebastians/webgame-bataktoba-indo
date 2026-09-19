@@ -6,8 +6,8 @@ Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan
 
 ## Product purpose
 - Membuktikan dulu bahwa pengalaman belajar 5–10 menit nyaman dipakai di HP sebelum corpus diperbesar.
-- Menyediakan jalur belajar yang jujur: setiap entri menampilkan status `source-evidence-qualified` / `evidence-insufficient` / `corpus-derived` (otomatis via `tools/quality-gate.mjs` `source-evidence-v1`), bukan verifikasi manusia.
-- Menjadi fondasi editorial: pipeline `raw → candidate → source-evidence-qualified → published` dengan hanya `data/published` yang dibaca website. Tidak ada `human-reviewed` sebagai prasyarat publikasi (governance 2026-09-01).
+- Menyediakan jalur belajar yang jujur: setiap entri menampilkan status `source-evidence-qualified` / `evidence-insufficient` / `source-blocked` (otomatis via `tools/quality-gate.mjs` `source-evidence-v2`), bukan verifikasi manusia.
+- Menjadi fondasi editorial: pipeline `raw → candidate → source-evidence-qualified → publication-eligible → published` dengan hanya `data/published` yang dibaca website. Tidak ada `human-reviewed` sebagai prasyarat publikasi (governance 2026-09-01).
 
 ## Practice modes
 | Mode | Deskripsi |
@@ -24,13 +24,13 @@ Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan
 | **Dictionary** | Dua arah ternormalisasi (NFC+casefold), fuzzy terbatas, filter tema/arah/tipe/status/difficulty (difficulty disabled jujur saat metadata belum ada), highlight aman, detail expandable, Simpan ke latihan, Practice kata ini → games seeded, Lapor koreksi via GitHub issue prefilled. |
 | **Session** | Pilihan ukuran 5/10/20, ringkasan (soal, benar, salah, akurasi, daftar salah, CTA Review Kesalahan), daily queue (due → sering-salah → baru-salah → baru, tanpa duplikat prompt), streak non-punishing (1 hari libur tetap hidup, putus setelah 2 hari). |
 
-## Data counts (production truth)
-- **Word pairs (published):** 367 (semua `source-evidence-qualified` via `quality-gate` `0.4/1`; sebelumnya `corpus-derived` 367)
-- **Genuine phrase pairs:** 0 (corpus word-level belum menghasilkan pasangan multi-token ≥2 token per sisi; aturan phrase menolak 1 kata)
-- **Sample sentences (published):** 80 (otomatis `beta-unreviewed` → akan `source-evidence-qualified` setelah gate kalimat, masih menunggu)
+## Data counts (production truth — PUBLIC SAFE MODE)
+- **Word pairs (published):** 0 (licensing block: `REQUIRES_LEGAL_REVIEW`, `publicationAllowed: false`)
+- **Genuine phrase pairs:** 0
+- **Sample sentences (published):** 0
 - **Published lessons:** 0 (threshold ≥8 item `source-evidence-qualified` per tema)
 - **Internal draft lessons:** 6 (tema: angka, keluarga, sapaan, makanan, waktu, alam)
-- **Source-evidence-qualified items:** 367 (human review tidak ada; `human-reviewed` = 0 legacy)
+- **Source-evidence-qualified items (internal only):** 591 qualified words, 60 qualified phrases, 80 qualified sentences
 - **Lesson minimum publication pool:** 8 (`minPoolItemsForPublication` di `data/published/lessons.json` dan `tools/quality-gate.mjs`)
 - **Legacy ID map:** 485 mappings (`data/migration/id-map.json`)
 
@@ -39,7 +39,7 @@ Selalu bangkit dari `data/published` saja. `data/raw`, `data/candidates`, `data/
 ## Topic page indexability policy
 Single source: `data/published/topics.json` + `tools/site.config.json` + sitemap generator + `check-site.mjs`.
 
-- **Indexable (included in sitemap.xml + <lastmod>):** `/`, `/about/`, `/contact/`, `/correction-process/`, `/data-source/`, `/dictionary/`, `/editorial-policy/`, `/flashcards/`, `/games/`, `/learn/`, `/learn/adat-ringan/`, `/learn/tips-diaspora/`, `/methodology/`, `/privacy/` (14 URLs).
+- **Indexable (included in sitemap.xml + <lastmod>):** `/`, `/about/`, `/contact/`, `/correction-process/`, `/data-source/`, `/dictionary/`, `/editorial-policy/`, `/flashcards/`, `/games/`, `/learn/`, `/learn/adat-ringan/`, `/learn/tips-diaspora/`, `/methodology/`, `/privacy/`, `/contributors/` (15 URLs).
 - **Noindex (excluded from sitemap, `noindex,follow`):** `/learn/angka/` (5 `source-evidence-qualified` need 8), `/learn/keluarga/` (0), `/learn/sapaan/` (0), `/learn/makanan/` (2), `/progres/` (personal), plus internal topics `waktu` (4), `alam` (2) yang belum punya halaman publik.
 - Promosi otomatis saat pool `source-evidence-qualified` ≥8; demosi saat <8. `npm run build:seo` + `npm run build` menerbitkan perubahan.
 
@@ -68,21 +68,20 @@ tools/build-learning-data.py  (Python, butuh master DB) — via npm run content:
 
 Normal incremental (tanpa master DB, yang dipakai sehari-hari):
   data/sources/staging/*.json (external source, license gate) ─┐
-  data/reviewed/overrides.json (human review) ─────────────────┤
-        ▼
-  npm run content:publish  (Node, DB-independent: validasi → apply review → recompute topics/lessons → quality report)
-        ▼
+         ▼                                                    │
+  npm run content:publish  (Node, DB-independent: validasi → recompute topics/lessons → quality report)
+         ▼
   data/published/  hanya yang lolos aturan publikasi (satu-satunya dibaca website)
-          • learning-items.json
-          • word-pairs.json (367)
-          • phrase-pairs.json (0, hard rule ≥2 token per sisi)
-          • sample-sentences.json (80, beta-unreviewed)
-          • lessons.json (0 published / 6 draft, threshold 8)
-          • topics.json (registry public-safe)
+        • learning-items.json
+        • word-pairs.json (0 public, 591 internal qualified)
+        • phrase-pairs.json (0 public, 60 internal qualified)
+        • sample-sentences.json (0 public, 80 internal qualified)
+        • lessons.json (0 published / 6 draft, threshold 8)
+        • topics.json (registry public-safe)
         data/reports/data-quality-report.json
         data/migration/id-map.json
 ```
-Confidence = sinyal statistik co-occurrence, bukan jaminan linguistik. Semua word `source-evidence-qualified` via gate otomatis `0.4/1` (`quality-gate.mjs` `v1`), bukan verifikasi manusia. Status publik jujur: `source-evidence-qualified` ≠ `human verified`.
+Confidence = sinyal statistik co-occurrence, bukan jaminan linguistik. Semua word `source-evidence-qualified` via gate otomatis `source-evidence-v2` (`quality-gate.mjs`), bukan verifikasi manusia. Status publik jujur: `source-evidence-qualified` ≠ `human verified`.
 
 ## Build, verify, tests
 ```bash
@@ -99,6 +98,7 @@ npm run build       # tools/build-dist.mjs → dist/ (public-only) + hashed asse
 npm run verify              # = verify:core && verify:drift
 npm run verify:core         # check + build + test + e2e + test:browser
 npm run verify:drift        # git diff --exit-code -- dist  (gagal jika committed dist belum sync)
+npm run verify:release      # verify + lighthouse-check
 
 # granular
 npm run check       # tools/check-site.mjs (link, schema, SEO, sitemap coverage, metadata counts, reviewStatus)
@@ -106,13 +106,19 @@ npm run test        # node --test "tests/**/*.test.mjs"  (193 tests: data, quest
 npm run e2e         # node tools/e2e-smoke.mjs  (server dist di 4179, fetch halaman kunci, manifest, sw, data)
 npm run test:browser # playwright test (chromium, 33 specs: quiz, typed, true/false, memory/matching 4/6/8, flashcards, dictionary, progres, security headers, draft-leak, axe 6 halaman, future-transition)
 npm run build:data  # historical full rebuild, butuh master DB 1.6 GB, tidak di CI — untuk incremental gunakan npm run content:publish (DB-independent)
-npm run content:publish       # DB-independent incremental (staging + review overrides → published, tanpa master DB)
+npm run content:publish       # DB-independent incremental (staging → published, tanpa master DB)
 npm run content:rebuild-full  # full historis, butuh master DB 1.6 GB
-npm run review:queue / lesson-gaps / topic-gaps / validate / preview / round1 / import # LEGACY human-review (deprecated 2026-09-01, retained for migration compat)
 npm run quality:status / preview / gaps # source-evidence quality pipeline (gate otomatis, tanpa human)
 npm run source:validate / preview / import # external source ingestion (staging → candidate, license gate APPROVED_FOR_INGESTION)
 npm run editorial:status      # ringkasan editorial (published/qualified, lesson/topic blockers)
 npm run lighthouse:check      # release gate deterministic (dist/_headers/checklist)
+```
+
+**Legacy commands (retained for migration compat only, not active publication workflow):**
+```
+npm run review:queue / lesson-gaps / topic-gaps / validate / preview / round1 / import
+# DEPRECATED 2026-09-01: human-review workflow, retained for migration compat only
+# Cannot become a publication gate. Governance checker distinguishes them.
 ```
 
 **Determinism:** `tools/build-dist.mjs` normalisasi EOL ke LF *sebelum* hashing/revision, menginject `meta last-modified` + visible `<time>` dari `tools/site.config.json: lastModified` (ISO date `2026-08-26` → `Terakhir diperbarui: 26 Agustus 2026`), serta mem-build `sitemap.xml` → `<lastmod>` dari sumber yang sama. Tidak ada `git log` history lookup; shallow/full clone, Windows/Linux menghasilkan byte identical (`npm run build` dua kali → `git diff --exit-code -- dist` clean).
@@ -157,10 +163,10 @@ Headers: `_headers` (CSP tanpa `unsafe-eval`/wildcard, ketat saat ads/analytics 
 1. `actions/checkout@v4` (shallow ok; build tidak tergantung history)
 2. `npm ci`
 3. `npx playwright install --with-deps chromium`
-4. `npm run verify` (check + build + unit + smoke + browser + axe)
+4. `npm run verify:release` (check + build + unit + smoke + browser + axe + lighthouse-check)
 5. `git diff --exit-code -- dist` (drift gate, eksplisit untuk diagnose)
 
-Local `npm run verify` reproduksi CI 1:1. Tidak rebuild ganda; failure menunjukkan file drift spesifik.
+Local `npm run verify:release` reproduksi CI 1:1. Tidak rebuild ganda; failure menunjukkan file drift spesifik.
 
 ## Keamanan & privasi
 - `innerHTML` untuk data corpus dilarang (diuji); `assets/js/utils/dom.js` (`el`, `replaceChildren`).

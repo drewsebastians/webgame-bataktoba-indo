@@ -1,5 +1,5 @@
 ﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.cfd4b3c2.js";
-import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.4b18e606.js";
+import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.6316db9b.js";
 import {
   exportProgress,
   getBucketIds,

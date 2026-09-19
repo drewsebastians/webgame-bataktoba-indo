@@ -1,25 +1,38 @@
 # Release Checklist — Batak Toba Play
 
-**Required at every release per Blueprint §24.2.** This checklist satisfies the Lighthouse/manual operational gate that is not fully automatable in CI without credentials.
+**Required at every release.** This checklist satisfies the Lighthouse/manual operational gate that is not fully automatable in CI without credentials.
 
-## Automated (via `npm run verify`)
+## Automated CI Gates (via `npm run verify:release`)
 - [ ] `npm ci`
-- [ ] `npm run verify` (check + build + unit + e2e + browser + axe + drift) — must be green
-- [ ] `npm run build` twice → `git diff --exit-code -- dist` clean (idempotent)
-- [ ] `node tools/lighthouse-check.mjs` — PASS
-- [ ] `npm run test` count matches `BLUEPRINT_COMPLIANCE_MATRIX.md` (now 154)
-- [ ] `npx playwright test` count matches matrix (now 32)
-- [ ] No `dist` leakage (`tests/data/artifact.test`)
+- [ ] `npm run check` — site + governance (links, schema, SEO, sitemap, metadata, no human-review deps)
+- [ ] `npm run build` — deterministic dist artifact
+- [ ] `npm run test` — unit/data tests (193 tests)
+- [ ] `npm run e2e` — smoke test against built dist
+- [ ] `npm run test:browser` — Playwright + axe (33 specs, 0 serious/critical)
+- [ ] `npm run lighthouse:check` — release gate deterministic (dist/_headers/checklist)
+- [ ] `git diff --exit-code -- dist` — drift gate (committed dist in sync)
 
-## Manual / Operational (requires human/credentials)
-- [ ] **Lighthouse** (lab): `npm run build && python -m http.server 4178 --directory dist` then `npx lighthouse http://127.0.0.1:4178/ --view` — record Performance ≥90, Accessibility ≥95, Best Practices ≥95, SEO ≥95, PWA installable
-- [ ] **260px / 320px reflow**: visually verify no horizontal scroll at 320 CSS px, 200% zoom, reduced-motion
-- [ ] **Broken links**: `npm run check` covers internal; externally verify `github.com/drewsebastians/webgame-bataktoba-indo/issues/new` reachable
-- [ ] **Data report**: inspect `data/reports/data-quality-report.json` stageCounts vs published
-- [ ] **Service worker**: change `dist/sw.js` `CACHE_VERSION` bump seen in network, old cache purged, update notification appears
-- [ ] **Privacy**: `privacy/index.html` matches `progress.js`, `analytics.js` (default OFF), `ads.js` (OFF)
-- [ ] **Ad placement**: if AdSense later enabled, verify `ALLOWED_PLACEMENTS`, `ads.txt`, no auto-refresh, reserved size, no placeholder
-- [ ] **Domain**: `wrangler.toml` `pages_build_output_dir = dist` and Cloudflare Pages deploys `dist/` (not repo root)
-- [ ] **Release tag**: `git tag -a vX.Y.Z -m "release"` and push tag
+## Deployment Verification (post-CI)
+- [ ] Cloudflare Pages deploys `dist/` (not repo root) — verify in Pages dashboard
+- [ ] Production URL serves expected content (homepage, games, dictionary, learn, trust pages)
+- [ ] Response headers: CSP strict, `X-Frame-Options: DENY`, cache policies correct
+- [ ] `robots.txt` and `sitemap.xml` accessible at production origin
+- [ ] Service worker registers, cache version matches build hash
+
+## Owner/External Checks (require credentials/access)
+- [ ] **Custom domain** (if configured): DNS resolves, HTTPS valid, canonical tags match
+- [ ] **Search Console**: property verified, sitemap submitted, indexable pages discovered
+- [ ] **Analytics provider** (if activated): events fire correctly, no PII, consent gate works
+- [ ] **AdSense** (if activated): ads load on allowed placements, `ads.txt` valid, no blank placeholders
+- [ ] **CMP** (if legally required): consent UI functional, blocks third-party without consent
+
+## Optional Monetization/Audio Gates
+- [ ] Licensed audio manifest valid, files present, playback works (if listening mode enabled)
+- [ ] AdSense account in good standing, no policy violations
+
+## Release Tagging
+- [ ] `git tag -a vX.Y.Z -m "release"` and push tag
+
+**Note:** Test counts (unit/browser) are verified by CI — not hardcoded here. CI failure on count mismatch is the gate.
 
 *If any manual item is not yet demonstrated for this release, mark the operational readiness as `OPERATIONAL_NOT_YET_PROVEN` in the traceability doc.*

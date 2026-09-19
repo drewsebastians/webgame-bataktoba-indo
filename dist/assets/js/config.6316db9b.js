@@ -1,6 +1,6 @@
 /**
  * Central site configuration.
- * Single source of truth for URLs, feature flags, and dataset locations.
+ * GENERATED from tools/site.config.json — DO NOT EDIT DIRECTLY.
  * Feature flags default to false: analytics and ads must never activate
  * without an explicit, reviewed configuration change.
  */

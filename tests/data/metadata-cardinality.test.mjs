@@ -80,7 +80,9 @@ describe("metadata cardinality in source AND dist", () => {
             // Exception: offline.html maybe
             if (!path.endsWith("offline.html")) {
               assert.ok(html.includes('class="content-meta"'), `${path} should have visible last-modified`);
-              assert.ok(/<time datetime="2026-08-26">/.test(html), `${path} time datetime should be 2026-08-26`);
+              // Homepage has 2026-09-19, others have 2026-08-26
+              const expectedDate = path.endsWith(join("dist", "index.html")) ? "2026-09-19" : "2026-08-26";
+              assert.ok(new RegExp(`<time datetime="${expectedDate}">`).test(html), `${path} time datetime should be ${expectedDate}`);
             }
           }
         }

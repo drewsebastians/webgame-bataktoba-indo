@@ -4,7 +4,48 @@ Log eksekusi berurutan sesuai `02_GAP_REPOSITORY_DAN_HOMEWORK_CODEX.md`.
 Update dokumen ini setiap kali satu task selesai.
 
 ---
-
+ 
+## CURRENT STATE — 19 September 2026 (Public-Safe Closure & Truth Reconciliation)
+ 
+**Authoritative — menggantikan klaim COMPLETE historis di atas sampai HEAD terbaru. Session historis di atas dipertahankan apa adanya.**
+ 
+### HEAD & CI
+- Starting SHA (prompt): `dfb57c1bed0a6e2c0ff741282af573e5698a3591` (licensing containment: public-safe mode) — CI green (Run ID 33711334755).
+- Current HEAD: akan berisi public-safe reconciliation changes (README, handoff docs, governance, CI, blueprint traceability).
+- Latest GitHub Actions Verify (expected green setelah push): `npm run verify:release` = `verify:core` (check+build+unit+smoke+browser) + `verify:drift` (git diff) + `lighthouse-check`.
+ 
+### Public-Safe Truth
+- **Public linguistic inventory: 0** — words: 0, phrases: 0, sentences: 0, published lessons: 0, indexable linguistic topics: 0.
+- **Licensing status:** `REQUIRES_LEGAL_REVIEW`, `publicationAllowed: false` (see `docs/CORPUS_LICENSING_STATUS.md`).
+- **Internal technical qualified inventory (not published):** 591 words, 60 phrases, 80 sentences via `source-evidence-v2` quality gate.
+- **No human review required or performed.** Publication gate = `source-evidence-qualified` (automated) AND `publicationAllowed: true` (legal).
+- **Draft lessons:** 6 (angka, keluarga, sapaan, makanan, waktu, alam) — all `evidence-insufficient` / `source-blocked`.
+ 
+### Governance
+- **No-human-review governance: COMPLETE** — `tools/check-governance.mjs` hardened, scans all active docs/code, no broad allowlist.
+- Legacy human-review commands retained in `package.json` under `review:*` namespace, documented DEPRECATED 2026-09-01, cannot become publication gate.
+- Historical docs containing human-review language preserved but marked historical; governance checker distinguishes via narrow explicit handling.
+ 
+### Documentation Reconciled
+- `README.md` rewritten to public-safe truth.
+- `docs/PRODUCTION_LAUNCH_OWNER_HANDOFF.md` created (7 minimal external actions).
+- `docs/ADSENSE_ACTIVATION_HANDOFF.md` human-review prerequisite removed.
+- `docs/SEARCH_CONSOLE_HANDOFF.md` updated to public-safe state (15 URLs, 0 lessons).
+- `ULTIMATE_BLUEPRINT_TRACEABILITY_2026-08-30.md` reconciled: `BLOCKED_LICENSE` replaces `BLOCKED_CONTENT`/`BLOCKED_HUMAN_REVIEW`.
+ 
+### External Blockers (Only Genuine)
+1. Corpus licensing resolution (legal permission for derived data publication)
+2. Custom domain/DNS (optional but required for Search Console/AdSense)
+3. Search Console ownership verification
+4. Analytics provider decision (INTENTIONALLY_DISABLED until owner selects)
+5. CMP decision (only if legally required for jurisdiction)
+6. AdSense Publisher ID + Google approval + ads.txt
+7. Licensed audio acquisition (listening mode)
+ 
+### Repository-Solvable: ALL CLOSED
+ 
+---
+ 
 ## Status per 24 Agustus 2026 (OpenCode session 1)
 
 ### Task 1 — Baseline audit dan test harness: SELESAI

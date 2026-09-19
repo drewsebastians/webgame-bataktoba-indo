@@ -3,8 +3,15 @@
   "repositoryIssuesUrl": "https://github.com/drewsebastians/webgame-bataktoba-indo/issues/new",
   "defaultLanguage": "id",
   "twitterCard": "summary",
+  "adsensePublisherId": "",
+  "features": {
+    "analytics": false,
+    "ads": false,
+    "pwa": true
+  },
+  "dataDir": "../../data/published/",
   "lastModified": {
-    "/": "2026-08-26",
+    "/": "2026-09-19",
     "/about/": "2026-08-26",
     "/methodology/": "2026-08-26",
     "/data-source/": "2026-08-26",
@@ -22,6 +29,7 @@
     "/learn/makanan/": "2026-08-26",
     "/learn/adat-ringan/": "2026-08-26",
     "/learn/tips-diaspora/": "2026-08-26",
-    "/contributors/": "2026-08-26"
+    "/contributors/": "2026-08-26",
+    "/progres/": "2026-08-26"
   }
 }

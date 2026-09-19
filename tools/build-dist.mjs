@@ -104,6 +104,43 @@ writeFileSync(swPath, sw, "utf8");
 const headers = readFileSync(join(root, "_headers"), "utf8");
 writeFileSync(join(dist, "_headers"), headers, "utf8");
 
+// Generate runtime config from single source (tools/site.config.json).
+function generateRuntimeConfig(distDir) {
+  const siteConfig = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "utf8"));
+  const runtimeConfig = `/**
+ * Central site configuration.
+ * GENERATED from tools/site.config.json — DO NOT EDIT DIRECTLY.
+ * Feature flags default to false: analytics and ads must never activate
+ * without an explicit, reviewed configuration change.
+ */
+
+export const SITE_CONFIG = Object.freeze({
+  name: "Batak Toba Play",
+  baseUrl: "${siteConfig.baseUrl}",
+  repositoryIssuesUrl: "${siteConfig.repositoryIssuesUrl}",
+  dataDir: "${siteConfig.dataDir}",
+  adsensePublisherId: "${siteConfig.adsensePublisherId}",
+  features: Object.freeze({
+    analytics: ${siteConfig.features.analytics},
+    ads: ${siteConfig.features.ads},
+    pwa: ${siteConfig.features.pwa},
+  }),
+});
+
+export const MIN_LESSON_POOL_ITEMS = 8;
+
+export const PRACTICE_MODES = Object.freeze(["meaning", "reverse", "typed", "truefalse", "matching", "memory", "daily", "sentence"]);
+
+export function absoluteUrl(path = "") {
+  return new URL(path, SITE_CONFIG.baseUrl).toString();
+}
+`;
+  const configDir = join(distDir, "assets", "js");
+  if (!existsSync(configDir)) mkdirSync(configDir, { recursive: true });
+  writeFileSync(join(configDir, "config.js"), runtimeConfig, "utf8");
+}
+generateRuntimeConfig(dist);
+
 
 // ---------------------------------------------------------------------------
 // Asset revisioning: hash every JS/CSS asset, rename, and rewrite references.

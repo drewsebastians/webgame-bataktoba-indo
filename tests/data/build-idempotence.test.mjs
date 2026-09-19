@@ -21,9 +21,9 @@ describe("build determinism", () => {
   it("site.config lastModified is single source and sitemap uses it", () => {
     const config = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "utf8"));
     assert.ok(config.lastModified, "lastModified map exists");
-    assert.equal(config.lastModified["/"], "2026-08-26");
+    assert.equal(config.lastModified["/"], "2026-09-19");
     const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
-    assert.ok(sitemap.includes("<lastmod>2026-08-26</lastmod>"), "sitemap should contain lastmod");
+    assert.ok(sitemap.includes("<lastmod>2026-09-19</lastmod>"), "sitemap should contain lastmod");
   });
 
   it("dist exists and contains hashed assets", () => {
