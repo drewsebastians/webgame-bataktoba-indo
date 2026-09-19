@@ -25,7 +25,7 @@
   "licenseStatus": "REQUIRES_LEGAL_REVIEW",
   "licenseFilesPresent": [],
   "publicationAllowed": false,
-  "qualityPolicyVersion": "source-evidence-v1",
+  "qualityPolicyVersion": "source-evidence-v2",
   "generatedAt": "2026-08-31T00:00:00Z",
   "notes": "Pinned upstream HEAD fb999a9 per owner governance 2026-09-01. Full corpus 1.69GB not vendored; manifest hash suffices for reproducibility. Publication blocked until license clarified (see docs/CORPUS_LICENSING_STATUS.md)."
 }

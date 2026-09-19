@@ -19,7 +19,7 @@ Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan
 | **Matching Pairs** | Papan terbuka 4 / 6 / 8 pasang (pilih varian). Cocokkan kata dan artinya tanpa timer wajib. Timer opsional OFF/ON (tidak mempengaruhi skor). |
 | **Memory Game** | Kartu tertutup 4 / 6 / 8 pasang, perlu membalik. State timer tidak bocor ke Memory. |
 | **Daily Challenge** | Date-seeded deterministic (mulberry32 + `dailySeed`), 10 soal per hari, sama untuk semua pengguna di hari yang sama. |
-| **Kalimat Pendek** | Beta 80 kalimat dari subset parallel corpus; label `beta-unreviewed`, tidak dipakai sebagai otoritas. |
+| **Kalimat Pendek** | Mode beta untuk kalimat pendek; 0 terbit (licensing block), tidak dipakai sebagai otoritas. |
 | **Flashcards** | Filter due / saved / difficult / tema, shuffle, tombol Salah/Sulit/Benar, shortcut keyboard Space + 1/2/3, navigasi panah. |
 | **Dictionary** | Dua arah ternormalisasi (NFC+casefold), fuzzy terbatas, filter tema/arah/tipe/status/difficulty (difficulty disabled jujur saat metadata belum ada), highlight aman, detail expandable, Simpan ke latihan, Practice kata ini → games seeded, Lapor koreksi via GitHub issue prefilled. |
 | **Session** | Pilihan ukuran 5/10/20, ringkasan (soal, benar, salah, akurasi, daftar salah, CTA Review Kesalahan), daily queue (due → sering-salah → baru-salah → baru, tanpa duplikat prompt), streak non-punishing (1 hari libur tetap hidup, putus setelah 2 hari). |
@@ -29,7 +29,7 @@ Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan
 - **Genuine phrase pairs:** 0
 - **Sample sentences (published):** 0
 - **Published lessons:** 0 (threshold ≥8 item `source-evidence-qualified` per tema)
-- **Internal draft lessons:** 6 (tema: angka, keluarga, sapaan, makanan, waktu, alam)
+- **Internal draft lessons (not published):** 6 (tema: angka, keluarga, sapaan, makanan, waktu, alam)
 - **Source-evidence-qualified items (internal only):** 591 qualified words, 60 qualified phrases, 80 qualified sentences
 - **Lesson minimum publication pool:** 8 (`minPoolItemsForPublication` di `data/published/lessons.json` dan `tools/quality-gate.mjs`)
 - **Legacy ID map:** 485 mappings (`data/migration/id-map.json`)
@@ -40,7 +40,7 @@ Selalu bangkit dari `data/published` saja. `data/raw`, `data/candidates`, `data/
 Single source: `data/published/topics.json` + `tools/site.config.json` + sitemap generator + `check-site.mjs`.
 
 - **Indexable (included in sitemap.xml + <lastmod>):** `/`, `/about/`, `/contact/`, `/correction-process/`, `/data-source/`, `/dictionary/`, `/editorial-policy/`, `/flashcards/`, `/games/`, `/learn/`, `/learn/adat-ringan/`, `/learn/tips-diaspora/`, `/methodology/`, `/privacy/`, `/contributors/` (15 URLs).
-- **Noindex (excluded from sitemap, `noindex,follow`):** `/learn/angka/` (5 `source-evidence-qualified` need 8), `/learn/keluarga/` (0), `/learn/sapaan/` (0), `/learn/makanan/` (2), `/progres/` (personal), plus internal topics `waktu` (4), `alam` (2) yang belum punya halaman publik.
+- **Noindex (excluded from sitemap, `noindex,follow`):** `/learn/angka/` (0 `source-evidence-qualified` published, need 8), `/learn/keluarga/` (0), `/learn/sapaan/` (0), `/learn/makanan/` (0), `/progres/` (personal), plus internal topics `waktu` (0), `alam` (0) yang belum punya halaman publik.
 - Promosi otomatis saat pool `source-evidence-qualified` ≥8; demosi saat <8. `npm run build:seo` + `npm run build` menerbitkan perubahan.
 
 Halaman tipis tetap jujur: menampilkan materi nyata + banner `menunggu bukti sumber`, tidak memalsukan ketersediaan.
