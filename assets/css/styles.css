@@ -803,7 +803,7 @@ h3 {
 
 @media (max-width: 640px) {
   #progress-root {
-    min-height: 23rem;
+    min-height: 27rem;
   }
 }
 
