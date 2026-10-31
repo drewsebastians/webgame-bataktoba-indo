@@ -141,8 +141,9 @@ test.describe("core learning flows", () => {
     expect(href).toContain("github.com");
     expect(href).toContain("issues/new");
 
-    await page.getByRole("button", { name: "Simpan ke daftar latihan" }).click();
-    await expect(page.getByRole("button", { name: "Tersimpan" })).toBeVisible();
+    const expandedRow = page.locator('.result-row[aria-expanded="true"]');
+    await expandedRow.getByRole("button", { name: "Simpan ke daftar latihan" }).click();
+    await expect(expandedRow.getByRole("button", { name: "Tersimpan" })).toBeVisible();
     await expect.poll(async () => getSavedFlags(page)).toHaveLength(1);
     expect(browserErrors).toEqual([]);
   });
