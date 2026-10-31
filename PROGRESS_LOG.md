@@ -419,3 +419,13 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 - Still 0 published lessons (need 8 pool + human review), thin topics noindex, domain/DNS, AdSense publisher/ads.txt/CMP, corpus licensing, audio — not faked.
 
 
+
+
+## 2026-10-31 autonomous checkpoint — public A1 merged, A2 underway
+
+- Verified PUBLIC webgame `main` ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea, tree `3c92da8cfb635786eba78eba7d9f8c7b1c60b912`; private engine `main` remains `cfec3baeb8beee4738c81fde73ba92b71755bc22`, tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`.
+- A1 public data containment merged at `ed7c3ae`; GitHub Verify run 41167137394 passed. Current published content remains empty. Provider build check succeeded; live page readback is still unverified.
+- A2 branch `codex/2026-10-31-webgame-synthetic-adapter-a2` replaces data-dependent browser skips with isolated synthetic fixtures, exercises lesson-to-quiz-to-mistake-review-to-spaced-repetition-to-dictionary, adds adapter/schema/right/provenance tests, and fixes saved-mode fallback after a lesson. CI results pending.
+- Private B23 complete; no repeat. B24 remains next; scheduled Tatoeba refresh not yet due.
+- Private validator PR #3 remains open because GitHub Actions run 41167909686 was rejected before job startup for billing/spending-limit status. No local Python runtime was available; no tests are claimed.
+- No private text was copied into the public repository. Historical public Git history remains unchanged.

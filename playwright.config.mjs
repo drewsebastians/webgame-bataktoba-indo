@@ -6,6 +6,7 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:4183",
     viewport: { width: 390, height: 844 },
+    hasTouch: true,
   },
   webServer: {
     command: "node tools/e2e-server.mjs 4183",

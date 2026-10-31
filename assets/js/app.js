@@ -549,7 +549,7 @@ async function initGames() {
   };
 
   let state = {
-    mode: getProgress().lastMode || "meaning",
+    mode: Object.keys(modes).includes(getProgress().lastMode) ? getProgress().lastMode : "meaning",
     answered: 0,
     correct: 0,
     current: null,

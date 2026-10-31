@@ -1,6 +1,6 @@
 # Webgame Browser — Upstream Data Requirements and Handoff v1
 
-**Upstream steward:** `drewsebastians/batak-indo-alignment-engine` (private). **Consumer:** Batak Toba Play (public website). **State:** schema contract documented, adapter/pipeline bridge not yet implemented, outward content transfer NOT AUTHORIZED by upstream private research policy. Do not use publication-eligible labels as evidence of authorization without independent proof.
+**Upstream steward:** `drewsebastians/batak-indo-alignment-engine` (private). **Consumer:** Batak Toba Play (public website). **State:** schema contract documented; a fail-closed schema/provenance adapter and isolated synthetic browser coverage are implemented on the current work branch; outward content transfer remains NOT AUTHORIZED by upstream private research policy. Do not use publication-eligible labels as evidence of authorization without independent proof.
 
 See the comprehensive [private upstream field dictionary](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/docs/WEBGAME_DATA_COLLECTION_CONTRACT.md) and upstream [learning item schema](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/schemas/webgame_learning_item.schema.json). Links resolve after upstream PR merge.
 
@@ -27,6 +27,12 @@ See the comprehensive [private upstream field dictionary](https://github.com/dre
 | license/permission | `APPROVED_FOR_INGESTION` only if source-specific public-rights and project-scope gates actually allow the transfer; never infer from private research permission |
 
 The older simple staging shape is **not** the canonical source collection schema. Do not put source text from upstream in this public Git repo merely to prove tests. For testing use visibly synthetic fixtures and test-only interception/in-memory data.
+
+## Adapter implementation checkpoint (2026-10-31)
+
+- `assets/js/upstream-adapter.js` validates the v1 item structure, source/evidence foreign keys, independent source-family counts, conflict rules, reviewer proof, alternatives, senses, topic mapping and per-game eligibility.
+- Public release requires independently supplied public-scope and upstream-policy approval references plus source-specific public distribution, current revocation, terms, license and attribution evidence. The adapter is not wired to fetch or publish private content.
+- Browser acceptance uses fabricated `SYNTHETIC_TEST_ONLY` values intercepted in Playwright. The production published endpoints and `dist` remain separate.
 
 ## Acceptance criteria
 
