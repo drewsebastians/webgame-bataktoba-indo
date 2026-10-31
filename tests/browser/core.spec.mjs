@@ -71,11 +71,21 @@ test.describe("core learning flows", () => {
     await expect(page.locator(".match-card")).toHaveCount(16);
   });
 
-  test("flashcards: space flips, actions advance, filters work", async ({ page }) => {
+  test("flashcards: isolated entrypoint, keyboard flip, actions and filters work", async ({ page }) => {
+    const scripts = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "script") scripts.push(new URL(request.url()).pathname);
+    });
+
     await installSyntheticContentRoutes(page);
     await page.goto("/flashcards/");
     const card = page.locator("#flashcard");
     await expect(card).toBeVisible();
+    expect(scripts.some((path) => /\/assets\/js\/flashcards-page\.[\da-f]{8}\.js$/.test(path))).toBe(true);
+    expect(scripts.some((path) => /\/assets\/js\/app\.[\da-f]{8}\.js$/.test(path))).toBe(false);
+    expect(scripts.some((path) => /\/assets\/js\/game\/(lesson-engine|modes)\.[\da-f]{8}\.js$/.test(path))).toBe(false);
+    expect(scripts.some((path) => /\/assets\/js\/onboarding\.[\da-f]{8}\.js$/.test(path))).toBe(false);
+
     const before = await card.textContent();
     await page.keyboard.press("Space");
     const after = await card.textContent();
