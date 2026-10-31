@@ -8,6 +8,8 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -22,11 +24,23 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
+      - name: Install pinned Lighthouse CLI
+        run: npx --yes lighthouse@13.4.1 --version
+
       # Corpus databases are NOT rebuilt in CI (they require the 1.6 GB local
       # alignment DB); CI validates the committed published outputs instead.
 
-      - name: Full verification (check + unit + build + smoke + browser + axe + lighthouse)
+      - name: Full verification (check + unit + build + smoke + browser + axe + Lighthouse)
         run: npm run verify:release
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports-${{ github.run_id }}
+          path: artifacts/lighthouse/*.json
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Committed dist drift gate
         run: git diff --exit-code -- dist
