@@ -63,6 +63,28 @@ test("adapter maps alternatives, sense, topic, provenance and independent game r
   assert.equal(item.lifecycleState, "WITHHELD");
 });
 
+test("adapter preserves context and source-relevant language metadata", () => {
+  const payload = createSyntheticEnginePackage();
+  Object.assign(payload.items[0], {
+    part_of_speech: "SYNTHETIC_TEST_ONLY_NOUN",
+    orthography: "SYNTHETIC_TEST_ONLY_STANDARD",
+    example_usage_ref: "synthetic-evidence-a",
+    context_note: "SYNTHETIC_TEST_ONLY: contextual note",
+  });
+
+  const item = mapUpstreamItem(payload.items[0]);
+  assert.equal(item.partOfSpeech, "SYNTHETIC_TEST_ONLY_NOUN");
+  assert.equal(item.orthography, "SYNTHETIC_TEST_ONLY_STANDARD");
+  assert.equal(item.exampleUsageRef, "synthetic-evidence-a");
+  assert.equal(item.contextNote, "SYNTHETIC_TEST_ONLY: contextual note");
+});
+
+test("optional contextual mapping fields stay empty when upstream omits them", () => {
+  const item = mapUpstreamItem(createSyntheticEnginePackage().items[0]);
+  assert.equal(item.exampleUsageRef, null);
+  assert.equal(item.contextNote, null);
+});
+
 test("schema validation rejects unknown fields, invalid enums and conflicting eligibility", () => {
   const payload = createSyntheticEnginePackage();
   const withUnknown = { ...payload.items[0], raw_source_text: "never accepted" };
