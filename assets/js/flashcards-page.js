@@ -19,7 +19,11 @@ import { track } from "./analytics.js";
 import { sweepPlaceholders } from "./ads.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const $ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+function pill(text, extraClass = "", attrs = {}) {
+  return el("span", { className: `pill ${extraClass}`.trim(), text, attrs });
+}
 
 function initNavToggle() {
   const toggle = $(".nav-toggle");
