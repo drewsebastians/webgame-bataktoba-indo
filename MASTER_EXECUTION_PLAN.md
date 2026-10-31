@@ -18,7 +18,7 @@ For every batch, re-check both repository visibilities, main/tree SHAs, Issues, 
 | LEARNING_READY | Lawful published lessons work end-to-end and production is checked. |
 | MONETIZATION_READY | Separate future gate; no current priority. |
 
-## Current checkpoint — 2026-10-31 10:47 UTC
+## Historical A2 checkpoint — 2026-10-31 10:47 UTC
 
 Public A2 is integrated through PR #4, merge commit 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e. Verify run 41191955903 passed 193 unit tests, E2E smoke, 33 Playwright tests, drift check, and release prerequisites. Cloudflare Workers Builds reported production deployment success (build f6ede399-fa67-4960-b615-b5f5d5fdaed0; version b6ccda02-0d2d-44c3-ad4f-129deb03e89b). Direct live readback is unavailable, so do not call the live artifact verified. Published content remains empty; synthetic test data is intercepted and absent from production artifacts.
 
@@ -26,7 +26,7 @@ Historical corpus-derived snapshots were deleted from the current public tree by
 
 Private B23 remains the latest completed batch. B24 is metadata-only and has produced no permitted records or consumer items. The current private validator PR cannot run because GitHub Actions fails before validator startup; run 41193636578 exposed no steps or logs. The approved private source vault remains unavailable.
 
-## Next actions
+## Historical next actions from A2 checkpoint
 
 1. Continue A3 browser work on measured performance, PWA/offline behavior, accessibility, security, and live-site readback.
 2. Keep the public content gates closed and all content arrays empty until rights and quality pass.
@@ -51,3 +51,20 @@ Cloudflare Workers Builds check `124531517252` reported production build `14592e
 Readiness: ENGINEERING_READY=YES for the tested synthetic UX, asset budget, and Lighthouse baseline; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=deferred. Private B24 remains metadata-only and B23 remains latest; no restricted or synthetic linguistic text was transferred here. The Alignment Engine stays PRIVATE.
 
 Next: extend measured browser coverage across key routes and journeys; continue responsive PWA/offline, accessibility, privacy, and security work; retry live artifact readback through an accessible route. Keep published arrays empty until record-level rights and quality gates pass.
+
+## Current checkpoint — 2026-10-31 12:51:22 UTC
+
+Public webgame main is `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d94de0742ecca8759bd0ebe0a5caf4a465ff`; public PR #9 is merged. Main Verify run [#56 / 41202127852](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41202127852) passed 201/201 unit tests (0 skipped), 33/33 browser tests, 12 Lighthouse audits across six routes and two profiles, published-data checks, and committed-dist drift. Every Accessibility score is 100/100; Performance ranges from 78 (desktop progress) to 100 (home/games/flashcards/dictionary desktop). The 14-day report artifact is ID `13043018067`.
+
+Cloudflare Workers Builds reports production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful. Live artifact readback remains unverified because the deployed pages are inaccessible through the available web connector. No private or synthetic linguistic content is in public output; published data remains zero. Prior public Git commits still contain historical corpus objects; no history rewrite was performed.
+
+The Alignment Engine remains PRIVATE on main `cfec3baeb8beee4738c81fde73ba92b71755bc22`; PR #3 head `ca4b41fa55d445fcc70b935156c55f8ca041fd71` and latest run #15 failed before validator startup with 0 steps. B23 remains latest; B24 is metadata-only and detailed source discovery stays in the private repo.
+
+Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and six-route Lighthouse checks; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
+## Next actions
+
+1. Inspect the desktop progress Lighthouse JSON report and address the strongest verified performance opportunity while preserving current score floors.
+2. Continue PWA/offline, responsive behavior, privacy/security, keyboard/touch accessibility and browser journey coverage.
+3. Retry live Pages readback through a route the available tools can access.
+4. Continue private B24 research and validator recovery separately; keep private source records and corpus text out of the public repo.

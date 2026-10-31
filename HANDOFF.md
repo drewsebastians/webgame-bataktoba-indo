@@ -1,4 +1,4 @@
-# Resume handoff — 2026-10-31 10:53 UTC
+# Resume handoff — 2026-10-31 12:51:22 UTC
 
 1. Re-fetch visibility, main/tree SHAs, Issues, PRs, Actions, and the private latest run catalog before every new batch.
 2. This checkpoint PR starts from public main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e / tree 964e674b438eb3a26419c747c9f030af282516bc. PR #4 is merged.
@@ -23,3 +23,15 @@
 5. Private main remains `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; repo remains PRIVATE; B23 remains latest. PR #3 is open at current head `818b684e27428ec8ed553e45ccd4ce88f13c25c0`; run #14 / 41199919060 failed before validator startup with 0 steps, so no private tests ran. Keep it unmerged.
 6. Private B24 preflight is metadata-only (11 metadata/scope rows, 8 possible direct leads, 3 adjunct/scope checks; 0 permitted/acquired records or consumer items/evidence). Approved source vault is unavailable. Do not transfer source leads or corpus data to public.
 7. Continue independent browser engineering. In the private track, continue safe metadata discovery, check for the approved vault, and recheck Actions on resume; do not claim validator validation or advance latest.json until a real run passes.
+
+
+## Current resume checkpoint — 2026-10-31 12:51:22 UTC
+
+1. Re-fetch both repository visibilities, main/tree SHAs, Issues, PRs, Actions and private `latest.json` before a new write batch.
+2. Public webgame remains PUBLIC at main `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d94de0742ecca8759bd0ebe0a5caf4a465ff`; PR #9 merged. Issue #2 remains open.
+3. Main Verify [#56 / 41202127852](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41202127852) passed 201/201 unit tests (0 skipped), 33/33 browser tests, six-route mobile/desktop Lighthouse, and dist drift. Site data check remains at 0 items, 0 words, 0 genuine phrases and 0 sentences.
+4. Lighthouse Performance scores: home 98/100 mobile, 100 desktop; angka 92/99; games 98/100; flashcards 88/100; dictionary 92/100; progress 87/78. Accessibility was 100 on all audits. Artifact `13043018067`; desktop progress is the next performance inspection.
+5. Cloudflare Workers Builds reports production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful. Direct live-page readback was not accessible via the available web connector; do not claim independent production readback.
+6. Keep public content empty/noindex. Historical corpus objects remain in earlier Git commits; no history rewrite. Synthetic fixtures remain test-only. Alignment Engine stays PRIVATE.
+7. Private main remains `cfec3baeb8beee4738c81fde73ba92b71755bc22`; PR #3 is at `ca4b41fa55d445fcc70b935156c55f8ca041fd71`. Run #15 failed before validator startup with 0 steps; no private tests ran. B23 remains latest; B24 is metadata-only and its detailed source registry remains private.
+8. Next public work: inspect the progress desktop report; continue PWA/offline, privacy/security, responsive and accessibility tasks; retry live readback. Continue private work independently without moving source details or language data to public.

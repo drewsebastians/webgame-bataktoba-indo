@@ -1,7 +1,15 @@
 # Progress Log — Program Menuju Ultimate Blueprint
 
-## LATEST EXECUTION CHECKPOINT — 31 October 2026
-Public baseline before this batch: webgame main 6b563267ed4973375ea8031910552d61ae324250 (tree 0b855047ca141d5178018787ea316b2047d271c5); private Alignment Engine main cfec3baeb8beee4738c81fde73ba92b71755bc22 (tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84). Web Verify run 41163350076 passed. Engine B23 is complete and latest.json names B24 next; do not repeat B17–B23. This batch removes current-tree public corpus snapshots, disables public corpus workflows, and retains empty production content. Historical commits remain unchanged. See STATUS.md, HANDOFF.md, and WORK_QUEUE.csv.
+## LATEST EXECUTION CHECKPOINT — 2026-10-31 12:51:22 UTC
+
+Public webgame main is `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d94de0742ecca8759bd0ebe0a5caf4a465ff`; PR #9 is merged. Main Verify run #56 / 41202127852 passed 201/201 unit tests (0 skipped), 33/33 browser tests, 12 Lighthouse route/profile audits, public-data checks and committed-dist drift. Published data remains empty: 0 learning items, words, genuine phrases or sentences.
+
+Lighthouse Accessibility scored 100/100 on all six routes and profiles. Performance: home 98 mobile / 100 desktop; angka 92 / 99; games 98 / 100; flashcards 88 / 100; dictionary 92 / 100; progress 87 / 78. Reports are artifact `lighthouse-reports-41202127852` (ID `13043018067`, retained 14 days). Desktop progress is the next performance inspection. Cloudflare Workers Builds reports production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful; direct live readback remains unverified because the available web connector could not access the Pages routes.
+
+The public repo remains free of current-tree raw/candidate corpus snapshots and synthetic test fixtures. Earlier Git commits still retain historical snapshots; no history rewrite. The Alignment Engine remains PRIVATE, B23 latest, and B24 metadata-only. Private PR #3 run #15 failed before validator startup with 0 steps; no private tests ran. No private language content or detailed source registry was transferred.
+
+Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and six-route Lighthouse checks; DATA_READY/PUBLICATION_READY/LEARNING_READY=NO; MONETIZATION_READY=deferred. See `STATUS.md`, `HANDOFF.md` and `WORK_QUEUE.csv` for resume state.
+
 
 ## CURRENT DECISION — 31 October 2026 (supersedes future-looking sequencing only)
 

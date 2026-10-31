@@ -1,33 +1,48 @@
-# Execution status — 2026-10-31 10:53 UTC
+# Execution status — 2026-10-31 12:51:22 UTC
 
 ## Verified GitHub state
 
-- Webgame remains PUBLIC. Checkpoint base main: 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e; tree 964e674b438eb3a26419c747c9f030af282516bc.
-- Alignment Engine remains PRIVATE. Main: cfec3baeb8beee4738c81fde73ba92b71755bc22; tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84. Private PR #3 head is 18eb6a7cbf45cbe73a8a704e2c1caf37b08488a0.
-- Public PR #4 merged as 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e. Public Issue #2 acceptance has passed; it remains an open starting queue while A3 continues.
-- Public Verify run 41191955903 passed on main: 193/193 unit tests, E2E smoke, 33/33 Playwright tests, drift check, and verify:release. The release workflow's Lighthouse prerequisite check passed; no full Lighthouse score audit was run.
-- Cloudflare Workers Builds reported production deployment success for the merge commit: build f6ede399-fa67-4960-b615-b5f5d5fdaed0; version b6ccda02-0d2d-44c3-ad4f-129deb03e89b. Direct live-site readback for https://webgame-bataktoba-indo.pages.dev/ was unavailable through the current web connector, so the live artifact is not claimed as independently verified.
-- Published word, phrase, sentence, learning-item, and lesson arrays remain empty. Synthetic content is served only by intercepted test routes; fixture-isolation checks passed.
+- Webgame remains PUBLIC; main is `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d94de0742ecca8759bd0ebe0a5caf4a465ff`. PR #9 is merged; public Issue #2 remains open as the ongoing engineering queue.
+- Alignment Engine remains PRIVATE; main is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`. Private PR #3 is open at `ca4b41fa55d445fcc70b935156c55f8ca041fd71`; its latest run #15 failed before validator startup with 0 steps, so no private tests ran.
+- Public main Verify run [#56 / 41202127852](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41202127852) passed: 201/201 unit tests (0 skipped), 33/33 browser tests, release checks, all 12 Lighthouse route/profile audits, and the committed-dist drift gate.
+- Cloudflare Workers Builds reported production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful. Direct live-page readback remains unavailable through the current web connector, so the deployed artifact is not claimed as independently verified.
+- Published data remains empty: 0 learning items, 0 words, 0 genuine phrases, 0 sentences. Synthetic fixtures remain isolated to intercepted browser tests; no private or restricted linguistic content was transferred to the public repo.
+
+## Lighthouse result — main run #56
+
+All six public routes passed both profiles. Accessibility scored 100/100 on every audit. Performance scores were:
+
+| Route | Mobile | Desktop |
+|---|---:|---:|
+| Home | 98 | 100 |
+| Angka lesson | 92 | 99 |
+| Games | 98 | 100 |
+| Flashcards | 88 | 100 |
+| Dictionary | 92 | 100 |
+| Progress | 87 | 78 |
+
+The lowest result is desktop `/progres/` at 78/100, above the 70/100 floor. JSON reports are in artifact `lighthouse-reports-41202127852` (ID `13043018067`, 14-day retention). These are CI snapshots, not field-user measurements.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for A2 synthetic engineering | Full release workflow passed with non-skipped synthetic browser journeys, responsive/touch/keyboard/offline checks, and axe accessibility tests. |
-| DATA_READY | NO | B23 remains latest; B24 is metadata-only and adds no permitted consumer records. |
-| PUBLICATION_READY | NO | Public content remains empty; no outward scope grant or record-level publication clearance. |
-| LEARNING_READY | NO | No authorized published lessons; empty state and noindex behavior remain active. |
+| ENGINEERING_READY | YES for synthetic browser journeys, asset budget, and six-route Lighthouse checks | Verify #56 passed unit, browser, build, Lighthouse, and drift checks. Live readback is still unverified. |
+| DATA_READY | NO | Private B23 remains latest; B24 has no permitted/acquired records or consumer items. |
+| PUBLICATION_READY | NO | Public learning content remains empty; no record-level publication clearance or scope grant. |
+| LEARNING_READY | NO | No authorized published lessons; empty state/noindex behavior remains active. |
 | MONETIZATION_READY | DEFERRED | Not a current priority. |
 
 ## Security and history
 
-The current tree has no corpus-derived raw, candidate, legacy, or report snapshots. The historical exposure audit records that earlier public commits still contain deleted snapshots. No history rewrite was performed; historical objects remain accessible.
+The current public tree contains no corpus-derived raw, candidate, legacy, or report snapshots. Historical public commits still retain earlier corpus-derived objects; no destructive history rewrite was performed. Synthetic fixtures are absent from the public build and Lighthouse artifacts.
 
-## Next work
+## Next actions
 
-- Continue A3 browser engineering: measure real performance, complete security/PWA follow-up, and retry live production readback when the available connector can inspect the Pages endpoint.
-- Continue private B24 metadata discovery without repeating B17–B23. Do not fetch records until an approved private source vault and source-specific rights are available. B23 remains latest in latest.json.
-- Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY, and MONETIZATION_READY separate.
+1. Inspect the Lighthouse report for desktop `/progres/` and identify the largest opportunity before changing code; preserve the 70/100 performance and 90/100 accessibility floors.
+2. Continue browser PWA/offline behavior, responsive interaction, privacy, security, keyboard/touch accessibility, and journey coverage independently of corpus readiness.
+3. Retry direct live-site readback through an accessible route and record it separately from the successful provider build check.
+4. Continue private B24 discovery and validator recovery in the PRIVATE repository; keep private source details there and do not transfer corpus text.
 
 
 ## A3 performance checkpoint — 2026-10-31 10:53 UTC
