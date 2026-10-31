@@ -1,21 +1,21 @@
-# Execution status — 2026-10-31 15:41 UTC
+# Execution status — 2026-10-31 15:52 UTC
 
 ## Verified GitHub state
 
 - Webgame remains PUBLIC. Main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 remains open. PR #13 is open; offline-service-worker coverage has passed full PR verification and awaits merge.
-- Main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, performance budget, Lighthouse and committed-dist drift. PR Verify #70 passed 201/201 unit tests (0 skipped), 35/35 browser tests, build/smoke, performance budget, all 12 Lighthouse audits and committed-dist drift on the service-worker change.
-- Verify #70 Lighthouse reports are uploaded as artifact `13048240651`. Cloudflare production build and direct live readback for the post-merge artifact are pending.
+- Main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, performance budget, Lighthouse and committed-dist drift. PR Verify #71 passed 202/202 unit tests (0 skipped), 35/35 browser tests, build/smoke, performance budget, all 12 Lighthouse audits and committed-dist drift on the checkpointed service-worker change.
+- Verify #71 Lighthouse reports are uploaded as artifact `13048113240`. Cloudflare Workers Builds reports successful deployment for PR checkpoint commit `1e6e562f` (build `91c14899-427c-4bad-bd75-888263035043`); post-merge main deployment and direct live artifact readback remain pending.
 - Public learning data remains empty: 0 items, words, genuine phrases or sentences. Synthetic fixtures remain test-only. The Alignment Engine remains PRIVATE; no private source details or records are copied here, and no content is authorized for publication.
 - Historical public corpus objects remain in Git history; no destructive history rewrite was performed.
 
-## Lighthouse result — PR Verify #70
+## Lighthouse result — PR Verify #71
 
 | Route | Mobile Performance | Desktop Performance | Accessibility, both profiles |
 |---|---:|---:|---:|
 | Home | 98 | 100 | 100 |
-| Angka lesson | 92 | 99 | 100 |
+| Angka lesson | 93 | 99 | 100 |
 | Games | 98 | 100 | 100 |
-| Flashcards | 87 | 100 | 100 |
+| Flashcards | 89 | 100 | 100 |
 | Dictionary | 92 | 100 | 100 |
 | Progress | 89 | 78 | 100 |
 
@@ -25,7 +25,7 @@ All 12 audits met the 70 Performance / 90 Accessibility floors. Desktop progress
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for the tested service-worker offline flow on PR #13; merge and main deployment verification pending | Verify #70 passed the full browser, Lighthouse, budget and committed-dist gates on the PR. |
+| ENGINEERING_READY | YES for the tested service-worker offline flow on PR #13; merge and main deployment verification pending | Verify #71 passed the full browser, Lighthouse, budget and committed-dist gates on the PR. |
 | DATA_READY | NO | No records have been approved for public sync; detailed source discovery remains private. |
 | PUBLICATION_READY | NO | No record-level rights clearance or publication scope; public data remains empty. |
 | LEARNING_READY | NO | No authorized real content is published; empty/noindex behavior remains active. |
