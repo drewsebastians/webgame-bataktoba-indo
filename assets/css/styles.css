@@ -798,7 +798,7 @@ h3 {
 
 /* Reserve the client-rendered stats/actions while local progress hydrates. */
 #progress-root {
-  min-height: 13rem;
+  min-height: 19rem;
 }
 
 @media (max-width: 640px) {
