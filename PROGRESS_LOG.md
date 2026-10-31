@@ -1,5 +1,11 @@
 # Progress Log — Program Menuju Ultimate Blueprint
 
+## CURRENT DECISION — 31 October 2026 (supersedes future-looking sequencing only)
+
+Active plan: [docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md](docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md); data consumer needs: [docs/UPSTREAM_WEBGAME_DATA_HANDOFF.md](docs/UPSTREAM_WEBGAME_DATA_HANDOFF.md). Product is a desktop/mobile **browser website** (plus browser PWA), not a native mobile app. Development **does not stop** while the private upstream data collection progresses. The owner explicitly rejects treating audio/pronunciation or cultural content as a near-term strategic differentiator. Source permissions still block real content publication, not synthetic UX/engine/test progress.
+
+Read-only checkpoint before this plan: main `5aa2bd9cde7d8be396e51d213ed5381fcc87d536`, 0 public word/phrase/sentence/lesson items; last verified CI 190 unit/data passed, 17 browser passed and 16 browser skipped. This is an historical observation only. Engineering-ready != learning-ready != monetization-ready. Next work: rights/exposure audit, browser synthetic e2e coverage, web source adapter contracts, mobile-browser usability and 5-minute journeys, independent data population. Historical notes below remain unchanged and may describe superseded counts or completion claims.
+
 Log eksekusi berurutan sesuai `02_GAP_REPOSITORY_DAN_HOMEWORK_CODEX.md`.
 Update dokumen ini setiap kali satu task selesai.
 

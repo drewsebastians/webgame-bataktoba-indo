@@ -1,5 +1,7 @@
 # Blueprint Compliance Matrix
 
+> **Historical matrix — not current runtime truth.** Older 367-word/80-sentence counts and review assumptions below predate 2026-09-03 licensing containment (0 publicly published language items). For active product priorities and the parallel browser/data streams see [ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31](docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md). Use current `data/published` and CI, not this matrix, for live readiness. Audio/pronunciation and native mobile are not priorities.
+
 Authoritative completion record for `01_BLUEPRINT_ULTIMATE_WEBSITE_BATAK_TOBA_PLAY.md` versus the actual repository state at HEAD. Legend: **COMPLETE** · PARTIAL · BLOCKED_EXTERNAL · NOT_IMPLEMENTED · INTENTIONALLY_DEFERRED
 
 Evidence keys: file paths, test names (`npm test`), browser tests (`npx playwright test`), checker rules (`npm run check`).

@@ -1,3 +1,5 @@
+> **Owner scope decision — 2026-10-31:** Audio/pronunciation is **NOT a current development priority or release gate**. This historical/conditional technical contract remains for possible future reconsideration only. Do not allocate roadmap capacity ahead of browser UX, games, quality, source-contract integration and parallel data enrichment. See [active browser plan](ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md).
+
 # Listening Audio Contract — Batak Toba Play
 
 **Status:** Mode blocked `BLOCKED_EXTERNAL` per Blueprint §10.11 (no synthetic).

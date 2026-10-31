@@ -1,5 +1,7 @@
 # First Topic SEO Unlock Plan — Batak Toba Play
 
+> **Historical snapshot; obsolete counts/governance below.** Since September 2026, all published item/topic pools are 0 because of source rights containment. Do not use historical human-review gates or 5/8 angka numbers as current public data. Under [active browser plan](ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md), the data steward collects requirements independently while website engineering continues; only authorized, independently rights-cleared data may enter public site. The 8-item minimum is a content-publication gate, not a developer stop-work condition.
+
 **Candidate:** `angka` (substantive but thin) → first indexable substantive topic. Alternatively `adat-ringan`/`tips-diaspora` already indexable but not lesson-linked.
 
 ## Current (recalculated 2026-08-30)
