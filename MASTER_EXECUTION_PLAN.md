@@ -37,3 +37,7 @@ Private B23 remains the latest completed batch. B24 is metadata-only and has pro
 ## A3 performance budget — 2026-10-31 10:53 UTC
 
 Branch `codex/2026-10-31-browser-performance-checkpoint-a3` adds `npm run performance:budget` to `verify:core`, plus unit coverage for individual and aggregate thresholds. The measured main baseline is 129,845 bytes of minified JS across 14 files and 15,217 bytes of CSS in one file. Budgets are 196,608 total JS bytes / 98,304 per JS file and 49,152 total CSS bytes / 49,152 per CSS file. These are uncompressed artifact limits; they do not claim Lighthouse scores or compressed transfer sizes. Verify workflow run #46 (`41194897354`, job `124518995179`) passed 196/196 unit tests, E2E smoke, 33/33 browser tests, `performance:budget`, release prerequisites, and dist drift. No full Lighthouse score audit or A3 production deployment is claimed yet; PR #5 remains open.
+
+## A3 merged production checkpoint — 2026-10-31 11:18 UTC
+
+PR #5 merged as `ffe009e9de10a1ddd144bb0a5d51be746f81b5cc`. Verify run #48 (`41195989468`) passed 196/196 unit tests (0 skipped), E2E smoke, 33/33 Playwright tests, asset-size budgets, release prerequisites, and dist drift. Cloudflare Workers Builds confirmed production build `de67c3c7-609a-437e-8e76-f4d7ccd26705` / version `cb3c2fd0-8648-4a89-b6bf-e7d766c69553`. The available web connector could not read the deployed home, games, robots.txt, or manifest, so live artifact readback remains unverified. Continue full Lighthouse measurement and PWA/security/accessibility work; keep published arrays empty.

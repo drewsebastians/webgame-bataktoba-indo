@@ -38,3 +38,13 @@ The current tree has no corpus-derived raw, candidate, legacy, or report snapsho
 - Public Verify run #46 (`41194897354`, job `124518995179`) passed on commit `2e367604b28beaf9e64890909d50aeef583b8960`: 196/196 unit tests, E2E smoke, 33/33 Playwright tests, `performance:budget`, release prerequisites, and dist drift. The Lighthouse prerequisite passed; no full Lighthouse score audit ran.
 - PR #5 is open; Cloudflare deployment for this A3 change is pending merge. No new production deployment is claimed yet.
 - Next A3 steps: verify CI and the production artifact, attempt live Pages readback again, then continue broader browser performance, PWA, and security work.
+
+
+## A3 integration and deployment checkpoint — 2026-10-31 11:18 UTC
+
+- PR #5 merged as `ffe009e9de10a1ddd144bb0a5d51be746f81b5cc`; public `main` tree is `0735930506c111d4690fbddef886246452a65837`.
+- Verify run #48 (`41195989468`, job `124522138592`) passed on the merge commit: 196/196 unit tests (0 skipped), E2E smoke, 33/33 Playwright tests, performance budget, release prerequisites, and committed-dist drift. The site check reports 0 published words, phrases, or sentences; synthetic fixture-isolation check passes.
+- Cloudflare Workers Builds reported a successful production build for this commit: build `de67c3c7-609a-437e-8e76-f4d7ccd26705`, version `cb3c2fd0-8648-4a89-b6bf-e7d766c69553`.
+- A direct live readback attempt for home, `/games`, `robots.txt`, and `manifest.webmanifest` was rejected as inaccessible by the available web connector. Provider build success is verified; the live artifact was not independently opened.
+- Readiness: ENGINEERING_READY=YES for the tested synthetic browser flow and asset budget; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=not in scope.
+- Next A3 work: obtain a full Lighthouse score audit and a live readback through an accessible route; continue PWA, privacy/security, and accessibility follow-up. Keep production content empty and noindex until publication gates pass.
