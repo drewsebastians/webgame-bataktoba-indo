@@ -45,6 +45,28 @@ function updateProgressBadges() {
   $$("[data-progress-known]").forEach((node) => (node.textContent = getBucketIds("known").length));
 }
 
+function initPrivacyPreferences() {
+  const analytics = $("#consent-analytics");
+  if (analytics) {
+    analytics.checked = hasAnalyticsConsent();
+    analytics.disabled = false;
+    analytics.addEventListener("change", () => {
+      if (analytics.checked) grantAnalyticsConsent();
+      else revokeAnalyticsConsent();
+    });
+  }
+
+  const ads = $("#consent-ads");
+  if (ads) {
+    ads.checked = readAdsConsent();
+    ads.disabled = false;
+    ads.addEventListener("change", () => {
+      if (ads.checked) grantAdsConsent();
+      else revokeAdsConsent();
+    });
+  }
+}
+
 function bannerNode(text, actionLabel, onAction) {
   const banner = el("div", { className: "app-banner" });
   const label = el("span", { text });
@@ -211,59 +233,6 @@ async function initProgressPage(notice = '') {
     initProgressPage("Progress dihapus.");
   });
 
-  function buildConsentRow(idSuffix, title, description, checked, onChange) {
-    const row = el("div", { className: "consent-row" });
-    const checkboxId = `consent-${idSuffix}`;
-    const checkbox = el("input", {
-      attrs: { type: "checkbox", role: "switch", id: checkboxId },
-    });
-    checkbox.checked = Boolean(checked);
-    checkbox.addEventListener("change", () => onChange(checkbox.checked));
-    row.append(
-      checkbox,
-      el(
-        "div",
-        {},
-        el("label", { attrs: { for: checkboxId } }, el("strong", { text: title })),
-        el("p", { text: description }),
-      ),
-    );
-    return row;
-  }
-
-  const privacySection = (() => {
-    const section = el("section", { className: "section band" });
-    const inner = el("div", { className: "section-inner" });
-    inner.append(
-      el("h2", { text: "Preferensi privasi" }),
-      el("p", {
-        className: "lead",
-        text: "Analytics dan iklan nonaktif secara default. Preferensi tersimpan lokal di perangkat ini dan bisa diubah kapan saja. Menolak tidak memengaruhi fungsi situs apa pun.",
-      }),
-      buildConsentRow(
-        "analytics",
-        "Analytics produk",
-        "Event anonim tanpa kata yang dicari, nama, email, atau isi progress. Tidak ada yang dikirim sebelum Anda setuju.",
-        hasAnalyticsConsent(),
-        (value) => {
-          if (value) grantAnalyticsConsent();
-          else revokeAnalyticsConsent();
-        },
-      ),
-      buildConsentRow(
-        "ads",
-        "Iklan (AdSense)",
-        "Iklan belum aktif di situs ini. Persetujuan baru berlaku bila iklan diaktifkan dengan konfigurasi resmi dan Publisher ID valid.",
-        readAdsConsent(),
-        (value) => {
-          if (value) grantAdsConsent();
-          else revokeAdsConsent();
-        },
-      ),
-    );
-    section.append(inner);
-    return section;
-  })();
 
   if (notice) statusLine.textContent = notice;
 
@@ -279,18 +248,15 @@ async function initProgressPage(notice = '') {
       resetButton,
     ),
     statusLine,
-    privacySection,
-    el("p", {
-      className: "feedback",
-      text: "Catatan: data tidak tersinkron otomatis antar perangkat. Ekspor secara berkala bila ingin menyimpannya.",
-    }),
   );
+  root.setAttribute("aria-busy", "false");
 }
 
 async function main() {
   await initProgress();
   initNavToggle();
   setActiveNav();
+  initPrivacyPreferences();
   updateProgressBadges();
   registerServiceWorker();
   sweepPlaceholders();
