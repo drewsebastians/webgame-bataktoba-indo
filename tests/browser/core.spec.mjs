@@ -111,6 +111,23 @@ test.describe("core learning flows", () => {
     await expect.poll(async () => getSavedFlags(page)).toHaveLength(1);
   });
 
+  test("progres: loads the focused entrypoint without game engines", async ({ page }) => {
+    const scripts = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "script") scripts.push(new URL(request.url()).pathname);
+    });
+
+    await page.goto("/progres/");
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("[role=list] .pill").first()).toBeVisible();
+
+    expect(scripts.some((path) => path.includes("/assets/js/progress-page."))).toBe(true);
+    expect(scripts.some((path) => path.includes("/assets/js/app."))).toBe(false);
+    for (const chunk of ["game/question-engine.", "game/lesson-engine.", "game/modes."]) {
+      expect(scripts.some((path) => path.includes(chunk))).toBe(false);
+    }
+  });
+
   test("progres: stats render, consent toggle works, reset is two-step", async ({ page }) => {
     await page.goto("/progres/");
     await expect(page.locator("[role=list] .pill").first()).toBeVisible();
