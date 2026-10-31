@@ -44,8 +44,8 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
 
   await page.goto("/flashcards/");
-  await page.locator("#fc-filter").selectOption("due");
-  const flashcard = page.locator("#flashcard");
+  await page.locator("#fc-filter").selectOption("all");
+  const flashcard = page.locator("#flashcard-card");
   await expect(flashcard).toBeVisible();
   await expect(flashcard).toContainText("SYNTHETIC_BT_");
   await page.getByRole("button", { name: "3 Benar", exact: true }).click();

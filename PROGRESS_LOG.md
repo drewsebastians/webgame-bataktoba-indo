@@ -446,3 +446,12 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 - Current update treats lesson start/completion as meaningful progress for onboarding and Home resumption, with unit coverage for the predicate. Full verification must rerun; generated dist drift is still to be inspected.
 - Cloudflare Workers Builds reported success for A2 head f8c7416. This does not verify live-site readback. Production content arrays remain empty, and no private corpus text or fixture content is being added to production.
 - Private Actions billing/spending limit remains the blocker for PR #3 validation; B23 is complete and B24 is next.
+
+## 2026-10-31 checkpoint — A2 CI run 41171672244
+
+- Verified both repo visibilities and main/tree SHAs before this batch: public ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea / 3c92da8cfb635786eba78eba7d9f8c7b1c60b912; private cfec3baeb8beee4738c81fde73ba92b71755bc22 / 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84.
+- Verify run 41171672244 completed 193/193 unit tests with 0 skips and passed E2E smoke; Playwright passed 31/33.
+- Home stayed empty after lesson-only completion; an attempted onboarding/return-card change did not resolve it. Added page error, data-response, and minimal progress diagnostics for the next full run.
+- The flashcard test selected a nonexistent id and filtered to due cards before any review was scheduled. It now targets the rendered card id and starts from the all-cards deck before scheduling a spaced-repetition review.
+- Cloudflare reported success for this A2 commit. Live-site readback remains unverified; production published arrays remain empty.
+- Private PR #3 remains blocked by GitHub billing/spending limit. B23 is complete; the next data batch is B24 after the scheduled export window.
