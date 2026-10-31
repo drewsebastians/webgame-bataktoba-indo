@@ -1,22 +1,39 @@
-# Execution status — 2026-10-31
+# Execution status — 2026-10-31 10:53 UTC
 
 ## Verified GitHub state
 
-- Public webgame is PUBLIC. `main` = `ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea`; tree = `3c92da8cfb635786eba78eba7d9f8c7b1c60b912`.
-- Private Alignment Engine is PRIVATE. `main` = `cfec3baeb8beee4738c81fde73ba92b71755bc22`; tree = `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`.
-- Public A1 containment PR #3 merged as `ed7c3ae`; Verify run 41167137394 passed. Cloudflare reported successful PR builds; production live-site readback is unverified.
-- Public A2 PR #4 remains open at `f32c0bdd68e280c155e1e0225f44b29d69d37d00`. Verify run 41171672244 passed 193/193 unit tests with 0 skips and the E2E smoke. Playwright passed 31/33; Home stayed empty after lesson-only completion, and the SRS test used a nonexistent card selector plus a due-only filter before scheduling review. The Home repair still needs diagnosis; browser diagnostics are now included.
-- Private engine PR #3 remains open at `3e0c6acc9bfbb485640507b55c19b25b43df8dc7`. GitHub Actions run 41170710503 did not start because of account billing/spending-limit status. No private tests are claimed as passing.
-- B23 is complete and must not be repeated. Its checkpoint reports 0 new direct bbc–Indonesian pairs, 0 automated-supported and 0 public-eligible items. B24 is next; Tatoeba refresh is scheduled after 2026-10-31 06:30 UTC.
+- Webgame remains PUBLIC. Checkpoint base main: 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e; tree 964e674b438eb3a26419c747c9f030af282516bc.
+- Alignment Engine remains PRIVATE. Main: cfec3baeb8beee4738c81fde73ba92b71755bc22; tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84. Private PR #3 head is 18eb6a7cbf45cbe73a8a704e2c1caf37b08488a0.
+- Public PR #4 merged as 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e. Public Issue #2 acceptance has passed; it remains an open starting queue while A3 continues.
+- Public Verify run 41191955903 passed on main: 193/193 unit tests, E2E smoke, 33/33 Playwright tests, drift check, and verify:release. The release workflow's Lighthouse prerequisite check passed; no full Lighthouse score audit was run.
+- Cloudflare Workers Builds reported production deployment success for the merge commit: build f6ede399-fa67-4960-b615-b5f5d5fdaed0; version b6ccda02-0d2d-44c3-ad4f-129deb03e89b. Direct live-site readback for https://webgame-bataktoba-indo.pages.dev/ was unavailable through the current web connector, so the live artifact is not claimed as independently verified.
+- Published word, phrase, sentence, learning-item, and lesson arrays remain empty. Synthetic content is served only by intercepted test routes; fixture-isolation checks passed.
 
-## Readiness
+## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | IN PROGRESS | A1 merged; A2 full browser suite still has two failures. |
-| DATA_READY | IN PROGRESS | B23 aggregate only; B24 discovery/refresh remains. |
-| PUBLICATION_READY | NO | Production arrays empty; no outward transfer or scope authorization. |
-| LEARNING_READY | NO | Real public-eligible content unavailable; production empty state retained. |
+| ENGINEERING_READY | YES for A2 synthetic engineering | Full release workflow passed with non-skipped synthetic browser journeys, responsive/touch/keyboard/offline checks, and axe accessibility tests. |
+| DATA_READY | NO | B23 remains latest; B24 is metadata-only and adds no permitted consumer records. |
+| PUBLICATION_READY | NO | Public content remains empty; no outward scope grant or record-level publication clearance. |
+| LEARNING_READY | NO | No authorized published lessons; empty state and noindex behavior remain active. |
 | MONETIZATION_READY | DEFERRED | Not a current priority. |
 
-No restricted data was transferred. Historical public Git history remains unchanged.
+## Security and history
+
+The current tree has no corpus-derived raw, candidate, legacy, or report snapshots. The historical exposure audit records that earlier public commits still contain deleted snapshots. No history rewrite was performed; historical objects remain accessible.
+
+## Next work
+
+- Continue A3 browser engineering: measure real performance, complete security/PWA follow-up, and retry live production readback when the available connector can inspect the Pages endpoint.
+- Continue private B24 metadata discovery without repeating B17–B23. Do not fetch records until an approved private source vault and source-specific rights are available. B23 remains latest in latest.json.
+- Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY, and MONETIZATION_READY separate.
+
+
+## A3 performance checkpoint — 2026-10-31 10:53 UTC
+
+- A3 implementation branch `codex/2026-10-31-browser-performance-checkpoint-a3` adds a deterministic CI gate for minified production JS/CSS sizes and unit coverage of its threshold logic.
+- Baseline from public main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e: 14 JS assets / 129,845 bytes total (largest 77,391 bytes); 1 CSS asset / 15,217 bytes.
+- Initial limits: 196,608 bytes total JS, 98,304 bytes per JS file, 49,152 bytes total CSS, and 49,152 bytes per CSS file. These are uncompressed artifact sizes, not network transfer estimates.
+- CI status for this PR is pending. No new test result or production deployment is claimed yet.
+- Next A3 steps: verify CI and the production artifact, attempt live Pages readback again, then continue broader browser performance, PWA, and security work.
