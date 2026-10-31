@@ -1,30 +1,27 @@
 {
-  "sourceId": "synthetic-test-angka",
-  "licenseStatus": "APPROVED_FOR_INGESTION",
+  "sourceId": "synthetic-test-only",
+  "licenseStatus": "SYNTHETIC_TEST_ONLY",
   "records": [
     {
-      "externalRecordId": "syn-001",
-      "batak": "zalpha",
-      "indonesian": "satu-sintetik",
-      "sourceReference": "synthetic fixture for test, not production",
-      "sourceType": "synthetic-test",
-      "notes": null
+      "externalRecordId": "synthetic-001",
+      "batak": "SYNTHETIC_BT_001",
+      "indonesian": "SYNTHETIC_ID_001",
+      "sourceReference": "synthetic test fixture only",
+      "sourceType": "synthetic-test"
     },
     {
-      "externalRecordId": "syn-002",
-      "batak": "zbeta",
-      "indonesian": "dua-sintetik",
-      "sourceReference": "synthetic fixture",
-      "sourceType": "synthetic-test",
-      "notes": null
+      "externalRecordId": "synthetic-002",
+      "batak": "SYNTHETIC_BT_002",
+      "indonesian": "SYNTHETIC_ID_002",
+      "sourceReference": "synthetic test fixture only",
+      "sourceType": "synthetic-test"
     },
     {
-      "externalRecordId": "syn-003",
-      "batak": "zgamma",
-      "indonesian": "tiga-sintetik",
-      "sourceReference": "synthetic fixture",
-      "sourceType": "synthetic-test",
-      "notes": null
+      "externalRecordId": "synthetic-003",
+      "batak": "SYNTHETIC_BT_003",
+      "indonesian": "SYNTHETIC_ID_003",
+      "sourceReference": "synthetic test fixture only",
+      "sourceType": "synthetic-test"
     }
   ]
 }

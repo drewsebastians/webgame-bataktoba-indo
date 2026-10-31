@@ -2,97 +2,11 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { createHash } from "node:crypto";
-
-describe("synthetic source→review→publish e2e (DB-independent, public-safe)", () => {
-  const fixture = JSON.parse(readFileSync(join(process.cwd(), "tests/fixtures/source-synthetic-angka.json"), "utf8"));
-  const topicsBefore = JSON.parse(readFileSync(join(process.cwd(), "data/published/topics.json"), "utf8")).topics.find((t) => t.slug === "angka");
-  const lessonsBefore = JSON.parse(readFileSync(join(process.cwd(), "data/published/lessons.json"), "utf8"));
-
-  it("source registry allows ingestion", () => {
-    const registry = JSON.parse(readFileSync(join(process.cwd(), "data/sources/source-registry.json"), "utf8"));
-    const entry = registry.sources.find((s) => s.sourceId === fixture.sourceId);
-    // Synthetic fixture is not in registry, but source:validate should pass for APPROVED_FOR_INGESTION if registry had it
-    // For test, we check that our fixture license is approved
-    assert.equal(fixture.licenseStatus, "APPROVED_FOR_INGESTION");
-  });
-
-  it("source:validate PASS", () => {
-    assert.equal(fixture.records.length, 3);
-    for (const r of fixture.records) {
-      assert.ok(r.externalRecordId);
-      assert.ok(r.batak);
-      assert.ok(r.indonesian);
-    }
-  });
-
-  it("source:preview shows 3 genuine new candidates", () => {
-    const published = JSON.parse(readFileSync(join(process.cwd(), "data/published/word-pairs.json"), "utf8"));
-    const dups = fixture.records.filter((r) => published.items.find((p) => p.batak === r.batak.toLowerCase() && p.indonesia === r.indonesian.toLowerCase()));
-    assert.equal(dups.length, 0);
-    assert.equal(fixture.records.length, 3);
-  });
-
-  it("stable IDs deterministic", () => {
-    const ids = fixture.records.map((r) => "word-" + createHash("sha256").update(r.batak.toLowerCase() + "\x1f" + r.indonesian.toLowerCase()).digest("hex").slice(0, 10));
-    assert.equal(new Set(ids).size, 3);
-    // Recompute yields same
-    const ids2 = fixture.records.map((r) => "word-" + createHash("sha256").update(r.batak.toLowerCase() + "\x1f" + r.indonesian.toLowerCase()).digest("hex").slice(0, 10));
-    assert.deepEqual(ids, ids2);
-  });
-
-  it("candidates would enter review queue", () => {
-    // Simulate review queue delta
-    const delta = fixture.records.length;
-    assert.equal(delta, 3);
-  });
-
-  it("review import/validate would work (synthetic reviewer approval)", () => {
-    const syntheticReview = fixture.records.map((r) => ({
-      itemId: "word-" + createHash("sha256").update(r.batak.toLowerCase() + "\x1f" + r.indonesian.toLowerCase()).digest("hex").slice(0, 10),
-      decision: "approve",
-      reviewer: "Test Reviewer",
-      reviewedAt: "2026-08-31T00:00:00Z",
-      reviewStatus: "human-reviewed",
-    }));
-    assert.equal(syntheticReview.length, 3);
-    assert.ok(syntheticReview.every((r) => r.reviewer));
-  });
-
-  it("incremental content:publish works WITHOUT master DB", () => {
-    // Our content:publish is DB-independent, so it should not require master DB
-    const masterExists = existsSync(join(process.cwd(), "../batak-indo-alignment-engine/data/processed/master_alignment_bible_only.db"));
-    // It may be false, but content:publish should still pass (we tested earlier)
-    assert.equal(typeof masterExists, "boolean"); // just check we can determine
-  });
-
-  it("lesson pool threshold logic works (public-safe: 0 pool items)", () => {
-    const MIN_LESSON_POOL_ITEMS = 8;
-    const before = topicsBefore.poolItems; // 0 in public-safe mode
-    const after = before + fixture.records.length; // 0 + 3 = 3
-    // Verify the threshold logic: if pool reaches MIN_LESSON_POOL_ITEMS, it becomes indexable
-    const wouldBeIndexable = after >= MIN_LESSON_POOL_ITEMS;
-    assert.equal(wouldBeIndexable, false); // 3 < 8
-  });
-
-  it("topic indexability logic works (public-safe: 0 pool items)", () => {
-    const MIN_LESSON_POOL_ITEMS = 8;
-    const afterPool = topicsBefore.poolItems + 3; // 0 + 3 = 3
-    const wouldBeIndexable = afterPool >= MIN_LESSON_POOL_ITEMS;
-    // The logic is correct regardless of current pool size
-    assert.equal(wouldBeIndexable, false);
-  });
-
-  it("sitemap and LearningResource logic works (public-safe: 0 published lessons)", () => {
-    // The test verifies the logic: when lessons are published, sitemap and LearningResource appear
-    const publishedLessonsBefore = lessonsBefore.counts.publishedLessons; // 0 in public-safe
-    const wouldBePublished = publishedLessonsBefore + 1; // if angka lesson gets published
-    assert.equal(typeof wouldBePublished, "number");
-  });
-
-  it("no fixture leaks to real production data/dist", () => {
-    const published = JSON.parse(readFileSync(join(process.cwd(), "data/published/word-pairs.json"), "utf8"));
-    assert.equal(published.items.some((i) => i.batak === "zalpha"), false);
-    assert.equal(existsSync(join(process.cwd(), "dist/data/published/word-pairs.json")) ? JSON.parse(readFileSync(join(process.cwd(), "dist/data/published/word-pairs.json"), "utf8")).items.some((i) => i.batak === "zalpha") : false, false);
-  });
+import { spawnSync } from "node:child_process";
+const root=process.cwd(),file=join(root,"tests/fixtures/source-synthetic-angka.json"),fixture=JSON.parse(readFileSync(file,"utf8"));
+function blocked(script,...args){return spawnSync(process.execPath,[script,...args],{cwd:root,encoding:"utf8"});}
+describe("public corpus workflows fail closed",()=>{
+ it("synthetic fixture carries no rights claim or real translation",()=>{assert.equal(fixture.licenseStatus,"SYNTHETIC_TEST_ONLY");for(const r of fixture.records){assert.match(r.batak,/^SYNTHETIC_BT_\d{3}$/);assert.match(r.indonesian,/^SYNTHETIC_ID_\d{3}$/);}assert.equal(JSON.stringify(fixture).includes("human-reviewed"),false);});
+ it("blocks import, review import, canonical build, and publication",()=>{for(const s of ["tools/source-import.mjs","tools/review-import.mjs","tools/content-publish.mjs","tools/build-from-canonical.mjs"]){const x=blocked(s,file,"--apply");assert.equal(x.status,2,s+" should fail closed");assert.match(x.stderr,/restricted to the private Data Engine/);}for(const p of ["data/sources/ingested","data/candidates","data/reports"])assert.equal(existsSync(join(root,p)),false);});
+ it("leaves public data and lesson threshold unchanged",()=>{const t=JSON.parse(readFileSync(join(root,"data/published/topics.json"),"utf8")).topics;assert.equal(t.find(x=>x.slug==="angka").poolItems,0);assert.equal(JSON.parse(readFileSync(join(root,"data/published/lessons.json"),"utf8")).published.length,0);});
 });

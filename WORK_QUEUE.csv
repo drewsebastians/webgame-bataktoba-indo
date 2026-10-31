@@ -1,0 +1,7 @@
+track,id,priority,status,task,acceptance,next_action
+website,A1,P0,in-progress,Contain current public exposure and disable public corpus workflows,Raw candidate legacy and internal report copies absent; build fails closed; CI green,Complete PR checks and merge
+website,A2,P1,queued,Implement fail-closed Engine adapter and synthetic browser flows,Schema rights provenance alternatives senses topic mapping and mode eligibility; browser flows use isolated fixtures,Start after A1
+website,A3,P1,queued,Responsive browser and accessibility coverage,320px mobile keyboard touch desktop offline reconnect with no content-driven skips,Continue after A2
+engine,B24,P0,queued,Continue permitted non-Bible discovery and scheduled Tatoeba retry,Source rights and counts reported without restricted text in Git,Retry after 2026-10-31 06:30 UTC; continue independent discovery
+engine,B25,P1,queued,Strengthen private collection validation and coverage,Schema FK rights quality conflict topic readiness and mode-eligibility negative tests,Begin after B24 retry
+cross-repo,C1,P1,queued,Reconcile consumer fields and readiness states,ENGINEERING DATA PUBLICATION LEARNING and MONETIZATION remain separate,Update handoff without transferring content

@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
@@ -187,10 +187,9 @@ describe("migration safety net", () => {
     }
   });
 
-  it("quality report stageCounts match the published pools", () => {
-    const report = JSON.parse(readFileSync(new URL("data/reports/data-quality-report.json", root), "utf8"));
-    assert.equal(report.stageCounts.wordPairs, loadPublished("word-pairs.json").items.length);
-    assert.equal(report.stageCounts.phrasePairs, loadPublished("phrase-pairs.json").items.length);
-    assert.equal(report.stageCounts.sampleSentences, loadPublished("sample-sentences.json").items.length);
+  it("no corpus snapshots remain in the public working tree", () => {
+    for (const rel of ["data/raw", "data/candidates", "data/legacy", "data/reports", "data/sources/alignment-engine-manifest.json", "content/curated/draft-vocabulary.json", "content/themes/keywords.json"]) {
+      assert.equal(existsSync(new URL(rel, root)), false, "public tree must not contain " + rel);
+    }
   });
 });

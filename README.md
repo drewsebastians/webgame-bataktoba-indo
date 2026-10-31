@@ -31,18 +31,15 @@ The webgame has a [current browser product plan](docs/ACTIVE_BROWSER_PRODUCT_PLA
 | **Dictionary** | Dua arah ternormalisasi (NFC+casefold), fuzzy terbatas, filter tema/arah/tipe/status/difficulty (difficulty disabled jujur saat metadata belum ada), highlight aman, detail expandable, Simpan ke latihan, Practice kata ini → games seeded, Lapor koreksi via GitHub issue prefilled. |
 | **Session** | Pilihan ukuran 5/10/20, ringkasan (soal, benar, salah, akurasi, daftar salah, CTA Review Kesalahan), daily queue (due → sering-salah → baru-salah → baru, tanpa duplikat prompt), streak non-punishing (1 hari libur tetap hidup, putus setelah 2 hari). |
 
-## Data counts (production truth — PUBLIC SAFE MODE)
-- **Word pairs (published):** 0 (licensing block: `REQUIRES_LEGAL_REVIEW`, `publicationAllowed: false`)
-- **Genuine phrase pairs:** 0
-- **Sample sentences (published):** 0
-- **Published lessons:** 0 (threshold ≥8 item `source-evidence-qualified` per tema)
-- **Internal draft lessons (not published):** 6 (tema: angka, keluarga, sapaan, makanan, waktu, alam)
-- **Source-evidence-qualified items (internal only):** 591 qualified words, 60 qualified phrases, 80 qualified sentences
-- **Lesson minimum publication pool:** 8 (`minPoolItemsForPublication` di `data/published/lessons.json` dan `tools/quality-gate.mjs`)
-- **Legacy ID map:** 485 mappings (`data/migration/id-map.json`)
+## Public content and release status
+- Published word pairs, phrase pairs, sample sentences, and lessons: **0**.
+- Topic pages remain noindex while no authorized public learning items exist.
+- This repository contains no raw or candidate corpus snapshots. Collection, import, review, reporting, and rebuild commands fail closed here; the private Alignment Engine owns that work.
+- The legacy ID map remains for browser-local progress migration. It contains identifiers only, not learning labels.
 
-Selalu bangkit dari `data/published` saja. `data/raw`, `data/candidates`, `data/sources/staging` (hanya jika `APPROVED_FOR_INGESTION`), `content/curated/draft-vocabulary.json` tidak pernah dibaca runtime atau di-deploy.
+The data/published directory is the only learning-data location copied into the website build. Release builds reject non-empty pools or indexable empty topics until the source adapter and publication gates are implemented and cleared.
 
+## Topic page indexability policy
 ## Topic page indexability policy
 Single source: `data/published/topics.json` + `tools/site.config.json` + sitemap generator + `check-site.mjs`.
 

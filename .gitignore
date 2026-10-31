@@ -6,3 +6,15 @@ Thumbs.db
 test-results/
 playwright-report/
 artifacts/
+
+# Private and corpus-derived working data stay out of this public repository.
+/artifacts/canonical-corpus/
+/data/raw/
+/data/candidates/
+/data/legacy/
+/data/reports/
+/data/reviewed/*.json
+/data/sources/staging/
+/data/sources/ingested/
+/content/curated/draft-vocabulary.json
+/content/themes/keywords.json
