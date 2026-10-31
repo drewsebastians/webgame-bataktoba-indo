@@ -73,14 +73,26 @@ test.describe("core learning flows", () => {
 
   test("flashcards: isolated entrypoint, keyboard flip, actions and filters work", async ({ page }) => {
     const scripts = [];
+    const browserErrors = [];
     page.on("request", (request) => {
       if (request.resourceType() === "script") scripts.push(new URL(request.url()).pathname);
+    });
+    page.on("pageerror", (error) => browserErrors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") browserErrors.push(message.text());
     });
 
     await installSyntheticContentRoutes(page);
     await page.goto("/flashcards/");
     const card = page.locator("#flashcard");
-    await expect(card).toBeVisible();
+    try {
+      await expect(card).toBeVisible();
+    } catch (error) {
+      const appError = await page.locator(".app-error").textContent().catch(() => "");
+      throw new Error(
+        `Flashcards entrypoint failed to render. App error: ${appError || "none"}. Browser errors: ${browserErrors.join(" | ") || "none"}. ${error.message}`,
+      );
+    }
     expect(scripts.some((path) => /\/assets\/js\/flashcards-page\.[\da-f]{8}\.js$/.test(path))).toBe(true);
     expect(scripts.some((path) => /\/assets\/js\/app\.[\da-f]{8}\.js$/.test(path))).toBe(false);
     expect(scripts.some((path) => /\/assets\/js\/game\/(lesson-engine|modes)\.[\da-f]{8}\.js$/.test(path))).toBe(false);
