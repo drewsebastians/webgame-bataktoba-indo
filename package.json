@@ -14,7 +14,7 @@
     "e2e": "node tools/e2e-smoke.mjs",
     "serve:e2e": "node tools/e2e-server.mjs 4179",
     "test:browser": "playwright test",
-    "verify:core": "npm run check && npm run build && npm run test && npm run e2e && npm run test:browser",
+    "verify:core": "npm run check && npm run build && npm run test && npm run performance:budget && npm run e2e && npm run test:browser",
     "verify:drift": "git diff --exit-code -- dist",
     "verify": "npm run verify:core && npm run verify:drift",
     "lighthouse:check": "node tools/lighthouse-check.mjs",
@@ -35,7 +35,8 @@
     "source:validate": "node tools/public-data-workflow-disabled.mjs",
     "source:preview": "node tools/public-data-workflow-disabled.mjs",
     "source:import": "node tools/public-data-workflow-disabled.mjs",
-    "start": "python -m http.server 4173"
+    "start": "python -m http.server 4173",
+    "performance:budget": "node tools/check-performance-budget.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

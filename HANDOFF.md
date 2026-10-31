@@ -1,10 +1,13 @@
-# Resume handoff
+# Resume handoff — 2026-10-31 10:53 UTC
 
-1. Re-fetch repository visibility, main/tree SHAs, Issues, PRs, Actions and private `latest.json` before each batch.
-2. Public main is `ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea` (tree `3c92da8cfb635786eba78eba7d9f8c7b1c60b912`). A2 PR #4 branch `codex/2026-10-31-webgame-synthetic-adapter-a2` is `f32c0bdd68e280c155e1e0225f44b29d69d37d00`. Verify run 41171672244 passed 193/193 unit tests (0 skipped) and E2E smoke; Playwright passed 31/33.
-3. Two browser failures remain: Home was empty after lesson completion, despite the attempted lesson-history-aware onboarding fix; SRS test selected a nonexistent `#flashcard` and filtered to due cards before scheduling one. The SRS selector/filter are corrected; Home runtime diagnostics are added to the next run.
-4. Cloudflare reported success for the A2 PR build. This is provider build/deployment evidence only; live-site readback is unverified.
-5. Production published arrays stay empty. Keep synthetic fixtures under tests/intercepted requests. No private corpus text or restricted records go into this public repo. Do not rewrite history.
-6. Private engine main remains `cfec3baeb8beee4738c81fde73ba92b71755bc22`. B23 is complete; B24 is next. Check the Tatoeba weekly export only after 2026-10-31 06:30 UTC and continue independent permitted discovery.
-7. Private PR #3 remains open at `3e0c6acc9bfbb485640507b55c19b25b43df8dc7`; run 41170710503 did not start because GitHub reported billing/spending-limit status. No validator tests have run or passed; keep it unmerged.
-8. Keep readiness gates separate. Production verification requires green workflow, build/deployment evidence and live readback.
+1. Re-fetch visibility, main/tree SHAs, Issues, PRs, Actions, and the private latest run catalog before every new batch.
+2. This checkpoint PR starts from public main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e / tree 964e674b438eb3a26419c747c9f030af282516bc. PR #4 is merged.
+3. Public Verify run 41191955903 passed 193/193 unit tests, E2E smoke, 33/33 browser tests, verify:drift, and verify:release. Lighthouse prerequisite check passed; no full score audit was run.
+4. Cloudflare Workers Builds reported production deployment success for build f6ede399-fa67-4960-b615-b5f5d5fdaed0 (version b6ccda02-0d2d-44c3-ad4f-129deb03e89b). Direct live Pages readback was unavailable through the current web connector. Do not claim the live artifact was independently inspected.
+5. Keep all public learning arrays empty and noindex until source rights, quality, and publication scope pass. Synthetic fixtures remain intercepted in tests and absent from dist.
+6. The exposure audit found historical snapshots in earlier public commits. Current-tree containment is complete; no destructive history rewrite was performed.
+7. Private main is cfec3baeb8beee4738c81fde73ba92b71755bc22; B23 remains latest. B24 is metadata-only. Private PR #3 head 18eb6a7cbf45cbe73a8a704e2c1caf37b08488a0 triggered Actions run 41193636578, which failed before validator startup without steps or logs. No private tests ran or passed.
+8. The approved private source vault is unavailable. Continue independent metadata discovery; do not acquire language records until storage and source rights are confirmed.
+9. Next public task is A3: live readback, measured performance, and continued PWA/accessibility/security work. The synthetic A2 acceptance in public Issue #2 is met; the issue remains open as a starting queue.
+
+10. A3 performance gate is implemented on `codex/2026-10-31-browser-performance-checkpoint-a3`: it checks production JS/CSS sizes after build and has threshold unit coverage. Baseline is 129,845 JS bytes across 14 files and 15,217 CSS bytes in 1 file; limits and exact meanings are in `docs/PERFORMANCE_BUDGET.md`. PR #5 is open at head `2e367604b28beaf9e64890909d50aeef583b8960`; Verify run #46 (`41194897354`, job `124518995179`) passed 196/196 unit, E2E smoke, 33/33 browser, asset budget, release prerequisite, and dist drift checks. The Lighthouse prerequisite is not a Lighthouse score audit. Merge after the checkpoint update passes, then verify Cloudflare build and retry direct Pages readback.

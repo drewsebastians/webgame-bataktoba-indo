@@ -64,3 +64,15 @@ A successful test job may skip public-data scenarios for legitimate safety, **bu
 At each bounded development batch: verify fresh remote main SHA/tree; read this plan and active progress log; choose highest unblocked browser-engineering task; implement; run tests; record tests passed/skipped, production/public data counts, changed paths and exact next tasks. Maintain source/data track separately; no fabricated content. Engineering and source collection can take turns or run on independent branches/agents; their publish gates must never be conflated.
 
 Source handoff currently **blocked**: upstream PRIVATE/NONCOMMERCIAL research scope, and this website PUBLIC. Even an individually CC-licensed source requires verifying precise rights, attribution and upstream policy before transfer. None of these safeguards should block pure code and synthetic-UX improvements.
+
+
+## A2 completion checkpoint — 2026-10-31 10:47 UTC
+
+Public Issue #2's synthetic engineering acceptance is met by PR #4, merged as 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e. Verify run 41191955903 passed the 193-unit suite, E2E smoke, 33 browser tests, release drift gate, and the verify:release prerequisites. Coverage includes the synthetic lesson/quiz/mistake-review/spaced-repetition/dictionary flow; keyboard, touch, 320px and desktop checks; offline/reconnect; axe accessibility; and fixture isolation. Production content remains empty.
+
+Cloudflare Workers Builds reported production deployment success for the merge commit, but direct live Pages readback was not available. Record deployment technical success separately from live artifact verification and from LEARNING_READY. A3 continues with real performance measurement, PWA/security follow-up, and live readback. The public history audit remains in force: removed historical snapshots are not purged, and no history rewrite was performed.
+
+
+## A3 progress — measured build asset guard
+
+The 31-Oct public main baseline contains 129,845 bytes of minified JavaScript across 14 assets and 15,217 bytes of CSS. CI now includes a deterministic JS/CSS artifact budget with explicit per-file and aggregate limits. The limits measure uncompressed build output; Verify run 41194897354 passed 196/196 unit tests, E2E smoke, 33/33 browser tests, asset budgets, release prerequisites, and dist drift. Lighthouse scores, post-merge deployment, and live Pages readback remain follow-up work.

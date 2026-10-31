@@ -455,3 +455,19 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 - The flashcard test selected a nonexistent id and filtered to due cards before any review was scheduled. It now targets the rendered card id and starts from the all-cards deck before scheduling a spaced-repetition review.
 - Cloudflare reported success for this A2 commit. Live-site readback remains unverified; production published arrays remain empty.
 - Private PR #3 remains blocked by GitHub billing/spending limit. B23 is complete; the next data batch is B24 after the scheduled export window.
+
+
+## 2026-10-31 10:47 UTC checkpoint — A2 release integrated
+
+- Verified repo state before checkpoint: webgame PUBLIC main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e/tree 964e674b438eb3a26419c747c9f030af282516bc; Alignment Engine PRIVATE main cfec3baeb8beee4738c81fde73ba92b71755bc22/tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84.
+- Public PR #4 merged as 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e. Verify run 41191955903 passed 193/193 unit tests, E2E smoke, 33/33 Playwright tests, drift check, and verify:release. Lighthouse prerequisite gate passed; no full Lighthouse score audit was run.
+- Cloudflare Workers Builds reported production deployment success: build f6ede399-fa67-4960-b615-b5f5d5fdaed0, version b6ccda02-0d2d-44c3-ad4f-129deb03e89b. Live Pages readback was unavailable through the current web connector, so no live content inspection is claimed.
+- Synthetic fixtures remained test-only and passed the dist isolation check. Published lesson and linguistic arrays remain empty; no private text transferred.
+- Historical corpus-derived snapshots remain reachable in older public commits. Current tree is contained and no history rewrite was performed.
+- Private B23 remains latest. B24 is metadata-only, no permitted records/learning items; private Actions run 41193636578 failed before job startup with no steps/logs; no private tests ran.
+- Next: A3 performance/PWA/security and live readback follow-up; continue private source discovery after the vault and source-specific rights gates are available.
+
+
+## A3 performance gate — 31 October 2026
+
+Measured main build assets at public baseline 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e: JavaScript 129,845 bytes across 14 files, CSS 15,217 bytes across one file. Added an automated production-asset budget checker, wired into release verification, with tests for the measured baseline, per-file overruns, and aggregate overruns. Verify run 41194897354 passed 196/196 unit tests, E2E smoke, 33/33 browser tests, asset budgets, release prerequisites, and dist drift. No Lighthouse score, A3 deployment, or live artifact readback is claimed.
