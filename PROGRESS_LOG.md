@@ -475,3 +475,15 @@ Measured main build assets at public baseline 14fe3bb5f2a7c9d2d663f9c3221382afb5
 ## A3 integration — 31 October 2026
 
 PR #5 merged as `ffe009e9de10a1ddd144bb0a5d51be746f81b5cc`. Main Verify run 41195989468 passed: 196 unit tests, E2E smoke, 33 Playwright tests, the JS/CSS budget, release prerequisites and dist drift. Cloudflare reported production build de67c3c7-609a-437e-8e76-f4d7ccd26705 (version cb3c2fd0-8648-4a89-b6bf-e7d766c69553). Direct live readback was unavailable through the web connector. Published content arrays remain empty.
+
+## MILESTONE — 31 October 2026: Lighthouse CI and cross-repository checkpoint
+
+- PR #7 merged to public main as `ce3338f0ac03fd56601db29c361bb8927b6ca247`; public repo remains PUBLIC and private Alignment Engine remains PRIVATE.
+- Main Verify run #52 (`41199134008`) passed: 200 unit tests, 0 skipped; 33 browser tests; E2E smoke, published-data checks, asset budget, Lighthouse and dist drift all passed.
+- Actual Lighthouse baseline on the built public artifact: mobile Performance 99/100 and Accessibility 100/100; desktop Performance 100/100 and Accessibility 100/100. JSON reports uploaded as artifact `13041633182`.
+- Cloudflare Workers Builds reported a successful production build (`14592e21-73bd-40cc-b629-99fc4b58c422`). The web connector could not read the deployed home, games, robots or manifest; live artifact verification remains open.
+- Site check still reports 0 published words, genuine phrases and sentences. No private or synthetic linguistic records entered public files or artifacts.
+- Private track remains B23 latest; B24 metadata-only and blocked from acquisition by missing approved vault/source-level clearance. PR #3 run #14 failed before validator steps; no private tests ran. Keep it open/unmerged and continue safe discovery independently.
+- Readiness: ENGINEERING_READY=YES for tested synthetic UX, asset limits and Lighthouse baseline; DATA_READY/PUBLICATION_READY/LEARNING_READY=NO; MONETIZATION_READY=deferred.
+
+Next work: broaden Lighthouse and browser journey coverage, PWA/offline/privacy/security/a11y follow-up, live readback, plus private source metadata discovery and runner/vault recovery.
