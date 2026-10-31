@@ -47,6 +47,58 @@ export function assertLighthouseScoreFloors(scores, floors = SCORE_FLOORS) {
   return true;
 }
 
+const PERFORMANCE_METRICS = Object.freeze([
+  Object.freeze({ id: "first-contentful-paint", label: "FCP" }),
+  Object.freeze({ id: "largest-contentful-paint", label: "LCP" }),
+  Object.freeze({ id: "speed-index", label: "Speed Index" }),
+  Object.freeze({ id: "total-blocking-time", label: "TBT" }),
+  Object.freeze({ id: "cumulative-layout-shift", label: "CLS" }),
+]);
+
+export function summarizePerformanceDiagnostics(report) {
+  const audits = report?.audits && typeof report.audits === "object" ? report.audits : {};
+  const metrics = Object.fromEntries(PERFORMANCE_METRICS.map(({ id, label }) => {
+    const audit = audits[id] ?? {};
+    return [label, {
+      displayValue: typeof audit.displayValue === "string" ? audit.displayValue : null,
+      numericValue: Number.isFinite(audit.numericValue) ? audit.numericValue : null,
+    }];
+  }));
+
+  const opportunities = Object.entries(audits)
+    .filter(([, audit]) => audit?.details?.type === "opportunity")
+    .map(([id, audit]) => {
+      const details = audit.details;
+      return {
+        id,
+        savingsMs: Number.isFinite(details.overallSavingsMs) && details.overallSavingsMs > 0
+          ? details.overallSavingsMs : 0,
+        savingsBytes: Number.isFinite(details.overallSavingsBytes) && details.overallSavingsBytes > 0
+          ? details.overallSavingsBytes : 0,
+      };
+    })
+    .filter(({ savingsMs, savingsBytes }) => savingsMs > 0 || savingsBytes > 0)
+    .sort((a, b) => b.savingsMs - a.savingsMs || b.savingsBytes - a.savingsBytes || a.id.localeCompare(b.id))
+    .slice(0, 3);
+
+  return { metrics, opportunities };
+}
+
+function formatPerformanceDiagnostics(summary) {
+  const metrics = Object.entries(summary.metrics)
+    .map(([label, metric]) => `${label} ${metric.displayValue ?? metric.numericValue ?? "n/a"}`)
+    .join("; ");
+  const opportunities = summary.opportunities.length
+    ? summary.opportunities.map(({ id, savingsMs, savingsBytes }) => {
+      const savings = [];
+      if (savingsMs) savings.push(`${savingsMs} ms`);
+      if (savingsBytes) savings.push(`${savingsBytes} bytes`);
+      return `${id} (${savings.join(", ")})`;
+    }).join("; ")
+    : "none reported";
+  return `metrics: ${metrics}; top opportunities: ${opportunities}`;
+}
+
 async function waitForPreview(server) {
   let spawnError;
   server.once("error", (error) => { spawnError = error; });
@@ -140,6 +192,12 @@ async function runAudits() {
           `Lighthouse ${route.id} ${profile}: performance ${Math.round(scores.performance * 100)}/100; ` +
           `accessibility ${Math.round(scores.accessibility * 100)}/100 — PASS`,
         );
+        if (scores.performance < 0.9) {
+          console.log(
+            `Lighthouse ${route.id} ${profile} diagnostics: ` +
+            formatPerformanceDiagnostics(summarizePerformanceDiagnostics(report)),
+          );
+        }
       }
     }
   } finally {
