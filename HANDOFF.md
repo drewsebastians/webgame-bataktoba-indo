@@ -1,13 +1,13 @@
-# Resume handoff — 2026-10-31 19:00 UTC
+# Resume handoff — 2026-10-31 22:50 UTC
 
-1. Re-fetch both repository visibilities, current main/tree SHAs, Issues, PRs, Actions, and the PRIVATE repo's latest.json before the next write. This checkpoint is based on public main `08075c01533670beaea8f97bb0e88b7d135ae9c5` / tree `f81c477843a792338266c6650cf16e323157092c`.
-2. PR #19 merged dedicated Flashcards route loading as `08075c0`; public Issue #2 is closed for the synthetic-only engineering acceptance, while A3 remains active.
-3. Post-merge Verify [#94 / 41231508931](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41231508931) passed 209/209 unit tests (0 skipped), E2E smoke, performance budget, 36/36 browser tests, 12 Lighthouse audits, and committed-dist drift.
-4. Lighthouse artifact [13054012122](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41231508931/artifacts/13054012122): Accessibility 100 on every route/profile; mobile Performance scores are Home 98, Angka 92, Games 99, Flashcards 90, Dictionary 92, Progress 100. Desktop scores are 100, 99, 100, 100, 100, 100 respectively.
-5. Cloudflare Workers Builds reported successful production build `0460f206-5b78-4643-812c-1e4aeb9daeef` / version `27c5545e-1eed-47b2-ae83-8948b92cefd5`. Direct live Pages readback remains unverified because the available reader cannot access the URLs.
-6. Production learning data remains empty/noindex. Synthetic records stayed test-only and the latest checks found no fixture markers in dist. Historical corpus-derived Git objects remain; preserve history without a rewrite.
-7. The Alignment Engine stays PRIVATE. Its collection/checkpoint details remain only in that repository; no private source or language data was copied into the public repo. B23/B24 progress and any blockers must be resumed from its own handoff.
-8. Continue A3 responsiveness, route performance, accessibility, privacy/security and browser PWA/offline work; do not wait for the corpus. Keep DATA_READY, PUBLICATION_READY and LEARNING_READY separate from ENGINEERING_READY.
+1. Recheck both repository visibility, current main/tree SHAs, Issues, PRs, Actions and the PRIVATE repo's latest.json before the next write batch.
+2. Public main at this checkpoint is e85d791e85ebc4dfed44d3f1c37483254fb49141 / tree a62514cc83bbcb54bdece6b6804807aa5b4d3d13; PR #21 (isolated Dictionary browser entrypoint) merged as e85d791e85ebc4dfed44d3f1c37483254fb49141.
+3. Post-merge Verify [#100 / 41249633492](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249633492) succeeded. PR Verify [#99 / 41249144975](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249144975) passed 209/209 unit, 36/36 Playwright, E2E smoke, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift.
+4. Lighthouse artifact [13059963011](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249144975/artifacts/13059963011): accessibility 100 on every route/profile; mobile performance scores are Home 98, Angka 92, Games 98, Flashcards 90, Dictionary 93, Progress 100.
+5. Dictionary uses its own hashed entrypoint. Synthetic fixture markers were confirmed absent from public dist; production remains empty/noindex with 0 published items, words, genuine phrases or sentences.
+6. GitHub CI proves technical success. Cloudflare production deployment for e85d791e85ebc4dfed44d3f1c37483254fb49141 and direct live Pages readback remain unverified; verify both before claiming deployment success.
+7. The Alignment Engine remains PRIVATE. Resume B24 from its own status/frontier; B23 remains latest and no B17–B23 work should be repeated. No private data or source ledger is copied here.
+8. Continue A3 responsive browser, PWA/offline, accessibility, security and performance work in parallel with private source discovery.
 
 ## Archived handoff records (preserved verbatim; superseded by the current instructions above)
 
