@@ -19,7 +19,9 @@ test("service worker restores a visited lesson offline and reconnects", async ({
   await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
   await expect.poll(
     () => page.evaluate(async () => {
-      const cache = await caches.open("btp-v1-shell");
+      const shellName = (await caches.keys()).find((name) => name.startsWith("btp-") && name.endsWith("-shell"));
+      if (!shellName) return 0;
+      const cache = await caches.open(shellName);
       return (await cache.match(new URL("/learn/angka/", location.origin)))?.status ?? 0;
     }),
     { timeout: 15000, message: "the visited lesson was not saved to the shell cache" },
