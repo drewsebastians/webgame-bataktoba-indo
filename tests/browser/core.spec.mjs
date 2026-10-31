@@ -90,7 +90,7 @@ test.describe("core learning flows", () => {
     } catch (error) {
       const appError = await page.locator(".app-error").textContent().catch(() => "");
       throw new Error(
-        `Flashcards entrypoint failed to render. App error: ${appError || "none"}. Browser errors: ${browserErrors.join(" | ") || "none"}. ${error.message}`,
+        `Flashcards entrypoint failed to render. App error: ${appError || "none"}. Browser errors: ${browserErrors.join(" | ") || "none"}. Loaded scripts: ${scripts.join(", ") || "none"}. ${error.message}`,
       );
     }
     expect(scripts.some((path) => /\/assets\/js\/flashcards-page\.[\da-f]{8}\.js$/.test(path))).toBe(true);

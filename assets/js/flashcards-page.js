@@ -18,16 +18,16 @@ import { masteryLabel } from "./game/session.js";
 import { track } from "./analytics.js";
 import { sweepPlaceholders } from "./ads.js";
 
-const $ = (selector, root = document) => root.querySelector(selector);
-const $ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const flashcardQuery = (selector, root = document) => root.querySelector(selector);
+const flashcardQueryAll = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 function pill(text, extraClass = "", attrs = {}) {
   return el("span", { className: `pill ${extraClass}`.trim(), text, attrs });
 }
 
 function initNavToggle() {
-  const toggle = $(".nav-toggle");
-  const links = $("#nav-links-list");
+  const toggle = flashcardQuery(".nav-toggle");
+  const links = flashcardQuery("#nav-links-list");
   if (!toggle || !links) return;
   toggle.addEventListener("click", () => {
     const open = links.classList.toggle("nav-open");
@@ -37,16 +37,16 @@ function initNavToggle() {
 
 function setActiveNav() {
   const page = document.body.dataset.page;
-  $$("[data-nav]").forEach((link) => {
+  flashcardQueryAll("[data-nav]").forEach((link) => {
     if (link.dataset.nav === page) link.setAttribute("aria-current", "page");
   });
 }
 
 function updateProgressBadges() {
   const progress = getProgress();
-  $$("[data-progress-answered]").forEach((node) => (node.textContent = progress.answered));
-  $$("[data-progress-correct]").forEach((node) => (node.textContent = progress.correct));
-  $$("[data-progress-known]").forEach((node) => (node.textContent = getBucketIds("known").length));
+  flashcardQueryAll("[data-progress-answered]").forEach((node) => (node.textContent = progress.answered));
+  flashcardQueryAll("[data-progress-correct]").forEach((node) => (node.textContent = progress.correct));
+  flashcardQueryAll("[data-progress-known]").forEach((node) => (node.textContent = getBucketIds("known").length));
 }
 
 function formatQuality(item) {
@@ -57,7 +57,7 @@ function formatQuality(item) {
 }
 
 async function initFlashcards() {
-  const root = $("#flashcard-root");
+  const root = flashcardQuery("#flashcard-root");
   if (!root) return;
   const { items } = await loadWordPairs();
   const topics = await loadTopics();
@@ -103,7 +103,7 @@ async function initFlashcards() {
   }
 
   function renderToolbar() {
-    const toolbar = $("#flashcard-toolbar");
+    const toolbar = flashcardQuery("#flashcard-toolbar");
     if (!toolbar) return;
     function select(id, label, options, value, onChange) {
       const wrapper = el("label", { className: "filter-field" }, label + " ");
@@ -185,7 +185,7 @@ async function initFlashcards() {
   }
 
   function renderCard() {
-    const cardRoot = $("#flashcard-card");
+    const cardRoot = flashcardQuery("#flashcard-card");
     if (!cardRoot) return;
     const item = currentItem();
     if (!item) {
@@ -301,7 +301,7 @@ function setOfflineBanner(offline) {
     offlineTracked = true;
     track("offline_session");
   }
-  const existing = $(".app-banner.offline-banner");
+  const existing = flashcardQuery(".app-banner.offline-banner");
   if (offline && !existing) {
     document.body.append(
       el("div", {
@@ -349,4 +349,4 @@ async function main() {
   await initFlashcards();
 }
 
-main().catch((error) => showError($("main"), error && error.message ? error.message : "Kesalahan tidak diketahui."));
+main().catch((error) => showError(flashcardQuery("main"), error && error.message ? error.message : "Kesalahan tidak diketahui."));
