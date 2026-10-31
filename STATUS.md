@@ -2,9 +2,9 @@
 
 ## Verified GitHub state
 
-- Webgame remains PUBLIC. Main/tree is `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 is open. PR #13 is open at `062fceb3f2d04b873b51da1b07430779101b0c82` on `codex/2026-10-31-service-worker-offline-e2e`.
+- Webgame remains PUBLIC. Main/tree is `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 is open. PR #13 is open at `fa2cf2b97dea5e976014eeed098ddda3f6e2a0cb` on `codex/2026-10-31-service-worker-offline-e2e`.
 - Alignment Engine remains PRIVATE. Main/tree is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; `latest.json` remains B23 / DEGRADED. PR #3 is open at `e726a5f8bb20eccc9c0e8962ac3f49fd6dd89952`. B24 is metadata-only: 15 preflight rows (12 possible direct leads, 2 adjuncts, 1 scope check), 0 verified families, permitted/acquired records, items/evidence, conflicts, topics or eligible items.
-- Public main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, asset budget, all Lighthouse audits and committed-dist drift. The latest PR #13 Verify #68 failed at the offline-banner locator after the previously visited lesson loaded offline; shell-cache assertion had passed. No complete PR #13 verification or merge is claimed.
+- Public main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, asset budget, all Lighthouse audits and committed-dist drift. PR #13 Verify #69 failed at the direct `navigator.onLine === false` expectation: Chromium reported `true` after offline emulation. The cached lesson and shell-cache assertion passed; the next run must verify cached navigation, offline fallback and reconnection without relying on that browser property.
 - Cloudflare Workers Builds reported a successful provider build for PR #13 commit `062fceb3` (build `5ed8390c-e9c7-4c44-a93f-689c44de967a`). This is provider status only; direct live artifact readback remains unavailable.
 - Private Actions run #19 / 41214022705 failed before any step ran (job reports zero steps; log endpoint returned 404). No private validator tests ran. The reason is not confirmed from available job evidence.
 - Public learning content remains empty: 0 items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only; no private/restricted content was transferred. Historical public corpus objects remain in Git history; no destructive rewrite was performed.
@@ -40,7 +40,7 @@ The current public tree contains no restricted corpus or synthetic fixture paylo
 
 ## Next actions
 
-1. Finish PR #13's real-service-worker browser coverage by retaining the cached lesson, offline fallback, reconnect, and offline-state checks while removing banner assertions already covered by the isolated UI flow.
+1. Finish PR #13's real-service-worker browser coverage by retaining cached lesson, offline fallback and reconnect checks. Playwright's offline emulation does not reliably change `navigator.onLine` in this runner.
 2. Synchronize committed `dist/sw.js` with the changed service worker source and CI's generated cache version, then require Verify and committed-dist drift to pass before merge.
 3. Keep deployment claims limited to provider build evidence until an accessible direct live readback is available.
 4. Continue independent public UX/security/PWA work and private B24 metadata discovery; preserve zero published language data and all separate readiness gates.
