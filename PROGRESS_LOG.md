@@ -1,4 +1,26 @@
-## LATEST EXECUTION CHECKPOINT — 2026-10-31 16:53 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-10-31 19:00 UTC
+
+### PUBLIC webgame
+
+- Re-verified public main `08075c01533670beaea8f97bb0e88b7d135ae9c5` / tree `f81c477843a792338266c6650cf16e323157092c` after PR #19 merge.
+- PR #19 isolates Flashcards behind its own browser entrypoint; browser assertions prove the route does not request the general app bundle or lesson engine/modes/onboarding bundles.
+- Main Verify #94 / 41231508931 passed 209/209 unit tests (0 skipped), E2E smoke, performance budget, 36/36 Playwright tests, all 12 Lighthouse audits and committed-dist drift.
+- Lighthouse artifact 13054012122: mobile Performance 98/92/99/90/92/100 and desktop 100/99/100/100/100/100 for Home, Angka, Games, Flashcards, Dictionary and Progress. Accessibility is 100 on every route/profile.
+- Bundle budget passed at 163,643/196,608 JavaScript bytes across 17 files and 15,491/49,152 CSS bytes. Flashcards mobile Performance improved from 88 to 90 after route isolation.
+- Cloudflare Workers Builds reports successful production build 0460f206-5b78-4643-812c-1e4aeb9daeef / version 27c5545e-1eed-47b2-ae83-8948b92cefd5. Direct live Pages readback remains unverified from the available reader.
+- Production data remains empty/noindex (0 items, words, genuine phrases and sentences). Synthetic fixtures stayed isolated from the build; no private data moved to public. Historical public Git objects remain unchanged.
+
+### PRIVATE Alignment Engine
+
+- The Alignment Engine remains PRIVATE. Its latest batch and collection/readiness details stay in the private repository; nothing was transferred to the public tree.
+- Resume B24 from the private HANDOFF.md; do not repeat B17–B23.
+
+### Readiness and next action
+
+- ENGINEERING_READY=YES for tested synthetic browser capabilities; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Continue A3 responsive UX, route payload/performance, accessibility, privacy/security and PWA/offline work independently of corpus readiness. Preserve the noindex/empty production state and synthetic-only test boundary.
+
+## PREVIOUS EXECUTION CHECKPOINT — 2026-10-31 16:53 UTC
 
 ### PUBLIC webgame
 
