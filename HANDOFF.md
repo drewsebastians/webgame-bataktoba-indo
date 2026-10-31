@@ -1,13 +1,13 @@
-# Resume handoff — 2026-10-31 16:53 UTC
+# Resume handoff — 2026-10-31 19:00 UTC
 
-1. Start by re-fetching visibility, main/tree SHAs, Issues, PRs, Actions, deployment checks and the PRIVATE repo's data/catalog/private_runs/latest.json. This checkpoint branch is based on public application-code main 52ce83df941a11c55f30051f16090bd94013a4ed / tree d913b581571aa0c529764781bd799d1ab946a172.
-2. Public Issue #2 is closed as completed. PR #13 delivered offline cache/fallback/reconnect coverage; PR #15 added fail-closed rights, provenance, conflict, commercial-gate and per-mode tests.
-3. Main Verify #77 / 41221229303 passed on 52ce83df: 207 unit tests, 0 skipped; E2E smoke; performance budget; 35/35 Playwright; 12 Lighthouse audits; committed-dist drift. Lighthouse artifact is 13050216595.
-4. Cloudflare Workers Builds succeeded for production build 8a43cc71-fff9-4145-a69e-01c92e971e59 (version e2168019-0b6f-4e3e-96dd-e82f083f1e0d). Direct Pages readback is still unverified. Keep that distinction in future reports.
-5. Production learning data remains empty. Synthetic fixtures are test-only; public test and build checks found no fixture leakage. Historical public raw/corpus Git objects remain unchanged.
-6. Next public task: investigate the Progress desktop Lighthouse Performance score (78), then continue A3 responsiveness, PWA/offline, accessibility, privacy/security and performance follow-up. Run relevant release verification for every implementation.
-7. The Alignment Engine remains PRIVATE at the previously verified main SHA cfec3baeb8beee4738c81fde73ba92b71755bc22 / tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84. B23 is still latest (DEGRADED); B24 is metadata-only. Private PR #3 remains open/unmerged because runs #23 and #24 failed before any validator steps ran. Keep private research and diagnostics private; do not repeat completed B17–B23 work or move data outward.
-8. No data-rights or runner blocker should stop independent public engineering. Continue B24 discovery only within the private source and rights gates, and require an actually started, passing private validator run before merge.
+1. Re-fetch both repository visibilities, current main/tree SHAs, Issues, PRs, Actions, and the PRIVATE repo's latest.json before the next write. This checkpoint is based on public main `08075c01533670beaea8f97bb0e88b7d135ae9c5` / tree `f81c477843a792338266c6650cf16e323157092c`.
+2. PR #19 merged dedicated Flashcards route loading as `08075c0`; public Issue #2 is closed for the synthetic-only engineering acceptance, while A3 remains active.
+3. Post-merge Verify [#94 / 41231508931](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41231508931) passed 209/209 unit tests (0 skipped), E2E smoke, performance budget, 36/36 browser tests, 12 Lighthouse audits, and committed-dist drift.
+4. Lighthouse artifact [13054012122](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41231508931/artifacts/13054012122): Accessibility 100 on every route/profile; mobile Performance scores are Home 98, Angka 92, Games 99, Flashcards 90, Dictionary 92, Progress 100. Desktop scores are 100, 99, 100, 100, 100, 100 respectively.
+5. Cloudflare Workers Builds reported successful production build `0460f206-5b78-4643-812c-1e4aeb9daeef` / version `27c5545e-1eed-47b2-ae83-8948b92cefd5`. Direct live Pages readback remains unverified because the available reader cannot access the URLs.
+6. Production learning data remains empty/noindex. Synthetic records stayed test-only and the latest checks found no fixture markers in dist. Historical corpus-derived Git objects remain; preserve history without a rewrite.
+7. The Alignment Engine stays PRIVATE. Its collection/checkpoint details remain only in that repository; no private source or language data was copied into the public repo. B23/B24 progress and any blockers must be resumed from its own handoff.
+8. Continue A3 responsiveness, route performance, accessibility, privacy/security and browser PWA/offline work; do not wait for the corpus. Keep DATA_READY, PUBLICATION_READY and LEARNING_READY separate from ENGINEERING_READY.
 
 ## Archived handoff records (preserved verbatim; superseded by the current instructions above)
 

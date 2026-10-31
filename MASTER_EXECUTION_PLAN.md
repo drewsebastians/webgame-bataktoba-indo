@@ -18,7 +18,7 @@ For every batch, re-check both repository visibilities, main/tree SHAs, Issues, 
 | LEARNING_READY | Lawful published lessons work end-to-end and production is checked. |
 | MONETIZATION_READY | Separate future gate; no current priority. |
 
-## Latest verified checkpoint — 2026-10-31 14:33 UTC
+## Historical checkpoint — 2026-10-31 14:33 UTC
 
 Public main is `730ff3fdd1db6190d70cc37774c3800db1e1602b` / tree `2e500141e4811ccbfc16db43207b3f866d1897fb`; PR #11 is merged. Verify run [#62 / 41207408541](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41207408541) passed 201/201 unit tests (0 skipped), 34/34 browser tests, build, E2E smoke, JS/CSS budget, 12 Lighthouse audits, and committed-dist drift. Lighthouse Performance (mobile/desktop): home 99/100, angka 93/99, games 98/100, flashcards 88/100, dictionary 93/100, progress 89/78; Accessibility 100 on every route/profile. Report artifact ID `13044757621`. Cloudflare Workers Builds verified production build `9236ed12-0264-47ef-8429-b6ae23453538` / version `7a3eec26-1e93-437b-8adb-0b7994330563`; direct live readback remains unverified.
 
@@ -74,22 +74,8 @@ Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and
 
 ## Next actions
 
-1. Inspect the desktop progress Lighthouse JSON report and address the strongest verified performance opportunity while preserving current score floors.
-2. Continue PWA/offline, responsive behavior, privacy/security, keyboard/touch accessibility and browser journey coverage.
-3. Retry live Pages readback through a route the available tools can access.
-4. Continue private B24 research and validator recovery separately; keep private source records and corpus text out of the public repo.
-
-## Active checkpoint — 2026-10-31 13:41 UTC
-
-- Public webgame is PUBLIC at main `1af06840fbe0098f2737720a8ab0d5c8b0412bfc` / tree `4e7a754b97e4111c3fef3cd43b661588d11bce7a`. PR #11 code/dist head `2c412b1f940e1548cb34f0e54a359d9740531a08` passed Verify #60: 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke/budget, all 12 Lighthouse route/profile audits, and dist drift. The docs checkpoint is pending its own CI run before merge.
-- The progress page now loads a 9,975-byte focused entrypoint; browser coverage confirms it does not request the app or game-engine bundles. Lighthouse progress is 89 mobile / 78 desktop with accessibility 100; overall JS budget remains below its cap.
-- Provider build check succeeded for the PR candidate; production main deployment and independent live readback are not yet verified.
-- Private repo remains PRIVATE at main `cfec3baeb8beee4738c81fde73ba92b71755bc22`; B23 is latest. PR #3 remains open at `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1`, with run #17 failing before runner startup (0 steps). B24 remains metadata-only: 14 source/scope rows, 0 permitted/acquired records; vault unavailable.
-- Readiness remains ENGINEERING_READY=YES for the tested synthetic flows and candidate checks; DATA_READY/PUBLICATION_READY/LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
-
-## Next actions
-
-1. Validate the checkpoint docs commit and merge PR #11.
-2. Verify main CI and Cloudflare build after merge, then retry live Pages readback.
-3. Continue independent public PWA/offline, responsiveness, performance, accessibility, privacy and security work.
-4. Continue private B24 metadata/rightsholder discovery; keep the validator PR unmerged until Actions executes and passes; acquire nothing without source-specific rights and approved storage.
+1. Continue A3 responsive browser engineering: route-level payload/performance, PWA/offline, accessibility, privacy and security.
+2. Preserve empty/noindex public learning content and keep synthetic fixtures isolated from production artifacts.
+3. Continue Data Engine discovery and permitted collection only in its PRIVATE repository; resume from its current HANDOFF.md without repeating completed batches.
+4. Verify live production Pages content directly through an accessible browser/reader before claiming live readback.
+5. Re-fetch repository visibility, main/tree SHAs, Issues, PRs, Actions, deployments and private latest.json before the next write batch.
