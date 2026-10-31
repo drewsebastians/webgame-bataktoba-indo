@@ -14,6 +14,21 @@ import { fileURLToPath } from "node:url";
 
 const root = join(fileURLToPath(new URL("../", import.meta.url)));
 
+function assertPublicContentClosed() {
+  for (const name of ["word-pairs.json", "phrase-pairs.json", "sample-sentences.json", "learning-items.json"]) {
+    const path = join(root, "data", "published", name);
+    if (!existsSync(path)) throw new Error("Public release gate: missing published file " + name);
+    const payload = JSON.parse(readFileSync(path, "utf8"));
+    if (!Array.isArray(payload.items) || payload.items.length !== 0) throw new Error("Public release is closed until source and publication gates pass.");
+  }
+  const lessons = JSON.parse(readFileSync(join(root, "data", "published", "lessons.json"), "utf8"));
+  if (!Array.isArray(lessons.published) || lessons.published.length !== 0) throw new Error("Public release is closed until source and publication gates pass.");
+  const topics = JSON.parse(readFileSync(join(root, "data", "published", "topics.json"), "utf8"));
+  if (!Array.isArray(topics.topics) || topics.topics.some((t) => t.poolItems !== 0 || (t.itemIds && t.itemIds.length) || t.indexability !== "noindex,follow")) throw new Error("Empty topics must remain noindex until publication gates pass.");
+}
+
+assertPublicContentClosed();
+
 const COPY_PATHS = [
   "index.html",
   "games",

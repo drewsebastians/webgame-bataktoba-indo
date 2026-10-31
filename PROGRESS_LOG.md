@@ -1,5 +1,8 @@
 # Progress Log — Program Menuju Ultimate Blueprint
 
+## LATEST EXECUTION CHECKPOINT — 31 October 2026
+Public baseline before this batch: webgame main 6b563267ed4973375ea8031910552d61ae324250 (tree 0b855047ca141d5178018787ea316b2047d271c5); private Alignment Engine main cfec3baeb8beee4738c81fde73ba92b71755bc22 (tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84). Web Verify run 41163350076 passed. Engine B23 is complete and latest.json names B24 next; do not repeat B17–B23. This batch removes current-tree public corpus snapshots, disables public corpus workflows, and retains empty production content. Historical commits remain unchanged. See STATUS.md, HANDOFF.md, and WORK_QUEUE.csv.
+
 ## CURRENT DECISION — 31 October 2026 (supersedes future-looking sequencing only)
 
 Active plan: [docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md](docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md); data consumer needs: [docs/UPSTREAM_WEBGAME_DATA_HANDOFF.md](docs/UPSTREAM_WEBGAME_DATA_HANDOFF.md). Product is a desktop/mobile **browser website** (plus browser PWA), not a native mobile app. Development **does not stop** while the private upstream data collection progresses. The owner explicitly rejects treating audio/pronunciation or cultural content as a near-term strategic differentiator. Source permissions still block real content publication, not synthetic UX/engine/test progress.

@@ -21,7 +21,6 @@ const requiredFiles = [
   "data/published/word-pairs.json",
   "data/published/phrase-pairs.json",
   "data/published/sample-sentences.json",
-  "data/reports/data-quality-report.json",
   "data/migration/id-map.json",
 ];
 
