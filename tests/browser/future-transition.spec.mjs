@@ -23,19 +23,13 @@ test("real synthetic lesson completion persists through home and offline/reconne
   expect(completedAt).toBeTruthy();
 
   await page.goto("/");
-  const homeState = await page.evaluate(() => {
-    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
-    const lesson = progress.lessons?.angka ?? {};
-    return {
-      dynamicText: document.querySelector("#home-dynamic")?.innerText ?? "",
-      statsText: document.querySelector("[data-home-stats]")?.innerText ?? "",
-      lessonProgress: { startedAt: Boolean(lesson.startedAt), completedAt: Boolean(lesson.completedAt) },
-      onboardingStored: localStorage.getItem("batakTobaPlay.onboarding") !== null,
-      appScripts: [...document.querySelectorAll("script[src]")].map((script) => script.getAttribute("src")),
-    };
-  });
-  expect(homeState.dynamicText, `Home init diagnostic: ${JSON.stringify({ homeState, pageErrors, dataResponses })}`)
-    .toContain("Lanjutkan Belajar");
+  await expect.poll(
+    () => page.locator("#home-dynamic").innerText(),
+    {
+      message: `Home did not render the saved lesson after async data loading; ${JSON.stringify({ pageErrors, dataResponses })}`,
+    },
+  ).toContain("Lanjutkan Belajar");
+  await expect(page.locator("[data-home-stats]")).toContainText("8 pasangan kata");
 
   await context.setOffline(true);
   await expect(page.locator(".app-banner.offline-banner")).toBeVisible();
