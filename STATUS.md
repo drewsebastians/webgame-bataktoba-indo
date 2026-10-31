@@ -1,12 +1,12 @@
-# Execution status — 2026-10-31 15:52 UTC
+# Execution status — 2026-10-31 16:25 UTC
 
 ## Verified GitHub state
 
-- Webgame remains PUBLIC. Main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 remains open. PR #13 is open; offline-service-worker coverage has passed full PR verification and awaits merge.
-- Main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, performance budget, Lighthouse and committed-dist drift. PR Verify #71 passed 202/202 unit tests (0 skipped), 35/35 browser tests, build/smoke, performance budget, all 12 Lighthouse audits and committed-dist drift on the checkpointed service-worker change.
-- Verify #71 Lighthouse reports are uploaded as artifact `13048113240`. Cloudflare Workers Builds reports successful deployment for PR checkpoint commit `1e6e562f` (build `91c14899-427c-4bad-bd75-888263035043`); post-merge main deployment and direct live artifact readback remain pending.
-- Public learning data remains empty: 0 items, words, genuine phrases or sentences. Synthetic fixtures remain test-only. The Alignment Engine remains PRIVATE; no private source details or records are copied here, and no content is authorized for publication.
-- Historical public corpus objects remain in Git history; no destructive history rewrite was performed.
+- The webgame repository is PUBLIC. The verified application-code merge checkpoint is `94b7f6a21edec58811e6eddcceaea4a595802064` (tree `70b14cf98552972d869feb431d64b4d4bc9fc07a`). Issue #2 remains open; PR #13 is merged.
+- Main Verify [#73 / 41218051252](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41218051252) succeeded on the merge commit, including full verification and committed-dist drift. PR Verify #71 recorded 202/202 unit tests (0 skipped), 35/35 browser tests, smoke, performance budget, all 12 Lighthouse audits and dist drift; Verify #72 also completed successfully on its docs checkpoint head. Latest main Lighthouse artifact: `13048927117`.
+- Cloudflare Workers Builds reported deployment success for merge commit `94b7f6a2` (build `2a722185-13a7-4c6d-aa94-2241745ba4aa`). The configured Pages host is `https://webgame-bataktoba-indo.pages.dev/`; direct live readback is unverified because the available web reader could not open it and DNS lookup from this execution environment did not resolve the host. 
+- Production learning data remains empty: 0 items, words, genuine phrases or sentences. Synthetic fixtures remain test-only. The Alignment Engine remains PRIVATE; public publication remains gated on explicit rights and quality approval.
+- The tested tree contains no new linguistic content from PR #13. Historical raw/corpus objects remain in earlier public Git commits; no destructive history rewrite was performed.
 
 ## Lighthouse result — PR Verify #71
 
@@ -25,7 +25,7 @@ All 12 audits met the 70 Performance / 90 Accessibility floors. Desktop progress
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for the tested service-worker offline flow on PR #13; merge and main deployment verification pending | Verify #71 passed the full browser, Lighthouse, budget and committed-dist gates on the PR. |
+| ENGINEERING_READY | YES for the merged service-worker offline flow; broader Issue #2 acceptance remains in progress | Verify #73 succeeded on the merge commit; PR #13 passed full PR verification including browser, Lighthouse, budget and committed-dist gates. |
 | DATA_READY | NO | No records have been approved for public sync; detailed source discovery remains private. |
 | PUBLICATION_READY | NO | No record-level rights clearance or publication scope; public data remains empty. |
 | LEARNING_READY | NO | No authorized real content is published; empty/noindex behavior remains active. |
@@ -41,10 +41,11 @@ The current public tree contains no restricted corpus or synthetic fixture paylo
 
 ## Next actions
 
-1. Re-fetch main, PR #13 head and required checks, then merge the fully verified PR using the expected head SHA.
-2. Verify post-merge main CI, Cloudflare production build/deployment, and direct live artifact behavior when an accessible readback is available.
-3. Continue independent responsive, accessibility, privacy/security and PWA work; keep empty/noindex behavior until rights and quality gates approve real content.
-4. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
+1. Continue Issue #2 with synthetic-only end-to-end lesson → quiz → mistake review → spaced repetition → dictionary coverage; verify keyboard, touch, 320px and desktop cases.
+2. Keep adapter fixtures synthetic-only and fail closed on rights, provenance, conflict, eligibility and fixture-leak checks.
+3. Continue responsive, accessibility, privacy/security and PWA work independently of data readiness; keep published arrays empty and empty topics noindex.
+4. Recheck the current main SHA, Verify run and Cloudflare build before the next integration; attempt live Pages readback again when a resolver/reader is available.
+5. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
 
 ## A3 performance checkpoint — 2026-10-31 10:53 UTC
 

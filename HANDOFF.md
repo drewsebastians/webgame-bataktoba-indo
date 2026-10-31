@@ -1,12 +1,11 @@
-# Resume handoff — 2026-10-31 15:52 UTC
+# Resume handoff — 2026-10-31 16:25 UTC
 
-1. Re-fetch public main/tree, PRs, Issues and Actions before each write or merge batch; keep the Alignment Engine PRIVATE and its source metadata in that repository.
-2. Public main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. PR #13 implementation commit `b337d8354c66744aaf4334f688afe145d44a9310` has passed; checkpoint commit `1e6e562f109058ff146e3e7f69997462c4d78f2f` also passed Verify #71.
-3. Verify #71 evidence: 202/202 unit (0 skipped), 35/35 Playwright browser tests, smoke, performance budget, all 12 Lighthouse audits and committed-dist drift. Artifact `13048113240`; scores (mobile/desktop Performance) home 98/100, angka 93/99, games 98/100, flashcards 89/100, dictionary 92/100, progress 89/78; Accessibility 100.
-4. The offline test confirms cached production lesson navigation, offline fallback for an unvisited route and reconnect. Synthetic fixtures remain isolated from the service-worker-enabled test.
-5. Cloudflare Workers Builds reported successful deployment for PR checkpoint commit `1e6e562f` (build `91c14899-427c-4bad-bd75-888263035043`). Post-merge main build and direct live readback are not yet verified. Public data remains 0 items/words/phrases/sentences; no private source metadata or language content was copied.
-6. Next: re-fetch PR head/checks and merge PR #13 with expected SHA; then verify main CI, Cloudflare build/deployment and live artifact if available. Continue public engineering independently of data readiness and keep the five readiness gates separate.
-
+1. Re-fetch both repository visibilities, current main/tree SHAs, Issues, PRs, Actions and private `latest.json` before the next write; keep the Alignment Engine PRIVATE.
+2. The last verified application-code checkpoint was webgame merge commit `94b7f6a21edec58811e6eddcceaea4a595802064` / tree `70b14cf98552972d869feb431d64b4d4bc9fc07a`. PR #13 is merged; Issue #2 remains open.
+3. Verify #73 / 41218051252 passed on that merge commit, with full verification and committed-dist drift. PR Verify #71 provides exact counts: 202/202 unit (0 skipped), 35/35 browser, smoke, performance budget, 12 Lighthouse audits and drift; latest main artifact is `13048927117`.
+4. Cloudflare Workers Builds reported successful deployment for the merge commit (build `2a722185-13a7-4c6d-aa94-2241745ba4aa`). Direct Pages readback remains unverified: the web reader could not open the configured hostname and execution-environment DNS lookup failed.
+5. Production still has 0 items, words, genuine phrases and sentences. Synthetic fixtures are test-only. No restricted/private data was added; historical Git objects remain unrevised.
+6. Next: continue Issue #2's synthetic lesson-to-dictionary journey, touch/keyboard/mobile coverage and fail-closed adapter tests. Develop independently of corpus readiness and preserve noindex/empty states.
 
 ## Historical handoff archive
 
