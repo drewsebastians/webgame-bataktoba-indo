@@ -1848,9 +1848,12 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
       (() => {
         const b = el("button", { className: "button", id: "lesson-next", text: "Lanjut", attrs: { type: "button", disabled: true } });
         b.addEventListener("click", () => {
-          stepIndex += 1;
-          if (plan[stepIndex].type === "summary") finish();
-          else renderStep();
+          if (recallIndex >= step.prompts.length) {
+            stepIndex += 1;
+            renderStep();
+          } else {
+            renderRecall();
+          }
         });
         return b;
       })(),

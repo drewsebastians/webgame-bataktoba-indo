@@ -9,9 +9,11 @@ async function answerMeaningQuestion(page, { wrong = false } = {}) {
   const prompt = (await page.locator(".prompt-text").textContent())?.trim();
   const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
   expect(item, `quiz prompt ${prompt}`).toBeTruthy();
+  const visibleAnswers = (await page.locator(".option").allTextContents()).map((label) => label.trim());
   const answer = wrong
-    ? SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.id !== item.id).indonesia
+    ? visibleAnswers.find((label) => label !== item.indonesia)
     : item.indonesia;
+  expect(answer).toBeTruthy();
   await page.getByRole("button", { name: answer, exact: true }).click();
   await expect(page.locator("#next-question")).toBeEnabled();
   await page.locator("#next-question").click();

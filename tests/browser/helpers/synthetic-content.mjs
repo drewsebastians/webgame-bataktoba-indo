@@ -92,9 +92,11 @@ export async function completeSyntheticLesson(page, { introduceMistake = true } 
     const prompt = (await page.locator(".prompt-text").textContent())?.trim();
     const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
     expect(item, `synthetic lesson prompt ${prompt}`).toBeTruthy();
+    const visibleAnswers = (await page.locator(".option").allTextContents()).map((label) => label.trim());
     const answer = introduceMistake && index === 0
-      ? SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.id !== item.id).indonesia
+      ? visibleAnswers.find((label) => label !== item.indonesia)
       : item.indonesia;
+    expect(answer, "a visible non-answer option for the deliberate mistake").toBeTruthy();
     await page.getByRole("button", { name: answer, exact: true }).click();
     await expect(page.getByRole("button", { name: "Lanjut", exact: true })).toBeEnabled();
     await page.getByRole("button", { name: "Lanjut", exact: true }).click();

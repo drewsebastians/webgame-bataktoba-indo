@@ -429,3 +429,12 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 - Private B23 complete; no repeat. B24 remains next; scheduled Tatoeba refresh not yet due.
 - Private validator PR #3 remains open because GitHub Actions run 41167909686 was rejected before job startup for billing/spending-limit status. No local Python runtime was available; no tests are claimed.
 - No private text was copied into the public repository. Historical public Git history remains unchanged.
+
+
+## 2026-10-31 checkpoint — first A2 CI findings
+
+- A2 Verify run 41170059393 completed 191 unit tests and E2E smoke successfully; 30 of 33 Playwright tests passed.
+- Three browser failures converged on a real lesson-flow bug: the recall step advanced to mistake review after the first checked answer. The engine is being corrected to keep serving the remaining recall prompts.
+- The synthetic fixture's deliberate wrong answer is now selected only from visible options.
+- Cloudflare Workers Builds passed on the tested PR head; this is a build result, not live-site readback.
+- No private content was transferred; production data remains empty. Private PR #3 still lacks a runnable Actions check due billing.
