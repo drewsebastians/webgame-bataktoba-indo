@@ -1,16 +1,79 @@
 {
   "lesson": {
-    "id": "lesson-fixture",
+    "id": "lesson-synthetic",
     "slug": "fixture",
-    "title": "Fixture Lesson",
-    "description": "Test-only lesson used to exercise the full engine flow.",
+    "title": "Synthetic Fixture Lesson",
+    "description": "Test-only fixture; not linguistic content.",
     "level": 1,
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "reviewRollup": "synthetic-test-only"
   },
   "items": [
-    { "id": "word-fx00000001", "batak": "fxsatu", "indonesia": "satu", "reviewStatus": "human-reviewed", "sourceType": "fixture" },
-    { "id": "word-fx00000002", "batak": "fxdua", "indonesia": "dua", "reviewStatus": "human-reviewed", "sourceType": "fixture" },
-    { "id": "word-fx00000003", "batak": "fxtiga", "indonesia": "tiga", "reviewStatus": "human-reviewed", "sourceType": "fixture" },
-    { "id": "word-fx00000004", "batak": "fxempat", "indonesia": "empat", "reviewStatus": "human-reviewed", "sourceType": "fixture" }
+    {
+      "id": "word-synthetic-001",
+      "batak": "SYNTHETIC_BT_001",
+      "indonesia": "SYNTHETIC_ID_001",
+      "indonesianAlternatives": [
+        "SYNTHETIC_ID_ALT_001"
+      ],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-002",
+      "batak": "SYNTHETIC_BT_002",
+      "indonesia": "SYNTHETIC_ID_002",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-003",
+      "batak": "SYNTHETIC_BT_003",
+      "indonesia": "SYNTHETIC_ID_003",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-004",
+      "batak": "SYNTHETIC_BT_004",
+      "indonesia": "SYNTHETIC_ID_004",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-005",
+      "batak": "SYNTHETIC_BT_005",
+      "indonesia": "SYNTHETIC_ID_005",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-006",
+      "batak": "SYNTHETIC_BT_006",
+      "indonesia": "SYNTHETIC_ID_006",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-007",
+      "batak": "SYNTHETIC_BT_007",
+      "indonesia": "SYNTHETIC_ID_007",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    },
+    {
+      "id": "word-synthetic-008",
+      "batak": "SYNTHETIC_BT_008",
+      "indonesia": "SYNTHETIC_ID_008",
+      "indonesianAlternatives": [],
+      "reviewStatus": "synthetic-test-only",
+      "sourceType": "synthetic-test"
+    }
   ]
 }

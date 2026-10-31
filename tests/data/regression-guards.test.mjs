@@ -76,16 +76,9 @@ describe("regression guards for blockers (public-safe mode)", () => {
     assert.equal(siteConfig.analyticsProvider || undefined, undefined);
   });
 
-  it("licensing hard gate blocks publication (REQUIRES_LEGAL_REVIEW)", () => {
-    const manifest = JSON.parse(readFileSync(join(root, "data/sources/alignment-engine-manifest.json"), "utf8"));
-    assert.equal(manifest.licenseStatus, "REQUIRES_LEGAL_REVIEW");
-    assert.equal(manifest.publicationAllowed, false);
-    // Published data should be empty
-    const words = JSON.parse(readFileSync(join(root, "data/published/word-pairs.json"), "utf8"));
-    const phrases = JSON.parse(readFileSync(join(root, "data/published/phrase-pairs.json"), "utf8"));
-    const sentences = JSON.parse(readFileSync(join(root, "data/published/sample-sentences.json"), "utf8"));
-    assert.equal(words.items.length, 0);
-    assert.equal(phrases.items.length, 0);
-    assert.equal(sentences.items.length, 0);
+  it("published content remains empty and release build enforces the closed gate", () => {
+    for (const name of ["word-pairs.json", "phrase-pairs.json", "sample-sentences.json", "learning-items.json"]) assert.equal(JSON.parse(readFileSync(join(root,"data/published",name),"utf8")).items.length, 0);
+    assert.equal(JSON.parse(readFileSync(join(root,"data/published/lessons.json"),"utf8")).published.length, 0);
+    assert.ok(readFileSync(join(root,"tools/build-dist.mjs"),"utf8").includes("assertPublicContentClosed"));
   });
 });

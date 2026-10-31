@@ -9,10 +9,10 @@ test.describe("future transition synthetic: review → lesson → SEO → homepa
       description: "Angka dasar untuk fixture",
       level: 1,
       estMinutes: 5,
-      reviewRollup: "human-reviewed",
+      reviewRollup: "synthetic-test-only",
       publicationStatus: "published",
       counts: { poolItems: 8 },
-      itemIds: ["word-0880cf2284", "word-141862f84e", "word-3991eb4b1f", "word-92add2f91e", "word-cda58024a5", "word-6a7710b417", "word-be83d23d14", "word-29ffff825b"],
+      itemIds: ["word-synthetic-001", "word-synthetic-002", "word-synthetic-003", "word-synthetic-004", "word-synthetic-005", "word-synthetic-006", "word-synthetic-007", "word-synthetic-008"],
     };
     await page.addInitScript((fixture) => {
       const orig = window.fetch;
@@ -24,7 +24,7 @@ test.describe("future transition synthetic: review → lesson → SEO → homepa
           return new Response(
             JSON.stringify({
               schemaVersion: 2,
-              topics: [{ slug: "angka", title: "Angka", description: "Panduan tema angka; substantive", level: 1, poolItems: 8, itemIds: fixture.itemIds, pageStatus: "public-indexable", indexability: "index,follow", publicationStatus: "published", reviewRollup: "human-reviewed" }],
+              topics: [{ slug: "angka", title: "Angka", description: "Panduan tema angka; substantive", level: 1, poolItems: 8, itemIds: fixture.itemIds, pageStatus: "public-indexable", indexability: "index,follow", publicationStatus: "published", reviewRollup: "synthetic-test-only" }],
             }),
             { status: 200, headers: { "Content-Type": "application/json" } },
           );
