@@ -48,3 +48,13 @@ The current tree has no corpus-derived raw, candidate, legacy, or report snapsho
 - A direct live readback attempt for home, `/games`, `robots.txt`, and `manifest.webmanifest` was rejected as inaccessible by the available web connector. Provider build success is verified; the live artifact was not independently opened.
 - Readiness: ENGINEERING_READY=YES for the tested synthetic browser flow and asset budget; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=not in scope.
 - Next A3 work: obtain a full Lighthouse score audit and a live readback through an accessible route; continue PWA, privacy/security, and accessibility follow-up. Keep production content empty and noindex until publication gates pass.
+
+## A3 measured Lighthouse and deployment checkpoint — 2026-10-31 12:03 UTC
+
+Public main is `ce3338f0ac03fd56601db29c361bb8927b6ca247` (tree `4fb92b1df1cfcf31c07ee9932a524e2e43e7f580`); PR #7 is merged. Main Verify run [#52 / 41199134008](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41199134008) passed: 200/200 unit tests (0 skipped), 33/33 Playwright tests, smoke, data and asset checks, Lighthouse, and committed-dist drift. Site check reported 0 published items: 0 words, 0 genuine phrases, 0 sentences. Lighthouse measured mobile Performance 99/100 and Accessibility 100/100; desktop Performance 100/100 and Accessibility 100/100. The two JSON reports are in artifact `lighthouse-reports-41199134008` (ID `13041633182`, 14-day retention).
+
+Cloudflare Workers Builds check `124531517252` reported production build `14592e21-73bd-40cc-b629-99fc4b58c422` successful for this commit. Direct readback of the deployed home, `/games`, `robots.txt`, and manifest was rejected as inaccessible by the available web connector. The provider build is verified; the live artifact has not been independently inspected.
+
+Readiness: ENGINEERING_READY=YES for the tested synthetic UX, asset budget, and Lighthouse baseline; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=deferred. Private B24 remains metadata-only and B23 remains latest; no restricted or synthetic linguistic text was transferred here. The Alignment Engine stays PRIVATE.
+
+Next: extend measured browser coverage across key routes and journeys; continue responsive PWA/offline, accessibility, privacy, and security work; retry live artifact readback through an accessible route. Keep published arrays empty until record-level rights and quality gates pass.
