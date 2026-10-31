@@ -1,8 +1,15 @@
 # Batak Toba Play
 
+> **Active owner-directed browser plan (31 October 2026):** [ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31](docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md). Desktop/mobile **web browser only**, development proceeds **in parallel** with corpus population; audio/pronunciation and culture-as-differentiator are not priorities. Public licensing restrictions remain in force. Historical progress below is not the current release truth.
+
+
 Website game belajar Bahasa Batak Toba – Indonesia yang berjalan full static di Cloudflare Pages. Dibangun untuk pemula (diaspora, keluarga, pembelajar mandiri) yang ingin mengenal kosakata dasar lewat latihan berulang yang playable.
 
 Statis penuh: tanpa login, tanpa backend, tanpa API berbayar. Progress tersimpan lokal di browser, transparan soal status bukti sumber.
+
+## Parallel delivery and source contract
+
+The webgame has a [current browser product plan](docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md) and a [cross-repository source-field handoff](docs/UPSTREAM_WEBGAME_DATA_HANDOFF.md). Engineering of responsive desktop/mobile browser learning, game logic, progress, offline/PWA and synthetic fixture tests continues while private data research runs in parallel. The private `batak-indo-alignment-engine` is **not** a public content feed; never export its noncommercial/private dataset into this public repository without separate source rights and an explicit change in its project scope. Audio, pronunciation, culture as a strategic differentiator and native mobile apps are not current roadmap priorities.
 
 ## Product purpose
 - Membuktikan dulu bahwa pengalaman belajar 5–10 menit nyaman dipakai di HP sebelum corpus diperbesar.

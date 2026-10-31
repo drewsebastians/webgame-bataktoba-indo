@@ -1,5 +1,7 @@
 # Production Launch Owner Handoff — Batak Toba Play
 
+> **Plan amendment 2026-10-31:** [Active browser product plan](ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md) supersedes launch sequencing. Desktop/mobile web browser engineering continues **while corpus acquisition is ongoing**. Corpus licensing only blocks public linguistic publication, not game/UX/PWA/test development. Audio is optional, not an owner-required step for release. Custom domain and AdSense are later operational choices; they are not prerequisites to continuing engineering. Private upstream research cannot feed the public website absent independent source permission **and** upstream project policy authorization. The seven-item handoff below describes conditional external activation, not a mandatory stop-work list.
+
 **Repository state:** Public-safe mode, 0 public linguistic items, licensing containment complete.
 **All repository-solvable tasks:** Done.
 **Only genuine external owner actions remain below.**

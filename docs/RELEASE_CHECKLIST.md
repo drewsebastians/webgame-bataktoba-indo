@@ -1,5 +1,7 @@
 # Release Checklist — Batak Toba Play
 
+> **2026-10-31:** For every change separate **engineering CI**, **live browser deploy verification**, and **real-content learning acceptance**. Maintain synthetic end-to-end test coverage despite zero real published data; report Playwright passed vs skipped counts. Desktop/mobile browser only; no audio or native-app release gate. Public dataset remains empty until upstream private scope and source rights independently permit transfer. See [active plan](ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md).
+
 **Required at every release.** This checklist satisfies the Lighthouse/manual operational gate that is not fully automatable in CI without credentials.
 
 ## Automated CI Gates (via `npm run verify:release`)

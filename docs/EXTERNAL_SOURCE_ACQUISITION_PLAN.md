@@ -1,5 +1,7 @@
 # External Source Acquisition Plan — Batak Toba Play
 
+> **2026-10-31 scope update:** Actual source discovery/collection/field administration belongs to the PRIVATE upstream [Webgame Data Collection Contract](UPSTREAM_WEBGAME_DATA_HANDOFF.md), under its private research roadmap. This historical list is only a lead list, never a grant of public redistribution. Public website engineering continues independently of sourcing; no public corpus handoff under existing upstream private-only policy. Pilot themes are angka/sapaan/keluarga but do not stall features until they are populated.
+
 **Status:** `CORPUS_EXHAUSTED = YES` for `angka` 5→8 with current DB; need 3 source-backed.
 
 ## Source Categories (evaluate per SOURCE_ACCEPTANCE_POLICY)

@@ -1,5 +1,7 @@
 # Architecture Note — Batak Toba Play
 
+> **2026-10-31 engineering decision:** Do not freeze browser UX/test improvements pending real corpus. Continue disciplined modules and synthetic test fixtures in parallel with data collection, with no broad speculative refactor. Scope is desktop/mobile browsers; source adapter is separate and must fail closed. See [active plan](ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md).
+
 **Blueprint §21** suggests `src/config/data/game/progress/lessons/...` modular. Current `assets/js/app.js` 2247 lines is monolithic but **SAFE_TO_DEFER**: boundaries already clear (`home`, `dictionary`, `lesson`, `game renderers`, `analytics` wiring), tests cover behavior (`tests/browser`, `tests/unit`), import graph simple (`assets/js/*` via `type:module`), no churn needed now.
 
 Potential future extractions (only if value > risk):

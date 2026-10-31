@@ -1,5 +1,7 @@
 # Ultimate Blueprint Traceability — 2026-09-19 (Public-Safe Reconciliation)
 
+> **2026-10-31 owner amendment:** The active [browser product plan](docs/ACTIVE_BROWSER_PRODUCT_PLAN_2026-10-31.md) controls *future work ordering*. Desktop/mobile browsers only, ongoing parallel website + data development, no priority for audio/pronunciation or culture-as-differentiator, and separate `ENGINEERING_READY`/`LEARNING_READY`/`MONETIZATION_READY` gates. The historical §1–28 audit below remains evidence of the 2026-09-19 code/content state, not a feature freeze.
+
 **Baseline:** `dfb57c1bed0a6e2c0ff741282af573e5698a3591` (origin/main green 33711334755). **Public-safe reconciliation** vs `01_BLUEPRINT_ULTIMATE_WEBSITE_BATAK_TOBA_PLAY.md` §§1-28. **Claims reconciled** to actual repo state: 0 public linguistic items, licensing block, no human review.
 
 Status legend: `REALIZED_PRODUCTION` | `IMPLEMENTED_GATED` | `PARTIAL` | `BLOCKED_LICENSE` | `BLOCKED_EXTERNAL_OWNER` | `OPERATIONAL_NOT_YET_PROVEN` | `INTENTIONALLY_DISABLED` | `NOT_IMPLEMENTED` | `OBSOLETE_IMPLEMENTATION_NOTE`
