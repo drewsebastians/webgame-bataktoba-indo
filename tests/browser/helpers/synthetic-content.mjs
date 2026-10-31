@@ -55,12 +55,25 @@ export const SYNTHETIC_LESSONS = {
   counts: { publishedLessons: 1, draftLessons: 0 },
 };
 
-const learningItems = { schemaVersion: 1, items: SYNTHETIC_WEBGAME_ITEMS };
+export const SYNTHETIC_LEARNING_ITEMS = {
+  metadata: {
+    schemaVersion: 2,
+    generatedAt: "synthetic-test-only",
+    sourceRepository: "synthetic-test-only",
+    sourceFiles: [],
+    sourceSha256: "",
+    counts: {
+      wordPairs: SYNTHETIC_WEBGAME_ITEMS.length,
+      publishedLessons: SYNTHETIC_LESSONS.published.length,
+    },
+  },
+  items: SYNTHETIC_WEBGAME_ITEMS,
+};
 const wordPairs = { schemaVersion: 1, items: SYNTHETIC_WEBGAME_ITEMS };
 const sampleSentences = { schemaVersion: 1, items: [] };
 
 const TEST_DATASETS = new Map([
-  ["learning-items.json", learningItems],
+  ["learning-items.json", SYNTHETIC_LEARNING_ITEMS],
   ["word-pairs.json", wordPairs],
   ["phrase-pairs.json", { schemaVersion: 1, items: [] }],
   ["sample-sentences.json", sampleSentences],
