@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { installSyntheticContentRoutes } from "./helpers/synthetic-content.mjs";
 
 test.describe.configure({ mode: "serial" });
 
@@ -12,7 +13,6 @@ async function getSavedFlags(page) {
   });
 }
 
-const PUBLIC_SAFE = true; // Licensing blocks publication of corpus-derived content
 
 test.describe("core learning flows", () => {
   test("home: onboarding appears for new users and can be skipped", async ({ page }) => {
@@ -25,7 +25,7 @@ test.describe("core learning flows", () => {
   });
 
   test("quiz: keyboard answer marks exactly one correct option; no duplicate labels", async ({ page }) => {
-    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+    await installSyntheticContentRoutes(page);
     await page.goto("/games/");
     await expect(page.locator(".option")).toHaveCount(4);
     const labels = await page.locator(".option").allTextContents();
@@ -41,7 +41,7 @@ test.describe("core learning flows", () => {
   });
 
   test("typed answer: grades input and shows feedback", async ({ page }) => {
-    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+    await installSyntheticContentRoutes(page);
     await page.goto("/games/");
     await page.getByRole("button", { name: /Ketik Jawaban/ }).click();
     await expect(page.locator(".typed-answer-input")).toBeVisible();
@@ -52,7 +52,7 @@ test.describe("core learning flows", () => {
   });
 
   test("true/false mode renders two options and records an answer", async ({ page }) => {
-    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+    await installSyntheticContentRoutes(page);
     await page.goto("/games/");
     await page.getByRole("button", { name: /Benar \/ Salah/ }).click();
     await expect(page.getByRole("button", { name: /Pasangan BENAR/ })).toBeVisible();
@@ -61,7 +61,7 @@ test.describe("core learning flows", () => {
   });
 
   test("memory: size selector builds the board", async ({ page }) => {
-    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+    await installSyntheticContentRoutes(page);
     await page.goto("/games/");
     await page.getByRole("button", { name: /^Memory/ }).click();
     await expect(page.locator(".match-card")).toHaveCount(12); // default 6 pairs
@@ -72,7 +72,7 @@ test.describe("core learning flows", () => {
   });
 
   test("flashcards: space flips, actions advance, filters work", async ({ page }) => {
-    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+    await installSyntheticContentRoutes(page);
     await page.goto("/flashcards/");
     const card = page.locator("#flashcard");
     await expect(card).toBeVisible();
@@ -89,10 +89,10 @@ test.describe("core learning flows", () => {
   });
 
   test("dictionary: search opens detail with correction link; save persists", async ({ page }) => {
-    if (PUBLIC_SAFE) test.skip(true, "Public-safe mode: no word data available (licensing blocks publication)");
+    await installSyntheticContentRoutes(page);
     await page.goto("/dictionary/");
     // 'aek -> air' is a real published pair from canonical corpus.
-    await page.locator("#dictionary-search").fill("aek");
+    await page.locator("#dictionary-search").fill("SYNTHETIC_BT_001");
     const firstRow = page.locator(".result-row").first();
     await firstRow.click();
     const correction = page.getByRole("link", { name: "Lapor koreksi" }).first();

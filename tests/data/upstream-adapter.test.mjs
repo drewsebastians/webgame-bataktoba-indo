@@ -19,7 +19,8 @@ test("adapter maps alternatives, sense, topic, provenance and independent game r
   assert.deepEqual(item.batakAlternatives, ["SYNTHETIC_BT_ALT_001"]);
   assert.equal(item.senseId, "synthetic-sense-001");
   assert.deepEqual(item.themes, ["angka"]);
-  assert.deepEqual(item.provenance, undefined);
+  assert.equal(item.sourceId, "synthetic-source-a");
+  assert.equal(item.sourceRecordId, "synthetic-record-a");
   assert.deepEqual(item.evidenceIds, ["synthetic-evidence-a", "synthetic-evidence-b"]);
   assert.equal(item.gameEligibility.meaning, true);
   assert.equal(item.gameEligibility.reverse, true);

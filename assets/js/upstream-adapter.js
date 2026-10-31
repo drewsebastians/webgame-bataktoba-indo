@@ -276,7 +276,7 @@ export function preparePublicRelease(payload, authorization = {}, { requireComme
           !/^[a-f0-9]{64}$/i.test(source.terms_sha256 ?? "") ||
           !nonEmptyString(source.license_expression) ||
           !nonEmptyString(source.attribution_requirement) ||
-          ["UNKNOWN", "SYNTHETIC_TEST_ONLY"].includes(source.attribution_requirement)) {
+          (source.attribution_requirement === "UNKNOWN" || source.attribution_requirement.startsWith("SYNTHETIC_"))) {
         throw new Error("SOURCE_RIGHTS_OR_PROVENANCE_NOT_CLEARED");
       }
     }
