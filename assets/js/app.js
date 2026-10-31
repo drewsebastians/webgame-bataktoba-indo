@@ -27,7 +27,7 @@ import {
   recordLessonCompletion,
   recordLessonStart,
 } from "./progress.js";
-import { getOnboarding, saveOnboarding, shouldOfferOnboarding } from "./onboarding.js";
+import { getOnboarding, hasLessonHistory, saveOnboarding, shouldOfferOnboarding } from "./onboarding.js";
 import {
   buildMemoryBoard,
   buildTrueFalse,
@@ -233,7 +233,7 @@ function renderHomeDynamic(container, wordPool) {
   }
 
   if (shouldOfferOnboarding(progressState)) renderOnboarding();
-  else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0) renderReturning();
+  else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0 || hasLessonHistory(progressState)) renderReturning();
   else replaceChildren(container);
 }
 

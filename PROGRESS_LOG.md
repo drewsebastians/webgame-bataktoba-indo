@@ -438,3 +438,11 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 - The synthetic fixture's deliberate wrong answer is now selected only from visible options.
 - Cloudflare Workers Builds passed on the tested PR head; this is a build result, not live-site readback.
 - No private content was transferred; production data remains empty. Private PR #3 still lacks a runnable Actions check due billing.
+
+## 2026-10-31 checkpoint — A2 second CI finding and lesson-history repair
+
+- Verified public repository remains PUBLIC; main ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea, tree 3c92da8cfb635786eba78eba7d9f8c7b1c60b912. A2 branch head f8c7416f8628ad9eace8e80856f1461dd3865e5c; private engine remains PRIVATE at main cfec3baeb8beee4738c81fde73ba92b71755bc22, tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84.
+- Verify run 41170470319 completed 191/191 unit tests and the E2E smoke. Playwright passed 32/33 tests; the remaining failure was Home rendering no returning card after a synthetic lesson completion. The recall regression is fixed.
+- Current update treats lesson start/completion as meaningful progress for onboarding and Home resumption, with unit coverage for the predicate. Full verification must rerun; generated dist drift is still to be inspected.
+- Cloudflare Workers Builds reported success for A2 head f8c7416. This does not verify live-site readback. Production content arrays remain empty, and no private corpus text or fixture content is being added to production.
+- Private Actions billing/spending limit remains the blocker for PR #3 validation; B23 is complete and B24 is next.
