@@ -52,10 +52,19 @@ export function resetOnboarding() {
   }
 }
 
+/** True when a learner has started or completed a lesson. */
+export function hasLessonHistory(progressState) {
+  const lessons = progressState?.lessons;
+  if (!lessons || typeof lessons !== "object" || Array.isArray(lessons)) return false;
+  return Object.values(lessons).some((lesson) =>
+    Boolean(lesson && (lesson.startedAt || lesson.completedAt)),
+  );
+}
+
 /** True when we should offer onboarding (never asked + no meaningful history). */
 export function shouldOfferOnboarding(progressState) {
   if (read()) return false;
   const answered = progressState?.answered ?? 0;
   const sessions = progressState?.sessions ?? [];
-  return answered === 0 && sessions.length === 0;
+  return answered === 0 && sessions.length === 0 && !hasLessonHistory(progressState);
 }
