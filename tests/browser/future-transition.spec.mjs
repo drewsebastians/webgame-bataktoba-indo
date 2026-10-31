@@ -29,7 +29,8 @@ test("real synthetic lesson completion persists through home and offline/reconne
       message: `Home did not render the saved lesson after async data loading; ${JSON.stringify({ pageErrors, dataResponses })}`,
     },
   ).toContain("Lanjutkan Belajar");
-  await expect(page.locator("[data-home-stats]")).toContainText("8 pasangan kata");
+  await expect(page.locator("[data-home-stats] .stat strong").nth(0)).toHaveText("8");
+  await expect(page.locator("[data-home-stats] .stat strong").nth(1)).toHaveText("1");
 
   await context.setOffline(true);
   await expect(page.locator(".app-banner.offline-banner")).toBeVisible();
