@@ -796,6 +796,23 @@ h3 {
   font-weight: 700;
 }
 
+/* Reserve the client-rendered stats/actions while local progress hydrates. */
+#progress-root {
+  min-height: 19rem;
+}
+
+@media (max-width: 640px) {
+  #progress-root {
+    min-height: 27rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #progress-root {
+    min-height: 30rem;
+  }
+}
+
 /* Progress page controls */
 #progress-root .action-row {
   flex-wrap: wrap;
