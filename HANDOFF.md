@@ -1,12 +1,11 @@
-# Resume handoff — 2026-10-31 15:23 UTC
+# Resume handoff — 2026-10-31 15:41 UTC
 
-1. Re-fetch both repository visibility, main/tree SHAs, Issues, PRs, Actions and private `latest.json` before each write batch.
-2. Public main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Public PR #13 is open at `fa2cf2b97dea5e976014eeed098ddda3f6e2a0cb`; Verify #69 loaded the cached lesson and passed the shell-cache check, then failed because Chromium kept `navigator.onLine` true under offline emulation. Run #68 separately failed at an offline-banner locator.
-3. Public fix in progress: remove unreliable `navigator.onLine` assertions, keep cached navigation/offline fallback/reconnect checks, and update `dist/sw.js` to match source using CI generated cache stamp `btp-381c46127726`. Require full Verify and drift before merge.
-4. Main Verify #65 passed 201/201 unit, 34/34 browser, build/smoke/budget, all 12 Lighthouse audits and drift. Scores (mobile/desktop Performance): home 98/100, angka 93/99, games 98/100, flashcards 88/100, dictionary 92/100, progress 89/78; Accessibility 100. Artifact `13046224004`.
-5. Cloudflare reported provider build success for PR #13 commit `062fceb3`; direct live readback is still unavailable. Public data stays empty/noindex; synthetic fixture content remains test-only and no private corpus was copied.
-6. Private repo remains PRIVATE at main/tree `cfec3baeb8beee4738c81fde73ba92b71755bc22` / `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; B23/DEGRADED is latest. PR #3 head `e726a5f8bb20eccc9c0e8962ac3f49fd6dd89952`; latest Actions run #19 failed before any steps, no private tests ran. B24 has 15 metadata/scope rows and zero acquired records or consumer items; approved source vault remains unavailable.
-7. Next: finish public offline test and verify CI/drift; continue private metadata/rights work without acquisition until the approved vault and source-specific processing rights are confirmed. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY distinct.
+1. Re-fetch public main/tree, PRs, Issues and Actions before each write or merge batch; keep the Alignment Engine PRIVATE and its source metadata in that repository.
+2. Public main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. PR #13 is open at implementation commit `b337d8354c66744aaf4334f688afe145d44a9310`; Verify #70 passed.
+3. Verify #70 evidence: 201/201 unit (0 skipped), 35/35 Playwright browser tests, smoke, performance budget, all 12 Lighthouse audits and committed-dist drift. Report artifact `13048240651`; scores (mobile/desktop Performance) home 98/100, angka 92/99, games 98/100, flashcards 87/100, dictionary 92/100, progress 89/78; Accessibility 100.
+4. The offline test confirms cached production lesson navigation, offline fallback for an unvisited route and reconnect. Synthetic fixtures remain isolated from the service-worker-enabled test.
+5. Public data remains 0 items, words, phrases and sentences. No private source metadata or language content was copied. Cloudflare production build/deployment and post-merge verification remain pending; do not claim them as complete.
+6. Next: re-fetch PR head/checks and merge PR #13 with expected SHA; then verify main CI, Cloudflare build/deployment and live artifact if available. Continue public engineering independently of data readiness and keep the five readiness gates separate.
 
 
 ## Historical handoff archive

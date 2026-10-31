@@ -1,36 +1,36 @@
-# Execution status — 2026-10-31 15:23 UTC
+# Execution status — 2026-10-31 15:41 UTC
 
 ## Verified GitHub state
 
-- Webgame remains PUBLIC. Main/tree is `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 is open. PR #13 is open at `fa2cf2b97dea5e976014eeed098ddda3f6e2a0cb` on `codex/2026-10-31-service-worker-offline-e2e`.
-- Alignment Engine remains PRIVATE. Main/tree is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; `latest.json` remains B23 / DEGRADED. PR #3 is open at `e726a5f8bb20eccc9c0e8962ac3f49fd6dd89952`. B24 is metadata-only: 15 preflight rows (12 possible direct leads, 2 adjuncts, 1 scope check), 0 verified families, permitted/acquired records, items/evidence, conflicts, topics or eligible items.
-- Public main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, asset budget, all Lighthouse audits and committed-dist drift. PR #13 Verify #69 failed at the direct `navigator.onLine === false` expectation: Chromium reported `true` after offline emulation. The cached lesson and shell-cache assertion passed; the next run must verify cached navigation, offline fallback and reconnection without relying on that browser property.
-- Cloudflare Workers Builds reported a successful provider build for PR #13 commit `062fceb3` (build `5ed8390c-e9c7-4c44-a93f-689c44de967a`). This is provider status only; direct live artifact readback remains unavailable.
-- Private Actions run #19 / 41214022705 failed before any step ran (job reports zero steps; log endpoint returned 404). No private validator tests ran. The reason is not confirmed from available job evidence.
-- Public learning content remains empty: 0 items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only; no private/restricted content was transferred. Historical public corpus objects remain in Git history; no destructive rewrite was performed.
+- Webgame remains PUBLIC. Main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 remains open. PR #13 is open; offline-service-worker coverage has passed full PR verification and awaits merge.
+- Main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, performance budget, Lighthouse and committed-dist drift. PR Verify #70 passed 201/201 unit tests (0 skipped), 35/35 browser tests, build/smoke, performance budget, all 12 Lighthouse audits and committed-dist drift on the service-worker change.
+- Verify #70 Lighthouse reports are uploaded as artifact `13048240651`. Cloudflare production build and direct live readback for the post-merge artifact are pending.
+- Public learning data remains empty: 0 items, words, genuine phrases or sentences. Synthetic fixtures remain test-only. The Alignment Engine remains PRIVATE; no private source details or records are copied here, and no content is authorized for publication.
+- Historical public corpus objects remain in Git history; no destructive history rewrite was performed.
 
-## Lighthouse result — merged main, Verify #65
+## Lighthouse result — PR Verify #70
 
 | Route | Mobile Performance | Desktop Performance | Accessibility, both profiles |
 |---|---:|---:|---:|
 | Home | 98 | 100 | 100 |
-| Angka lesson | 93 | 99 | 100 |
+| Angka lesson | 92 | 99 | 100 |
 | Games | 98 | 100 | 100 |
-| Flashcards | 88 | 100 | 100 |
+| Flashcards | 87 | 100 | 100 |
 | Dictionary | 92 | 100 | 100 |
 | Progress | 89 | 78 | 100 |
 
-All 12 audits met the 70 Performance / 90 Accessibility floors. Report artifact ID: `13046224004`. Desktop progress remains the lowest Performance score.
+All 12 audits met the 70 Performance / 90 Accessibility floors. Desktop progress remains the lowest Performance score.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for merged main flows, build, budget and six-route Lighthouse checks; PR #13 offline-service-worker coverage remains pending | Main Verify #65 passed; PR #13 Verify #68 failed at a redundant offline-banner assertion and has not passed the full gate. |
-| DATA_READY | NO | B23 remains latest; B24 has no permitted/acquired records or consumer items. |
+| ENGINEERING_READY | YES for the tested service-worker offline flow on PR #13; merge and main deployment verification pending | Verify #70 passed the full browser, Lighthouse, budget and committed-dist gates on the PR. |
+| DATA_READY | NO | No records have been approved for public sync; detailed source discovery remains private. |
 | PUBLICATION_READY | NO | No record-level rights clearance or publication scope; public data remains empty. |
 | LEARNING_READY | NO | No authorized real content is published; empty/noindex behavior remains active. |
 | MONETIZATION_READY | DEFERRED | Not a current priority. |
+
 
 
 ## Security and history
@@ -38,13 +38,13 @@ All 12 audits met the 70 Performance / 90 Accessibility floors. Report artifact 
 The current public tree contains no restricted corpus or synthetic fixture payloads; tests intercept synthetic responses and the production audit reports zero published items. Historical raw/corpus objects remain in earlier public Git commits. No destructive history rewrite was performed.
 
 
+
 ## Next actions
 
-1. Finish PR #13's real-service-worker browser coverage by retaining cached lesson, offline fallback and reconnect checks. Playwright's offline emulation does not reliably change `navigator.onLine` in this runner.
-2. Synchronize committed `dist/sw.js` with the changed service worker source and CI's generated cache version, then require Verify and committed-dist drift to pass before merge.
-3. Keep deployment claims limited to provider build evidence until an accessible direct live readback is available.
-4. Continue independent public UX/security/PWA work and private B24 metadata discovery; preserve zero published language data and all separate readiness gates.
-5. Keep private PR #3 unmerged until a runner executes and the validator tests pass.
+1. Re-fetch main, PR #13 head and required checks, then merge the fully verified PR using the expected head SHA.
+2. Verify post-merge main CI, Cloudflare production build/deployment, and direct live artifact behavior when an accessible readback is available.
+3. Continue independent responsive, accessibility, privacy/security and PWA work; keep empty/noindex behavior until rights and quality gates approve real content.
+4. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
 
 ## A3 performance checkpoint — 2026-10-31 10:53 UTC
 
@@ -71,6 +71,6 @@ Public main is `ce3338f0ac03fd56601db29c361bb8927b6ca247` (tree `4fb92b1df1cfcf3
 
 Cloudflare Workers Builds check `124531517252` reported production build `14592e21-73bd-40cc-b629-99fc4b58c422` successful for this commit. Direct readback of the deployed home, `/games`, `robots.txt`, and manifest was rejected as inaccessible by the available web connector. The provider build is verified; the live artifact has not been independently inspected.
 
-Readiness: ENGINEERING_READY=YES for the tested synthetic UX, asset budget, and Lighthouse baseline; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=deferred. Private B24 remains metadata-only and B23 remains latest; no restricted or synthetic linguistic text was transferred here. The Alignment Engine stays PRIVATE.
+Readiness: ENGINEERING_READY=YES for the tested synthetic UX, asset budget, and Lighthouse baseline; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=deferred. No source-level private metadata or language text was transferred here. The Alignment Engine remains PRIVATE.
 
 Next: extend measured browser coverage across key routes and journeys; continue responsive PWA/offline, accessibility, privacy, and security work; retry live artifact readback through an accessible route. Keep published arrays empty until record-level rights and quality gates pass.
