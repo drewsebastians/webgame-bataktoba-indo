@@ -8,6 +8,38 @@ import {
 } from "../../assets/js/upstream-adapter.js";
 import { createSyntheticEnginePackage } from "../fixtures/synthetic-engine-package.mjs";
 
+/**
+ * Synthetic gate fixture only. These placeholders exercise control flow and
+ * are not source rights, publication approvals, or linguistic evidence.
+ */
+function createSyntheticPublicationGateCandidate() {
+  const payload = createSyntheticEnginePackage();
+  for (const source of payload.sources) {
+    Object.assign(source, {
+      distribution_state: "EXPLICITLY_ALLOWED_WITH_OBLIGATIONS",
+      public_web_permission: "YES",
+      commercial_web_permission: "NO",
+      revocation_status: "ACTIVE",
+      terms_evidence_ref: "SYNTHETIC_TEST_ONLY: placeholder reference",
+      terms_sha256: "a".repeat(64),
+      license_expression: "SYNTHETIC_TEST_ONLY",
+      attribution_requirement: "Synthetic test attribution placeholder",
+    });
+  }
+  Object.assign(payload.items[0], {
+    quality_state: "AUTOMATED_SUPPORTED",
+    public_release_eligible: true,
+    release_block_reason: "",
+    lifecycle_state: "PUBLISHED",
+  });
+  return payload;
+}
+
+const SYNTHETIC_APPROVAL_PLACEHOLDERS = {
+  publicWebScopeRef: "SYNTHETIC_TEST_ONLY: placeholder scope",
+  upstreamPolicyApprovalRef: "SYNTHETIC_TEST_ONLY: placeholder policy",
+};
+
 test("adapter maps alternatives, sense, topic, provenance and independent game readiness", () => {
   const payload = createSyntheticEnginePackage();
   const validation = validateUpstreamPackage(payload);
@@ -70,6 +102,83 @@ test("human-reviewed state needs reviewer evidence rather than a quality label a
   const payload = createSyntheticEnginePackage();
   payload.items[0].quality_state = "HUMAN_REVIEWED";
   assert.ok(validateUpstreamPackage(payload).errors.includes("quality:human_review_proof_missing"));
+});
+
+
+test("publication rejects unknown rights and missing rights evidence after scope gates", () => {
+  const unresolvedCases = [
+    ["distribution state", (source) => { source.distribution_state = "UNKNOWN"; }],
+    ["public permission", (source) => { source.public_web_permission = "UNKNOWN"; }],
+    ["revocation state", (source) => { source.revocation_status = "UNKNOWN"; }],
+    ["terms reference", (source) => { source.terms_evidence_ref = ""; }],
+    ["terms hash", (source) => { source.terms_sha256 = ""; }],
+    ["license expression", (source) => { source.license_expression = ""; }],
+    ["attribution", (source) => { source.attribution_requirement = "UNKNOWN"; }],
+  ];
+
+  for (const [label, makeUnresolved] of unresolvedCases) {
+    const payload = createSyntheticPublicationGateCandidate();
+    makeUnresolved(payload.sources[0]);
+    assert.deepEqual(validateUpstreamPackage(payload), { valid: true, errors: [] }, label);
+    assert.throws(
+      () => preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS),
+      /SOURCE_RIGHTS_OR_PROVENANCE_NOT_CLEARED/,
+      label,
+    );
+  }
+});
+
+test("commercial permission is a separate optional release gate", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  assert.deepEqual(validateUpstreamPackage(payload), { valid: true, errors: [] });
+  assert.throws(
+    () => preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS, {
+      requireCommercialPermission: true,
+    }),
+    /SOURCE_RIGHTS_OR_PROVENANCE_NOT_CLEARED/,
+  );
+});
+
+test("publication rejects primary evidence without a matching source record", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  payload.items[0].source_record_id = "untraced-record";
+  const validation = validateUpstreamPackage(payload);
+  assert.ok(validation.errors.includes("item:primary_provenance_missing"));
+  assert.throws(
+    () => preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS),
+    /INVALID_UPSTREAM_PACKAGE:item:primary_provenance_missing/,
+  );
+});
+
+test("conflicted records cannot be published even when all game modes are withheld", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  Object.assign(payload.items[0], {
+    quality_state: "CONFLICTED",
+    quiz_eligible: false,
+    reverse_eligible: false,
+    typed_eligible: false,
+    matching_eligible: false,
+    sentence_eligible: false,
+    review_eligible: false,
+  });
+  assert.deepEqual(validateUpstreamPackage(payload), { valid: true, errors: [] });
+  assert.throws(
+    () => preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS),
+    /ITEM_NOT_PUBLICATION_READY/,
+  );
+});
+
+test("mode eligibility maps independently instead of being inferred from another mode", () => {
+  const payload = createSyntheticEnginePackage();
+  payload.items[0].matching_eligible = false;
+  payload.items[0].typed_eligible = false;
+  const item = mapUpstreamItem(payload.items[0]);
+
+  assert.equal(item.gameEligibility.meaning, true);
+  assert.equal(item.gameEligibility.reverse, true);
+  assert.equal(item.gameEligibility.matching, false);
+  assert.equal(item.gameEligibility.typed, false);
+  assert.equal(item.gameEligibility.spacedRepetition, true);
 });
 
 test("publication hard-fails without both scope approvals or cleared source rights", () => {
