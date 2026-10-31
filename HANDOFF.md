@@ -1,3 +1,16 @@
+# Resume handoff — 2026-10-31 16:53 UTC
+
+1. Start by re-fetching visibility, main/tree SHAs, Issues, PRs, Actions, deployment checks and the PRIVATE repo's data/catalog/private_runs/latest.json. This checkpoint branch is based on public application-code main 52ce83df941a11c55f30051f16090bd94013a4ed / tree d913b581571aa0c529764781bd799d1ab946a172.
+2. Public Issue #2 is closed as completed. PR #13 delivered offline cache/fallback/reconnect coverage; PR #15 added fail-closed rights, provenance, conflict, commercial-gate and per-mode tests.
+3. Main Verify #77 / 41221229303 passed on 52ce83df: 207 unit tests, 0 skipped; E2E smoke; performance budget; 35/35 Playwright; 12 Lighthouse audits; committed-dist drift. Lighthouse artifact is 13050216595.
+4. Cloudflare Workers Builds succeeded for production build 8a43cc71-fff9-4145-a69e-01c92e971e59 (version e2168019-0b6f-4e3e-96dd-e82f083f1e0d). Direct Pages readback is still unverified. Keep that distinction in future reports.
+5. Production learning data remains empty. Synthetic fixtures are test-only; public test and build checks found no fixture leakage. Historical public raw/corpus Git objects remain unchanged.
+6. Next public task: investigate the Progress desktop Lighthouse Performance score (78), then continue A3 responsiveness, PWA/offline, accessibility, privacy/security and performance follow-up. Run relevant release verification for every implementation.
+7. The Alignment Engine remains PRIVATE at the previously verified main SHA cfec3baeb8beee4738c81fde73ba92b71755bc22 / tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84. B23 is still latest (DEGRADED); B24 is metadata-only. Private PR #3 remains open/unmerged because runs #23 and #24 failed before any validator steps ran. Keep private research and diagnostics private; do not repeat completed B17–B23 work or move data outward.
+8. No data-rights or runner blocker should stop independent public engineering. Continue B24 discovery only within the private source and rights gates, and require an actually started, passing private validator run before merge.
+
+## Archived handoff records (preserved verbatim; superseded by the current instructions above)
+
 # Resume handoff — 2026-10-31 16:25 UTC
 
 1. Re-fetch both repository visibilities, current main/tree SHAs, Issues, PRs, Actions and private `latest.json` before the next write; keep the Alignment Engine PRIVATE.

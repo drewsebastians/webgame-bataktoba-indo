@@ -1,6 +1,29 @@
+## LATEST EXECUTION CHECKPOINT — 2026-10-31 16:53 UTC
+
+### PUBLIC webgame
+
+- Verified repository visibility PUBLIC and application-code checkpoint main 52ce83df941a11c55f30051f16090bd94013a4ed / tree d913b581571aa0c529764781bd799d1ab946a172 before this documentation batch.
+- PR #13 merged offline service-worker cache/fallback/reconnect coverage; PR #15 merged synthetic-only fail-closed adapter tests. Issue #2 was updated with evidence and closed as completed.
+- Main Verify [#77 / 41221229303](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41221229303) passed: 207/207 unit tests (0 skipped), E2E smoke, performance budget, 35/35 Playwright browser tests, all 12 Lighthouse audits and committed-dist drift. Lighthouse artifact: 13050216595.
+- Lighthouse six-route results: mobile Performance 98/92/98/88/92/89 and desktop 100/99/100/100/100/78 for home, angka, games, flashcards, dictionary and progress respectively; Accessibility was 100/100 across all mobile and desktop routes. Inspect desktop Progress Performance before optimizing.
+- Cloudflare Workers Builds reported successful production build 8a43cc71-fff9-4145-a69e-01c92e971e59 (version e2168019-0b6f-4e3e-96dd-e82f083f1e0d). Provider status is verified; direct live readback remains unavailable and unverified.
+- Published content remains 0 items, words, genuine phrases and sentences. Test fixture markers are absent from dist. No private data was transferred. Historical raw/corpus Git objects remain; no history rewrite was made.
+
+### PRIVATE Alignment Engine
+
+- Repository remains PRIVATE at latest verified main cfec3baeb8beee4738c81fde73ba92b71755bc22 / tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84; private latest.json still says B23 / DEGRADED / next B24.
+- B24 preflight remains metadata-only; no permitted or acquired records are claimed. Private PR #3 remains open and unmerged because validation runs #23 and #24 failed before validator steps started. No private tests or collection are claimed as passed.
+- Keep B17–B23 complete work untouched. Continue permitted source discovery/rights review in the private repository; do not transfer private source details or corpus to the public repository.
+
+### Next action
+
+Continue public A3 independently: inspect desktop Progress Lighthouse 78, then improve responsive/PWA/offline/accessibility/privacy/security or performance gaps with synthetic-only tests. Re-fetch both GitHub states before the next write batch. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
+
+---
+
 # Progress Log — Program Menuju Ultimate Blueprint
 
-## LATEST EXECUTION CHECKPOINT — 2026-10-31 16:25 UTC
+## Superseded checkpoint — 2026-10-31 16:25 UTC (retained for history)
 
 The verified application-code merge checkpoint is public main `94b7f6a21edec58811e6eddcceaea4a595802064` / tree `70b14cf98552972d869feb431d64b4d4bc9fc07a`; PR #13 is merged and Issue #2 remains open. Main Verify run [#73 / 41218051252](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41218051252) succeeded, including full verification and committed-dist drift. PR Verify #71 passed 202/202 unit tests (0 skipped), 35/35 browser tests, smoke, performance budget, all 12 Lighthouse audits and drift; the latest main Lighthouse artifact is `lighthouse-reports-41218051252` (ID `13048927117`).
 
