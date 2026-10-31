@@ -54,34 +54,43 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return; // ads/analytics: never intercepted
 
   if (request.mode === "navigate") {
+    const networkResponsePromise = fetch(request).then(async (response) => {
+      if (response.ok) {
+        const cache = await caches.open(SHELL_CACHE);
+        await cache.put(request, response.clone());
+      }
+      return response;
+    });
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(SHELL_CACHE).then((cache) => cache.put(request, copy));
-          return response;
-        })
-        .catch(async () => {
-          const cached = await caches.match(request);
-          return cached ?? (await caches.match("./offline.html")) ?? Response.error();
-        }),
+      networkResponsePromise.catch(async () => {
+        const cached = await caches.match(request);
+        return cached ?? (await caches.match("./offline.html")) ?? Response.error();
+      }),
     );
     return;
   }
 
   if (isRuntimeCacheable(url)) {
-    // stale-while-revalidate
+    // stale-while-revalidate; keep background refresh alive until its cache write finishes.
+    const cachePromise = caches.open(RUNTIME_CACHE);
+    const networkResponsePromise = cachePromise.then(async (cache) => {
+      const response = await fetch(request);
+      if (response.ok) await cache.put(request, response.clone());
+      return response;
+    });
+    event.waitUntil(networkResponsePromise.then(() => undefined).catch(() => undefined));
     event.respondWith(
-      caches.open(RUNTIME_CACHE).then(async (cache) => {
-        const cached = await cache.match(request);
-        const network = fetch(request)
-          .then((response) => {
-            if (response.ok) cache.put(request, response.clone());
-            return response;
-          })
-          .catch(() => cached ?? Response.error());
-        return cached ?? network;
-      }),
+      cachePromise
+        .then(async (cache) => {
+          const cached = await cache.match(request);
+          if (cached) return cached;
+          try {
+            return await networkResponsePromise;
+          } catch {
+            return Response.error();
+          }
+        })
+        .catch(() => Response.error()),
     );
   }
   // else: plain network request, no interception

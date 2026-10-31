@@ -35,6 +35,11 @@ describe("service worker", () => {
     assert.match(sw, /fetch\(request\)/);
   });
 
+  it("keeps stale-while-revalidate cache writes alive after returning a cached response", () => {
+    assert.match(sw, /event\.waitUntil\(networkResponsePromise/);
+    assert.match(sw, /await cache\.put\(request, response\.clone\(\)\)/);
+  });
+
   it("never intercepts cross-origin requests (ads/analytics stay network-only)", () => {
     assert.match(sw, /url\.origin !== self\.location\.origin/);
   });

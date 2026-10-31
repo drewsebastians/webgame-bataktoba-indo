@@ -1,14 +1,12 @@
-# Resume handoff — 2026-10-31 14:33 UTC
+# Resume handoff — 2026-10-31 15:52 UTC
 
-1. Re-fetch repository visibility, main/tree SHAs, Issues, PRs, Actions, and private `latest.json` before every write batch.
-2. Public webgame is PUBLIC at `730ff3fdd1db6190d70cc37774c3800db1e1602b` / tree `2e500141e4811ccbfc16db43207b3f866d1897fb`; PR #11 is merged. Main Verify run #62 passed 201/201 unit (0 skipped), 34/34 browser, build/smoke, budget, 12 Lighthouse audits, and committed-dist drift.
-3. Main Lighthouse run #62 scores: home 99/100, angka 93/99, games 98/100, flashcards 88/100, dictionary 93/100, progress 89/78 (mobile/desktop Performance); Accessibility 100 throughout. Artifact ID `13044757621`.
-4. Cloudflare production provider build succeeded (build `9236ed12-0264-47ef-8429-b6ae23453538`, version `7a3eec26-1e93-437b-8adb-0b7994330563`). Direct live readback remains unverified; do not claim production artifact inspection.
-5. Public content remains empty/noindex: 0 items, words, genuine phrases, and sentences. No synthetic fixture payload or private/restricted language content is in the build. Historical public Git objects remain; no history rewrite.
-6. Alignment Engine remains PRIVATE at main `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; `latest.json` remains B23 / DEGRADED. PR #3 is open at `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1`; run #17 failed before runner startup with runner_id 0 and zero steps. No private tests ran.
-7. B24 on PR #3 is metadata-only (14 scope rows; 11 possible direct leads, 3 adjunct/scope checks; 0 verified families or permitted/acquired records/items/evidence). Approved private vault remains unavailable; keep detailed source metadata private.
-8. Next public task: inspect progress desktop Lighthouse report, continue PWA/offline and responsive/security/accessibility engineering, and retry live readback. Next private task: continue rights/provenance metadata discovery without acquiring content until vault and rights blockers clear; keep PR #3 unmerged until validator tests pass.
-9. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY, and MONETIZATION_READY as separate gates.
+1. Re-fetch public main/tree, PRs, Issues and Actions before each write or merge batch; keep the Alignment Engine PRIVATE and its source metadata in that repository.
+2. Public main/tree: `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. PR #13 implementation commit `b337d8354c66744aaf4334f688afe145d44a9310` has passed; checkpoint commit `1e6e562f109058ff146e3e7f69997462c4d78f2f` also passed Verify #71.
+3. Verify #71 evidence: 202/202 unit (0 skipped), 35/35 Playwright browser tests, smoke, performance budget, all 12 Lighthouse audits and committed-dist drift. Artifact `13048113240`; scores (mobile/desktop Performance) home 98/100, angka 93/99, games 98/100, flashcards 89/100, dictionary 92/100, progress 89/78; Accessibility 100.
+4. The offline test confirms cached production lesson navigation, offline fallback for an unvisited route and reconnect. Synthetic fixtures remain isolated from the service-worker-enabled test.
+5. Cloudflare Workers Builds reported successful deployment for PR checkpoint commit `1e6e562f` (build `91c14899-427c-4bad-bd75-888263035043`). Post-merge main build and direct live readback are not yet verified. Public data remains 0 items/words/phrases/sentences; no private source metadata or language content was copied.
+6. Next: re-fetch PR head/checks and merge PR #13 with expected SHA; then verify main CI, Cloudflare build/deployment and live artifact if available. Continue public engineering independently of data readiness and keep the five readiness gates separate.
+
 
 ## Historical handoff archive
 
