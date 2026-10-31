@@ -45,7 +45,28 @@
         <h1>Progres belajar Anda</h1>
       </section>
       <p>Semua data di halaman ini tersimpan hanya di browser Anda (localStorage), tanpa akun dan tanpa server.</p>
-      <div id="progress-root"><p class="feedback">Memuat progres...</p></div>
+      <div id="progress-root" aria-busy="true"><p class="feedback" role="status" aria-live="polite">Memuat progres...</p></div>
+      <section id="privacy-settings" class="section band" aria-labelledby="privacy-heading">
+        <div class="section-inner">
+          <h2 id="privacy-heading">Preferensi privasi</h2>
+          <p class="lead">Analytics dan iklan nonaktif secara default. Preferensi tersimpan lokal di perangkat ini dan bisa diubah kapan saja. Menolak tidak memengaruhi fungsi situs apa pun.</p>
+          <div class="consent-row">
+            <input type="checkbox" role="switch" id="consent-analytics" aria-describedby="analytics-consent-description" disabled>
+            <div>
+              <label for="consent-analytics"><strong>Analytics produk</strong></label>
+              <p id="analytics-consent-description">Event anonim tanpa kata yang dicari, nama, email, atau isi progress. Tidak ada yang dikirim sebelum Anda setuju.</p>
+            </div>
+          </div>
+          <div class="consent-row">
+            <input type="checkbox" role="switch" id="consent-ads" aria-describedby="ads-consent-description" disabled>
+            <div>
+              <label for="consent-ads"><strong>Iklan (AdSense)</strong></label>
+              <p id="ads-consent-description">Iklan belum aktif di situs ini. Persetujuan baru berlaku bila iklan diaktifkan dengan konfigurasi resmi dan Publisher ID valid.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <p class="feedback">Catatan: data tidak tersinkron otomatis antar perangkat. Ekspor secara berkala bila ingin menyimpannya.</p>
       <div class="action-row"><a class="button secondary" href="../games/">Lanjut Latihan</a></div>
     </main>
     <footer class="site-footer">
