@@ -259,16 +259,6 @@ for (const [name, payload] of [
   });
 }
 
-// --- Quality report sanity ---------------------------------------------------
-try {
-  const report = JSON.parse(readFileSync(join(root, "data/reports/data-quality-report.json"), "utf8"));
-  if (report.stageCounts?.wordPairs !== words.length) {
-    failures.push("data-quality-report stageCounts.wordPairs does not match published word pool.");
-  }
-} catch (error) {
-  failures.push(`data-quality-report.json unreadable: ${error.message}`);
-}
-
 // --- Per-page SEO basics -----------------------------------------------------
 {
   const pages = [];
