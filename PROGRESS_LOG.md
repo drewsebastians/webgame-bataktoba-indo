@@ -470,4 +470,4 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 
 ## A3 performance gate — 31 October 2026
 
-Measured main build assets at public baseline 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e: JavaScript 129,845 bytes across 14 files, CSS 15,217 bytes across one file. Added an automated production-asset budget checker, wired into release verification, with tests for the measured baseline, per-file overruns, and aggregate overruns. PR CI is pending; no Lighthouse score or live artifact readback is claimed.
+Measured main build assets at public baseline 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e: JavaScript 129,845 bytes across 14 files, CSS 15,217 bytes across one file. Added an automated production-asset budget checker, wired into release verification, with tests for the measured baseline, per-file overruns, and aggregate overruns. Verify run 41194897354 passed 196/196 unit tests, E2E smoke, 33/33 browser tests, asset budgets, release prerequisites, and dist drift. No Lighthouse score, A3 deployment, or live artifact readback is claimed.

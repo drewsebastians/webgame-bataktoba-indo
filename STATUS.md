@@ -35,5 +35,6 @@ The current tree has no corpus-derived raw, candidate, legacy, or report snapsho
 - A3 implementation branch `codex/2026-10-31-browser-performance-checkpoint-a3` adds a deterministic CI gate for minified production JS/CSS sizes and unit coverage of its threshold logic.
 - Baseline from public main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e: 14 JS assets / 129,845 bytes total (largest 77,391 bytes); 1 CSS asset / 15,217 bytes.
 - Initial limits: 196,608 bytes total JS, 98,304 bytes per JS file, 49,152 bytes total CSS, and 49,152 bytes per CSS file. These are uncompressed artifact sizes, not network transfer estimates.
-- CI status for this PR is pending. No new test result or production deployment is claimed yet.
+- Public Verify run #46 (`41194897354`, job `124518995179`) passed on commit `2e367604b28beaf9e64890909d50aeef583b8960`: 196/196 unit tests, E2E smoke, 33/33 Playwright tests, `performance:budget`, release prerequisites, and dist drift. The Lighthouse prerequisite passed; no full Lighthouse score audit ran.
+- PR #5 is open; Cloudflare deployment for this A3 change is pending merge. No new production deployment is claimed yet.
 - Next A3 steps: verify CI and the production artifact, attempt live Pages readback again, then continue broader browser performance, PWA, and security work.
