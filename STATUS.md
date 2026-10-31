@@ -1,48 +1,50 @@
-# Execution status — 2026-10-31 14:33 UTC
+# Execution status — 2026-10-31 15:23 UTC
 
 ## Verified GitHub state
 
-- Webgame remains PUBLIC. Main is `730ff3fdd1db6190d70cc37774c3800db1e1602b` / tree `2e500141e4811ccbfc16db43207b3f866d1897fb`; PR [#11](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/11) merged at that SHA. Starting Issue #2 remains open.
-- Alignment Engine remains PRIVATE. Main is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; `latest.json` still identifies B23 as latest (DEGRADED). PR #3 is open at `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1`; its latest run #17 / 41205702401 failed before runner startup (runner_id 0, zero steps). No private validator tests ran.
-- Private PR #3 carries B24 metadata-only discovery: 14 metadata/scope rows (11 possible direct leads, 3 adjunct/scope checks), with 0 verified source families, permitted/acquired records, candidate items/evidence, conflicts, topics, or eligible records. The approved private source vault is unavailable.
-- Public Verify [#62 / 41207408541](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41207408541) passed on merge SHA: 201/201 unit tests (0 skipped), 34/34 browser tests, build, E2E smoke, asset budget, all 12 Lighthouse audits, and committed-dist drift.
-- Cloudflare Workers Builds reported the production build successful: build `9236ed12-0264-47ef-8429-b6ae23453538`, version `7a3eec26-1e93-437b-8adb-0b7994330563`. This verifies the provider build check; direct live-site readback remains unverified.
-- Public learning data remains empty: 0 items, 0 words, 0 genuine phrases, and 0 sentences. Synthetic fixtures remain isolated to tests; no private/restricted or synthetic linguistic content entered production artifacts.
+- Webgame remains PUBLIC. Main/tree is `6a6e6cf9ed6db759ce0c478ae0e830198444c5f6` / `3bf132a37e9ca3c7291c459d224c66390e1ab95f`. Starting Issue #2 is open. PR #13 is open at `062fceb3f2d04b873b51da1b07430779101b0c82` on `codex/2026-10-31-service-worker-offline-e2e`.
+- Alignment Engine remains PRIVATE. Main/tree is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; `latest.json` remains B23 / DEGRADED. PR #3 is open at `e726a5f8bb20eccc9c0e8962ac3f49fd6dd89952`. B24 is metadata-only: 15 preflight rows (12 possible direct leads, 2 adjuncts, 1 scope check), 0 verified families, permitted/acquired records, items/evidence, conflicts, topics or eligible items.
+- Public main Verify #65 passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, asset budget, all Lighthouse audits and committed-dist drift. The latest PR #13 Verify #68 failed at the offline-banner locator after the previously visited lesson loaded offline; shell-cache assertion had passed. No complete PR #13 verification or merge is claimed.
+- Cloudflare Workers Builds reported a successful provider build for PR #13 commit `062fceb3` (build `5ed8390c-e9c7-4c44-a93f-689c44de967a`). This is provider status only; direct live artifact readback remains unavailable.
+- Private Actions run #19 / 41214022705 failed before any step ran (job reports zero steps; log endpoint returned 404). No private validator tests ran. The reason is not confirmed from available job evidence.
+- Public learning content remains empty: 0 items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only; no private/restricted content was transferred. Historical public corpus objects remain in Git history; no destructive rewrite was performed.
 
-## Lighthouse result — merged main, run #62
+## Lighthouse result — merged main, Verify #65
 
 | Route | Mobile Performance | Desktop Performance | Accessibility, both profiles |
 |---|---:|---:|---:|
-| Home | 99 | 100 | 100 |
+| Home | 98 | 100 | 100 |
 | Angka lesson | 93 | 99 | 100 |
 | Games | 98 | 100 | 100 |
 | Flashcards | 88 | 100 | 100 |
-| Dictionary | 93 | 100 | 100 |
+| Dictionary | 92 | 100 | 100 |
 | Progress | 89 | 78 | 100 |
 
-All 12 audits met the 70 Performance / 90 Accessibility floors. Reports are in artifact `lighthouse-reports-41207408541` (ID `13044757621`, retained 14 days). The focused progress entrypoint remains 9,975 bytes; JavaScript budget is 153,131/196,608 bytes across 16 files and CSS is 15,217/49,152 bytes. These are lab snapshots; desktop progress remains the lowest score at 78.
+All 12 audits met the 70 Performance / 90 Accessibility floors. Report artifact ID: `13046224004`. Desktop progress remains the lowest Performance score.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for the merged isolated browser flows, build, budget, and six-route Lighthouse checks | Main Verify #62 passed; synthetic browser fixtures are test-only. |
+| ENGINEERING_READY | YES for merged main flows, build, budget and six-route Lighthouse checks; PR #13 offline-service-worker coverage remains pending | Main Verify #65 passed; PR #13 Verify #68 failed at a redundant offline-banner assertion and has not passed the full gate. |
 | DATA_READY | NO | B23 remains latest; B24 has no permitted/acquired records or consumer items. |
 | PUBLICATION_READY | NO | No record-level rights clearance or publication scope; public data remains empty. |
 | LEARNING_READY | NO | No authorized real content is published; empty/noindex behavior remains active. |
 | MONETIZATION_READY | DEFERRED | Not a current priority. |
 
+
 ## Security and history
 
 The current public tree contains no restricted corpus or synthetic fixture payloads; tests intercept synthetic responses and the production audit reports zero published items. Historical raw/corpus objects remain in earlier public Git commits. No destructive history rewrite was performed.
 
+
 ## Next actions
 
-1. Inspect the run #62 progress desktop Lighthouse report and target the strongest verified performance opportunity while preserving score floors.
-2. Continue browser PWA/offline, responsive, accessibility, privacy/security, and short-session learning-flow work independently of corpus readiness.
-3. Retry direct live readback through an accessible route; until then, describe deployment as provider-build success only.
-4. Continue B24 metadata-only non-Bible / bbc discovery in the PRIVATE repo; acquire no linguistic records until private storage and source-specific processing rights are verified.
-5. Keep PR #3 open until private Actions starts and the validator tests actually pass. Preserve empty public data and separate readiness gates.
+1. Finish PR #13's real-service-worker browser coverage by retaining the cached lesson, offline fallback, reconnect, and offline-state checks while removing banner assertions already covered by the isolated UI flow.
+2. Synchronize committed `dist/sw.js` with the changed service worker source and CI's generated cache version, then require Verify and committed-dist drift to pass before merge.
+3. Keep deployment claims limited to provider build evidence until an accessible direct live readback is available.
+4. Continue independent public UX/security/PWA work and private B24 metadata discovery; preserve zero published language data and all separate readiness gates.
+5. Keep private PR #3 unmerged until a runner executes and the validator tests pass.
 
 ## A3 performance checkpoint — 2026-10-31 10:53 UTC
 

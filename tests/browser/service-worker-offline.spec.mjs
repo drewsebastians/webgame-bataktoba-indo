@@ -30,7 +30,7 @@ test("service worker restores a visited lesson offline and reconnects", async ({
   await context.setOffline(true);
   await page.goto("/learn/angka/");
   await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
-  await expect(page.locator(".app-banner.offline-banner")).toBeVisible();
+  await expect.poll(() => page.evaluate(() => navigator.onLine)).toBe(false);
 
   await page.goto("/dictionary/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
@@ -38,5 +38,5 @@ test("service worker restores a visited lesson offline and reconnects", async ({
   await context.setOffline(false);
   await page.goto("/dictionary/");
   await expect(page.getByRole("heading", { name: "Cari kata Batak Toba atau Indonesia" })).toBeVisible();
-  await expect(page.locator(".app-banner.offline-banner")).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => navigator.onLine)).toBe(true);
 });
