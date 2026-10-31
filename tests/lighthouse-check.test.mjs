@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  LIGHTHOUSE_ROUTES,
   SCORE_FLOORS,
   assertLighthouseScoreFloors,
   readLighthouseScores,
@@ -18,6 +19,23 @@ test("reads real Lighthouse category scores", () => {
     performance: 0.82,
     accessibility: 0.96,
   });
+});
+
+test("audits only the fixed local learner-facing route set", () => {
+  assert.deepEqual(
+    LIGHTHOUSE_ROUTES.map(({ id, path }) => [id, path]),
+    [
+      ["home", "/"],
+      ["learn-angka", "/learn/angka/"],
+      ["games", "/games/"],
+      ["flashcards", "/flashcards/"],
+      ["dictionary", "/dictionary/"],
+      ["progress", "/progres/"],
+    ],
+  );
+  assert.ok(LIGHTHOUSE_ROUTES.every(({ id, path }) =>
+    /^[a-z0-9-]+$/.test(id) && path.startsWith("/") && !path.startsWith("//"),
+  ));
 });
 
 test("accepts scores at the documented mobile and desktop floors", () => {

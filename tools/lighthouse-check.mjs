@@ -11,9 +11,18 @@ import { setTimeout as delay } from "node:timers/promises";
 import { chromium } from "@playwright/test";
 
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const PREVIEW_URL = "http://127.0.0.1:4178/";
+const PREVIEW_ORIGIN = "http://127.0.0.1:4178";
+const PREVIEW_URL = `${PREVIEW_ORIGIN}/`;
 const LIGHTHOUSE_VERSION = "13.4.1";
 export const SCORE_FLOORS = Object.freeze({ performance: 0.7, accessibility: 0.9 });
+export const LIGHTHOUSE_ROUTES = Object.freeze([
+  Object.freeze({ id: "home", path: "/" }),
+  Object.freeze({ id: "learn-angka", path: "/learn/angka/" }),
+  Object.freeze({ id: "games", path: "/games/" }),
+  Object.freeze({ id: "flashcards", path: "/flashcards/" }),
+  Object.freeze({ id: "dictionary", path: "/dictionary/" }),
+  Object.freeze({ id: "progress", path: "/progres/" }),
+]);
 
 export function readLighthouseScores(report) {
   const scores = {
@@ -60,11 +69,11 @@ async function waitForPreview(server) {
   throw new Error("Preview server did not become ready within 20 seconds");
 }
 
-function runLighthouse(profile, outputPath, chromePath) {
+function runLighthouse(profile, url, outputPath, chromePath) {
   const args = [
     "--yes",
     `lighthouse@${LIGHTHOUSE_VERSION}`,
-    PREVIEW_URL,
+    url,
     "--only-categories=performance,accessibility",
     "--output=json",
     `--output-path=${outputPath}`,
@@ -83,7 +92,7 @@ function runLighthouse(profile, outputPath, chromePath) {
   });
   if (result.error) throw result.error;
   if (result.status !== 0) {
-    throw new Error(`Lighthouse ${profile} audit exited with status ${result.status}`);
+    throw new Error(`Lighthouse ${profile} audit for ${url} exited with status ${result.status}`);
   }
 }
 
@@ -96,6 +105,13 @@ async function runAudits() {
   if (!existsSync(distHeaders)) throw new Error("dist/_headers missing — run npm run build first");
   if (!readFileSync(distHeaders, "utf8").includes("Content-Security-Policy")) {
     throw new Error("dist/_headers is missing Content-Security-Policy");
+  }
+
+  for (const route of LIGHTHOUSE_ROUTES) {
+    const relativePage = route.path === "/" ? "index.html" : join(route.path.slice(1), "index.html");
+    if (!existsSync(join(ROOT, "dist", relativePage))) {
+      throw new Error(`dist route page missing for ${route.path} — run npm run build first`);
+    }
   }
 
   const chromePath = process.env.CHROME_PATH || chromium.executablePath();
@@ -112,16 +128,19 @@ async function runAudits() {
 
   try {
     await waitForPreview(server);
-    for (const profile of ["mobile", "desktop"]) {
-      const outputPath = join(outputDirectory, `lighthouse-${profile}.json`);
-      runLighthouse(profile, outputPath, chromePath);
-      const report = JSON.parse(readFileSync(outputPath, "utf8"));
-      const scores = readLighthouseScores(report);
-      assertLighthouseScoreFloors(scores);
-      console.log(
-        `Lighthouse ${profile}: performance ${Math.round(scores.performance * 100)}/100; ` +
-        `accessibility ${Math.round(scores.accessibility * 100)}/100 — PASS`,
-      );
+    for (const route of LIGHTHOUSE_ROUTES) {
+      const url = new URL(route.path, PREVIEW_ORIGIN).toString();
+      for (const profile of ["mobile", "desktop"]) {
+        const outputPath = join(outputDirectory, `lighthouse-${route.id}-${profile}.json`);
+        runLighthouse(profile, url, outputPath, chromePath);
+        const report = JSON.parse(readFileSync(outputPath, "utf8"));
+        const scores = readLighthouseScores(report);
+        assertLighthouseScoreFloors(scores);
+        console.log(
+          `Lighthouse ${route.id} ${profile}: performance ${Math.round(scores.performance * 100)}/100; ` +
+          `accessibility ${Math.round(scores.accessibility * 100)}/100 — PASS`,
+        );
+      }
     }
   } finally {
     if (server.exitCode === null) {
