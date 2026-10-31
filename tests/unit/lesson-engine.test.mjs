@@ -32,7 +32,7 @@ describe("lesson engine plan", () => {
   });
 
   it("intro carries title/objective; recognition covers all items with one correct each", () => {
-    assert.equal(plan[0].title, "Fixture Lesson");
+    assert.equal(plan[0].title, "Synthetic Fixture Lesson");
     const questions = plan[1].questions;
     assert.equal(questions.length, items.length);
     for (const q of questions) {
