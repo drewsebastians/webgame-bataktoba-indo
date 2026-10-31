@@ -1,14 +1,16 @@
-# Resume handoff — 2026-10-31 13:41 UTC
+# Resume handoff — 2026-10-31 14:33 UTC
 
-1. Re-fetch visibility, main/tree SHAs, Issues, PRs, Actions, and the private latest run catalog before every new batch.
-2. This checkpoint PR starts from public main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e / tree 964e674b438eb3a26419c747c9f030af282516bc. PR #4 is merged.
-3. Public Verify run 41191955903 passed 193/193 unit tests, E2E smoke, 33/33 browser tests, verify:drift, and verify:release. Lighthouse prerequisite check passed; no full score audit was run.
-4. Cloudflare Workers Builds reported production deployment success for build f6ede399-fa67-4960-b615-b5f5d5fdaed0 (version b6ccda02-0d2d-44c3-ad4f-129deb03e89b). Direct live Pages readback was unavailable through the current web connector. Do not claim the live artifact was independently inspected.
-5. Keep all public learning arrays empty and noindex until source rights, quality, and publication scope pass. Synthetic fixtures remain intercepted in tests and absent from dist.
-6. The exposure audit found historical snapshots in earlier public commits. Current-tree containment is complete; no destructive history rewrite was performed.
-7. Private main is cfec3baeb8beee4738c81fde73ba92b71755bc22; B23 remains latest. B24 is metadata-only. Private PR #3 head 18eb6a7cbf45cbe73a8a704e2c1caf37b08488a0 triggered Actions run 41193636578, which failed before validator startup without steps or logs. No private tests ran or passed.
-8. The approved private source vault is unavailable. Continue independent metadata discovery; do not acquire language records until storage and source rights are confirmed.
-9. Next public task is A3: live readback, measured performance, and continued PWA/accessibility/security work. The synthetic A2 acceptance in public Issue #2 is met; the issue remains open as a starting queue.
+1. Re-fetch repository visibility, main/tree SHAs, Issues, PRs, Actions, and private `latest.json` before every write batch.
+2. Public webgame is PUBLIC at `730ff3fdd1db6190d70cc37774c3800db1e1602b` / tree `2e500141e4811ccbfc16db43207b3f866d1897fb`; PR #11 is merged. Main Verify run #62 passed 201/201 unit (0 skipped), 34/34 browser, build/smoke, budget, 12 Lighthouse audits, and committed-dist drift.
+3. Main Lighthouse run #62 scores: home 99/100, angka 93/99, games 98/100, flashcards 88/100, dictionary 93/100, progress 89/78 (mobile/desktop Performance); Accessibility 100 throughout. Artifact ID `13044757621`.
+4. Cloudflare production provider build succeeded (build `9236ed12-0264-47ef-8429-b6ae23453538`, version `7a3eec26-1e93-437b-8adb-0b7994330563`). Direct live readback remains unverified; do not claim production artifact inspection.
+5. Public content remains empty/noindex: 0 items, words, genuine phrases, and sentences. No synthetic fixture payload or private/restricted language content is in the build. Historical public Git objects remain; no history rewrite.
+6. Alignment Engine remains PRIVATE at main `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; `latest.json` remains B23 / DEGRADED. PR #3 is open at `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1`; run #17 failed before runner startup with runner_id 0 and zero steps. No private tests ran.
+7. B24 on PR #3 is metadata-only (14 scope rows; 11 possible direct leads, 3 adjunct/scope checks; 0 verified families or permitted/acquired records/items/evidence). Approved private vault remains unavailable; keep detailed source metadata private.
+8. Next public task: inspect progress desktop Lighthouse report, continue PWA/offline and responsive/security/accessibility engineering, and retry live readback. Next private task: continue rights/provenance metadata discovery without acquiring content until vault and rights blockers clear; keep PR #3 unmerged until validator tests pass.
+9. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY, and MONETIZATION_READY as separate gates.
+
+## Historical handoff archive
 
 10. A3 performance gate is implemented on `codex/2026-10-31-browser-performance-checkpoint-a3`: it checks production JS/CSS sizes after build and has threshold unit coverage. Baseline is 129,845 JS bytes across 14 files and 15,217 CSS bytes in 1 file; limits and exact meanings are in `docs/PERFORMANCE_BUDGET.md`. PR #5 is open at head `2e367604b28beaf9e64890909d50aeef583b8960`; Verify run #46 (`41194897354`, job `124518995179`) passed 196/196 unit, E2E smoke, 33/33 browser, asset budget, release prerequisite, and dist drift checks. The Lighthouse prerequisite is not a Lighthouse score audit. Merge after the checkpoint update passes, then verify Cloudflare build and retry direct Pages readback.
 

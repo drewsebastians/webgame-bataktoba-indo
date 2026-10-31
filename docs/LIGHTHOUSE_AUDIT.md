@@ -47,3 +47,21 @@ The focused `/progres/` entrypoint change is on PR #11 at code/dist head `2c412b
 All candidate audits exceeded the 70 Performance / 90 Accessibility floors. Reports are in `lighthouse-reports-41206008614` (artifact ID `13043638906`, retained 14 days). The desktop progress score remains 78; these are lab snapshots, not field telemetry.
 
 Cloudflare Workers Builds check succeeded for the PR candidate (build `67dbfb92-aa03-4567-aa85-46477b82ba28`, version `12feb4c9-2b57-48da-a646-46aa7c01a382`). Production main deployment and independent live readback remain unverified until after merge and an accessible readback.
+
+
+## Latest verified main deployment — run #62 (2026-10-31)
+
+PR #11's focused progress entrypoint is merged on main `730ff3fdd1db6190d70cc37774c3800db1e1602b`. Verify [run #62 / 41207408541](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41207408541) passed 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke, performance budget, all 12 route/profile Lighthouse audits, and committed-dist drift. The browser assertion confirms `/progres/` does not request the main application or quiz, lesson, and game-mode bundles.
+
+| Route | Mobile Performance | Desktop Performance | Accessibility, both profiles |
+|---|---:|---:|---:|
+| Home | 99 | 100 | 100 |
+| Angka lesson | 93 | 99 | 100 |
+| Games | 98 | 100 | 100 |
+| Flashcards | 88 | 100 | 100 |
+| Dictionary | 93 | 100 | 100 |
+| Progress | 89 | 78 | 100 |
+
+All audits met the existing 70 Performance / 90 Accessibility floors. Artifact `lighthouse-reports-41207408541` (ID `13044757621`) retains the reports for 14 days. JavaScript is 153,131/196,608 bytes across 16 files; CSS is 15,217/49,152 bytes. These are lab scores, not field-user telemetry.
+
+Cloudflare Workers Builds check reported production build `9236ed12-0264-47ef-8429-b6ae23453538` / version `7a3eec26-1e93-437b-8adb-0b7994330563` successful for main. This verifies provider build/deployment status. Direct live-site readback remains unverified through the available route/tooling. Public data check reports zero published items, words, genuine phrases, and sentences; synthetic fixtures and private corpus are not in the audited artifact.

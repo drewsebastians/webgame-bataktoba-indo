@@ -18,6 +18,16 @@ For every batch, re-check both repository visibilities, main/tree SHAs, Issues, 
 | LEARNING_READY | Lawful published lessons work end-to-end and production is checked. |
 | MONETIZATION_READY | Separate future gate; no current priority. |
 
+## Latest verified checkpoint — 2026-10-31 14:33 UTC
+
+Public main is `730ff3fdd1db6190d70cc37774c3800db1e1602b` / tree `2e500141e4811ccbfc16db43207b3f866d1897fb`; PR #11 is merged. Verify run [#62 / 41207408541](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41207408541) passed 201/201 unit tests (0 skipped), 34/34 browser tests, build, E2E smoke, JS/CSS budget, 12 Lighthouse audits, and committed-dist drift. Lighthouse Performance (mobile/desktop): home 99/100, angka 93/99, games 98/100, flashcards 88/100, dictionary 93/100, progress 89/78; Accessibility 100 on every route/profile. Report artifact ID `13044757621`. Cloudflare Workers Builds verified production build `9236ed12-0264-47ef-8429-b6ae23453538` / version `7a3eec26-1e93-437b-8adb-0b7994330563`; direct live readback remains unverified.
+
+The public artifact remains empty/noindex with 0 published items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only; private/restricted content was not moved into this repository. Historical objects remain in earlier Git commits; no history rewrite was performed.
+
+The Alignment Engine remains PRIVATE on main `cfec3baeb8beee4738c81fde73ba92b71755bc22`; B23 remains latest (DEGRADED). Private PR #3 remains open; run #17 failed before runner startup with zero steps, so no validator tests ran. Its B24 branch contains metadata-only discovery (14 rows, 0 permitted/acquired records). The approved private source vault remains unavailable.
+
+Readiness: ENGINEERING_READY=YES for the merged and tested browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Continue public browser engineering and private metadata research independently. Inspect the progress desktop Lighthouse report and continue PWA/offline, responsive, privacy/security, accessibility, and live-readback work. Do not publish language records without rights and quality gates.
+
 ## Historical A2 checkpoint — 2026-10-31 10:47 UTC
 
 Public A2 is integrated through PR #4, merge commit 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e. Verify run 41191955903 passed 193 unit tests, E2E smoke, 33 Playwright tests, drift check, and release prerequisites. Cloudflare Workers Builds reported production deployment success (build f6ede399-fa67-4960-b615-b5f5d5fdaed0; version b6ccda02-0d2d-44c3-ad4f-129deb03e89b). Direct live readback is unavailable, so do not call the live artifact verified. Published content remains empty; synthetic test data is intercepted and absent from production artifacts.
