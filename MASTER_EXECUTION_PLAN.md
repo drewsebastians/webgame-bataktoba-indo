@@ -68,3 +68,18 @@ Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and
 2. Continue PWA/offline, responsive behavior, privacy/security, keyboard/touch accessibility and browser journey coverage.
 3. Retry live Pages readback through a route the available tools can access.
 4. Continue private B24 research and validator recovery separately; keep private source records and corpus text out of the public repo.
+
+## Active checkpoint — 2026-10-31 13:41 UTC
+
+- Public webgame is PUBLIC at main `1af06840fbe0098f2737720a8ab0d5c8b0412bfc` / tree `4e7a754b97e4111c3fef3cd43b661588d11bce7a`. PR #11 code/dist head `2c412b1f940e1548cb34f0e54a359d9740531a08` passed Verify #60: 201/201 unit tests (0 skipped), 34/34 browser tests, build/smoke/budget, all 12 Lighthouse route/profile audits, and dist drift. The docs checkpoint is pending its own CI run before merge.
+- The progress page now loads a 9,975-byte focused entrypoint; browser coverage confirms it does not request the app or game-engine bundles. Lighthouse progress is 89 mobile / 78 desktop with accessibility 100; overall JS budget remains below its cap.
+- Provider build check succeeded for the PR candidate; production main deployment and independent live readback are not yet verified.
+- Private repo remains PRIVATE at main `cfec3baeb8beee4738c81fde73ba92b71755bc22`; B23 is latest. PR #3 remains open at `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1`, with run #17 failing before runner startup (0 steps). B24 remains metadata-only: 14 source/scope rows, 0 permitted/acquired records; vault unavailable.
+- Readiness remains ENGINEERING_READY=YES for the tested synthetic flows and candidate checks; DATA_READY/PUBLICATION_READY/LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
+## Next actions
+
+1. Validate the checkpoint docs commit and merge PR #11.
+2. Verify main CI and Cloudflare build after merge, then retry live Pages readback.
+3. Continue independent public PWA/offline, responsiveness, performance, accessibility, privacy and security work.
+4. Continue private B24 metadata/rightsholder discovery; keep the validator PR unmerged until Actions executes and passes; acquire nothing without source-specific rights and approved storage.

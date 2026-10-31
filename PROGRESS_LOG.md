@@ -1,6 +1,17 @@
 # Progress Log — Program Menuju Ultimate Blueprint
 
-## LATEST EXECUTION CHECKPOINT — 2026-10-31 12:51:22 UTC
+
+
+## LATEST EXECUTION CHECKPOINT — 2026-10-31 13:41 UTC
+
+Public webgame remains PUBLIC with main `1af06840fbe0098f2737720a8ab0d5c8b0412bfc` / tree `4e7a754b97e4111c3fef3cd43b661588d11bce7a`. PR #11 code/dist head `2c412b1f940e1548cb34f0e54a359d9740531a08` passed Verify #60 / 41206008614: 201/201 unit tests (0 skipped), 34/34 browser tests, build, smoke, JS/CSS budget, 12 Lighthouse audits and committed-dist drift. The focused progress entrypoint is 9,975 bytes; browser coverage confirms it avoids loading the main app and game/lesson/question/mode bundles. JS totals 153,131/196,608 bytes; CSS totals 15,217/49,152 bytes.
+
+Lighthouse scores (mobile/desktop Performance): home 98/100, angka 94/99, games 98/100, flashcards 89/100, dictionary 92/100, progress 89/78; Accessibility 100 on every audit. Artifact `13043638906`. Cloudflare Workers Builds reported the PR candidate build successful (build `67dbfb92-aa03-4567-aa85-46477b82ba28`, version `12feb4c9-2b57-48da-a646-46aa7c01a382`). This is a provider check, not proof of a live production readback.
+
+Public learning data remains empty. No private or synthetic linguistic data entered dist; historical objects remain in earlier Git history and no rewrite was performed. Private Alignment Engine remains PRIVATE, B23 latest, B24 metadata-only at 14 rows; private PR #3 run #17 had zero steps before runner startup, so no private tests ran. The approved vault is unavailable, and no source content was transferred.
+
+Next: validate this checkpoint doc commit, merge PR #11 after checks pass, verify main CI/provider build, retry live readback, and continue independent PWA/offline/security/accessibility work. Keep private PR #3 open until its validator actually runs and passes.
+## Previous execution checkpoint — 2026-10-31 12:51:22 UTC
 
 Public webgame main is `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d94de0742ecca8759bd0ebe0a5caf4a465ff`; PR #9 is merged. Main Verify run #56 / 41202127852 passed 201/201 unit tests (0 skipped), 33/33 browser tests, 12 Lighthouse route/profile audits, public-data checks and committed-dist drift. Published data remains empty: 0 learning items, words, genuine phrases or sentences.
 

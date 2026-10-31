@@ -1,4 +1,4 @@
-# Resume handoff — 2026-10-31 12:51:22 UTC
+# Resume handoff — 2026-10-31 13:41 UTC
 
 1. Re-fetch visibility, main/tree SHAs, Issues, PRs, Actions, and the private latest run catalog before every new batch.
 2. This checkpoint PR starts from public main 14fe3bb5f2a7c9d2d663f9c3221382afb54bb76e / tree 964e674b438eb3a26419c747c9f030af282516bc. PR #4 is merged.
@@ -35,3 +35,12 @@
 6. Keep public content empty/noindex. Historical corpus objects remain in earlier Git commits; no history rewrite. Synthetic fixtures remain test-only. Alignment Engine stays PRIVATE.
 7. Private main remains `cfec3baeb8beee4738c81fde73ba92b71755bc22`; PR #3 is at `ca4b41fa55d445fcc70b935156c55f8ca041fd71`. Run #15 failed before validator startup with 0 steps; no private tests ran. B23 remains latest; B24 is metadata-only and its detailed source registry remains private.
 8. Next public work: inspect the progress desktop report; continue PWA/offline, privacy/security, responsive and accessibility tasks; retry live readback. Continue private work independently without moving source details or language data to public.
+
+## Current resume checkpoint — 2026-10-31 13:41 UTC
+
+1. Public main remains `1af06840fbe0098f2737720a8ab0d5c8b0412bfc` / `4e7a754b97e4111c3fef3cd43b661588d11bce7a`. PR #11 code/dist head `2c412b1f940e1548cb34f0e54a359d9740531a08` passed Verify #60: 201/201 unit tests (0 skipped), 34/34 browser tests, E2E smoke, performance budget, 12 Lighthouse audits, and dist drift. Current docs commit will be validated by its own CI run.
+2. Lighthouse artifact `13043638906`, `lighthouse-reports-41206008614`: home 98/100 mobile/desktop; angka 94/99; games 98/100; flashcards 89/100; dictionary 92/100; progress 89/78. Accessibility was 100 across routes/profiles. Desktop progress remains 78; these are lab measurements.
+3. Cloudflare Workers Builds reported PR candidate build `67dbfb92-aa03-4567-aa85-46477b82ba28` / version `12feb4c9-2b57-48da-a646-46aa7c01a382` successful. The live Pages artifact has not been independently read back.
+4. Public content remains empty/noindex: zero items, words, genuine phrases and sentences. No private or synthetic language data is in dist. Historical public Git objects remain; no history rewrite.
+5. Private main is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`. B23 remains latest. Private PR #3 head `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1` run #17 / 41205702401 failed before runner startup with zero steps (runner_id 0); no validator tests ran. B24 has 14 metadata/scope rows, 11 possible direct leads and 3 adjunct/scope checks, with zero permitted/acquired records. Approved vault remains unavailable.
+6. Next: validate checkpoint CI, merge PR #11, verify main CI and Cloudflare build, retry live readback; keep private PR #3 unmerged until an actual validator run passes.
