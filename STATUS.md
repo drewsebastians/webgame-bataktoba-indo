@@ -1,48 +1,47 @@
-# Execution status — 2026-10-31 12:51:22 UTC
+# Execution status — 2026-10-31 13:41 UTC
 
 ## Verified GitHub state
 
-- Webgame remains PUBLIC; main is `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d94de0742ecca8759bd0ebe0a5caf4a465ff`. PR #9 is merged; public Issue #2 remains open as the ongoing engineering queue.
-- Alignment Engine remains PRIVATE; main is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`. Private PR #3 is open at `ca4b41fa55d445fcc70b935156c55f8ca041fd71`; its latest run #15 failed before validator startup with 0 steps, so no private tests ran.
-- Public main Verify run [#56 / 41202127852](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41202127852) passed: 201/201 unit tests (0 skipped), 33/33 browser tests, release checks, all 12 Lighthouse route/profile audits, and the committed-dist drift gate.
-- Cloudflare Workers Builds reported production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful. Direct live-page readback remains unavailable through the current web connector, so the deployed artifact is not claimed as independently verified.
-- Published data remains empty: 0 learning items, 0 words, 0 genuine phrases, 0 sentences. Synthetic fixtures remain isolated to intercepted browser tests; no private or restricted linguistic content was transferred to the public repo.
+- Webgame remains PUBLIC. Main is `1af06840fbe0098f2737720a8ab0d5c8b0412bfc` / tree `4e7a754b97e4111c3fef3cd43b661588d11bce7a`. PR #11 is open at head `2c412b1f940e1548cb34f0e54a359d9740531a08`; Issue #2 remains open.
+- Alignment Engine remains PRIVATE. Main is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`. PR #3 head `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1`; run #17 / 41205702401 failed before runner startup with runner_id 0 and 0 steps. No private validator tests ran. B23 remains latest; B24 is metadata-only.
+- Public Verify [#60 / 41206008614](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41206008614) passed on PR #11: 201/201 unit tests (0 skipped), 34/34 browser tests, build, smoke, asset budget, all 12 Lighthouse audits, and committed-dist drift.
+- Cloudflare Workers Builds check succeeded for the PR candidate (build `67dbfb92-aa03-4567-aa85-46477b82ba28`, version `12feb4c9-2b57-48da-a646-46aa7c01a382`). This is a provider build check; direct production live readback remains unverified.
+- Public learning data remains empty: 0 learning items, 0 words, 0 genuine phrases, and 0 sentences. No private/restricted linguistic content or synthetic fixtures entered the production build.
 
-## Lighthouse result — main run #56
+## Lighthouse result — PR #11 candidate, run #60
 
-All six public routes passed both profiles. Accessibility scored 100/100 on every audit. Performance scores were:
+| Route | Mobile Performance | Desktop Performance | Accessibility, both profiles |
+|---|---:|---:|---:|
+| Home | 98 | 100 | 100 |
+| Angka lesson | 94 | 99 | 100 |
+| Games | 98 | 100 | 100 |
+| Flashcards | 89 | 100 | 100 |
+| Dictionary | 92 | 100 | 100 |
+| Progress | 89 | 78 | 100 |
 
-| Route | Mobile | Desktop |
-|---|---:|---:|
-| Home | 98 | 100 |
-| Angka lesson | 92 | 99 |
-| Games | 98 | 100 |
-| Flashcards | 88 | 100 |
-| Dictionary | 92 | 100 |
-| Progress | 87 | 78 |
-
-The lowest result is desktop `/progres/` at 78/100, above the 70/100 floor. JSON reports are in artifact `lighthouse-reports-41202127852` (ID `13043018067`, 14-day retention). These are CI snapshots, not field-user measurements.
+All 12 candidate audits passed the 70 Performance / 90 Accessibility floors. Reports are in artifact `lighthouse-reports-41206008614` (ID `13043638906`, 14-day retention). CI scores are lab snapshots; desktop progress remains 78. The focused progress entrypoint is 9,975 bytes, and its browser test confirms the route does not request the app, quiz, lesson, or game-mode bundles. The overall JS budget is 153,131/196,608 bytes across 16 files; CSS is 15,217/49,152 bytes.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for synthetic browser journeys, asset budget, and six-route Lighthouse checks | Verify #56 passed unit, browser, build, Lighthouse, and drift checks. Live readback is still unverified. |
-| DATA_READY | NO | Private B23 remains latest; B24 has no permitted/acquired records or consumer items. |
-| PUBLICATION_READY | NO | Public learning content remains empty; no record-level publication clearance or scope grant. |
-| LEARNING_READY | NO | No authorized published lessons; empty state/noindex behavior remains active. |
+| ENGINEERING_READY | YES for isolated synthetic journeys, asset budget, and six-route Lighthouse candidate | Verify #60 passed; PR #11 docs checkpoint is pending its own CI run. |
+| DATA_READY | NO | Private B24 has no permitted/acquired records or consumer items; B23 remains latest. |
+| PUBLICATION_READY | NO | Public learning data is empty and no new publication scope exists. |
+| LEARNING_READY | NO | No authorized published lesson content; empty/noindex behavior remains active. |
 | MONETIZATION_READY | DEFERRED | Not a current priority. |
 
 ## Security and history
 
-The current public tree contains no corpus-derived raw, candidate, legacy, or report snapshots. Historical public commits still retain earlier corpus-derived objects; no destructive history rewrite was performed. Synthetic fixtures are absent from the public build and Lighthouse artifacts.
+The current public tree contains no restricted corpus or test fixture payloads; synthetic browser responses remain isolated to tests and absent from dist. Historical raw objects remain in earlier public Git commits. No history rewrite was performed.
 
 ## Next actions
 
-1. Inspect the Lighthouse report for desktop `/progres/` and identify the largest opportunity before changing code; preserve the 70/100 performance and 90/100 accessibility floors.
-2. Continue browser PWA/offline behavior, responsive interaction, privacy, security, keyboard/touch accessibility, and journey coverage independently of corpus readiness.
-3. Retry direct live-site readback through an accessible route and record it separately from the successful provider build check.
-4. Continue private B24 discovery and validator recovery in the PRIVATE repository; keep private source details there and do not transfer corpus text.
+1. Validate this checkpoint-only PR commit, then merge PR #11.
+2. Verify main CI and the Cloudflare provider build after merge; retry direct live Pages readback through an accessible route.
+3. Continue browser PWA/offline, responsive, accessibility, performance, privacy and security work independently of corpus readiness.
+4. Keep private PR #3 open until its validator actually runs and passes; continue B24 metadata-only rights discovery until approved storage and source-specific permissions are available.
+5. Preserve empty published data and the separate readiness gates.
 
 
 ## A3 performance checkpoint — 2026-10-31 10:53 UTC
