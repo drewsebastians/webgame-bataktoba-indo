@@ -110,12 +110,30 @@ test.describe("core learning flows", () => {
     await expect(page.locator("#flashcard-card")).toContainText(/Tidak ada kartu|Tahap/);
   });
 
-  test("dictionary: search opens detail with correction link; save persists", async ({ page }) => {
+  test("dictionary: isolated entrypoint searches synthetic fixture, opens detail and saves", async ({ page }) => {
+    const scripts = [];
+    const browserErrors = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "script") scripts.push(new URL(request.url()).pathname);
+    });
+    page.on("pageerror", (error) => browserErrors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") browserErrors.push(message.text());
+    });
+
     await installSyntheticContentRoutes(page);
     await page.goto("/dictionary/");
-    // 'aek -> air' is a real published pair from canonical corpus.
+    await expect(page.locator("#dictionary-search")).toBeVisible();
+
+    expect(scripts.some((path) => /\/assets\/js\/dictionary-page\.[\da-f]{8}\.js$/.test(path))).toBe(true);
+    expect(scripts.some((path) => /\/assets\/js\/app\.[\da-f]{8}\.js$/.test(path))).toBe(false);
+    expect(scripts.some((path) => /\/assets\/js\/game\/(question-engine|lesson-engine|modes)\.[\da-f]{8}\.js$/.test(path))).toBe(false);
+    expect(scripts.some((path) => /\/assets\/js\/onboarding\.[\da-f]{8}\.js$/.test(path))).toBe(false);
+
+    // This is an isolated synthetic browser fixture; it is never bundled for production.
     await page.locator("#dictionary-search").fill("SYNTHETIC_BT_001");
     const firstRow = page.locator(".result-row").first();
+    await expect(firstRow).toContainText("SYNTHETIC_BT_001");
     await firstRow.click();
     const correction = page.getByRole("link", { name: "Lapor koreksi" }).first();
     await expect(correction).toBeVisible();
@@ -123,14 +141,11 @@ test.describe("core learning flows", () => {
     expect(href).toContain("github.com");
     expect(href).toContain("issues/new");
 
-    await page.evaluate(() => {
-      const button = [...document.querySelectorAll(".result-detail button")].find((b) =>
-        b.textContent.includes("Simpan"),
-      );
-      if (!button) throw new Error("save button missing");
-      button.click();
-    });
+    const expandedRow = page.locator('.result-row[aria-expanded="true"]');
+    await expandedRow.getByRole("button", { name: "Simpan ke daftar latihan" }).click();
+    await expect(expandedRow.getByRole("button", { name: "Tersimpan" })).toBeVisible();
     await expect.poll(async () => getSavedFlags(page)).toHaveLength(1);
+    expect(browserErrors).toEqual([]);
   });
 
   test("progres: loads the focused entrypoint without game engines", async ({ page }) => {

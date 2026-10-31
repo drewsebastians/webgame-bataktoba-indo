@@ -1,31 +1,34 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { evaluatePerformanceBudget, PERFORMANCE_BUDGET } from "../../tools/check-performance-budget.mjs";
+import { readdirSync, statSync } from "node:fs";
+import { join, relative } from "node:path";
 
-test("measured production bundle fits the initial budgets", () => {
-  const report = evaluatePerformanceBudget([
-    { path: "dist/assets/js/ads.523484b2.js", size: 3_222 },
-    { path: "dist/assets/js/analytics.ab842beb.js", size: 4_099 },
-    { path: "dist/assets/js/app.649678b6.js", size: 77_391 },
-    { path: "dist/assets/js/config.6316db9b.js", size: 884 },
-    { path: "dist/assets/js/data.cfd4b3c2.js", size: 1_060 },
-    { path: "dist/assets/js/game/lesson-engine.f650cc27.js", size: 1_951 },
-    { path: "dist/assets/js/game/modes.94847ebc.js", size: 5_979 },
-    { path: "dist/assets/js/game/question-engine.5494a83a.js", size: 6_555 },
-    { path: "dist/assets/js/game/session.30f0491c.js", size: 4_636 },
-    { path: "dist/assets/js/onboarding.b17e4b59.js", size: 2_225 },
-    { path: "dist/assets/js/progress.fa26cbf8.js", size: 18_370 },
-    { path: "dist/assets/js/utils/corrections.2eedd2fd.js", size: 923 },
-    { path: "dist/assets/js/utils/dom.742eac8c.js", size: 1_512 },
-    { path: "dist/assets/js/utils/normalize.9471d62c.js", size: 1_038 },
-    { path: "dist/assets/css/styles.940b46b4.css", size: 15_217 },
-    { path: "dist/assets/fonts/learning.woff2", size: 500_000 },
-  ]);
+function collectProductionAssets(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = join(directory, entry.name);
+    if (entry.isDirectory()) return collectProductionAssets(fullPath);
+    if (![".js", ".mjs", ".css"].includes(entry.name.slice(entry.name.lastIndexOf(".")).toLowerCase())) {
+      return [];
+    }
+    return [{
+      path: relative(process.cwd(), fullPath).replaceAll("\\\\", "/"),
+      size: statSync(fullPath).size,
+    }];
+  });
+}
 
-  assert.equal(report.javascript.count, 14);
-  assert.equal(report.javascript.totalBytes, 129_845);
-  assert.equal(report.css.count, 1);
-  assert.equal(report.css.totalBytes, 15_217);
+test("measured production bundle fits the budgets, including focused page entrypoints", () => {
+  const assets = collectProductionAssets(join(process.cwd(), "dist", "assets"));
+  const report = evaluatePerformanceBudget(assets);
+
+  assert.ok(assets.some(({ path }) => /dist\/assets\/js\/dictionary-page\.[\da-f]{8}\.js$/.test(path)));
+  assert.ok(assets.some(({ path }) => /dist\/assets\/js\/flashcards-page\.[\da-f]{8}\.js$/.test(path)));
+  assert.ok(assets.some(({ path }) => /dist\/assets\/js\/progress-page\.[\da-f]{8}\.js$/.test(path)));
+  assert.ok(report.javascript.count >= 17);
+  assert.ok(report.javascript.totalBytes <= PERFORMANCE_BUDGET.javascript.totalBytes);
+  assert.ok(report.css.count >= 1);
+  assert.ok(report.css.totalBytes <= PERFORMANCE_BUDGET.css.totalBytes);
   assert.deepEqual(report.violations, []);
 });
 
