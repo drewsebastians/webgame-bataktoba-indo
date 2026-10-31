@@ -40,9 +40,9 @@ function setActiveNav() {
 
 function updateProgressBadges() {
   const progress = getProgress();
-  $("[data-progress-answered]").forEach((node) => (node.textContent = progress.answered));
-  $("[data-progress-correct]").forEach((node) => (node.textContent = progress.correct));
-  $("[data-progress-known]").forEach((node) => (node.textContent = getBucketIds("known").length));
+  $$("[data-progress-answered]").forEach((node) => (node.textContent = progress.answered));
+  $$("[data-progress-correct]").forEach((node) => (node.textContent = progress.correct));
+  $$("[data-progress-known]").forEach((node) => (node.textContent = getBucketIds("known").length));
 }
 
 function initPrivacyPreferences() {
