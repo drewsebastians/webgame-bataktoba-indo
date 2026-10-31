@@ -1,17 +1,22 @@
 # Execution status — 2026-10-31
 
-- Public webgame: PUBLIC, baseline main 6b563267ed4973375ea8031910552d61ae324250, tree 0b855047ca141d5178018787ea316b2047d271c5.
-- Private engine: PRIVATE, latest main cfec3baeb8beee4738c81fde73ba92b71755bc22, tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84.
-- Web Verify baseline run 41163350076 passed.
-- Engine B23 is DEGRADED and complete; latest.json names B24 next. Do not repeat B17–B23.
-- Issue #2 is open in both repositories; no open PRs were present at baseline.
+## Verified GitHub state
 
-| Readiness | State | Evidence |
+- Public webgame is PUBLIC. `main` = `ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea`; tree = `3c92da8cfb635786eba78eba7d9f8c7b1c60b912`.
+- Private Alignment Engine is PRIVATE. `main` = `cfec3baeb8beee4738c81fde73ba92b71755bc22`; tree = `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`.
+- Public A1 containment PR #3 merged as `ed7c3ae`; Verify run 41167137394 passed. Cloudflare reported successful PR builds; production live-site readback is unverified.
+- Public A2 PR #4 remains open at `f32c0bdd68e280c155e1e0225f44b29d69d37d00`. Verify run 41171672244 passed 193/193 unit tests with 0 skips and the E2E smoke. Playwright passed 31/33; Home stayed empty after lesson-only completion, and the SRS test used a nonexistent card selector plus a due-only filter before scheduling review. The Home repair still needs diagnosis; browser diagnostics are now included.
+- Private engine PR #3 remains open at `3e0c6acc9bfbb485640507b55c19b25b43df8dc7`. GitHub Actions run 41170710503 did not start because of account billing/spending-limit status. No private tests are claimed as passing.
+- B23 is complete and must not be repeated. Its checkpoint reports 0 new direct bbc–Indonesian pairs, 0 automated-supported and 0 public-eligible items. B24 is next; Tatoeba refresh is scheduled after 2026-10-31 06:30 UTC.
+
+## Readiness
+
+| Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | IN_PROGRESS | Baseline Verify green; adapter and synthetic browser coverage remain queued. |
-| DATA_READY | IN_PROGRESS | B23 aggregate report; 0 new direct bbc–Indonesian pairs; B24 remains. |
-| PUBLICATION_READY | NO | Public arrays empty; no outward transfer authorized. |
-| LEARNING_READY | NO | Real learning content unavailable; production empty-state remains. |
+| ENGINEERING_READY | IN PROGRESS | A1 merged; A2 full browser suite still has two failures. |
+| DATA_READY | IN PROGRESS | B23 aggregate only; B24 discovery/refresh remains. |
+| PUBLICATION_READY | NO | Production arrays empty; no outward transfer or scope authorization. |
+| LEARNING_READY | NO | Real public-eligible content unavailable; production empty state retained. |
 | MONETIZATION_READY | DEFERRED | Not a current priority. |
 
-A1 public data containment is on this PR branch; inspect GitHub PR and Actions for current state. Historical commits remain unchanged.
+No restricted data was transferred. Historical public Git history remains unchanged.

@@ -419,3 +419,39 @@ Semua repository-solvable gap ditutup; sisa hanya external.
 - Still 0 published lessons (need 8 pool + human review), thin topics noindex, domain/DNS, AdSense publisher/ads.txt/CMP, corpus licensing, audio — not faked.
 
 
+
+
+## 2026-10-31 autonomous checkpoint — public A1 merged, A2 underway
+
+- Verified PUBLIC webgame `main` ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea, tree `3c92da8cfb635786eba78eba7d9f8c7b1c60b912`; private engine `main` remains `cfec3baeb8beee4738c81fde73ba92b71755bc22`, tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`.
+- A1 public data containment merged at `ed7c3ae`; GitHub Verify run 41167137394 passed. Current published content remains empty. Provider build check succeeded; live page readback is still unverified.
+- A2 branch `codex/2026-10-31-webgame-synthetic-adapter-a2` replaces data-dependent browser skips with isolated synthetic fixtures, exercises lesson-to-quiz-to-mistake-review-to-spaced-repetition-to-dictionary, adds adapter/schema/right/provenance tests, and fixes saved-mode fallback after a lesson. CI results pending.
+- Private B23 complete; no repeat. B24 remains next; scheduled Tatoeba refresh not yet due.
+- Private validator PR #3 remains open because GitHub Actions run 41167909686 was rejected before job startup for billing/spending-limit status. No local Python runtime was available; no tests are claimed.
+- No private text was copied into the public repository. Historical public Git history remains unchanged.
+
+
+## 2026-10-31 checkpoint — first A2 CI findings
+
+- A2 Verify run 41170059393 completed 191 unit tests and E2E smoke successfully; 30 of 33 Playwright tests passed.
+- Three browser failures converged on a real lesson-flow bug: the recall step advanced to mistake review after the first checked answer. The engine is being corrected to keep serving the remaining recall prompts.
+- The synthetic fixture's deliberate wrong answer is now selected only from visible options.
+- Cloudflare Workers Builds passed on the tested PR head; this is a build result, not live-site readback.
+- No private content was transferred; production data remains empty. Private PR #3 still lacks a runnable Actions check due billing.
+
+## 2026-10-31 checkpoint — A2 second CI finding and lesson-history repair
+
+- Verified public repository remains PUBLIC; main ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea, tree 3c92da8cfb635786eba78eba7d9f8c7b1c60b912. A2 branch head f8c7416f8628ad9eace8e80856f1461dd3865e5c; private engine remains PRIVATE at main cfec3baeb8beee4738c81fde73ba92b71755bc22, tree 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84.
+- Verify run 41170470319 completed 191/191 unit tests and the E2E smoke. Playwright passed 32/33 tests; the remaining failure was Home rendering no returning card after a synthetic lesson completion. The recall regression is fixed.
+- Current update treats lesson start/completion as meaningful progress for onboarding and Home resumption, with unit coverage for the predicate. Full verification must rerun; generated dist drift is still to be inspected.
+- Cloudflare Workers Builds reported success for A2 head f8c7416. This does not verify live-site readback. Production content arrays remain empty, and no private corpus text or fixture content is being added to production.
+- Private Actions billing/spending limit remains the blocker for PR #3 validation; B23 is complete and B24 is next.
+
+## 2026-10-31 checkpoint — A2 CI run 41171672244
+
+- Verified both repo visibilities and main/tree SHAs before this batch: public ed7c3ae3d22e1685bc31a61b3c027cd21d7254ea / 3c92da8cfb635786eba78eba7d9f8c7b1c60b912; private cfec3baeb8beee4738c81fde73ba92b71755bc22 / 297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84.
+- Verify run 41171672244 completed 193/193 unit tests with 0 skips and passed E2E smoke; Playwright passed 31/33.
+- Home stayed empty after lesson-only completion; an attempted onboarding/return-card change did not resolve it. Added page error, data-response, and minimal progress diagnostics for the next full run.
+- The flashcard test selected a nonexistent id and filtered to due cards before any review was scheduled. It now targets the rendered card id and starts from the all-cards deck before scheduling a spaced-repetition review.
+- Cloudflare reported success for this A2 commit. Live-site readback remains unverified; production published arrays remain empty.
+- Private PR #3 remains blocked by GitHub billing/spending limit. B23 is complete; the next data batch is B24 after the scheduled export window.

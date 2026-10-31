@@ -22,7 +22,7 @@ A fast, friendly Batak Toba–Indonesian learning **website** for **desktop and 
 | Source-to-product **future field contract** | [Private upstream collection contract](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/docs/WEBGAME_DATA_COLLECTION_CONTRACT.md) | Contract exists on a PR until merged; metadata requirements alone grant no publication rights. |
 | Browser UI, games, lessons, progress, testing, published subset, SEO, safe deployment | PUBLIC `drewsebastians/webgame-bataktoba-indo` | Only publication-authorized subset; zero linguistic items until explicit gates pass. |
 | Rights/scope gate | Both, independently | Private processing permission != public site redistribution or advertising/commercial permission. Upstream's active private-only policy **also** forbids outward handoff unless explicitly changed. |
-| Future conversion | Adapter in this repository, NOT YET IMPLEMENTED | Input contract != current `source:import` staging schema; map and validate explicitly before running publish. |
+| Future conversion | Fail-closed schema and provenance adapter exists; production integration remains gated on explicit authorization | Input contract != current `source:import` staging schema; map and validate explicitly before running publish. |
 
 The public repository already contains historical/raw/candidate corpus-derived files. Their Git exposure needs a **separate provenance/rights audit**, including commit history. Deployment-only exclusion from `dist/` does not make past public Git content private. Do not destructively rewrite history or claim legal clearance solely on the basis of this plan.
 

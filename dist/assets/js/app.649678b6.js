@@ -27,7 +27,7 @@ import {
   recordLessonCompletion,
   recordLessonStart,
 } from "./progress.fa26cbf8.js";
-import { getOnboarding, saveOnboarding, shouldOfferOnboarding } from "./onboarding.2babc419.js";
+import { getOnboarding, hasLessonHistory, saveOnboarding, shouldOfferOnboarding } from "./onboarding.b17e4b59.js";
 import {
   buildMemoryBoard,
   buildTrueFalse,
@@ -233,7 +233,7 @@ function renderHomeDynamic(container, wordPool) {
   }
 
   if (shouldOfferOnboarding(progressState)) renderOnboarding();
-  else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0) renderReturning();
+  else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0 || hasLessonHistory(progressState)) renderReturning();
   else replaceChildren(container);
 }
 
@@ -549,7 +549,7 @@ async function initGames() {
   };
 
   let state = {
-    mode: getProgress().lastMode || "meaning",
+    mode: Object.keys(modes).includes(getProgress().lastMode) ? getProgress().lastMode : "meaning",
     answered: 0,
     correct: 0,
     current: null,
@@ -1848,9 +1848,12 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
       (() => {
         const b = el("button", { className: "button", id: "lesson-next", text: "Lanjut", attrs: { type: "button", disabled: true } });
         b.addEventListener("click", () => {
-          stepIndex += 1;
-          if (plan[stepIndex].type === "summary") finish();
-          else renderStep();
+          if (recallIndex >= step.prompts.length) {
+            stepIndex += 1;
+            renderStep();
+          } else {
+            renderRecall();
+          }
         });
         return b;
       })(),
