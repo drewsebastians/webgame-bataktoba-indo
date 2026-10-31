@@ -5,6 +5,7 @@ import {
   SCORE_FLOORS,
   assertLighthouseScoreFloors,
   readLighthouseScores,
+  summarizePerformanceDiagnostics,
 } from "../tools/lighthouse-check.mjs";
 
 const report = (performance, accessibility) => ({
@@ -54,4 +55,42 @@ test("fails when either category falls below its floor", () => {
 
 test("fails closed when Lighthouse omits a required score", () => {
   assert.throws(() => readLighthouseScores({ categories: {} }), /performance category score/);
+});
+
+test("summarizes performance metrics and ranks measured opportunities", () => {
+  const summary = summarizePerformanceDiagnostics({
+    audits: {
+      "first-contentful-paint": { displayValue: "1.2 s", numericValue: 1200 },
+      "largest-contentful-paint": { displayValue: "1.8 s", numericValue: 1800 },
+      "speed-index": { displayValue: "1.4 s", numericValue: 1400 },
+      "total-blocking-time": { displayValue: "120 ms", numericValue: 120 },
+      "cumulative-layout-shift": { displayValue: "0.02", numericValue: 0.02 },
+      "render-blocking-resources": {
+        details: { type: "opportunity", overallSavingsMs: 120, overallSavingsBytes: 4500 },
+      },
+      "unused-javascript": {
+        details: { type: "opportunity", overallSavingsMs: 80, overallSavingsBytes: 9000 },
+      },
+      "modern-image-formats": {
+        details: { type: "opportunity", overallSavingsBytes: 12000 },
+      },
+      diagnostic: { details: { type: "table", overallSavingsMs: 9999 } },
+    },
+  });
+
+  assert.equal(summary.metrics.FCP.displayValue, "1.2 s");
+  assert.equal(summary.metrics.LCP.numericValue, 1800);
+  assert.deepEqual(summary.opportunities, [
+    { id: "render-blocking-resources", savingsMs: 120, savingsBytes: 4500 },
+    { id: "unused-javascript", savingsMs: 80, savingsBytes: 9000 },
+    { id: "modern-image-formats", savingsMs: 0, savingsBytes: 12000 },
+  ]);
+});
+
+test("diagnostic summary tolerates a missing audit payload", () => {
+  const summary = summarizePerformanceDiagnostics(null);
+  assert.ok(Object.values(summary.metrics).every((metric) =>
+    metric.displayValue === null && metric.numericValue === null,
+  ));
+  assert.deepEqual(summary.opportunities, []);
 });
