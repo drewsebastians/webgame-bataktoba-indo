@@ -12,7 +12,7 @@ function collectProductionAssets(directory) {
       return [];
     }
     return [{
-      path: relative(process.cwd(), fullPath).replaceAll("\\\\", "/"),
+      path: relative(process.cwd(), fullPath).replaceAll("\\", "/"),
       size: statSync(fullPath).size,
     }];
   });

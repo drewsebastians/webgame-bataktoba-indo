@@ -112,8 +112,17 @@ async function initDictionary() {
   const filtersRoot = dictionaryQuery("#dictionary-filters");
   if (!input || !results) return;
   const { items } = await loadLearningItems();
-  const topics = await loadTopics();
   const searchable = items.filter((item) => item.type !== "sentence");
+  const panel = dictionaryQuery("#app-error");
+  if (panel) panel.setAttribute("aria-busy", "false");
+  if (!searchable.length) return;
+
+  const topics = await loadTopics();
+  const emptyState = dictionaryQuery("#dictionary-empty-state");
+  input.disabled = false;
+  if (emptyState) emptyState.hidden = true;
+  if (filtersRoot) filtersRoot.hidden = false;
+  results.hidden = false;
 
   const themes = [...new Set(topics.topics.map((t) => t.slug))];
   const filters = { direction: "both", theme: "all", type: "all", review: "all", difficulty: "all" };
@@ -401,7 +410,11 @@ async function main() {
   await initDictionary();
 }
 
-main().catch((error) => showError(
-  dictionaryQuery("main"),
-  error && error.message ? error.message : "Kesalahan tidak diketahui.",
-));
+main().catch((error) => {
+  const panel = dictionaryQuery("#app-error");
+  if (panel) panel.setAttribute("aria-busy", "false");
+  showError(
+    dictionaryQuery("main"),
+    error && error.message ? error.message : "Kesalahan tidak diketahui.",
+  );
+});

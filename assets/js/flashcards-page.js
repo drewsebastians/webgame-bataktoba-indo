@@ -60,6 +60,10 @@ async function initFlashcards() {
   const root = flashcardQuery("#flashcard-root");
   if (!root) return;
   const { items } = await loadWordPairs();
+  if (!items.length) {
+    root.setAttribute("aria-busy", "false");
+    return;
+  }
   const topics = await loadTopics();
   const themes = [...new Set(topics.topics.map((t) => t.slug))];
 
@@ -261,6 +265,7 @@ async function initFlashcards() {
 
   renderToolbar();
   renderCard();
+  root.setAttribute("aria-busy", "false");
   document.addEventListener("keydown", handleKeydown);
 }
 
