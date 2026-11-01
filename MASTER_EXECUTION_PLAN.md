@@ -1,20 +1,20 @@
 # Master execution plan
 
-## Current checkpoint — 2026-11-01 09:31 UTC
+## Current checkpoint — 2026-11-01 10:00 UTC
 
-- PUBLIC main HEAD is `7734c6e221dd74d4e942224c614e94156a915125` / tree `4fa5cf69f5aad042fafb4eeb680f44d2de81df50`; PR #35 is merged, and PR #34's Node 24 action pins remain in the workflow.
-- Exact-main Verify [run 41293149232](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41293149232) passed 215/215 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits, and committed-dist drift all passed; artifact 13078286529.
-- Lighthouse Accessibility was 100 on all routes/profiles; mobile Performance home/angka/games/flashcards/dictionary/progress was 98/92/98/90/93/100 and desktop was 100/99/100/100/100/100. Budgets: JavaScript 178,003/196,608 bytes across 18 files; CSS 15,698/49,152 bytes.
-- Exact-main Workers Builds succeeded (build 5a6c50cf-1546-4785-bebb-24621006087c, version 9d4e426e-5e31-47fe-8285-230a2a048923). Direct live Pages readback is still UNVERIFIED.
+- PUBLIC main HEAD is `84c05624f959f235d16a790d3c479e74f68b9564` / tree `e67bd8ecbc0651afb37899a801f3b25195d35028`; PRs #35/#36/#37 are merged. The latest README documents immutable Node 24 actions and their actual step order.
+- Exact-main Verify [run 41295166507](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41295166507) passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright, JS/CSS budgets, 12 Lighthouse audits and dist drift; artifact 13078943622.
+- Lighthouse Accessibility is 100 on all route/profile audits; mobile Performance is 98/92/98/90/93/100 and desktop is 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
+- Exact-main Workers Builds succeeded (build `7bd60fc7-785d-4c3f-9648-233ae7354ac8`, version `04d00dca-64bb-4c83-bb23-86d60d2ea932`). Direct Pages readback remains UNVERIFIED.
 - Production remains empty/noindex with 0 published records; fixtures remain test-only; no private/restricted content moved; Git history was not rewritten.
 - Readiness: ENGINEERING_READY=YES for exact-main browser CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next actions
 
-1. Continue independent A3 responsive browser UX, PWA/offline, accessibility, privacy/security and route performance work.
+1. Continue independent A3 responsive browser UX, PWA/offline, accessibility, privacy/security and route performance.
 2. Prioritize measured mobile Performance follow-up on flashcards (90) and dictionary (93).
-3. Retry exact live Pages readback through a targetable provider/browser surface; keep production content status unverified until inspected.
-4. Keep published data empty/noindex until rights, provenance, quality and publication gates pass.
+3. Retry direct live Pages readback through an accessible targetable provider/browser surface; keep live production status unverified until inspected.
+4. Keep public data empty/noindex until rights, provenance, quality and publication gates pass.
 5. Re-fetch both repositories, main/tree, Issues, PRs, Actions and latest.json before the next write batch.
 
 ## Mission and constraints
