@@ -1,4 +1,4 @@
-# Resume handoff — 2026-11-01 08:36 UTC
+# Resume handoff — 2026-11-01 09:31 UTC
 
 ## Current checkpoint
 
@@ -16,8 +16,6 @@
 2. Retry live Pages readback when a targetable browser/provider surface is available; keep live production status UNVERIFIED until then.
 3. Keep public data empty/noindex and synthetic fixtures isolated.
 4. Re-fetch both repositories and all checkpoint sources before the next write batch.
-
-## Archived handoff records (preserved; superseded by the current instructions above)
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
