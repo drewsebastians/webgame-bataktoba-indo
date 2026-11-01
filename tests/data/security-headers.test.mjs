@@ -50,6 +50,7 @@ test("source and built CSP disallow inline executable scripts", () => {
   assert.deepEqual(scriptSources, ["'self'"]);
   assert.equal(scriptSources.includes("'unsafe-inline'"), false);
   assert.equal(scriptSources.includes("'unsafe-eval'"), false);
+  assert.deepEqual(directiveValue(sourceCsp, "style-src"), ["'self'"]);
 
   for (const [name, expected] of [
     ["object-src", ["'none'"]],
@@ -93,6 +94,41 @@ test("source HTML has no inline executable scripts, event handlers, or javascrip
       if (/\b(?:href|src)\s*=\s*(?:(["'])\s*javascript\s*:|javascript\s*:)/i.test(tag)) {
         violations.push(`${path}: javascript URL`);
       }
+    }
+  }
+  assert.deepEqual(violations, [], violations.join("\n"));
+});
+
+
+test("source HTML and JavaScript do not require inline styles", () => {
+  const violations = [];
+  for (const file of sourceHtmlFiles()) {
+    const html = readFileSync(file, "utf8");
+    const path = relative(root, file).split(sep).join("/");
+    if (/<style\b/i.test(html)) violations.push(path + ": inline style block");
+    const markup = html
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/(<script\b[^>]*>)[\s\S]*?<\/script\s*>/gi, "$1</script>");
+    for (const match of markup.matchAll(/<[a-z][^>]*>/gi)) {
+      if (/\sstyle\s*=/i.test(match[0])) violations.push(path + ": inline style attribute");
+    }
+  }
+
+  const jsRoot = join(root, "assets/js");
+  const jsFiles = [];
+  function walk(directory) {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const file = join(directory, entry.name);
+      if (entry.isDirectory()) walk(file);
+      else if (entry.isFile() && entry.name.endsWith(".js")) jsFiles.push(file);
+    }
+  }
+  walk(jsRoot);
+  for (const file of jsFiles) {
+    const source = readFileSync(file, "utf8");
+    const path = relative(root, file).split(sep).join("/");
+    if (/\.\s*style\s*(?:\.|\[|=)|\bsetAttribute\s*\(\s*["']style["']/i.test(source)) {
+      violations.push(path + ": dynamic inline style mutation");
     }
   }
   assert.deepEqual(violations, [], violations.join("\n"));
