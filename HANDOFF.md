@@ -1,18 +1,20 @@
-# Resume handoff — 2026-11-01 01:27:51 UTC
+# Resume handoff — 2026-11-01 02:20 UTC
 
-1. Re-fetch both repositories, visibility, current main/tree, Issues, PRs, Actions, deployment state and private `latest.json` before each write batch.
-2. Webgame is PUBLIC at main/tree da4a41403e40bb4c4ae8b55c7319ec1283065c9b / ce07c4ac18407da2c396b270158797d51f998157. PR #26 merged CSP hardening; main Verify #112 passed 213 unit, E2E smoke, 36 browser, budgets, drift and 12 Lighthouse audits.
-3. Cloudflare Workers Builds reports exact-main build `f70ecd9c-c03d-4344-bd5f-417944e195dd` / version `2a8051f0-01e6-4a20-9f93-40f2c4a2debf` successful. Live readback of home, dictionary, robots.txt and manifest is still unavailable; keep production/live verification open.
-4. CSP `script-src` now allows only `'self'`; 21 source HTML routes pass the no-inline-executable-script, no-event-handler and no-javascript-URL regression scan. Inline style support remains for the current static layout attributes.
-5. Public content remains 0 published items/words/phrases/sentences and no warnings. Fixtures remain test-only; no private/restricted data was copied.
-6. Alignment Engine remains PRIVATE; B23 remains latest and B24 is metadata-only. Do not move private content to this repository.
+## Current checkpoint
+
+1. Re-fetch both repository visibilities, main/tree SHAs, Issues, PRs, Actions and private `latest.json` before the next write batch; preserve the public/private boundary.
+2. Webgame is PUBLIC at main/tree cb7c7a96f20fbbafa4b2073be4b3556586d6a249 / 13b29daec49b382e07de6c9aeb83b68e2e8c641b. PR #28 merged CSP hardening; main Verify #116 / 41263675787 passed 214 unit, smoke, 36 browser, budgets, drift and 12 Lighthouse audits. The full report is artifact 13066475984.
+3. Cloudflare Workers Builds check 124722013685 succeeded for exact main (build af3b725e-d9ab-41d4-bbb7-ddd249057613, version 51d0207c-02f7-4f7c-b11c-423980ec8b12). Provider status is verified; direct live readback remains **UNVERIFIED** because the web reader could not access Pages and the local browser helper stopped at URL identification.
+4. CSP `script-src` and `style-src` are self-only. Six static style attributes were replaced by classes; dynamic style mutation was removed. Keep regression coverage and review future external origins separately.
+5. Public content remains 0 items/words/genuine phrases/sentences/warnings, empty/noindex. Synthetic fixtures are isolated; no private/restricted data was copied and no Git history rewrite occurred.
+6. Alignment Engine remains PRIVATE; its current checkpoint is maintained there. Do not move any private source metadata or language content into this repository.
+7. Issue #2 is closed as complete; A3/A5 remain the active broader work queue. There are no open PRs at this checkpoint.
 
 ## Next
 
-1. Continue A3 desktop/mobile browser work independently of corpus readiness.
-2. Retry live artifact inspection from a reachable browser surface and verify its response headers plus empty/noindex state.
-3. Keep the site noindex/empty while publication rights and quality gates remain unsatisfied.
-4. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
+1. Continue A3 browser engineering independently: responsive UX, PWA/offline, accessibility, privacy/security and measured route performance.
+2. Retry direct production readback on a reachable browser surface; verify home, dictionary, `robots.txt`, manifest and CSP before marking the live artifact verified.
+3. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate; retain empty/noindex production content until publication and quality gates pass.
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
