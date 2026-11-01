@@ -92,7 +92,7 @@ export function summarizePerformanceDiagnostics(report) {
       selector: typeof node?.selector === "string" ? node.selector.slice(0, 160) : null,
       score: Number.isFinite(score) ? score : null,
     }))
-    .filter(({ selector, score }) => selector || (score !== null && score > 0))
+    .filter(({ score }) => score !== null && score > 0)
     .slice(0, 3);
 
   return { metrics, opportunities, layoutShifts };
