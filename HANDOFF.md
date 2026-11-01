@@ -17,8 +17,6 @@
 3. Keep public data empty/noindex and synthetic fixtures isolated.
 4. Continue private metadata-only B24 discovery; do not acquire corpus until rights/storage gates clear.
 
-## Archived handoff records (preserved; superseded by current instructions above)
-
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
 
