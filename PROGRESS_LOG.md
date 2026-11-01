@@ -1,3 +1,23 @@
+## LATEST EXECUTION CHECKPOINT — 2026-11-01 16:41 UTC
+
+### PUBLIC webgame
+
+- Public main/tree code checkpoint: `efbe05226272d364ca3626ebebe4749523e6ec0b` / `fddeb9720ec43d736085fc3f9f91700d537979b6`; PR #45 merged, Issue #2 closed.
+- Verify #41322447587 passed 216 unit tests, E2E smoke, 38/38 browser tests, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Mobile scores are 98–100, desktop 100, and all audited Accessibility scores 100.
+- Cloudflare Workers Builds reports production build `21a991ee-46bd-4a20-a4e7-004700e04edb` succeeded. Direct live readback remains UNVERIFIED.
+- Public data remains empty/noindex: 0 items, words, genuine phrases and sentences. Synthetic fixtures remain test-only; no private data was transferred.
+- Historical audit corrected: July 2026 public Git history contains corpus-derived JSON; a July 4 successful GitHub Pages run uploaded repository root. A9 blocks destructive history removal pending explicit owner approval.
+
+### PRIVATE Data Engine
+
+- Private main/tree checkpoint `5ea4dc674ece9dfce4fdbbe6d3e14b8c0e06b8fc` / `b259d607d12c7346aeea3e12cc5d56f01cc1714e`; PR #28 merged. Exact-main run 41323453287 passed the 32-row source metadata ledger and 20 synthetic contract/discovery tests; sparse checkout excluded corpus files.
+- B23 remains latest/DEGRADED; B24 remains metadata-only with no permitted/acquired records, candidate items/evidence or game/public eligibility at this checkpoint. The approved private source vault is unavailable.
+- No private linguistic content moved to this public repository.
+
+### Readiness
+
+- ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
 ## LATEST EXECUTION CHECKPOINT — 2026-11-01 14:31 UTC
 
 ### PUBLIC webgame

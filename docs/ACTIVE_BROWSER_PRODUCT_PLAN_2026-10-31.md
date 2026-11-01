@@ -89,3 +89,9 @@ Main `8a1ea9611483c90711ea1cf717bf6087cc83a962` passed Verify #126 / 41286770783
 ## Post-merge operational checkpoint — 2026-11-01 08:36 UTC
 
 PR #32 merged as `ecebfe67ef17d033d9e9ee41fe0bbb7168cda78a` with documentation-only changes. Its exact-head Verify run 41288169799 passed 215/215 unit tests (0 skipped), 36/36 Playwright tests, E2E smoke, asset budgets, 12 Lighthouse audits and committed-dist drift. Accessibility was 100 across route/profile audits; mobile Performance was 98/92/98/90/93/100 and desktop 100/99/100/100/100/100. Candidate Workers Builds check passed, while exact-main provider state and direct live readback remain unverified. Public content remains empty/noindex; synthetic fixtures remain test-only.
+
+## Post-PR #45 and historical exposure checkpoint — 2026-11-01 16:41 UTC
+
+The product remains a desktop/mobile browser website. PR #45 merged at public main `efbe05226272d364ca3626ebebe4749523e6ec0b` / tree `fddeb9720ec43d736085fc3f9f91700d537979b6` to preserve the stable empty lesson state while no content is published. Exact-main Verify [41322447587](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41322447587) passed 216 unit tests, E2E smoke, 38/38 browser/axe tests, budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse Accessibility is 100 on all audited route/profile pairs; mobile Performance scores are 98–100 and desktop scores are 100. Cloudflare Workers Builds reports a successful provider build; direct live readback remains unverified.
+
+A corrected public history audit now records the July 2026 Git snapshot and a successful Pages root-upload run. Current-tree containment remains in place. A9 blocks any destructive history rewrite pending explicit owner approval; website engineering continues independently.
