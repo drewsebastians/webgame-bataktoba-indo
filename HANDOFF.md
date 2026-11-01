@@ -1,5 +1,24 @@
-# Resume handoff — 2026-11-01 10:32 UTC
+# Resume handoff — 2026-11-01 11:01 UTC
 
+## Current checkpoint
+
+1. Webgame is PUBLIC at main 90c073e7a4ed0367cb0f845b6bcbf697a0c60671 / tree 2281e2a2c5d1fbddfafcf8d250176e6ba9044eb1. PR #39 is merged.
+2. Exact-main Verify [41299217543](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543) passed 216/216 unit, E2E smoke, 36/36 browser tests, budgets, 12 Lighthouse audits and dist drift; artifact [13081020550](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543/artifacts/13081020550). Workers Build `033df6e7-48ba-47de-9461-9265694afc12` succeeded.
+3. Accessibility scored 100 across route/profile audits. Mobile Performance was 97/92/98/90/94/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
+4. PR #39 made diagnostics visible below 95. CLS was 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary; the reports show large unused/unminified route assets. Next: implement a measured payload and layout-stability improvement, then compare Lighthouse on the same six routes.
+5. Direct Pages readback remains unverified. Public production content stays empty/noindex; synthetic fixtures remain isolated; Git history has not been rewritten.
+6. Readiness: ENGINEERING_READY=YES for current browser flow and CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
+## Next
+
+1. Inspect the current route loading/layout and build pipeline; implement the highest-value safe CSS/JS payload and CLS fix indicated by CI.
+2. Run full Verify, Lighthouse, and Workers Build on the exact PR head; verify the merged-main run and report scores.
+3. Retry live Pages readback when a targetable provider/browser surface is available; do not claim production content was inspected until then.
+4. Keep synthetic fixtures test-only and public content empty/noindex pending rights and quality gates.
+5. Re-fetch repository refs and checkpoints before each new batch.
+
+
+## Archived handoff records (preserved; superseded by the current instructions above)
 ## Current checkpoint
 
 1. Webgame is PUBLIC at base main `3c5d3946c3ef3dd0eea756fbc8235f047ce39c76` / tree `5f2c37f38e3232967827f52b8da93e91e1937eca`. PR #39 (`3eeea62d35ad22914e3ab7cbfeaebb381293c421`) is open and checks are pending.
