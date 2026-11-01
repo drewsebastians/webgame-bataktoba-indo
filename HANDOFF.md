@@ -1,14 +1,22 @@
-# Resume handoff — 2026-11-01 00:50 UTC
+# Resume handoff — 2026-11-01 01:27:51 UTC
 
-1. Re-fetch both repository visibility, current main/tree SHAs, Issues, PRs, Actions, deployment state and the PRIVATE repository latest.json before each write batch.
-2. Webgame is PUBLIC at verified main ca7bc9842a57b0765d0b33b5bf517c4b5de485b5 / tree e6485a749114b9086b5e628270f5e2bb7546c21f. PR #23 merged the contextual adapter mapping; PR #24 merged the checkpoint: https://github.com/drewsebastians/webgame-bataktoba-indo/pull/24.
-3. Main Verify #108 / 41257990728 passed 211/211 unit tests, E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-dist drift and 12 Lighthouse audits. Accessibility was 100 on every route/profile. Lighthouse artifact 13063919161: https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41257990728/artifacts/13063919161.
-4. Cloudflare Workers Builds reported a successful production-service build for exact main SHA ca7bc9842a57b0765d0b33b5bf517c4b5de485b5 (build 191555d0-5483-4ca9-a0f6-e4fa0d597d5c; version 45ae3539-c79c-49ec-aa83-8041d9d9cb10). Direct live readback of home, dictionary, robots.txt and manifest is unavailable; keep live production verification open.
-5. Public CI confirms 0 published learning items, words, genuine phrases and sentences. Fixtures remain synthetic-only; keep empty/noindex states until rights and quality gates pass.
-6. Alignment Engine remains PRIVATE. B23 remains latest; B24 stays private and metadata-only. Never move private/restricted text or artifacts into this PUBLIC repo.
-7. Continue independent A3 browser work and re-fetch GitHub state before each next write batch.
+1. Re-fetch both repositories, visibility, current main/tree, Issues, PRs, Actions, deployment state and private `latest.json` before each write batch.
+2. Webgame is PUBLIC at main/tree da4a41403e40bb4c4ae8b55c7319ec1283065c9b / ce07c4ac18407da2c396b270158797d51f998157. PR #26 merged CSP hardening; main Verify #112 passed 213 unit, E2E smoke, 36 browser, budgets, drift and 12 Lighthouse audits.
+3. Cloudflare Workers Builds reports exact-main build `f70ecd9c-c03d-4344-bd5f-417944e195dd` / version `2a8051f0-01e6-4a20-9f93-40f2c4a2debf` successful. Live readback of home, dictionary, robots.txt and manifest is still unavailable; keep production/live verification open.
+4. CSP `script-src` now allows only `'self'`; 21 source HTML routes pass the no-inline-executable-script, no-event-handler and no-javascript-URL regression scan. Inline style support remains for the current static layout attributes.
+5. Public content remains 0 published items/words/phrases/sentences and no warnings. Fixtures remain test-only; no private/restricted data was copied.
+6. Alignment Engine remains PRIVATE; B23 remains latest and B24 is metadata-only. Do not move private content to this repository.
 
-## Archived handoff records (preserved verbatim; superseded by the current instructions above)
+## Next
+
+1. Continue A3 desktop/mobile browser work independently of corpus readiness.
+2. Retry live artifact inspection from a reachable browser surface and verify its response headers plus empty/noindex state.
+3. Keep the site noindex/empty while publication rights and quality gates remain unsatisfied.
+4. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
+
+## Archived handoff records (preserved; superseded by the current instructions above)
+
+
 ## Archived handoff records (preserved verbatim; superseded by the current instructions above)
 
 # Resume handoff — 2026-10-31 16:25 UTC
