@@ -164,11 +164,13 @@ Headers: `_headers` (CSP tanpa `unsafe-eval`/wildcard, ketat saat ads/analytics 
 
 ## CI
 `.github/workflows/verify.yml` (ubuntu-latest, Node 24):
-1. `actions/checkout@v4` (shallow ok; build tidak tergantung history)
-2. `npm ci`
-3. `npx playwright install --with-deps chromium`
-4. `npm run verify:release` (check + build + unit + smoke + browser + axe + lighthouse-check)
-5. `git diff --exit-code -- dist` (drift gate, eksplisit untuk diagnose)
+1. `actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1` (v7.0.1, pinned immutable SHA; shallow checkout)
+2. `actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1` (v7.1.0; Node 24; package-manager cache disabled)
+3. `npm ci`
+4. `npx playwright install --with-deps chromium`
+5. `npm run verify:release` (check + build + unit + smoke + browser + axe + lighthouse-check)
+6. `git diff --exit-code -- dist` (drift gate, eksplisit untuk diagnose)
+7. `actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9` (v7.0.2; Lighthouse reports)
 
 Local `npm run verify:release` reproduksi CI 1:1. Tidak rebuild ganda; failure menunjukkan file drift spesifik.
 
