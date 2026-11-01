@@ -86,6 +86,10 @@ describe("regression guards for blockers (public-safe mode)", () => {
       const policy = readFileSync(join(root, path), "utf8");
       assert.ok(policy.includes("belum menerbitkan materi kosakata atau pelajaran Batak Toba"));
       assert.equal(policy.includes("Materi belajar berasal dari subset corpus"), false);
+      if (path === "dist/privacy/index.html") {
+        assert.ok(policy.includes('datetime="2026-11-01"'));
+        assert.equal(policy.includes('datetime="2026-08-26"'), false);
+      }
     }
   });
 });
