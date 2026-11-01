@@ -15,6 +15,11 @@ const PREVIEW_ORIGIN = "http://127.0.0.1:4178";
 const PREVIEW_URL = `${PREVIEW_ORIGIN}/`;
 const LIGHTHOUSE_VERSION = "13.4.1";
 export const SCORE_FLOORS = Object.freeze({ performance: 0.7, accessibility: 0.9 });
+export const DIAGNOSTICS_PERFORMANCE_THRESHOLD = 0.95;
+
+export function shouldReportPerformanceDiagnostics(score) {
+  return typeof score === "number" && Number.isFinite(score) && score < DIAGNOSTICS_PERFORMANCE_THRESHOLD;
+}
 export const LIGHTHOUSE_ROUTES = Object.freeze([
   Object.freeze({ id: "home", path: "/" }),
   Object.freeze({ id: "learn-angka", path: "/learn/angka/" }),
@@ -192,7 +197,7 @@ async function runAudits() {
           `Lighthouse ${route.id} ${profile}: performance ${Math.round(scores.performance * 100)}/100; ` +
           `accessibility ${Math.round(scores.accessibility * 100)}/100 — PASS`,
         );
-        if (scores.performance < 0.9) {
+        if (shouldReportPerformanceDiagnostics(scores.performance)) {
           console.log(
             `Lighthouse ${route.id} ${profile} diagnostics: ` +
             formatPerformanceDiagnostics(summarizePerformanceDiagnostics(report)),

@@ -6,6 +6,8 @@ import {
   assertLighthouseScoreFloors,
   readLighthouseScores,
   summarizePerformanceDiagnostics,
+  shouldReportPerformanceDiagnostics,
+  DIAGNOSTICS_PERFORMANCE_THRESHOLD,
 } from "../tools/lighthouse-check.mjs";
 
 const report = (performance, accessibility) => ({
@@ -85,6 +87,15 @@ test("summarizes performance metrics and ranks measured opportunities", () => {
     { id: "unused-javascript", savingsMs: 80, savingsBytes: 9000 },
     { id: "modern-image-formats", savingsMs: 0, savingsBytes: 12000 },
   ]);
+});
+
+test("reports actionable diagnostics for all routes below the 95-point target", () => {
+  assert.equal(shouldReportPerformanceDiagnostics(0.90), true);
+  assert.equal(shouldReportPerformanceDiagnostics(0.93), true);
+  assert.equal(shouldReportPerformanceDiagnostics(0.949), true);
+  assert.equal(shouldReportPerformanceDiagnostics(DIAGNOSTICS_PERFORMANCE_THRESHOLD), false);
+  assert.equal(shouldReportPerformanceDiagnostics(1), false);
+  assert.equal(shouldReportPerformanceDiagnostics(Number.NaN), false);
 });
 
 test("diagnostic summary tolerates a missing audit payload", () => {

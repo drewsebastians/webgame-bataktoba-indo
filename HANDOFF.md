@@ -1,4 +1,24 @@
-# Resume handoff — 2026-11-01 10:00 UTC
+# Resume handoff — 2026-11-01 10:32 UTC
+
+## Current checkpoint
+
+1. Webgame is PUBLIC at base main `3c5d3946c3ef3dd0eea756fbc8235f047ce39c76` / tree `5f2c37f38e3232967827f52b8da93e91e1937eca`. PR #39 (`3eeea62d35ad22914e3ab7cbfeaebb381293c421`) is open and checks are pending.
+2. PR #39 changes Lighthouse diagnostics to print metrics and the top three measured opportunities below 95 Performance; unit tests cover scores 90, 93, 94.9, the threshold, and invalid input. The previous flashcards and dictionary mobile scores were below the old <90-only diagnostic condition.
+3. Base main Verify [41296159704](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41296159704) passed 215/215 unit tests, E2E smoke, 36/36 Playwright tests, budgets, 12 Lighthouse audits and committed-dist drift. Accessibility scored 100 across route/profile audits. Mobile Performance was 98/94/98/90/93/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
+4. Exact-main Workers Build succeeded for base main (build `3f906f04-f715-44c1-8e11-476bf5ed5235`, version `31d30c5e-8144-4fdb-907c-50f651e7df5a`). Direct Pages readback remains unverified; do not claim independent inspection of the running artifact.
+5. Public learning content remains empty/noindex: 0 items, words, genuine phrases, sentences and warnings. Synthetic fixtures are test-only; no restricted content was transferred; Git history remains unchanged.
+6. Keep engineering, data, publication, learning and monetization readiness as separate gates, each with its own evidence.
+
+## Next
+
+1. Await PR #39 exact-head Verify and Workers Build results; inspect diagnostic metrics/opportunities for the low-scoring mobile routes.
+2. Implement and measure a focused improvement only where the report shows a concrete opportunity; rerun relevant checks and compare scores.
+3. Retry direct Pages readback when an accessible targetable provider/browser surface is available; keep production status UNVERIFIED until readback.
+4. Keep synthetic fixtures isolated; verify source rights and provenance before any production publication.
+5. Re-fetch current refs and checkpoints before each new batch.
+
+
+## Archived handoff records (preserved; superseded by the current instructions above)
 
 ## Current checkpoint
 
@@ -7,7 +27,7 @@
 3. Accessibility scored 100 across all route/profile audits; mobile Performance was 98/92/98/90/93/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. JS/CSS budgets were 178,003/196,608 and 15,698/49,152 bytes.
 4. Exact-main Workers Builds succeeded (build `7bd60fc7-785d-4c3f-9648-233ae7354ac8`, version `04d00dca-64bb-4c83-bb23-86d60d2ea932`). Direct Pages readback remains unverified; treat the build as technical deployment evidence, not live-content inspection.
 5. Public content remains empty/noindex: 0 items, words, genuine phrases, sentences or warnings. Synthetic fixtures are test-only; no private/restricted content moved to public; Git history remains unchanged.
-6. Alignment Engine remains PRIVATE at `b631686de0b9169db62dd71ed04517f718d4820d`; B23 remains latest / DEGRADED and B24 metadata-only. Its root tree SHA is not exposed by the connected private-repository reader.
+<!-- Cross-repository details omitted. -->
 7. Readiness: ENGINEERING_READY=YES for exact-main browser CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next
@@ -15,7 +35,7 @@
 1. Continue A3 responsive browser work and investigate mobile flashcards/dictionary performance.
 2. Retry live Pages readback when an accessible targetable provider/browser surface is available; keep production status UNVERIFIED until readback.
 3. Keep public data empty/noindex and synthetic fixtures isolated.
-4. Continue private metadata-only B24 discovery; do not acquire corpus until rights/storage gates clear.
+<!-- Cross-repository details omitted. -->
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
@@ -24,7 +44,7 @@
 
 # Resume handoff — 2026-10-31 16:25 UTC
 
-1. Re-fetch both repository visibilities, current main/tree SHAs, Issues, PRs, Actions and private `latest.json` before the next write; keep the Alignment Engine PRIVATE.
+<!-- Cross-repository details omitted. -->
 2. The last verified application-code checkpoint was webgame merge commit `94b7f6a21edec58811e6eddcceaea4a595802064` / tree `70b14cf98552972d869feb431d64b4d4bc9fc07a`. PR #13 is merged; Issue #2 remains open.
 3. Verify #73 / 41218051252 passed on that merge commit, with full verification and committed-dist drift. PR Verify #71 provides exact counts: 202/202 unit (0 skipped), 35/35 browser, smoke, performance budget, 12 Lighthouse audits and drift; latest main artifact is `13048927117`.
 4. Cloudflare Workers Builds reported successful deployment for the merge commit (build `2a722185-13a7-4c6d-aa94-2241745ba4aa`). Direct Pages readback remains unverified: the web reader could not open the configured hostname and execution-environment DNS lookup failed.
@@ -43,9 +63,9 @@
 2. Public main is `ce3338f0ac03fd56601db29c361bb8927b6ca247` / tree `4fb92b1df1cfcf31c07ee9932a524e2e43e7f580`. PR #7 merged. Verify run #52 / 41199134008 passed 200/200 unit (0 skipped), 33/33 browser, E2E smoke, asset budget, Lighthouse, and dist drift. Site check remains at zero published words/phrases/sentences.
 3. Main Lighthouse scores: mobile 99 Performance / 100 Accessibility; desktop 100 / 100. Reports are artifact ID `13041633182`, `lighthouse-reports-41199134008`. Cloudflare Workers Builds production check passed for build `14592e21-73bd-40cc-b629-99fc4b58c422`. Direct live readback of home, games, robots and manifest remains inaccessible through the available web connector; do not describe the live artifact as independently verified.
 4. Public content remains empty and noindex. Historical corpus objects remain in old Git commits; no history rewrite was performed. No private/restricted or synthetic language content was transferred to public.
-5. Private main remains `cfec3baeb8beee4738c81fde73ba92b71755bc22` / tree `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`; repo remains PRIVATE; B23 remains latest. PR #3 is open at current head `818b684e27428ec8ed553e45ccd4ce88f13c25c0`; run #14 / 41199919060 failed before validator startup with 0 steps, so no private tests ran. Keep it unmerged.
-6. Private B24 preflight is metadata-only (11 metadata/scope rows, 8 possible direct leads, 3 adjunct/scope checks; 0 permitted/acquired records or consumer items/evidence). Approved source vault is unavailable. Do not transfer source leads or corpus data to public.
-7. Continue independent browser engineering. In the private track, continue safe metadata discovery, check for the approved vault, and recheck Actions on resume; do not claim validator validation or advance latest.json until a real run passes.
+<!-- Cross-repository details omitted. -->
+<!-- Cross-repository details omitted. -->
+<!-- Cross-repository details omitted. -->
 
 
 ## Current resume checkpoint — 2026-10-31 12:51:22 UTC
@@ -55,8 +75,8 @@
 3. Main Verify [#56 / 41202127852](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41202127852) passed 201/201 unit tests (0 skipped), 33/33 browser tests, six-route mobile/desktop Lighthouse, and dist drift. Site data check remains at 0 items, 0 words, 0 genuine phrases and 0 sentences.
 4. Lighthouse Performance scores: home 98/100 mobile, 100 desktop; angka 92/99; games 98/100; flashcards 88/100; dictionary 92/100; progress 87/78. Accessibility was 100 on all audits. Artifact `13043018067`; desktop progress is the next performance inspection.
 5. Cloudflare Workers Builds reports production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful. Direct live-page readback was not accessible via the available web connector; do not claim independent production readback.
-6. Keep public content empty/noindex. Historical corpus objects remain in earlier Git commits; no history rewrite. Synthetic fixtures remain test-only. Alignment Engine stays PRIVATE.
-7. Private main remains `cfec3baeb8beee4738c81fde73ba92b71755bc22`; PR #3 is at `ca4b41fa55d445fcc70b935156c55f8ca041fd71`. Run #15 failed before validator startup with 0 steps; no private tests ran. B23 remains latest; B24 is metadata-only and its detailed source registry remains private.
+<!-- Cross-repository details omitted. -->
+<!-- Cross-repository details omitted. -->
 8. Next public work: inspect the progress desktop report; continue PWA/offline, privacy/security, responsive and accessibility tasks; retry live readback. Continue private work independently without moving source details or language data to public.
 
 ## Current resume checkpoint — 2026-10-31 13:41 UTC
@@ -65,5 +85,5 @@
 2. Lighthouse artifact `13043638906`, `lighthouse-reports-41206008614`: home 98/100 mobile/desktop; angka 94/99; games 98/100; flashcards 89/100; dictionary 92/100; progress 89/78. Accessibility was 100 across routes/profiles. Desktop progress remains 78; these are lab measurements.
 3. Cloudflare Workers Builds reported PR candidate build `67dbfb92-aa03-4567-aa85-46477b82ba28` / version `12feb4c9-2b57-48da-a646-46aa7c01a382` successful. The live Pages artifact has not been independently read back.
 4. Public content remains empty/noindex: zero items, words, genuine phrases and sentences. No private or synthetic language data is in dist. Historical public Git objects remain; no history rewrite.
-5. Private main is `cfec3baeb8beee4738c81fde73ba92b71755bc22` / `297b4f2ae9e5ff40fdb49ece9b7bb92ad0890a84`. B23 remains latest. Private PR #3 head `9d4fa616ef92dddc1b3b8d626364f4c0108b01a1` run #17 / 41205702401 failed before runner startup with zero steps (runner_id 0); no validator tests ran. B24 has 14 metadata/scope rows, 11 possible direct leads and 3 adjunct/scope checks, with zero permitted/acquired records. Approved vault remains unavailable.
-6. Next: validate checkpoint CI, merge PR #11, verify main CI and Cloudflare build, retry live readback; keep private PR #3 unmerged until an actual validator run passes.
+<!-- Cross-repository details omitted. -->
+<!-- Cross-repository details omitted. -->
