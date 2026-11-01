@@ -1,21 +1,21 @@
-# Resume handoff — 2026-11-01 11:58 UTC
+# Resume handoff — 2026-11-01 14:31 UTC
 
 ## Current checkpoint
 
-1. Webgame is PUBLIC at main `873c00cf11b4941b138c7b319e53a57b145b4261` / tree `c0d326bb70bc2d892fc642cbc589a8c4c27b9d78`. PR #41 is merged; Issue #2 is closed and no PRs are open at this checkpoint.
-2. Exact-main Verify [41302976375](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375) passed 216/216 unit tests (0 failed/skipped), smoke, 36/36 browser tests, budgets, 12 Lighthouse audits and dist drift. Artifact [13082267265](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375/artifacts/13082267265). Cloudflare Workers Build `63eb22c7-1be5-4cd7-a591-e9542cc2e403` succeeded.
-3. Accessibility is 100 across all routes/profiles. Mobile Performance is 98/92/98/90/93/100 and desktop is 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
-4. Mobile CLS is 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary. The Lighthouse selectors identify shifted elements, not proven causes. Measured mobile opportunities include 70,418 unused JS bytes on angka, 11,534 unminified JS bytes on flashcards, and 9,828 unminified JS bytes on dictionary.
-5. Production remains empty/noindex: 0 published learning items and 0 warnings; synthetic fixtures are isolated. Direct live Pages readback is unverified.
-6. Readiness: ENGINEERING_READY=YES for the current tested browser flows and CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+1. Webgame is PUBLIC at main `00f8ab0049cbff8585cd554438166f4531f04c39` / tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`; PR #43 merged and Issue #2 closed.
+2. PR [#43](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/43) merged as `00f8ab0049cbff8585cd554438166f4531f04c39` (tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`); Issue #2 is closed. Exact-PR Verify [41313831063](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41313831063) and exact-main Verify [41315341826](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41315341826) both passed. The merged-main run passed 216/216 unit tests (0 failed/skipped), E2E smoke, 37/37 Playwright/axe browser tests, JavaScript/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse report artifact: [13087012406](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41315341826/artifacts/13087012406).
+3. Accessibility is 100 across all routes/profiles. Lighthouse Performance is mobile 98/92/99/99/99/100 and desktop 100/99/100/100/100/100. JavaScript/CSS budgets are 178,590/196,608 and 15,766/49,152 bytes.
+4. Cloudflare Workers Builds check [124874167176](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/124874167176) succeeded for production build `bf5b6270-f706-4df7-a3a8-9112aff78a1f`, version `a070d6b6-7be0-4117-b44a-01acd875d5d3`.
+5. Production remains empty/noindex: site check reports 0 published learning items (0 words, 0 genuine phrases, 0 sentences) and 0 warnings. Synthetic data remains isolated to browser tests; no private/restricted language data entered public source or dist. Direct live-page readback remains UNVERIFIED.
+6. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next
 
-1. Implement and measure a route payload/CLS improvement while keeping synthetic fixtures out of production.
-2. Run full Verify, browser tests, Lighthouse and Workers Build on exact PR head; then verify merged-main checks.
-3. Retry direct Pages readback when a targetable browser surface is available.
-4. Keep published content empty/noindex until rights and quality gates pass.
-5. Re-fetch current refs and open PRs before each next write.
+1. Continue measured route payload/CLS work on A3; maintain isolated synthetic game testing.
+2. Re-fetch current refs and exact check runs before merge/deploy.
+3. Keep published content empty/noindex until rights and quality gates pass.
+4. Retry direct live readback when a usable provider/browser surface is available.
+5. Keep website and private data collection moving independently, with no private-content transfer.
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 

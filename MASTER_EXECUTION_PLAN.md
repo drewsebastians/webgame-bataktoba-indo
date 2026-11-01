@@ -1,22 +1,22 @@
 # Master execution plan
 
-## Current checkpoint — 2026-11-01 11:58 UTC
+## Current checkpoint — 2026-11-01 14:31 UTC
 
-- Webgame remains PUBLIC at main `873c00cf11b4941b138c7b319e53a57b145b4261` / tree `c0d326bb70bc2d892fc642cbc589a8c4c27b9d78`; PR #41 merged and Issue #2 is closed. No PRs were open at checkpoint.
-- Exact-main Verify [41302976375](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375) passed 216/216 unit tests (0 skipped), E2E smoke, 36/36 Playwright, JS/CSS budgets, 12 Lighthouse audits and dist drift; artifact [13082267265](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375/artifacts/13082267265).
-- Accessibility scored 100 on all routes/profiles. Mobile Performance is 98/92/98/90/93/100; desktop is 100/99/100/100/100/100. Mobile CLS is 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary; Lighthouse identifies shifted elements but not their confirmed causes.
-- Cloudflare Workers production build `63eb22c7-1be5-4cd7-a591-e9542cc2e403` / version `7899b356-6ada-4cc6-9753-2bc7ea3d9751` succeeded. Direct Pages readback is UNVERIFIED.
-- Public learning data remains empty/noindex with 0 items and 0 warnings; fixtures are synthetic-only. No private/restricted data was added and public Git history was not rewritten.
-- The Alignment Engine remains PRIVATE; B23 is still the latest completed batch and B24 remains metadata-only. No private language data was transferred to this repository.
+- Webgame remains PUBLIC at main `00f8ab0049cbff8585cd554438166f4531f04c39` / tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`; PR #43 is merged and Issue #2 is closed. No PRs were open at the pre-checkpoint recheck.
+- PR [#43](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/43) merged as `00f8ab0049cbff8585cd554438166f4531f04c39` (tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`); Issue #2 is closed. Exact-PR Verify [41313831063](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41313831063) and exact-main Verify [41315341826](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41315341826) both passed. The merged-main run passed 216/216 unit tests (0 failed/skipped), E2E smoke, 37/37 Playwright/axe browser tests, JavaScript/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse report artifact: [13087012406](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41315341826/artifacts/13087012406).
+- Lighthouse Accessibility scored 100 across all route/profile audits; Performance was mobile 98/92/99/99/99/100 and desktop 100/99/100/100/100/100. Budgets pass at 178,590/196,608 JavaScript bytes and 15,766/49,152 CSS bytes.
+- Cloudflare Workers Builds check [124874167176](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/124874167176) succeeded for production build `bf5b6270-f706-4df7-a3a8-9112aff78a1f`, version `a070d6b6-7be0-4117-b44a-01acd875d5d3`.
+- Production remains empty/noindex: site check reports 0 published learning items (0 words, 0 genuine phrases, 0 sentences) and 0 warnings. Synthetic data remains isolated to browser tests; no private/restricted language data entered public source or dist. Direct live-page readback remains UNVERIFIED.
+- The Alignment Engine remains PRIVATE; B23 is still the latest completed batch and B24 remains metadata-only. No private language data was transferred here.
 
 ## Next actions
 
-1. Implement measured route payload and CLS improvements for angka, flashcards and dictionary, with synthetic E2E coverage isolated from production.
-2. Run exact-PR unit/E2E/Lighthouse/budget/dist-drift checks and Cloudflare Build; compare exact route metrics, then verify merged-main.
-3. Continue independent private B24 metadata/right discovery while keeping the corpus restricted and unchanged unless permitted access is verified.
-4. Retry direct Pages readback when an accessible targetable browser/provider surface is available.
+1. Implement and measure A3 route payload/CLS improvements, prioritizing angka mobile CLS and unused JavaScript.
+2. Continue exact-head unit/E2E/Lighthouse/budget/drift checks and Cloudflare build verification; distinguish technical deployment from learning readiness.
+3. Continue independent private B24 discovery without repeating B17–B23; keep all restricted content private and latest.json at B23 until a lawful reproducible collection passes.
+4. Retry direct live readback when an accessible targetable provider/browser surface is available.
 5. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
-6. Re-fetch both repositories' visibilities, refs/trees, Issues, PRs, Actions and private `latest.json` before each batch. Use expected SHAs; never force-push or rewrite public history.
+6. Re-fetch both repositories' visibility, refs/trees, Issues, PRs, Actions and private latest.json before each batch; use expected SHAs and never rewrite public history.
 
 ## Mission and constraints
 

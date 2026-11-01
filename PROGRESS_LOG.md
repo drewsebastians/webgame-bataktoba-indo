@@ -1,4 +1,23 @@
-## LATEST EXECUTION CHECKPOINT — 2026-11-01 10:00 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-11-01 14:31 UTC
+
+### PUBLIC webgame
+
+- PUBLIC main is `00f8ab0049cbff8585cd554438166f4531f04c39` / tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`; PR #43 is merged and Issue #2 is closed.
+- Exact-PR Verify 41313831063 and merged-main Verify 41315341826 passed. Main validation: 216/216 unit tests, 0 failed/skipped, E2E smoke, 37/37 browser/axe checks, budgets, 12 Lighthouse audits, and committed-dist drift. Lighthouse artifact 13087012406.
+- Accessibility is 100 for all routes/profiles; mobile Performance is 98/92/99/99/99/100, desktop 100/99/100/100/100/100. Bundle budgets are 178,590/196,608 JS and 15,766/49,152 CSS bytes.
+- Cloudflare production build bf5b6270-f706-4df7-a3a8-9112aff78a1f / version a070d6b6-7be0-4117-b44a-01acd875d5d3 succeeded. Technical deployment is verified; direct live readback remains unverified.
+- Site check reports 0 published learning items and 0 warnings. No synthetic or private language content is in production; production remains empty/noindex.
+
+### PRIVATE Alignment Engine
+
+- Alignment Engine remains PRIVATE. B23 remains latest completed; B24 remains metadata-only with 0 permitted/acquired records, consumer items/evidence, topic mappings or game/public eligibility. No private language content moved to the public repository.
+
+### Readiness and next
+
+- ENGINEERING_READY=YES for the current public flow; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Continue measured A3 angka mobile CLS/payload work; keep empty catalog truthful and synthetic fixtures isolated. Retry live readback only when an accessible provider/browser surface is available. Continue private B24 discovery independently.
+
+## PREVIOUS EXECUTION CHECKPOINT — 2026-11-01 10:00 UTC
 
 ### PUBLIC webgame
 
