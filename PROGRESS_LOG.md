@@ -1,24 +1,23 @@
-## LATEST EXECUTION CHECKPOINT — 2026-10-31 19:00 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-11-01 08:12 UTC
 
 ### PUBLIC webgame
 
-- Re-verified public main `08075c01533670beaea8f97bb0e88b7d135ae9c5` / tree `f81c477843a792338266c6650cf16e323157092c` after PR #19 merge.
-- PR #19 isolates Flashcards behind its own browser entrypoint; browser assertions prove the route does not request the general app bundle or lesson engine/modes/onboarding bundles.
-- Main Verify #94 / 41231508931 passed 209/209 unit tests (0 skipped), E2E smoke, performance budget, 36/36 Playwright tests, all 12 Lighthouse audits and committed-dist drift.
-- Lighthouse artifact 13054012122: mobile Performance 98/92/99/90/92/100 and desktop 100/99/100/100/100/100 for Home, Angka, Games, Flashcards, Dictionary and Progress. Accessibility is 100 on every route/profile.
-- Bundle budget passed at 163,643/196,608 JavaScript bytes across 17 files and 15,491/49,152 CSS bytes. Flashcards mobile Performance improved from 88 to 90 after route isolation.
-- Cloudflare Workers Builds reports successful production build 0460f206-5b78-4643-812c-1e4aeb9daeef / version 27c5545e-1eed-47b2-ae83-8948b92cefd5. Direct live Pages readback remains unverified from the available reader.
-- Production data remains empty/noindex (0 items, words, genuine phrases and sentences). Synthetic fixtures stayed isolated from the build; no private data moved to public. Historical public Git objects remain unchanged.
+- Re-verified PUBLIC main HEAD `8a1ea9611483c90711ea1cf717bf6087cc83a962`; PR #30 and #31 are merged. GitHub's connected commit reader does not return the root tree SHA.
+- Main Verify #126 / 41286770783 passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, all 12 Lighthouse audits and committed-dist drift. Artifact 13075318914.
+- Lighthouse Performance: mobile 98/93/98/90/94/100; desktop 100/99/100/100/100/100 for home, angka, games, flashcards, dictionary and progress. Accessibility is 100 on all routes/profiles.
+- Budgets passed: JavaScript 178,003/196,608 bytes across 18 files; CSS 15,698/49,152 bytes.
+- Deployment remains UNVERIFIED: PR #31 Workers Builds failed for pre-merge head 2a7d00ea5ed4ddd5e94317f9964e51ad6a609202 (build c7d05d30-bef2-4007-b1a3-88aa4089ea6a); the separate merged-SHA build a4f08713-b002-475d-8d10-e5c8b43a6452 was last observed in progress and its final state is unavailable through connected tools. Direct Pages readback failed for home/privacy/robots/manifest.
+- Published learning data remains empty/noindex (0 items, words, genuine phrases, sentences and warnings). Synthetic fixtures stayed isolated; no private/restricted content moved to public; no history rewrite.
 
 ### PRIVATE Alignment Engine
 
-- The Alignment Engine remains PRIVATE. Its latest batch and collection/readiness details stay in the private repository; nothing was transferred to the public tree.
-- Resume B24 from the private HANDOFF.md; do not repeat B17–B23.
+- Alignment Engine remains PRIVATE; its live B24 source-discovery and B23 latest-batch checkpoint stays in that repository. Do not copy source metadata or linguistic text to the public tree.
 
 ### Readiness and next action
 
-- ENGINEERING_READY=YES for tested synthetic browser capabilities; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
-- Continue A3 responsive UX, route payload/performance, accessibility, privacy/security and PWA/offline work independently of corpus readiness. Preserve the noindex/empty production state and synthetic-only test boundary.
+- ENGINEERING_READY=YES for the verified browser/CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Continue independent A3 browser engineering. Separately resolve exact-main provider status and direct readback; keep empty/noindex output until content gates pass.
+- Resume private work from the current private HANDOFF.md and WORK_QUEUE.csv without repeating B17–B23.
 
 ## PREVIOUS EXECUTION CHECKPOINT — 2026-10-31 16:53 UTC
 
