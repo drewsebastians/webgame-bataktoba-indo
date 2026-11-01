@@ -81,4 +81,11 @@ describe("regression guards for blockers (public-safe mode)", () => {
     assert.equal(JSON.parse(readFileSync(join(root,"data/published/lessons.json"),"utf8")).published.length, 0);
     assert.ok(readFileSync(join(root,"tools/build-dist.mjs"),"utf8").includes("assertPublicContentClosed"));
   });
+  it("privacy policy describes the empty public catalog accurately", () => {
+    for (const path of ["privacy/index.html", "dist/privacy/index.html"]) {
+      const policy = readFileSync(join(root, path), "utf8");
+      assert.ok(policy.includes("belum menerbitkan materi kosakata atau pelajaran Batak Toba"));
+      assert.equal(policy.includes("Materi belajar berasal dari subset corpus"), false);
+    }
+  });
 });
