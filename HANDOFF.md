@@ -1,20 +1,21 @@
-# Resume handoff — 2026-11-01 02:20 UTC
+# Resume handoff — 2026-11-01 08:12 UTC
 
 ## Current checkpoint
 
-1. Re-fetch both repository visibilities, main/tree SHAs, Issues, PRs, Actions and private `latest.json` before the next write batch; preserve the public/private boundary.
-2. Webgame is PUBLIC at main/tree cb7c7a96f20fbbafa4b2073be4b3556586d6a249 / 13b29daec49b382e07de6c9aeb83b68e2e8c641b. PR #28 merged CSP hardening; main Verify #116 / 41263675787 passed 214 unit, smoke, 36 browser, budgets, drift and 12 Lighthouse audits. The full report is artifact 13066475984.
-3. Cloudflare Workers Builds check 124722013685 succeeded for exact main (build af3b725e-d9ab-41d4-bbb7-ddd249057613, version 51d0207c-02f7-4f7c-b11c-423980ec8b12). Provider status is verified; direct live readback remains **UNVERIFIED** because the web reader could not access Pages and the local browser helper stopped at URL identification.
-4. CSP `script-src` and `style-src` are self-only. Six static style attributes were replaced by classes; dynamic style mutation was removed. Keep regression coverage and review future external origins separately.
-5. Public content remains 0 items/words/genuine phrases/sentences/warnings, empty/noindex. Synthetic fixtures are isolated; no private/restricted data was copied and no Git history rewrite occurred.
-6. Alignment Engine remains PRIVATE; its current checkpoint is maintained there. Do not move any private source metadata or language content into this repository.
-7. Issue #2 is closed as complete; A3/A5 remain the active broader work queue. There are no open PRs at this checkpoint.
+1. Webgame remains PUBLIC at main HEAD `8a1ea9611483c90711ea1cf717bf6087cc83a962`; issue #2 is closed and no open PRs were present at batch start. The GitHub connector did not expose the current root tree SHA; the checkpoint branch was pinned to this immutable main commit.
+2. PR #30 merged as `fd20fe2e481900876b91bcbeb4e69ee614902d59` and PR #31 as `8a1ea9611483c90711ea1cf717bf6087cc83a962`. Main Verify #126 / 41286770783 passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 browser tests, asset budgets, 12 Lighthouse audits and committed-dist drift. Artifact: 13075318914.
+3. Lighthouse Accessibility is 100 across all 12 route/profile audits. Performance mobile scores are 98/93/98/90/94/100 for home/angka/games/flashcards/dictionary/progress; desktop scores are 100/99/100/100/100/100. JS/CSS budgets passed at 178,003/196,608 and 15,698/49,152 bytes.
+4. Latest deployment is UNVERIFIED. PR #31's Workers Builds check failed on pre-merge head `2a7d00ea5ed4ddd5e94317f9964e51ad6a609202` (build `c7d05d30-bef2-4007-b1a3-88aa4089ea6a`). The separate merged-SHA build `a4f08713-b002-475d-8d10-e5c8b43a6452` was last observed in progress, and its final state is not exposed by the connected check reader. Direct Pages reads failed.
+5. Public content remains 0 items/words/genuine phrases/sentences/warnings and empty/noindex. Synthetic fixtures are test-only; no private/restricted data moved to public, and no history rewrite occurred.
+6. Alignment Engine remains PRIVATE; its current B24 metadata-only checkpoint stays in that repository. Do not transfer private source metadata or language text here.
+7. Readiness: ENGINEERING_READY=YES for the verified browser/CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next
 
-1. Continue A3 browser engineering independently: responsive UX, PWA/offline, accessibility, privacy/security and measured route performance.
-2. Retry direct production readback on a reachable browser surface; verify home, dictionary, `robots.txt`, manifest and CSP before marking the live artifact verified.
-3. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate; retain empty/noindex production content until publication and quality gates pass.
+1. Continue independent A3 web engineering.
+2. Resolve exact-main provider build status and PR #31 build failure; verify live home, privacy, robots.txt, manifest and response CSP when an authenticated/reachable surface is available.
+3. Preserve the empty/noindex production state until rights, provenance, quality and publication gates pass.
+4. At the next checkpoint, retrieve the current tree SHA using an authorized Git object surface; the current connector exposes only the commit/file SHAs.
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
