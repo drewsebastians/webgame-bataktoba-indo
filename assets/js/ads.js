@@ -74,7 +74,6 @@ export function mountAd(container, { placement = null, format = "auto" } = {}) {
   }
   const slot = document.createElement("ins");
   slot.className = "adsbygoogle";
-  slot.style.display = "block";
   slot.dataset.adClient = SITE_CONFIG.adsensePublisherId;
   slot.dataset.adFormat = format;
   container.append(slot);

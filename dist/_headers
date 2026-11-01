@@ -3,12 +3,12 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Frame-Options: DENY
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 # Notes:
 # - Inline JSON-LD blocks are non-executable data and do not need script permission.
 #   No inline executable scripts or event handlers are present in source HTML.
-# - Inline styles remain enabled for the small set of static layout attributes.
+# - Inline style attributes and blocks are disallowed; layout uses local CSS classes.
 # - Third-party origins (ads/analytics) stay closed while those features are
 #   disabled. When AdSense is activated, pagead2.googlesyndication.com must be
 #   added explicitly to script-src/frame-src via configuration.

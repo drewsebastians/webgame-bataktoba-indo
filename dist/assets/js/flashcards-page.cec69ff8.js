@@ -16,7 +16,7 @@ import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { shuffleWith } from "./game/question-engine.5494a83a.js";
 import { masteryLabel } from "./game/session.30f0491c.js";
 import { track } from "./analytics.ab842beb.js";
-import { sweepPlaceholders } from "./ads.523484b2.js";
+import { sweepPlaceholders } from "./ads.07252d43.js";
 
 const flashcardQuery = (selector, root = document) => root.querySelector(selector);
 const flashcardQueryAll = (selector, root = document) => [...root.querySelectorAll(selector)];

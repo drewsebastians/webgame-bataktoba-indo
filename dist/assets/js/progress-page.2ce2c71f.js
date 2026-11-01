@@ -12,7 +12,7 @@ import {
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { computeStreak } from "./game/session.30f0491c.js";
 import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.ab842beb.js";
-import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.523484b2.js";
+import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.07252d43.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];

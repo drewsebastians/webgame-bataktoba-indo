@@ -6,7 +6,7 @@ import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.2eedd2fd.js";
 import { track } from "./analytics.ab842beb.js";
-import { sweepPlaceholders } from "./ads.523484b2.js";
+import { sweepPlaceholders } from "./ads.07252d43.js";
 
 const dictionaryQuery = (selector, root = document) => root.querySelector(selector);
 const dictionaryQueryAll = (selector, root = document) => [...root.querySelectorAll(selector)];

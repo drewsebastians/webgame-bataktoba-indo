@@ -909,3 +909,9 @@ h3 {
   position: relative;
   z-index: 1;
 }
+
+/* Component spacing and reserved ad slot styles */
+.game-action-row { margin-top: 1rem; }
+.game-scorebar { margin-top: 1rem; }
+.topic-lesson-shell { margin-bottom: 2rem; }
+.adsbygoogle { display: block; }
