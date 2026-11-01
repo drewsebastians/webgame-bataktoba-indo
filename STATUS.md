@@ -1,12 +1,12 @@
-# Execution status — 2026-11-01 00:00:22 UTC
+# Execution status — 2026-11-01 00:06:45 UTC
 
 ## Verified checkpoint
 
-- Repository is PUBLIC. Main: 92a3f3f9f6c1abb8a774013c5e632d07e11a1441; tree: 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at head c17fd28ef41f2b5612c18f0e98c2678ef91ee765; its current merge base is main.
-- PR Verify [#103 / 41254645516](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254645516) started on GitHub Actions. It passed 211/211 unit tests (0 failed/0 skipped), E2E smoke, 36/36 Playwright tests, and performance budgets (JavaScript 178,035/196,608 bytes; CSS 15,491/49,152 bytes). The build regenerated only the service-worker cache version in `dist/sw.js`; the committed-dist drift check failed on that generated difference, so Lighthouse did not run and the post-step drift gate was skipped.
-- This checkpoint adds the CI-generated `dist/sw.js` cache version and preserves the full run evidence. The PR adds four optional contextual fields in the fail-closed adapter; its two added adapter unit tests use synthetic-only values. No learning data is published or transferred.
-- Cloudflare Workers integration reported a successful `production` build for PR commit c17fd28ef41f2b5612c18f0e98c2678ef91ee765 in the PR timeline. Direct live-site readback remains unverified; do not treat it as independent production verification.
-- Production remains empty/noindex: 0 published items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only. No restricted/private corpus content was transferred and no history rewrite was performed.
+- Repository is PUBLIC. Main: 92a3f3f9f6c1abb8a774013c5e632d07e11a1441; tree: 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at head 201b899fcbd817852bebe3c5cc69772bf34030b3; it includes the adapter change, generated `dist/sw.js` cache version and this checkpoint.
+- PR Verify [#104 / 41254920158](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254920158) passed: 211/211 unit tests (0 failed/0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-dist drift, and 12 Lighthouse audits. JS is 178,035/196,608 bytes; CSS is 15,491/49,152 bytes. Accessibility scored 100/100 on all routes. Mobile performance scores: home 98, angka 92, games 98, flashcards 90, dictionary 93 and progress 100; desktop scores: 100, 99, 100, 100, 100 and 100. Lighthouse report artifact [13063120129](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254920158/artifacts/13063120129).
+- Adapter change preserves part of speech, orthography, example-use reference and context note alongside previously mapped alternatives, sense, topics, provenance and per-game eligibility. The new tests use synthetic-only values; no real learning content is published or transferred.
+- Cloudflare Workers integration reported a successful `production` build for PR code commit `c17fd28`. This is provider-reported build evidence; direct live-site readback remains unverified and must be checked after merge.
+- Production remains empty/noindex: 0 published items, words, genuine phrases or sentences. Synthetic fixtures remain test-only. No private/restricted corpus content was transferred and no Git history rewrite was performed.
 
 ## Readiness gates
 

@@ -1,12 +1,12 @@
 # Master execution plan
 
-## Current checkpoint — 2026-11-01 00:00:22 UTC
+## Current checkpoint — 2026-11-01 00:06:45 UTC
 
-- PUBLIC main: 92a3f3f9f6c1abb8a774013c5e632d07e11a1441 / tree 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at c17fd28ef41f2b5612c18f0e98c2678ef91ee765; it maps contextual metadata through the existing fail-closed adapter and adds two synthetic-only tests.
-- PR Verify [#103 / 41254645516](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254645516) passed 211/211 unit tests (0 skipped), E2E smoke, 36/36 browser tests, and performance budgets (JS 178,035/196,608 bytes; CSS 15,491/49,152 bytes). It failed solely on committed-dist drift after the deterministic build regenerated `dist/sw.js` cache version; this commit includes that generated version. Lighthouse did not run in that failed attempt. Current-head release verification is still required.
-- Cloudflare Workers integration reported a successful `production` build on PR commit c17fd28ef41f2b5612c18f0e98c2678ef91ee765; direct live readback is not verified. Do not claim the production artifact is independently checked until post-merge provider and live checks complete.
-- Production remains empty/noindex with 0 published items, words, genuine phrases or sentences. No private/restricted content or source metadata was copied into this public repo.
-- Readiness: ENGINEERING_READY=YES for prior verified browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. This PR remains unmerged pending full current-head CI.
+- PUBLIC main: 92a3f3f9f6c1abb8a774013c5e632d07e11a1441 / tree 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at tested head 201b899fcbd817852bebe3c5cc69772bf34030b3, adding optional contextual adapter metadata, synthetic-only unit coverage, and the CI-generated service-worker cache version.
+- PR Verify [#104 / 41254920158](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254920158) passed 211/211 unit tests (0 skipped), E2E smoke, 36/36 browser tests, JS/CSS budgets, committed-dist drift and 12 Lighthouse audits. JS is 178,035/196,608 bytes; CSS is 15,491/49,152 bytes. Accessibility scored 100 on every route; mobile performance: home 98, angka 92, games 98, flashcards 90, dictionary 93, progress 100. Report artifact: [13063120129](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254920158/artifacts/13063120129).
+- Cloudflare Workers integration reported a successful `production` build on PR code commit c17fd28. Direct live readback is not verified; verify provider deployment and live artifact after merge.
+- Production remains empty/noindex with 0 published items, words, genuine phrases or sentences. No private/restricted content is in this public change. Readiness remains ENGINEERING_READY=YES for verified browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Merge only after the current docs-checkpoint head passes full release verification. After merge, verify main CI, Cloudflare deployment and live artifact, then continue responsive UX, PWA/offline, security/privacy, accessibility and performance work.
 
 ## Mission and constraints
 
