@@ -1,31 +1,32 @@
-# Execution status — 2026-11-01 11:01 UTC
+# Execution status — 2026-11-01 11:58 UTC
 
 ## Latest verified main checkpoint
 
-- Repository is PUBLIC at main 90c073e7a4ed0367cb0f845b6bcbf697a0c60671 / tree 2281e2a2c5d1fbddfafcf8d250176e6ba9044eb1. PR #39 merged the Lighthouse diagnostics threshold.
-- Exact-main Verify run [41299217543](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543) passed 216/216 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse artifact: [13081020550](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543/artifacts/13081020550).
-- Lighthouse Accessibility scored 100 across every route/profile. Mobile Performance for home/angka/games/flashcards/dictionary/progress was 97/92/98/90/94/100; desktop was 100/99/100/100/100/100.
-- CI now prints route diagnostics below 95 Performance. Mobile CLS was 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary. Top measured opportunities: angka unused JS 70,418 bytes and unminified JS 30,418 bytes; flashcards unminified JS 11,534 bytes and unused CSS 10,524 bytes; dictionary unminified JS 9,828 bytes and unused CSS 10,461 bytes. These reports point to route asset size and layout stability work.
-- Exact-main Workers Build succeeded (build 033df6e7-48ba-47de-9461-9265694afc12). Direct Pages readback remains UNVERIFIED; build success does not establish live artifact inspection.
-- Production remains empty/noindex: 0 published items, words, genuine phrases, sentences and warnings. Synthetic fixtures remain test-only; Git history has not been rewritten.
+- Repository visibility is PUBLIC. Main is `873c00cf11b4941b138c7b319e53a57b145b4261` / tree `c0d326bb70bc2d892fc642cbc589a8c4c27b9d78`. PR #41 merged Lighthouse 13 layout-shift element diagnostics and tests; it changes tooling only. Issue #2 is closed and no pull requests are open at this snapshot.
+- Exact-main Verify [run 41302976375](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375) passed 216/216 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JavaScript/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse artifact: [13082267265](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375/artifacts/13082267265).
+- Accessibility scored 100 on every route/profile. Mobile Performance for home/angka/games/flashcards/dictionary/progress was 98/92/98/90/93/100; desktop was 100/99/100/100/100/100.
+- Mobile CLS remains 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary. Lighthouse identifies shifted elements: `body > main#main-content > p` on angka (0.145); `body > main#main-content > section.section` on flashcards (0.204) and dictionary (0.149). These are impacted elements, not confirmed root causes.
+- Measured mobile opportunities: angka unused JS 70,418 bytes (600 ms) and unminified JS 30,418 bytes (300 ms); flashcards unminified JS 11,534 bytes (300 ms) and unused CSS 10,524 bytes; dictionary unused CSS 10,461 bytes and unminified JS 9,828 bytes (150 ms).
+- Cloudflare Workers Build succeeded for production build `63eb22c7-1be5-4cd7-a591-e9542cc2e403` (version `7899b356-6ada-4cc6-9753-2bc7ea3d9751`). Direct live Pages readback remains UNVERIFIED because connected browser/web surfaces could not inspect the live domain.
+- Production is empty/noindex: 0 published learning items (0 words, 0 genuine phrases, 0 sentences), 0 warnings. Synthetic fixtures remain test-only. No private/restricted data was added, and public Git history was not rewritten.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for tested browser flows, synthetic fixture coverage, diagnostics and exact-main CI | Verify 41299217543 passed unit, smoke, browser, budget, Lighthouse and dist-drift checks. |
+| ENGINEERING_READY | YES for tested browser flows, isolated fixtures, diagnostics and exact-main CI | Verify 41302976375 passed unit, smoke, browser, budget, Lighthouse and dist-drift checks. |
 | DATA_READY | NO | Published learning data remains empty. |
 | PUBLICATION_READY | NO | Record-level rights and scope approvals are not established. |
 | LEARNING_READY | NO | No real production learning content; synthetic tests do not establish learning readiness. |
-| MONETIZATION_READY | DEFERRED | Separate future gate; not current priority. |
+| MONETIZATION_READY | DEFERRED | Separate decision; not a current priority. |
 
 ## Resume actions
 
-1. Use the measured mobile report to reduce route asset payloads and CLS on angka, flashcards and dictionary; re-run Lighthouse and compare exact route results.
-2. Retry direct Pages readback through a targetable provider/browser surface. Keep live production UNVERIFIED until the actual artifact is inspected.
-3. Keep public content empty/noindex and fixtures synthetic until source rights, provenance, quality and publication gates pass.
-4. Re-fetch both repositories, visibility, main/tree, Issues, PRs, Actions and checkpoints before the next write batch.
-
+1. Implement a measured route JavaScript payload and CLS improvement for angka, flashcards and dictionary; keep production data empty and noindex.
+2. Run exact-PR Verify, browser tests, Lighthouse and Workers Build; compare metrics, then verify merged-main checks.
+3. Retry live Pages readback when a targetable provider/browser surface is available; do not claim live content was inspected until then.
+4. Keep synthetic fixtures test-only and production empty/noindex until rights and quality gates pass.
+5. Re-fetch both repository refs, visibility, Issues, PRs, Actions and private `latest.json` before each next batch.
 
 ## Previous checkpoint (superseded: 2026-11-01 10:32 UTC)
 ## Latest branch checkpoint (PR #39 validation pending)
