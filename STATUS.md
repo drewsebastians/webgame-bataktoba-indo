@@ -1,4 +1,34 @@
-# Execution status — 2026-11-01 10:00 UTC
+# Execution status — 2026-11-01 10:27 UTC
+
+## Latest branch checkpoint (PR #39 validation pending)
+
+- Repository is PUBLIC. Verified base main is `3c5d3946c3ef3dd0eea756fbc8235f047ce39c76`, root tree `5f2c37f38e3232967827f52b8da93e91e1937eca`.
+- PR #39 adds a unit-tested Lighthouse diagnostics threshold: report route/profile metrics and the top three measured opportunities whenever Performance is below 95. This includes the current flashcards mobile score of 90 and dictionary mobile score of 93, which were omitted by the old below-90 condition.
+- Code commits are `e5946caaa0eb898e499b64144c9ed2bc7e0f8498` and `3eeea62d35ad22914e3ab7cbfeaebb381293c421`. PR #39's base main Verify run [41296159704](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41296159704) passed 215/215 unit tests, E2E smoke, 36/36 Playwright tests, budgets, 12 Lighthouse audits and committed-dist drift. PR #39 checks are pending at this checkpoint.
+- Baseline Lighthouse Accessibility scored 100 on all route/profile audits. Mobile Performance for home/angka/games/flashcards/dictionary/progress was 98/94/98/90/93/100; desktop was 100/99/100/100/100/100. Current diagnostics do not yet include metric or opportunity details; PR #39 is intended to expose them in CI.
+- Exact-main Workers Build succeeded for base main (build `3f906f04-f715-44c1-8e11-476bf5ed5235`, version `31d30c5e-8144-4fdb-907c-50f651e7df5a`). Direct Pages readback remains UNVERIFIED; a provider build alone does not verify the live artifact.
+- Public production remains empty/noindex: 0 published items, words, genuine phrases, sentences and warnings. Synthetic fixtures remain test-only; no private/restricted linguistic data was transferred. Git history was not rewritten.
+
+## Readiness gates
+
+| Gate | State | Evidence |
+|---|---|---|
+| ENGINEERING_READY | YES for current browser flows and exact-main CI; PR #39 diagnostics refinement pending | Base main Verify run 41296159704 passed unit, smoke, browser, budget, Lighthouse and dist-drift checks. |
+| DATA_READY | NO | Published learning data remains empty. |
+| PUBLICATION_READY | NO | No record-level public rights and upstream scope authorization. |
+| LEARNING_READY | NO | No real production learning content; synthetic tests do not establish learning readiness. |
+| MONETIZATION_READY | DEFERRED | Separate future gate; not a current priority. |
+
+## Resume actions
+
+1. Await PR #39 checks, inspect its Lighthouse metric/opportunity output for flashcards and dictionary, then implement the highest-value measured mobile fix.
+2. Retry direct Pages readback through a targetable provider/browser surface. Keep live production UNVERIFIED until the actual artifact is inspected.
+3. Keep content empty/noindex and fixtures synthetic until source rights, provenance, quality and publication gates pass.
+4. Continue private B24 metadata-only discovery independently; do not repeat B17–B23 or acquire corpus while approved storage and rights gates are unresolved.
+5. Re-fetch both repositories, visibility, main/tree, Issues, PRs, Actions and private latest.json before the next write batch.
+
+
+## Previous checkpoint (superseded: 2026-11-01 10:00 UTC)
 
 ## Latest verified merged-main checkpoint
 
