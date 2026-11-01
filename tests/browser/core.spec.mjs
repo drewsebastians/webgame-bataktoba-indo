@@ -15,6 +15,25 @@ async function getSavedFlags(page) {
 
 
 test.describe("core learning flows", () => {
+  test("empty public dataset keeps dictionary and flashcards honest without layout injection", async ({ page }) => {
+    await page.goto("/flashcards/");
+    await expect(page.locator("#flashcard-root")).toHaveAttribute("aria-busy", "false");
+    await expect(page.locator("#flashcard-root")).toContainText("Belum ada kartu belajar yang siap ditampilkan");
+    await expect(page.locator("#flashcard")).toHaveCount(0);
+    await expect(page.locator("#fc-filter")).toHaveCount(0);
+    await expect(page.locator("#flashcard-root")).not.toContainText("SYNTHETIC_");
+
+    await page.goto("/dictionary/");
+    await expect(page.locator("#app-error")).toHaveAttribute("aria-busy", "false");
+    await expect(page.locator("#dictionary-empty-state")).toBeVisible();
+    await expect(page.locator("#dictionary-search")).toBeDisabled();
+    await expect(page.locator("#dictionary-filters")).toBeHidden();
+    await expect(page.locator("#dictionary-results")).toBeHidden();
+    await expect(page.locator(".result-row")).toHaveCount(0);
+    await expect(page.locator("#dictionary-search")).not.toHaveAttribute("placeholder", /pogos|podang/i);
+    await expect(page.locator("#app-error")).not.toContainText("SYNTHETIC_");
+  });
+
   test("home: onboarding appears for new users and can be skipped", async ({ page }) => {
     await page.goto("/");
     const skip = page.getByRole("button", { name: "Lewati", exact: true });
