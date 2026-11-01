@@ -169,8 +169,8 @@ Headers: `_headers` (CSP tanpa `unsafe-eval`/wildcard, ketat saat ads/analytics 
 3. `npm ci`
 4. `npx playwright install --with-deps chromium`
 5. `npm run verify:release` (check + build + unit + smoke + browser + axe + lighthouse-check)
-6. `git diff --exit-code -- dist` (drift gate, eksplisit untuk diagnose)
-7. `actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9` (v7.0.2; Lighthouse reports)
+6. `actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9` (v7.0.2; Lighthouse reports; runs with `if: always()`)
+7. `git diff --exit-code -- dist` (drift gate, eksplisit untuk diagnose)
 
 Local `npm run verify:release` reproduksi CI 1:1. Tidak rebuild ganda; failure menunjukkan file drift spesifik.
 
