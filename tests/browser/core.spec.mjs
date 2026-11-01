@@ -53,7 +53,7 @@ test.describe("core learning flows", () => {
 
     await page.goto("/learn/angka/");
     const root = page.locator("#lesson-root");
-    await expect(root).toContainText("Materi belajar untuk tema ini belum tersedia");
+    await expect(root).toContainText("Materi untuk tema ini belum terbit");
     await page.waitForLoadState("networkidle");
 
     const before = await page.evaluate(() => window.__lessonRootAtDomReady);
@@ -269,7 +269,7 @@ test.describe("security & privacy invariants", () => {
       expect(body).not.toContain(banned);
     }
     await expect(
-      page.getByText(/Materi belajar untuk tema ini belum tersedia|Lesson latihan penuh belum terbit/i).first(),
+      page.getByText(/Materi untuk tema ini belum terbit|Lesson latihan penuh belum terbit/i).first(),
     ).toBeVisible();
   });
 });
