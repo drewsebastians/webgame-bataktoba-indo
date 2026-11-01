@@ -1,23 +1,22 @@
-## LATEST EXECUTION CHECKPOINT — 2026-11-01 08:12 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-11-01 08:36 UTC
 
 ### PUBLIC webgame
 
-- Re-verified PUBLIC main HEAD `8a1ea9611483c90711ea1cf717bf6087cc83a962`; PR #30 and #31 are merged. GitHub's connected commit reader does not return the root tree SHA.
-- Main Verify #126 / 41286770783 passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, all 12 Lighthouse audits and committed-dist drift. Artifact 13075318914.
-- Lighthouse Performance: mobile 98/93/98/90/94/100; desktop 100/99/100/100/100/100 for home, angka, games, flashcards, dictionary and progress. Accessibility is 100 on all routes/profiles.
-- Budgets passed: JavaScript 178,003/196,608 bytes across 18 files; CSS 15,698/49,152 bytes.
-- Deployment remains UNVERIFIED: PR #31 Workers Builds failed for pre-merge head 2a7d00ea5ed4ddd5e94317f9964e51ad6a609202 (build c7d05d30-bef2-4007-b1a3-88aa4089ea6a); the separate merged-SHA build a4f08713-b002-475d-8d10-e5c8b43a6452 was last observed in progress and its final state is unavailable through connected tools. Direct Pages readback failed for home/privacy/robots/manifest.
-- Published learning data remains empty/noindex (0 items, words, genuine phrases, sentences and warnings). Synthetic fixtures stayed isolated; no private/restricted content moved to public; no history rewrite.
+- Reverified PUBLIC main HEAD `ecebfe67ef17d033d9e9ee41fe0bbb7168cda78a`; PR #32 merged as a documentation-only checkpoint. The connected commit reader does not expose the root tree SHA.
+- PR #32 Verify run 41288169799 passed on exact PR head `90b7ea15c14da1664b8c521f1436c993ada4d4ba`: 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Artifact 13075514013.
+- Lighthouse Performance: mobile 98/92/98/90/93/100, desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress; Accessibility 100 across all audits.
+- Budgets passed at 178,003/196,608 JavaScript bytes across 18 files and 15,698/49,152 CSS bytes.
+- PR #32 Workers Builds candidate check succeeded (build fcfe85c3-eb27-4706-982a-7ae506267005, version 240ef3ad-4d55-499b-bfe1-7f48dbd84690). Exact-main status remains UNVERIFIED; the PR #31 candidate check failed, direct Pages readback is inaccessible, and merged-SHA final provider status is not available from connected tools.
+- Production remains empty/noindex (0 items, words, genuine phrases, sentences, warnings). Synthetic fixtures remain isolated. No private/restricted content moved to public; no history rewrite.
 
 ### PRIVATE Alignment Engine
 
-- Alignment Engine remains PRIVATE; its live B24 source-discovery and B23 latest-batch checkpoint stays in that repository. Do not copy source metadata or linguistic text to the public tree.
+- Alignment Engine remains PRIVATE; its latest B24 metadata-only progress is checkpointed there. No source records or language text crossed repositories.
 
 ### Readiness and next action
 
-- ENGINEERING_READY=YES for the verified browser/CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
-- Continue independent A3 browser engineering. Separately resolve exact-main provider status and direct readback; keep empty/noindex output until content gates pass.
-- Resume private work from the current private HANDOFF.md and WORK_QUEUE.csv without repeating B17–B23.
+- ENGINEERING_READY=YES for tested browser/CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Continue independent A3 browser engineering; resolve exact-main provider and live readback separately. Keep publication empty/noindex until gates pass.
 
 ## PREVIOUS EXECUTION CHECKPOINT — 2026-10-31 16:53 UTC
 
