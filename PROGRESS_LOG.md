@@ -1,4 +1,25 @@
-## LATEST EXECUTION CHECKPOINT — 2026-11-01 09:31 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-11-01 10:00 UTC
+
+### PUBLIC webgame
+
+- PUBLIC main is `84c05624f959f235d16a790d3c479e74f68b9564` / tree `e67bd8ecbc0651afb37899a801f3b25195d35028`. PRs #35, #36 and #37 are merged; #37 corrected README workflow ordering; Issue #2 is closed and no PRs remain open.
+- Exact-main Verify run 41295166507 passed 215/215 unit tests (0 failed/skipped), E2E smoke, 36/36 Playwright, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Artifact 13078943622.
+- Lighthouse Performance: mobile 98/92/98/90/93/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress; Accessibility 100 for all routes/profiles. Budgets: 178,003/196,608 JS and 15,698/49,152 CSS bytes.
+- Exact-main Workers Builds passed (build 7bd60fc7-785d-4c3f-9648-233ae7354ac8, version 04d00dca-64bb-4c83-bb23-86d60d2ea932). Technical build/deployment evidence is verified; direct Pages readback remains UNVERIFIED.
+- Production remains empty/noindex (0 published items, words, genuine phrases, sentences and warnings); fixtures remain test-only; no private/restricted content moved and no history rewrite occurred.
+
+### PRIVATE Alignment Engine
+
+- PRIVATE main is `b631686de0b9169db62dd71ed04517f718d4820d`; root tree SHA is not exposed by the connected private reader. PR #20 merged the B24/status checkpoint without corpus changes.
+- `latest.json` remains B23 / DEGRADED, next B24. B24 remains 31 metadata/scope rows (25 direct, 5 adjunct, 1 scope), all METADATA_ONLY; 0 permitted/acquired records, learning items/evidence, new families/conflicts, topic or per-game/public eligibility.
+- The approved private source vault remains unavailable; source rights and per-entry provenance block corpus processing. No language content was acquired or transferred and no HUMAN_REVIEWED status was added.
+
+### Readiness and next
+
+- ENGINEERING_READY=YES for exact-main browser CI and the private validator/preflight slice; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Continue independent website UX/performance work; continue B24 metadata-only source discovery and preserve B23 until permitted acquisition validates.
+
+## PREVIOUS EXECUTION CHECKPOINT — 2026-11-01 09:31 UTC
 
 ### PUBLIC webgame
 
