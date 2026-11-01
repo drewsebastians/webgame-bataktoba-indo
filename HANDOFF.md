@@ -1,13 +1,14 @@
-# Resume handoff — 2026-11-01 00:06:45 UTC
+# Resume handoff — 2026-11-01 00:29 UTC
 
-1. Re-fetch both repository visibilities, main/tree SHAs, Issues, PRs, Actions and the PRIVATE repo's `latest.json` before a new write batch.
-2. Public repo is PUBLIC at main 92a3f3f9f6c1abb8a774013c5e632d07e11a1441 / tree 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at tested head 201b899fcbd817852bebe3c5cc69772bf34030b3: https://github.com/drewsebastians/webgame-bataktoba-indo/pull/23.
-3. Verify [#104 / 41254920158](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254920158) passed 211/211 unit, E2E smoke, 36/36 browser, performance budgets, committed-dist drift and all 12 Lighthouse audits. Artifact [13063120129](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254920158/artifacts/13063120129) is available. The docs-only checkpoint commit after this tested head must also pass current-head CI before merge.
-4. Cloudflare bot reported production build success for code commit c17fd28. After merge, verify provider build on the actual main SHA and directly inspect home, dictionary, robots, sitemap, manifest and published-data state before claiming live production verification.
-5. PR #23 preserves contextual metadata through the fail-closed browser adapter; tests use synthetic-only values. Production remains empty/noindex; do not publish language content until rights and quality gates pass.
-6. Alignment Engine stays PRIVATE and separate. No B17–B23 work is to be repeated and no private/restricted text or artifacts are transferred to the public repo.
-7. After PR #23 merges, re-fetch main SHA/tree, verify the main workflow and provider deployment, then continue the next A3 browser backlog item independently of data readiness.
+1. Re-fetch both repository visibility, current main/tree SHAs, Issues, PRs, Actions, deployment state, and the PRIVATE repository latest.json before each new write batch.
+2. Webgame is PUBLIC. Its tested code baseline is main 0c547ce58beb723ddcffa7988ad04d7a3b333da1 / tree d7352e3853135fc72646ea34ae1c79a360480760. PR #23 merged the fail-closed adapter metadata mapping: https://github.com/drewsebastians/webgame-bataktoba-indo/pull/23.
+3. Main Verify #106 / 41256392388 passed 211/211 unit tests, E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-dist drift, and 12 Lighthouse audits. Accessibility was 100 on all routes/profiles; artifact 13063566275 is available at https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41256392388/artifacts/13063566275.
+4. Cloudflare Workers integration reported a successful production build for tested PR head 6b675581. The build was not tied to squashed main SHA 0c547ce; direct live readback of home, dictionary, robots.txt, and manifest was unavailable. Keep deployment verification open.
+5. Public CI confirms 0 published learning items, words, genuine phrases, or sentences. Fixtures remain synthetic-only. Keep noindex/empty states and do not publish language data without rights and quality clearance.
+6. Alignment Engine remains PRIVATE. B23 remains the latest completed batch; continue B24 only. Never move private or restricted text and artifacts to the PUBLIC repository.
+7. Continue independent A3 browser work; the next checkpoint must re-fetch GitHub and verify current heads before writes.
 
+## Archived handoff records (preserved verbatim; superseded by the current instructions above)
 ## Archived handoff records (preserved verbatim; superseded by the current instructions above)
 
 # Resume handoff — 2026-10-31 16:25 UTC
