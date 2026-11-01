@@ -85,3 +85,7 @@ The production JS/CSS budget is merged and passes CI. Main run 41195989468 passe
 ## A3 verified continuation checkpoint — 2026-11-01 08:12 UTC
 
 Main `8a1ea9611483c90711ea1cf717bf6087cc83a962` passed Verify #126 / 41286770783: 215/215 unit tests (0 skipped), 36/36 browser tests, E2E smoke, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Accessibility scored 100 across all route/profile audits. Mobile Performance is 98/93/98/90/94/100 and desktop is 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. Public content remains empty/noindex and synthetic fixtures remain test-only. PR #31's provider check failed before merge; exact-main provider status and live readback are still unverified. Continue A3 browser engineering independently, and keep publication gated on rights, provenance and quality.
+
+## Post-merge operational checkpoint — 2026-11-01 08:36 UTC
+
+PR #32 merged as `ecebfe67ef17d033d9e9ee41fe0bbb7168cda78a` with documentation-only changes. Its exact-head Verify run 41288169799 passed 215/215 unit tests (0 skipped), 36/36 Playwright tests, E2E smoke, asset budgets, 12 Lighthouse audits and committed-dist drift. Accessibility was 100 across route/profile audits; mobile Performance was 98/92/98/90/93/100 and desktop 100/99/100/100/100/100. Candidate Workers Builds check passed, while exact-main provider state and direct live readback remain unverified. Public content remains empty/noindex; synthetic fixtures remain test-only.
