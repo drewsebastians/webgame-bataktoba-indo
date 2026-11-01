@@ -1,20 +1,23 @@
 # Master execution plan
 
-## Current checkpoint — 2026-11-01 08:36 UTC
+## Current checkpoint — 2026-11-01 09:31 UTC
 
-- PUBLIC main HEAD is `ecebfe67ef17d033d9e9ee41fe0bbb7168cda78a`; PR #32 merged its operational checkpoint. The connected GitHub commit reader does not expose the root tree SHA.
-- PR #32's exact-head Verify [run 41288169799](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41288169799) passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright, JS/CSS budgets, dist drift and 12 Lighthouse audits on `90b7ea15c14da1664b8c521f1436c993ada4d4ba`. Artifact 13075514013. Accessibility is 100 on all routes/profiles; mobile Performance is 98/92/98/90/93/100 and desktop is 100/99/100/100/100/100 for home, angka, games, flashcards, dictionary and progress.
-- JS/CSS budget passed at 178,003/196,608 and 15,698/49,152 bytes.
-- PR #32 Workers Builds candidate check succeeded (build `fcfe85c3-eb27-4706-982a-7ae506267005`, version `240ef3ad-4d55-499b-bfe1-7f48dbd84690`). Exact-main provider status and direct live Pages readback remain UNVERIFIED; PR #31 pre-merge check failed on its separate head and no merged-SHA final status is exposed.
-- Production remains empty/noindex with 0 items, words, genuine phrases, sentences and warnings. Synthetic fixtures remain test-only; no private/restricted content moved; no history rewrite.
-- Readiness: ENGINEERING_READY=YES for current browser CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- PUBLIC main HEAD is `7734c6e221dd74d4e942224c614e94156a915125` / tree `4fa5cf69f5aad042fafb4eeb680f44d2de81df50`; PR #35 is merged, and PR #34's Node 24 action pins remain in the workflow.
+- Exact-main Verify [run 41293149232](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41293149232) passed 215/215 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits, and committed-dist drift all passed; artifact 13078286529.
+- Lighthouse Accessibility was 100 on all routes/profiles; mobile Performance home/angka/games/flashcards/dictionary/progress was 98/92/98/90/93/100 and desktop was 100/99/100/100/100/100. Budgets: JavaScript 178,003/196,608 bytes across 18 files; CSS 15,698/49,152 bytes.
+- Exact-main Workers Builds succeeded (build 5a6c50cf-1546-4785-bebb-24621006087c, version 9d4e426e-5e31-47fe-8285-230a2a048923). Direct live Pages readback is still UNVERIFIED.
+- Production remains empty/noindex with 0 published records; fixtures remain test-only; no private/restricted content moved; Git history was not rewritten.
+- Readiness: ENGINEERING_READY=YES for exact-main browser CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next actions
 
-1. Continue independent A3 responsive desktop/mobile UX, PWA/offline, accessibility, privacy/security and route performance.
-2. Resolve exact-main Workers Builds and inspect live empty/noindex output plus CSP headers.
-3. Keep production content empty until rights, provenance, quality and publication gates pass.
-4. Re-fetch both repositories, visibility, main/tree, Issues, PRs, Actions and private latest.json before the next write batch. The current GitHub connector omits root tree SHA; obtain it from an authorized Git object interface.
+1. Continue independent A3 responsive browser UX, PWA/offline, accessibility, privacy/security and route performance work.
+2. Prioritize measured mobile Performance follow-up on flashcards (90) and dictionary (93).
+3. Retry exact live Pages readback through a targetable provider/browser surface; keep production content status unverified until inspected.
+4. Keep published data empty/noindex until rights, provenance, quality and publication gates pass.
+5. Re-fetch both repositories, main/tree, Issues, PRs, Actions and latest.json before the next write batch.
+
+## Mission and constraints
 
 ## Mission and constraints
 
