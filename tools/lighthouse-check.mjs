@@ -86,7 +86,7 @@ export function summarizePerformanceDiagnostics(report) {
     .sort((a, b) => b.savingsMs - a.savingsMs || b.savingsBytes - a.savingsBytes || a.id.localeCompare(b.id))
     .slice(0, 3);
 
-  const layoutShiftItems = audits["layout-shift-elements"]?.details?.items;
+  const layoutShiftItems = audits["layout-shifts"]?.details?.items;
   const layoutShifts = (Array.isArray(layoutShiftItems) ? layoutShiftItems : [])
     .map(({ node, score }) => ({
       selector: typeof node?.selector === "string" ? node.selector.slice(0, 160) : null,
