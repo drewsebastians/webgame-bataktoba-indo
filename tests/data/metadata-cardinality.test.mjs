@@ -4,6 +4,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
+const siteConfig = JSON.parse(readFileSync(join(root, "tools/site.config.json"), "utf8"));
 
 function walkHtml(dir, cb) {
   for (const name of readdirSync(dir)) {
@@ -80,8 +81,18 @@ describe("metadata cardinality in source AND dist", () => {
             // Exception: offline.html maybe
             if (!path.endsWith("offline.html")) {
               assert.ok(html.includes('class="content-meta"'), `${path} should have visible last-modified`);
-              // Homepage has 2026-09-19, others have 2026-08-26
-              const expectedDate = path.endsWith(join("dist", "index.html")) ? "2026-09-19" : "2026-08-26";
+              const relative = path.slice(dist.length + 1).split(String.fromCharCode(92)).join("/");
+              const route = relative === "index.html"
+                ? "/"
+                : relative === "offline.html"
+                  ? "/offline.html"
+                  : relative.endsWith("/index.html")
+                    ? `/${relative.slice(0, -11)}/`
+                    : relative.endsWith(".html")
+                      ? `/${relative.slice(0, -5)}/`
+                      : `/${relative}`;
+              const expectedDate = siteConfig.lastModified?.[route];
+              assert.ok(expectedDate, `${route} should have configured last-modified metadata`);
               assert.ok(new RegExp(`<time datetime="${expectedDate}">`).test(html), `${path} time datetime should be ${expectedDate}`);
             }
           }
