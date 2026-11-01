@@ -1,32 +1,31 @@
-# Execution status — 2026-11-01 11:58 UTC
+# Execution status — 2026-11-01 14:31 UTC
 
 ## Latest verified main checkpoint
 
-- Repository visibility is PUBLIC. Main is `873c00cf11b4941b138c7b319e53a57b145b4261` / tree `c0d326bb70bc2d892fc642cbc589a8c4c27b9d78`. PR #41 merged Lighthouse 13 layout-shift element diagnostics and tests; it changes tooling only. Issue #2 is closed and no pull requests are open at this snapshot.
-- Exact-main Verify [run 41302976375](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375) passed 216/216 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JavaScript/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse artifact: [13082267265](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375/artifacts/13082267265).
-- Accessibility scored 100 on every route/profile. Mobile Performance for home/angka/games/flashcards/dictionary/progress was 98/92/98/90/93/100; desktop was 100/99/100/100/100/100.
-- Mobile CLS remains 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary. Lighthouse identifies shifted elements: `body > main#main-content > p` on angka (0.145); `body > main#main-content > section.section` on flashcards (0.204) and dictionary (0.149). These are impacted elements, not confirmed root causes.
-- Measured mobile opportunities: angka unused JS 70,418 bytes (600 ms) and unminified JS 30,418 bytes (300 ms); flashcards unminified JS 11,534 bytes (300 ms) and unused CSS 10,524 bytes; dictionary unused CSS 10,461 bytes and unminified JS 9,828 bytes (150 ms).
-- Cloudflare Workers Build succeeded for production build `63eb22c7-1be5-4cd7-a591-e9542cc2e403` (version `7899b356-6ada-4cc6-9753-2bc7ea3d9751`). Direct live Pages readback remains UNVERIFIED because connected browser/web surfaces could not inspect the live domain.
-- Production is empty/noindex: 0 published learning items (0 words, 0 genuine phrases, 0 sentences), 0 warnings. Synthetic fixtures remain test-only. No private/restricted data was added, and public Git history was not rewritten.
+- Repository is PUBLIC. Main is `00f8ab0049cbff8585cd554438166f4531f04c39` / tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`. PR #43 is merged; Issue #2 is closed. No other PRs were open at the recheck before this documentation branch.
+- PR [#43](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/43) merged as `00f8ab0049cbff8585cd554438166f4531f04c39` (tree `f4258c919a4377af9faf9d50e65c9adb18fb7c88`); Issue #2 is closed. Exact-PR Verify [41313831063](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41313831063) and exact-main Verify [41315341826](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41315341826) both passed. The merged-main run passed 216/216 unit tests (0 failed/skipped), E2E smoke, 37/37 Playwright/axe browser tests, JavaScript/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse report artifact: [13087012406](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41315341826/artifacts/13087012406).
+- Accessibility scored 100 on all 12 route/profile audits. Lighthouse Performance is mobile 98/92/99/99/99/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
+- Performance budgets pass: JavaScript 178,590/196,608 bytes across 18 files; CSS 15,766/49,152 bytes.
+- Cloudflare Workers Builds check [124874167176](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/124874167176) succeeded for production build `bf5b6270-f706-4df7-a3a8-9112aff78a1f`, version `a070d6b6-7be0-4117-b44a-01acd875d5d3`.
+- Production remains empty/noindex: site check reports 0 published learning items (0 words, 0 genuine phrases, 0 sentences) and 0 warnings. Synthetic data remains isolated to browser tests; no private/restricted language data entered public source or dist. Direct live-page readback remains UNVERIFIED.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for tested browser flows, isolated fixtures, diagnostics and exact-main CI | Verify 41302976375 passed unit, smoke, browser, budget, Lighthouse and dist-drift checks. |
-| DATA_READY | NO | Published learning data remains empty. |
-| PUBLICATION_READY | NO | Record-level rights and scope approvals are not established. |
+| ENGINEERING_READY | YES | Exact-main Verify 41315341826 passed build, unit, smoke, browser/axe, budget, Lighthouse and dist-drift checks; Cloudflare production build succeeded. |
+| DATA_READY | NO | Public learning data remains empty. |
+| PUBLICATION_READY | NO | Record-level rights and explicit scope approvals are not established. |
 | LEARNING_READY | NO | No real production learning content; synthetic tests do not establish learning readiness. |
 | MONETIZATION_READY | DEFERRED | Separate decision; not a current priority. |
 
 ## Resume actions
 
-1. Implement a measured route JavaScript payload and CLS improvement for angka, flashcards and dictionary; keep production data empty and noindex.
-2. Run exact-PR Verify, browser tests, Lighthouse and Workers Build; compare metrics, then verify merged-main checks.
-3. Retry live Pages readback when a targetable provider/browser surface is available; do not claim live content was inspected until then.
-4. Keep synthetic fixtures test-only and production empty/noindex until rights and quality gates pass.
-5. Re-fetch both repository refs, visibility, Issues, PRs, Actions and private `latest.json` before each next batch.
+1. Continue A3 route performance work, prioritizing the measured mobile angka CLS (0.145) and its unused JavaScript opportunity (70,418 bytes); preserve synthetic-only game fixtures.
+2. Keep public content empty/noindex until data meets rights, provenance, schema and quality gates.
+3. Retry direct live readback through an available provider/browser surface; retain UNVERIFIED until the live artifact is inspected.
+4. Continue website and private data work independently; transfer no private language content.
+5. Re-fetch current refs, trees, visibility, Issues, PRs, Actions and private latest.json before each write.
 
 ## Previous checkpoint (superseded: 2026-11-01 10:32 UTC)
 ## Latest branch checkpoint (PR #39 validation pending)
