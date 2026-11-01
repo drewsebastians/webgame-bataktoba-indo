@@ -19,8 +19,6 @@
 
 ## Mission and constraints
 
-## Mission and constraints
-
 Build a useful responsive desktop and mobile browser game and browser PWA. Website engineering and private data research continue independently. Audio, pronunciation, and culture-led features are not current priorities.
 
 Keep drewsebastians/batak-indo-alignment-engine PRIVATE. Never move private or restricted language text into the public repository, logs, external services, or build artifacts without verified record-specific rights and explicit publication scope. Do not rewrite public Git history.
