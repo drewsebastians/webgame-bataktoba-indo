@@ -1,21 +1,21 @@
-# Resume handoff — 2026-11-01 08:36 UTC
+# Resume handoff — 2026-11-01 09:31 UTC
 
 ## Current checkpoint
 
-1. Webgame remains PUBLIC at main HEAD `ecebfe67ef17d033d9e9ee41fe0bbb7168cda78a`; PR #32 merged as this documentation-only checkpoint. The connected GitHub reader does not expose the current root tree SHA.
-2. PR #32 Verify run 41288169799 passed on head `90b7ea15c14da1664b8c521f1436c993ada4d4ba`: 215/215 unit tests (0 skipped), E2E smoke, 36/36 browser tests, asset budgets, 12 Lighthouse audits and committed-dist drift. Artifact: 13075514013. The merged tree contains no app/data changes from the tested head.
-3. Lighthouse Accessibility is 100 for all audits. Mobile Performance is 98/92/98/90/93/100; desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. JS/CSS budgets passed at 178,003/196,608 and 15,698/49,152 bytes.
-4. The PR #32 Workers Builds check succeeded on its PR head (build `fcfe85c3-eb27-4706-982a-7ae506267005`, version `240ef3ad-4d55-499b-bfe1-7f48dbd84690`). Final exact-main provider status is still UNVERIFIED: PR #31's pre-merge check failed, merged-SHA status is not exposed, and direct Pages reads failed.
-5. Public content remains empty/noindex (0 items, words, genuine phrases, sentences and warnings). Synthetic fixtures are test-only. No private/restricted data moved to public; history remains unchanged.
-6. Alignment Engine remains PRIVATE; its source metadata and language content remain there. No transfer.
-7. Readiness: ENGINEERING_READY=YES for verified browser/CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+1. Webgame is PUBLIC at main `7734c6e221dd74d4e942224c614e94156a915125` / tree `4fa5cf69f5aad042fafb4eeb680f44d2de81df50`; PR #35 merged the README CI pin correction. PR #34's workflow change is included.
+2. Exact-main Verify run [41293149232](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41293149232) passed 215/215 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits, and committed-dist drift all passed; Lighthouse artifact [13078286529](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41293149232/artifacts/13078286529).
+3. Accessibility scored 100 across all route/profile audits; mobile Performance was 98/92/98/90/93/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. JS/CSS budgets passed at 178,003/196,608 and 15,698/49,152 bytes.
+4. Exact-main Workers Builds succeeded (build 5a6c50cf-1546-4785-bebb-24621006087c, version 9d4e426e-5e31-47fe-8285-230a2a048923). Direct Pages readback remains unverified; treat the build as technical deployment evidence and do not claim live content inspection.
+5. Public content stays empty/noindex: 0 items, words, genuine phrases, sentences or warnings. Synthetic fixtures are test-only; no private/restricted content moved to public; no Git history rewrite.
+6. Alignment Engine stays PRIVATE. Its latest completed collection batch remains B23 / DEGRADED; B24 is metadata-only and source content remains gated by rights and approved storage.
+7. Readiness: ENGINEERING_READY=YES for exact-main browser CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next
 
-1. Continue A3 engineering independently of corpus readiness.
-2. Resolve exact-main Workers Builds state and direct live readback; verify home, privacy, robots.txt, manifest and CSP response.
-3. Keep empty/noindex publication until rights, provenance, quality and publication gates pass.
-4. Re-fetch both repositories and their current states before the next write batch; retrieve current tree SHA through an authorized Git object surface when available.
+1. Continue A3 responsive browser work and investigate mobile flashcards/dictionary performance.
+2. Retry live Pages readback when a targetable browser/provider surface is available; keep live production status UNVERIFIED until then.
+3. Keep public data empty/noindex and synthetic fixtures isolated.
+4. Re-fetch both repositories and all checkpoint sources before the next write batch.
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
