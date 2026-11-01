@@ -2004,6 +2004,11 @@ async function initLearn() {
   const poolItems = poolItemIds.map((id) => itemById.get(id)).filter(Boolean);
   const wordPool = words.items;
 
+  // The public topic pages start with an honest empty state in their HTML.
+  // Keep it in place when the published pool is empty so asynchronous data
+  // checks do not expand the lesson shell and shift the article below it.
+  if (poolItems.length === 0) return;
+
   function vocabRow(batakText, indonesiaText, statusPill) {
     return el(
       "div",
