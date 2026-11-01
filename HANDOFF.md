@@ -1,24 +1,24 @@
-# Resume handoff — 2026-11-01 11:01 UTC
+# Resume handoff — 2026-11-01 11:58 UTC
 
 ## Current checkpoint
 
-1. Webgame is PUBLIC at main 90c073e7a4ed0367cb0f845b6bcbf697a0c60671 / tree 2281e2a2c5d1fbddfafcf8d250176e6ba9044eb1. PR #39 is merged.
-2. Exact-main Verify [41299217543](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543) passed 216/216 unit, E2E smoke, 36/36 browser tests, budgets, 12 Lighthouse audits and dist drift; artifact [13081020550](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543/artifacts/13081020550). Workers Build `033df6e7-48ba-47de-9461-9265694afc12` succeeded.
-3. Accessibility scored 100 across route/profile audits. Mobile Performance was 97/92/98/90/94/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
-4. PR #39 made diagnostics visible below 95. CLS was 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary; the reports show large unused/unminified route assets. Next: implement a measured payload and layout-stability improvement, then compare Lighthouse on the same six routes.
-5. Direct Pages readback remains unverified. Public production content stays empty/noindex; synthetic fixtures remain isolated; Git history has not been rewritten.
-6. Readiness: ENGINEERING_READY=YES for current browser flow and CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+1. Webgame is PUBLIC at main `873c00cf11b4941b138c7b319e53a57b145b4261` / tree `c0d326bb70bc2d892fc642cbc589a8c4c27b9d78`. PR #41 is merged; Issue #2 is closed and no PRs are open at this checkpoint.
+2. Exact-main Verify [41302976375](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375) passed 216/216 unit tests (0 failed/skipped), smoke, 36/36 browser tests, budgets, 12 Lighthouse audits and dist drift. Artifact [13082267265](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375/artifacts/13082267265). Cloudflare Workers Build `63eb22c7-1be5-4cd7-a591-e9542cc2e403` succeeded.
+3. Accessibility is 100 across all routes/profiles. Mobile Performance is 98/92/98/90/93/100 and desktop is 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
+4. Mobile CLS is 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary. The Lighthouse selectors identify shifted elements, not proven causes. Measured mobile opportunities include 70,418 unused JS bytes on angka, 11,534 unminified JS bytes on flashcards, and 9,828 unminified JS bytes on dictionary.
+5. Production remains empty/noindex: 0 published learning items and 0 warnings; synthetic fixtures are isolated. Direct live Pages readback is unverified.
+6. Readiness: ENGINEERING_READY=YES for the current tested browser flows and CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next
 
-1. Inspect the current route loading/layout and build pipeline; implement the highest-value safe CSS/JS payload and CLS fix indicated by CI.
-2. Run full Verify, Lighthouse, and Workers Build on the exact PR head; verify the merged-main run and report scores.
-3. Retry live Pages readback when a targetable provider/browser surface is available; do not claim production content was inspected until then.
-4. Keep synthetic fixtures test-only and public content empty/noindex pending rights and quality gates.
-5. Re-fetch repository refs and checkpoints before each new batch.
-
+1. Implement and measure a route payload/CLS improvement while keeping synthetic fixtures out of production.
+2. Run full Verify, browser tests, Lighthouse and Workers Build on exact PR head; then verify merged-main checks.
+3. Retry direct Pages readback when a targetable browser surface is available.
+4. Keep published content empty/noindex until rights and quality gates pass.
+5. Re-fetch current refs and open PRs before each next write.
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
+
 ## Current checkpoint
 
 1. Webgame is PUBLIC at base main `3c5d3946c3ef3dd0eea756fbc8235f047ce39c76` / tree `5f2c37f38e3232967827f52b8da93e91e1937eca`. PR #39 (`3eeea62d35ad22914e3ab7cbfeaebb381293c421`) is open and checks are pending.
