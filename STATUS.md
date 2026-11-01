@@ -1,20 +1,20 @@
-# Execution status — 2026-11-01 02:20 UTC
+# Execution status — 2026-11-01 08:12 UTC
 
 ## Latest verified merged-main checkpoint
 
-- Repository is PUBLIC. Current main/tree: cb7c7a96f20fbbafa4b2073be4b3556586d6a249 / 13b29daec49b382e07de6c9aeb83b68e2e8c641b. PR #28, “security: disallow inline styles in public pages,” merged as cb7c7a96f20fbbafa4b2073be4b3556586d6a249; tested PR head was `d2cfd78425ba165451b43aedcb5ee730758c7c3d`.
-- Main Verify [#116 / run 41263675787](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41263675787) passed on the exact main SHA: 214/214 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-`dist` drift, and 12 Lighthouse audits. Report artifact: [13066475984](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41263675787/artifacts/13066475984).
-- Lighthouse accessibility scored 100 on every audited route/profile. Mobile performance: home 99, angka 93, games 98, flashcards 90, dictionary 93, progress 100. Desktop: home 100, angka 99, games 100, flashcards 100, dictionary 100, progress 100.
-- CSP now uses `'self'` for both `script-src` and `style-src`. Static style attributes were replaced with classes, dynamic style mutation was removed, and regression tests guard source and generated routes against inline styles. Ads remain disabled.
-- Cloudflare Workers Builds check [124722013685](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/124722013685) completed successfully for exact main. Provider build: [af3b725e-d9ab-41d4-bbb7-ddd249057613](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/af3b725e-d9ab-41d4-bbb7-ddd249057613); version `51d0207c-02f7-4f7c-b11c-423980ec8b12`. This verifies provider build status, not an independent live response readback.
-- Live readback of the Pages host could not be completed through the available web connector; local browser inspection stopped when the UI helper could not confidently identify the active browser URL. Keep the live artifact **UNVERIFIED** until home, dictionary, `robots.txt`, manifest and response CSP are read directly.
-- Production remains empty/noindex: 0 published items, words, genuine phrases, sentences or warnings. Fixtures remain synthetic-only; no private/restricted content was transferred. Public historical Git objects remain unchanged; no history rewrite was performed.
+- Repository visibility: PUBLIC. Verified main HEAD: `8a1ea9611483c90711ea1cf717bf6087cc83a962`. The connected GitHub commit reader does not return the root tree SHA; do not infer it. The checkpoint branch was created directly from this exact commit SHA, and file updates use current blob SHAs.
+- PR #30 merged as `fd20fe2e481900876b91bcbeb4e69ee614902d59`; PR #31 merged as `8a1ea9611483c90711ea1cf717bf6087cc83a962`. Issue #2 is closed; no open PRs were present at batch start.
+- Main Verify [#126 / run 41286770783](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41286770783) passed on exact main: 215/215 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Report artifact: [13075318914](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41286770783/artifacts/13075318914).
+- Lighthouse accessibility scored 100 on every audited route/profile. Mobile performance: home 98, angka 93, games 98, flashcards 90, dictionary 94, progress 100. Desktop: home 100, angka 99, games 100, flashcards 100, dictionary 100, progress 100.
+- Asset budgets passed: JavaScript 178,003/196,608 bytes across 18 files; CSS 15,698/49,152 bytes across one file.
+- Deployment is UNVERIFIED for this merged SHA. PR #31's Workers Builds check failed on its pre-merge head `2a7d00ea5ed4ddd5e94317f9964e51ad6a609202` (build `c7d05d30-bef2-4007-b1a3-88aa4089ea6a`). A separate Workers Builds check for the merged SHA had previously been observed in progress (build `a4f08713-b002-475d-8d10-e5c8b43a6452`); the connected check reader does not expose its final state. Direct reads of the Pages home, privacy page, robots.txt and manifest also failed from this environment. Neither pre-merge failure nor unavailable live reads establish the final production state.
+- Production learning content remains empty/noindex: 0 published items, words, genuine phrases, sentences or warnings. Synthetic fixtures remain isolated; no private/restricted content was transferred. Public Git history was not rewritten.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for merged browser flows, the fail-closed adapter and current CSP scope; wider A3 work continues | Main Verify #116 passed unit, smoke, browser, budget, drift and Lighthouse checks. |
+| ENGINEERING_READY | YES for current browser flows, adapter, CSP and automated CI scope | Main Verify #126 passed unit, smoke, browser, budgets, Lighthouse and dist checks. |
 | DATA_READY | NO | Published learning data remains empty. |
 | PUBLICATION_READY | NO | No record-level public rights and upstream scope authorization. |
 | LEARNING_READY | NO | No real production learning content; synthetic tests do not establish learning readiness. |
@@ -22,9 +22,10 @@
 
 ## Resume actions
 
-1. Continue A3 desktop/mobile browser UX, accessibility, PWA/offline, privacy/security and route performance independently of corpus readiness.
-2. Retry direct live readback from a reachable browser surface and inspect the empty/noindex state plus CSP response header.
+1. Continue A3 browser UX, PWA/offline, accessibility, privacy/security and route performance independently of corpus readiness.
+2. Recheck exact-main Workers Builds status through an accessible provider/check surface, diagnose the PR #31 failure, then read the live empty/noindex state and CSP headers before marking production verified.
 3. Keep production content empty and fixtures synthetic until rights, provenance, quality and publication gates pass.
+4. Re-fetch both repositories, visibility, main/tree, Issues, PRs, Actions and private latest.json before the next write batch. The current GitHub connector exposes commit/file SHAs but not the root tree SHA; obtain that from an authorized Git object surface rather than guessing.
 
 ## Previous checkpoint (superseded: 2026-11-01 00:50 UTC)
 
