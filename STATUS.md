@@ -1,29 +1,32 @@
-# Execution status — 2026-11-01 01:27:51 UTC
+# Execution status — 2026-11-01 02:20 UTC
 
 ## Latest verified merged-main checkpoint
 
-- Repository is PUBLIC. Current main/tree: da4a41403e40bb4c4ae8b55c7319ec1283065c9b / ce07c4ac18407da2c396b270158797d51f998157. PR #26, “security: disallow inline executable scripts,” is merged.
-- Main Verify #112 / run 41260476681 passed on exact main SHA da4a41403e40bb4c4ae8b55c7319ec1283065c9b: 213/213 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-dist drift, and 12 Lighthouse audits. Report artifact: https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41260476681/artifacts/13065470311.
-- Lighthouse accessibility scored 100/100 for every audited route/profile. Mobile performance: home 100, angka 92, games 97, flashcards 90, dictionary 93, progress 100. Desktop: home 100, angka 99, games 100, flashcards 100, dictionary 100, progress 100.
-- Security hardening removes `'unsafe-inline'` from `script-src`; `style-src` retains inline style support for the existing static layout attributes. Source and built CSP match. Regression coverage scans 21 source HTML routes and found no inline executable script (JSON-LD is data-only), inline event handler, or `javascript:` URL.
-- Cloudflare Workers Builds reports a successful production-service build for exact main SHA da4a41403e40bb4c4ae8b55c7319ec1283065c9b: build `f70ecd9c-c03d-4344-bd5f-417944e195dd`, version `2a8051f0-01e6-4a20-9f93-40f2c4a2debf`. Direct live readback of home, dictionary, robots.txt and manifest failed through the available web connector. Record provider build success, but keep live artifact verification open and do not mark production/live verified.
-- Main verification confirms 0 published learning items, words, genuine phrases, sentences, or warnings. Test fixtures remain isolated; no private/restricted text or synthetic learning content was published.
+- Repository is PUBLIC. Current main/tree: cb7c7a96f20fbbafa4b2073be4b3556586d6a249 / 13b29daec49b382e07de6c9aeb83b68e2e8c641b. PR #28, “security: disallow inline styles in public pages,” merged as cb7c7a96f20fbbafa4b2073be4b3556586d6a249; tested PR head was `d2cfd78425ba165451b43aedcb5ee730758c7c3d`.
+- Main Verify [#116 / run 41263675787](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41263675787) passed on the exact main SHA: 214/214 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-`dist` drift, and 12 Lighthouse audits. Report artifact: [13066475984](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41263675787/artifacts/13066475984).
+- Lighthouse accessibility scored 100 on every audited route/profile. Mobile performance: home 99, angka 93, games 98, flashcards 90, dictionary 93, progress 100. Desktop: home 100, angka 99, games 100, flashcards 100, dictionary 100, progress 100.
+- CSP now uses `'self'` for both `script-src` and `style-src`. Static style attributes were replaced with classes, dynamic style mutation was removed, and regression tests guard source and generated routes against inline styles. Ads remain disabled.
+- Cloudflare Workers Builds check [124722013685](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/124722013685) completed successfully for exact main. Provider build: [af3b725e-d9ab-41d4-bbb7-ddd249057613](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/af3b725e-d9ab-41d4-bbb7-ddd249057613); version `51d0207c-02f7-4f7c-b11c-423980ec8b12`. This verifies provider build status, not an independent live response readback.
+- Live readback of the Pages host could not be completed through the available web connector; local browser inspection stopped when the UI helper could not confidently identify the active browser URL. Keep the live artifact **UNVERIFIED** until home, dictionary, `robots.txt`, manifest and response CSP are read directly.
+- Production remains empty/noindex: 0 published items, words, genuine phrases, sentences or warnings. Fixtures remain synthetic-only; no private/restricted content was transferred. Public historical Git objects remain unchanged; no history rewrite was performed.
 
 ## Readiness gates
 
 | Gate | State | Evidence |
 |---|---|---|
-| ENGINEERING_READY | YES for the merged adapter, metadata mapping, CSP hardening and synthetic/browser test scope; broader A3 work continues | Verify #112 passed 213 unit, smoke, 36 browser, budgets, drift and 12 Lighthouse audits. |
-| DATA_READY | NO | Public production data remains empty; no approved real learning records are available. |
-| PUBLICATION_READY | NO | No record-level rights and upstream policy grant allows publication. |
-| LEARNING_READY | NO | No real production learning content is available; synthetic tests do not establish learning readiness. |
+| ENGINEERING_READY | YES for merged browser flows, the fail-closed adapter and current CSP scope; wider A3 work continues | Main Verify #116 passed unit, smoke, browser, budget, drift and Lighthouse checks. |
+| DATA_READY | NO | Published learning data remains empty. |
+| PUBLICATION_READY | NO | No record-level public rights and upstream scope authorization. |
+| LEARNING_READY | NO | No real production learning content; synthetic tests do not establish learning readiness. |
 | MONETIZATION_READY | DEFERRED | Separate future gate; not a current priority. |
 
 ## Resume actions
 
-1. Continue independent A3 responsive UX, accessibility, PWA/offline and privacy/security work.
-2. Retry direct live artifact inspection when a connected browser can reach the configured Pages host; verify the live CSP and empty/noindex output.
-3. Keep published data empty/noindex until source rights and quality gates pass; keep private/restricted content and synthetic fixtures out of production.
+1. Continue A3 desktop/mobile browser UX, accessibility, PWA/offline, privacy/security and route performance independently of corpus readiness.
+2. Retry direct live readback from a reachable browser surface and inspect the empty/noindex state plus CSP response header.
+3. Keep production content empty and fixtures synthetic until rights, provenance, quality and publication gates pass.
+
+## Previous checkpoint (superseded: 2026-11-01 00:50 UTC)
 
 ## Previous checkpoint (superseded: 2026-11-01 00:50 UTC)
 
