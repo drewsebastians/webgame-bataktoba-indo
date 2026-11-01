@@ -1,5 +1,33 @@
-# Execution status — 2026-11-01 10:32 UTC
+# Execution status — 2026-11-01 11:01 UTC
 
+## Latest verified main checkpoint
+
+- Repository is PUBLIC at main 90c073e7a4ed0367cb0f845b6bcbf697a0c60671 / tree 2281e2a2c5d1fbddfafcf8d250176e6ba9044eb1. PR #39 merged the Lighthouse diagnostics threshold.
+- Exact-main Verify run [41299217543](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543) passed 216/216 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse artifact: [13081020550](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41299217543/artifacts/13081020550).
+- Lighthouse Accessibility scored 100 across every route/profile. Mobile Performance for home/angka/games/flashcards/dictionary/progress was 97/92/98/90/94/100; desktop was 100/99/100/100/100/100.
+- CI now prints route diagnostics below 95 Performance. Mobile CLS was 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary. Top measured opportunities: angka unused JS 70,418 bytes and unminified JS 30,418 bytes; flashcards unminified JS 11,534 bytes and unused CSS 10,524 bytes; dictionary unminified JS 9,828 bytes and unused CSS 10,461 bytes. These reports point to route asset size and layout stability work.
+- Exact-main Workers Build succeeded (build 033df6e7-48ba-47de-9461-9265694afc12). Direct Pages readback remains UNVERIFIED; build success does not establish live artifact inspection.
+- Production remains empty/noindex: 0 published items, words, genuine phrases, sentences and warnings. Synthetic fixtures remain test-only; Git history has not been rewritten.
+
+## Readiness gates
+
+| Gate | State | Evidence |
+|---|---|---|
+| ENGINEERING_READY | YES for tested browser flows, synthetic fixture coverage, diagnostics and exact-main CI | Verify 41299217543 passed unit, smoke, browser, budget, Lighthouse and dist-drift checks. |
+| DATA_READY | NO | Published learning data remains empty. |
+| PUBLICATION_READY | NO | Record-level rights and scope approvals are not established. |
+| LEARNING_READY | NO | No real production learning content; synthetic tests do not establish learning readiness. |
+| MONETIZATION_READY | DEFERRED | Separate future gate; not current priority. |
+
+## Resume actions
+
+1. Use the measured mobile report to reduce route asset payloads and CLS on angka, flashcards and dictionary; re-run Lighthouse and compare exact route results.
+2. Retry direct Pages readback through a targetable provider/browser surface. Keep live production UNVERIFIED until the actual artifact is inspected.
+3. Keep public content empty/noindex and fixtures synthetic until source rights, provenance, quality and publication gates pass.
+4. Re-fetch both repositories, visibility, main/tree, Issues, PRs, Actions and checkpoints before the next write batch.
+
+
+## Previous checkpoint (superseded: 2026-11-01 10:32 UTC)
 ## Latest branch checkpoint (PR #39 validation pending)
 
 - Repository is PUBLIC. Verified base main is `3c5d3946c3ef3dd0eea756fbc8235f047ce39c76`, root tree `5f2c37f38e3232967827f52b8da93e91e1937eca`.
