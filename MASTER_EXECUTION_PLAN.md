@@ -1,19 +1,21 @@
 # Master execution plan
 
-## Current checkpoint — 2026-11-01 02:20 UTC
+## Current checkpoint — 2026-11-01 08:12 UTC
 
-- PUBLIC main/tree: cb7c7a96f20fbbafa4b2073be4b3556586d6a249 / 13b29daec49b382e07de6c9aeb83b68e2e8c641b. PR #28 (“security: disallow inline styles in public pages”) merged; tested head d2cfd78425ba165451b43aedcb5ee730758c7c3d.
-- Main Verify [#116 / 41263675787](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41263675787) passed on exact main: 214/214 unit tests (0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-`dist` drift and 12 Lighthouse audits. Artifact 13066475984. Accessibility is 100 on every route/profile; mobile Performance scores are home 99, angka 93, games 98, flashcards 90, dictionary 93, progress 100; desktop scores are 100, 99, 100, 100, 100, 100 respectively.
-- CSP now sets both `script-src` and `style-src` to `'self'`; static inline style attributes and dynamic style mutation were removed. Regression coverage protects source and built output. Ads remain disabled.
-- Cloudflare exact-main Workers Builds check 124722013685 is successful; build af3b725e-d9ab-41d4-bbb7-ddd249057613 / version 51d0207c-02f7-4f7c-b11c-423980ec8b12. Live readback is UNVERIFIED: web connector access failed and local browser helper could not identify the active URL.
-- Production remains empty/noindex with 0 items, words, genuine phrases, sentences and warnings. Synthetic fixtures remain test-only; no private/restricted content was transferred; public history was not rewritten.
-- Readiness: ENGINEERING_READY=YES for verified browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- PUBLIC repository remains PUBLIC at main `8a1ea9611483c90711ea1cf717bf6087cc83a962`. PR #30 and PR #31 are merged; public Issue #2 is closed. The connected GitHub commit reader did not expose the current root tree SHA; no tree value is inferred.
+- Exact-main Verify [#126 / 41286770783](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41286770783) passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, committed-dist drift and 12 Lighthouse audits. Artifact 13075318914. Accessibility is 100 on every route/profile; mobile Performance scores are 98/93/98/90/94/100 and desktop scores 100/99/100/100/100/100 for home, angka, games, flashcards, dictionary and progress.
+- Asset budget passed at 178,003/196,608 JavaScript bytes across 18 files and 15,698/49,152 CSS bytes.
+- Exact-main production deployment remains UNVERIFIED: PR #31 Workers Builds failed on pre-merge SHA `2a7d00ea5ed4ddd5e94317f9964e51ad6a609202` (build `c7d05d30-bef2-4007-b1a3-88aa4089ea6a`); the merged-SHA build `a4f08713-b002-475d-8d10-e5c8b43a6452` was last observed in progress and its final result is unavailable through connected tools. Direct Pages readback failed.
+- Production remains empty/noindex with 0 items, words, genuine phrases, sentences and warnings. Synthetic fixtures remain test-only; no private/restricted content transferred; public Git history was not rewritten.
+- Readiness: ENGINEERING_READY=YES for current browser/CI scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Alignment Engine remains PRIVATE; its B24 metadata-only state and source details remain recorded there. No private details are included in this public plan.
 
 ## Next actions
 
-1. Continue A3 responsive desktop/mobile browser UX, PWA/offline, accessibility, privacy/security and route performance independently of data collection.
-2. Reattempt direct live readback of home, dictionary, robots.txt, manifest and CSP on a reachable browser surface; do not claim live production verification before that succeeds.
-3. Preserve empty/noindex public content until source-specific rights, provenance, quality and publication gates pass.
+1. Continue independent A3 responsive desktop/mobile browser UX, PWA/offline, accessibility, privacy/security and route performance.
+2. Investigate the failed PR provider check and obtain exact-main Workers Builds status, then inspect the live empty/noindex output and CSP headers.
+3. Keep public content empty until source rights, provenance, quality and publication gates pass.
+4. Before the next write batch, verify both repositories, issues, open PRs, main/tree, Actions and private latest.json. The currently connected GitHub API exposes commit/file SHAs but omits root tree SHA; retrieve it from an authorized Git object interface instead of guessing.
 
 ## Mission and constraints
 

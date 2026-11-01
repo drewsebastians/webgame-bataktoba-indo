@@ -80,3 +80,8 @@ The 31-Oct public main baseline contains 129,845 bytes of minified JavaScript ac
 ## A3 integration checkpoint
 
 The production JS/CSS budget is merged and passes CI. Main run 41195989468 passed 196 unit tests, E2E smoke, 33 browser tests, budget, release prerequisites and dist drift. Cloudflare reported a successful production build for merge commit ffe009e9de10a1ddd144bb0a5d51be746f81b5cc. A direct live readback could not be completed through the available web connector. Full Lighthouse score measurement and direct live inspection remain follow-up work; published learning content stays empty.
+
+
+## A3 verified continuation checkpoint — 2026-11-01 08:12 UTC
+
+Main `8a1ea9611483c90711ea1cf717bf6087cc83a962` passed Verify #126 / 41286770783: 215/215 unit tests (0 skipped), 36/36 browser tests, E2E smoke, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Accessibility scored 100 across all route/profile audits. Mobile Performance is 98/93/98/90/94/100 and desktop is 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. Public content remains empty/noindex and synthetic fixtures remain test-only. PR #31's provider check failed before merge; exact-main provider status and live readback are still unverified. Continue A3 browser engineering independently, and keep publication gated on rights, provenance and quality.
