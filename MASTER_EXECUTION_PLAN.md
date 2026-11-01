@@ -1,21 +1,22 @@
 # Master execution plan
 
-## Current checkpoint — 2026-11-01 10:00 UTC
+## Current checkpoint — 2026-11-01 11:58 UTC
 
-- PUBLIC main HEAD is `84c05624f959f235d16a790d3c479e74f68b9564` / tree `e67bd8ecbc0651afb37899a801f3b25195d35028`; PRs #35/#36/#37 are merged. The latest README documents immutable Node 24 actions and their actual step order.
-- Exact-main Verify [run 41295166507](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41295166507) passed 215/215 unit tests (0 skipped), E2E smoke, 36/36 Playwright, JS/CSS budgets, 12 Lighthouse audits and dist drift; artifact 13078943622.
-- Lighthouse Accessibility is 100 on all route/profile audits; mobile Performance is 98/92/98/90/93/100 and desktop is 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress.
-- Exact-main Workers Builds succeeded (build `7bd60fc7-785d-4c3f-9648-233ae7354ac8`, version `04d00dca-64bb-4c83-bb23-86d60d2ea932`). Direct Pages readback remains UNVERIFIED.
-- Production remains empty/noindex with 0 published records; fixtures remain test-only; no private/restricted content moved; Git history was not rewritten.
-- Readiness: ENGINEERING_READY=YES for exact-main browser CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Webgame remains PUBLIC at main `873c00cf11b4941b138c7b319e53a57b145b4261` / tree `c0d326bb70bc2d892fc642cbc589a8c4c27b9d78`; PR #41 merged and Issue #2 is closed. No PRs were open at checkpoint.
+- Exact-main Verify [41302976375](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375) passed 216/216 unit tests (0 skipped), E2E smoke, 36/36 Playwright, JS/CSS budgets, 12 Lighthouse audits and dist drift; artifact [13082267265](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41302976375/artifacts/13082267265).
+- Accessibility scored 100 on all routes/profiles. Mobile Performance is 98/92/98/90/93/100; desktop is 100/99/100/100/100/100. Mobile CLS is 0.145 on angka, 0.204 on flashcards and 0.149 on dictionary; Lighthouse identifies shifted elements but not their confirmed causes.
+- Cloudflare Workers production build `63eb22c7-1be5-4cd7-a591-e9542cc2e403` / version `7899b356-6ada-4cc6-9753-2bc7ea3d9751` succeeded. Direct Pages readback is UNVERIFIED.
+- Public learning data remains empty/noindex with 0 items and 0 warnings; fixtures are synthetic-only. No private/restricted data was added and public Git history was not rewritten.
+- The Alignment Engine remains PRIVATE; B23 is still the latest completed batch and B24 remains metadata-only. No private language data was transferred to this repository.
 
 ## Next actions
 
-1. Continue independent A3 responsive browser UX, PWA/offline, accessibility, privacy/security and route performance.
-2. Prioritize measured mobile Performance follow-up on flashcards (90) and dictionary (93).
-3. Retry direct live Pages readback through an accessible targetable provider/browser surface; keep live production status unverified until inspected.
-4. Keep public data empty/noindex until rights, provenance, quality and publication gates pass.
-5. Re-fetch both repositories, main/tree, Issues, PRs, Actions and latest.json before the next write batch.
+1. Implement measured route payload and CLS improvements for angka, flashcards and dictionary, with synthetic E2E coverage isolated from production.
+2. Run exact-PR unit/E2E/Lighthouse/budget/dist-drift checks and Cloudflare Build; compare exact route metrics, then verify merged-main.
+3. Continue independent private B24 metadata/right discovery while keeping the corpus restricted and unchanged unless permitted access is verified.
+4. Retry direct Pages readback when an accessible targetable browser/provider surface is available.
+5. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
+6. Re-fetch both repositories' visibilities, refs/trees, Issues, PRs, Actions and private `latest.json` before each batch. Use expected SHAs; never force-push or rewrite public history.
 
 ## Mission and constraints
 
@@ -23,14 +24,14 @@ Build a useful responsive desktop and mobile browser game and browser PWA. Websi
 
 Keep drewsebastians/batak-indo-alignment-engine PRIVATE. Never move private or restricted language text into the public repository, logs, external services, or build artifacts without verified record-specific rights and explicit publication scope. Do not rewrite public Git history.
 
-For every batch, re-check both repository visibilities, main/tree SHAs, Issues, PRs, Actions, and private latest.json. Use expected-SHA updates, non-force ref moves, tests and deployment evidence. Keep persistent STATUS, HANDOFF, and WORK_QUEUE checkpoints current.
+For every batch, re-check both repository visibilities, main/tree SHAs, Issues, PRs, Actions and private latest.json. Use expected-SHA updates, non-force ref moves, tests and deployment evidence. Keep persistent STATUS, HANDOFF and WORK_QUEUE checkpoints current.
 
 ## Independent readiness gates
 
 | Gate | Current rule |
 |---|---|
 | ENGINEERING_READY | Website features and isolated synthetic flows build and pass CI; does not imply language content is ready. |
-| DATA_READY | Specific records have sufficient provenance, evidence, quality, topics, alternatives, and per-game eligibility. |
+| DATA_READY | Specific records have sufficient provenance, evidence, quality, topics, alternatives and per-game eligibility. |
 | PUBLICATION_READY | Record rights and upstream scope explicitly permit public use. |
 | LEARNING_READY | Lawful published lessons work end-to-end and production is checked. |
 | MONETIZATION_READY | Separate future gate; no current priority. |
