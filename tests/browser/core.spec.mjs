@@ -34,6 +34,37 @@ test.describe("core learning flows", () => {
     await expect(page.locator("#app-error")).not.toContainText("SYNTHETIC_");
   });
 
+  test("empty topic state stays stable while the public catalog loads", async ({ page }) => {
+    await page.route(/\/data\/published\/(topics|learning-items|word-pairs|lessons)\.json$/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 150));
+      await route.continue();
+    });
+    await page.addInitScript(() => {
+      document.addEventListener("DOMContentLoaded", () => {
+        const root = document.querySelector("#lesson-root");
+        const rect = root?.getBoundingClientRect();
+        window.__lessonRootAtDomReady = {
+          text: root?.innerText,
+          height: rect?.height,
+          bottom: rect?.bottom,
+        };
+      }, { once: true });
+    });
+
+    await page.goto("/learn/angka/");
+    const root = page.locator("#lesson-root");
+    await expect(root).toContainText("Materi untuk tema ini belum terbit");
+    await page.waitForLoadState("networkidle");
+
+    const before = await page.evaluate(() => window.__lessonRootAtDomReady);
+    const after = await root.evaluate((node) => {
+      const rect = node.getBoundingClientRect();
+      return { text: node.innerText, height: rect.height, bottom: rect.bottom };
+    });
+    expect(after).toEqual(before);
+    await expect(root).not.toContainText("SYNTHETIC_");
+  });
+
   test("home: onboarding appears for new users and can be skipped", async ({ page }) => {
     await page.goto("/");
     const skip = page.getByRole("button", { name: "Lewati", exact: true });
@@ -238,7 +269,7 @@ test.describe("security & privacy invariants", () => {
       expect(body).not.toContain(banned);
     }
     await expect(
-      page.getByText(/menunggu review penutur|Lesson latihan penuh belum terbit/i).first(),
+      page.getByText(/Materi untuk tema ini belum terbit|Lesson latihan penuh belum terbit/i).first(),
     ).toBeVisible();
   });
 });
