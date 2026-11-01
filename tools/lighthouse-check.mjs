@@ -86,22 +86,36 @@ export function summarizePerformanceDiagnostics(report) {
     .sort((a, b) => b.savingsMs - a.savingsMs || b.savingsBytes - a.savingsBytes || a.id.localeCompare(b.id))
     .slice(0, 3);
 
-  return { metrics, opportunities };
+  const layoutShiftItems = audits["layout-shift-elements"]?.details?.items;
+  const layoutShifts = (Array.isArray(layoutShiftItems) ? layoutShiftItems : [])
+    .map(({ node, score }) => ({
+      selector: typeof node?.selector === "string" ? node.selector.slice(0, 160) : null,
+      score: Number.isFinite(score) ? score : null,
+    }))
+    .filter(({ selector, score }) => selector || (score !== null && score > 0))
+    .slice(0, 3);
+
+  return { metrics, opportunities, layoutShifts };
 }
 
 function formatPerformanceDiagnostics(summary) {
   const metrics = Object.entries(summary.metrics)
-    .map(([label, metric]) => `${label} ${metric.displayValue ?? metric.numericValue ?? "n/a"}`)
+    .map(([label, metric]) => label + " " + (metric.displayValue ?? metric.numericValue ?? "n/a"))
     .join("; ");
+  const layoutShifts = summary.layoutShifts.length
+    ? summary.layoutShifts.map(({ selector, score }) =>
+      (selector ?? "unknown selector") + " (score " + (score ?? "n/a") + ")",
+    ).join("; ")
+    : "none reported";
   const opportunities = summary.opportunities.length
     ? summary.opportunities.map(({ id, savingsMs, savingsBytes }) => {
       const savings = [];
-      if (savingsMs) savings.push(`${savingsMs} ms`);
-      if (savingsBytes) savings.push(`${savingsBytes} bytes`);
-      return `${id} (${savings.join(", ")})`;
+      if (savingsMs) savings.push(savingsMs + " ms");
+      if (savingsBytes) savings.push(savingsBytes + " bytes");
+      return id + " (" + savings.join(", ") + ")";
     }).join("; ")
     : "none reported";
-  return `metrics: ${metrics}; top opportunities: ${opportunities}`;
+  return "metrics: " + metrics + "; layout shifts: " + layoutShifts + "; top opportunities: " + opportunities;
 }
 
 async function waitForPreview(server) {
