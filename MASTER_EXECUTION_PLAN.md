@@ -1,14 +1,12 @@
 # Master execution plan
 
-## Current checkpoint — 2026-10-31 22:50 UTC
+## Current checkpoint — 2026-11-01 00:00:22 UTC
 
-- PUBLIC main after Dictionary route merge: e85d791e85ebc4dfed44d3f1c37483254fb49141 / tree a62514cc83bbcb54bdece6b6804807aa5b4d3d13. PR #21 merged as e85d791e85ebc4dfed44d3f1c37483254fb49141; Issue #2 remains closed for its synthetic browser/adapter acceptance, while A3 continues.
-- Post-merge Verify [#100 / 41249633492](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249633492) succeeded on main. PR Verify [#99 / 41249144975](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249144975) passed 209/209 unit tests (0 failed/0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse checks, and committed-dist drift.
-- Dictionary now has a dedicated hashed route entrypoint. Its browser flow uses isolated synthetic fixtures; CI confirmed synthetic markers are absent from public dist.
-- Lighthouse #99: accessibility 100/100 for all 12 route/profile runs. Mobile performance: home 98, angka 92, games 98, flashcards 90, dictionary 93, progress 100; desktop: 100, 99, 100, 100, 100, 100.
-- Production content remains empty/noindex: 0 published items, words, genuine phrases, or sentences. Historical Git objects remain intact; no history rewrite or restricted-content transfer occurred.
-- GitHub CI technical status is green. Provider deployment for e85d791e85ebc4dfed44d3f1c37483254fb49141 and direct live artifact readback still need separate verification; no production deployment claim is made here.
-- Readiness: ENGINEERING_READY=YES for verified synthetic/browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- PUBLIC main: 92a3f3f9f6c1abb8a774013c5e632d07e11a1441 / tree 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at c17fd28ef41f2b5612c18f0e98c2678ef91ee765; it maps contextual metadata through the existing fail-closed adapter and adds two synthetic-only tests.
+- PR Verify [#103 / 41254645516](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254645516) passed 211/211 unit tests (0 skipped), E2E smoke, 36/36 browser tests, and performance budgets (JS 178,035/196,608 bytes; CSS 15,491/49,152 bytes). It failed solely on committed-dist drift after the deterministic build regenerated `dist/sw.js` cache version; this commit includes that generated version. Lighthouse did not run in that failed attempt. Current-head release verification is still required.
+- Cloudflare Workers integration reported a successful `production` build on PR commit c17fd28ef41f2b5612c18f0e98c2678ef91ee765; direct live readback is not verified. Do not claim the production artifact is independently checked until post-merge provider and live checks complete.
+- Production remains empty/noindex with 0 published items, words, genuine phrases or sentences. No private/restricted content or source metadata was copied into this public repo.
+- Readiness: ENGINEERING_READY=YES for prior verified browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. This PR remains unmerged pending full current-head CI.
 
 ## Mission and constraints
 

@@ -1,14 +1,12 @@
-# Execution status — 2026-10-31 22:50 UTC
+# Execution status — 2026-11-01 00:00:22 UTC
 
 ## Verified checkpoint
 
-- Repository is PUBLIC. Main: e85d791e85ebc4dfed44d3f1c37483254fb49141; tree: a62514cc83bbcb54bdece6b6804807aa5b4d3d13.
-- PR #21 merged as e85d791e85ebc4dfed44d3f1c37483254fb49141; public Issue #2 is closed for its synthetic-only browser/adapter checkpoint; A3 remains active.
-- Post-merge Verify [#100 / 41249633492](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249633492) succeeded. PR Verify [#99 / 41249144975](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41249144975) passed 209/209 unit tests (0 failed/0 skipped), E2E smoke, 36/36 Playwright tests, performance budgets, 12 Lighthouse checks, and committed-dist drift.
-- Production assets: JavaScript 177,848/196,608 bytes across 18 files; CSS 15,491/49,152 bytes. Lighthouse #99 artifact: 13059963011. Accessibility was 100/100 on all 12 audits.
-- Dictionary route now uses an isolated hashed entrypoint. CI confirmed synthetic fixtures stay out of public dist.
-- Published learning content remains empty/noindex: 0 items, words, genuine phrases, sentences. Historical corpus-derived objects remain in earlier Git commits; no history rewrite occurred.
-- Cloudflare provider deployment for the merge and direct live Pages readback have not yet been independently verified.
+- Repository is PUBLIC. Main: 92a3f3f9f6c1abb8a774013c5e632d07e11a1441; tree: 4990a3391d6925c89a7067d43a0061206a3a63e1. PR #23 is open at head c17fd28ef41f2b5612c18f0e98c2678ef91ee765; its current merge base is main.
+- PR Verify [#103 / 41254645516](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41254645516) started on GitHub Actions. It passed 211/211 unit tests (0 failed/0 skipped), E2E smoke, 36/36 Playwright tests, and performance budgets (JavaScript 178,035/196,608 bytes; CSS 15,491/49,152 bytes). The build regenerated only the service-worker cache version in `dist/sw.js`; the committed-dist drift check failed on that generated difference, so Lighthouse did not run and the post-step drift gate was skipped.
+- This checkpoint adds the CI-generated `dist/sw.js` cache version and preserves the full run evidence. The PR adds four optional contextual fields in the fail-closed adapter; its two added adapter unit tests use synthetic-only values. No learning data is published or transferred.
+- Cloudflare Workers integration reported a successful `production` build for PR commit c17fd28ef41f2b5612c18f0e98c2678ef91ee765 in the PR timeline. Direct live-site readback remains unverified; do not treat it as independent production verification.
+- Production remains empty/noindex: 0 published items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only. No restricted/private corpus content was transferred and no history rewrite was performed.
 
 ## Readiness gates
 
