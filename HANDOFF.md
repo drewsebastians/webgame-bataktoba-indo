@@ -1,21 +1,21 @@
-# Resume handoff — 2026-11-01 09:31 UTC
+# Resume handoff — 2026-11-01 10:00 UTC
 
 ## Current checkpoint
 
-1. Webgame is PUBLIC at main `7734c6e221dd74d4e942224c614e94156a915125` / tree `4fa5cf69f5aad042fafb4eeb680f44d2de81df50`; PR #35 merged the README CI pin correction. PR #34's workflow change is included.
-2. Exact-main Verify run [41293149232](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41293149232) passed 215/215 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, JS/CSS budgets, 12 Lighthouse audits, and committed-dist drift all passed; Lighthouse artifact [13078286529](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41293149232/artifacts/13078286529).
-3. Accessibility scored 100 across all route/profile audits; mobile Performance was 98/92/98/90/93/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. JS/CSS budgets passed at 178,003/196,608 and 15,698/49,152 bytes.
-4. Exact-main Workers Builds succeeded (build 5a6c50cf-1546-4785-bebb-24621006087c, version 9d4e426e-5e31-47fe-8285-230a2a048923). Direct Pages readback remains unverified; treat the build as technical deployment evidence and do not claim live content inspection.
-5. Public content stays empty/noindex: 0 items, words, genuine phrases, sentences or warnings. Synthetic fixtures are test-only; no private/restricted content moved to public; no Git history rewrite.
-6. Alignment Engine stays PRIVATE. Its latest completed collection batch remains B23 / DEGRADED; B24 is metadata-only and source content remains gated by rights and approved storage.
+1. Webgame is PUBLIC at main `84c05624f959f235d16a790d3c479e74f68b9564` / tree `e67bd8ecbc0651afb37899a801f3b25195d35028`. PRs #35, #36 and #37 are merged; PR #37 corrected the README's CI step order.
+2. Exact-main Verify run [41295166507](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41295166507) passed 215/215 unit tests (0 failed, 0 skipped), E2E smoke, 36/36 Playwright tests, budgets, 12 Lighthouse audits and committed-dist drift; artifact [13078943622](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41295166507/artifacts/13078943622).
+3. Accessibility scored 100 across all route/profile audits; mobile Performance was 98/92/98/90/93/100 and desktop 100/99/100/100/100/100 for home/angka/games/flashcards/dictionary/progress. JS/CSS budgets were 178,003/196,608 and 15,698/49,152 bytes.
+4. Exact-main Workers Builds succeeded (build `7bd60fc7-785d-4c3f-9648-233ae7354ac8`, version `04d00dca-64bb-4c83-bb23-86d60d2ea932`). Direct Pages readback remains unverified; treat the build as technical deployment evidence, not live-content inspection.
+5. Public content remains empty/noindex: 0 items, words, genuine phrases, sentences or warnings. Synthetic fixtures are test-only; no private/restricted content moved to public; Git history remains unchanged.
+6. Alignment Engine remains PRIVATE at `b631686de0b9169db62dd71ed04517f718d4820d`; B23 remains latest / DEGRADED and B24 metadata-only. Its root tree SHA is not exposed by the connected private-repository reader.
 7. Readiness: ENGINEERING_READY=YES for exact-main browser CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ## Next
 
 1. Continue A3 responsive browser work and investigate mobile flashcards/dictionary performance.
-2. Retry live Pages readback when a targetable browser/provider surface is available; keep live production status UNVERIFIED until then.
+2. Retry live Pages readback when an accessible targetable provider/browser surface is available; keep production status UNVERIFIED until readback.
 3. Keep public data empty/noindex and synthetic fixtures isolated.
-4. Re-fetch both repositories and all checkpoint sources before the next write batch.
+4. Continue private metadata-only B24 discovery; do not acquire corpus until rights/storage gates clear.
 
 ## Archived handoff records (preserved; superseded by the current instructions above)
 
