@@ -67,6 +67,16 @@ test("summarizes performance metrics and ranks measured opportunities", () => {
       "speed-index": { displayValue: "1.4 s", numericValue: 1400 },
       "total-blocking-time": { displayValue: "120 ms", numericValue: 120 },
       "cumulative-layout-shift": { displayValue: "0.02", numericValue: 0.02 },
+      "layout-shift-elements": {
+        details: {
+          type: "table",
+          items: [
+            { score: 0.12, node: { selector: "main > .lesson-card" } },
+            { score: 0.04, node: { selector: ".site-footer" } },
+            { score: 0, node: { selector: ".stable" } },
+          ],
+        },
+      },
       "render-blocking-resources": {
         details: { type: "opportunity", overallSavingsMs: 120, overallSavingsBytes: 4500 },
       },
@@ -87,6 +97,10 @@ test("summarizes performance metrics and ranks measured opportunities", () => {
     { id: "unused-javascript", savingsMs: 80, savingsBytes: 9000 },
     { id: "modern-image-formats", savingsMs: 0, savingsBytes: 12000 },
   ]);
+  assert.deepEqual(summary.layoutShifts, [
+    { selector: "main > .lesson-card", score: 0.12 },
+    { selector: ".site-footer", score: 0.04 },
+  ]);
 });
 
 test("reports actionable diagnostics for all routes below the 95-point target", () => {
@@ -104,4 +118,5 @@ test("diagnostic summary tolerates a missing audit payload", () => {
     metric.displayValue === null && metric.numericValue === null,
   ));
   assert.deepEqual(summary.opportunities, []);
+  assert.deepEqual(summary.layoutShifts, []);
 });
