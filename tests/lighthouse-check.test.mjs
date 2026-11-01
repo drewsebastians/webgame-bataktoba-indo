@@ -67,7 +67,7 @@ test("summarizes performance metrics and ranks measured opportunities", () => {
       "speed-index": { displayValue: "1.4 s", numericValue: 1400 },
       "total-blocking-time": { displayValue: "120 ms", numericValue: 120 },
       "cumulative-layout-shift": { displayValue: "0.02", numericValue: 0.02 },
-      "layout-shift-elements": {
+      "layout-shifts": {
         details: {
           type: "table",
           items: [
