@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { hasLessonHistory, shouldOfferOnboarding } from "../../assets/js/onboarding.js";
+import { getOnboarding, hasLessonHistory, saveOnboarding, shouldOfferOnboarding } from "../../assets/js/onboarding.js";
 
 test("onboarding is offered only before meaningful progress", () => {
   assert.equal(shouldOfferOnboarding({ answered: 0, sessions: [], lessons: {} }), true);

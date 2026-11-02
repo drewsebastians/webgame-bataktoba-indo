@@ -115,86 +115,88 @@ function renderHomeDynamic(container, wordPool) {
   const onboardingRecord = getOnboarding();
 
   function renderOnboarding() {
-    function choiceGroup(label, options, onPick) {
-      const group = el("fieldset", { className: "onboarding-group" });
-      group.append(el("legend", { text: label }));
-      const row = el("div", { className: "action-row" });
-      for (const option of options) {
-        const button = el("button", {
-          className: "button secondary",
-          text: option.label,
-          attrs: { type: "button" },
-        });
-        button.addEventListener("click", () => onPick(option));
-        row.append(button);
-      }
-      group.append(row);
-      return group;
-    }
-
-    let draft = {};
     const panel = el("section", { className: "section band onboarding-panel" });
     const body = el("div", { className: "section-inner" });
+    const group = el("fieldset", { className: "onboarding-group" });
+    group.append(el("legend", { text: "Pilih jumlah soal untuk sesi awal." }));
+    const options = el("div", { className: "action-row" });
+    const status = el("p", {
+      className: "feedback",
+      attrs: { "aria-live": "polite" },
+    });
+
+    for (const size of [5, 10, 20]) {
+      const button = el("button", {
+        className: "button secondary",
+        text: `${size} soal`,
+        attrs: { type: "button", "aria-pressed": "false" },
+      });
+      button.addEventListener("click", () => {
+        saveOnboarding({ sessionSize: size, skipped: false });
+        options.querySelectorAll("button").forEach((other) => {
+          other.setAttribute("aria-pressed", String(other === button));
+        });
+        status.textContent = `Preferensi sesi ${size} soal tersimpan di browser ini. Kamu bisa mengubahnya kapan saja di halaman Games.`;
+      });
+      options.append(button);
+    }
+    group.append(options);
+
+    const skip = el("button", {
+      className: "button secondary",
+      text: "Lewati",
+      attrs: { type: "button" },
+    });
+    skip.addEventListener("click", () => {
+      saveOnboarding({ sessionSize: 10, skipped: true });
+      const gamesLink = el("a", {
+        className: "button",
+        text: "Buka Games",
+        attrs: { href: "games/" },
+      });
+      replaceChildren(
+        body,
+        el("h2", { text: "Mulai cepat (opsional)" }),
+        el("p", {
+          className: "lead",
+          text: "Pilihan awal dilewati. Sesi default berisi 10 soal dan bisa diubah di halaman Games.",
+        }),
+        gamesLink,
+      );
+      gamesLink.focus();
+    });
+
     body.append(
       el("h2", { text: "Mulai cepat (opsional)" }),
-      el("p", { className: "lead", text: "Tiga pertanyaan ringkas agar rekomendasi lebih pas. Semua tersimpan lokal dan bisa dilewati." }),
+      el("p", {
+        className: "lead",
+        text: "Pilih panjang latihan awal. Preferensi ini tersimpan hanya di browser dan bisa diubah kapan saja.",
+      }),
+      group,
+      status,
+      el("div", { className: "action-row" }, skip),
     );
-
-    function renderStep() {
-      if (draft.durationMinutes) {
-        saveOnboarding({ ...draft, skipped: false });
-        renderHomeDynamic(container, wordPool);
-        return;
-      }
-      replaceChildren(body, el("h2", { text: "Mulai cepat (opsional)" }));
-      if (!draft.familiarity) {
-        body.append(
-          choiceGroup("Seberapa jauh Anda mengenal Bahasa Batak Toba?", [
-            { label: "Belum pernah", value: "belum" },
-            { label: "Beberapa kata", value: "beberapa-kata" },
-            { label: "Paham sedikit", value: "sedikit" },
-            { label: "Ingin review", value: "review" },
-          ], (option) => {
-            draft.familiarity = option.value;
-            renderStep();
-          }),
-        );
-      } else if (!draft.goal) {
-        body.append(
-          choiceGroup("Tujuan utama?", [
-            { label: "Keluarga", value: "keluarga" },
-            { label: "Percakapan dasar", value: "percakapan" },
-            { label: "Kosakata umum", value: "kosakata-umum" },
-            { label: "Koneksi budaya", value: "budaya" },
-            { label: "Latihan santai", value: "santai" },
-          ], (option) => {
-            draft.goal = option.value;
-            renderStep();
-          }),
-        );
-      } else {
-        body.append(
-          choiceGroup("Durasi sesi favorit?", [
-            { label: "3 menit", value: 3 },
-            { label: "5 menit", value: 5 },
-            { label: "10 menit", value: 10 },
-          ], (option) => {
-            draft.durationMinutes = option.value;
-            renderStep();
-          }),
-        );
-      }
-      const skip = el("button", { className: "button secondary", text: "Lewati", attrs: { type: "button" } });
-      skip.addEventListener("click", () => {
-        saveOnboarding({ ...draft, skipped: true });
-        renderHomeDynamic(container, wordPool);
-      });
-      body.append(el("div", { className: "action-row" }, skip));
-      replaceChildren(panel, body);
-    }
-
-    renderStep();
+    panel.append(body);
     replaceChildren(container, panel);
+  }
+
+  function renderSessionPreference() {
+    const card = el("section", { className: "section band continue-card" });
+    const inner = el("div", { className: "section-inner" });
+    inner.append(
+      el("h2", { text: "Sesi awalmu siap" }),
+      el("p", {
+        className: "lead",
+        text: `Preferensi saat ini: ${onboardingRecord.sessionSize} soal. Kamu bisa mengubah jumlahnya kapan saja di Games.`,
+      }),
+      el("a", {
+        className: "button",
+        text: "Buka Games",
+        attrs: { href: "games/" },
+      }),
+    );
+    card.append(inner);
+    replaceChildren(container, card);
   }
 
   function renderReturning() {
@@ -234,6 +236,7 @@ function renderHomeDynamic(container, wordPool) {
 
   if (shouldOfferOnboarding(progressState)) renderOnboarding();
   else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0 || hasLessonHistory(progressState)) renderReturning();
+  else if (onboardingRecord && !onboardingRecord.skipped) renderSessionPreference();
   else replaceChildren(container);
 }
 
@@ -558,7 +561,7 @@ async function initGames() {
     startedAt: Date.now(),
     matched: new Set(),
     selected: [],
-    sessionSize: 10,
+    sessionSize: getOnboarding()?.sessionSize ?? 10,
     sessionAnswers: [],
     inReviewMode: false,
   };
@@ -1348,7 +1351,8 @@ async function initGames() {
   $$(".session-size-button").forEach((button) =>
     button.addEventListener("click", () => {
       state.sessionSize = Number(button.dataset.size) || 10;
-      $$(".session-size-button").forEach((other) =>
+      saveOnboarding({ sessionSize: state.sessionSize, skipped: false });
+      $(".session-size-button").forEach((other) =>
         other.setAttribute("aria-pressed", String(other.dataset.size === String(state.sessionSize))),
       );
       if (modes[state.mode]?.kind !== "memory") startSession({ size: state.sessionSize });
