@@ -1,20 +1,20 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-02 04:08 UTC
+## Latest checkpoint — 2026-11-02 04:54 UTC
 
-- Webgame is **PUBLIC** at main/tree `58d45ce5ed7bbb45fd601a0b7189712883ea1a07` / `43e33e64cf5e35f3df40e2492a00054250f50fc7`; PR #49 onboarding preference is merged. Exact-head Verify [41383644095](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41383644095) and exact-main Verify [41384190761](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41384190761) passed. Both included 221 unit tests (0 skipped), smoke, performance budget, 40 browser tests, dist drift and 12 Lighthouse audits. All Accessibility scores were 100; mobile Performance was 98/98/98/99/99/100 and desktop was 100 across the six audited routes.
-- Cloudflare Workers Builds succeeded for production build `5f510877-edb8-4856-9ee7-7060e68085bd`. This verifies the provider build, not a direct live-page readback. The current runtime could not resolve the Pages hostname; `LIVE_READBACK=UNVERIFIED`.
-- Checkpoint PR [#50](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/50) head `60bac460bb3b9a82d9f293dd34802acdb495b3a5` passed exact-head Verify [41385538415](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41385538415), including the full suite above. This follow-up documentation commit still needs its own exact-head run.
-- The public catalog remains empty/noindex (0 learning items, words, genuine phrases and sentences); synthetic fixtures remain isolated from dist, and no private linguistic data was transferred. Issue #2 is closed; PR #50 is the only open Webgame PR at this checkpoint.
+- At checkpoint start, Webgame is **PUBLIC** at main/tree `ca1ec4ad2d0fd28c04109ff1fb587ad3a69c376d` / `c1e4657a57a7868dbd0bb5b3c9d4d1e8faeacbe6`. PR [#50](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/50) is merged; exact-main Verify [41387329437](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41387329437) passed.
+- PR [#51](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/51) fixes the homepage daily-practice route: the CTA opens `games/?practice=daily`, Games consumes the query and starts the existing due-first queue, and an isolated synthetic browser test checks the due item. Feature head `c69f6ac272417fe4c583f2d6da7894c89a0acf92` passed exact-head Verify [41390699539](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41390699539): 221/221 Node tests (0 skipped), E2E smoke, performance budget, 41/41 Playwright tests, committed-dist drift, and 12 Lighthouse audits. Accessibility was 100/100 on all audits; mobile Performance was 98/98/98/99/99/100 and desktop was 100 on all six routes.
+- This PR includes a checkpoint-only documentation refresh. Its resulting exact head must pass Verify before PR #51 is merged against the unchanged base.
+- Cloudflare Workers Builds reported successful build `817a713d-4ac7-4193-ab38-f5b394116313` for PR #50 head `a0a604b60093ab608a1c9a98952c6563d189cb9e`. This is provider-build evidence for that checkpoint; direct live Pages readback remains **UNVERIFIED** because this environment cannot resolve the Pages hostname.
+- Production catalog remains empty/noindex (0 learning items, words, genuine phrases and sentences). Synthetic fixtures remain test-only; no private/restricted linguistic data is in the public tree or build artifacts. Issue #2 is closed.
 - Readiness: `ENGINEERING_READY=YES`; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`.
 
 ### Resume actions
 
-1. Finish PR #50 exact-head verification and merge only if its final head passes against the unchanged main SHA.
-2. Retry a direct read-only fetch of home, Games, manifest and versioned JS from a network that resolves `pages.dev`; keep live readback unverified until artifact identity and public-data isolation are confirmed.
-3. Continue A3 responsive UX, game/lesson flow, browser offline, privacy and security work with synthetic-only fixtures.
-4. Keep the public catalog empty/noindex until rights, provenance, quality and publication gates pass; continue the private track independently.
-
+1. Wait for exact-head Verify on the documentation-refreshed PR #51 branch; merge only if it passes and the base is still `ca1ec4ad2d0fd28c04109ff1fb587ad3a69c376d`.
+2. After merge, verify the new main SHA/tree, exact-main Actions result, and Cloudflare production build; keep live readback unverified until the served artifact is inspected from a resolvable network.
+3. Continue A3 responsive UX, lesson/game flow, PWA/offline, accessibility, privacy and security work with synthetic-only fixtures.
+4. Continue B24 discovery and rights work in the PRIVATE Engine independently; do not transfer private content or publish records without verified rights and quality gates.
 
 ## Latest checkpoint — 2026-11-02 03:52 UTC
 
