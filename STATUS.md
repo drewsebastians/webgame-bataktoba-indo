@@ -1,6 +1,39 @@
-# Execution status — 2026-11-02 01:26 UTC
+# Execution status — 2026-11-02 04:08 UTC
 
-## Latest checkpoint — 2026-11-02 01:26 UTC
+## Latest checkpoint — 2026-11-02 04:08 UTC
+
+- Webgame is **PUBLIC** at main/tree `58d45ce5ed7bbb45fd601a0b7189712883ea1a07` / `43e33e64cf5e35f3df40e2492a00054250f50fc7`; PR #49 onboarding preference is merged. Exact-head Verify [41383644095](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41383644095) and exact-main Verify [41384190761](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41384190761) passed. Both included 221 unit tests (0 skipped), smoke, performance budget, 40 browser tests, dist drift and 12 Lighthouse audits. All Accessibility scores were 100; mobile Performance was 98/98/98/99/99/100 and desktop was 100 across the six audited routes.
+- Cloudflare Workers Builds succeeded for production build `5f510877-edb8-4856-9ee7-7060e68085bd`. This verifies the provider build, not a direct live-page readback. The current runtime could not resolve the Pages hostname; `LIVE_READBACK=UNVERIFIED`.
+- Checkpoint PR [#50](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/50) head `60bac460bb3b9a82d9f293dd34802acdb495b3a5` passed exact-head Verify [41385538415](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41385538415), including the full suite above. This follow-up documentation commit still needs its own exact-head run.
+- The public catalog remains empty/noindex (0 learning items, words, genuine phrases and sentences); synthetic fixtures remain isolated from dist, and no private linguistic data was transferred. Issue #2 is closed; PR #50 is the only open Webgame PR at this checkpoint.
+- Readiness: `ENGINEERING_READY=YES`; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`.
+
+### Resume actions
+
+1. Finish PR #50 exact-head verification and merge only if its final head passes against the unchanged main SHA.
+2. Retry a direct read-only fetch of home, Games, manifest and versioned JS from a network that resolves `pages.dev`; keep live readback unverified until artifact identity and public-data isolation are confirmed.
+3. Continue A3 responsive UX, game/lesson flow, browser offline, privacy and security work with synthetic-only fixtures.
+4. Keep the public catalog empty/noindex until rights, provenance, quality and publication gates pass; continue the private track independently.
+
+
+## Latest checkpoint — 2026-11-02 03:52 UTC
+
+- Webgame remains **PUBLIC** at main/tree `58d45ce5ed7bbb45fd601a0b7189712883ea1a07` / `43e33e64cf5e35f3df40e2492a00054250f50fc7`. PR [#49](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/49) merged as `58d45ce5ed7bbb45fd601a0b7189712883ea1a07`; it makes the local 5/10/20-question onboarding preference apply to Games and migrates v1 local preferences.
+- Exact-head Verify [41383644095](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41383644095) and exact-main Verify [41384190761](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41384190761) passed. Main evidence: 221 unit tests (0 skipped), E2E smoke, performance budget, 40 browser tests, committed-dist drift, and 12 Lighthouse route/profile audits. Accessibility scored 100/100 on all audits; mobile Performance scored 98/98/98/99/99/100 and desktop scored 100 on home, angka, games, flashcards, dictionary and progress.
+- Cloudflare Workers Builds reported a successful production build `5f510877-edb8-4856-9ee7-7060e68085bd`. This verifies the provider build. Direct live readback is still **UNVERIFIED**: the web connector could not open Pages, and both Node and PowerShell fetches failed because the current environment could not resolve the Pages hostname.
+- Production catalog remains empty (0 learning items, words, genuine phrases and sentences); empty topic pages remain noindex. Synthetic browser fixtures are absent from public dist, and no private linguistic data was transferred.
+- Readiness: `ENGINEERING_READY=YES`; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`.
+- Issue [#2](https://github.com/drewsebastians/webgame-bataktoba-indo/issues/2) is closed. No public PR is open at this checkpoint.
+
+### Resume actions
+
+1. Retry a read-only live fetch of the home page, Games, manifest and versioned JS bundle when a network path can resolve `pages.dev`; keep direct readback unverified until served asset identity and public-data isolation are confirmed.
+2. Continue A3 responsive UX, game/lesson flow, offline browser, privacy and security engineering with synthetic-only fixtures.
+3. Keep the public catalog empty/noindex until item-level rights, provenance, quality and publication gates pass; continue the private data track independently.
+4. Do not rewrite public Git history; A9 remains blocked pending explicit approval.
+
+
+## Previous checkpoint — 2026-11-02 01:26 UTC
 
 - Application main is at `3ff59a4e55213b6031a488d2721301cc3afc4d23` / tree `788eeb94f8a36288d36a7c41eee061dfd3aeb6a4`. PR [#47](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/47) merged the progress-import safety and Windows Lighthouse runner fix. Exact-head Verify [41371579464](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41371579464) and exact-main Verify [41372157370](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41372157370) passed.
 - Verification: 221/221 unit tests, E2E smoke, 39/39 Playwright tests, performance budgets (180,368/196,608 JavaScript bytes; 15,766/49,152 CSS bytes), committed-dist drift, and 12 Lighthouse route/profile audits. Accessibility was 100/100 on all audits. Mobile performance: home 98, angka 98, games 98, flashcards 99, dictionary 99, progress 100; desktop 100 on all six routes.
