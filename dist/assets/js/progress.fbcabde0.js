@@ -252,9 +252,9 @@ export function validateProgressPayload(payload) {
  * ---------------------------------------------------------------------- */
 
 /**
- * Pure migration: legacy v1 payload + optional id map -> v2 payload.
- * Legacy ids that cannot be mapped keep their original id so no data is
- * silently dropped.
+ * Pure migration: legacy v1 payload + optional id map -> schema v3.
+ * Safe unmapped ids retain their original key; unsafe keys and entries beyond
+ * the scan/storage bounds are ignored.
  */
 export function migrateLegacyProgress(legacy, idMap = {}) {
   const progress = createEmptyProgress();
