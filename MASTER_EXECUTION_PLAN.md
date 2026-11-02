@@ -1,5 +1,21 @@
 # Master execution plan
 
+## Latest checkpoint — 2026-11-02 05:17 UTC
+
+- At checkpoint start, Webgame is PUBLIC at main/tree 99d5b2069a358c80dbd83648efb6f0182fc3b4dc / f11b1ecd6f9782c2bba149674bdd773f7363441a; PR #51 is merged. Its feature head and its documentation-refreshed head passed exact-head Verify [41390699539](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41390699539) and [41391402350](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41391402350). Exact-main Verify [41391810426](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41391810426) also passed on the main SHA above.
+- The homepage “Latihan Harian” CTA now opens games/?practice=daily; Games consumes the parameter and starts the existing due-first queue. The synthetic browser test seeds one due fixture and verifies it appears first. Verified runs passed 221/221 Node tests (0 skipped), smoke, performance budget, 41/41 Playwright tests, committed-dist drift and 12 Lighthouse audits. Accessibility was 100/100 on every audit; mobile Performance was 98/98/98/99/99/100, desktop was 100 on all six routes.
+- Cloudflare Workers Builds reported a successful production build 384bacaa-f4ca-4be0-a83a-03387d19f2d2 for PR #51 head 3a2cd29081101e646a5b78335220683d86de4f75. This confirms a provider build, while direct live Pages readback remains UNVERIFIED because this environment cannot resolve the Pages host.
+- Production catalog remains empty/noindex: 0 learning items, words, genuine phrases and sentences. Synthetic fixtures are test-only; no private/restricted linguistic data entered public source or dist. Issue #2 is closed.
+- The PRIVATE Engine is at main/tree e1a7a495d5dde31af3866f2b20e03a1c5f594ed0 / edb3f20df80cf02ed887121b21a5b36cd94f2fdd; checkpoint PR #39 is merged. The last relevant validator run [41387047029](https://github.com/drewsebastians/batak-indo-alignment-engine/actions/runs/41387047029) passed 15 contract and 9 discovery tests and validated 36 metadata-only B24 leads; all public transfer remains blocked, no data records were acquired, and B23 remains latest / DEGRADED / next B24. Engine docs-only changes are outside its validator workflow path filter.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
+### Resume actions
+
+1. Run exact-head verification for this documentation-only checkpoint PR and merge only if it passes with base 99d5b2069a358c80dbd83648efb6f0182fc3b4dc unchanged.
+2. Verify the resulting main SHA/tree and provider build after the docs merge. Keep live Pages readback unverified until the artifact is fetched and checked from a network that resolves the host.
+3. Continue A3 responsive UX, lesson/game flow, PWA/offline, accessibility, privacy and security work with synthetic-only fixtures.
+4. Continue the PRIVATE Engine B24 source and rights work independently; keep acquisition and public transfer gated on source-specific rights, provenance and approved storage.
+
 ## Latest checkpoint — 2026-11-02 04:54 UTC
 
 - At checkpoint start, Webgame is **PUBLIC** at main/tree `ca1ec4ad2d0fd28c04109ff1fb587ad3a69c376d` / `c1e4657a57a7868dbd0bb5b3c9d4d1e8faeacbe6`. PR [#50](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/50) is merged; exact-main Verify [41387329437](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41387329437) passed.

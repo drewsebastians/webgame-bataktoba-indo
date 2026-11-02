@@ -1,17 +1,16 @@
-## LATEST EXECUTION CHECKPOINT — 2026-11-02 04:54 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-11-02 05:17 UTC
 
 ### PUBLIC webgame
 
-- Main at batch start: `ca1ec4ad2d0fd28c04109ff1fb587ad3a69c376d` / tree `c1e4657a57a7868dbd0bb5b3c9d4d1e8faeacbe6`; PR #50 merged; exact-main Verify 41387329437 passed.
-- PR #51 daily-practice CTA fix: feature head `c69f6ac272417fe4c583f2d6da7894c89a0acf92`; exact-head Verify [41390699539](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41390699539) passed 221/221 Node tests (0 skipped), E2E smoke, performance budget, 41/41 Playwright tests, 12 Lighthouse audits and committed-dist drift. Mobile Lighthouse Performance was 98/98/98/99/99/100, desktop 100, accessibility 100 throughout.
-- A docs-only checkpoint refresh is being added to PR #51 and requires the same exact-head gate before merge.
-- Cloudflare build `817a713d-4ac7-4193-ab38-f5b394116313` succeeded for the previous PR #50 head; no live Pages readback is verified. Environment DNS for the Pages host is unresolved.
-- Public content remains empty/noindex (0 learning items, words, genuine phrases and sentences); no synthetic or private language data is present in dist.
+- Main code snapshot 99d5b2069a358c80dbd83648efb6f0182fc3b4dc/tree f11b1ecd6f9782c2bba149674bdd773f7363441a; PR #51 merged.
+- PR #51 exact-head Verify 41391402350 and main push Verify 41391810426 passed: 221/221 Node tests, 0 skipped; E2E smoke; performance budget; 41/41 Playwright browser tests; 12 Lighthouse audits; committed-dist drift. Accessibility was 100 throughout, mobile performance 98/98/98/99/99/100 and desktop 100.
+- Cloudflare build 384bacaa-f4ca-4be0-a83a-03387d19f2d2 succeeded for PR #51 head. Live Pages readback remains unverified because this environment cannot resolve the Pages host.
+- Public learning content stays empty/noindex (0 items, words, genuine phrases and sentences); synthetic test fixtures remain absent from public dist.
 
 ### PRIVATE Data Engine and boundary
 
-- Data Engine remains PRIVATE at main/tree `58ac7bd4a498134394fc750cd2bb2996074063a5` / `bdad05b5a7986475d236eb85d2bd3e58c299509b`; PR #38 merged and exact-main run 41387047029 passed. B24 remains metadata-only (36 leads); no permitted/acquired records or learner items; B23 remains latest / DEGRADED / next B24.
-- No private linguistic content, restricted artifact, or synthetic test fixture was transferred into the public repository.
+- Private main/tree e1a7a495d5dde31af3866f2b20e03a1c5f594ed0/edb3f20df80cf02ed887121b21a5b36cd94f2fdd includes merged PR #39 checkpoint docs. Relevant validator run 41387047029 passed for 36 metadata-only leads (28 direct, 3 concept, 3 sentence adjunct, 2 scope), 15 contract and 9 discovery tests; all public transfer blocked, 0 permitted/acquired records, B23 remains latest / DEGRADED / next B24.
+- No private language data or restricted artifacts were transferred.
 
 ### Readiness
 
