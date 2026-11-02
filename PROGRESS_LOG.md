@@ -658,3 +658,12 @@ PR #5 merged as `ffe009e9de10a1ddd144bb0a5d51be746f81b5cc`. Main Verify run 4119
 - Readiness: ENGINEERING_READY=YES for tested synthetic UX, asset limits and Lighthouse baseline; DATA_READY/PUBLICATION_READY/LEARNING_READY=NO; MONETIZATION_READY=deferred.
 
 Next work: broaden Lighthouse and browser journey coverage, PWA/offline/privacy/security/a11y follow-up, live readback, plus private source metadata discovery and runner/vault recovery.
+
+
+## 2026-11-02 03:52 UTC checkpoint — PR #49 onboarding preference
+
+- Verified Webgame PUBLIC main/tree `58d45ce5ed7bbb45fd601a0b7189712883ea1a07` / `43e33e64cf5e35f3df40e2492a00054250f50fc7` before the checkpoint change; PR #49 is merged as `58d45ce5ed7bbb45fd601a0b7189712883ea1a07`.
+- Exact-head Verify 41383644095 and exact-main Verify 41384190761 passed: 221 unit tests (0 skipped), smoke, performance budget, 40 Playwright browser tests, dist drift, and 12 Lighthouse audits. All 12 Accessibility scores are 100; mobile Performance is 98/98/98/99/99/100 and desktop is 100 for all six audited routes.
+- Cloudflare Workers Builds succeeded for production build `5f510877-edb8-4856-9ee7-7060e68085bd`. Direct readback of Pages remains UNVERIFIED; the web connector could not open it and direct fetch attempts failed at DNS resolution.
+- Public catalog remains empty/noindex; synthetic fixtures are absent from dist, and no private content crossed repositories. ENGINEERING_READY=yes; DATA_READY, PUBLICATION_READY and LEARNING_READY=no; MONETIZATION_READY deferred.
+- Next: retry live artifact readback from a resolvable network, update A5 only after evidence, and continue A3 browser engineering independently of the private data track.
