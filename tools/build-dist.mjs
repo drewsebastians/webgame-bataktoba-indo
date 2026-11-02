@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname, extname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -178,38 +178,55 @@ function revisionAssets(distDir) {
   }
 
   const files = collect(assetRoot, "");
-  for (const [full, rel] of files) {
-    const hash = createHash("sha256").update(readFileSync(full)).digest("hex").slice(0, 8);
-    const ext = extname(full);
+  const sourceByRel = new Map(files.map(([full, rel]) => [rel, full]));
+  const finalContent = new Map();
+  const visiting = new Set();
+
+  // Dependency filenames are part of their importers' bytes. Resolve imports
+  // from the leaves upward, then hash each final file after its import paths
+  // have been rewritten. Hashing before rewriting let immutable URLs retain
+  // stale bytes when only a dependency changed.
+  function buildAsset(rel) {
+    if (manifest.has(rel)) return manifest.get(rel);
+    if (visiting.has(rel)) throw new Error(`Circular asset imports cannot be revisioned: ${rel}`);
+    visiting.add(rel);
+
+    const source = sourceByRel.get(rel);
+    let code = readFileSync(source, "utf8");
+    if (/\.(?:js|mjs)$/.test(rel)) {
+      const sourceTarget = join(distDir, rel);
+      code = code.replace(
+        /((?:from\s*|import\s*\(\s*|import\s+)["'])(\.\.?\/[^"']+)(["'])/g,
+        (match, head, spec, quote) => {
+          const base = join(dirname(sourceTarget), spec)
+            .slice(distDir.length + 1)
+            .replace(/\\/g, "/");
+          if (!sourceByRel.has(base)) return match;
+
+          const mapped = buildAsset(base);
+          let relSpec = relative(dirname(sourceTarget), join(distDir, mapped)).replace(/\\/g, "/");
+          if (!relSpec.startsWith(".")) relSpec = "./" + relSpec;
+          return `${head}${relSpec}${quote}`;
+        },
+      );
+    }
+
+    const hash = createHash("sha256").update(code).digest("hex").slice(0, 8);
+    const ext = extname(rel);
     const hashedRel = rel.replace(new RegExp(`\\${ext}$`), `.${hash}${ext}`);
-    const hashedFull = join(distDir, hashedRel);
-    renameSync(full, hashedFull);
     manifest.set(rel, hashedRel);
+    finalContent.set(rel, code);
+    visiting.delete(rel);
+    return hashedRel;
   }
 
-  // Rewrite ES module imports (static + dynamic strings) inside hashed JS.
-  function relOf(full) {
-    return full.slice(distDir.length + 1).replace(/\\/g, "/");
-  }
+  for (const [, rel] of files) buildAsset(rel);
 
-  for (const [full] of files) {
-    const rel = relOf(full);
-    const target = join(distDir, manifest.get(rel));
-    let code = readFileSync(target, "utf8");
-    code = code.replace(
-      /((?:from\s*|import\s*\(\s*|import\s+)["'])(\.\.?\/[^"']+)(["'])/g,
-      (match, head, spec, quote) => {
-        const base = join(dirname(target), spec)
-          .slice(distDir.length + 1)
-          .replace(/\\/g, "/");
-        const mapped = manifest.get(base);
-        if (!mapped) return match;
-        let relSpec = relative(dirname(target), join(distDir, mapped)).replace(/\\/g, "/");
-        if (!relSpec.startsWith(".")) relSpec = "./" + relSpec;
-        return `${head}${relSpec}${quote}`;
-      },
-    );
-    writeFileSync(target, code, "utf8");
+  // Remove all original paths before writing hashed outputs so a coincidental
+  // filename collision cannot overwrite a source needed by another asset.
+  for (const [full] of files) rmSync(full, { force: true });
+  for (const [, rel] of files) {
+    writeFileSync(join(distDir, manifest.get(rel)), finalContent.get(rel), "utf8");
   }
 
 

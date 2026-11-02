@@ -9,11 +9,11 @@ import {
   initProgress,
   MAX_PROGRESS_IMPORT_BYTES,
   resetProgress,
-} from "./progress.d8b326f4.js";
+} from "./progress.1b03f867.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
-import { computeStreak } from "./game/session.30f0491c.js";
-import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.ab842beb.js";
-import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.07252d43.js";
+import { computeStreak } from "./game/session.305509d7.js";
+import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.0e73c5d9.js";
+import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.2ec2a9a9.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];

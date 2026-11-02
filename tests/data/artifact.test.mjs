@@ -1,5 +1,8 @@
 import { readFileSync, existsSync } from "node:fs";
+import { readdirSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
@@ -48,6 +51,29 @@ describe("production artifact integrity", () => {
       "data/migration/id-map.json",
     ]) {
       assert.ok(existsSync(new URL(`dist/${rel}`, root)), `missing dist/${rel}`);
+    }
+  });
+
+  (hasDist ? it : it.skip)("gives each immutable JS/CSS URL a hash of its final bytes", () => {
+    const assetRoot = fileURLToPath(new URL("dist/assets/", root));
+    const hashedAssets = [];
+    function walk(dir) {
+      for (const name of readdirSync(dir)) {
+        const full = join(dir, name);
+        if (statSync(full).isDirectory()) walk(full);
+        else if (/\.(?:js|mjs|css)$/.test(name)) hashedAssets.push({ name, path: full });
+      }
+    }
+    walk(assetRoot);
+    assert.ok(hashedAssets.length > 0, "expected revisioned production assets");
+
+    for (const asset of hashedAssets) {
+      const { name, path } = asset;
+      const match = name.match(/\.([a-f0-9]{8})\.(?:js|mjs|css)$/);
+      assert.ok(match, `expected a content-hashed asset name: ${name}`);
+      const bytes = readFileSync(path);
+      const expected = createHash("sha256").update(bytes).digest("hex").slice(0, 8);
+      assert.equal(match[1], expected, `${name} must hash its final rewritten bytes`);
     }
   });
 });

@@ -1,4 +1,4 @@
-﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.cfd4b3c2.js";
+﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.a34bfabb.js";
 import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.6316db9b.js";
 import {
   exportProgress,
@@ -16,17 +16,17 @@ import {
   saveProgress,
   setDifficult,
   setSaved,
-} from "./progress.d8b326f4.js";
+} from "./progress.1b03f867.js";
 import { el, replaceChildren } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
-import { buildCorrectionUrl } from "./utils/corrections.2eedd2fd.js";
-import { createQuizRunner, makeQuestion, shuffleWith } from "./game/question-engine.5494a83a.js";
-import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.30f0491c.js";
-import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-engine.f650cc27.js";
+import { buildCorrectionUrl } from "./utils/corrections.27d36b47.js";
+import { createQuizRunner, makeQuestion, shuffleWith } from "./game/question-engine.8cac11a2.js";
+import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.305509d7.js";
+import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-engine.d7147cc0.js";
 import {
   recordLessonCompletion,
   recordLessonStart,
-} from "./progress.d8b326f4.js";
+} from "./progress.1b03f867.js";
 import { getOnboarding, hasLessonHistory, saveOnboarding, shouldOfferOnboarding } from "./onboarding.9a4d475b.js";
 import {
   buildMemoryBoard,
@@ -35,9 +35,9 @@ import {
   dailySeed,
   mulberry32,
   todayDateKey,
-} from "./game/modes.94847ebc.js";
-import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.ab842beb.js";
-import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.07252d43.js";
+} from "./game/modes.15a43a12.js";
+import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.0e73c5d9.js";
+import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.2ec2a9a9.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
