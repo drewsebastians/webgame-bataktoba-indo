@@ -2,7 +2,13 @@
 
 **Upstream steward:** `drewsebastians/batak-indo-alignment-engine` (private). **Consumer:** Batak Toba Play (public website). **State:** schema contract documented; a fail-closed schema/provenance adapter and isolated synthetic browser coverage are implemented on the current work branch; outward content transfer remains NOT AUTHORIZED by upstream private research policy. Do not use publication-eligible labels as evidence of authorization without independent proof.
 
-See the comprehensive [private upstream field dictionary](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/docs/WEBGAME_DATA_COLLECTION_CONTRACT.md) and upstream [learning item schema](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/schemas/webgame_learning_item.schema.json). Links resolve after upstream PR merge.
+See the comprehensive [private upstream field dictionary](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/docs/WEBGAME_DATA_COLLECTION_CONTRACT.md) and upstream [learning item schema](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/schemas/webgame_learning_item.schema.json). The contract and schema are present on private upstream main; repository visibility remains private.
+
+
+
+## Upstream contract checkpoint — 2026-11-02
+
+The private upstream collection contract and learning-item schema are available from its main branch. The contract defines required evidence and authorization fields; it grants no public distribution permission and does not authorize transfer. This public handoff describes interface requirements only. No private source record or language content is included here.
 
 ## Required field groups
 
