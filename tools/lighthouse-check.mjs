@@ -5,7 +5,7 @@
  */
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { spawn, spawnSync } from "node:child_process";
-import { resolve, join, dirname } from "node:path";
+import { resolve, join, dirname, win32 } from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 import { chromium } from "@playwright/test";
@@ -29,9 +29,12 @@ export function resolveNpxInvocation({
 } = {}) {
   if (platform !== "win32") return { command: "npx", argsPrefix: [] };
 
+  // Keep Windows path semantics when this resolver is exercised by tests on
+  // POSIX CI runners as well as when it runs on Windows itself.
+  const windowsPath = platform === process.platform ? { join, dirname } : win32;
   const candidates = [
-    npmExecPath ? join(dirname(npmExecPath), "npx-cli.js") : null,
-    join(dirname(nodeExecutable), "node_modules", "npm", "bin", "npx-cli.js"),
+    npmExecPath ? windowsPath.join(windowsPath.dirname(npmExecPath), "npx-cli.js") : null,
+    windowsPath.join(windowsPath.dirname(nodeExecutable), "node_modules", "npm", "bin", "npx-cli.js"),
   ].filter(Boolean);
   const cliPath = candidates.find(pathExists);
   if (!cliPath) throw new Error("Could not locate npm's npx-cli.js on Windows");
