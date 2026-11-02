@@ -627,7 +627,7 @@ async function initGames() {
       nextQuestion();
     }
     saveProgress({ lastMode: mode });
-    $$(".mode-button").forEach((button) => {
+    $$(".mode-button[data-mode]").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
     });
   }
