@@ -27,3 +27,15 @@ test("progress privacy controls stay in place while local stats hydrate", async 
     ).toBeLessThanOrEqual(1);
   }
 });
+
+test("progress import rejects a file above the shared 1 MB limit", async ({ page }) => {
+  await page.goto("/progres/");
+  await page.locator("#import-file").setInputFiles({
+    name: "oversized-progress.json",
+    mimeType: "application/json",
+    buffer: Buffer.alloc(1024 * 1024 + 1, 0x20),
+  });
+
+  await page.getByRole("button", { name: "Impor progress" }).click();
+  await expect(page.getByRole("status")).toContainText("maksimal 1 MB");
+});

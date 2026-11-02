@@ -229,6 +229,104 @@ describe("corrupted storage handling", () => {
     assert.equal(result.progress.answered, 1);
     assert.ok(result.progress.items["word-ab12cd34ef"]);
   });
+
+  it("sanitizes imported session summaries and drops unrecognized metadata", () => {
+    const normalized = progress.validateProgressPayload({
+      schemaVersion: 3,
+      sessions: [
+        {
+          dateKey: "2026-11-02",
+          mode: "meaning",
+          answered: 5,
+          correct: 4,
+          completedAt: 1793552210000,
+          email: "private@example.invalid",
+          rawSourceText: "must not be retained",
+          extra: { arbitrary: true },
+        },
+        { dateKey: "2026-02-30", mode: "meaning", answered: 5, correct: 4 },
+        { dateKey: "2026-11-02", mode: "unknown-mode", answered: 5, correct: 4 },
+        { dateKey: "2026-11-02", mode: "matching", answered: 4, correct: 3 },
+      ],
+    });
+
+    assert.deepEqual(normalized.sessions, [
+      {
+        dateKey: "2026-11-02",
+        mode: "meaning",
+        answered: 5,
+        correct: 4,
+        completedAt: 1793552210000,
+      },
+    ]);
+  });
+
+  it("imports a maximum bounded progress export within the shared 1 MB limit", () => {
+    const items = Object.fromEntries(
+      Array.from({ length: 2000 }, (_, index) => [
+        `word-${index.toString(16).padStart(10, "0")}`,
+        {
+          seen: 123,
+          correctCount: 123,
+          incorrectCount: 123,
+          consecutiveCorrect: 123,
+          lastResult: "incorrect",
+          lastReviewedAt: 1793552210000,
+          nextReviewAt: 1793552210000,
+          reviewStage: 5,
+          bucket: "review",
+          saved: true,
+          difficult: true,
+        },
+      ]),
+    );
+    const lessons = Object.fromEntries(
+      Array.from({ length: 200 }, (_, index) => [
+        `lesson-${String(index).padStart(3, "0")}`,
+        {
+          startedAt: 1793552210000,
+          completedAt: 1793552210000,
+          attempts: 1000000,
+          mistakesTotal: 1000000,
+          lastMistakeCount: 10000,
+        },
+      ]),
+    );
+    const payload = {
+      schemaVersion: 3,
+      answered: 1000000000,
+      correct: 1000000000,
+      lastMode: "meaning",
+      items,
+      lessons,
+      sessions: Array.from({ length: 30 }, () => ({
+        dateKey: "2026-11-02",
+        mode: "matching",
+        answered: 2000,
+        correct: 2000,
+        completedAt: 1793552210000,
+      })),
+      migratedFromLegacy: true,
+      migratedAt: 1793552210000,
+      savedAt: 1793552210000,
+    };
+    const serialized = JSON.stringify(payload, null, 2);
+
+    assert.ok(Buffer.byteLength(serialized) <= progress.MAX_PROGRESS_IMPORT_BYTES);
+    const result = progress.importProgress(serialized);
+    assert.equal(result.ok, true);
+    assert.equal(Object.keys(result.progress.items).length, 2000);
+  });
+
+  it("rejects oversized imports without changing stored progress", () => {
+    const before = progress.exportProgress();
+    const oversized = `{"schemaVersion":3,"padding":"${"x".repeat(
+      progress.MAX_PROGRESS_IMPORT_BYTES,
+    )}"}`;
+
+    assert.deepEqual(progress.importProgress(oversized), { ok: false, reason: "too-large" });
+    assert.equal(progress.exportProgress(), before);
+  });
 });
 
 describe("bounded storage and resilience", () => {

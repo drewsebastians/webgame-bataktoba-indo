@@ -26,6 +26,18 @@ export const REVIEW_INTERVAL_DAYS = [1, 3, 7, 14, 30];
 
 const MAX_TRACKED_ITEMS = 2000;
 const MAX_SESSIONS = 30;
+export const MAX_PROGRESS_IMPORT_BYTES = 1024 * 1024;
+
+const SESSION_MODES = new Set([
+  "meaning",
+  "reverse",
+  "typed",
+  "truefalse",
+  "daily",
+  "sentence",
+  "matching",
+  "memory",
+]);
 
 function nowMs() {
   return Date.now();
@@ -109,6 +121,31 @@ function clampInt(value, min, max, fallback = min) {
   return Math.min(max, Math.max(min, Math.trunc(parsed)));
 }
 
+function isValidDateKey(value) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00.000Z`);
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+/** Keep only the small, app-owned summary needed for streaks and progress. */
+function sanitizeSession(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+  if (!isValidDateKey(raw.dateKey) || !SESSION_MODES.has(raw.mode)) return null;
+
+  const answered = clampInt(raw.answered, 0, MAX_TRACKED_ITEMS, -1);
+  const correct = clampInt(raw.correct, 0, answered, -1);
+  if (answered < 5 || correct < 0) return null;
+
+  return {
+    dateKey: raw.dateKey,
+    mode: raw.mode,
+    answered,
+    correct,
+    completedAt:
+      Number.isSafeInteger(raw.completedAt) && raw.completedAt >= 0 ? raw.completedAt : null,
+  };
+}
+
 function sanitizeItemStats(raw) {
   if (!raw || typeof raw !== "object") return emptyItemStats();
   const stats = emptyItemStats();
@@ -168,7 +205,8 @@ export function validateProgressPayload(payload) {
       : null;
   if (Array.isArray(payload.sessions)) {
     progress.sessions = payload.sessions
-      .filter((session) => session && typeof session === "object")
+      .map(sanitizeSession)
+      .filter(Boolean)
       .slice(-MAX_SESSIONS);
   }
   if (payload.lessons && typeof payload.lessons === "object") {
@@ -494,6 +532,13 @@ export function exportProgress() {
 }
 
 export function importProgress(jsonText) {
+  if (typeof jsonText !== "string") return { ok: false, reason: "invalid-json" };
+  if (
+    jsonText.length > MAX_PROGRESS_IMPORT_BYTES ||
+    new TextEncoder().encode(jsonText).byteLength > MAX_PROGRESS_IMPORT_BYTES
+  ) {
+    return { ok: false, reason: "too-large" };
+  }
   let parsed;
   try {
     parsed = JSON.parse(jsonText);
