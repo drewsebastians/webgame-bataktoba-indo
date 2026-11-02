@@ -95,3 +95,10 @@ PR #32 merged as `ecebfe67ef17d033d9e9ee41fe0bbb7168cda78a` with documentation-o
 The product remains a desktop/mobile browser website. PR #45 merged at public main `efbe05226272d364ca3626ebebe4749523e6ec0b` / tree `fddeb9720ec43d736085fc3f9f91700d537979b6` to preserve the stable empty lesson state while no content is published. Exact-main Verify [41322447587](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41322447587) passed 216 unit tests, E2E smoke, 38/38 browser/axe tests, budgets, 12 Lighthouse audits and committed-dist drift. Lighthouse Accessibility is 100 on all audited route/profile pairs; mobile Performance scores are 98–100 and desktop scores are 100. Cloudflare Workers Builds reports a successful provider build; direct live readback remains unverified.
 
 A corrected public history audit now records the July 2026 Git snapshot and a successful Pages root-upload run. Current-tree containment remains in place. A9 blocks any destructive history rewrite pending explicit owner approval; website engineering continues independently.
+
+
+## A3 progress import safety and verification checkpoint — 2026-11-02 01:26 UTC
+
+PR #47 is merged at application main `3ff59a4e55213b6031a488d2721301cc3afc4d23`. Progress export/import uses a shared 1 MiB limit and validates/whitelists imported session summaries. The Windows Lighthouse command now resolves npx using Windows path semantics even when its resolver test runs on a POSIX CI host.
+
+Exact-main Verify [41372157370](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41372157370) passed 221 unit tests, E2E smoke, 39/39 browser tests, budgets, 12 Lighthouse audits and dist drift. All Accessibility scores were 100; mobile Performance ranged 98–100, desktop was 100 on all routes. Cloudflare provider build succeeded; direct live readback remains unverified. Public learning content remains empty/noindex, and synthetic fixtures remain test-only.
