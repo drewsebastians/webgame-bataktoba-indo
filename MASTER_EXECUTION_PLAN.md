@@ -1,6 +1,16 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-02 07:23 UTC
+## Latest checkpoint — 2026-11-02 10:21 UTC
+
+- Webgame remains PUBLIC at main/tree bfcfe32f919e6cc995fb9db7eb5bedd97101a2d9 / 57bb3c1f1339e9bcbff07fd4c8fc3016d5a1c3ea; PR [#55](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/55) merged the progress-import hardening.
+- The migration now bounds legacy IDs scanned and stored, ignores unsafe object keys, and validates imported item slugs. It adds no learner content, source data, or production fixtures.
+- Exact-head Verify [41412050042](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41412050042) completed successfully. Local validation passed 226/226 unit tests, checks/governance, build and performance budget (JS 182,940/196,608 bytes; CSS 15,766/49,152). Local smoke did not reach server readiness in 20 seconds and local Playwright did not return within its runner window; CI is the browser release gate.
+- Cloudflare reported successful provider build 3e1d1cb9-b3cc-419b-bfe1-3e49cde6916c for PR head 92e061e2a60913cb87ac4e333cb4658609486450. This is PR-head build evidence. The current connector did not return main push-triggered runs, and post-merge live artifact readback remains UNVERIFIED.
+- Production catalog remains empty/noindex; the synthetic fixtures remain test-only and no private/restricted linguistic data was transferred. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 browser UX and isolated end-to-end coverage independently; retry read-only live home/Games/manifest/asset identity checks for A5. Keep historical Git-history rewrite A9 approval-gated.
+
+
+## Previous checkpoint — 2026-11-02 07:23 UTC
 
 - Webgame remains PUBLIC at runtime main `4b06c123fd1b409d7731771bc7cfe674381f39bb` / tree `4c44cdb14783b3422f3607ea6803f62816c3adb3`; code PR [#53](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/53) is merged.
 - A3 hardening validates imported lesson slugs before accepting untrusted progress backups. The production build now rewrites module dependency paths before calculating immutable asset hashes; committed `dist/` URLs match the final served bytes. No learner content or source adapter data changed.
