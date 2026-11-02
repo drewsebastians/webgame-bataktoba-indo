@@ -220,9 +220,10 @@ function renderHomeDynamic(container, wordPool) {
       ),
     );
     const actions = el("div", { className: "action-row" });
-    const dailyButton = el("a", { className: "button", text: "Latihan Harian", attrs: { href: "games/" } });
-    dailyButton.addEventListener("click", () => {
-      saveProgress({ startWithDaily: true });
+    const dailyButton = el("a", {
+      className: "button",
+      text: "Latihan Harian",
+      attrs: { href: "games/?practice=daily" },
     });
     actions.append(
       dailyButton,
@@ -535,6 +536,7 @@ async function initDictionary() {
 async function initGames() {
   const panel = $("#game-panel");
   if (!panel) return;
+  const shouldStartDailyPractice = new URLSearchParams(window.location.search).get("practice") === "daily";
   const wordData = await loadWordPairs();
   const sentenceData = await loadSentences();
   const wordPool = wordData.items;
@@ -1376,6 +1378,16 @@ async function initGames() {
   });
   updateStreakBadge();
   setMode(state.mode);
+  if (shouldStartDailyPractice) {
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.delete("practice");
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`,
+    );
+    startDailyPractice();
+  }
 }
 
 async function initFlashcards() {
