@@ -1,4 +1,22 @@
-# Resume handoff — 2026-11-02 05:17 UTC
+# Resume handoff — 2026-11-02 07:23 UTC
+
+## Latest checkpoint — 2026-11-02 07:23 UTC
+
+- Webgame remains PUBLIC at runtime main `4b06c123fd1b409d7731771bc7cfe674381f39bb` / tree `4c44cdb14783b3422f3607ea6803f62816c3adb3`; code PR [#53](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/53) is merged.
+- A3 hardening validates imported lesson slugs before accepting untrusted progress backups. The production build now rewrites module dependency paths before calculating immutable asset hashes; committed `dist/` URLs match the final served bytes. No learner content or source adapter data changed.
+- Exact-head Verify [41404703403](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41404703403) and exact-main Verify [41405329501](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41405329501) both passed: 223/223 unit tests (0 skipped), check/build, E2E smoke, 41/41 Playwright tests, performance budgets and committed-dist drift. CI reports 0 published items and 0 warnings.
+- Budget: JavaScript 181,987/196,608 bytes; CSS 15,766/49,152 bytes. Twelve Lighthouse route/profile audits passed; accessibility was 100 throughout; mobile performance was 97/99/98/99/99/100 and desktop 100 on all six routes.
+- Cloudflare Workers bot reported build `1d23f48b-ffe9-4651-8998-1f19da996034` successful for PR head `9775e1e50d1e0dcd29589841e600c67ea27c55cc`. This is provider build evidence. Live artifact readback remains UNVERIFIED; the available network fetch could not access the candidate Pages/Workers hostnames.
+- Production learning catalog stays empty/noindex. Synthetic fixtures are isolated to tests; the merged tree adds no synthetic, private or restricted linguistic content. Data/publication/learning gates remain separate from engineering success.
+- Readiness: ENGINEERING_READY=YES for the merged A3 hardening and exact-main CI; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
+### Resume actions
+
+1. Continue the highest unblocked browser engineering slice; keep production content empty/noindex and all automated linguistic fixtures test-only.
+2. Keep A5 live readback UNVERIFIED until a directly accessible production host and served artifact are inspected; retain the successful provider build as technical evidence only.
+3. Continue private Data Engine source discovery and rights assessment independently. Do not transfer private/restricted linguistic data into this public repository.
+4. Re-fetch both repository refs, visibility, Issues, PRs, Actions and private run pointer before the next batch; use exact expected SHAs and leave historical public Git history unchanged.
+
 
 ## Latest checkpoint — 2026-11-02 05:17 UTC
 
