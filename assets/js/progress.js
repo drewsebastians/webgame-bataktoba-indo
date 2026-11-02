@@ -211,6 +211,9 @@ export function validateProgressPayload(payload) {
   }
   if (payload.lessons && typeof payload.lessons === "object") {
     for (const [slug, raw] of Object.entries(payload.lessons).slice(0, 200)) {
+      // Imported backup files are untrusted input. Lesson keys become object
+      // properties and must stay within the app's stable, URL-safe slug format.
+      if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) continue;
       if (!raw || typeof raw !== "object") continue;
       progress.lessons[slug] = {
         startedAt:

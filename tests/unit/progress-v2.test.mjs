@@ -261,6 +261,22 @@ describe("corrupted storage handling", () => {
     ]);
   });
 
+  it("drops unsafe imported lesson keys without changing object prototypes", () => {
+    const normalized = progress.validateProgressPayload(JSON.parse(`{
+      "schemaVersion": 3,
+      "lessons": {
+        "__proto__": {"polluted": true},
+        "<img src=x>": {"startedAt": 1793552210000},
+        "angka": {"startedAt": 1793552210000, "attempts": 1}
+      }
+    }`));
+
+    assert.deepEqual(Object.keys(normalized.lessons), ["angka"]);
+    assert.equal(Object.getPrototypeOf(normalized.lessons), Object.prototype);
+    assert.equal(Object.prototype.polluted, undefined);
+    assert.equal(normalized.lessons.angka.attempts, 1);
+  });
+
   it("imports a maximum bounded progress export within the shared 1 MB limit", () => {
     const items = Object.fromEntries(
       Array.from({ length: 2000 }, (_, index) => [

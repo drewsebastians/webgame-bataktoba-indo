@@ -1,12 +1,12 @@
 // Focused dictionary entrypoint keeps game and lesson engines off this route.
-import { loadLearningItems, loadTopics } from "./data.cfd4b3c2.js";
+import { loadLearningItems, loadTopics } from "./data.a34bfabb.js";
 import { SITE_CONFIG } from "./config.6316db9b.js";
-import { getBucketIds, getProgress, initProgress, saveProgress, setSaved } from "./progress.d8b326f4.js";
+import { getBucketIds, getProgress, initProgress, saveProgress, setSaved } from "./progress.1b03f867.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
-import { buildCorrectionUrl } from "./utils/corrections.2eedd2fd.js";
-import { track } from "./analytics.ab842beb.js";
-import { sweepPlaceholders } from "./ads.07252d43.js";
+import { buildCorrectionUrl } from "./utils/corrections.27d36b47.js";
+import { track } from "./analytics.0e73c5d9.js";
+import { sweepPlaceholders } from "./ads.2ec2a9a9.js";
 
 const dictionaryQuery = (selector, root = document) => root.querySelector(selector);
 const dictionaryQueryAll = (selector, root = document) => [...root.querySelectorAll(selector)];
