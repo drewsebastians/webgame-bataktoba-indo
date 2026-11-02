@@ -5,7 +5,7 @@
  */
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { spawn, spawnSync } from "node:child_process";
-import { resolve, join } from "node:path";
+import { resolve, join, dirname, win32 } from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 import { chromium } from "@playwright/test";
@@ -19,6 +19,26 @@ export const DIAGNOSTICS_PERFORMANCE_THRESHOLD = 0.95;
 
 export function shouldReportPerformanceDiagnostics(score) {
   return typeof score === "number" && Number.isFinite(score) && score < DIAGNOSTICS_PERFORMANCE_THRESHOLD;
+}
+
+export function resolveNpxInvocation({
+  platform = process.platform,
+  npmExecPath = process.env.npm_execpath,
+  nodeExecutable = process.execPath,
+  pathExists = existsSync,
+} = {}) {
+  if (platform !== "win32") return { command: "npx", argsPrefix: [] };
+
+  // Keep Windows path semantics when this resolver is exercised by tests on
+  // POSIX CI runners as well as when it runs on Windows itself.
+  const windowsPath = platform === process.platform ? { join, dirname } : win32;
+  const candidates = [
+    npmExecPath ? windowsPath.join(windowsPath.dirname(npmExecPath), "npx-cli.js") : null,
+    windowsPath.join(windowsPath.dirname(nodeExecutable), "node_modules", "npm", "bin", "npx-cli.js"),
+  ].filter(Boolean);
+  const cliPath = candidates.find(pathExists);
+  if (!cliPath) throw new Error("Could not locate npm's npx-cli.js on Windows");
+  return { command: nodeExecutable, argsPrefix: [cliPath] };
 }
 export const LIGHTHOUSE_ROUTES = Object.freeze([
   Object.freeze({ id: "home", path: "/" }),
@@ -153,12 +173,12 @@ function runLighthouse(profile, url, outputPath, chromePath) {
   ];
   if (profile === "desktop") args.push("--preset=desktop");
 
-  const command = process.platform === "win32" ? "npx.cmd" : "npx";
-  const result = spawnSync(command, args, {
+  const invocation = resolveNpxInvocation();
+  const result = spawnSync(invocation.command, [...invocation.argsPrefix, ...args], {
     cwd: ROOT,
     env: { ...process.env, CHROME_PATH: chromePath },
     stdio: "inherit",
-    shell: process.platform === "win32",
+    shell: false,
     timeout: 180_000,
   });
   if (result.error) throw result.error;

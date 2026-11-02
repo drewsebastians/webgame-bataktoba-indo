@@ -8,6 +8,7 @@ import {
   summarizePerformanceDiagnostics,
   shouldReportPerformanceDiagnostics,
   DIAGNOSTICS_PERFORMANCE_THRESHOLD,
+  resolveNpxInvocation,
 } from "../tools/lighthouse-check.mjs";
 
 const report = (performance, accessibility) => ({
@@ -39,6 +40,27 @@ test("audits only the fixed local learner-facing route set", () => {
   assert.ok(LIGHTHOUSE_ROUTES.every(({ id, path }) =>
     /^[a-z0-9-]+$/.test(id) && path.startsWith("/") && !path.startsWith("//"),
   ));
+});
+
+test("runs the Windows Lighthouse CLI through Node without a shell", () => {
+  const npmExecPath = "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js";
+  const npxCli = "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npx-cli.js";
+  assert.deepEqual(
+    resolveNpxInvocation({
+      platform: "win32",
+      npmExecPath,
+      nodeExecutable: "C:\\Program Files\\nodejs\\node.exe",
+      pathExists: (path) => path === npxCli,
+    }),
+    { command: "C:\\Program Files\\nodejs\\node.exe", argsPrefix: [npxCli] },
+  );
+});
+
+test("uses npx directly without enabling a command shell on POSIX", () => {
+  assert.deepEqual(
+    resolveNpxInvocation({ platform: "linux" }),
+    { command: "npx", argsPrefix: [] },
+  );
 });
 
 test("accepts scores at the documented mobile and desktop floors", () => {

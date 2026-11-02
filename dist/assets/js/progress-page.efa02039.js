@@ -7,8 +7,9 @@ import {
   getSavedIds,
   importProgress,
   initProgress,
+  MAX_PROGRESS_IMPORT_BYTES,
   resetProgress,
-} from "./progress.fa26cbf8.js";
+} from "./progress.d8b326f4.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { computeStreak } from "./game/session.30f0491c.js";
 import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.ab842beb.js";
@@ -196,8 +197,8 @@ async function initProgressPage(notice = '') {
       statusLine.textContent = "Pilih file JSON terlebih dahulu.";
       return;
     }
-    if (file.size > 512 * 1024) {
-      statusLine.textContent = "File terlalu besar (maksimal 512 KB).";
+    if (file.size > MAX_PROGRESS_IMPORT_BYTES) {
+      statusLine.textContent = "File terlalu besar (maksimal 1 MB).";
       return;
     }
     const text = await file.text();
@@ -206,9 +207,13 @@ async function initProgressPage(notice = '') {
       initProgressPage("Progress berhasil diimpor.");
       return;
     }
-    statusLine.textContent = `Impor gagal: ${
-      result.reason === "invalid-json" ? "file bukan JSON valid" : "schema tidak didukung"
-    }.`;
+    const reason =
+      result.reason === "invalid-json"
+        ? "file bukan JSON valid"
+        : result.reason === "too-large"
+          ? "file terlalu besar"
+          : "schema tidak didukung";
+    statusLine.textContent = `Impor gagal: ${reason}.`;
   });
 
   let resetArmed = false;
