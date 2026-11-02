@@ -1,4 +1,20 @@
-# Execution status — 2026-11-02 03:52 UTC
+# Execution status — 2026-11-02 04:08 UTC
+
+## Latest checkpoint — 2026-11-02 04:08 UTC
+
+- Webgame is **PUBLIC** at main/tree `58d45ce5ed7bbb45fd601a0b7189712883ea1a07` / `43e33e64cf5e35f3df40e2492a00054250f50fc7`; PR #49 onboarding preference is merged. Exact-head Verify [41383644095](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41383644095) and exact-main Verify [41384190761](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41384190761) passed. Both included 221 unit tests (0 skipped), smoke, performance budget, 40 browser tests, dist drift and 12 Lighthouse audits. All Accessibility scores were 100; mobile Performance was 98/98/98/99/99/100 and desktop was 100 across the six audited routes.
+- Cloudflare Workers Builds succeeded for production build `5f510877-edb8-4856-9ee7-7060e68085bd`. This verifies the provider build, not a direct live-page readback. The current runtime could not resolve the Pages hostname; `LIVE_READBACK=UNVERIFIED`.
+- Checkpoint PR [#50](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/50) head `60bac460bb3b9a82d9f293dd34802acdb495b3a5` passed exact-head Verify [41385538415](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41385538415), including the full suite above. This follow-up documentation commit still needs its own exact-head run.
+- The public catalog remains empty/noindex (0 learning items, words, genuine phrases and sentences); synthetic fixtures remain isolated from dist, and no private linguistic data was transferred. Issue #2 is closed; PR #50 is the only open Webgame PR at this checkpoint.
+- Readiness: `ENGINEERING_READY=YES`; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`.
+
+### Resume actions
+
+1. Finish PR #50 exact-head verification and merge only if its final head passes against the unchanged main SHA.
+2. Retry a direct read-only fetch of home, Games, manifest and versioned JS from a network that resolves `pages.dev`; keep live readback unverified until artifact identity and public-data isolation are confirmed.
+3. Continue A3 responsive UX, game/lesson flow, browser offline, privacy and security work with synthetic-only fixtures.
+4. Keep the public catalog empty/noindex until rights, provenance, quality and publication gates pass; continue the private track independently.
+
 
 ## Latest checkpoint — 2026-11-02 03:52 UTC
 
