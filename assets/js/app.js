@@ -1352,7 +1352,7 @@ async function initGames() {
     button.addEventListener("click", () => {
       state.sessionSize = Number(button.dataset.size) || 10;
       saveOnboarding({ sessionSize: state.sessionSize, skipped: false });
-      $(".session-size-button").forEach((other) =>
+      $$(".session-size-button").forEach((other) =>
         other.setAttribute("aria-pressed", String(other.dataset.size === String(state.sessionSize))),
       );
       if (modes[state.mode]?.kind !== "memory") startSession({ size: state.sessionSize });
