@@ -9,7 +9,7 @@ import {
   initProgress,
   MAX_PROGRESS_IMPORT_BYTES,
   resetProgress,
-} from "./progress.1b03f867.js";
+} from "./progress.7cfa0e1b.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { computeStreak } from "./game/session.305509d7.js";
 import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.0e73c5d9.js";

@@ -102,6 +102,24 @@ describe("v2 -> v3 migration", () => {
     assert.equal(migrated.items["word-cccccccccc"].bucket, "known");
     assert.equal(migrated.items["word-dddddddddd"].bucket, "review");
   });
+
+  it("drops unsafe item keys during v2 migration without changing object prototypes", () => {
+    const payload = JSON.parse(`{
+      "schemaVersion": 2,
+      "items": {
+        "__proto__": {"polluted": true},
+        "constructor": {"polluted": true},
+        "word-aaaaaaaaaa\\n": {"seen": 1, "bucket": "known"},
+        "word-bbbbbbbbbb": {"seen": 1, "bucket": "known"}
+      }
+    }`);
+
+    const migrated = progress.validateProgressPayload(payload);
+
+    assert.deepEqual(Object.keys(migrated.items), ["word-bbbbbbbbbb"]);
+    assert.equal(Object.getPrototypeOf(migrated.items), Object.prototype);
+    assert.equal(Object.prototype.polluted, undefined);
+  });
 });
 
 describe("review schedule (deterministic)", () => {
@@ -166,6 +184,38 @@ describe("legacy migration", () => {
   it("keeps unmapped legacy ids instead of dropping them", () => {
     const migrated = progress.migrateLegacyProgress({ known: ["word-9999"] }, {});
     assert.equal(migrated.items["word-9999"].bucket, "known");
+  });
+
+  it("rejects reserved mapped ids and bounds legacy migration work", () => {
+    const known = ["__proto__", "constructor", "toString", "__defineGetter__"];
+    for (let index = 0; index < 2100; index += 1) {
+      known.push(`legacy-${String(index).padStart(4, "0")}`);
+    }
+    const legacy = { known, review: ["review-overflow"] };
+    const idMap = Object.create(null);
+    idMap.__proto__ = "__proto__";
+    idMap.constructor = "constructor";
+    idMap.toString = "toString";
+    idMap.__defineGetter__ = "__defineGetter__";
+
+    const migrated = progress.migrateLegacyProgress(legacy, idMap);
+
+    assert.equal(Object.getPrototypeOf(migrated.items), Object.prototype);
+    assert.equal(Object.prototype.polluted, undefined);
+    assert.equal(Object.keys(migrated.items).length, 2000);
+    assert.equal(Object.hasOwn(migrated.items, "__proto__"), false);
+    assert.equal(Object.hasOwn(migrated.items, "constructor"), false);
+    assert.equal(Object.hasOwn(migrated.items, "review-overflow"), false);
+  });
+
+  it("caps legacy scans even when attacker-controlled entries repeat", () => {
+    const migrated = progress.migrateLegacyProgress({
+      known: Array(5000).fill("one-old-id"),
+      review: ["after-scan-cap"],
+    });
+
+    assert.deepEqual(Object.keys(migrated.items), ["one-old-id"]);
+    assert.equal(Object.hasOwn(migrated.items, "after-scan-cap"), false);
   });
 
   it("auto-migrates on init when only legacy storage exists", async () => {

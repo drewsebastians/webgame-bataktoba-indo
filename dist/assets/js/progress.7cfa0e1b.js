@@ -27,6 +27,13 @@ export const REVIEW_INTERVAL_DAYS = [1, 3, 7, 14, 30];
 const MAX_TRACKED_ITEMS = 2000;
 const MAX_SESSIONS = 30;
 export const MAX_PROGRESS_IMPORT_BYTES = 1024 * 1024;
+const MAX_LEGACY_IDS_TO_SCAN = MAX_TRACKED_ITEMS * 2;
+const ITEM_ID_PATTERN = /^[a-z]+-[0-9a-f]{10}(?![\s\S])/;
+const RESERVED_RECORD_KEYS = new Set(Object.getOwnPropertyNames(Object.prototype));
+
+function isSafeRecordKey(value) {
+  return typeof value === "string" && value.length > 0 && value !== "prototype" && !RESERVED_RECORD_KEYS.has(value);
+}
 
 const SESSION_MODES = new Set([
   "meaning",
@@ -176,6 +183,7 @@ export function migrateV2ToV3(payload) {
   const promoted = { ...payload, schemaVersion: PROGRESS_SCHEMA_VERSION };
   promoted.items = {};
   for (const [id, raw] of Object.entries(payload.items ?? {})) {
+    if (!ITEM_ID_PATTERN.test(id)) continue;
     const stats = sanitizeItemStats(raw); // keeps known/review buckets
     if (raw?.bucket === "saved") {
       stats.saved = true;
@@ -232,7 +240,7 @@ export function validateProgressPayload(payload) {
   }
   if (payload.items && typeof payload.items === "object") {
     for (const [id, raw] of Object.entries(payload.items).slice(0, MAX_TRACKED_ITEMS)) {
-      if (!/^[a-z]+-[0-9a-f]{10}$/.test(id)) continue; // only stable ids accepted
+      if (!ITEM_ID_PATTERN.test(id)) continue; // only stable ids accepted
       progress.items[id] = sanitizeItemStats(raw);
     }
   }
@@ -259,14 +267,26 @@ export function migrateLegacyProgress(legacy, idMap = {}) {
   progress.lastMode = typeof legacy.lastMode === "string" ? legacy.lastMode : "meaning";
 
   function remap(id) {
-    return idMap[id] ?? id;
+    if (idMap && Object.prototype.hasOwnProperty.call(idMap, id)) {
+      const mapped = idMap[id];
+      if (typeof mapped === "string" && mapped.length > 0) return mapped;
+    }
+    return id;
   }
 
+  const migratedIds = new Set();
+  let scannedIds = 0;
   for (const bucketValue of ["known", "review"]) {
+    if (migratedIds.size >= MAX_TRACKED_ITEMS || scannedIds >= MAX_LEGACY_IDS_TO_SCAN) break;
     const list = Array.isArray(legacy[bucketValue]) ? legacy[bucketValue] : [];
     for (const rawId of list) {
+      scannedIds += 1;
+      if (scannedIds > MAX_LEGACY_IDS_TO_SCAN) break;
       if (typeof rawId !== "string" || !rawId) continue;
       const id = remap(rawId);
+      if (!isSafeRecordKey(id)) continue;
+      if (!migratedIds.has(id) && migratedIds.size >= MAX_TRACKED_ITEMS) break;
+      migratedIds.add(id);
       const stats = progress.items[id] ?? emptyItemStats();
       stats.bucket = bucketValue;
       if (bucketValue === "known") {
