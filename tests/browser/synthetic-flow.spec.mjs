@@ -19,6 +19,49 @@ async function answerMeaningQuestion(page, { wrong = false } = {}) {
   await page.locator("#next-question").click();
 }
 
+test("homepage daily practice link launches the due-first queue", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  const dueItem = SYNTHETIC_WEBGAME_ITEMS[2];
+  await page.addInitScript(({ itemId }) => {
+    const key = "batakTobaPlay.progress.v2";
+    if (localStorage.getItem(key)) return;
+    const yesterday = Date.now() - 24 * 60 * 60 * 1000;
+    localStorage.setItem(
+      key,
+      JSON.stringify({
+        schemaVersion: 3,
+        answered: 1,
+        correct: 0,
+        lastMode: "meaning",
+        items: {
+          [itemId]: {
+            seen: 1,
+            correctCount: 0,
+            incorrectCount: 1,
+            consecutiveCorrect: 0,
+            lastResult: "incorrect",
+            lastReviewedAt: yesterday,
+            nextReviewAt: yesterday,
+            reviewStage: 0,
+            bucket: "review",
+            saved: false,
+            difficult: false,
+          },
+        },
+        sessions: [],
+      }),
+    );
+  }, { itemId: dueItem.id });
+
+  await page.goto("/");
+  const dailyPracticeLink = page.getByRole("link", { name: "Latihan Harian", exact: true });
+  await expect(dailyPracticeLink).toHaveAttribute("href", "games/?practice=daily");
+  await dailyPracticeLink.click();
+
+  await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
+  await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
+});
+
 test("five-minute lesson → quiz → mistake review → spaced repetition → dictionary", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await completeSyntheticLesson(page);

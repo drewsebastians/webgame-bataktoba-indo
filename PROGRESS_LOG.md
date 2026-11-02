@@ -1,15 +1,17 @@
-## LATEST EXECUTION CHECKPOINT — 2026-11-02 01:26 UTC
+## LATEST EXECUTION CHECKPOINT — 2026-11-02 04:54 UTC
 
 ### PUBLIC webgame
 
-- App main/tree `3ff59a4e55213b6031a488d2721301cc3afc4d23` / `788eeb94f8a36288d36a7c41eee061dfd3aeb6a4`; PR #47 merged.
-- Exact-main Verify [41372157370](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41372157370) passed 221 unit tests, E2E smoke, 39/39 Playwright tests, JS/CSS budgets, 12 Lighthouse audits and committed-dist drift. Accessibility was 100 on all 12 audits; mobile Performance was 98–100 and desktop Performance was 100.
-- Cloudflare production build check `d70773e9-3943-414c-a941-4d7614dda7f2` succeeded. Direct live Pages readback remains UNVERIFIED.
-- Progress file handling is bounded to 1 MiB and sanitizes imported session summaries. The Windows Lighthouse runner path regression is fixed and CI covered. Published data remains empty/noindex (0 items, words, genuine phrases, sentences); synthetic fixtures remain test-only.
+- Main at batch start: `ca1ec4ad2d0fd28c04109ff1fb587ad3a69c376d` / tree `c1e4657a57a7868dbd0bb5b3c9d4d1e8faeacbe6`; PR #50 merged; exact-main Verify 41387329437 passed.
+- PR #51 daily-practice CTA fix: feature head `c69f6ac272417fe4c583f2d6da7894c89a0acf92`; exact-head Verify [41390699539](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41390699539) passed 221/221 Node tests (0 skipped), E2E smoke, performance budget, 41/41 Playwright tests, 12 Lighthouse audits and committed-dist drift. Mobile Lighthouse Performance was 98/98/98/99/99/100, desktop 100, accessibility 100 throughout.
+- A docs-only checkpoint refresh is being added to PR #51 and requires the same exact-head gate before merge.
+- Cloudflare build `817a713d-4ac7-4193-ab38-f5b394116313` succeeded for the previous PR #50 head; no live Pages readback is verified. Environment DNS for the Pages host is unresolved.
+- Public content remains empty/noindex (0 learning items, words, genuine phrases and sentences); no synthetic or private language data is present in dist.
 
 ### PRIVATE Data Engine and boundary
 
-- The separate private track remains private and metadata-only. B23 remains the latest completed collection batch; no private linguistic content, records, or examples were transferred to this public repository.
+- Data Engine remains PRIVATE at main/tree `58ac7bd4a498134394fc750cd2bb2996074063a5` / `bdad05b5a7986475d236eb85d2bd3e58c299509b`; PR #38 merged and exact-main run 41387047029 passed. B24 remains metadata-only (36 leads); no permitted/acquired records or learner items; B23 remains latest / DEGRADED / next B24.
+- No private linguistic content, restricted artifact, or synthetic test fixture was transferred into the public repository.
 
 ### Readiness
 
