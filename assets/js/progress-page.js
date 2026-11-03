@@ -1,8 +1,10 @@
 import { SITE_CONFIG } from "./config.js";
+import { loadLearningItems } from "./data.js";
 import {
   exportProgress,
   getBucketIds,
   getDifficultIds,
+  getDueItems,
   getProgress,
   getSavedIds,
   importProgress,
@@ -136,6 +138,16 @@ function localDateKey(atMs = Date.now()) {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
+async function getDueReviewItems() {
+  try {
+    const dataset = await loadLearningItems();
+    if (!dataset || !Array.isArray(dataset.items)) return null;
+    return getDueItems(dataset.items);
+  } catch {
+    return null;
+  }
+}
+
 async function initProgressPage(notice = '') {
   const root = $("#progress-root");
   if (!root) return;
@@ -145,6 +157,7 @@ async function initProgressPage(notice = '') {
   const correct = state.correct ?? 0;
   const accuracy = answered === 0 ? "-" : `${Math.round((100 * correct) / answered)}%`;
   const streak = computeStreak((state.sessions ?? []).map((session) => session.dateKey));
+  const dueReviewItems = await getDueReviewItems();
 
   const stats = el(
     "div",
@@ -158,6 +171,35 @@ async function initProgressPage(notice = '') {
     pill(`Disimpan ${getSavedIds().length}`, "", { role: "listitem" }),
     pill(`Sulit ${getDifficultIds().length}`, "", { role: "listitem" }),
   );
+
+  const reviewSummary = el(
+    "section",
+    { className: "card", attrs: { id: "progress-review", "aria-labelledby": "progress-review-heading" } },
+    el("h2", { attrs: { id: "progress-review-heading" }, text: "Latihan harian" }),
+    el("p", {
+      className: "feedback",
+      text:
+        dueReviewItems === null
+          ? "Status review belum bisa dimuat."
+          : dueReviewItems.length === 0
+            ? "Belum ada materi untuk ditinjau hari ini."
+            : `${dueReviewItems.length} materi siap untuk latihan harian. Antrean harian memprioritaskan materi yang jatuh tempo.`,
+      attrs: { role: "status", "aria-live": "polite" },
+    }),
+  );
+  if (dueReviewItems?.length) {
+    reviewSummary.append(
+      el(
+        "div",
+        { className: "action-row" },
+        el("a", {
+          className: "button",
+          text: "Mulai latihan harian",
+          attrs: { href: "../games/?practice=daily" },
+        }),
+      ),
+    );
+  }
 
   const statusLine = el("p", { className: "feedback", attrs: { role: "status", "aria-live": "polite" } });
 
@@ -244,6 +286,7 @@ async function initProgressPage(notice = '') {
   replaceChildren(
     root,
     stats,
+    reviewSummary,
     el(
       "div",
       { className: "action-row" },
