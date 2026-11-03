@@ -62,3 +62,19 @@ test("skipped onboarding keeps a useful Home action after reload", async ({ page
   await page.waitForURL("**/games/");
   await expect(page.locator('.session-size-button[data-size="10"]')).toHaveAttribute("aria-pressed", "true");
 });
+
+
+test("keyboard skip keeps focus on Home's actionable Games link", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/");
+
+  const skip = page.getByRole("button", { name: "Lewati", exact: true });
+  await skip.focus();
+  await page.keyboard.press("Enter");
+
+  const gamesLink = page.locator(".onboarding-panel").getByRole("link", { name: "Buka Games" });
+  await expect(gamesLink).toBeFocused();
+  await page.keyboard.press("Enter");
+  await page.waitForURL("**/games/");
+  await expect(page.locator('.session-size-button[data-size="10"]')).toHaveAttribute("aria-pressed", "true");
+});
