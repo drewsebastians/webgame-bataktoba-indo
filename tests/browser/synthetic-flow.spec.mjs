@@ -54,9 +54,8 @@ test("homepage daily practice link launches the due-first queue", async ({ page 
   }, { itemId: dueItem.id });
 
   await page.goto("/progres/");
-  const reviewSummary = page.locator("#progress-review");
-  await expect(reviewSummary).toContainText("1 materi siap untuk latihan harian.");
-  const reviewLink = reviewSummary.getByRole("link", { name: "Mulai latihan harian", exact: true });
+  await expect(page.getByRole("status")).toContainText("1 materi siap untuk latihan harian.");
+  const reviewLink = page.getByRole("link", { name: "Mulai latihan harian", exact: true });
   await expect(reviewLink).toHaveAttribute("href", "../games/?practice=daily");
   await reviewLink.click();
 

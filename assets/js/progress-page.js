@@ -172,36 +172,17 @@ async function initProgressPage(notice = '') {
     pill(`Sulit ${getDifficultIds().length}`, "", { role: "listitem" }),
   );
 
-  const reviewSummary = el(
-    "section",
-    { className: "card", attrs: { id: "progress-review", "aria-labelledby": "progress-review-heading" } },
-    el("h2", { attrs: { id: "progress-review-heading" }, text: "Latihan harian" }),
-    el("p", {
-      className: "feedback",
-      text:
-        dueReviewItems === null
-          ? "Status review belum bisa dimuat."
-          : dueReviewItems.length === 0
-            ? "Belum ada materi untuk ditinjau hari ini."
-            : `${dueReviewItems.length} materi siap untuk latihan harian. Antrean harian memprioritaskan materi yang jatuh tempo.`,
-      attrs: { role: "status", "aria-live": "polite" },
-    }),
-  );
-  if (dueReviewItems?.length) {
-    reviewSummary.append(
-      el(
-        "div",
-        { className: "action-row" },
-        el("a", {
-          className: "button",
-          text: "Mulai latihan harian",
-          attrs: { href: "../games/?practice=daily" },
-        }),
-      ),
-    );
-  }
-
-  const statusLine = el("p", { className: "feedback", attrs: { role: "status", "aria-live": "polite" } });
+  const reviewStatus =
+    dueReviewItems === null
+      ? "Jadwal review tidak tersedia."
+      : dueReviewItems.length === 0
+        ? "Tidak ada review jatuh tempo."
+        : `${dueReviewItems.length} materi siap untuk latihan harian.`;
+  const statusLine = el("p", {
+    className: "feedback",
+    text: reviewStatus,
+    attrs: { role: "status", "aria-live": "polite" },
+  });
 
   const exportButton = el("button", {
     className: "button",
@@ -283,20 +264,19 @@ async function initProgressPage(notice = '') {
 
   if (notice) statusLine.textContent = notice;
 
-  replaceChildren(
-    root,
-    stats,
-    reviewSummary,
-    el(
-      "div",
-      { className: "action-row" },
-      exportButton,
-      fileInput,
-      importButton,
-      resetButton,
-    ),
-    statusLine,
-  );
+  const actionRow = el("div", { className: "action-row" });
+  if (dueReviewItems?.length) {
+    actionRow.append(
+      el("a", {
+        className: "button",
+        text: "Mulai latihan harian",
+        attrs: { href: "../games/?practice=daily" },
+      }),
+    );
+  }
+  actionRow.append(exportButton, fileInput, importButton, resetButton);
+
+  replaceChildren(root, stats, actionRow, statusLine);
   root.setAttribute("aria-busy", "false");
 }
 
