@@ -1,5 +1,15 @@
 # Execution status — 2026-11-03 07:02 UTC
 
+## Latest checkpoint — 2026-11-03 16:06 UTC
+
+- Webgame remains PUBLIC at main HEAD/tree `110ba77958250ed172c90f452c5bc1a2ac3baae7` / `28d58056166366f797099190646245b2f55663b8`. PR [#69](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/69) adds polite, atomic status live regions to dynamic offline/update banners and browser coverage for offline/reconnect across home, flashcards, dictionary and progress routes. Production published content remains unchanged and empty.
+- Main Verify [#41669449187](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41669449187) passed: 229 unit tests, 46 browser tests, 0 skipped; smoke, performance budget, 12 Lighthouse mobile/desktop profiles, and committed-dist drift all passed. Accessibility was 100/100 on all 12 profiles; mobile performance was 97–100, desktop 100. Build cache version is `btp-3c56ddfc5809`.
+- Site check: 0 published learning items (0 words, 0 genuine phrases, 0 sentences), 0 warnings; synthetic test fixture markers absent from public dist. No private/restricted linguistic data was added.
+- Production deployment for this commit is NOT_VERIFIED from available provider/network evidence. The available live reader returned inaccessible for the homepage, service-worker script, and manifest; served artifact identity remains unverified. A5 stays blocked_external.
+- Private data collection remains isolated; no Engine source metadata, restricted rows, or corpus content was copied into this public repository. DATA_READY=NO and PUBLICATION_READY=NO.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A3 remains active; A9 historical Git review remains approval-gated.
+- Next: continue the highest-priority desktop/mobile browser UX and PWA work under A3; retry current production readback through a supported surface; preserve the empty/noindex catalog and synthetic-only test boundary.
+
 ## Latest checkpoint — 2026-11-03 09:47 UTC
 
 - Webgame main HEAD/tree is cf5ee8f0e3c908c36df6216e9f6297f7e995532a / ac2c7fae66cb5bd6e14ab454c6c460d1f18671f4 after checkpoint-only PR [#67](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/67). The current feature baseline is PR [#66](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/66) at 094e666eb6b7656b0c43c3ef106a907be7b8d41d / b6775c3627e1a811c2af1f3d24323dae4c462f8c; it adds a due-first daily-practice CTA using public published items and local review state. The empty catalog displays no CTA; fixtures remain test-only.
