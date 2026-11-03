@@ -235,7 +235,7 @@ function renderHomeDynamic(container, wordPool) {
     replaceChildren(container, card);
   }
 
-  if (shouldOfferOnboarding(progressState)) renderOnboarding();
+  if (shouldOfferOnboarding(progressState) && !onboardingRecord) renderOnboarding();
   else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0 || hasLessonHistory(progressState)) renderReturning();
   else if (onboardingRecord && !onboardingRecord.skipped) renderSessionPreference();
   else replaceChildren(container);
