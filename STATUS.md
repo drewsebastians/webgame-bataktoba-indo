@@ -1,6 +1,16 @@
 # Execution status — 2026-11-03 07:02 UTC
 
-## Latest checkpoint — 2026-11-03 07:02 UTC
+## Latest checkpoint — 2026-11-03 08:26 UTC
+
+- Webgame is PUBLIC at main/tree 7f31d0b366a77c87b492219f6eaac302da0da1be / 1dcff325642f3eabedc8dc83df6b17d6a60ce030. PR [#64](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/64) fixes Matching Pairs timer behavior: elapsed time updates while idle, toggling preserves keyboard focus, and switching mode or completing/resetting a board clears the interval and resets elapsed time as specified.
+- Exact-head Verify [41599334104](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41599334104) and merged-main Verify [41600453685](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41600453685) succeeded. Main CI reported 228 unit tests and 44 browser tests passed, performance budget and smoke checks passed, and the committed build matched generated output. Lighthouse passed 12 mobile/desktop route checks: accessibility 100/100 throughout, mobile performance 97–100/100, desktop 100/100.
+- Site check reports 0 published learning items, 0 words, 0 genuine phrases, 0 sentences, and 0 warnings. Synthetic fixtures remain test-only; no private Engine rows or source metadata were transferred.
+- Cloudflare Workers Builds check [07da192a-2696-4864-a76b-0b278ea4e966](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/07da192a-2696-4864-a76b-0b278ea4e966) succeeded for main commit 7f31d0b366a77c87b492219f6eaac302da0da1be. This verifies technical build/deployment success. Direct live Home/Games/manifest/bundle readback is still unavailable, so served artifact identity remains UNVERIFIED and A5 remains open.
+- The PRIVATE Engine is at main/tree d085fa598569edc5b4b596e57501bc4e8151e66b / 02cfdc696f096511e928df80cada6d7023733ace after PR #54; its exact-head and merged-main validations passed. Aggregate discovery remains metadata-only with zero learner records and zero public transfer. No Engine source-level details or data are published here.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A3 remains active; A5 awaits direct production readback; A9 remains approval-gated.
+- Next: continue independent browser UX and synthetic game-flow coverage under A3; keep the public catalog empty/noindex until publication gates pass. Retry direct production readback for A5 when a supported surface is available. Continue private-side B24 work independently.
+
+## Previous checkpoint — 2026-11-03 07:02 UTC
 
 - The verified implementation/test baseline is PUBLIC Webgame main/tree 3f014dab861fd8ec80b863d2bdbe90738c4b3857 / ef84f9a8f76894b505d7b11c33021e9108c93792. PR [#62](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/62) adds a synthetic keyboard regression: Enter activates onboarding skip, focus moves to “Buka Games”, and Enter opens Games with the 10-question preference.
 - Exact-head Verify [41592447568](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41592447568) and merged-main Verify [41593264058](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41593264058) passed. Main verified 228/228 unit tests, 44/44 browser tests with 0 skipped, release checks and dist-drift. Lighthouse accessibility scored 100/100 in all 12 route/profile checks; mobile performance was 98–100 and desktop 100. Performance budgets passed.
