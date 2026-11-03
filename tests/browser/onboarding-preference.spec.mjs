@@ -45,3 +45,20 @@ test("saved onboarding preference does not re-prompt after returning home", asyn
   await page.waitForURL("**/games/");
   await expect(page.locator('.session-size-button[data-size="10"]')).toHaveAttribute("aria-pressed", "true");
 });
+
+test("skipped onboarding keeps a useful Home action after reload", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Lewati", exact: true }).click();
+  await expect(page.locator(".onboarding-panel")).toContainText("Sesi default berisi 10 soal");
+
+  await page.reload();
+  await expect(page.locator(".onboarding-panel")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Sesi awalmu siap" })).toBeVisible();
+  await expect(page.locator(".continue-card")).toContainText("Pilihan awal dilewati. Sesi default berisi 10 soal");
+
+  await page.locator(".continue-card").getByRole("link", { name: "Buka Games" }).click();
+  await page.waitForURL("**/games/");
+  await expect(page.locator('.session-size-button[data-size="10"]')).toHaveAttribute("aria-pressed", "true");
+});
