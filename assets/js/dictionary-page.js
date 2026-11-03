@@ -61,7 +61,7 @@ function showLastModified() {
 
 function showUpdateBanner() {
   if (dictionaryQuery(".app-banner.update-banner")) return;
-  const banner = el("div", { className: "app-banner update-banner" });
+  const banner = el("div", { className: "app-banner update-banner", attrs: { role: "status", "aria-live": "polite", "aria-atomic": "true" } });
   const label = el("span", { text: "Versi baru tersedia." });
   const button = el("button", { className: "button", text: "Muat ulang", attrs: { type: "button" } });
   button.addEventListener("click", () => window.location.reload());
@@ -80,6 +80,7 @@ function setOfflineBanner(offline) {
   if (offline && !existing) {
     document.body.append(el("div", {
       className: "app-banner offline-banner",
+        attrs: { role: "status", "aria-live": "polite", "aria-atomic": "true" },
       text: "Anda sedang offline. Halaman yang pernah dibuka tetap tersedia.",
     }));
   } else if (!offline && existing) {
