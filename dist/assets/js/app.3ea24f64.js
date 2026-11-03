@@ -2260,7 +2260,7 @@ function registerServiceWorker() {
 }
 
 function bannerNode(text, actionLabel, onAction) {
-  const banner = el("div", { className: "app-banner" });
+  const banner = el("div", { className: "app-banner", attrs: { role: "status", "aria-live": "polite", "aria-atomic": "true" } });
   const label = el("span", { text });
   const button = el("button", { className: "button", text: actionLabel, attrs: { type: "button" } });
   button.addEventListener("click", onAction);
@@ -2287,6 +2287,7 @@ function setOfflineBanner(offline) {
   if (offline && !existing) {
     const banner = el("div", {
       className: "app-banner offline-banner",
+        attrs: { role: "status", "aria-live": "polite", "aria-atomic": "true" },
       text: "Anda sedang offline. Halaman yang pernah dibuka tetap tersedia.",
     });
     document.body.append(banner);

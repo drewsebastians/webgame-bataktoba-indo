@@ -38,3 +38,25 @@ test("service worker restores a visited lesson offline and reconnects", async ({
   await page.goto("/dictionary/");
   await expect(page.getByRole("heading", { name: "Cari kata Batak Toba atau Indonesia" })).toBeVisible();
 });
+
+
+test("offline status is announced accessibly on every browser app route", async ({ page, context }) => {
+  for (const route of ["/", "/flashcards/", "/dictionary/", "/progres/"]) {
+    await page.goto(route);
+    await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+    await expect.poll(
+      () => page.evaluate(() => Boolean(navigator.serviceWorker.controller)),
+      { timeout: 15000, message: `service worker did not control ${route}` },
+    ).toBe(true);
+
+    await context.setOffline(true);
+    const offlineStatus = page.locator(".offline-banner");
+    await expect(offlineStatus).toBeVisible();
+    await expect(offlineStatus).toHaveAttribute("role", "status");
+    await expect(offlineStatus).toHaveAttribute("aria-live", "polite");
+    await expect(offlineStatus).toHaveAttribute("aria-atomic", "true");
+
+    await context.setOffline(false);
+    await expect(offlineStatus).toHaveCount(0);
+  }
+});
