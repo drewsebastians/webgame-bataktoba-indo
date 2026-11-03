@@ -601,6 +601,7 @@ async function initGames() {
   function startSession({ mode = state.mode, size = state.sessionSize } = {}) {
     const config = modes[mode];
     if (!config) return;
+    stopMatchingTimer();
     state = {
       ...state,
       mode,
@@ -615,14 +616,6 @@ async function initGames() {
       inReviewMode: false,
       typedValue: "",
     };
-    if (state.matchingTimerId) {
-      clearInterval(state.matchingTimerId);
-      state.matchingTimerId = null;
-    }
-    if (state.matchingTimerId) {
-      clearInterval(state.matchingTimerId);
-      state.matchingTimerId = null;
-    }
     if (config.kind === "memory") {
       renderMemory();
     } else if (config.kind === "matching") {
@@ -1093,7 +1086,32 @@ async function initGames() {
 
   /* ---- Matching Pairs (open pairs, distinct from Memory) ---------------- */
 
+  function stopMatchingTimer() {
+    if (!state.matchingTimerId) return;
+    clearInterval(state.matchingTimerId);
+    state.matchingTimerId = null;
+  }
+
+  function startMatchingTimer() {
+    stopMatchingTimer();
+    state.matchingStartedAt = Date.now();
+    state.matchingTimerId = window.setInterval(() => {
+      if (state.mode !== "matching" || !state.matchingTimerOn) {
+        stopMatchingTimer();
+        return;
+      }
+      const timePill = $("#matching-time", panel);
+      if (!timePill) {
+        stopMatchingTimer();
+        return;
+      }
+      const elapsedSeconds = Math.floor((Date.now() - state.matchingStartedAt) / 1000);
+      timePill.textContent = `Waktu ${elapsedSeconds} dtk`;
+    }, 1000);
+  }
+
   function renderMatchingPairs() {
+    stopMatchingTimer();
     const pairCount = state.matchingPairs ?? 6;
     const { cards, pairs } = buildMemoryBoard(wordPool, { pairCount });
     state = {
@@ -1104,8 +1122,10 @@ async function initGames() {
       selected: [],
       matchingTotalPairs: pairs,
       startedAt: Date.now(),
+      matchingStartedAt: Date.now(),
     };
     paintMatchingPairs();
+    if (state.matchingTimerOn) startMatchingTimer();
   }
 
   function paintMatchingPairs(message = "") {
@@ -1153,7 +1173,16 @@ async function initGames() {
     });
     timerToggle.addEventListener("click", () => {
       state.matchingTimerOn = !state.matchingTimerOn;
-      paintMatchingPairs();
+      timerToggle.setAttribute("aria-pressed", String(state.matchingTimerOn));
+      timerToggle.textContent = state.matchingTimerOn ? "Timer: aktif" : "Timer: mati";
+      if (state.matchingTimerOn) {
+        state.matchingStartedAt = Date.now();
+        $("#matching-scorebar", panel)?.append(pill("Waktu 0 dtk", "", { id: "matching-time" }));
+        startMatchingTimer();
+      } else {
+        stopMatchingTimer();
+        $("#matching-time", panel)?.remove();
+      }
     });
 
     newRound.addEventListener("click", renderMatchingPairs);
@@ -1162,11 +1191,11 @@ async function initGames() {
       panel,
       el(
         "div",
-        { className: "scorebar" },
+        { className: "scorebar", attrs: { id: "matching-scorebar" } },
         pill("Matching Pairs"),
         pill(`${state.matched.size}/${state.matchingTotalPairs} cocok`),
         state.matchingTimerOn
-          ? pill(`Waktu ${Math.round((Date.now() - state.startedAt) / 1000)} dtk`)
+          ? pill(`Waktu ${Math.floor((Date.now() - state.matchingStartedAt) / 1000)} dtk`, "", { id: "matching-time" })
           : null,
       ),
       el("div", { className: "action-row" }, sizeButtons),
@@ -1190,6 +1219,7 @@ async function initGames() {
       recordAnswer(true, "matching", first.id);
       track("answer_correct", { mode: "matching" });
       if (state.matched.size === state.matchingTotalPairs) {
+        stopMatchingTimer();
         paintMatchingPairs(`Selesai. ${state.matchingTotalPairs} pasangan cocok.`);
       } else {
         paintMatchingPairs("Cocok.");
