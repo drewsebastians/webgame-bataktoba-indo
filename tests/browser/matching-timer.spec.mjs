@@ -11,34 +11,31 @@ test.describe("Matching Pairs timer (optional)", () => {
     await page.getByRole("button", { name: /^Matching Pairs/ }).click();
   });
 
-  test("default OFF, toggle ON shows time, advances, toggle OFF still completes", async ({ page }) => {
-    // Default OFF
+  test("default OFF; elapsed time advances while idle and keyboard focus stays on the toggle", async ({ page }) => {
     const timerToggle = page.getByRole("button", { name: /Timer:/ });
     await expect(timerToggle).toBeVisible();
     await expect(timerToggle).toHaveAttribute("aria-pressed", "false");
-    await expect(page.getByText(/^Waktu \d+ dtk$/)).toHaveCount(0);
+    await expect(page.locator("#matching-time")).toHaveCount(0);
 
-    // Toggle ON
-    await timerToggle.click();
+    await timerToggle.focus();
+    await page.keyboard.press("Enter");
     await expect(timerToggle).toHaveAttribute("aria-pressed", "true");
     await expect(timerToggle).toContainText("aktif");
-    const timePill = page.getByText(/^Waktu \d+ dtk$/);
-    await expect(timePill).toBeVisible();
-    const firstText = await timePill.textContent();
-    // Wait a bit and check that time advances (paint happens on re-render? we trigger by toggling?)
-    // Since paint only on demand, we force a re-click to see increment? Instead we just check it is visible and numeric.
-    expect(firstText).toMatch(/Waktu \d+ dtk/);
+    const timePill = page.locator("#matching-time");
+    await expect(timePill).toHaveText("Waktu 0 dtk");
+    await expect.poll(async () => {
+      const text = await timePill.textContent();
+      return Number(text?.match(/^Waktu (\d+) dtk$/)?.[1] ?? -1);
+    }).toBeGreaterThan(0);
+    await expect(timerToggle).toBeFocused();
 
-    // Toggle OFF
-    await timerToggle.click();
+    await page.keyboard.press("Space");
     await expect(timerToggle).toHaveAttribute("aria-pressed", "false");
-    await expect(page.getByText(/^Waktu \d+ dtk$/)).toHaveCount(0);
+    await expect(timePill).toHaveCount(0);
+    await expect(timerToggle).toBeFocused();
 
-    // Completion still works without timer
     const cards = page.locator(".match-card");
     await expect(cards).toHaveCount(12);
-    // Try to complete by clicking matching pairs brute-force: click first two that match?
-    // Simpler: ensure new board works
     await page.getByRole("button", { name: "Papan Baru" }).click();
     await expect(cards).toHaveCount(12);
   });
@@ -53,25 +50,25 @@ test.describe("Matching Pairs timer (optional)", () => {
     await expect(timerToggle).toHaveAttribute("aria-pressed", "false");
   });
 
-  test("Matching timer state does not leak into Memory and back", async ({ page }) => {
+  test("timer pauses outside Matching and restarts at zero when Matching resumes", async ({ page }) => {
     const timerToggle = page.getByRole("button", { name: /Timer:/ });
     await timerToggle.click();
     await expect(timerToggle).toHaveAttribute("aria-pressed", "true");
+    await expect.poll(async () => {
+      const text = await page.locator("#matching-time").textContent();
+      return Number(text?.match(/^Waktu (\d+) dtk$/)?.[1] ?? -1);
+    }).toBeGreaterThan(0);
 
-    // Switch to Memory
     await page.getByRole("button", { name: /^Memory/ }).click();
     await expect(page.locator(".match-card.face-down")).not.toHaveCount(0);
-    // Matching timer control should not be visible in Memory
     await expect(page.getByRole("button", { name: /Timer:/ })).toHaveCount(0);
-    await expect(page.getByText(/^Waktu \d+ dtk$/)).toHaveCount(0);
+    await expect(page.locator("#matching-time")).toHaveCount(0);
 
-    // Return to Matching
+    await page.waitForTimeout(1100);
     await page.getByRole("button", { name: /^Matching Pairs/ }).click();
     const backToggle = page.getByRole("button", { name: /Timer:/ });
-    await expect(backToggle).toBeVisible();
-    // Document intended behavior: timer resets to OFF on re-enter? Our implementation resets startedAt but keeps matchingTimerOn flag?
-    // At minimum, check that we are back to Matching and control exists.
-    await expect(backToggle).toBeVisible();
+    await expect(backToggle).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator("#matching-time")).toHaveText("Waktu 0 dtk");
   });
 
   test("new board respects timer OFF (no score penalty)", async ({ page }) => {
