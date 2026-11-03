@@ -28,3 +28,20 @@ test("onboarding preference applies to the synthetic browser session and stays l
   );
   expect(preference.sessionSize).toBe(20);
 });
+
+test("saved onboarding preference does not re-prompt after returning home", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "10 soal", exact: true }).click();
+  await expect(page.locator(".onboarding-panel [aria-live='polite']")).toContainText("10 soal tersimpan");
+
+  await page.reload();
+  await expect(page.locator(".onboarding-panel")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Sesi awalmu siap" })).toBeVisible();
+  await expect(page.locator(".continue-card")).toContainText("Preferensi saat ini: 10 soal");
+
+  await page.locator(".continue-card").getByRole("link", { name: "Buka Games" }).click();
+  await page.waitForURL("**/games/");
+  await expect(page.locator('.session-size-button[data-size="10"]')).toHaveAttribute("aria-pressed", "true");
+});
