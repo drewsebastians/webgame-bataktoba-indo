@@ -1,8 +1,10 @@
 import { SITE_CONFIG } from "./config.6316db9b.js";
+import { loadLearningItems } from "./data.a34bfabb.js";
 import {
   exportProgress,
   getBucketIds,
   getDifficultIds,
+  getDueItems,
   getProgress,
   getSavedIds,
   importProgress,
@@ -136,6 +138,16 @@ function localDateKey(atMs = Date.now()) {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
+async function getDueReviewItems() {
+  try {
+    const dataset = await loadLearningItems();
+    if (!dataset || !Array.isArray(dataset.items)) return null;
+    return getDueItems(dataset.items);
+  } catch {
+    return null;
+  }
+}
+
 async function initProgressPage(notice = '') {
   const root = $("#progress-root");
   if (!root) return;
@@ -145,6 +157,7 @@ async function initProgressPage(notice = '') {
   const correct = state.correct ?? 0;
   const accuracy = answered === 0 ? "-" : `${Math.round((100 * correct) / answered)}%`;
   const streak = computeStreak((state.sessions ?? []).map((session) => session.dateKey));
+  const dueReviewItems = await getDueReviewItems();
 
   const stats = el(
     "div",
@@ -159,7 +172,17 @@ async function initProgressPage(notice = '') {
     pill(`Sulit ${getDifficultIds().length}`, "", { role: "listitem" }),
   );
 
-  const statusLine = el("p", { className: "feedback", attrs: { role: "status", "aria-live": "polite" } });
+  const reviewStatus =
+    dueReviewItems === null
+      ? "Jadwal review tidak tersedia."
+      : dueReviewItems.length === 0
+        ? "Tidak ada review jatuh tempo."
+        : `${dueReviewItems.length} materi siap untuk latihan harian.`;
+  const statusLine = el("p", {
+    className: "feedback",
+    text: reviewStatus,
+    attrs: { role: "status", "aria-live": "polite" },
+  });
 
   const exportButton = el("button", {
     className: "button",
@@ -241,19 +264,19 @@ async function initProgressPage(notice = '') {
 
   if (notice) statusLine.textContent = notice;
 
-  replaceChildren(
-    root,
-    stats,
-    el(
-      "div",
-      { className: "action-row" },
-      exportButton,
-      fileInput,
-      importButton,
-      resetButton,
-    ),
-    statusLine,
-  );
+  const actionRow = el("div", { className: "action-row" });
+  if (dueReviewItems?.length) {
+    actionRow.append(
+      el("a", {
+        className: "button",
+        text: "Mulai latihan harian",
+        attrs: { href: "../games/?practice=daily" },
+      }),
+    );
+  }
+  actionRow.append(exportButton, fileInput, importButton, resetButton);
+
+  replaceChildren(root, stats, actionRow, statusLine);
   root.setAttribute("aria-busy", "false");
 }
 

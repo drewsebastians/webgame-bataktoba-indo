@@ -53,6 +53,15 @@ test("homepage daily practice link launches the due-first queue", async ({ page 
     );
   }, { itemId: dueItem.id });
 
+  await page.goto("/progres/");
+  await expect(page.getByRole("status")).toContainText("1 materi siap untuk latihan harian.");
+  const reviewLink = page.getByRole("link", { name: "Mulai latihan harian", exact: true });
+  await expect(reviewLink).toHaveAttribute("href", "../games/?practice=daily");
+  await reviewLink.click();
+
+  await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
+  await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
+
   await page.goto("/");
   const dailyPracticeLink = page.getByRole("link", { name: "Latihan Harian", exact: true });
   await expect(dailyPracticeLink).toHaveAttribute("href", "games/?practice=daily");

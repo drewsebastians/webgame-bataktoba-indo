@@ -65,6 +65,13 @@ test.describe("core learning flows", () => {
     await expect(root).not.toContainText("SYNTHETIC_");
   });
 
+  test("empty public progress hides the review action and stays honest", async ({ page }) => {
+    await page.goto("/progres/");
+    await expect(page.getByRole("status")).toContainText("Tidak ada review jatuh tempo.");
+    await expect(page.getByRole("link", { name: "Mulai latihan harian", exact: true })).toHaveCount(0);
+    await expect(page.locator("#progress-root")).not.toContainText("SYNTHETIC_");
+  });
+
   test("home: onboarding appears for new users and can be skipped", async ({ page }) => {
     await page.goto("/");
     const skip = page.getByRole("button", { name: "Lewati", exact: true });
