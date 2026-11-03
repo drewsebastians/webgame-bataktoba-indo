@@ -183,11 +183,14 @@ function renderHomeDynamic(container, wordPool) {
   function renderSessionPreference() {
     const card = el("section", { className: "section band continue-card" });
     const inner = el("div", { className: "section-inner" });
+    const preferenceCopy = onboardingRecord.skipped
+      ? `Pilihan awal dilewati. Sesi default berisi ${onboardingRecord.sessionSize} soal; kamu bisa mengubah jumlahnya kapan saja di Games.`
+      : `Preferensi saat ini: ${onboardingRecord.sessionSize} soal. Kamu bisa mengubah jumlahnya kapan saja di Games.`;
     inner.append(
       el("h2", { text: "Sesi awalmu siap" }),
       el("p", {
         className: "lead",
-        text: `Preferensi saat ini: ${onboardingRecord.sessionSize} soal. Kamu bisa mengubah jumlahnya kapan saja di Games.`,
+        text: preferenceCopy,
       }),
       el("a", {
         className: "button",
@@ -237,7 +240,7 @@ function renderHomeDynamic(container, wordPool) {
 
   if (shouldOfferOnboarding(progressState) && !onboardingRecord) renderOnboarding();
   else if ((progressState.answered ?? 0) > 0 || (progressState.sessions ?? []).length > 0 || hasLessonHistory(progressState)) renderReturning();
-  else if (onboardingRecord && !onboardingRecord.skipped) renderSessionPreference();
+  else if (onboardingRecord) renderSessionPreference();
   else replaceChildren(container);
 }
 
