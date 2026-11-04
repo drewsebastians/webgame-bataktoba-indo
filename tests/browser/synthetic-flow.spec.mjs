@@ -71,6 +71,29 @@ test("homepage daily practice link launches the due-first queue", async ({ page 
   await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
 });
 
+test("game and lesson prompts render context notes as inert text", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+
+  const context = page.locator(".prompt-context");
+  await expect(context).toBeVisible();
+  await expect(context).toContainText("Konteks");
+  await expect(context).toContainText("SYNTHETIC_TEST_ONLY_CONTEXT");
+  await expect(page.locator("#synthetic-context-probe")).toHaveCount(0);
+
+  for (const mode of ["typed", "truefalse"]) {
+    await page.locator(`.mode-button[data-mode="${mode}"]`).click();
+    await expect(page.locator(".prompt-context")).toBeVisible();
+    await expect(page.locator(".prompt-context")).toContainText("SYNTHETIC_TEST_ONLY_CONTEXT");
+  }
+
+  await page.goto("/learn/angka/");
+  await page.getByRole("button", { name: "Mulai belajar" }).click();
+  await expect(page.locator(".prompt-context")).toBeVisible();
+  await expect(page.locator(".prompt-context")).toContainText("SYNTHETIC_TEST_ONLY_CONTEXT");
+  await expect(page.locator("#synthetic-context-probe")).toHaveCount(0);
+});
+
 test("five-minute lesson → quiz → mistake review → spaced repetition → dictionary", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await completeSyntheticLesson(page);

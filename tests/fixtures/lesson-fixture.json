@@ -17,7 +17,8 @@
         "SYNTHETIC_ID_ALT_001"
       ],
       "reviewStatus": "synthetic-test-only",
-      "sourceType": "synthetic-test"
+      "sourceType": "synthetic-test",
+      "contextNote": "SYNTHETIC_TEST_ONLY_CONTEXT: usage note"
     },
     {
       "id": "word-synthetic-002",

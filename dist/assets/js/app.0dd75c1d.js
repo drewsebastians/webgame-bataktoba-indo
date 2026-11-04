@@ -20,9 +20,9 @@ import {
 import { el, replaceChildren } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.27d36b47.js";
-import { createQuizRunner, makeQuestion, shuffleWith } from "./game/question-engine.8cac11a2.js";
+import { createQuizRunner, makeQuestion, shuffleWith } from "./game/question-engine.7a9b7d86.js";
 import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.305509d7.js";
-import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-engine.d7147cc0.js";
+import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-engine.b8e8ea35.js";
 import {
   recordLessonCompletion,
   recordLessonStart,
@@ -57,6 +57,19 @@ function sample(items, count) {
 
 function pill(text, extraClass = "", attrs = {}) {
   return el("span", { className: `pill ${extraClass}`.trim(), text, attrs });
+}
+
+function promptContextNodes(value) {
+  const note = typeof value === "string" ? value.trim() : "";
+  if (!note) return [];
+  return [
+    el(
+      "p",
+      { className: "prompt-context" },
+      el("span", { className: "prompt-context-label", text: "Konteks" }),
+      el("span", { className: "prompt-context-text", text: note }),
+    ),
+  ];
 }
 
 function initNavToggle() {
@@ -677,6 +690,7 @@ async function initGames() {
         { className: "prompt" },
         el("span", { className: "prompt-kicker", text: config.prompt }),
         el("strong", { className: "prompt-text", text: question.prompt }),
+        ...promptContextNodes(question.contextNote),
       ),
       el("div", { className: "options" }, optionButtons),
       feedback,
@@ -853,6 +867,7 @@ async function initGames() {
         { className: "prompt" },
         el("span", { className: "prompt-kicker", text: config.prompt }),
         el("strong", { className: "prompt-text", text: question.prompt }),
+        ...promptContextNodes(question.contextNote),
       ),
       el("div", { className: "action-row" }, input, checkButton),
       feedback,
@@ -943,6 +958,7 @@ async function initGames() {
         { className: "prompt" },
         el("span", { className: "prompt-kicker", text: config.prompt }),
         el("strong", { className: "prompt-text", text: tf.statement }),
+        ...promptContextNodes(question.contextNote),
       ),
       el("div", { className: "options" }, trueButton, falseButton),
       feedback,
@@ -1891,7 +1907,12 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
     replaceChildren(
       root,
       pill(`Recall ${recallIndex + 1}/${step.prompts.length}`),
-      el("div", { className: "prompt" }, el("strong", { className: "prompt-text", text: promptStep.prompt })),
+      el(
+        "div",
+        { className: "prompt" },
+        el("strong", { className: "prompt-text", text: promptStep.prompt }),
+        ...promptContextNodes(promptStep.contextNote),
+      ),
       el("div", { className: "action-row" }, input, checkButton),
       feedback,
       (() => {
@@ -1953,7 +1974,12 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
       replaceChildren(
         root,
         pill(`Pengenalan ${qIndex + 1}/${step.questions.length}`),
-        el("div", { className: "prompt" }, el("strong", { className: "prompt-text", text: question.prompt })),
+        el(
+          "div",
+          { className: "prompt" },
+          el("strong", { className: "prompt-text", text: question.prompt }),
+          ...promptContextNodes(question.contextNote),
+        ),
         el("div", { className: "options" }, optionButtons),
         feedback,
         nb,
@@ -2193,6 +2219,7 @@ function renderMiniPractice(root, themeItems, fullPool) {
         { className: "prompt" },
         el("span", { className: "prompt-kicker", text: "Pilih arti yang cocok" }),
         el("strong", { className: "prompt-text", text: question.prompt }),
+        ...promptContextNodes(question.contextNote),
       ),
       el("div", { className: "options" }, optionButtons),
       feedback,

@@ -32,7 +32,14 @@ export function buildLessonPlan(lesson, items, distractorPool, makeQuestionFn, {
 
   const recall = items
     .filter((item) => normalizeLabel(item.batak) && normalizeLabel(item.indonesia))
-    .map((item) => ({ itemId: item.id, prompt: item.batak, expected: item.indonesia }));
+    .map((item) => ({
+      itemId: item.id,
+      prompt: item.batak,
+      expected: item.indonesia,
+      contextNote: typeof item.contextNote === "string" && item.contextNote.trim()
+        ? item.contextNote.trim()
+        : null,
+    }));
   steps.push({ type: "recall", prompts: recall });
 
   steps.push({ type: "mistake-review", itemIds: [] }); // filled at runtime

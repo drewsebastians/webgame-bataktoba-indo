@@ -47,6 +47,18 @@ describe("lesson engine plan", () => {
     }
   });
 
+  it("keeps context notes on recognition and recall prompts", () => {
+    const item = items[0];
+    assert.equal(
+      plan[1].questions.find((question) => question.itemId === item.id)?.contextNote,
+      item.contextNote,
+    );
+    assert.equal(
+      plan[2].prompts.find((prompt) => prompt.itemId === item.id)?.contextNote,
+      item.contextNote,
+    );
+  });
+
   it("mistake review starts empty and collectMistakes dedupes preserving order", () => {
     assert.deepEqual(plan[3].itemIds, []);
     assert.deepEqual(collectMistakes(["a", "b", "a"]), ["a", "b"]);
