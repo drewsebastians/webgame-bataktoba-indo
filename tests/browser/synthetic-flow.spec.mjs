@@ -136,3 +136,52 @@ test("keyboard, touch, 320px and desktop viewport cover the same synthetic quiz"
   await page.setViewportSize({ width: 1280, height: 900 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(1280);
 });
+
+test("keyboard-only five-question session reviews a deliberate mistake", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+
+  const fiveQuestionSession = page.locator('.session-size-button[data-size="5"]');
+  await fiveQuestionSession.focus();
+  await page.keyboard.press("Enter");
+
+  for (let index = 0; index < 5; index += 1) {
+    const prompt = (await page.locator(".prompt-text").textContent())?.trim();
+    const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
+    expect(item, `synthetic quiz prompt ${prompt}`).toBeTruthy();
+
+    const answers = (await page.locator(".option").allTextContents()).map((label) => label.trim());
+    const answer = index === 0
+      ? answers.find((label) => label !== item.indonesia)
+      : item.indonesia;
+    const answerIndex = answers.indexOf(answer);
+    expect(answerIndex, "the keyboard answer key must map to a visible option").toBeGreaterThanOrEqual(0);
+
+    await page.keyboard.press(String(answerIndex + 1));
+    const nextQuestion = page.locator("#next-question");
+    await expect(nextQuestion).toBeEnabled();
+    await nextQuestion.focus();
+    await page.keyboard.press("Enter");
+  }
+
+  await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
+  const reviewMistakes = page.locator("#review-mistakes");
+  await expect(reviewMistakes).toBeVisible();
+  await reviewMistakes.focus();
+  await page.keyboard.press("Enter");
+
+  const reviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  const reviewItem = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === reviewPrompt);
+  expect(reviewItem, `synthetic mistake-review prompt ${reviewPrompt}`).toBeTruthy();
+  const reviewAnswers = (await page.locator(".option").allTextContents()).map((label) => label.trim());
+  const reviewAnswerIndex = reviewAnswers.indexOf(reviewItem.indonesia);
+  expect(reviewAnswerIndex).toBeGreaterThanOrEqual(0);
+
+  await page.keyboard.press(String(reviewAnswerIndex + 1));
+  const finishReview = page.locator("#next-question");
+  await expect(finishReview).toBeEnabled();
+  await finishReview.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
+});
+
