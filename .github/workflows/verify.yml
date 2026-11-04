@@ -45,3 +45,13 @@ jobs:
 
       - name: Committed dist drift gate
         run: git diff --exit-code -- dist
+
+      # Keep the exact public build that passed release verification available for audit.
+      # This contains only committed public dist; test fixtures are not copied here.
+      - name: Upload verified public site artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: verified-public-site-dist-${{ github.run_id }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
