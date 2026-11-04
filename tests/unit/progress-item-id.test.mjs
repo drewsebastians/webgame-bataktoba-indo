@@ -47,7 +47,7 @@ describe("progress item ID boundary", () => {
 
   it("keeps tracking valid stable IDs", () => {
     resetProgress();
-    const itemId = "word-0123456789";
+    const itemId = "word-due000001";
 
     recordAnswer(true, "meaning", itemId);
     setSaved(itemId, true);
