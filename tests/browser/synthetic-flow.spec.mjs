@@ -245,6 +245,27 @@ test("published lesson exposes accessible phase progress", async ({ page }) => {
   await expect(progress).toHaveAttribute("aria-valuetext", "2 dari 5 langkah");
 });
 
+test("lesson quiz moves keyboard focus to the next prompt", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/learn/angka/");
+  await page.getByRole("button", { name: "Mulai belajar" }).click();
+
+  const firstPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === firstPrompt);
+  expect(item, `synthetic lesson prompt ${firstPrompt}`).toBeTruthy();
+
+  await page.getByRole("button", { name: item.indonesia, exact: true }).focus();
+  await page.keyboard.press("Enter");
+  const next = page.locator("#lesson-next");
+  await expect(next).toBeFocused();
+  await page.keyboard.press("Enter");
+
+  await expect(page.locator(".prompt-text")).not.toHaveText(firstPrompt);
+  await expect(page.locator(".prompt-text")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.locator(".option").first()).toBeFocused();
+});
+
 test("mobile game targets keep a 44px minimum", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 375, height: 812 });

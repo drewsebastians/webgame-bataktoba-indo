@@ -1975,6 +1975,8 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
       }
       const question = step.questions[qIndex];
       const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
+      const promptNode = el("strong", { className: "prompt-text", text: question.prompt });
+      if (qIndex > 0) promptNode.tabIndex = -1;
       const optionButtons = question.options.map((option) => {
         const button = el("button", {
           className: "option",
@@ -2012,13 +2014,14 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
         el(
           "div",
           { className: "prompt" },
-          el("strong", { className: "prompt-text", text: question.prompt }),
+          promptNode,
           ...promptContextNodes(question.contextNote),
         ),
         el("div", { className: "options" }, optionButtons),
         feedback,
         nb,
       );
+      if (qIndex > 0) promptNode.focus();
     }
     renderQ();
   }
