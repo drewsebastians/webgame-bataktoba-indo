@@ -1,6 +1,16 @@
 # Execution status — 2026-11-04
 
-## Latest checkpoint — 2026-11-04 07:05 UTC
+## Latest checkpoint — 2026-11-04 07:23 UTC
+
+- Current PUBLIC main HEAD/tree is `6bfd0f5e02b13fb32e1070ea1faceaf7d06fc477` / `b95826a29f4163fab3d3a9901a89865946986a2c` after documentation-only PR #80. The latest product/deployment code remains PR #79 at `ee63d4e21568762003c72d636136d8b87d2a78c0` / `26eb36b8b89738c75aa84a7ad9efc48deb32b9e3`.
+- Exact-head Verify #41787423023 and merged-main Verify #41788275173 passed 231 unit + 48 browser tests each, 0 skipped; smoke, performance budget, synthetic-fixture isolation, committed-dist drift and all 12 Lighthouse profiles passed. Accessibility was 100/100; mobile Performance was 97–100 and desktop was 100.
+- Main artifact `verified-public-site-dist-41788275173` uploaded at 119,117 bytes (SHA-256 `107a95a12250ab367c9d533a2afcd83b498327aacba2112663b179742b6c1efd`). Site check found 0 published items, words, genuine phrases or sentences and 0 warnings; synthetic markers were absent. The public catalog remains empty/noindex.
+- Cloudflare Workers Builds reported technical success for main build `da933b84-195c-46b8-9320-3551adfcf0e0`. The configured reader could not access the live site or the current GitHub Pages settings, so served production identity remains NOT_VERIFIED.
+- A read-only Git-tree audit found historical `data/raw`, `data/candidates`, `data/legacy` and populated `data/published` JSON paths in reachable commits from July–September 2026. Current main has no raw/candidate/legacy paths, and CI confirms 0 published learning records. The historical Git objects remain publicly reachable; the audit inspected tree paths/sizes only and did not read corpus file contents.
+- `PROGRESS_LOG.md` remains unchanged after two automatic approval-review rejections of broad edits that could carry forward restricted historical inventory or technical details. No history rewrite was performed. Removing the reachable historical objects or changing visibility remains approval-gated.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No private source metadata or linguistic data was transferred to PUBLIC.
+
+## Previous checkpoint — 2026-11-04 07:05 UTC
 
 - PUBLIC Webgame remains PUBLIC at main HEAD/tree `ee63d4e21568762003c72d636136d8b87d2a78c0` / `26eb36b8b89738c75aa84a7ad9efc48deb32b9e3` after PR [#79](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/79). It hardens progress item IDs at storage read/write boundaries and regenerates the five changed hashed JS bundles, HTML references and service-worker cache version. The change uses synthetic IDs only.
 - Exact-head Verify [#41787423023](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41787423023) and merged-main Verify [#41788275173](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41788275173) both passed 231 unit + 48 browser tests, 0 skipped; smoke, performance budget, synthetic isolation, committed-dist drift and all 12 Lighthouse profiles passed. Accessibility was 100/100 for every profile; mobile performance 97–100 and desktop 100.
