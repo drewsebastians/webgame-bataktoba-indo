@@ -35,8 +35,13 @@ function isSafeRecordKey(value) {
   return typeof value === "string" && value.length > 0 && value !== "prototype" && !RESERVED_RECORD_KEYS.has(value);
 }
 
-function isValidItemId(value) {
-  return typeof value === "string" && ITEM_ID_PATTERN.test(value);
+function isSafeItemId(value) {
+  return (
+    typeof value === "string" &&
+    value.length <= 128 &&
+    /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) &&
+    isSafeRecordKey(value)
+  );
 }
 
 const SESSION_MODES = new Set([
@@ -187,7 +192,7 @@ export function migrateV2ToV3(payload) {
   const promoted = { ...payload, schemaVersion: PROGRESS_SCHEMA_VERSION };
   promoted.items = {};
   for (const [id, raw] of Object.entries(payload.items ?? {})) {
-    if (!isValidItemId(id)) continue;
+    if (!ITEM_ID_PATTERN.test(id)) continue;
     const stats = sanitizeItemStats(raw); // keeps known/review buckets
     if (raw?.bucket === "saved") {
       stats.saved = true;
@@ -244,7 +249,7 @@ export function validateProgressPayload(payload) {
   }
   if (payload.items && typeof payload.items === "object") {
     for (const [id, raw] of Object.entries(payload.items).slice(0, MAX_TRACKED_ITEMS)) {
-      if (!isValidItemId(id)) continue; // only stable ids accepted
+      if (!ITEM_ID_PATTERN.test(id)) continue; // only stable ids accepted
       progress.items[id] = sanitizeItemStats(raw);
     }
   }
@@ -463,7 +468,7 @@ export function recordAnswer(isCorrect, mode, itemId = null) {
   next.answered = current.answered + 1;
   next.correct = current.correct + (isCorrect ? 1 : 0);
   next.lastMode = mode ?? current.lastMode;
-  if (isValidItemId(itemId)) {
+  if (isSafeItemId(itemId)) {
     updateItemStats(next.items, itemId, isCorrect, timestamp);
     enforceBoundedStorage(next.items);
   }
@@ -483,7 +488,7 @@ function enforceBoundedStorage(items) {
 }
 
 export function getItemStats(itemId) {
-  if (!isValidItemId(itemId)) return emptyItemStats();
+  if (!isSafeItemId(itemId)) return emptyItemStats();
   return getProgress().items[itemId] ?? emptyItemStats();
 }
 
@@ -505,7 +510,7 @@ export function getDifficultIds() {
 }
 
 function setItemFlag(id, field, value) {
-  if (!isValidItemId(id)) return;
+  if (!isSafeItemId(id)) return;
   const current = hydrateSync();
   const next = { ...current, items: { ...current.items } };
   const stats = sanitizeItemStats(next.items[id] ?? null);
@@ -527,7 +532,7 @@ export function setDifficult(id, value = true) {
 }
 
 export function markFlashcard(id, bucket) {
-  if (!isValidItemId(id) || !["known", "review"].includes(bucket)) return;
+  if (!isSafeItemId(id) || !["known", "review"].includes(bucket)) return;
   const current = hydrateSync();
   const timestamp = nowMs();
   const next = { ...current, items: { ...current.items } };
