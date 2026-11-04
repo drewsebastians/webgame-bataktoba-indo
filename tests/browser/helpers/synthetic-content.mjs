@@ -18,6 +18,7 @@ export const SYNTHETIC_WEBGAME_ITEMS = Array.from({ length: 8 }, (_, index) => {
     quality: SYNTHETIC_TEST_ONLY,
     reviewStatus: "synthetic-test-only",
     sourceType: "synthetic-test-only",
+    contextNote: "SYNTHETIC_TEST_ONLY_CONTEXT: <img id=\"synthetic-context-probe\" src=\"x\">",
   };
 });
 

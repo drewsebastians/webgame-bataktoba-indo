@@ -93,6 +93,9 @@ export function makeQuestion(
 
   return {
     prompt: item[from],
+    contextNote: typeof item.contextNote === "string" && item.contextNote.trim()
+      ? item.contextNote.trim()
+      : null,
     sourceFlag: item.sourceType || item.sourceFlag || null,
     quality: item.quality || null,
     reviewStatus: item.reviewStatus || null,
