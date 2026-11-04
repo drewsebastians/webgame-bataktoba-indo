@@ -189,6 +189,7 @@ test("mobile game targets keep a 44px minimum", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/games/");
+  await expect(page.locator(".option").first()).toBeVisible();
 
   const assertVisibleTargetsMeetMinimum = async (selector) => {
     const targets = await page.locator(selector).evaluateAll((elements) =>
