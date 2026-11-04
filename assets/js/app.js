@@ -764,6 +764,7 @@ async function initGames() {
       nextButton.textContent = "Soal Terakhir";
     }
     nextButton.disabled = false;
+    nextButton.focus();
     updateProgressBadges();
   }
 

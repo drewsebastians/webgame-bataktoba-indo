@@ -183,7 +183,7 @@ test("keyboard-only five-question session reviews a deliberate mistake", async (
     await page.keyboard.press(String(answerIndex + 1));
     const nextQuestion = page.locator("#next-question");
     await expect(nextQuestion).toBeEnabled();
-    await nextQuestion.focus();
+    await expect(nextQuestion).toBeFocused();
     await page.keyboard.press("Enter");
   }
 
@@ -203,7 +203,7 @@ test("keyboard-only five-question session reviews a deliberate mistake", async (
   await page.keyboard.press(String(reviewAnswerIndex + 1));
   const finishReview = page.locator("#next-question");
   await expect(finishReview).toBeEnabled();
-  await finishReview.focus();
+  await expect(finishReview).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
 });
