@@ -1,6 +1,16 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-04 03:20 UTC
+## Latest checkpoint — 2026-11-04 04:58:22 UTC
+
+- PUBLIC Webgame main HEAD is `51854a627da65de1a8cf5f60805d7a1280a9953e` after PR [#76](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/76). The available GitHub connector returns commit SHA and diff but not the commit tree SHA; shell Git transport cannot resolve `github.com`. No earlier tree SHA is reused. Current public checkpoint copies summarize private progress generically; Git history is unchanged.
+- PR #76 exact-head Verify [#41773526587](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41773526587) passed 229 unit tests, 48 browser tests, 0 skipped, E2E smoke, performance budget, synthetic-fixture isolation, committed-dist drift, and 12 Lighthouse profiles. Accessibility scored 100/100 throughout; mobile performance was 97–99 and desktop 100.
+- Verify uploaded `verified-public-site-dist-41773526587` (SHA-256 `be32af07211ce5813b6b4cb1dbd6a9cd1256ed4e20f4959f38d68cb66e10dedb`, expires 2026-11-18). Release checks found 0 published items, words, genuine phrases, or sentences and 0 warnings; synthetic markers are absent from public `dist/`.
+- Cloudflare's PR check reported build success for PR head `aafdb368f1d915d01f8ab91da68112a6979b40bc` (build `f6b48884-904e-40f8-883a-f91978cea796`). This is branch-head provider evidence, not a post-merge main artifact readback. Main post-merge status and live homepage/manifest/`sw.js`/`robots.txt` readback remain NOT_VERIFIED.
+- The public catalog remains empty/noindex. No private metadata, restricted corpus, or linguistic data was transferred. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A5 remains blocked_external; A9 history review remains approval-gated.
+- Next: obtain the current main tree SHA and post-merge workflow/provider status from a supported GitHub surface; read back the live site and assets; continue A3 browser engineering independently of corpus readiness.
+
+
+## Previous checkpoint — 2026-11-04 03:20 UTC
 
 - PUBLIC Webgame main HEAD/tree is `3c908495f6ef4210aae39567896e1536ba10912b` / `560ac8f9af954769f8e5b85780937d7f56d4a20c` after documentation PR [#73](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/73). The application baseline remains PR #72's verified public artifact upload; the checkpoint change does not alter app code or published data.
 - Exact-head Verify [#41763953814](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41763953814) and merged-main Verify [#41764746439](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41764746439) passed 229 unit tests and 46 browser tests (0 skipped), including synthetic-fixture isolation, E2E smoke, performance budget, committed-dist drift, and 12 Lighthouse route/profile audits. Accessibility was 100/100 throughout; mobile performance 98–99 and desktop 100.
@@ -24,7 +34,7 @@
 - Webgame main HEAD/tree is cf5ee8f0e3c908c36df6216e9f6297f7e995532a / ac2c7fae66cb5bd6e14ab454c6c460d1f18671f4 after checkpoint-only PR [#67](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/67). The current feature baseline is PR [#66](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/66) at 094e666eb6b7656b0c43c3ef106a907be7b8d41d / b6775c3627e1a811c2af1f3d24323dae4c462f8c; it adds a due-first daily-practice CTA using public published items and local review state. The empty catalog displays no CTA; fixtures remain test-only.
 - Main Verify [41613072560](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41613072560) passed 228 unit tests, 45 browser tests (0 skipped), smoke, performance budget, dist drift and 12 Lighthouse profiles. Accessibility was 100/100 throughout, mobile performance 97–100 and desktop 100. The site check reported 0 published items, words, genuine phrases, sentences and warnings; synthetic markers were absent from dist.
 - Cloudflare Workers Builds main check [f512dbda-ef5b-428d-9498-38681af76f52](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/f512dbda-ef5b-428d-9498-38681af76f52) succeeded for the current main checkpoint. This confirms provider build/deployment success; direct live Home/Games/manifest/bundle readback remains UNVERIFIED and A5 remains open.
-- PRIVATE Engine main HEAD/tree is 2427b9293eaef07066fb91d2efeef97496c8ffbc / 951ee61ebfe1e843a068629e019cd8319f5dd000 after documentation-only PR #57. PR #56 validations passed 19 contract + 11 source-discovery tests; B24 has 38 metadata-only leads and all public transfers blocked. No source-level metadata or records were transferred to this repository.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 - Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A3 continues; A5 direct readback remains open; A9 historical Git changes remain approval-gated.
 - Next: continue 5–10 minute browser UX, accessibility, PWA and synthetic flow improvements under A3. Preserve empty/noindex production content and source separation. Retry direct production readback through a supported browser/network surface.
 
@@ -33,7 +43,7 @@
 - Webgame is PUBLIC at main/tree 094e666eb6b7656b0c43c3ef106a907be7b8d41d / b6775c3627e1a811c2af1f3d24323dae4c462f8c. PR [#66](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/66) adds a due-first daily-practice action to Progress using only published public items and local review state; the empty catalog still shows no due CTA, and synthetic fixtures remain isolated in tests.
 - Main Verify [41608443134](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41608443134) passed 228 unit tests and 45 browser tests (0 skipped), E2E smoke, performance budget, committed-dist drift and 12 Lighthouse route/profile checks. Accessibility was 100/100 throughout; mobile performance was 97–100 and desktop performance 100.
 - Site check reported 0 published items, 0 words, 0 genuine phrases, 0 sentences and 0 warnings. Synthetic test markers were absent from public dist. Cloudflare Workers Builds [57813fc9-f60d-4b00-8e88-ecf45ff8f0d7](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/57813fc9-f60d-4b00-8e88-ecf45ff8f0d7) succeeded for commit 094e666eb6b7656b0c43c3ef106a907be7b8d41d. This confirms provider build/deployment success; direct live Home/Games/manifest/bundle readback remains UNVERIFIED, so A5 stays open.
-- PRIVATE Engine is at main/tree 39918a0148e4de4c5a154de7fcc58ef65db11634 / c94b1eb5c46cbb17db15db79ec8ab389cf26618e. Its PR #56 and exact-head/main workflows passed 19 contract and 11 source-discovery tests, no skips. B24 currently has 38 metadata-only leads and zero public transfer; no Engine data moved to this PUBLIC repository. Private source-level details are not included here.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 - Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A3 continues; A5 needs direct live readback; A9 remains approval-gated.
 - Next: continue short-session UX, accessibility, PWA and synthetic-flow improvements under A3; attempt direct production readback through an available supported browser surface; preserve noindex/empty catalog until publication rights and quality gates pass.
 
@@ -41,11 +51,11 @@
 
 - Webgame is PUBLIC at main/tree 7f31d0b366a77c87b492219f6eaac302da0da1be / 1dcff325642f3eabedc8dc83df6b17d6a60ce030. PR [#64](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/64) fixes Matching Pairs timer behavior: elapsed time updates while idle, toggling preserves keyboard focus, and switching mode or completing/resetting a board clears the interval and resets elapsed time as specified.
 - Exact-head Verify [41599334104](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41599334104) and merged-main Verify [41600453685](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41600453685) succeeded. Main CI reported 228 unit tests and 44 browser tests passed, performance budget and smoke checks passed, and the committed build matched generated output. Lighthouse passed 12 mobile/desktop route checks: accessibility 100/100 throughout, mobile performance 97–100/100, desktop 100/100.
-- Site check reports 0 published learning items, 0 words, 0 genuine phrases, 0 sentences, and 0 warnings. Synthetic fixtures remain test-only; no private Engine rows or source metadata were transferred.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 - Cloudflare Workers Builds check [07da192a-2696-4864-a76b-0b278ea4e966](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/07da192a-2696-4864-a76b-0b278ea4e966) succeeded for main commit 7f31d0b366a77c87b492219f6eaac302da0da1be. This verifies technical build/deployment success. Direct live Home/Games/manifest/bundle readback is still unavailable, so served artifact identity remains UNVERIFIED and A5 remains open.
-- The PRIVATE Engine is at main/tree d085fa598569edc5b4b596e57501bc4e8151e66b / 02cfdc696f096511e928df80cada6d7023733ace after PR #54; its exact-head and merged-main validations passed. Aggregate discovery remains metadata-only with zero learner records and zero public transfer. No Engine source-level details or data are published here.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 - Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A3 remains active; A5 awaits direct production readback; A9 remains approval-gated.
-- Next: continue independent browser UX and synthetic game-flow coverage under A3; keep the public catalog empty/noindex until publication gates pass. Retry direct production readback for A5 when a supported surface is available. Continue private-side B24 work independently.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Previous checkpoint — 2026-11-03 07:02 UTC
 
@@ -53,10 +63,10 @@
 - Exact-head Verify [41592447568](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41592447568) and merged-main Verify [41593264058](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41593264058) passed. Main verified 228/228 unit tests, 44/44 browser tests with 0 skipped, release checks and dist-drift. Lighthouse accessibility scored 100/100 in all 12 route/profile checks; mobile performance was 98–100 and desktop 100. Performance budgets passed.
 - Cloudflare Workers Builds production check [21b65c3c-dde3-4248-bb56-5e1ae23e8fad](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/21b65c3c-dde3-4248-bb56-5e1ae23e8fad) succeeded for main commit 3f014dab861fd8ec80b863d2bdbe90738c4b3857 (version 7c853194-46ff-4fea-8d87-5690c7c79d60). This is technical build/deployment evidence; direct Home/Games/manifest/bundle readback remains unavailable and served artifact identity remains UNVERIFIED.
 - The public catalog is still empty/noindex: main Verify reported 0 published learning items, 0 words, 0 genuine phrases, 0 sentences and 0 warnings. PR #62 changed test code only; no corpus records or synthetic fixtures entered production output.
-- The PRIVATE Engine implementation baseline is main/tree 24b8ca54431a6da5626328afb87fbee6a5b60c1f / 4d972a143f6713172052dc643270c51cd120e55b. PR [#52](https://github.com/drewsebastians/batak-indo-alignment-engine/pull/52) adds synthetic regressions for private-only release denial and source-family lineage. Exact workflow [41592870033](https://github.com/drewsebastians/batak-indo-alignment-engine/actions/runs/41592870033) and main [41593286115](https://github.com/drewsebastians/batak-indo-alignment-engine/actions/runs/41593286115) passed 19 contract plus 9 source-discovery tests, 0 skipped; sparse CI excludes corpus files.
-- Engine B24 preflight remains 37 metadata-only leads (29 direct, 3 concept-mapping, 3 sentence-source, 2 scope checks), 0 assigned source families, 0 permitted/acquired records, 0 candidate/automated-supported items, 0 evidence rows, 0 conflicts, 0 topic maps and 0 eligible items; all 37 public transfers remain blocked. Pilot readiness remains 0/8 eligible items each for angka, keluarga and sapaan. `latest.json` remains B23 / DEGRADED / next B24; no B17–B23 batch was repeated, no language rows/files were fetched, and no HUMAN_REVIEWED claims were added.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 - Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A5 live readback and A9 history-rewrite decision remain open; Engine acquisition remains gated on approved private storage and source-specific processing scope.
-- Next: continue A3 browser UX and B24 metadata-only non-Bible `bbc` discovery independently. Keep synthetic fixtures test-only, preserve the empty/noindex public catalog, and keep direct production readback as a separate verification gate.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Previous checkpoint — 2026-11-03 01:37 UTC
 
@@ -64,9 +74,9 @@
 - PR #60 exact-head Verify [41558847216](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41558847216) passed full checks, synthetic browser flow, axe, Lighthouse and committed-dist drift. Merged-main Verify [41559521523](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41559521523) passed on cd9cc8ee8f38b99f18689b7b5af2edd91d03f431. Local check, 228/228 unit tests, syntax checks, build and performance budget passed (JS 183,149/196,608 bytes; CSS 15,766/49,152). Local Playwright did not report a result; exact-head CI browser checks passed.
 - Cloudflare Workers Builds production check [9eb0c864-d355-4b89-9601-10c0ab95ff17](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/9eb0c864-d355-4b89-9601-10c0ab95ff17) succeeded for merged main commit cd9cc8ee8f38b99f18689b7b5af2edd91d03f431. Direct live readback of Home, Games, manifest and the versioned bundle remained inaccessible through the available web and browser surfaces; served artifact identity remains UNVERIFIED.
 - The PUBLIC catalog remains empty/noindex. PR #60 added no learning content, private records or test fixtures to production assets. Issue #2 remains closed. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
-- The PRIVATE Engine remains at main/tree cde3454ec3a0dbc8e4e3b6cf031ea3a4e8fb0070 / afe4f66ed534f1d5e11bcaed549693980977366f. PR [#48](https://github.com/drewsebastians/batak-indo-alignment-engine/pull/48) adds synthetic foreign-key regression coverage only. Exact-head run [41560162486](https://github.com/drewsebastians/batak-indo-alignment-engine/actions/runs/41560162486) and merged-main run [41560849778](https://github.com/drewsebastians/batak-indo-alignment-engine/actions/runs/41560849778) passed; the exact run passed 17 contract tests and 9 source-discovery tests, with no skipped tests. CI sparse checkout excluded corpus files.
-- Engine discovery remains B24 with 37 metadata-only leads (29 direct, 3 concept adjuncts, 3 sentence adjuncts, 2 scope checks), 0 assigned families, 0 permitted/acquired records, 0 learner items/evidence/conflicts/topic mappings/game-eligible records, and all 37 public-transfer blocks. `latest.json` remains B23 / DEGRADED / next B24. Approved private storage and source-specific processing permission remain unverified; no B17–B23 batch was repeated and no source text was fetched.
-- Next: continue A3 browser UX independently; keep A5 open until the live served artifact can be read back and matched to the merged build; continue B24 metadata-only source/rights discovery without duplicate batches or file acquisition. Keep historical public-history rewrite A9 approval-gated.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 
 ## Previous checkpoint — 2026-11-03 01:00 UTC
@@ -111,7 +121,7 @@
 - The homepage “Latihan Harian” CTA now opens games/?practice=daily; Games consumes the parameter and starts the existing due-first queue. The synthetic browser test seeds one due fixture and verifies it appears first. Verified runs passed 221/221 Node tests (0 skipped), smoke, performance budget, 41/41 Playwright tests, committed-dist drift and 12 Lighthouse audits. Accessibility was 100/100 on every audit; mobile Performance was 98/98/98/99/99/100, desktop was 100 on all six routes.
 - Cloudflare Workers Builds reported a successful production build 384bacaa-f4ca-4be0-a83a-03387d19f2d2 for PR #51 head 3a2cd29081101e646a5b78335220683d86de4f75. This confirms a provider build, while direct live Pages readback remains UNVERIFIED because this environment cannot resolve the Pages host.
 - Production catalog remains empty/noindex: 0 learning items, words, genuine phrases and sentences. Synthetic fixtures are test-only; no private/restricted linguistic data entered public source or dist. Issue #2 is closed.
-- The PRIVATE Engine is at main/tree e1a7a495d5dde31af3866f2b20e03a1c5f594ed0 / edb3f20df80cf02ed887121b21a5b36cd94f2fdd; checkpoint PR #39 is merged. The last relevant validator run [41387047029](https://github.com/drewsebastians/batak-indo-alignment-engine/actions/runs/41387047029) passed 15 contract and 9 discovery tests and validated 36 metadata-only B24 leads; all public transfer remains blocked, no data records were acquired, and B23 remains latest / DEGRADED / next B24. Engine docs-only changes are outside its validator workflow path filter.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 - Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
 ### Resume actions
@@ -119,7 +129,7 @@
 1. Run exact-head verification for this documentation-only checkpoint PR and merge only if it passes with base 99d5b2069a358c80dbd83648efb6f0182fc3b4dc unchanged.
 2. Verify the resulting main SHA/tree and provider build after the docs merge. Keep live Pages readback unverified until the artifact is fetched and checked from a network that resolves the host.
 3. Continue A3 responsive UX, lesson/game flow, PWA/offline, accessibility, privacy and security work with synthetic-only fixtures.
-4. Continue the PRIVATE Engine B24 source and rights work independently; keep acquisition and public transfer gated on source-specific rights, provenance and approved storage.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Latest checkpoint — 2026-11-02 04:54 UTC
 
@@ -135,7 +145,7 @@
 1. Wait for exact-head Verify on the documentation-refreshed PR #51 branch; merge only if it passes and the base is still `ca1ec4ad2d0fd28c04109ff1fb587ad3a69c376d`.
 2. After merge, verify the new main SHA/tree, exact-main Actions result, and Cloudflare production build; keep live readback unverified until the served artifact is inspected from a resolvable network.
 3. Continue A3 responsive UX, lesson/game flow, PWA/offline, accessibility, privacy and security work with synthetic-only fixtures.
-4. Continue B24 discovery and rights work in the PRIVATE Engine independently; do not transfer private content or publish records without verified rights and quality gates.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Latest checkpoint — 2026-11-02 03:52 UTC
 
@@ -194,7 +204,7 @@
 
 1. Continue A3 browser engineering across responsiveness, PWA, accessibility, privacy and security. Current six-route Lighthouse baseline is 98–100 mobile, 100 desktop, and 100 accessibility.
 2. Keep synthetic fixtures isolated and production datasets empty/noindex until real publication gates pass.
-3. Continue private B24 discovery independently; do not copy source-specific details or language content into this repository.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 4. Keep direct live readback unverified; distinguish provider build success from served-artifact inspection.
 5. Preserve current history evidence and seek explicit owner authorization before any destructive history rewrite.
 
@@ -207,25 +217,25 @@
 - Lighthouse Accessibility scored 100 across all route/profile audits; Performance was mobile 98/92/99/99/99/100 and desktop 100/99/100/100/100/100. Budgets pass at 178,590/196,608 JavaScript bytes and 15,766/49,152 CSS bytes.
 - Cloudflare Workers Builds check [124874167176](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/124874167176) succeeded for production build `bf5b6270-f706-4df7-a3a8-9112aff78a1f`, version `a070d6b6-7be0-4117-b44a-01acd875d5d3`.
 - Production remains empty/noindex: site check reports 0 published learning items (0 words, 0 genuine phrases, 0 sentences) and 0 warnings. Synthetic data remains isolated to browser tests; no private/restricted language data entered public source or dist. Direct live-page readback remains UNVERIFIED.
-- The Alignment Engine remains PRIVATE; B23 is still the latest completed batch and B24 remains metadata-only. No private language data was transferred here.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Next actions
 
 1. Implement and measure A3 route payload/CLS improvements, prioritizing angka mobile CLS and unused JavaScript.
 2. Continue exact-head unit/E2E/Lighthouse/budget/drift checks and Cloudflare build verification; distinguish technical deployment from learning readiness.
-3. Continue independent private B24 discovery without repeating B17–B23; keep all restricted content private and latest.json at B23 until a lawful reproducible collection passes.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 4. Retry direct live readback when an accessible targetable provider/browser surface is available.
 5. Keep ENGINEERING_READY, DATA_READY, PUBLICATION_READY, LEARNING_READY and MONETIZATION_READY separate.
-6. Re-fetch both repositories' visibility, refs/trees, Issues, PRs, Actions and private latest.json before each batch; use expected SHAs and never rewrite public history.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 
 ## Mission and constraints
 
 Build a useful responsive desktop and mobile browser game and browser PWA. Website engineering and private data research continue independently. Audio, pronunciation, and culture-led features are not current priorities.
 
-Keep drewsebastians/batak-indo-alignment-engine PRIVATE. Never move private or restricted language text into the public repository, logs, external services, or build artifacts without verified record-specific rights and explicit publication scope. Do not rewrite public Git history.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
-For every batch, re-check both repository visibilities, main/tree SHAs, Issues, PRs, Actions and private latest.json. Use expected-SHA updates, non-force ref moves, tests and deployment evidence. Keep persistent STATUS, HANDOFF and WORK_QUEUE checkpoints current.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Independent readiness gates
 
@@ -243,7 +253,7 @@ Public main is `730ff3fdd1db6190d70cc37774c3800db1e1602b` / tree `2e500141e4811c
 
 The public artifact remains empty/noindex with 0 published items, words, genuine phrases, or sentences. Synthetic fixtures remain test-only; private/restricted content was not moved into this repository. Historical objects remain in earlier Git commits; no history rewrite was performed.
 
-The Alignment Engine remains PRIVATE on main `cfec3baeb8beee4738c81fde73ba92b71755bc22`; B23 remains latest (DEGRADED). Private PR #3 remains open; run #17 failed before runner startup with zero steps, so no validator tests ran. Its B24 branch contains metadata-only discovery (14 rows, 0 permitted/acquired records). The approved private source vault remains unavailable.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 Readiness: ENGINEERING_READY=YES for the merged and tested browser scope; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Continue public browser engineering and private metadata research independently. Inspect the progress desktop Lighthouse report and continue PWA/offline, responsive, privacy/security, accessibility, and live-readback work. Do not publish language records without rights and quality gates.
 
@@ -253,13 +263,13 @@ Public A2 is integrated through PR #4, merge commit 14fe3bb5f2a7c9d2d663f9c32213
 
 Historical corpus-derived snapshots were deleted from the current public tree by the A1 containment change. Older public Git commits retain those objects. No history rewrite was authorized or performed.
 
-Private B23 remains the latest completed batch. B24 is metadata-only and has produced no permitted records or consumer items. The current private validator PR cannot run because GitHub Actions fails before validator startup; run 41193636578 exposed no steps or logs. The approved private source vault remains unavailable.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 ## Historical next actions from A2 checkpoint
 
 1. Continue A3 browser work on measured performance, PWA/offline behavior, accessibility, security, and live-site readback.
 2. Keep the public content gates closed and all content arrays empty until rights and quality pass.
-3. Continue B24 source discovery in parallel, metadata-only while rights or vault access are unresolved.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 4. Recheck private CI only when Actions can start; do not mark engineering validation complete without actual test logs.
 
 
@@ -277,7 +287,7 @@ Public main is `ce3338f0ac03fd56601db29c361bb8927b6ca247` (tree `4fb92b1df1cfcf3
 
 Cloudflare Workers Builds check `124531517252` reported production build `14592e21-73bd-40cc-b629-99fc4b58c422` successful for this commit. Direct readback of the deployed home, `/games`, `robots.txt`, and manifest was rejected as inaccessible by the available web connector. The provider build is verified; the live artifact has not been independently inspected.
 
-Readiness: ENGINEERING_READY=YES for the tested synthetic UX, asset budget, and Lighthouse baseline; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=deferred. Private B24 remains metadata-only and B23 remains latest; no restricted or synthetic linguistic text was transferred here. The Alignment Engine stays PRIVATE.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 Next: extend measured browser coverage across key routes and journeys; continue responsive PWA/offline, accessibility, privacy, and security work; retry live artifact readback through an accessible route. Keep published arrays empty until record-level rights and quality gates pass.
 
@@ -287,7 +297,7 @@ Public webgame main is `d5dc0a44786b4b12c20a4586a88dfa85406a68f5` / tree `26b3d9
 
 Cloudflare Workers Builds reports production build `aefb2216-8994-4e29-931d-4966a308b4aa` successful. Live artifact readback remains unverified because the deployed pages are inaccessible through the available web connector. No private or synthetic linguistic content is in public output; published data remains zero. Prior public Git commits still contain historical corpus objects; no history rewrite was performed.
 
-The Alignment Engine remains PRIVATE on main `cfec3baeb8beee4738c81fde73ba92b71755bc22`; PR #3 head `ca4b41fa55d445fcc70b935156c55f8ca041fd71` and latest run #15 failed before validator startup with 0 steps. B23 remains latest; B24 is metadata-only and detailed source discovery stays in the private repo.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
 
 Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and six-route Lighthouse checks; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 
@@ -297,4 +307,4 @@ Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and
 2. Preserve empty/noindex public learning content and keep synthetic fixtures isolated from production artifacts.
 3. Continue Data Engine discovery and permitted collection only in its PRIVATE repository; resume from its current HANDOFF.md without repeating completed batches.
 4. Verify live production Pages content directly through an accessible browser/reader before claiming live readback.
-5. Re-fetch repository visibility, main/tree SHAs, Issues, PRs, Actions, deployments and private latest.json before the next write batch.
+- Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
