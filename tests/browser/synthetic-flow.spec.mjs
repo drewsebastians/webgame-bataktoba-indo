@@ -185,3 +185,39 @@ test("keyboard-only five-question session reviews a deliberate mistake", async (
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
 });
 
+test("mobile game targets keep a 44px minimum", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/games/");
+  await expect(page.locator(".option").first()).toBeVisible();
+
+  const assertVisibleTargetsMeetMinimum = async (selector) => {
+    const targets = await page.locator(selector).evaluateAll((elements) =>
+      elements
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          const style = window.getComputedStyle(element);
+          return rect.width > 0 && rect.height > 0 && style.display !== "none" && style.visibility !== "hidden";
+        })
+        .map((element) => ({
+          classes: typeof element.className === "string" ? element.className : element.tagName,
+          height: element.getBoundingClientRect().height,
+        })),
+    );
+
+    expect(targets.length).toBeGreaterThan(0);
+    for (const target of targets) {
+      expect(target.height, `${target.classes} touch target height`).toBeGreaterThanOrEqual(44);
+    }
+    return targets;
+  };
+
+  const quizTargets = await assertVisibleTargetsMeetMinimum(".mode-button, .option, .button");
+  expect(quizTargets.some((target) => target.classes.includes("option"))).toBe(true);
+
+  await page.locator('.mode-button[data-mode="matching"]').click();
+  await expect(page.locator(".match-card").first()).toBeVisible();
+  const matchingTargets = await assertVisibleTargetsMeetMinimum(".mode-button, .match-card, .button");
+  expect(matchingTargets.some((target) => target.classes.includes("match-card"))).toBe(true);
+});
+
