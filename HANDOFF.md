@@ -1,6 +1,17 @@
 # Resume handoff — 2026-11-04
 
-## Latest checkpoint — 2026-11-04 12:44 UTC
+## Latest checkpoint — 2026-11-04 14:30 UTC
+
+- PUBLIC Webgame remains PUBLIC at main HEAD/tree `a3b5c0a4e88e3f09e61e2d1cc7a5fb2adc70a5e5` / `eff4b91bf5ff61058de054d82ddfa8d2928dcfc7` after PR [#86](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/86). Multiple-choice quiz and mistake-review answers now move keyboard focus to the enabled next-question button; Enter proceeds without a second manual focus step. Typed-answer and true/false modes already follow this pattern.
+- Exact-head Verify [#41845336685](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41845336685) and post-merge main Verify [#41847258551](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41847258551) both succeeded. Main verification passed 232/232 unit tests (0 failed/skipped), 51/51 browser tests, build, smoke, performance budget, synthetic-fixture isolation, synthetic-marker scan of public `dist/`, public-data gate, committed-dist drift, and all 12 Lighthouse profiles. Accessibility was 100/100 in every profile; mobile performance 97–99/100; desktop 100/100.
+- The main data gate found 0 published learning items (0 words, 0 genuine phrases, 0 sentences) and 0 warnings. Synthetic test markers were absent from public `dist/`; the catalog remains empty/noindex. Main artifact `verified-public-site-dist-41847258551` (artifact ID 13331218304) was 119,775 bytes; uploaded ZIP SHA-256: `cfefc94cc05a9d4959325fc4baf0f8af87c14dba6c75b29bdef3c6e4cd1306d1`.
+- Production deployment and live homepage/manifest/service-worker/robots readback remain NOT_VERIFIED. The expected `pages.dev` URLs were inaccessible through the configured reader, `wrangler.toml` names no custom domain, and the CI artifact proves a build rather than production serving.
+- No private Engine data or source metadata was transferred. Historical public Git objects remain approval-gated; no history rewrite was performed.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue keyboard and touch usability across responsive lessons, games, and mistake review with isolated synthetic fixtures; retain the empty/noindex publication gate. Retry live deployment verification when a supported provider or actual domain reader is available.
+
+
+## Previous checkpoint — 2026-11-04 12:44 UTC
 
 - PUBLIC Webgame remains PUBLIC at main HEAD/tree `34aeb41db202c5bc9afbca9db0c3ec926754cd5d` / `87fc181cafb2d92a61277484fc04c029c93a0041` after PR [#84](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/84). It adds accessible native progress values to short quiz, mistake-review, mini-practice, and published-lesson phases, with synthetic-only browser coverage.
 - Exact-head Verify [#41812445875](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41812445875) and merged-main Verify [#41828954994](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41828954994) succeeded. The main run passed 51 browser tests, build/smoke, committed-dist drift, synthetic-fixture isolation, and the public-data gate (0 learning items, 0 warnings). All 12 Lighthouse profiles passed: accessibility 100/100; mobile performance 97–100; desktop 100/100.
