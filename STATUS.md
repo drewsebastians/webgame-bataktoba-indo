@@ -1,6 +1,15 @@
 # Execution status — 2026-11-04
 
-## Latest checkpoint — 2026-11-04 05:18:01 UTC
+## Latest checkpoint — 2026-11-04 07:05 UTC
+
+- PUBLIC Webgame remains PUBLIC at main HEAD/tree `ee63d4e21568762003c72d636136d8b87d2a78c0` / `26eb36b8b89738c75aa84a7ad9efc48deb32b9e3` after PR [#79](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/79). It hardens progress item IDs at storage read/write boundaries and regenerates the five changed hashed JS bundles, HTML references and service-worker cache version. The change uses synthetic IDs only.
+- Exact-head Verify [#41787423023](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41787423023) and merged-main Verify [#41788275173](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41788275173) both passed 231 unit + 48 browser tests, 0 skipped; smoke, performance budget, synthetic isolation, committed-dist drift and all 12 Lighthouse profiles passed. Accessibility was 100/100 for every profile; mobile performance 97–100 and desktop 100.
+- Main artifact `verified-public-site-dist-41788275173` uploaded at 119,117 bytes (SHA-256 `107a95a12250ab367c9d533a2afcd83b498327aacba2112663b179742b6c1efd`, expires 2026-11-18). Site check found 0 published items, words, genuine phrases or sentences and 0 warnings; synthetic markers were absent from the public artifact. Catalog remains empty/noindex.
+- Cloudflare Workers Builds returned technical success for the main production build `da933b84-195c-46b8-9320-3551adfcf0e0`. Direct live homepage, manifest, service-worker and robots.txt readback could not be accessed through the configured reader; production artifact identity remains NOT_VERIFIED.
+- The data track remains PRIVATE with no publication-ready records. No private source metadata or linguistic data was transferred. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- `PROGRESS_LOG.md` remains unchanged: automatic approval review rejected two attempted updates because a broad rewrite could carry forward restricted historical inventory/technical detail. No history rewrite was performed. A9 historical exposure remains approval-gated; A5 direct live readback remains externally blocked.
+
+## Previous checkpoint — 2026-11-04 05:18:01 UTC
 
 - PUBLIC Webgame main HEAD is `754a49b7a9ff60044f089a028ae1f6c40b3460c4` after checkpoint PR [#77](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/77). GitHub's connected API returns the commit SHA and diff but not its tree SHA; shell Git transport cannot resolve `github.com`, so no previous tree value is reused.
 - Exact-head Verify [#41777307830](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41777307830) passed 229 unit tests, 48 browser tests, 0 skipped, smoke, performance budget, synthetic isolation, dist drift and 12 Lighthouse profiles. Accessibility was 100/100 throughout; mobile Performance ranged 97–99 and desktop was 100.
