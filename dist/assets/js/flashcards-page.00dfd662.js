@@ -169,18 +169,23 @@ async function initFlashcards() {
     else if (action === "difficult") setDifficult(item.id, true);
     index = (index + step + deck.length) % deck.length;
     flipped = false;
-    renderCard();
+    renderCard({ focusCard: true });
     updateProgressBadges();
   }
 
   function handleKeydown(event) {
-    if (event.target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(event.target.tagName)) {
+    const target = event.target;
+    if (target instanceof HTMLElement && (
+      ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName) || target.isContentEditable
+    )) {
       return;
     }
     if (event.key === " ") {
+      // Let buttons keep their native Space activation. The flashcard itself
+      // flips through its click handler, while rating controls must still work.
+      if (target instanceof Element && target.closest("button, a, [role=button]")) return;
       event.preventDefault();
-      flipped = !flipped;
-      renderCard();
+      flipCard();
     } else if (event.key === "1") advance(1, "wrong");
     else if (event.key === "2") advance(1, "difficult");
     else if (event.key === "3") advance(1, "correct");
@@ -188,7 +193,12 @@ async function initFlashcards() {
     else if (event.key === "ArrowLeft") advance(-1);
   }
 
-  function renderCard() {
+  function flipCard() {
+    flipped = !flipped;
+    renderCard({ focusCard: true });
+  }
+
+  function renderCard({ focusCard = false } = {}) {
     const cardRoot = flashcardQuery("#flashcard-card");
     if (!cardRoot) return;
     const item = currentItem();
@@ -212,8 +222,7 @@ async function initFlashcards() {
       el("span", { text: `${flipped ? "Indonesia" : "Batak Toba"} - klik atau tekan spasi untuk balik` }),
     );
     card.addEventListener("click", () => {
-      flipped = !flipped;
-      renderCard();
+      flipCard();
     });
 
     const wrongButton = el("button", { className: "button secondary", text: "1 Salah", attrs: { type: "button" } });
@@ -249,6 +258,7 @@ async function initFlashcards() {
         nextButton,
       ),
     );
+    if (focusCard) card.focus({ preventScroll: true });
   }
 
   rebuildDeck();
