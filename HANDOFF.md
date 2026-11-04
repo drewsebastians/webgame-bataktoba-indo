@@ -1,6 +1,16 @@
 # Resume handoff — 2026-11-04
 
-## Latest checkpoint — 2026-11-04 04:58:22 UTC
+## Latest checkpoint — 2026-11-04 05:18:01 UTC
+
+- PUBLIC Webgame main HEAD is `754a49b7a9ff60044f089a028ae1f6c40b3460c4` after checkpoint PR [#77](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/77). GitHub's connected API returns the commit SHA and diff but not its tree SHA; shell Git transport cannot resolve `github.com`, so no previous tree value is reused.
+- Exact-head Verify [#41777307830](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41777307830) passed 229 unit tests, 48 browser tests, 0 skipped, smoke, performance budget, synthetic isolation, dist drift and 12 Lighthouse profiles. Accessibility was 100/100 throughout; mobile Performance ranged 97–99 and desktop was 100.
+- Verified artifact `verified-public-site-dist-41777307830` (SHA-256 `05f2912be2463f21e07e042b3f21fb3bf7bfb82090de28b4e3bf048d0c0929b4`, expires 2026-11-18). Site check found 0 published items, words, genuine phrases or sentences and 0 warnings; synthetic markers are absent from public `dist/`.
+- Cloudflare reported a successful build for PR head `45a5e85c9766131347843d1dfc3d11d0e8d7f14c` (build `fd2d5daa-87ea-4fb0-ae95-86b1fcc5b7d2`). The connected GitHub API returned no post-merge main workflow/status; live homepage/manifest/`sw.js`/`robots.txt` readback remains NOT_VERIFIED.
+- The public catalog stays empty/noindex. Operational summaries now keep the repository boundary generic. `PROGRESS_LOG.md` remains unchanged pending an approved safe edit; no Git history rewrite was performed. A1 is blocked_approval, A5 is blocked_external, and A9 remains approval-gated. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: resolve the PROGRESS_LOG editing blocker, retrieve the current tree SHA and post-merge status through a supported GitHub surface, directly read back the live artifacts, and continue independent A3 browser engineering.
+
+
+## Previous checkpoint — 2026-11-04 04:58:22 UTC
 
 - PUBLIC Webgame main HEAD is `51854a627da65de1a8cf5f60805d7a1280a9953e` after PR [#76](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/76). The available GitHub connector returns commit SHA and diff but not the commit tree SHA; shell Git transport cannot resolve `github.com`. No earlier tree SHA is reused. Current public checkpoint copies summarize private progress generically; Git history is unchanged.
 - PR #76 exact-head Verify [#41773526587](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41773526587) passed 229 unit tests, 48 browser tests, 0 skipped, E2E smoke, performance budget, synthetic-fixture isolation, committed-dist drift, and 12 Lighthouse profiles. Accessibility scored 100/100 throughout; mobile performance was 97–99 and desktop 100.
