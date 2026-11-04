@@ -72,6 +72,20 @@ function promptContextNodes(value) {
   ];
 }
 
+function sessionProgressNode(current, total, label = "Kemajuan sesi", unit = "soal") {
+  const safeTotal = Math.max(1, Number.isFinite(total) ? total : 1);
+  const safeCurrent = Math.min(Math.max(0, Number.isFinite(current) ? current : 0), safeTotal);
+  return el("progress", {
+    className: "session-progress",
+    attrs: {
+      max: safeTotal,
+      value: safeCurrent,
+      "aria-label": label,
+      "aria-valuetext": String(safeCurrent) + " dari " + String(safeTotal) + " " + unit,
+    },
+  });
+}
+
 function initNavToggle() {
   const toggle = $(".nav-toggle");
   const links = $("#nav-links-list");
@@ -655,6 +669,7 @@ async function initGames() {
   function renderQuiz() {
     const config = modes[state.mode];
     const question = state.current;
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
 
     const feedback = el("p", { className: "feedback", id: "feedback", attrs: { "aria-live": "polite" } });
     const nextButton = el("button", {
@@ -684,6 +699,11 @@ async function initGames() {
         pill(config.label),
         pill(`Ronde ${state.answered + 1}`),
         pill(`Skor ${state.correct}/${state.answered}`),
+      ),
+      sessionProgressNode(
+        Math.min(state.answered + 1, sessionLimit),
+        sessionLimit,
+        state.inReviewMode ? "Kemajuan review kesalahan" : "Kemajuan sesi",
       ),
       el(
         "div",
@@ -799,6 +819,7 @@ async function initGames() {
       return;
     }
     state = { ...state, current: question, locked: false };
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
     const item = itemById(question.itemId);
     const input = el("input", {
       className: "input typed-answer-input",
@@ -861,6 +882,11 @@ async function initGames() {
         pill(config.label),
         pill(`Ronde ${state.answered + 1}`),
         pill(`Skor ${state.correct}/${state.answered}`),
+      ),
+      sessionProgressNode(
+        Math.min(state.answered + 1, sessionLimit),
+        sessionLimit,
+        state.inReviewMode ? "Kemajuan review kesalahan" : "Kemajuan sesi",
       ),
       el(
         "div",
@@ -952,6 +978,11 @@ async function initGames() {
         pill(config.label),
         pill(`Ronde ${state.answered + 1}`),
         pill(`Skor ${state.correct}/${state.answered}`),
+      ),
+      sessionProgressNode(
+        Math.min(state.answered + 1, sessionLimit),
+        sessionLimit,
+        state.inReviewMode ? "Kemajuan review kesalahan" : "Kemajuan sesi",
       ),
       el(
         "div",
@@ -1872,6 +1903,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
         ? el("p", { className: "feedback", text: `Rekomendasi berikutnya: ${next}.` })
         : el("p", { className: "feedback", text: "Belum ada lesson lain yang terbit." }),
     );
+    summary.prepend(sessionProgressNode(plan.length, plan.length, "Kemajuan lesson", "langkah"));
     const backToTop = root.closest("main")?.querySelector(".page-heading");
     if (backToTop) backToTop.after(summary);
     else root.append(summary);
@@ -1906,6 +1938,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
 
     replaceChildren(
       root,
+      sessionProgressNode(stepIndex + 1, plan.length, "Kemajuan lesson", "langkah"),
       pill(`Recall ${recallIndex + 1}/${step.prompts.length}`),
       el(
         "div",
@@ -1973,6 +2006,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
       nb.addEventListener("click", renderQ);
       replaceChildren(
         root,
+        sessionProgressNode(stepIndex + 1, plan.length, "Kemajuan lesson", "langkah"),
         pill(`Pengenalan ${qIndex + 1}/${step.questions.length}`),
         el(
           "div",
@@ -1997,6 +2031,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
     }
     replaceChildren(
       root,
+      sessionProgressNode(stepIndex + 1, plan.length, "Kemajuan lesson", "langkah"),
       pill("Review kesalahan"),
       el(
         "div",
@@ -2020,6 +2055,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
   function renderIntro() {
     replaceChildren(
       root,
+      sessionProgressNode(stepIndex + 1, plan.length, "Kemajuan lesson", "langkah"),
       el("h2", { text: lesson.title }),
       el("p", { className: "lead", text: lesson.description }),
       el("p", { className: "feedback", text: `Estimasi ${lesson.estMinutes} menit - level ${lesson.level}. Status materi: ${lesson.reviewRollup}.` }),
@@ -2214,6 +2250,7 @@ function renderMiniPractice(root, themeItems, fullPool) {
         pill(`Mini latihan ${Math.min(answered + 1, maxQuestions)}/${maxQuestions}`),
         pill(formatQuality(question), "", { "data-source-flag": question.sourceFlag || "corpus-derived" }),
       ),
+      sessionProgressNode(Math.min(answered + 1, maxQuestions), maxQuestions, "Kemajuan mini latihan"),
       el(
         "div",
         { className: "prompt" },

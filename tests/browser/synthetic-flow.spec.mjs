@@ -208,6 +208,43 @@ test("keyboard-only five-question session reviews a deliberate mistake", async (
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
 });
 
+test("fixed-length practice exposes accessible progress across quiz modes", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+  await page.locator('.session-size-button[data-size="5"]').click();
+
+  for (const mode of ["meaning", "typed", "truefalse"]) {
+    if (mode !== "meaning") await page.locator(".mode-button[data-mode=\"" + mode + "\"]").click();
+    const progress = page.getByRole("progressbar", { name: "Kemajuan sesi" });
+    await expect(progress).toHaveAttribute("max", "5");
+    await expect(progress).toHaveAttribute("value", "1");
+    await expect(progress).toHaveAttribute("aria-valuetext", "1 dari 5 soal");
+
+    if (mode === "typed") {
+      await page.locator(".typed-answer-input").fill("jawaban latihan");
+      await page.keyboard.press("Enter");
+    } else {
+      await page.locator(".option").first().click();
+    }
+    await page.locator("#next-question").click();
+    await expect(progress).toHaveAttribute("value", "2");
+    await expect(progress).toHaveAttribute("aria-valuetext", "2 dari 5 soal");
+  }
+});
+
+test("published lesson exposes accessible phase progress", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/learn/angka/");
+  const progress = page.getByRole("progressbar", { name: "Kemajuan lesson" });
+  await expect(progress).toBeVisible();
+  await expect(progress).toHaveAttribute("max", "5");
+  await expect(progress).toHaveAttribute("value", "1");
+  await expect(progress).toHaveAttribute("aria-valuetext", "1 dari 5 langkah");
+  await page.getByRole("button", { name: "Mulai belajar" }).click();
+  await expect(progress).toHaveAttribute("value", "2");
+  await expect(progress).toHaveAttribute("aria-valuetext", "2 dari 5 langkah");
+});
+
 test("mobile game targets keep a 44px minimum", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 375, height: 812 });
