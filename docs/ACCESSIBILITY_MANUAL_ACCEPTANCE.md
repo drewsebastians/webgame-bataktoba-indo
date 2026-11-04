@@ -21,3 +21,8 @@
 **Automated via Playwright:** `core.spec` covers keyboard, skip, axe, non-color, touch, reduced-motion, mobile nav. Manual items above must be ticked per release and filed in `test-results/`.
 
 *Not claimed as performed this release unless ticked.*
+
+
+## Automated regression added — 2026-11-04
+
+Playwright test `mobile game targets keep a 44px minimum` checks visible `.mode-button`, `.option`, `.button`, and `.match-card` hit areas at a 375px viewport using isolated synthetic fixtures. PR #76 Verify run #41773526587 passed. This supplements the manual checklist above; no manual acceptance item is marked complete.
