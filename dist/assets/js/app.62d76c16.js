@@ -16,7 +16,7 @@ import {
   saveProgress,
   setDifficult,
   setSaved,
-} from "./progress.fbcabde0.js";
+} from "./progress.4b6d4b51.js";
 import { el, replaceChildren } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.27d36b47.js";
@@ -26,7 +26,7 @@ import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-e
 import {
   recordLessonCompletion,
   recordLessonStart,
-} from "./progress.fbcabde0.js";
+} from "./progress.4b6d4b51.js";
 import { getOnboarding, hasLessonHistory, saveOnboarding, shouldOfferOnboarding } from "./onboarding.9a4d475b.js";
 import {
   buildMemoryBoard,

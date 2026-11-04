@@ -35,6 +35,15 @@ function isSafeRecordKey(value) {
   return typeof value === "string" && value.length > 0 && value !== "prototype" && !RESERVED_RECORD_KEYS.has(value);
 }
 
+function isSafeItemId(value) {
+  return (
+    typeof value === "string" &&
+    value.length <= 128 &&
+    /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) &&
+    isSafeRecordKey(value)
+  );
+}
+
 const SESSION_MODES = new Set([
   "meaning",
   "reverse",
@@ -459,7 +468,7 @@ export function recordAnswer(isCorrect, mode, itemId = null) {
   next.answered = current.answered + 1;
   next.correct = current.correct + (isCorrect ? 1 : 0);
   next.lastMode = mode ?? current.lastMode;
-  if (itemId) {
+  if (isSafeItemId(itemId)) {
     updateItemStats(next.items, itemId, isCorrect, timestamp);
     enforceBoundedStorage(next.items);
   }
@@ -479,6 +488,7 @@ function enforceBoundedStorage(items) {
 }
 
 export function getItemStats(itemId) {
+  if (!isSafeItemId(itemId)) return emptyItemStats();
   return getProgress().items[itemId] ?? emptyItemStats();
 }
 
@@ -500,7 +510,7 @@ export function getDifficultIds() {
 }
 
 function setItemFlag(id, field, value) {
-  if (!id) return;
+  if (!isSafeItemId(id)) return;
   const current = hydrateSync();
   const next = { ...current, items: { ...current.items } };
   const stats = sanitizeItemStats(next.items[id] ?? null);
@@ -522,7 +532,7 @@ export function setDifficult(id, value = true) {
 }
 
 export function markFlashcard(id, bucket) {
-  if (!id || !["known", "review"].includes(bucket)) return;
+  if (!isSafeItemId(id) || !["known", "review"].includes(bucket)) return;
   const current = hydrateSync();
   const timestamp = nowMs();
   const next = { ...current, items: { ...current.items } };
