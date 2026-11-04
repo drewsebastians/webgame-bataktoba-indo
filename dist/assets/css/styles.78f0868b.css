@@ -347,6 +347,13 @@ h3 {
   gap: 0.7rem;
   margin: 0 0 1rem;
 }
+.session-progress {
+  display: block;
+  width: min(100%, 34rem);
+  height: 0.75rem;
+  margin: 0.25rem 0 1rem;
+  accent-color: var(--teal);
+}
 
 .pill {
   display: inline-flex;
