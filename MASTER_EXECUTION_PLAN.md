@@ -1,6 +1,15 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-04 02:53 UTC
+## Latest checkpoint — 2026-11-04 03:20 UTC
+
+- PUBLIC Webgame main HEAD/tree is `3c908495f6ef4210aae39567896e1536ba10912b` / `560ac8f9af954769f8e5b85780937d7f56d4a20c` after documentation PR [#73](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/73). The application baseline remains PR #72's verified public artifact upload; the checkpoint change does not alter app code or published data.
+- Exact-head Verify [#41763953814](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41763953814) and merged-main Verify [#41764746439](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41764746439) passed 229 unit tests and 46 browser tests (0 skipped), including synthetic-fixture isolation, E2E smoke, performance budget, committed-dist drift, and 12 Lighthouse route/profile audits. Accessibility was 100/100 throughout; mobile performance 98–99 and desktop 100.
+- Merged-main CI uploaded `verified-public-site-dist-41764746439` (SHA-256 `63fa40492643a02aa52baceadaba6acf9575b73c564f5ccdca03d420e27041cb`, expires 2026-11-18). Release checks keep the catalog empty/noindex with 0 published items, words, genuine phrases and sentences; synthetic data remains absent from public dist.
+- GitHub's Cloudflare Workers Builds check reports technical success for this main commit [build](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/00c22d58-0ac1-4676-8afd-3c5383757e16). Direct live homepage, manifest, `sw.js` and `robots.txt` readback remains NOT_VERIFIED: available page readers could not access the site and no compatible browser surface was available. A5 remains blocked_external.
+- No Engine source-level metadata, restricted corpus, or language records entered this PUBLIC repository. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A9 historical Git review remains approval-gated.
+- Next: continue A3 responsive browser UX, game/lesson flow, accessibility, PWA/offline, privacy/security and synthetic-only browser coverage while data collection continues separately. Retry direct live readback when a supported browser/network surface becomes available; keep the empty/noindex state.
+
+## Previous checkpoint — 2026-11-04 02:53 UTC
 
 - PUBLIC Webgame main HEAD/tree is `30eec1764e9f146e5a2dbf54d54a4e33238d9fe9` / `eae051369b874faeb020fedbe4c917fa6019dde6` after CI artifact PR [#72](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/72). The workflow uploads the committed public `dist/` only after release verification and the committed-dist drift gate.
 - Merged-main Verify [#41762006947](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41762006947) passed 229 unit tests, 46 browser tests (0 skipped), E2E smoke, performance budget, committed-dist drift, and 12 Lighthouse route/profile audits. Accessibility was 100/100 for all profiles; mobile performance 97–100 and desktop 100. JavaScript was 185,766/196,608 bytes; CSS was 15,766/49,152 bytes.
