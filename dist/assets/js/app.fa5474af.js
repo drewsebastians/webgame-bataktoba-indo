@@ -1189,6 +1189,7 @@ async function initGames() {
       button.addEventListener("click", () => {
         state.matchingPairs = n;
         renderMatchingPairs();
+        $(".matching-size-button[aria-pressed='true']", panel)?.focus();
       });
       return button;
     });
@@ -1201,6 +1202,7 @@ async function initGames() {
         attrs: {
           type: "button",
           "data-index": index,
+          "aria-pressed": String(state.selected.some((selected) => selected.id === card.id && selected.side === card.side)),
           disabled: isMatched || undefined,
         },
       });
@@ -1233,7 +1235,10 @@ async function initGames() {
       }
     });
 
-    newRound.addEventListener("click", renderMatchingPairs);
+    newRound.addEventListener("click", () => {
+      renderMatchingPairs();
+      focusMatchingTarget();
+    });
 
     replaceChildren(
       panel,
@@ -1253,32 +1258,41 @@ async function initGames() {
     );
   }
 
+  function focusMatchingTarget() {
+    const target = $(".match-card:not(:disabled)", panel) ?? $("#new-matching", panel);
+    target?.focus();
+  }
+
   function chooseMatchingCard(button) {
     const card = state.options[Number(button.dataset.index)];
     if (state.matched.has(card.id)) return; // rapid re-click cannot double-score
+    if (state.selected.some((selected) => selected.id === card.id && selected.side === card.side)) return;
+
     state.selected = [...state.selected, card].slice(-2);
     button.classList.add("selected");
+    button.setAttribute("aria-pressed", "true");
     if (state.selected.length < 2) return;
 
     const [first, second] = state.selected;
     const isMatch = first.id === second.id && first.side !== second.side;
+    let message = "Belum cocok.";
     if (isMatch) {
       state.matched.add(first.id);
       recordAnswer(true, "matching", first.id);
       track("answer_correct", { mode: "matching" });
-      if (state.matched.size === state.matchingTotalPairs) {
-        stopMatchingTimer();
-        paintMatchingPairs(`Selesai. ${state.matchingTotalPairs} pasangan cocok.`);
-      } else {
-        paintMatchingPairs("Cocok.");
-      }
+      message = state.matched.size === state.matchingTotalPairs
+        ? `Selesai. ${state.matchingTotalPairs} pasangan cocok.`
+        : "Cocok.";
+      if (state.matched.size === state.matchingTotalPairs) stopMatchingTimer();
     } else {
       recordAnswer(false, "matching", first.id);
       track("answer_incorrect", { mode: "matching" });
-      paintMatchingPairs("Belum cocok.");
     }
+
     state.selected = [];
+    paintMatchingPairs(message);
     updateProgressBadges();
+    focusMatchingTarget();
   }
 
   function renderSummary({ finishedReview = false } = {}) {

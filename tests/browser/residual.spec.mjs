@@ -38,6 +38,19 @@ test("matching cards expose selection state and restore keyboard focus through c
   expect(groups.size).toBe(6);
   for (const indexes of groups.values()) expect(indexes).toHaveLength(2);
 
+  const [firstGroup, secondGroup] = [...groups.values()];
+  const firstMismatch = cards.nth(firstGroup[0]);
+  const secondMismatch = cards.nth(secondGroup[0]);
+  await firstMismatch.focus();
+  await firstMismatch.press("Enter");
+  await expect(firstMismatch).toHaveAttribute("aria-pressed", "true");
+  await secondMismatch.press("Space");
+  await expect(firstMismatch).toHaveAttribute("aria-pressed", "false");
+  await expect(secondMismatch).toHaveAttribute("aria-pressed", "false");
+  const focusAfterMismatch = page.locator(".match-card:focus:not(:disabled)");
+  await expect(focusAfterMismatch).toHaveCount(1);
+  await expect(focusAfterMismatch).toHaveAttribute("data-index", "0");
+
   const resolvedIndexes = new Set();
   let pairNumber = 0;
   for (const indexes of groups.values()) {
