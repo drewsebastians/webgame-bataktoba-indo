@@ -13,6 +13,7 @@ const hasDist = existsSync(dist);
 const FORBIDDEN = [
   "data/raw",
   "data/candidates",
+  "data/legacy",
   "data/reviewed",
   "content",
   "tests",

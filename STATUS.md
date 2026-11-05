@@ -407,3 +407,12 @@
 2. Continue A3 browser work independently: responsive UX, PWA/offline, accessibility, privacy/security and route performance.
 3. Retry direct live artifact inspection when an available browser surface can reach the configured Pages host.
 <!-- Cross-repository details omitted. -->
+
+
+## 2026-11-05 public content exposure checkpoint
+
+- Metadata-only audit: [docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md](docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md). Main baseline `53d61320c1853539b316d892469edeca562d9a36`, tree `621eeb357bf3993629cc48943b9424760e85e0c8`.
+- Current source and dist published arrays remain empty (0 items and 0 published lessons). Thin lesson-topic pages are noindex; dictionary and data-source routes remain indexable by product intent.
+- Historical scan covered 338 commits / 247 trees, all 91 branch heads and 90 PR heads, and 532 unique text blobs with no fetch/parse errors. It found 85 JSON path/blob schema matches and 18 raw-candidate blobs; no record values were copied into this checkpoint.
+- Main Verify `41948552063` and Cloudflare check `126987216922` succeeded. Verified artifact `13379563643` is 120,002 bytes. Direct live Pages readback remains NOT_VERIFIED.
+- Historical exposure remains reachable from main history and merged PR #1’s retained branch head. No ref was deleted and no history was rewritten; queue item A11 remains blocked pending explicit owner approval for any destructive ref/history change.
