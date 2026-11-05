@@ -1148,18 +1148,29 @@ async function initGames() {
     track("answer_incorrect", { mode: "memory" });
     paintMemory(message);
     updateProgressBadges();
-    const returnFocusIndex = focusMemoryTarget();
+    focusMemoryTarget();
+    const scheduledFocusTarget = document.activeElement;
+    const scheduledFocusIndex = scheduledFocusTarget?.dataset.index ?? null;
+    const mismatchedButtons = $(".match-card.selected", panel);
     state.memoryHideTimeoutId = window.setTimeout(() => {
       if (state.mode !== "memory" || state.selected.length !== 2) {
         state.memoryHideTimeoutId = null;
         return;
       }
-      const shouldRestoreFocus = panel.contains(document.activeElement);
+      const shouldRestoreScheduledFocus =
+        document.activeElement === scheduledFocusTarget &&
+        scheduledFocusTarget?.dataset.index === scheduledFocusIndex;
       state.selected = [];
       state.memoryHideTimeoutId = null;
-      paintMemory(message);
+      for (const hiddenButton of mismatchedButtons) {
+        hiddenButton.classList.remove("selected");
+        hiddenButton.classList.add("face-down");
+        hiddenButton.textContent = "?";
+        hiddenButton.setAttribute("aria-pressed", "false");
+        hiddenButton.setAttribute("aria-label", "Kartu tertutup");
+      }
       updateProgressBadges();
-      if (shouldRestoreFocus) focusMemoryTarget(returnFocusIndex);
+      if (shouldRestoreScheduledFocus) scheduledFocusTarget?.focus();
     }, 700);
   }
 

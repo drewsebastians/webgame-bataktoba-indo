@@ -119,6 +119,7 @@ test("memory cards expose reveal state and restore keyboard focus through a roun
   ]));
   const idsByIndex = new Map();
   const matchedIndexes = new Set();
+  let focusMovementChecked = false;
 
   for (let index = 0; index < 12; index += 1) {
     const first = cards.nth(index);
@@ -189,11 +190,20 @@ test("memory cards expose reveal state and restore keyboard focus through a roun
         const focusDuringMismatch = page.locator(".match-card:focus:not(:disabled)");
         await expect(focusDuringMismatch).toHaveAttribute("data-index", String(expectedFocusIndex));
 
+        const shouldKeepMovedFocus = !focusMovementChecked;
+        const movedFocusTarget = page.locator(".memory-size-button").first();
+        if (shouldKeepMovedFocus) await movedFocusTarget.focus();
+
         await expect(first).toHaveAttribute("aria-pressed", "false", { timeout: 2000 });
         await expect(second).toHaveAttribute("aria-pressed", "false");
         await expect(first).toHaveClass(/face-down/);
-        const focusAfterHide = page.locator(".match-card:focus:not(:disabled)");
-        await expect(focusAfterHide).toHaveAttribute("data-index", String(expectedFocusIndex));
+        if (shouldKeepMovedFocus) {
+          await expect(movedFocusTarget).toBeFocused();
+          focusMovementChecked = true;
+        } else {
+          const focusAfterHide = page.locator(".match-card:focus:not(:disabled)");
+          await expect(focusAfterHide).toHaveAttribute("data-index", String(expectedFocusIndex));
+        }
       }
     }
 
