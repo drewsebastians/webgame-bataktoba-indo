@@ -129,7 +129,7 @@ export async function completeSyntheticLesson(page, { introduceMistake = true, s
     await expect(page.getByText("Review kesalahan")).toBeVisible();
     await expect(page.locator(".vocab-row")).toHaveCount(1);
     if (stopAtMistakeReview) return;
-$2await page.getByRole("button", { name: "Lanjut ke ringkasan" }).click();
+await page.getByRole("button", { name: "Lanjut ke ringkasan" }).click();
   }
   await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeVisible();
 }
