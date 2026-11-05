@@ -16,6 +16,70 @@ test("matching pairs is a distinct open-board mode", async ({ page }) => {
   expect((await cards.first().textContent()).length).toBeGreaterThan(0);
 });
 
+test("matching cards expose selection state and restore keyboard focus through completion and reset", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+  await page.getByRole("button", { name: /^Matching Pairs/ }).click();
+
+  const cards = page.locator(".match-card");
+  await expect(cards).toHaveCount(12);
+  await expect(page.locator(".match-card[aria-pressed='true']")).toHaveCount(0);
+
+  const textToId = new Map(SYNTHETIC_WEBGAME_ITEMS.flatMap((item) => [
+    [item.batak, item.id],
+    [item.indonesia, item.id],
+  ]));
+  const groups = new Map();
+  for (const [index, text] of (await cards.allTextContents()).entries()) {
+    const id = textToId.get(text.trim());
+    expect(typeof id).toBe("string");
+    groups.set(id, [...(groups.get(id) ?? []), index]);
+  }
+  expect(groups.size).toBe(6);
+  for (const indexes of groups.values()) expect(indexes).toHaveLength(2);
+
+  const resolvedIndexes = new Set();
+  let pairNumber = 0;
+  for (const indexes of groups.values()) {
+    const [firstIndex, secondIndex] = indexes;
+    const first = cards.nth(firstIndex);
+    await first.focus();
+    await first.press("Enter");
+    await expect(first).toHaveAttribute("aria-pressed", "true");
+
+    // A selected card cannot be selected twice to create a false pair.
+    await first.press("Enter");
+    await expect(first).toHaveAttribute("aria-pressed", "true");
+
+    const second = cards.nth(secondIndex);
+    await second.focus();
+    await second.press("Space");
+    await expect(page.locator(".match-card[aria-pressed='true']")).toHaveCount(0);
+    resolvedIndexes.add(firstIndex);
+    resolvedIndexes.add(secondIndex);
+    pairNumber += 1;
+
+    if (pairNumber < groups.size) {
+      const nextIndex = Array.from({ length: 12 }, (_, index) => index)
+        .find((index) => !resolvedIndexes.has(index));
+      const focusedCard = page.locator(".match-card:focus:not(:disabled)");
+      await expect(focusedCard).toHaveCount(1);
+      await expect(focusedCard).toHaveAttribute("data-index", String(nextIndex));
+    }
+  }
+
+  await expect(cards).toHaveCount(12);
+  await expect(page.locator(".match-card:disabled")).toHaveCount(12);
+  const newRound = page.locator("#new-matching");
+  await expect(newRound).toBeFocused();
+  await newRound.press("Enter");
+  await expect(page.locator(".match-card:disabled")).toHaveCount(0);
+  await expect(page.locator(".match-card[aria-pressed='true']")).toHaveCount(0);
+  const firstActiveCard = page.locator(".match-card:focus:not(:disabled)");
+  await expect(firstActiveCard).toHaveCount(1);
+  await expect(firstActiveCard).toHaveAttribute("data-index", "0");
+});
+
 test("memory game keeps cards face-down until revealed", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.goto("/games/");
