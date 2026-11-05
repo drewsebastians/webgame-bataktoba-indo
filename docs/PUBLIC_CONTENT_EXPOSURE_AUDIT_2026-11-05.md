@@ -11,10 +11,10 @@ This is a public-repository metadata and content-shape audit. It contains no rec
 - The general JSON schema scan found 85 path/blob versions with bilingual/text-shaped keys. CSV and Markdown schema-pattern hits: 0. A separate shape scan was applied to all 18 `data/raw` blobs because their text-field names do not match the general key heuristic.
 - Counts are snapshots/path/blob versions, not counts of unique language items. The scanner does not assess correctness, licensing, permission, attribution sufficiency, or whether unrecognized field names conceal text. Binary files, content outside the scanned file extensions, unreachable Git objects, and fork repositories were not scanned.
 
-## Current main and current build
+## Main and build at audit baseline
 
-- Current main tree contains no `data/raw`, `data/candidates`, or `data/legacy` paths.
-- Current `data/published` and `dist/data/published`: 0 word-pair items, 0 phrase-pair items, 0 sample-sentence items, 0 learning items, and 0 published lessons.
+- Main tree at the scan baseline contains no `data/raw`, `data/candidates`, or `data/legacy` paths.
+- At the scan baseline, `data/published` and `dist/data/published`: 0 word-pair items, 0 phrase-pair items, 0 sample-sentence items, 0 learning items, and 0 published lessons.
 - Thin lesson-topic routes remain noindex. Dictionary and data-source entrypoints remain indexable per the active product plan; “empty catalog” does not mean every route is noindex.
 - Main Verify run `41948552063` succeeded; Cloudflare Workers Builds check `126987216922` succeeded. The unexpired verified site artifact is `verified-public-site-dist-41948552063`, artifact ID `13379563643`, 120,002 bytes.
 - The CI artifact is build evidence. Direct live Pages route readback was not performed in this audit; live production content remains NOT_VERIFIED.
@@ -117,3 +117,12 @@ Related existing gates: `tests/data/data-quality.test.mjs` (“no corpus snapsho
 ## Blocker and next action
 
 Historical content remains reachable from public main history and from merged PR #1’s branch head. No branch was deleted and no history was rewritten. Explicit owner approval is required before any remote-ref deletion or history rewrite; preserving historical evidence while keeping current main/build empty is the current state. Continue independent website work and keep live Pages readback NOT_VERIFIED until inspected through an available surface.
+
+
+## Post-merge guard checkpoint
+
+- The history scan above used main baseline `53d61320c1853539b316d892469edeca562d9a36`. The audit report and guard changes merged in PR #92 as `a7dbb578ccd7326c82944c7621437a7a76f06152`; final tree: `51b2f34001248cd8a2118412b72a1e66f84ed6b2`.
+- Exact-head PR Verify run `41959632333` and Workers Builds check `127022450727` completed successfully. Post-merge main Verify run `41960577426` and Workers Builds check `127026190992` also completed successfully.
+- Post-merge verified public dist artifact `verified-public-site-dist-41960577426`, artifact ID `13384727740`, size 120,002 bytes. Direct live Pages route readback remains NOT_VERIFIED.
+- Local targeted tests were not run because network cloning was blocked by DNS and the PowerShell launcher was blocked by the managed sandbox; the exact-head PR CI completed the full verification workflow successfully.
+- No source corpus values were added. Current published source and dist item arrays and lesson arrays remain empty. A11 (audit and guard) is complete; A12 (history/reference disposition) remains `blocked_approval`.
