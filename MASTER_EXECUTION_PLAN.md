@@ -1,6 +1,17 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-05 01:16 UTC
+## Latest checkpoint — 2026-11-05 05:00 UTC
+
+- PUBLIC Webgame main is `dc16eba74905ecf119b89db16c3416c1f78faec3` / tree `505cbc2803e4ce708330d1f96f2b13fccb1c16df`, after [PR #94](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/94). Matching Pairs now announces selected cards with `aria-pressed`, ignores repeat selection of the same card, and restores focus after wrong/matched pairs, completion, size changes and new-round reset. Its isolated synthetic browser regression covers both wrong and successful pairs, selection state, focus order, completion and reset.
+- PR exact-head Verify [#41969849993](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41969849993) and merged-main Verify [#41970641011](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41970641011) passed: 232/232 unit, 54/54 Playwright (0 skipped), site/governance checks, build, smoke, performance budget, synthetic/data gates, committed-dist drift, and all 12 Lighthouse profiles. Accessibility scored 100 in every profile; mobile Performance was 98–99 and desktop 100.
+- Main artifact `verified-public-site-dist-41970641011` (artifact ID 13389740872) is 120,154 bytes; Lighthouse report artifact 13390065129 is 1,290,792 bytes. The published lesson list remains empty and synthetic fixture isolation passed; thin-topic routes remain noindex under the product plan.
+- Cloudflare Workers Builds main check [#127058123382](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/127058123382) succeeded for build `25d19ff8-dc3b-4770-9110-097b09333d70`. This verifies provider build/deployment success only. Direct live route and asset readback remains NOT_VERIFIED; deployed artifact identity is not independently confirmed.
+- The isolated local build and syntax checks passed; the local Playwright runner stalled before reporting a result. Exact-head and post-merge GitHub browser suites passed. No private or restricted language records were moved into public artifacts; no history refs were rewritten.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 with Memory mode keyboard/assistive-state and deterministic focus review using isolated synthetic fixtures. Keep publication gates closed while the real published catalog is empty; retain historical public-ref disposition as approval-gated.
+
+
+## Previous checkpoint — 2026-11-05 01:16 UTC
 
 - PUBLIC Webgame main is `0d1b48a7e0c646dfdf23989ad54b082b463dc484` / tree `ee727ceefcb7b0d09a81e14a02b50a694cce6512`, merged from PR [#90](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/90). Flashcard Space no longer intercepts native button activation; focus returns to the current flashcard after flip or advance. Regression coverage uses isolated synthetic fixtures.
 - Exact-head Verify [#41873033025](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41873033025) and post-merge main Verify [#41946847454](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41946847454) both succeeded: 232 unit tests, 53 browser tests (0 skipped), site/governance checks, build, E2E smoke, performance budget, synthetic fixture isolation and marker scan, committed-dist drift, plus 12 Lighthouse profiles. Main accessibility scored 100/100 throughout; mobile performance was 98/98/98/99/99/99 and desktop was 100/100 throughout.
