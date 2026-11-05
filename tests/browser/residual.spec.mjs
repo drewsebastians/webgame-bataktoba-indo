@@ -16,6 +16,19 @@ test("matching pairs is a distinct open-board mode", async ({ page }) => {
   expect((await cards.first().textContent()).length).toBeGreaterThan(0);
 });
 
+test("starting Matching Pairs with the keyboard focuses the first playable card", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+
+  const modeButton = page.getByRole("button", { name: /^Matching Pairs/ });
+  await modeButton.focus();
+  await page.keyboard.press("Enter");
+
+  const firstCard = page.locator(".match-card:not(:disabled)").first();
+  await expect(firstCard).toBeFocused();
+  await expect(firstCard).toHaveAttribute("aria-pressed", "false");
+});
+
 test("matching cards expose selection state and restore keyboard focus through completion and reset", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.goto("/games/");

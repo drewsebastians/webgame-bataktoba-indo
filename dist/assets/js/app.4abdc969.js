@@ -648,6 +648,7 @@ async function initGames() {
       focusMemoryTarget();
     } else if (config.kind === "matching") {
       renderMatchingPairs();
+      focusMatchingTarget();
     } else {
       getRunner(mode, { fresh: true });
       nextQuestion();
