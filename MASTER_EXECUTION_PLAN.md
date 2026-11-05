@@ -1,6 +1,17 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-04 16:28 UTC
+## Latest checkpoint — 2026-11-05 01:16 UTC
+
+- PUBLIC Webgame main is `0d1b48a7e0c646dfdf23989ad54b082b463dc484` / tree `ee727ceefcb7b0d09a81e14a02b50a694cce6512`, merged from PR [#90](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/90). Flashcard Space no longer intercepts native button activation; focus returns to the current flashcard after flip or advance. Regression coverage uses isolated synthetic fixtures.
+- Exact-head Verify [#41873033025](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41873033025) and post-merge main Verify [#41946847454](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41946847454) both succeeded: 232 unit tests, 53 browser tests (0 skipped), site/governance checks, build, E2E smoke, performance budget, synthetic fixture isolation and marker scan, committed-dist drift, plus 12 Lighthouse profiles. Main accessibility scored 100/100 throughout; mobile performance was 98/98/98/99/99/99 and desktop was 100/100 throughout.
+- Main artifact `verified-public-site-dist-41946847454` (artifact ID 13379520720) is 120,002 bytes with SHA-256 `e61d69bd438702cf2b515ef23e8ae06ed25b57d07563068299ee2afbe3da0554`. The public-data gate reports 0 published items, words, genuine phrases, sentences, and warnings; synthetic markers are absent from dist and the catalog remains empty/noindex.
+- Cloudflare Workers Builds main check [#126981587815](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/126981587815) succeeded for build `78b80c69-dde3-4487-823d-30657b204e72` (version `f16790e2-cf93-4dd1-b10d-a2a67b0b903e`). This confirms provider build success only. Direct live route and asset readback remains NOT_VERIFIED; deployed artifact identity is not independently confirmed.
+- The focused local Playwright attempt could not reach loopback because local sockets are denied in this execution environment; both exact-head and merged-main GitHub browser runs passed. No private/restricted language records or synthetic fixtures were transferred into production; public Git history was not rewritten.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 keyboard/touch/accessibility review across the remaining browser learning flows, keep content empty/noindex pending rights and quality gates, and retry live readback through a supported surface. Historical public Git exposure remains approval-gated; no history rewrite was performed.
+
+## Previous checkpoint — 2026-11-04 16:28 UTC
+
 
 - PUBLIC Webgame remains PUBLIC at main HEAD/tree `130f5250f0d7777d2a2f12662a67c0782a1c069a` / `1df03fbadeacc7cccaf191d14d228acf46b99738` after PR [#88](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/88). Lesson multiple-choice quizzes now move keyboard focus to the next question prompt after “Lanjut”; Tab advances to the first answer. The browser regression uses isolated synthetic fixtures.
 - Exact-head Verify run [#41861612699](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41861612699) completed successfully: 232/232 unit tests, 52/52 browser tests, build, E2E smoke, performance budget, synthetic-fixture isolation, synthetic marker scan, committed-dist drift, and 12 Lighthouse profiles passed. All profiles scored 100/100 accessibility; mobile performance was 98/98/98/99/99/99 and desktop was 100/100 throughout. The post-merge Verify run [#41866053326](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41866053326) also reports completed/success and its logs show the same checks; one check-run API projection remained queued after the run completed.
