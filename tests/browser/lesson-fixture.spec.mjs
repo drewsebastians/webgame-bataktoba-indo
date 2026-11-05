@@ -16,6 +16,15 @@ test.describe("published lesson flow with isolated synthetic fixture", () => {
     await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
   });
 
+  test("synthetic mistake review focuses its continuation control", async ({ page }) => {
+    await installSyntheticContentRoutes(page);
+    await completeSyntheticLesson(page, { stopAtMistakeReview: true });
+
+    const continuation = page.locator("#lesson-next");
+    await expect(continuation).toBeVisible();
+    await expect(continuation).toBeFocused();
+  });
+
   test("synthetic fixture completes recognition, recall, mistake review, and summary", async ({ page }) => {
     await installSyntheticContentRoutes(page);
     await completeSyntheticLesson(page);
