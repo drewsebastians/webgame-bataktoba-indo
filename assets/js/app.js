@@ -645,6 +645,7 @@ async function initGames() {
     };
     if (config.kind === "memory") {
       renderMemory();
+      focusMemoryTarget();
     } else if (config.kind === "matching") {
       renderMatchingPairs();
     } else {
@@ -1007,7 +1008,14 @@ async function initGames() {
 
   /* ---- Memory Game ------------------------------------------------------- */
 
+  function stopMemoryHideTimer() {
+    if (!state.memoryHideTimeoutId) return;
+    clearTimeout(state.memoryHideTimeoutId);
+    state.memoryHideTimeoutId = null;
+  }
+
   function renderMemory() {
+    stopMemoryHideTimer();
     const pairCount = state.memoryPairs ?? 6;
     const { cards, pairs } = buildMemoryBoard(wordPool, { pairCount });
     state = {
@@ -1017,9 +1025,24 @@ async function initGames() {
       matched: new Set(),
       selected: [],
       memoryTotalPairs: pairs,
+      memoryHideTimeoutId: null,
       startedAt: Date.now(),
     };
     paintMemory();
+  }
+
+  function focusMemoryTarget(preferredIndex = null) {
+    const preferred =
+      preferredIndex === null
+        ? null
+        : `.match-card[data-index="${preferredIndex}"]:not(:disabled)`;
+    const target =
+      (preferred ? $(preferred, panel) : null) ??
+      $(".match-card:not(:disabled):not(.selected)", panel) ??
+      $(".match-card:not(:disabled)", panel) ??
+      $("#new-memory", panel);
+    target?.focus();
+    return target?.dataset.index ?? null;
   }
 
   function paintMemory(message = "") {
@@ -1035,23 +1058,25 @@ async function initGames() {
       button.addEventListener("click", () => {
         state.memoryPairs = n;
         renderMemory();
+        $(".memory-size-button[aria-pressed='true']", panel)?.focus();
       });
       return button;
     });
 
     const cardButtons = state.options.map((card, index) => {
       const isMatched = state.matched.has(card.id);
-      const isSelected = state.selected.some((sel) => sel.id === card.id && sel.side === card.side);
+      const isSelected = state.selected.some(
+        (selected) => selected.id === card.id && selected.side === card.side,
+      );
       const revealed = isMatched || isSelected;
       return el("button", {
-        className: `match-card${isMatched ? " matched" : ""}${revealed ? "" : " face-down"}`,
+        className: `match-card${isMatched ? " matched" : ""}${isSelected ? " selected" : ""}${revealed ? "" : " face-down"}`,
         text: revealed ? card.text : "?",
-        attrs: {
-          "aria-label": revealed ? undefined : "Kartu tertutup",
-        },
         attrs: {
           type: "button",
           "data-index": index,
+          "aria-pressed": String(revealed),
+          "aria-label": revealed ? undefined : "Kartu tertutup",
           disabled: isMatched || undefined,
         },
       });
@@ -1067,7 +1092,10 @@ async function initGames() {
       text: "Papan Baru",
       attrs: { type: "button" },
     });
-    newRound.addEventListener("click", renderMemory);
+    newRound.addEventListener("click", () => {
+      renderMemory();
+      focusMemoryTarget();
+    });
 
     replaceChildren(
       panel,
@@ -1087,30 +1115,52 @@ async function initGames() {
 
   function chooseMemoryCard(button) {
     const card = state.options[Number(button.dataset.index)];
-    if (state.matched.has(card.id)) return;
-    state.selected = [...state.selected, card].slice(-2);
+    if (state.matched.has(card.id) || state.selected.length >= 2) return;
+    if (state.selected.some((selected) => selected.id === card.id && selected.side === card.side)) return;
+
+    state.selected = [...state.selected, card];
+    button.classList.remove("face-down");
     button.classList.add("selected");
+    button.textContent = card.text;
+    button.setAttribute("aria-pressed", "true");
+    button.removeAttribute("aria-label");
     if (state.selected.length < 2) return;
 
     const [first, second] = state.selected;
     const isMatch = first.id === second.id && first.side !== second.side;
+    let message = "Belum cocok. Coba pasangan lain.";
     if (isMatch) {
       state.matched.add(first.id);
       recordAnswer(true, "memory", first.id);
       track("answer_correct", { mode: "memory" });
-      if (state.matched.size === state.memoryTotalPairs) {
-        const seconds = Math.round((Date.now() - state.startedAt) / 1000);
-        paintMemory(`Selesai. Semua ${state.memoryTotalPairs} pasangan cocok dalam ${seconds} detik.`);
-      } else {
-        paintMemory("Cocok.");
-      }
-    } else {
-      recordAnswer(false, "memory", first.id);
-      track("answer_incorrect", { mode: "memory" });
-      paintMemory("Belum cocok. Coba pasangan lain.");
+      message = state.matched.size === state.memoryTotalPairs
+        ? `Selesai. Semua ${state.memoryTotalPairs} pasangan cocok dalam ${Math.round((Date.now() - state.startedAt) / 1000)} detik.`
+        : "Cocok.";
+      state.selected = [];
+      stopMemoryHideTimer();
+      paintMemory(message);
+      updateProgressBadges();
+      focusMemoryTarget();
+      return;
     }
-    state.selected = [];
+
+    recordAnswer(false, "memory", first.id);
+    track("answer_incorrect", { mode: "memory" });
+    paintMemory(message);
     updateProgressBadges();
+    const returnFocusIndex = focusMemoryTarget();
+    state.memoryHideTimeoutId = window.setTimeout(() => {
+      if (state.mode !== "memory" || state.selected.length !== 2) {
+        state.memoryHideTimeoutId = null;
+        return;
+      }
+      const shouldRestoreFocus = panel.contains(document.activeElement);
+      state.selected = [];
+      state.memoryHideTimeoutId = null;
+      paintMemory(message);
+      updateProgressBadges();
+      if (shouldRestoreFocus) focusMemoryTarget(returnFocusIndex);
+    }, 700);
   }
 
   function handleQuizKeyboard(event) {
