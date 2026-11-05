@@ -216,6 +216,7 @@ test("keyboard-only five-question session reviews a deliberate mistake", async (
   }
 
   await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
+  await expect(page.locator("#session-summary-heading")).toBeFocused();
   const reviewMistakes = page.locator("#review-mistakes");
   await expect(reviewMistakes).toBeVisible();
   await reviewMistakes.focus();
@@ -234,6 +235,7 @@ test("keyboard-only five-question session reviews a deliberate mistake", async (
   await expect(finishReview).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
+  await expect(page.locator("#session-summary-heading")).toBeFocused();
 });
 
 test("fixed-length practice exposes accessible progress across quiz modes", async ({ page }) => {

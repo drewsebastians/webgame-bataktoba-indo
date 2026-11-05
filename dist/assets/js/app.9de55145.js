@@ -1377,6 +1377,8 @@ async function initGames() {
     const mistakeItems = summary.mistakeIds.map((id) => itemById(id)).filter(Boolean);
 
     const headline = el("h2", { text: finishedReview ? "Review kesalahan selesai" : "Sesi selesai" });
+    headline.id = "session-summary-heading";
+    headline.tabIndex = -1;
     const stats = el(
       "div",
       { className: "scorebar" },
@@ -1435,6 +1437,7 @@ async function initGames() {
     children.push(el("div", { className: "action-row" }, newSession), switchHint);
 
     replaceChildren(panel, children);
+    headline.focus({ preventScroll: true });
   }
 
   function startMistakeReview(ids) {
