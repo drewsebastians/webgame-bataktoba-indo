@@ -786,6 +786,11 @@ async function initGames() {
     }
     if (kind === "truefalse") {
       renderTrueFalse();
+      const promptNode = $(".prompt-text", panel);
+      if (promptNode && state.answered > 0) {
+        promptNode.setAttribute("tabindex", "-1");
+        promptNode.focus({ preventScroll: false });
+      }
       return;
     }
     const runner = getRunner(state.mode);
