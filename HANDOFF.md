@@ -365,3 +365,10 @@
 4. Public content remains empty/noindex: zero items, words, genuine phrases and sentences. No private or synthetic language data is in dist. Historical public Git objects remain; no history rewrite.
 <!-- Cross-repository details omitted. -->
 <!-- Cross-repository details omitted. -->
+
+
+## 2026-11-05 exposure-audit handoff
+
+- Read [docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md](docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md) before repeating the history scan. It records exact scan scope, blob/path metadata, rights-field absence, current source/dist counts, and branch/PR reachability without corpus values.
+- Guard changes are covered by the existing Verify pipeline: source-tree payload-directory gate, closed published-data gate in source and dist, dist forbidden-path gate, and synthetic-marker isolation gate.
+- Next: continue independent A3 browser work; keep the catalog empty until publication gates pass. Obtain explicit owner approval before any stale public-ref deletion or history rewrite. Direct live Pages route readback remains NOT_VERIFIED.

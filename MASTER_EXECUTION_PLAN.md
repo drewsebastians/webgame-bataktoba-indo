@@ -358,3 +358,8 @@ Readiness: ENGINEERING_READY=YES for tested synthetic journeys, asset budget and
 3. Continue Data Engine discovery and permitted collection only in its PRIVATE repository; resume from its current HANDOFF.md without repeating completed batches.
 4. Verify live production Pages content directly through an accessible browser/reader before claiming live readback.
 - Private-track progress and source-level rights remain checkpointed in the private repository. No private metadata, restricted records, or language content is copied into this public repository.
+
+
+## 2026-11-05 public exposure checkpoint
+
+The public content audit is recorded in [docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md](docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md). Current main source/dist datasets remain empty and CI guards reject reintroduced raw/candidate/legacy payload paths, non-empty published arrays, and synthetic markers in dist. Historical public Git objects remain reachable through main history and PR #1’s retained head; no ref deletion/history rewrite was performed. Require explicit owner approval before such destructive changes. Continue website work independently; live Pages readback is NOT_VERIFIED.

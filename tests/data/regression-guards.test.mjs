@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
@@ -76,10 +76,18 @@ describe("regression guards for blockers (public-safe mode)", () => {
     assert.equal(siteConfig.analyticsProvider || undefined, undefined);
   });
 
-  it("published content remains empty and release build enforces the closed gate", () => {
-    for (const name of ["word-pairs.json", "phrase-pairs.json", "sample-sentences.json", "learning-items.json"]) assert.equal(JSON.parse(readFileSync(join(root,"data/published",name),"utf8")).items.length, 0);
-    assert.equal(JSON.parse(readFileSync(join(root,"data/published/lessons.json"),"utf8")).published.length, 0);
-    assert.ok(readFileSync(join(root,"tools/build-dist.mjs"),"utf8").includes("assertPublicContentClosed"));
+  it("published content remains empty in source and built public dist", () => {
+    assert.ok(existsSync(join(root, "dist")), "run npm run build before release verification");
+    const itemFiles = ["word-pairs.json", "phrase-pairs.json", "sample-sentences.json", "learning-items.json"];
+    for (const directory of ["data/published", "dist/data/published"]) {
+      for (const name of itemFiles) {
+        const payload = JSON.parse(readFileSync(join(root, directory, name), "utf8"));
+        assert.equal(payload.items.length, 0, `${directory}/${name} must remain empty`);
+      }
+      const lessons = JSON.parse(readFileSync(join(root, directory, "lessons.json"), "utf8"));
+      assert.equal(lessons.published.length, 0, `${directory}/lessons.json must remain empty`);
+    }
+    assert.ok(readFileSync(join(root, "tools/build-dist.mjs"), "utf8").includes("assertPublicContentClosed"));
   });
   it("privacy policy describes the empty public catalog accurately", () => {
     for (const path of ["privacy/index.html", "dist/privacy/index.html"]) {
