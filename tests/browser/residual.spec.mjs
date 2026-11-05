@@ -101,6 +101,136 @@ test("memory game keeps cards face-down until revealed", async ({ page }) => {
   expect(await page.locator(".match-card.face-down").count()).toBeGreaterThanOrEqual(10);
 });
 
+test("memory cards expose reveal state and restore keyboard focus through a round", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+  await page.getByRole("button", { name: /^Memory/ }).click();
+
+  const cards = page.locator(".match-card");
+  await expect(cards).toHaveCount(12);
+  const initialCardFocus = page.locator(".match-card:focus:not(:disabled)");
+  await expect(initialCardFocus).toHaveAttribute("data-index", "0");
+  await expect(page.locator(".match-card[aria-pressed='false']")).toHaveCount(12);
+  await expect(page.locator(".match-card[aria-pressed='true']")).toHaveCount(0);
+
+  const textToId = new Map(SYNTHETIC_WEBGAME_ITEMS.flatMap((item) => [
+    [item.batak, item.id],
+    [item.indonesia, item.id],
+  ]));
+  const idsByIndex = new Map();
+  const matchedIndexes = new Set();
+  let focusMovementChecked = false;
+
+  for (let index = 0; index < 12; index += 1) {
+    const first = cards.nth(index);
+    if (await first.isDisabled()) continue;
+
+    await first.focus();
+    await first.press("Enter");
+    const firstId = textToId.get((await first.textContent()).trim());
+    expect(typeof firstId).toBe("string");
+    idsByIndex.set(index, firstId);
+    await expect(first).toHaveAttribute("aria-pressed", "true");
+    await expect(first).not.toHaveClass(/face-down/);
+
+    if (index === 0) {
+      await first.press("Enter");
+      await expect(page.locator(".match-card[aria-pressed='true']")).toHaveCount(1);
+    }
+
+    let knownMateIndex = -1;
+    for (const [candidateIndex, candidateId] of idsByIndex) {
+      if (candidateIndex === index || candidateId !== firstId || matchedIndexes.has(candidateIndex)) continue;
+      if (!(await cards.nth(candidateIndex).isDisabled())) {
+        knownMateIndex = candidateIndex;
+        break;
+      }
+    }
+
+    let resolvedIndexes = [];
+    let mismatchIndexes = [];
+    if (knownMateIndex >= 0) {
+      const second = cards.nth(knownMateIndex);
+      await second.press("Space");
+      await expect(first).toBeDisabled();
+      await expect(second).toBeDisabled();
+      resolvedIndexes = [index, knownMateIndex];
+    } else {
+      let unknownIndex = -1;
+      for (let candidateIndex = 0; candidateIndex < 12; candidateIndex += 1) {
+        if (candidateIndex === index || idsByIndex.has(candidateIndex) || matchedIndexes.has(candidateIndex)) continue;
+        if (!(await cards.nth(candidateIndex).isDisabled())) {
+          unknownIndex = candidateIndex;
+          break;
+        }
+      }
+      expect(unknownIndex).toBeGreaterThanOrEqual(0);
+
+      const second = cards.nth(unknownIndex);
+      await second.click();
+      const secondId = textToId.get((await second.textContent()).trim());
+      expect(typeof secondId).toBe("string");
+      idsByIndex.set(unknownIndex, secondId);
+
+      if (secondId === firstId) {
+        await expect(first).toBeDisabled();
+        await expect(second).toBeDisabled();
+        resolvedIndexes = [index, unknownIndex];
+      } else {
+        mismatchIndexes = [index, unknownIndex];
+        const expectedFocusIndex =
+          Array.from({ length: 12 }, (_, candidateIndex) => candidateIndex)
+            .find((candidateIndex) =>
+              !matchedIndexes.has(candidateIndex) && !mismatchIndexes.includes(candidateIndex),
+            ) ??
+          Array.from({ length: 12 }, (_, candidateIndex) => candidateIndex)
+            .find((candidateIndex) => !matchedIndexes.has(candidateIndex));
+        await expect(first).toHaveAttribute("aria-pressed", "true");
+        await expect(second).toHaveAttribute("aria-pressed", "true");
+        const focusDuringMismatch = page.locator(".match-card:focus:not(:disabled)");
+        await expect(focusDuringMismatch).toHaveAttribute("data-index", String(expectedFocusIndex));
+
+        const shouldKeepMovedFocus = !focusMovementChecked;
+        const movedFocusTarget = page.locator(".memory-size-button").first();
+        if (shouldKeepMovedFocus) await movedFocusTarget.focus();
+
+        await expect(first).toHaveAttribute("aria-pressed", "false", { timeout: 2000 });
+        await expect(second).toHaveAttribute("aria-pressed", "false");
+        await expect(first).toHaveClass(/face-down/);
+        if (shouldKeepMovedFocus) {
+          await expect(movedFocusTarget).toBeFocused();
+          focusMovementChecked = true;
+        } else {
+          const focusAfterHide = page.locator(".match-card:focus:not(:disabled)");
+          await expect(focusAfterHide).toHaveAttribute("data-index", String(expectedFocusIndex));
+        }
+      }
+    }
+
+    for (const resolvedIndex of resolvedIndexes) matchedIndexes.add(resolvedIndex);
+    if (resolvedIndexes.length > 0 && matchedIndexes.size < 12) {
+      const nextIndex = Array.from({ length: 12 }, (_, candidateIndex) => candidateIndex)
+        .find((candidateIndex) => !matchedIndexes.has(candidateIndex));
+      const focusedCard = page.locator(".match-card:focus:not(:disabled)");
+      await expect(focusedCard).toHaveCount(1);
+      await expect(focusedCard).toHaveAttribute("data-index", String(nextIndex));
+    }
+  }
+
+  await expect(page.locator(".match-card:disabled")).toHaveCount(12);
+  const newRound = page.locator("#new-memory");
+  await expect(newRound).toBeFocused();
+  await newRound.press("Enter");
+  await expect(page.locator(".match-card:disabled")).toHaveCount(0);
+  await expect(page.locator(".match-card[aria-pressed='true']")).toHaveCount(0);
+  const firstActiveCard = page.locator(".match-card:focus:not(:disabled)");
+  await expect(firstActiveCard).toHaveAttribute("data-index", "0");
+
+  await page.locator(".memory-size-button").first().click();
+  await expect(page.locator(".memory-size-button[aria-pressed='true']")).toBeFocused();
+  await expect(page.locator(".match-card")).toHaveCount(8);
+});
+
 test("topic page stays honest when zero lessons are published", async ({ page }) => {
   await page.goto("/learn/sapaan/");
   await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
