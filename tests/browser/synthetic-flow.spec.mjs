@@ -140,6 +140,34 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await expect(page.locator(".result-detail")).toBeVisible();
 });
 
+test("flashcard keyboard activation preserves focus and native rating buttons", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("all");
+
+  const card = page.locator("#flashcard");
+  await expect(card).toContainText("SYNTHETIC_BT_001");
+  await card.focus();
+  await page.keyboard.press("Space");
+
+  const flippedCard = page.locator("#flashcard");
+  await expect(flippedCard).toContainText("SYNTHETIC_ID_001");
+  await expect(flippedCard).toBeFocused();
+
+  const firstCardText = (await flippedCard.textContent())?.trim();
+  const correctButton = page.getByRole("button", { name: "3 Benar", exact: true });
+  await correctButton.focus();
+  await page.keyboard.press("Space");
+
+  await expect.poll(async () => page.evaluate(() => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.answered;
+  })).toBe(1);
+  const nextCard = page.locator("#flashcard");
+  await expect(nextCard).toBeFocused();
+  await expect(nextCard).not.toHaveText(firstCardText ?? "");
+});
+
 test("keyboard, touch, 320px and desktop viewport cover the same synthetic quiz", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 320, height: 720 });
