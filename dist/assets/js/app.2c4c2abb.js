@@ -1151,7 +1151,7 @@ async function initGames() {
     focusMemoryTarget();
     const scheduledFocusTarget = document.activeElement;
     const scheduledFocusIndex = scheduledFocusTarget?.dataset.index ?? null;
-    const mismatchedButtons = $(".match-card.selected", panel);
+    const mismatchedButtons = $$(".match-card.selected", panel);
     state.memoryHideTimeoutId = window.setTimeout(() => {
       if (state.mode !== "memory" || state.selected.length !== 2) {
         state.memoryHideTimeoutId = null;
