@@ -262,6 +262,27 @@ test("fixed-length practice exposes accessible progress across quiz modes", asyn
   }
 });
 
+test("True/False continuation moves keyboard focus to the next prompt", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+  await page.locator('.session-size-button[data-size="5"]').click();
+  await page.locator('.mode-button[data-mode="truefalse"]').click();
+
+  const progress = page.getByRole("progressbar", { name: "Kemajuan sesi" });
+  await expect(progress).toHaveAttribute("value", "1");
+  await expect(page.locator(".prompt-text")).toContainText("SYNTHETIC_");
+
+  await page.locator(".option").first().focus();
+  await page.keyboard.press("Enter");
+  const nextQuestion = page.locator("#next-question");
+  await expect(nextQuestion).toBeEnabled();
+  await expect(nextQuestion).toBeFocused();
+  await page.keyboard.press("Enter");
+
+  await expect(page.locator(".prompt-text")).toBeFocused();
+  await expect(progress).toHaveAttribute("value", "2");
+});
+
 test("published lesson exposes accessible phase progress", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.goto("/learn/angka/");
