@@ -121,6 +121,8 @@ test("memory cards expose reveal state and restore keyboard focus through a roun
 
   const cards = page.locator(".match-card");
   await expect(cards).toHaveCount(12);
+  await expect(cards.nth(0)).toHaveAccessibleName("Kartu 1 dari 12, tertutup");
+  await expect(cards.nth(11)).toHaveAccessibleName("Kartu 12 dari 12, tertutup");
   const initialCardFocus = page.locator(".match-card:focus:not(:disabled)");
   await expect(initialCardFocus).toHaveAttribute("data-index", "0");
   await expect(page.locator(".match-card[aria-pressed='false']")).toHaveCount(12);
@@ -142,6 +144,7 @@ test("memory cards expose reveal state and restore keyboard focus through a roun
     await first.press("Enter");
     const firstId = textToId.get((await first.textContent()).trim());
     expect(typeof firstId).toBe("string");
+    await expect(first).toHaveAccessibleName(new RegExp(`^Kartu ${index + 1} dari 12, .+`));
     idsByIndex.set(index, firstId);
     await expect(first).toHaveAttribute("aria-pressed", "true");
     await expect(first).not.toHaveClass(/face-down/);
@@ -209,6 +212,8 @@ test("memory cards expose reveal state and restore keyboard focus through a roun
 
         await expect(first).toHaveAttribute("aria-pressed", "false", { timeout: 2000 });
         await expect(second).toHaveAttribute("aria-pressed", "false");
+        await expect(first).toHaveAccessibleName(new RegExp(`^Kartu ${mismatchIndexes[0] + 1} dari 12, tertutup$`));
+        await expect(second).toHaveAccessibleName(new RegExp(`^Kartu ${mismatchIndexes[1] + 1} dari 12, tertutup$`));
         await expect(first).toHaveClass(/face-down/);
         if (shouldKeepMovedFocus) {
           await expect(movedFocusTarget).toBeFocused();
