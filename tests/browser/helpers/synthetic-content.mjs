@@ -97,7 +97,7 @@ export async function installSyntheticContentRoutes(page) {
   });
 }
 
-export async function completeSyntheticLesson(page, { introduceMistake = true } = {}) {
+export async function completeSyntheticLesson(page, { introduceMistake = true, stopAtMistakeReview = false } = {}) {
   await page.goto("/learn/angka/");
   await expect(page.getByRole("button", { name: "Mulai belajar" })).toBeVisible();
   await page.getByRole("button", { name: "Mulai belajar" }).click();
@@ -128,7 +128,8 @@ export async function completeSyntheticLesson(page, { introduceMistake = true } 
   if (introduceMistake) {
     await expect(page.getByText("Review kesalahan")).toBeVisible();
     await expect(page.locator(".vocab-row")).toHaveCount(1);
-    await page.getByRole("button", { name: "Lanjut ke ringkasan" }).click();
+    if (stopAtMistakeReview) return;
+await page.getByRole("button", { name: "Lanjut ke ringkasan" }).click();
   }
   await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeVisible();
 }

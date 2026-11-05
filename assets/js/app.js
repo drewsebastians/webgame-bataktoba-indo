@@ -2129,6 +2129,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
         return b;
       })(),
     );
+    $("#lesson-next", root)?.focus();
   }
 
   function renderIntro() {
