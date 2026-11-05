@@ -122,7 +122,7 @@ Historical content remains reachable from public main history and from merged PR
 ## Post-merge guard checkpoint
 
 - The history scan above used main baseline `53d61320c1853539b316d892469edeca562d9a36`. The audit report and guard changes merged in PR #92 as `a7dbb578ccd7326c82944c7621437a7a76f06152`; final tree: `51b2f34001248cd8a2118412b72a1e66f84ed6b2`.
-- Exact-head PR Verify run `41959632333` and Workers Builds check `127022450727` completed successfully. Post-merge main Verify run `41960577426` and Workers Builds check `127026190992` also completed successfully.
+- Exact-head PR Verify run `41959632333` and Workers Builds check `127022450727` completed successfully. Post-merge main Verify run `41960577426` and Workers Builds check `127026190992` also completed successfully. The post-merge run passed 232/232 unit tests and 53/53 Playwright tests (0 skipped), plus smoke and performance-budget checks. All 12 Lighthouse profiles passed: Accessibility 100 on desktop/mobile, mobile Performance 97–99, and desktop Performance 100.
 - Post-merge verified public dist artifact `verified-public-site-dist-41960577426`, artifact ID `13384727740`, size 120,002 bytes. Direct live Pages route readback remains NOT_VERIFIED.
 - Local targeted tests were not run because network cloning was blocked by DNS and the PowerShell launcher was blocked by the managed sandbox; the exact-head PR CI completed the full verification workflow successfully.
 - No source corpus values were added. Current published source and dist item arrays and lesson arrays remain empty. A11 (audit and guard) is complete; A12 (history/reference disposition) remains `blocked_approval`.

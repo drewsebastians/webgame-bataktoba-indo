@@ -414,7 +414,7 @@
 ## 2026-11-05 post-merge public exposure checkpoint
 
 - Audit and CI guards merged as PR #92, commit `a7dbb578ccd7326c82944c7621437a7a76f06152`, tree `51b2f34001248cd8a2118412b72a1e66f84ed6b2`. Report: [docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md](docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md).
-- PR Verify #41959632333 and PR Workers Builds #127022450727 succeeded. Post-merge main Verify #41960577426 and Workers Builds #127026190992 succeeded.
+- PR Verify #41959632333 and PR Workers Builds #127022450727 succeeded. Post-merge main Verify #41960577426 and Workers Builds #127026190992 succeeded: 232/232 unit, 53/53 Playwright (0 skipped), smoke and performance budget passed; all 12 Lighthouse profiles passed (Accessibility 100 desktop/mobile, mobile Performance 97–99, desktop Performance 100).
 - Verified main artifact #13384727740 is 120,002 bytes. Current source and dist published items and lessons remain 0; raw/candidate/legacy paths remain absent from current main. Thin-topic routes remain noindex; dictionary/data-source routes are indexable by product intent.
 - The metadata-only history audit found old content still reachable from main history and merged PR #1 branch head. No ref deletion or history rewrite occurred. A11 is done; A12 remains blocked pending explicit owner authorization for history/ref disposition.
 - Direct live Pages readback is NOT_VERIFIED. Local targeted tests could not run in this managed shell; exact-head CI passed the full verification workflow.

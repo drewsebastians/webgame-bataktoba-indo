@@ -372,6 +372,6 @@
 ## 2026-11-05 post-merge exposure handoff
 
 - Latest main: `a7dbb578ccd7326c82944c7621437a7a76f06152`, tree `51b2f34001248cd8a2118412b72a1e66f84ed6b2`. PR #92 merged the audit and dist/catalog guards.
-- Verified checks: PR Verify #41959632333, PR Workers Builds #127022450727, main Verify #41960577426, main Workers Builds #127026190992 — all success. Main public dist artifact #13384727740 (120,002 bytes) is available; direct live Pages route readback remains NOT_VERIFIED.
+- Verified checks: PR Verify #41959632333, PR Workers Builds #127022450727, main Verify #41960577426, main Workers Builds #127026190992 — all success. Main run passed 232/232 unit and 53/53 Playwright tests (0 skipped), smoke/performance budget, and all 12 Lighthouse profiles (Accessibility 100 desktop/mobile, mobile Performance 97–99, desktop Performance 100). Main public dist artifact #13384727740 (120,002 bytes) is available; direct live Pages route readback remains NOT_VERIFIED.
 - Read [docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md](docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md) before repeating the scan. It contains metadata only and records exact refs and scope.
 - Continue independent A3 website work with synthetic-only fixtures. Keep published content empty until rights and quality gates pass. A11 is complete; A12 is blocked pending explicit owner approval before any remote ref deletion or history rewrite. Do not rewrite public history.
