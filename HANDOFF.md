@@ -1,15 +1,13 @@
 # Resume handoff — 2026-11-05
 
-## Latest checkpoint — 2026-11-05 07:42 UTC
+## Latest checkpoint — 2026-11-05 10:29 UTC
 
-- PUBLIC Webgame main is `38ef418139bd357a55e62f3ba6175f6442a8185f` / tree `e8499efdefc381b0c5a80ecf20a0bd8d1fd0d1e7`, after [PR #98](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/98). The lesson mistake-review phase now moves keyboard focus to its continuation control. An isolated synthetic fixture stops at that phase and asserts focus. No production linguistic content changed.
-- Exact-head Verify [#41987496715](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41987496715) and merged-main Verify [#41988229060](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41988229060) passed: 232/232 unit tests, 56/56 browser tests (0 skipped), site/governance checks, build, smoke, performance budget, synthetic/data gates, committed-dist drift, and all 12 Lighthouse profiles. Accessibility was 100 in every profile; merged-main mobile Performance was 98–100 and desktop was 100.
-- Main artifact `verified-public-site-dist-41988229060` (ID 13396563163) is 120,590 bytes; Lighthouse artifact 13396258751 is 1,327,416 bytes. The published lesson catalog remains empty, and synthetic marker checks passed.
-- Cloudflare Workers Builds exact-head check [#127111788750](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/127111788750) and main check [#127117447726](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/127117447726) succeeded; main build ID `3e76f244-603d-4608-9383-e4d330dc02e2`. Provider build success is verified; direct live route and asset readback remains NOT_VERIFIED because the available web reader could not access the Pages route.
-- The initial PR #98 head failed because a test-helper edit left a malformed token; it was corrected before merge. The failed head was not merged. Thin-topic routes remain noindex. No private or restricted records were added; no public history refs were rewritten.
-- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
-- Next: inspect keyboard focus after a finite session completes and add a synthetic-only regression if the summary transition lacks a clear focus target. Keep the production catalog empty until rights and quality gates pass.
-
+- PUBLIC Webgame main is `80186482dd2697e1958b264dead73a37bc2711e0` / tree `43a44470c01d153e2d263134ca8c086215cff0b2`, after [PR #100](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/100). When a five-question practice or mistake-review phase ends, the result heading now receives keyboard focus. An isolated synthetic browser flow covers answer selection, continuation, completion, and focus. No production linguistic content changed.
+- Exact-head Verify [#41992682941](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41992682941) and post-merge Verify [#42006771839](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42006771839) passed: 232/232 unit tests and 56/56 Playwright tests (0 skipped), site/governance checks, build, smoke, performance budget, synthetic/data gates, committed-dist drift, and all 12 Lighthouse profiles. Accessibility was 100 in every profile; main mobile Performance was 97–99 and desktop was 100.
+- Main artifact `verified-public-site-dist-42006771839` (ID 13405436395) is 120,639 bytes, SHA-256 `48cbc8cad9cb15896488de6114f6ebb0ab666312b5e924732c6336606ed145d6`. Lighthouse artifact ID 13405421252 is 1,292,931 bytes. The published lesson catalog remains empty and synthetic marker checks passed.
+- Cloudflare Workers Builds main check [#127176286794](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/127176286794) succeeded for production build `9a8e7aff-caf4-45c3-b756-b010081e29b0`, version `17636a75-e0bc-45b0-88b3-4ae07ef84db9`. Provider build success is verified; direct live route and asset readback remains NOT_VERIFIED.
+- No private or restricted records were added, thin-topic routes remain noindex, and public history refs were not rewritten. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: A3 will add a synthetic keyboard regression and preserve focus on the next prompt when continuing a True/False question. Keep the production catalog empty until rights and quality gates pass; keep historical public refs approval-gated.
 
 
 ## Previous checkpoint — 2026-11-05 06:31 UTC
