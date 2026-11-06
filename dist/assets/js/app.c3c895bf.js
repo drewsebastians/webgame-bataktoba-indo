@@ -688,6 +688,23 @@ async function initGames() {
         attrs: { type: "button", "data-answer": option.id },
       });
       button.addEventListener("click", () => answerQuestion(button));
+      button.addEventListener("keydown", (event) => {
+        const direction = {
+          ArrowDown: 1,
+          ArrowRight: 1,
+          ArrowUp: -1,
+          ArrowLeft: -1,
+        }[event.key];
+        if (!direction) return;
+
+        const options = $$(".option", panel);
+        const index = options.indexOf(button);
+        if (index < 0 || options.length < 2) return;
+
+        event.preventDefault();
+        const nextIndex = (index + direction + options.length) % options.length;
+        options[nextIndex].focus();
+      });
       return button;
     });
 
@@ -714,7 +731,10 @@ async function initGames() {
         el("strong", { className: "prompt-text", text: question.prompt }),
         ...promptContextNodes(question.contextNote),
       ),
-      el("div", { className: "options" }, optionButtons),
+      el("div", {
+        className: "options",
+        attrs: { role: "group", "aria-label": "Pilihan jawaban" },
+      }, optionButtons),
       feedback,
       el(
         "div",
