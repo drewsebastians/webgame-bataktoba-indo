@@ -267,6 +267,73 @@ test("mobile due flashcard review removes mastered cards and keeps focus on prog
   }
 });
 
+test("keyboard due review advances through wrong, difficult and correct ratings", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  const dueItems = SYNTHETIC_WEBGAME_ITEMS.slice(0, 3);
+  await page.addInitScript(({ itemIds }) => {
+    const yesterday = Date.now() - 24 * 60 * 60 * 1000;
+    const items = Object.fromEntries(itemIds.map((itemId) => [itemId, {
+      seen: 1,
+      correctCount: 0,
+      incorrectCount: 1,
+      consecutiveCorrect: 0,
+      lastResult: "incorrect",
+      lastReviewedAt: yesterday,
+      nextReviewAt: yesterday,
+      reviewStage: 0,
+      bucket: "review",
+      saved: false,
+      difficult: false,
+    }]));
+    localStorage.setItem("batakTobaPlay.progress.v2", JSON.stringify({
+      schemaVersion: 3,
+      answered: 2,
+      correct: 0,
+      lastMode: "flashcards",
+      items,
+      sessions: [],
+    }));
+  }, { itemIds: dueItems.map((item) => item.id) });
+
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("due");
+  const card = page.locator("#flashcard");
+  await expect(card).toContainText(dueItems[0].batak);
+  await card.focus();
+  await page.keyboard.press("1");
+  await expect(page.locator("#flashcard")).toContainText(dueItems[1].batak);
+  await expect(page.locator("#flashcard")).toBeFocused();
+  const afterWrong = await page.evaluate((itemId) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return { answered: progress.answered, item: progress.items?.[itemId] };
+  }, dueItems[0].id);
+  expect(afterWrong.answered).toBe(3);
+  expect(afterWrong.item?.lastResult).toBe("incorrect");
+
+  await page.keyboard.press("2");
+  await expect(page.locator("#flashcard")).toContainText(dueItems[2].batak);
+  await expect(page.locator("#flashcard")).toBeFocused();
+  const afterDifficult = await page.evaluate((itemId) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return { answered: progress.answered, difficult: progress.items?.[itemId]?.difficult };
+  }, dueItems[1].id);
+  expect(afterDifficult).toEqual({ answered: 3, difficult: true });
+
+  await page.keyboard.press("3");
+  await expect(page.locator("#flashcard")).toContainText(dueItems[1].batak);
+  await expect(page.locator("#flashcard-card .pill").first()).toHaveText("2/2");
+  await expect(page.locator("#flashcard")).toBeFocused();
+  await page.keyboard.press("3");
+  await expect(page.locator("#flashcard")).toContainText(dueItems[0].batak);
+  await expect(page.locator("#flashcard-card .pill").first()).toHaveText("1/1");
+  await expect(page.locator("#flashcard")).toBeFocused();
+  await page.keyboard.press("3");
+  const emptyState = page.locator("#flashcard-card [role='status']");
+  await expect(emptyState).toContainText("Tidak ada kartu untuk filter ini");
+  await expect(emptyState).toBeFocused();
+  await expect(page.locator("#flashcard-toolbar")).toContainText("0 kartu");
+});
+
 test("keyboard, touch, 320px and desktop viewport cover the same synthetic quiz", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 320, height: 720 });
