@@ -1,6 +1,14 @@
 # Resume handoff — 2026-11-06
 
-## Latest checkpoint — 2026-11-06 10:26 UTC (post-merge A3 / PR #116)
+## Latest checkpoint — 2026-11-06 15:39 UTC (post-merge A3 / PR #118)
+
+- PUBLIC `main` is `b5ec970b2f9eb9dd966a1e7dcb8797622ac2db7c` / tree `2ac18fd8855e9e3bfa96aa2368e78e8b85127c63`. PR [#118](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/118) adds a labeled multiple-choice group and wrapping arrow-key navigation; synthetic browser coverage verifies movement, explicit activation, focus handoff and continuation. Generated dist assets and SW cache were updated.
+- Exact-head Verify [#42241668236](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42241668236): 232 unit + 62 browser tests, 0 skipped; release/data/isolation/smoke/performance/dist-drift gates and all 12 Lighthouse profiles passed (a11y 100; mobile Performance 97–99; desktop 100). Dist artifact [13516426063](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42241668236/artifacts/13516426063) is 121,011 bytes; catalog 0, synthetic markers absent.
+- Cloudflare Workers Builds succeeded for the PR branch build `1924a5c8-a6e9-48a0-818d-c68219c8d86a`, commit `1e02c16`. No main-merge run/status or direct route readback was available; A5 remains `blocked_external` and live artifact identity is NOT_VERIFIED.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No public linguistic content or history rewrite.
+- Next: continue synthetic keyboard/touch accessibility through remaining quiz and lesson modes; retry A5 via a supported live surface.
+
+## Previous checkpoint — 2026-11-06 10:26 UTC (post-merge A3 / PR #116)
 
 - PUBLIC main e5b9803b43364b370455e1f0ed65813548146bb9 / tree 7ffb3a7df6b8f32f32bdb71016dd49236a747393 after PR #116: a synthetic-only keyboard due-review regression checks wrong/difficult/correct ratings, progress, focus, queue advancement and empty state. No product data changed.
 - Exact-head Verify #42200375587 and post-merge Verify #42201399171 passed 232 unit + 61 Playwright tests (0 skipped), release/data/isolation/smoke/performance/dist-drift gates and 12 Lighthouse profiles (a11y 100; mobile Performance 97–100; desktop 100).
@@ -8,6 +16,7 @@
 - Cloudflare Workers Builds production check succeeded for build ec0db782-d156-43e1-ad00-b64bee5249d4. Direct Pages root, flashcards, manifest, robots and service-worker reads were inaccessible; live route contents and served-artifact identity remain NOT_VERIFIED.
 - Historical corpus-shaped Git exposure remains documented; this test-only PR added no source data. No history rewrite; A9/A12 remain approval-gated. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 - Next: continue A3 synthetic keyboard/touch review of spaced-repetition and other game flows. Keep A5 blocked until direct live artifact readback succeeds.
+
 ## Previous checkpoint — 2026-11-06 07:38 UTC (post-merge A3 / PR #112)
 
 - PUBLIC `main` is `2bd0a3be873776592dcec5d95ace24555ee19eed` / tree `7f8fac76a4402e818e7307cd3fca62eb0818dc4a` after [PR #112](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/112). Due flashcards now leave the review queue after a correct rating; count and focus update, including the empty state.

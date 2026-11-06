@@ -1,6 +1,15 @@
 # Execution status — 2026-11-06
 
-## Latest checkpoint — 2026-11-06 10:26 UTC (post-merge A3 / PR #116)
+## Latest checkpoint — 2026-11-06 15:39 UTC (post-merge A3 / PR #118)
+
+- PUBLIC main is `b5ec970b2f9eb9dd966a1e7dcb8797622ac2db7c` / tree `2ac18fd8855e9e3bfa96aa2368e78e8b85127c63`. [PR #118](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/118) adds an accessible answer group and wrapping arrow-key navigation for multiple-choice quiz options; users still activate an answer explicitly. The regression uses isolated synthetic fixtures, and hashed `dist`/service-worker assets were rebuilt.
+- Exact-head Verify [#42241668236](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42241668236) passed 232/232 unit tests and 62/62 Playwright tests (0 skipped), release/data/isolation/smoke/performance/dist-drift gates, and 12 Lighthouse profiles. Accessibility scored 100/100 throughout; mobile Performance was 97–99 and desktop 100.
+- Verified dist artifact [13516426063](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42241668236/artifacts/13516426063) is 121,011 bytes (SHA-256 `d86c5ab24b1eb6b371a86f7f7e22ac85cffc1d2cd7b2fd70931021d8b7919bd9`); Lighthouse artifact [13515966171](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42241668236/artifacts/13515966171) is 1,283,688 bytes. CI confirms 0 published learning items and no synthetic fixture markers in public dist.
+- Cloudflare Workers Builds reported success for PR-head commit `1e02c16d159b966b55b7d575534bce1406767d03` (build `1924a5c8-a6e9-48a0-818d-c68219c8d86a`). No Actions run or combined status was returned for merge commit `b5ec970`; direct Pages readback remains inaccessible. This proves PR-branch build success only; A5 stays `blocked_external` until main deployment and served-artifact identity can be verified.
+- Historical corpus-shaped objects remain confined to public Git history and are not in the current tree or build; no history rewrite occurred. A1/A9/A12 remain approval-gated. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 synthetic keyboard/touch and accessibility review across remaining game/lesson flows; preserve the empty/noindex public catalog. Retry A5 live verification through a supported surface.
+
+## Previous checkpoint — 2026-11-06 10:26 UTC (post-merge A3 / PR #116)
 
 - PUBLIC main e5b9803b43364b370455e1f0ed65813548146bb9 / tree 7ffb3a7df6b8f32f32bdb71016dd49236a747393 after PR #116: a synthetic-only keyboard due-review regression checks wrong/difficult/correct ratings, progress, focus, queue advancement and empty state. No product data changed.
 - Exact-head Verify #42200375587 and post-merge Verify #42201399171 passed 232 unit + 61 Playwright tests (0 skipped), release/data/isolation/smoke/performance/dist-drift gates and 12 Lighthouse profiles (a11y 100; mobile Performance 97–100; desktop 100).
@@ -8,6 +17,7 @@
 - Cloudflare Workers Builds production check succeeded for build ec0db782-d156-43e1-ad00-b64bee5249d4. Direct Pages root, flashcards, manifest, robots and service-worker reads were inaccessible; live route contents and served-artifact identity remain NOT_VERIFIED.
 - Historical corpus-shaped Git exposure remains documented; this test-only PR added no source data. No history rewrite; A9/A12 remain approval-gated. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
 - Next: continue A3 synthetic keyboard/touch review of spaced-repetition and other game flows. Keep A5 blocked until direct live artifact readback succeeds.
+
 ## Previous checkpoint — 2026-11-06 07:38 UTC (post-merge A3 / PR #112)
 
 - PUBLIC `main` is `2bd0a3be873776592dcec5d95ace24555ee19eed` / tree `7f8fac76a4402e818e7307cd3fca62eb0818dc4a`, after [PR #112](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/112). Due-first flashcard review now rebuilds its queue after a correct rating, removes mastered cards, updates the remaining count, and moves focus to the next card or empty status. Coverage uses isolated synthetic mobile fixtures.
