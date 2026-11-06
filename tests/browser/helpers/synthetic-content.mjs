@@ -83,11 +83,11 @@ const TEST_DATASETS = new Map([
 ]);
 
 /** Intercept only published content URLs; fixture values never enter dist. */
-export async function installSyntheticContentRoutes(page) {
+export async function installSyntheticContentRoutes(page, payloadOverrides = {}) {
   await page.route("**/data/published/**", async (route) => {
     const pathname = new URL(route.request().url()).pathname;
     const filename = pathname.split("/").at(-1);
-    const payload = TEST_DATASETS.get(filename);
+    const payload = payloadOverrides[filename] ?? TEST_DATASETS.get(filename);
     if (!payload) return route.continue();
     return route.fulfill({
       status: 200,
