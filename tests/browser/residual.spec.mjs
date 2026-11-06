@@ -332,10 +332,10 @@ test("mobile touch plays Matching Pairs and reveals Memory cards at 320px", asyn
 
   await page.goto("/games/");
   await page.getByRole("button", { name: /^Memory/ }).tap();
-  const faceDownCard = page.locator(".match-card.face-down").first();
-  await expect(faceDownCard).toBeVisible();
-  await faceDownCard.tap();
-  await expect(faceDownCard).not.toHaveClass(/face-down/);
-  await expect(faceDownCard).toHaveAttribute("aria-pressed", "true");
+  const memoryCard = page.locator(".match-card").first();
+  await expect(memoryCard).toHaveClass(/face-down/);
+  await memoryCard.tap();
+  await expect(memoryCard).not.toHaveClass(/face-down/);
+  await expect(memoryCard).toHaveAttribute("aria-pressed", "true");
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
