@@ -296,3 +296,46 @@ test("og:image uses absolute production URL on every visited page", async ({ pag
     expect(content.startsWith("https://webgame-bataktoba-indo.pages.dev/assets/icons/og-image.png")).toBe(true);
   }
 });
+
+
+test("mobile touch plays Matching Pairs and reveals Memory cards at 320px", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/games/");
+  await page.getByRole("button", { name: /^Matching Pairs/ }).tap();
+
+  const cards = page.locator(".match-card");
+  await expect(cards).toHaveCount(12);
+  await expect(page.getByText(/\/6 cocok/)).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+
+  const textToId = new Map(SYNTHETIC_WEBGAME_ITEMS.flatMap((item) => [
+    [item.batak, item.id],
+    [item.indonesia, item.id],
+  ]));
+  const groups = new Map();
+  for (const [index, text] of (await cards.allTextContents()).entries()) {
+    const itemId = textToId.get(text.trim());
+    expect(typeof itemId).toBe("string");
+    groups.set(itemId, [...(groups.get(itemId) ?? []), index]);
+  }
+  const [firstIndex, secondIndex] = [...groups.values()][0];
+  const first = cards.nth(firstIndex);
+  const second = cards.nth(secondIndex);
+  await first.tap();
+  await expect(first).toHaveAttribute("aria-pressed", "true");
+  await second.tap();
+  await expect(first).toBeDisabled();
+  await expect(second).toBeDisabled();
+  await expect(page.getByText(/1\/6 cocok/)).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+
+  await page.goto("/games/");
+  await page.getByRole("button", { name: /^Memory/ }).tap();
+  const memoryCard = page.locator(".match-card").first();
+  await expect(memoryCard).toHaveClass(/face-down/);
+  await memoryCard.tap();
+  await expect(memoryCard).not.toHaveClass(/face-down/);
+  await expect(memoryCard).toHaveAttribute("aria-pressed", "true");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});
