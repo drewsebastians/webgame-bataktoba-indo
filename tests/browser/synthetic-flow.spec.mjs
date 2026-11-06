@@ -92,6 +92,32 @@ test("starting a quiz mode moves focus to its first question", async ({ page }) 
   }
 });
 
+test("multiple-choice answers support arrow-key navigation before activation", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+
+  const options = page.locator(".option");
+  await expect(options).toHaveCount(4);
+  await expect(page.getByRole("group", { name: "Pilihan jawaban" })).toBeVisible();
+  await options.nth(0).focus();
+
+  await page.keyboard.press("ArrowDown");
+  await expect(options.nth(1)).toBeFocused();
+  await page.keyboard.press("ArrowUp");
+  await expect(options.nth(0)).toBeFocused();
+  await page.keyboard.press("ArrowLeft");
+  await expect(options.nth(3)).toBeFocused();
+  await expect(page.locator("#next-question")).toBeDisabled();
+  await expect(options.nth(3)).toBeEnabled();
+
+  await page.keyboard.press("Enter");
+  const continuation = page.locator("#next-question");
+  await expect(continuation).toBeEnabled();
+  await expect(continuation).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator(".prompt-text")).toBeFocused();
+});
+
 test("game and lesson prompts render context notes as inert text", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.goto("/games/");
