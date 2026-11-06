@@ -1,6 +1,13 @@
 # Resume handoff — 2026-11-06
 
-## Latest checkpoint — 2026-11-06 07:38 UTC (post-merge A3 / PR #112)
+## Latest checkpoint — 2026-11-06 09:05 UTC (post-merge A3 / PR #114)
+
+- PUBLIC `main` is `522eec31530d32f2e3937f5345cf52adff3c6e56` / tree `d9c7b4b38f333341ffb5264015bb7f892041bee1` after [PR #114](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/114), which adds synthetic multi-mistake review focus assertions; no production content changed.
+- Exact-head [#42188695439](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42188695439) and post-merge [#42189240700](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700) passed 232 unit + 60 Playwright tests (0 skipped), release/data/isolation/smoke/performance/dist-drift checks, and 12 Lighthouse profiles (a11y 100 throughout; mobile Performance 97–99; desktop 100). Dist artifact 13487989938: 120,845 bytes; Lighthouse artifact 13488034858: 1,291,654 bytes.
+- Cloudflare production build `8b76d90c-db9e-4873-b311-cc59adba7fac` succeeded. Direct readback remains NOT_VERIFIED: the reader could not access the Pages routes, and the browser surface could not determine the active URL safely. Public content stays empty/noindex; synthetic fixtures remain absent from dist.
+- Continue A3 on spaced-repetition focus. Keep A5 blocked until direct live artifact readback; preserve historical audit and do not rewrite refs without explicit authorization. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+
+## Previous checkpoint — 2026-11-06 07:38 UTC (post-merge A3 / PR #112)
 
 - PUBLIC `main` is `2bd0a3be873776592dcec5d95ace24555ee19eed` / tree `7f8fac76a4402e818e7307cd3fca62eb0818dc4a` after [PR #112](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/112). Due flashcards now leave the review queue after a correct rating; count and focus update, including the empty state.
 - Exact-head [#42179496857](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42179496857) and post-merge [#42180710200](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42180710200) passed 232 unit + 60 Playwright tests (0 skipped), build/release/data/isolation/smoke/performance/dist-drift checks, and 12 Lighthouse profiles (a11y 100 throughout; mobile performance 97–99; desktop 100). Dist artifact 13485810074 (120,845 bytes); catalog empty; synthetic markers absent.
