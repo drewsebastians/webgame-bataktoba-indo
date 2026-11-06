@@ -101,6 +101,7 @@ export async function completeSyntheticLesson(page, { introduceMistake = true, s
   await page.goto("/learn/angka/");
   await expect(page.getByRole("button", { name: "Mulai belajar" })).toBeVisible();
   await page.getByRole("button", { name: "Mulai belajar" }).click();
+  await expect(page.locator(".prompt-text")).toBeFocused();
 
   for (let index = 0; index < SYNTHETIC_WEBGAME_ITEMS.length; index += 1) {
     const prompt = (await page.locator(".prompt-text").textContent())?.trim();
@@ -112,8 +113,15 @@ export async function completeSyntheticLesson(page, { introduceMistake = true, s
       : item.indonesia;
     expect(answer, "a visible non-answer option for the deliberate mistake").toBeTruthy();
     await page.getByRole("button", { name: answer, exact: true }).click();
-    await expect(page.getByRole("button", { name: "Lanjut", exact: true })).toBeEnabled();
+    const continuation = page.getByRole("button", { name: "Lanjut", exact: true });
+    await expect(continuation).toBeEnabled();
+    await expect(continuation).toBeFocused();
     await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+    if (index < SYNTHETIC_WEBGAME_ITEMS.length - 1) {
+      await expect(page.locator(".prompt-text")).toBeFocused();
+    } else {
+      await expect(page.locator(".typed-answer-input")).toBeFocused();
+    }
   }
 
   for (const item of SYNTHETIC_WEBGAME_ITEMS) {
@@ -122,14 +130,21 @@ export async function completeSyntheticLesson(page, { introduceMistake = true, s
     await input.fill(item.indonesia);
     await page.getByRole("button", { name: "Periksa", exact: true }).click();
     await expect(page.locator(".feedback").first()).toContainText("Benar");
+    const continuation = page.getByRole("button", { name: "Lanjut", exact: true });
+    await expect(continuation).toBeFocused();
     await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+    if (item !== SYNTHETIC_WEBGAME_ITEMS.at(-1)) {
+      await expect(page.locator(".typed-answer-input")).toBeFocused();
+    }
   }
 
   if (introduceMistake) {
     await expect(page.getByText("Review kesalahan")).toBeVisible();
     await expect(page.locator(".vocab-row")).toHaveCount(1);
+    await expect(page.getByRole("button", { name: "Lanjut ke ringkasan" })).toBeFocused();
     if (stopAtMistakeReview) return;
-await page.getByRole("button", { name: "Lanjut ke ringkasan" }).click();
+    await page.getByRole("button", { name: "Lanjut ke ringkasan" }).click();
   }
   await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeFocused();
 }

@@ -1985,10 +1985,13 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
     recordLessonCompletion(lesson.slug, { mistakeCount: mistakes.length });
     track("lesson_complete", { slug: lesson.slug, mistakes: String(mistakes.length) });
     const next = recommendNext(registry, lesson.slug);
+    const heading = el("h2", { text: "Lesson selesai" });
+    heading.id = "lesson-summary-heading";
+    heading.tabIndex = -1;
     const summary = el(
       "section",
       { className: "section band" },
-      el("h2", { text: "Lesson selesai" }),
+      heading,
       el("p", { className: "lead", text: `${items.length} item dipelajari, ${mistakes.length} kesalahan dicatat untuk review.` }),
       next
         ? el("p", { className: "feedback", text: `Rekomendasi berikutnya: ${next}.` })
@@ -1998,6 +2001,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
     const backToTop = root.closest("main")?.querySelector(".page-heading");
     if (backToTop) backToTop.after(summary);
     else root.append(summary);
+    heading.focus({ preventScroll: false });
   }
 
   function renderRecall() {
@@ -2052,6 +2056,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
         return b;
       })(),
     );
+    input.focus();
   }
 
   function renderRecognition() {
@@ -2066,7 +2071,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
       const question = step.questions[qIndex];
       const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
       const promptNode = el("strong", { className: "prompt-text", text: question.prompt });
-      if (qIndex > 0) promptNode.tabIndex = -1;
+      promptNode.tabIndex = -1;
       const optionButtons = question.options.map((option) => {
         const button = el("button", {
           className: "option",
@@ -2111,7 +2116,7 @@ async function initPublishedLesson(root, lesson, learningItems, wordPool, regist
         feedback,
         nb,
       );
-      if (qIndex > 0) promptNode.focus();
+      promptNode.focus({ preventScroll: false });
     }
     renderQ();
   }
