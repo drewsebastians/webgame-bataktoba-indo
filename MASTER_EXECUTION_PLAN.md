@@ -1,18 +1,18 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-06 22:24:00 UTC (post-merge A3 / PR #126)
+## Latest checkpoint — 2026-11-06 22:47:38 UTC (post-merge A3 / PR #127 documentation checkpoint)
 
-- PUBLIC `main` is `9f76dc3bd7d0d68fe262372a70746df6683a1ac4` / tree `43b7c47ada653dbe93afed31e35eec5470ccbf4c`. [PR #126](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/126) adds an isolated keyboard-only synthetic lesson journey through recognition, typed recall, an intentional mistake, mistake review and summary. It changes browser tests only; no runtime bundle, published content or language data changed.
-- Exact-head Verify [#42301981644](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42301981644) and post-merge main Verify [#42302722763](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42302722763) both succeeded: 232 unit tests, 66 Playwright tests (0 skipped), smoke, governance/data isolation, performance budget, committed-dist drift and 12 Lighthouse profiles.
-- Lighthouse accessibility scored 100/100 in all profiles; mobile performance was 97–99/100 and desktop was 100/100. CI confirmed 0 published learning items and no synthetic fixture markers in the public dist; verified-site and Lighthouse artifacts were uploaded by the main run.
-- The Cloudflare Workers Builds check on this merge commit succeeded (build `ae688d26-67d1-476a-91cb-fc562d3d6800`, version `d38fc25d-2278-42bc-9935-5368b6bc7ca0`). This confirms the technical production build only. Direct live root, `robots.txt`, manifest and service-worker readback is still NOT_VERIFIED through available browser/web access, so A5 remains `blocked_external`.
-- Readiness: ENGINEERING_READY=YES for the verified synthetic browser slice; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No private Engine data was transferred, and no public Git history was rewritten.
+- At this checkpoint PUBLIC `main` is `b7fbb164682ed43f13db2168f24150bb99195dca` / tree `bcc33293df9228075931176126175281e4e30d4d`. It includes the keyboard-only synthetic lesson regression from [PR #126](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/126) at code commit `9f76dc3bd7d0d68fe262372a70746df6683a1ac4` and the docs-only checkpoint refresh from [PR #127](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/127). No runtime code, published content or language data changed in PR #127.
+- Exact-head Verify [#42301981644](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42301981644), post-merge code Verify [#42302722763](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42302722763), and latest main Verify [#42306591061](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42306591061) succeeded. Latest-main logs report 232/232 unit tests and 66/66 Playwright tests (0 skipped), smoke, governance/data isolation, performance budget, committed-dist drift and all 12 Lighthouse profiles.
+- Lighthouse accessibility scored 100/100 in all 12 profiles; mobile performance was 97–99/100 and desktop was 100/100. The latest verified public-site artifact [#13546327900](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42306591061/artifacts/13546327900) is 121,147 bytes; Lighthouse reports [#13546662795](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42306591061/artifacts/13546662795) are 1,302,024 bytes.
+- CI reports 0 published learning items and no synthetic fixture markers in public dist. Cloudflare Workers Builds reported a successful technical production build for this checkpoint (build `04af8b72-d709-456c-ade2-20d5fa54991f`, version `fd6e715a-ecb7-4cef-bf37-a762ffcb8b04`). Direct live root, `robots.txt`, manifest and service-worker readback remains NOT_VERIFIED through available browser/web access, so A5 stays `blocked_external`.
+- Readiness: ENGINEERING_READY=YES for the verified synthetic browser flow; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. The public catalog remains empty/noindex. No private Engine data was transferred and no public Git history was rewritten.
 
 ## Resume actions
 
-1. Continue A3 synthetic keyboard/touch and responsive accessibility coverage across remaining game and lesson flows; keep PWA/offline, privacy, performance, and fixture-isolation checks in the release suite.
+1. Continue A3 synthetic keyboard/touch and responsive accessibility coverage across remaining game and lesson flows; keep PWA/offline, privacy, performance and fixture-isolation checks in the release suite.
 2. Preserve the empty/noindex public catalog and current containment while real content rights and quality remain unverified.
-3. Keep A5 blocked until a supported browser surface can read the live root, robots policy, manifest and service worker and tie the served artifact to this build.
+3. Keep A5 blocked until a supported browser surface can read the live root, robots policy, manifest and service worker and tie the served artifact to the Cloudflare build.
 4. Continue the PRIVATE data track independently; do not copy private metadata, language content or synthetic fixtures into this PUBLIC repository.
 
 ## Previous checkpoint — 2026-11-06 19:14:33 UTC (post-merge A3 touch coverage / PR #122)
