@@ -167,7 +167,14 @@ async function initFlashcards() {
     if (action === "wrong") recordAnswer(false, "flashcards", item.id);
     else if (action === "correct") recordAnswer(true, "flashcards", item.id);
     else if (action === "difficult") setDifficult(item.id, true);
-    index = (index + step + deck.length) % deck.length;
+    if (filter === "due" && action === "correct") {
+      const previousIndex = index;
+      rebuildDeck();
+      index = deck.length ? Math.min(previousIndex, deck.length - 1) : 0;
+      renderToolbar();
+    } else {
+      index = (index + step + deck.length) % deck.length;
+    }
     flipped = false;
     renderCard({ focusCard: true });
     updateProgressBadges();
@@ -203,13 +210,16 @@ async function initFlashcards() {
     if (!cardRoot) return;
     const item = currentItem();
     if (!item) {
+      const emptyState = el("p", {
+        className: "feedback",
+        text: "Tidak ada kartu untuk filter ini. Coba tumpukan lain atau tandai beberapa kata di dictionary.",
+        attrs: { role: "status", tabindex: "-1" },
+      });
       replaceChildren(
         cardRoot,
-        el("p", {
-          className: "feedback",
-          text: "Tidak ada kartu untuk filter ini. Coba tumpukan lain atau tandai beberapa kata di dictionary.",
-        }),
+        emptyState,
       );
+      if (focusCard) emptyState.focus({ preventScroll: true });
       return;
     }
     const stats = getItemStats(item.id);
