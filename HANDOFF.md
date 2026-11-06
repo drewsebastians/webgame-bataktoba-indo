@@ -1,5 +1,14 @@
 # Resume handoff — 2026-11-05
 
+## Latest checkpoint — 2026-11-06 01:28 UTC (post-merge A3 / PR #107)
+
+- PUBLIC main is `e295415176bc975e5fa89ab444760263024b3aa0` / tree `b807e9f615652b497846f57df381465ace0b75c1` after [PR #107](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/107). Lesson transitions now move focus through recognition, typed recall, and summary; isolated synthetic tests cover that sequence and mistake review.
+- Post-merge Verify [#42142771367](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42142771367) passed 232 unit + 58 Playwright tests (0 skipped), build, smoke, governance/data gates, performance budget, fixture isolation, committed-dist drift, and 12 Lighthouse profiles (a11y 100; mobile performance 96–100; desktop 100). Verified public dist artifact is [13469146205](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42142771367/artifacts/13469146205), 120,698 bytes.
+- Cloudflare production build `49333f68-771e-4b37-823e-ccfe428186b1` / version `70108076-9780-4522-bb80-fff973f53b6e` succeeded. Direct Pages readback is still NOT_VERIFIED; the available web reader could not access the host and no supported browser is connected. The public lesson catalog remains empty/noindex; no private or synthetic language data was published.
+- Resume at A3 with keyboard/touch review for mistake review and spaced repetition. Keep A5 blocked pending supported live readback; do not rewrite historical refs under A9/A12 without explicit authorization.
+
+## Previous checkpoint — 2026-11-05 16:16 UTC (post-merge PR #104)
+
 ## Latest checkpoint — 2026-11-05 16:16 UTC (post-merge PR #104)
 
 - PUBLIC Webgame main is `81e9cde89197de8687e96fb7d3ebdbe805fec34f` / tree `e1bbc51b5877e58a7264a7c65dc99a9bd1cbd8b4`, after [PR #104](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/104). Starting Matching Pairs now moves keyboard focus to the first playable card. The isolated synthetic browser regression verifies keyboard entry, focus, and playable-card navigation.

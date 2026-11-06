@@ -1,6 +1,15 @@
 # Execution status — 2026-11-05
 
-## Latest checkpoint — 2026-11-05 16:16 UTC (post-merge PR #104)
+## Latest checkpoint — 2026-11-06 01:28 UTC (post-merge A3 / PR #107)
+
+- PUBLIC main is `e295415176bc975e5fa89ab444760263024b3aa0` / tree `b807e9f615652b497846f57df381465ace0b75c1`, after [PR #107](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/107). Lesson flow now moves focus to the first recognition prompt, then typed recall, then the completed-lesson summary. The isolated synthetic flow asserts recognition, recall, mistake review, and summary focus.
+- Exact-head Verify [#42140435349](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42140435349) and post-merge Verify [#42142771367](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42142771367) passed 232/232 unit tests and 58/58 Playwright tests (0 skipped), site/governance checks, build, smoke, performance budget, synthetic isolation/data gates, committed-dist drift, and all 12 Lighthouse profiles. Accessibility scored 100/100 in every profile; mobile performance ranged 96–100 and desktop was 100.
+- Main artifacts: `verified-public-site-dist-42142771367`, artifact ID 13469146205 (120,698 bytes); Lighthouse reports artifact ID 13468452733 (1,291,166 bytes). The site gate reports 0 published learning items/words/phrases/sentences and 0 warnings; synthetic markers remain absent from public dist.
+- Cloudflare Workers Builds production check succeeded for build `49333f68-771e-4b37-823e-ccfe428186b1`, version `70108076-9780-4522-bb80-fff973f53b6e`. Provider deployment success is verified; direct live page/asset readback and served-artifact identity remain NOT_VERIFIED because the available web reader could not access the Pages host and no supported browser surface was available.
+- No private/restricted records or synthetic linguistic fixtures were added to public artifacts; thin-topic routes remain noindex; public Git history was not rewritten. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 with synthetic-only keyboard/touch and focus review for mistake review and spaced repetition. Keep A5 blocked until live readback is possible; keep A9/A12 historical-ref actions approval-gated.
+
+## Previous checkpoint — 2026-11-05 16:16 UTC (post-merge PR #104)
 
 - PUBLIC Webgame main is `81e9cde89197de8687e96fb7d3ebdbe805fec34f` / tree `e1bbc51b5877e58a7264a7c65dc99a9bd1cbd8b4`, after [PR #104](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/104). Starting Matching Pairs now moves keyboard focus to the first playable card. The isolated synthetic browser regression verifies keyboard entry, focus, and playable-card navigation.
 - Exact-head Verify [#42057389466](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42057389466) and post-merge Verify [#42060522453](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42060522453) passed: 232/232 unit tests and 58/58 Playwright tests (0 skipped), site/governance checks, build, smoke, performance budget, synthetic/data gates, committed-dist drift, and all 12 Lighthouse profiles. Accessibility scored 100 in every profile; mobile Performance was 97–100 and desktop was 100.
