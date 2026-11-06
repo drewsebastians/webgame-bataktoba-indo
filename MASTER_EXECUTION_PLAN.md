@@ -1,6 +1,21 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-06 19:14:33 UTC (post-merge A3 touch coverage / PR #122)
+## Latest checkpoint — 2026-11-06 20:07:58 UTC (post-merge A3 / PR #124)
+
+- PUBLIC `main` is `034b11c532f6a8abd20656ca22a295fe4cd48a7f` / tree `a72994f82ab8fa217ddecf4fecf81ccaf7124699`. [PR #124](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/124) adds isolated synthetic touch coverage at 320px for a full five-question quiz, one deliberate mistake, mistake review and touch continuation; it checks for horizontal overflow throughout. It also pins the published `import-in-the-middle@3.5.3` alongside Lighthouse in both CI invocations after npm returned 404 for the unresolved 3.6.0 tarball. No app runtime code, published content or language data changed.
+- Exact-head Verify [#42283231257](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42283231257) on PR head `c229ca5cd6aba14afb2961f149d80f5137e32525` and post-merge main Verify [#42285201189](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42285201189) both passed: 232/232 unit tests, 65/65 Playwright tests (0 skipped), smoke, governance/data isolation, performance budget, committed-dist drift and all 12 Lighthouse profiles.
+- Lighthouse accessibility was 100/100 on all profiles; mobile performance was 97–99/100 and desktop was 100/100. Main-run public artifact [#13537855951](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42285201189/artifacts/13537855951) is 121,147 bytes (SHA-256 `74d91dc53ec81aa11383800f3c08b63d89b6f88fdfafc5a35895b434ffdf23da`); Lighthouse reports [#13537691241](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42285201189/artifacts/13537691241) are 1,302,326 bytes.
+- CI confirmed 0 published learning items and no synthetic fixture markers in public dist. Cloudflare Workers Builds check [#128124326271](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/128124326271) reports production build success for this main commit (build `5c290e8a-5321-450b-988f-f44938bdc9db`, version `22fdfb12-85b6-4c94-bc12-075bd9f0967e`). Direct live root, `robots.txt`, manifest and service-worker readback remained inaccessible through available web/browser surfaces, so served-artifact identity is NOT_VERIFIED and A5 remains `blocked_external`.
+- Readiness: ENGINEERING_READY=YES for the tested synthetic browser slice; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No private Engine data was transferred; historical Git history was not rewritten.
+
+## Resume actions
+
+1. Continue A3 synthetic keyboard and touch accessibility review across remaining game and lesson flows; keep responsive, PWA/offline, performance and privacy checks in the release suite.
+2. Preserve current public containment and the empty/noindex catalog.
+3. Retry direct live artifact readback through a supported surface; keep A5 blocked until the served artifact is inspected.
+4. Continue the PRIVATE data track independently; do not copy metadata or language content into this PUBLIC repository.
+
+## Previous checkpoint — 2026-11-06 19:14:33 UTC (post-merge A3 touch coverage / PR #122)
 
 - PUBLIC `main` is `e4ca2e0163a9474caa4f1bcb69846e2b7116ca11` / tree `c7a56df17e2204b7844074fb3376ffbf8935b91d`. [PR #122](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/122) adds isolated Playwright touch coverage at 320px for Matching Pairs selection/matching and Memory reveal, including horizontal-overflow checks. It changes tests only; no application bundle, public data, or linguistic content changed.
 - Exact-head Verify [#42272405302](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42272405302) and post-merge main Verify [#42273286017](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42273286017) passed: 232/232 unit tests, 64/64 Playwright tests (0 skipped), smoke, governance/data isolation, performance budget, all 12 Lighthouse profiles, and committed-dist drift. Accessibility scored 100/100 in all profiles; mobile performance was 97–99/100 and desktop was 100/100.
