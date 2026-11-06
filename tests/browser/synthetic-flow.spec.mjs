@@ -230,20 +230,7 @@ test("flashcard topic and deck filters refresh counts without losing keyboard fo
     "word-pairs.json": { schemaVersion: 1, items: themedItems },
     "topics.json": topics,
   };
-  await page.route("**/data/published/word-pairs.json", async (route) => {
-    return route.fulfill({
-      status: 200,
-      contentType: "application/json; charset=utf-8",
-      body: JSON.stringify(payloads["word-pairs.json"]),
-    });
-  });
-  await page.route("**/data/published/topics.json", async (route) => {
-    return route.fulfill({
-      status: 200,
-      contentType: "application/json; charset=utf-8",
-      body: JSON.stringify(payloads["topics.json"]),
-    });
-  });
+  await installSyntheticContentRoutes(page, payloads);
 
   await page.goto("/flashcards/");
   await expect(page.locator("#flashcard-toolbar .pill")).toHaveText("8 kartu");
