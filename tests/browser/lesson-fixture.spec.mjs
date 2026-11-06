@@ -9,11 +9,17 @@ test.describe("published lesson flow with isolated synthetic fixture", () => {
   test("production empty state stays honest without fixture data", async ({ page, request }) => {
     const words = await request.get("/data/published/word-pairs.json").then((response) => response.json());
     const lessons = await request.get("/data/published/lessons.json").then((response) => response.json());
+    const sentences = await request.get("/data/published/sample-sentences.json").then((response) => response.json());
     expect(words.items).toHaveLength(0);
     expect(lessons.published).toHaveLength(0);
+    expect(sentences.items).toHaveLength(0);
 
     await page.goto("/learn/sapaan/");
     await expect(page.getByText(/belum terbit/i).first()).toBeVisible();
+
+    await page.goto("/games/");
+    await page.locator('.mode-button[data-mode="sentence"]').click();
+    await expect(page.getByRole("alert")).toHaveText("Data soal belum tersedia untuk mode ini. Coba mode lain.");
   });
 
   test("synthetic mistake review focuses its continuation control", async ({ page }) => {
