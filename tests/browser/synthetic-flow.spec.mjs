@@ -3,6 +3,7 @@ import {
   installSyntheticContentRoutes,
   completeSyntheticLesson,
   SYNTHETIC_WEBGAME_ITEMS,
+  SYNTHETIC_SENTENCE_ITEMS,
   SYNTHETIC_TOPICS,
 } from "./helpers/synthetic-content.mjs";
 
@@ -650,6 +651,58 @@ test("mobile touch completes a five-question quiz and reviews a mistake at 320px
   await expect(reviewContinuation).toBeEnabled();
   await assertNoHorizontalOverflow();
   await reviewContinuation.tap();
+
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
   await assertNoHorizontalOverflow();
+});
+
+test("sentence mode runs a synthetic five-question quiz and mistake review", async ({ page, request }) => {
+  const productionSentences = await request
+    .get("/data/published/sample-sentences.json")
+    .then((response) => response.json());
+  expect(productionSentences.items).toHaveLength(0);
+
+  await installSyntheticContentRoutes(page, {
+    "sample-sentences.json": { schemaVersion: 1, items: SYNTHETIC_SENTENCE_ITEMS },
+  });
+  await page.goto("/games/");
+  await page.locator('.session-size-button[data-size="5"]').click();
+  await page.locator('.mode-button[data-mode="sentence"]').click();
+
+  const deliberateMistakes = [];
+  for (let index = 0; index < 5; index += 1) {
+    const prompt = (await page.locator(".prompt-text").textContent())?.trim();
+    const item = SYNTHETIC_SENTENCE_ITEMS.find((entry) => entry.batak === prompt);
+    expect(item, `synthetic sentence prompt ${prompt}`).toBeTruthy();
+
+    const answers = (await page.locator(".option").allTextContents()).map((label) => label.trim());
+    const answer = index === 0
+      ? answers.find((label) => label !== item.indonesia)
+      : item.indonesia;
+    expect(answer).toBeTruthy();
+    if (index === 0) deliberateMistakes.push(item.id);
+    await page.getByRole("button", { name: answer, exact: true }).click();
+
+    const continuation = page.locator("#next-question");
+    await expect(continuation).toBeEnabled();
+    await continuation.click();
+  }
+
+  await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
+  const reviewMistakes = page.locator("#review-mistakes");
+  await expect(reviewMistakes).toBeVisible();
+  await reviewMistakes.click();
+
+  const reviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  const reviewItem = SYNTHETIC_SENTENCE_ITEMS.find((entry) => entry.batak === reviewPrompt);
+  expect(reviewItem?.id).toBe(deliberateMistakes[0]);
+  await page.getByRole("button", { name: reviewItem.indonesia, exact: true }).click();
+  await page.locator("#next-question").click();
+  await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
+
+  const reviewed = await page.evaluate((itemId) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.items?.[itemId]?.lastResult;
+  }, reviewItem.id);
+  expect(reviewed).toBe("correct");
 });

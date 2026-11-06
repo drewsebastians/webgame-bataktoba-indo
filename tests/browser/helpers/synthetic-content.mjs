@@ -22,6 +22,27 @@ export const SYNTHETIC_WEBGAME_ITEMS = Array.from({ length: 8 }, (_, index) => {
   };
 });
 
+export const SYNTHETIC_SENTENCE_ITEMS = Array.from({ length: 8 }, (_, index) => {
+  const number = String(index + 1).padStart(3, "0");
+  const id = `sentence-${String(index + 1).padStart(10, "0")}`;
+  return {
+    id,
+    type: "sentence",
+    batak: `SYNTHETIC_SENTENCE_BT_${number} SYNTHETIC_SENTENCE_TOKEN_BT_${number}`,
+    indonesia: `SYNTHETIC_SENTENCE_ID_${number} SYNTHETIC_SENTENCE_TOKEN_ID_${number}`,
+    indonesianAlternatives: [],
+    batakAlternatives: [],
+    senseId: `synthetic-sentence-sense-${number}`,
+    themes: ["synthetic-sentences"],
+    difficulty: null,
+    quality: SYNTHETIC_TEST_ONLY,
+    reviewStatus: "synthetic-test-only",
+    sourceType: "synthetic-test-only",
+    contextNote: "SYNTHETIC_TEST_ONLY_SENTENCE_CONTEXT",
+  };
+});
+
+
 export const SYNTHETIC_LESSON = {
   slug: "angka",
   title: "Synthetic Fixture Lesson",
