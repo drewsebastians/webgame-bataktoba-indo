@@ -109,6 +109,11 @@ async function initFlashcards() {
   function renderToolbar() {
     const toolbar = flashcardQuery("#flashcard-toolbar");
     if (!toolbar) return;
+    const activeControlId =
+      document.activeElement instanceof HTMLElement &&
+      toolbar.contains(document.activeElement)
+        ? document.activeElement.id
+        : "";
     function select(id, label, options, value, onChange) {
       const wrapper = el("label", { className: "filter-field" }, label + " ");
       const selectEl = el("select", { className: "input filter-select", id });
@@ -140,6 +145,7 @@ async function initFlashcards() {
         (v) => {
           theme = v;
           rebuildDeck();
+          renderToolbar();
           renderCard();
         },
       ),
@@ -147,7 +153,7 @@ async function initFlashcards() {
         const shuffleButton = el("button", {
           className: `button secondary${shuffled ? "" : ""}`,
           text: shuffled ? "Shuffle: aktif" : "Shuffle",
-          attrs: { type: "button", "aria-pressed": String(shuffled) },
+          attrs: { type: "button", id: "fc-shuffle", "aria-pressed": String(shuffled) },
         });
         shuffleButton.addEventListener("click", () => {
           shuffled = !shuffled;
@@ -159,6 +165,7 @@ async function initFlashcards() {
       })(),
       el("span", { className: "pill", text: `${deck.length} kartu` }),
     );
+    if (activeControlId) flashcardQuery(`#${activeControlId}`)?.focus();
   }
 
   function advance(step, action = null) {
