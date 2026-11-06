@@ -1,6 +1,14 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-06 07:38 UTC (post-merge A3 / PR #112)
+## Latest checkpoint — 2026-11-06 09:05 UTC (post-merge A3 / PR #114)
+
+- PUBLIC `main` is `522eec31530d32f2e3937f5345cf52adff3c6e56` / tree `d9c7b4b38f333341ffb5264015bb7f892041bee1` after [PR #114](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/114). The test-only change verifies continuation and prompt focus across a quiz and two-item mistake review; no content or production code changed.
+- Exact-head [#42188695439](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42188695439) and post-merge [#42189240700](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700) passed: 232/232 unit, 60/60 Playwright (0 skipped), release/data/fixture-isolation/smoke/performance/dist-drift checks, and 12 Lighthouse profiles. Accessibility is 100 throughout; mobile Performance is 97–99; desktop is 100. Dist artifact 13487989938 (120,845 bytes); Lighthouse artifact 13488034858 (1,291,654 bytes).
+- Cloudflare Workers Builds production check succeeded for build `8b76d90c-db9e-4873-b311-cc59adba7fac`. Live root, flashcards, manifest, robots, and service-worker reads remain NOT_VERIFIED; the browser route was unavailable through the supported surface.
+- Current generated public catalog is empty and synthetic fixture markers are absent from dist. The historical exposure audit remains active; no history rewrite or ref deletion occurred. A9/A12 remain approval-gated. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 synthetic focus review around spaced-repetition rating/advance. A5 awaits verified live readback; data and publication gates remain independent.
+
+## Previous checkpoint — 2026-11-06 07:38 UTC (post-merge A3 / PR #112)
 
 - PUBLIC `main` is `2bd0a3be873776592dcec5d95ace24555ee19eed` / tree `7f8fac76a4402e818e7307cd3fca62eb0818dc4a` after [PR #112](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/112). Due-review flashcards now leave the current queue after a correct rating; remaining count and focus are updated, including the empty state. Regression is isolated to synthetic mobile fixtures.
 - Exact-head Verify [#42179496857](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42179496857) and post-merge Verify [#42180710200](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42180710200) passed 232/232 unit and 60/60 Playwright tests (0 skipped), release/governance/data gates, build, smoke, performance budget, fixture isolation, dist drift, and 12 Lighthouse profiles. A11y 100 in all profiles; mobile performance 97–99; desktop 100.

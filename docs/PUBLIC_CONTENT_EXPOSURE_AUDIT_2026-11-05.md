@@ -126,3 +126,10 @@ Historical content remains reachable from public main history and from merged PR
 - Post-merge verified public dist artifact `verified-public-site-dist-41960577426`, artifact ID `13384727740`, size 120,002 bytes. Direct live Pages route readback remains NOT_VERIFIED.
 - Local targeted tests were not run because network cloning was blocked by DNS and the PowerShell launcher was blocked by the managed sandbox; the exact-head PR CI completed the full verification workflow successfully.
 - No source corpus values were added. Current published source and dist item arrays and lesson arrays remain empty. A11 (audit and guard) is complete; A12 (history/reference disposition) remains `blocked_approval`.
+
+
+## Current-tree continuity checkpoint — 2026-11-06 09:05 UTC
+
+- Current PUBLIC `main` is `522eec31530d32f2e3937f5345cf52adff3c6e56` / tree `d9c7b4b38f333341ffb5264015bb7f892041bee1` after PR #114. Its only changed file was `tests/browser/synthetic-flow.spec.mjs`; the change adds focus assertions to an isolated synthetic journey. It introduced no source corpus, raw snapshot, learner record, or published text.
+- Post-merge Verify [#42189240700](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700) reports 0 published items/words/phrases/sentences and confirms synthetic fixture markers are absent from the verified public artifact [13487989938](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700/artifacts/13487989938), 120,845 bytes. The Lighthouse artifact is [13488034858](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700/artifacts/13488034858), 1,291,654 bytes.
+- This is a current-tree containment check, not a rerun of the historical Git-object scan above. Historical raw/candidate/legacy and text-shaped published snapshots remain reachable as recorded; no ref deletion, object purge, or history rewrite occurred. A9/A12 remain `blocked_approval` pending explicit authorization. Direct live Pages content and served-artifact identity remain NOT_VERIFIED.

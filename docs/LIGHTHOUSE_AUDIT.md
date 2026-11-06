@@ -1,4 +1,19 @@
-## Latest verified main baseline — 2026-10-31 18:55 UTC
+## Latest verified main baseline — 2026-11-06 08:42 UTC
+
+Main commit `522eec31530d32f2e3937f5345cf52adff3c6e56`; post-merge Verify [#42189240700](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700) passed all 12 audits. The reports are in [artifact 13488034858](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700/artifacts/13488034858) (1,291,654 bytes).
+
+| Route | Mobile Performance | Desktop Performance | Accessibility (both) |
+|---|---:|---:|---:|
+| Home | 99 | 100 | 100 |
+| Angka lesson | 97 | 100 | 100 |
+| Games | 97 | 100 | 100 |
+| Flashcards | 99 | 100 | 100 |
+| Dictionary | 99 | 100 | 100 |
+| Progress | 99 | 100 | 100 |
+
+The verified public dist artifact is [13487989938](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700/artifacts/13487989938), 120,845 bytes. Cloudflare Workers Builds reports production build `8b76d90c-db9e-4873-b311-cc59adba7fac` successful. Direct live Pages reads remain NOT_VERIFIED; these are lab scores, not field-user telemetry.
+
+## Previous verified main baseline — 2026-10-31 18:55 UTC
 
 Main commit `08075c01533670beaea8f97bb0e88b7d135ae9c5`; Verify [#94 / 41231508931](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41231508931) passed all 12 audits. Reports are in artifact [13054012122](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41231508931/artifacts/13054012122).
 

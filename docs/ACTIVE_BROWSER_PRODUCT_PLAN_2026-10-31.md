@@ -65,6 +65,14 @@ At each bounded development batch: verify fresh remote main SHA/tree; read this 
 
 Source handoff currently **blocked**: upstream PRIVATE/NONCOMMERCIAL research scope, and this website PUBLIC. Even an individually CC-licensed source requires verifying precise rights, attribution and upstream policy before transfer. None of these safeguards should block pure code and synthetic-UX improvements.
 
+## A3 verified continuation checkpoint — 2026-11-06 09:05 UTC
+
+PR [#114](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/114) is merged at public main `522eec31530d32f2e3937f5345cf52adff3c6e56` / tree `d9c7b4b38f333341ffb5264015bb7f892041bee1`. The synthetic five-minute browser journey now checks focus after each quiz answer, while reviewing two deliberate mistakes, advancing to the second review prompt, and reaching the review summary. Production code and learning data were unchanged.
+
+Exact-head Verify [#42188695439](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42188695439) and post-merge Verify [#42189240700](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42189240700) passed 232/232 unit tests, 60/60 Playwright tests (0 skipped), release/governance/data checks, build, smoke, performance budget, fixture isolation, committed-dist drift, and 12 Lighthouse profiles. Accessibility was 100 throughout; mobile Performance was 97–99 and desktop Performance 100. The verified public dist artifact is 13487989938 (120,845 bytes); Lighthouse artifact 13488034858 is 1,291,654 bytes.
+
+Cloudflare Workers Builds reports production build `8b76d90c-db9e-4873-b311-cc59adba7fac` successful. Root, flashcards, manifest, robots, and service-worker live reads were inaccessible from the web reader; the alternate browser surface could not determine its active URL safely. Live contents and served-artifact identity remain NOT_VERIFIED. The current publication catalog remains empty and synthetic markers are absent from dist. Historical public corpus-shaped blobs remain reachable per the 2026-11-05 metadata-only audit; no destructive Git-history action was taken. Continue A3 with spaced-repetition rating/advance focus coverage. Keep A5 blocked until a supported live readback is available; A9/A12 remain approval-gated.
+
 
 ## A2 completion checkpoint — 2026-10-31 10:47 UTC
 
