@@ -15,8 +15,16 @@ async function answerMeaningQuestion(page, { wrong = false } = {}) {
     : item.indonesia;
   expect(answer).toBeTruthy();
   await page.getByRole("button", { name: answer, exact: true }).click();
-  await expect(page.locator("#next-question")).toBeEnabled();
-  await page.locator("#next-question").click();
+  const continuation = page.locator("#next-question");
+  await expect(continuation).toBeEnabled();
+  await expect(continuation).toBeFocused();
+  await continuation.click();
+  if (await page.locator(".prompt-text").count()) {
+    await expect(page.locator(".prompt-text")).toBeFocused();
+  } else {
+    await expect(page.locator("#session-summary-heading")).toBeFocused();
+  }
+  return prompt;
 }
 
 test("homepage daily practice link launches the due-first queue", async ({ page }) => {
@@ -116,21 +124,38 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await page.locator('.session-size-button[data-size="5"]').click();
   await expect(page.locator(".prompt-text")).toBeVisible();
 
+  const deliberateMistakes = [];
   for (let index = 0; index < 5; index += 1) {
-    await answerMeaningQuestion(page, { wrong: index === 0 });
+    const prompt = await answerMeaningQuestion(page, { wrong: index < 2 });
+    if (index < 2) deliberateMistakes.push(prompt);
   }
   await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
   await expect(page.locator("#review-mistakes")).toBeVisible();
   await page.locator("#review-mistakes").click();
   await expect(page.locator(".prompt-text")).toBeFocused();
 
-  const reviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
-  const reviewItem = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === reviewPrompt);
-  expect(reviewItem).toBeTruthy();
-  await page.getByRole("button", { name: reviewItem.indonesia, exact: true }).click();
-  await expect(page.locator("#next-question")).toBeEnabled();
-  await page.locator("#next-question").click();
+  const firstReviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  expect(deliberateMistakes).toContain(firstReviewPrompt);
+  const firstReviewItem = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === firstReviewPrompt);
+  expect(firstReviewItem).toBeTruthy();
+  await page.getByRole("button", { name: firstReviewItem.indonesia, exact: true }).click();
+  const reviewContinuation = page.locator("#next-question");
+  await expect(reviewContinuation).toBeEnabled();
+  await expect(reviewContinuation).toBeFocused();
+  await reviewContinuation.click();
+  await expect(page.locator(".prompt-text")).toBeFocused();
+
+  const secondReviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  expect(deliberateMistakes).toContain(secondReviewPrompt);
+  expect(secondReviewPrompt).not.toBe(firstReviewPrompt);
+  const secondReviewItem = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === secondReviewPrompt);
+  expect(secondReviewItem).toBeTruthy();
+  await page.getByRole("button", { name: secondReviewItem.indonesia, exact: true }).click();
+  await expect(reviewContinuation).toBeEnabled();
+  await expect(reviewContinuation).toBeFocused();
+  await reviewContinuation.click();
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
+  await expect(page.locator("#session-summary-heading")).toBeFocused();
 
   await page.goto("/flashcards/");
   await page.locator("#fc-filter").selectOption("all");
