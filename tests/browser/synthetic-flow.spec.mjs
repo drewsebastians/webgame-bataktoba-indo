@@ -207,7 +207,6 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
 });
 
 test("flashcard topic and deck filters refresh counts without losing keyboard focus", async ({ page }) => {
-  await installSyntheticContentRoutes(page);
   const splitAt = 3;
   const themedItems = SYNTHETIC_WEBGAME_ITEMS.map((item, index) => ({
     ...item,
@@ -231,14 +230,18 @@ test("flashcard topic and deck filters refresh counts without losing keyboard fo
     "word-pairs.json": { schemaVersion: 1, items: themedItems },
     "topics.json": topics,
   };
-  await page.route("**/data/published/**", async (route) => {
-    const filename = new URL(route.request().url()).pathname.split("/").at(-1);
-    const payload = payloads[filename];
-    if (!payload) return route.fallback();
+  await page.route("**/data/published/word-pairs.json", async (route) => {
     return route.fulfill({
       status: 200,
       contentType: "application/json; charset=utf-8",
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payloads["word-pairs.json"]),
+    });
+  });
+  await page.route("**/data/published/topics.json", async (route) => {
+    return route.fulfill({
+      status: 200,
+      contentType: "application/json; charset=utf-8",
+      body: JSON.stringify(payloads["topics.json"]),
     });
   });
 
