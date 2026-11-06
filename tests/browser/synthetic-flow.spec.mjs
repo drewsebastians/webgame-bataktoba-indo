@@ -651,6 +651,11 @@ test("mobile touch completes a five-question quiz and reviews a mistake at 320px
   await expect(reviewContinuation).toBeEnabled();
   await assertNoHorizontalOverflow();
   await reviewContinuation.tap();
+
+  await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
+  await assertNoHorizontalOverflow();
+});
+
 test("sentence mode runs a synthetic five-question quiz and mistake review", async ({ page, request }) => {
   const productionSentences = await request
     .get("/data/published/sample-sentences.json")
@@ -700,8 +705,4 @@ test("sentence mode runs a synthetic five-question quiz and mistake review", asy
     return progress.items?.[itemId]?.lastResult;
   }, reviewItem.id);
   expect(reviewed).toBe("correct");
-});
-
-  await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
-  await assertNoHorizontalOverflow();
 });
