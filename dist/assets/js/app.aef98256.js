@@ -651,7 +651,7 @@ async function initGames() {
       focusMatchingTarget();
     } else {
       getRunner(mode, { fresh: true });
-      nextQuestion();
+      nextQuestion({ focusPrompt: true });
     }
     saveProgress({ lastMode: mode });
     $$(".mode-button[data-mode]").forEach((button) => {
@@ -691,7 +691,7 @@ async function initGames() {
       return button;
     });
 
-    nextButton.addEventListener("click", nextQuestion);
+    nextButton.addEventListener("click", () => nextQuestion());
 
     replaceChildren(
       panel,
@@ -770,7 +770,7 @@ async function initGames() {
     updateProgressBadges();
   }
 
-  function nextQuestion() {
+  function nextQuestion({ focusPrompt = false } = {}) {
     const kind = modes[state.mode].kind;
     const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
     if (kind !== "memory" && state.answered >= sessionLimit) {
@@ -788,7 +788,7 @@ async function initGames() {
     if (kind === "truefalse") {
       renderTrueFalse();
       const promptNode = $(".prompt-text", panel);
-      if (promptNode && state.answered > 0) {
+      if (promptNode && (focusPrompt || state.answered > 0)) {
         promptNode.setAttribute("tabindex", "-1");
         promptNode.focus({ preventScroll: false });
       }
@@ -810,7 +810,7 @@ async function initGames() {
     state = { ...state, current: question, locked: false };
     renderQuiz();
     const promptNode = $(".prompt-text", panel);
-    if (promptNode && state.answered > 0) {
+    if (promptNode && (focusPrompt || state.answered > 0)) {
       promptNode.setAttribute("tabindex", "-1");
       promptNode.focus({ preventScroll: false });
     }
@@ -1465,7 +1465,7 @@ async function initGames() {
     };
     track("mistake_review_start", { count: String(uniqueIds.length) });
     getRunner(state.mode, { fresh: true, initialIds: uniqueIds });
-    nextQuestion();
+    nextQuestion({ focusPrompt: true });
   }
 
   function startDailyPractice() {
@@ -1492,7 +1492,7 @@ async function initGames() {
       button.setAttribute("aria-pressed", String(button.dataset.mode === "meaning"));
     });
     getRunner("meaning", { fresh: true, initialIds: queueIds });
-    nextQuestion();
+    nextQuestion({ focusPrompt: true });
   }
 
   function updateStreakBadge() {
@@ -1548,7 +1548,6 @@ async function initGames() {
     button.setAttribute("aria-pressed", String(button.dataset.size === String(state.sessionSize)));
   });
   updateStreakBadge();
-  setMode(state.mode);
   if (shouldStartDailyPractice) {
     const nextUrl = new URL(window.location.href);
     nextUrl.searchParams.delete("practice");
@@ -1558,6 +1557,8 @@ async function initGames() {
       `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`,
     );
     startDailyPractice();
+  } else {
+    setMode(state.mode);
   }
 }
 

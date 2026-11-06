@@ -61,6 +61,7 @@ test("homepage daily practice link launches the due-first queue", async ({ page 
 
   await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
   await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
+  await expect(page.locator(".prompt-text")).toBeFocused();
 
   await page.goto("/");
   const dailyPracticeLink = page.getByRole("link", { name: "Latihan Harian", exact: true });
@@ -69,6 +70,18 @@ test("homepage daily practice link launches the due-first queue", async ({ page 
 
   await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
   await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
+  await expect(page.locator(".prompt-text")).toBeFocused();
+});
+
+test("starting a quiz mode moves focus to its first question", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/games/");
+
+  for (const mode of ["reverse", "truefalse"]) {
+    await page.locator(`.mode-button[data-mode="${mode}"]`).click();
+    await expect(page.locator(".prompt-text")).toBeVisible();
+    await expect(page.locator(".prompt-text")).toBeFocused();
+  }
 });
 
 test("game and lesson prompts render context notes as inert text", async ({ page }) => {
@@ -109,6 +122,7 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
   await expect(page.locator("#review-mistakes")).toBeVisible();
   await page.locator("#review-mistakes").click();
+  await expect(page.locator(".prompt-text")).toBeFocused();
 
   const reviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
   const reviewItem = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === reviewPrompt);
