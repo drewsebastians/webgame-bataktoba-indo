@@ -3,6 +3,7 @@ import {
   installSyntheticContentRoutes,
   completeSyntheticLesson,
   SYNTHETIC_WEBGAME_ITEMS,
+  SYNTHETIC_TOPICS,
 } from "./helpers/synthetic-content.mjs";
 
 async function answerMeaningQuestion(page, { wrong = false } = {}) {
@@ -203,6 +204,62 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await expect(firstResult).toContainText("SYNTHETIC_BT_001");
   await firstResult.click();
   await expect(page.locator(".result-detail")).toBeVisible();
+});
+
+test("flashcard topic and deck filters refresh counts without losing keyboard focus", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  const splitAt = 3;
+  const themedItems = SYNTHETIC_WEBGAME_ITEMS.map((item, index) => ({
+    ...item,
+    themes: [index < splitAt ? "angka" : "keluarga"],
+  }));
+  const itemIds = themedItems.map((item) => item.id);
+  const topics = {
+    ...SYNTHETIC_TOPICS,
+    topics: [
+      { ...SYNTHETIC_TOPICS.topics[0], itemIds: itemIds.slice(0, splitAt), poolItems: splitAt },
+      {
+        ...SYNTHETIC_TOPICS.topics[0],
+        slug: "keluarga",
+        title: "Synthetic Fixture Family Topic",
+        itemIds: itemIds.slice(splitAt),
+        poolItems: itemIds.length - splitAt,
+      },
+    ],
+  };
+  const payloads = {
+    "word-pairs.json": { schemaVersion: 1, items: themedItems },
+    "topics.json": topics,
+  };
+  await page.route("**/data/published/**", async (route) => {
+    const filename = new URL(route.request().url()).pathname.split("/").at(-1);
+    const payload = payloads[filename];
+    if (!payload) return route.fallback();
+    return route.fulfill({
+      status: 200,
+      contentType: "application/json; charset=utf-8",
+      body: JSON.stringify(payload),
+    });
+  });
+
+  await page.goto("/flashcards/");
+  await expect(page.locator("#flashcard-toolbar .pill")).toHaveText("8 kartu");
+  const theme = page.locator("#fc-theme");
+  await theme.focus();
+  await theme.selectOption("keluarga");
+  await expect(page.locator("#fc-theme")).toBeFocused();
+  await expect(page.locator("#flashcard-toolbar .pill")).toHaveText("5 kartu");
+  await expect(page.locator("#flashcard-card")).toContainText(SYNTHETIC_WEBGAME_ITEMS[splitAt].batak);
+
+  const filter = page.locator("#fc-filter");
+  await filter.focus();
+  await filter.selectOption("saved");
+  await expect(page.locator("#fc-filter")).toBeFocused();
+  await expect(page.locator("#flashcard-toolbar .pill")).toHaveText("0 kartu");
+
+  await page.locator("#fc-shuffle").click();
+  await expect(page.locator("#fc-shuffle")).toBeFocused();
+  await expect(page.locator("#fc-shuffle")).toHaveAttribute("aria-pressed", "true");
 });
 
 test("flashcard keyboard activation preserves focus and native rating buttons", async ({ page }) => {
