@@ -1082,7 +1082,7 @@ async function initGames() {
           type: "button",
           "data-index": index,
           "aria-pressed": String(revealed),
-          "aria-label": revealed ? undefined : "Kartu tertutup",
+          "aria-label": `Kartu ${index + 1} dari ${state.options.length}, ${revealed ? card.text : "tertutup"}`,
           disabled: isMatched || undefined,
         },
       });
@@ -1129,7 +1129,10 @@ async function initGames() {
     button.classList.add("selected");
     button.textContent = card.text;
     button.setAttribute("aria-pressed", "true");
-    button.removeAttribute("aria-label");
+    button.setAttribute(
+      "aria-label",
+      `Kartu ${Number(button.dataset.index) + 1} dari ${state.options.length}, ${card.text}`,
+    );
     if (state.selected.length < 2) return;
 
     const [first, second] = state.selected;
@@ -1173,7 +1176,10 @@ async function initGames() {
         hiddenButton.classList.add("face-down");
         hiddenButton.textContent = "?";
         hiddenButton.setAttribute("aria-pressed", "false");
-        hiddenButton.setAttribute("aria-label", "Kartu tertutup");
+        hiddenButton.setAttribute(
+          "aria-label",
+          `Kartu ${Number(hiddenButton.dataset.index) + 1} dari ${state.options.length}, tertutup`,
+        );
       }
       updateProgressBadges();
       if (shouldRestoreScheduledFocus) scheduledFocusTarget?.focus();
