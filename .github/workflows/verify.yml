@@ -25,8 +25,8 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Install pinned Lighthouse CLI
-        run: npx --yes lighthouse@13.4.1 --version
+      - name: Install pinned Lighthouse CLI with available ESM loader
+        run: npx --yes --package=lighthouse@13.4.1 --package=import-in-the-middle@3.5.3 lighthouse --version
 
       # Corpus databases are NOT rebuilt in CI (they require the 1.6 GB local
       # alignment DB); CI validates the committed published outputs instead.
