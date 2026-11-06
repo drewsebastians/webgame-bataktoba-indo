@@ -1,6 +1,15 @@
 # Master execution plan
 
-## Latest checkpoint — 2026-11-06 01:28 UTC (post-merge A3 / PR #107)
+## Latest checkpoint — 2026-11-06 02:10 UTC (post-merge A3 / PR #109)
+
+- PUBLIC `main` is `c277d92214737c99f18c86f6caccbc4fffbaa2ac` / tree `a4092ddf83c1de3d9cf8ce0a3cd43f0fbb044779`, after [PR #109](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/109). Starting a quiz mode, mistake review, or due-first daily practice now focuses the first prompt; a daily-practice route no longer briefly mounts the previously saved mode. Browser regressions use isolated synthetic fixtures.
+- Exact-head PR Verify [#42146950672](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42146950672) and post-merge Verify [#42147581255](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42147581255) passed 232/232 unit tests and 59/59 Playwright tests (0 skipped), release/governance/data gates, build, smoke, performance budget, fixture isolation, committed-dist drift, and 12 Lighthouse profiles. Accessibility scored 100/100 in all profiles; mobile performance ranged 97–100 and desktop scored 100.
+- The post-merge verified public dist artifact is [13471025613](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42147581255/artifacts/13471025613), 120,742 bytes; Lighthouse artifact [13471040410](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42147581255/artifacts/13471040410), 1,290,770 bytes. The release gate reports 0 published items/words/phrases/sentences and 0 warnings; synthetic fixture markers are absent from public dist.
+- Cloudflare Workers Builds reported production build success for this `main` commit, build `dd56e05c-739a-491f-8dd2-1a9e4d7a78ad`. Direct live route/asset readback and served-artifact identity remain NOT_VERIFIED; the available reader/browser surface cannot access the site host.
+- No private/restricted linguistic records or synthetic fixtures were published; thin-topic routes remain noindex and public Git history was not rewritten. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 with keyboard/touch focus through spaced repetition and answer/advance flows using synthetic fixtures. Keep A5 blocked pending live readback; keep A9/A12 historical-ref actions approval-gated.
+
+## Previous checkpoint — 2026-11-06 01:28 UTC (post-merge A3 / PR #107)
 
 - PUBLIC main is `e295415176bc975e5fa89ab444760263024b3aa0` / tree `b807e9f615652b497846f57df381465ace0b75c1`.
 - PR #107 moves lesson focus through recognition prompt, typed recall, and summary; synthetic browser coverage asserts phase transitions and mistake-review focus.
