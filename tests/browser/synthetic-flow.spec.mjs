@@ -592,3 +592,64 @@ test("mobile game targets keep a 44px minimum", async ({ page }) => {
   expect(matchingTargets.some((target) => target.classes.includes("match-card"))).toBe(true);
 });
 
+
+
+test("mobile touch completes a five-question quiz and reviews a mistake at 320px", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/games/");
+  await page.locator('.session-size-button[data-size="5"]').tap();
+
+  const progress = page.getByRole("progressbar", { name: "Kemajuan sesi" });
+  const assertNoHorizontalOverflow = async () => {
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  };
+
+  await expect(progress).toHaveAttribute("max", "5");
+  await expect(progress).toHaveAttribute("value", "1");
+  await assertNoHorizontalOverflow();
+
+  for (let index = 0; index < 5; index += 1) {
+    const prompt = (await page.locator(".prompt-text").textContent())?.trim();
+    const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
+    expect(item, `synthetic quiz prompt ${prompt}`).toBeTruthy();
+
+    const visibleAnswers = (await page.locator(".option").allTextContents()).map((label) => label.trim());
+    const answer = index === 0
+      ? visibleAnswers.find((label) => label !== item.indonesia)
+      : item.indonesia;
+    expect(answer).toBeTruthy();
+    await page.getByRole("button", { name: answer, exact: true }).tap();
+
+    const continuation = page.locator("#next-question");
+    await expect(continuation).toBeEnabled();
+    await expect(progress).toHaveAttribute("value", String(index + 1));
+    await assertNoHorizontalOverflow();
+
+    if (index < 4) {
+      await continuation.tap();
+      await expect(page.locator(".prompt-text")).toBeVisible();
+      await expect(progress).toHaveAttribute("value", String(index + 2));
+      await assertNoHorizontalOverflow();
+    } else {
+      await continuation.tap();
+    }
+  }
+
+  await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
+  const reviewMistakes = page.locator("#review-mistakes");
+  await expect(reviewMistakes).toBeVisible();
+  await reviewMistakes.tap();
+
+  const reviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  const reviewItem = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === reviewPrompt);
+  expect(reviewItem, `synthetic review prompt ${reviewPrompt}`).toBeTruthy();
+  await page.getByRole("button", { name: reviewItem.indonesia, exact: true }).tap();
+
+  const reviewContinuation = page.locator("#next-question");
+  await expect(reviewContinuation).toBeEnabled();
+  await assertNoHorizontalOverflow();
+  await reviewContinuation.tap();
+  await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
+  await assertNoHorizontalOverflow();
+});
