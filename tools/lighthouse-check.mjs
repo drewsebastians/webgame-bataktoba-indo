@@ -163,7 +163,9 @@ async function waitForPreview(server) {
 function runLighthouse(profile, url, outputPath, chromePath) {
   const args = [
     "--yes",
-    `lighthouse@${LIGHTHOUSE_VERSION}`,
+    `--package=lighthouse@${LIGHTHOUSE_VERSION}`,
+    "--package=import-in-the-middle@3.5.3",
+    "lighthouse",
     url,
     "--only-categories=performance,accessibility",
     "--output=json",
