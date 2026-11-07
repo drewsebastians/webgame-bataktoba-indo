@@ -820,3 +820,68 @@ test("sentence quiz supports touch and keyboard at 320px with focus, review and 
   }, reviewItem.id);
   expect(persisted).toBe("correct");
 });
+
+test("320px touch daily practice opens the due item and schedules its next review", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 720 });
+  const dueItem = SYNTHETIC_WEBGAME_ITEMS[2];
+  await page.addInitScript(({ itemId }) => {
+    const yesterday = Date.now() - 24 * 60 * 60 * 1000;
+    localStorage.setItem(
+      "batakTobaPlay.progress.v2",
+      JSON.stringify({
+        schemaVersion: 3,
+        answered: 1,
+        correct: 0,
+        lastMode: "meaning",
+        items: {
+          [itemId]: {
+            seen: 1,
+            correctCount: 0,
+            incorrectCount: 1,
+            consecutiveCorrect: 0,
+            lastResult: "incorrect",
+            lastReviewedAt: yesterday,
+            nextReviewAt: yesterday,
+            reviewStage: 0,
+            bucket: "review",
+            saved: false,
+            difficult: false,
+          },
+        },
+        sessions: [],
+      }),
+    );
+  }, { itemId: dueItem.id });
+
+  const assertNoHorizontalOverflow = async () => {
+    const dimensions = await page.evaluate(() => ({
+      viewport: window.innerWidth,
+      document: document.documentElement.scrollWidth,
+    }));
+    expect(dimensions.document, `horizontal overflow at ${dimensions.viewport}px`).toBeLessThanOrEqual(dimensions.viewport);
+  };
+
+  await page.goto("/progres/");
+  await expect(page.getByRole("status")).toContainText("1 materi siap untuk latihan harian.");
+  await page.getByRole("link", { name: "Mulai latihan harian", exact: true }).tap();
+  await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
+  await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
+  await expect(page.locator(".prompt-text")).toBeFocused();
+  await assertNoHorizontalOverflow();
+
+  await page.getByRole("button", { name: dueItem.indonesia, exact: true }).tap();
+  const continuation = page.locator("#next-question");
+  await expect(continuation).toBeEnabled();
+  await expect(continuation).toBeFocused();
+  const scheduled = await page.evaluate((itemId) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.items?.[itemId];
+  }, dueItem.id);
+  expect(scheduled?.lastResult).toBe("correct");
+  expect(scheduled?.reviewStage).toBeGreaterThan(0);
+  expect(scheduled?.nextReviewAt).toBeGreaterThan(Date.now());
+
+  await continuation.tap();
+  await assertNoHorizontalOverflow();
+});
