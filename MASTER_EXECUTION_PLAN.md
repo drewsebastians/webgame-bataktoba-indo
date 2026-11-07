@@ -1,5 +1,16 @@
 # Master execution plan
 
+## Latest checkpoint — 2026-11-07 14:44 UTC / 2026-11-07 21:44 WIB (post-merge A3 / PR #131)
+
+- PUBLIC `main` is `dd9ba13f8c95b55eaa4ac62df05a02ef47c82182` / tree `1662e2f4502351d513b12001de0dad634cfe91a9`. [PR #131](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/131) adds a synthetic 320px sentence-mode browser regression covering touch and keyboard input, focus transitions, horizontal overflow, mistake review and saved progress. The same work fixes wrapping of long feedback text on narrow screens. No learning data was added.
+- Exact-head Verify [#42381901408](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42381901408) and post-merge main Verify [#42382379021](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42382379021) passed. Both report 232/232 unit tests and 68/68 Playwright tests, with no skips; smoke, synthetic isolation, performance budget and committed-dist drift passed. All 12 Lighthouse profiles passed accessibility at 100/100; mobile performance ranged 97–99/100 and desktop was 100/100.
+- Cloudflare Workers Builds reported production build success `a3529cb6-2e7f-4332-babb-273975b1f398`. The verified site artifact [#13577169630](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42382379021/artifacts/13577169630) is 121,155 bytes (SHA-256 `0f1275acc14365b7659e5b15d4258b0a54af6bf495c19804f183ee32f79644e1`); Lighthouse reports are [#13577428869](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42382379021/artifacts/13577428869).
+- Live readback remains NOT_VERIFIED: the available reader could not access the site root, robots.txt, manifest, published-sentence endpoint or service worker. The successful build and uploaded artifact are technical evidence, not a direct production readback. Keep A5 `blocked_external`.
+- Published learning data remains empty/noindex. The synthetic sentence payload is intercepted by Playwright only and is absent from the production bundle. No private engine records or restricted content were transferred.
+- Readiness: ENGINEERING_READY = YES for the verified browser flows; DATA_READY = NO; PUBLICATION_READY = NO; LEARNING_READY = NO; MONETIZATION_READY = DEFERRED.
+- Next: continue A3 with responsive keyboard/touch coverage for lesson and review transitions; keep production-data gates fail-closed and all synthetic fixtures out of `dist`.
+
+
 ## Latest checkpoint — 2026-11-07 13:44:34 UTC / 2026-11-07 20:44:34 WIB (post-merge synthetic sentence coverage / PR #129)
 
 - PUBLIC application main is `9a9a9c55268889ee570a1d42a6d38ff3fa9429f6` / tree `4b1c751531d1b59e850e686d90bd44a85d43e107`. [PR #129](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/129) closes the synthetic browser-test gap for sentence mode: a five-question quiz, deliberate mistake, mistake review and progress persistence run through an explicit per-test route override. The default/published sentence dataset stays empty, and the UI remains honest about the unavailable mode. No production runtime code or linguistic data was added.
