@@ -706,3 +706,117 @@ test("sentence mode runs a synthetic five-question quiz and mistake review", asy
   }, reviewItem.id);
   expect(reviewed).toBe("correct");
 });
+
+
+test("sentence quiz supports touch and keyboard at 320px with focus, review and saved progress", async ({ page, request }) => {
+  const productionSentences = await request
+    .get("/data/published/sample-sentences.json")
+    .then((response) => response.json());
+  expect(productionSentences.items).toHaveLength(0);
+
+  await installSyntheticContentRoutes(page, {
+    "sample-sentences.json": { schemaVersion: 1, items: SYNTHETIC_SENTENCE_ITEMS },
+  });
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/games/");
+
+  const assertNoHorizontalOverflow = async () => {
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  };
+
+  await page.locator('.session-size-button[data-size="5"]').tap();
+  await page.locator('.mode-button[data-mode="sentence"]').tap();
+
+  const progress = page.getByRole("progressbar", { name: "Kemajuan sesi" });
+  await expect(progress).toHaveAttribute("max", "5");
+  await expect(progress).toHaveAttribute("value", "1");
+  await expect(page.locator(".prompt-text")).toBeFocused();
+  await assertNoHorizontalOverflow();
+
+  let deliberateMistakeId = null;
+  for (let index = 0; index < 5; index += 1) {
+    const prompt = (await page.locator(".prompt-text").textContent())?.trim();
+    const item = SYNTHETIC_SENTENCE_ITEMS.find((entry) => entry.batak === prompt);
+    expect(item, `synthetic mobile sentence prompt ${prompt}`).toBeTruthy();
+
+    const options = page.locator(".option");
+    await expect(options).toHaveCount(4);
+    const labels = (await options.allTextContents()).map((label) => label.trim());
+    const answer = index === 0
+      ? labels.find((label) => label !== item.indonesia)
+      : item.indonesia;
+    const answerIndex = labels.indexOf(answer);
+    expect(answerIndex).toBeGreaterThanOrEqual(0);
+    if (index === 0) deliberateMistakeId = item.id;
+
+    if (index === 0 || index === 2) {
+      await options.nth(answerIndex).tap();
+    } else {
+      await page.keyboard.press("Tab");
+      await expect(options.first()).toBeFocused();
+      for (let step = 0; step < answerIndex; step += 1) {
+        await page.keyboard.press("ArrowRight");
+      }
+      await expect(options.nth(answerIndex)).toBeFocused();
+      await page.keyboard.press("Enter");
+    }
+
+    const continuation = page.locator("#next-question");
+    await expect(continuation).toBeEnabled();
+    await expect(continuation).toBeFocused();
+    await expect(progress).toHaveAttribute("value", String(index + 1));
+    await assertNoHorizontalOverflow();
+
+    if (index < 4) {
+      if (index === 1) await continuation.tap();
+      else await page.keyboard.press("Enter");
+      await expect(page.locator(".prompt-text")).toBeFocused();
+      await expect(progress).toHaveAttribute("value", String(index + 2));
+      await assertNoHorizontalOverflow();
+    } else {
+      await continuation.tap();
+    }
+  }
+
+  const summary = page.getByRole("heading", { name: "Sesi selesai" });
+  await expect(summary).toBeVisible();
+  await expect(summary).toBeFocused();
+  await assertNoHorizontalOverflow();
+
+  const reviewButton = page.locator("#review-mistakes");
+  await expect(reviewButton).toBeVisible();
+  await reviewButton.tap();
+  const reviewPrompt = (await page.locator(".prompt-text").textContent())?.trim();
+  const reviewItem = SYNTHETIC_SENTENCE_ITEMS.find((entry) => entry.batak === reviewPrompt);
+  expect(reviewItem?.id).toBe(deliberateMistakeId);
+  await expect(page.locator(".prompt-text")).toBeFocused();
+
+  const reviewOptions = page.locator(".option");
+  const reviewLabels = (await reviewOptions.allTextContents()).map((label) => label.trim());
+  const correctIndex = reviewLabels.indexOf(reviewItem.indonesia);
+  expect(correctIndex).toBeGreaterThanOrEqual(0);
+  await page.keyboard.press("Tab");
+  await expect(reviewOptions.first()).toBeFocused();
+  for (let step = 0; step < correctIndex; step += 1) {
+    await page.keyboard.press("ArrowRight");
+  }
+  await expect(reviewOptions.nth(correctIndex)).toBeFocused();
+  await page.keyboard.press("Enter");
+
+  const reviewContinuation = page.locator("#next-question");
+  await expect(reviewContinuation).toBeEnabled();
+  await expect(reviewContinuation).toBeFocused();
+  await assertNoHorizontalOverflow();
+  await page.keyboard.press("Enter");
+
+  const reviewSummary = page.getByRole("heading", { name: "Review kesalahan selesai" });
+  await expect(reviewSummary).toBeVisible();
+  await expect(reviewSummary).toBeFocused();
+  await assertNoHorizontalOverflow();
+
+  const persisted = await page.evaluate((itemId) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.items?.[itemId]?.lastResult;
+  }, reviewItem.id);
+  expect(persisted).toBe("correct");
+});
