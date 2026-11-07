@@ -864,7 +864,13 @@ test("320px touch daily practice opens the due item and schedules its next revie
 
   await page.goto("/progres/");
   await expect(page.getByRole("status")).toContainText("1 materi siap untuk latihan harian.");
-  await page.getByRole("link", { name: "Mulai latihan harian", exact: true }).tap();
+  await assertNoHorizontalOverflow();
+  const dailyPracticeLink = page.getByRole("link", { name: "Mulai latihan harian", exact: true });
+  await expect(dailyPracticeLink).toBeVisible();
+  const touchTarget = await dailyPracticeLink.boundingBox();
+  expect(touchTarget?.width).toBeGreaterThanOrEqual(44);
+  expect(touchTarget?.height).toBeGreaterThanOrEqual(44);
+  await dailyPracticeLink.tap();
   await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
   await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
   await expect(page.locator(".prompt-text")).toBeFocused();
