@@ -1,5 +1,15 @@
 # Resume handoff — 2026-11-07
 
+## Latest checkpoint — 2026-11-07 15:23 UTC / 2026-11-07 22:23 WIB (post-merge A3 touch lesson / PR #133)
+
+- PUBLIC code checkpoint is `721de4ea72def31794de5f1add7345196d6b5c43` / tree `876ea378e24282be51d6d5a6412b4708d67f200c`. [PR #133](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/133) adds a synthetic-only, 320px touch lesson run through recognition, typed recall, deliberate mistake review and summary, checking horizontal overflow at each transition. No runtime content or linguistic data changed.
+- Exact-head Verify [#42384762032](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42384762032) and post-merge main Verify [#42385338254](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42385338254) passed 232 unit tests and 69 Playwright tests (0 skipped), smoke, synthetic isolation, performance budget and committed-dist drift. All 12 Lighthouse profiles passed accessibility at 100; mobile performance was 96–99 and desktop 100.
+- Cloudflare Workers Builds technical production build `0a1dea42-26d5-47c0-a1ae-5dd53c57cffd` succeeded. Post-merge verified site artifact [#13579079405](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42385338254/artifacts/13579079405) is 121,155 bytes (SHA-256 `2f1c927d8a5abd54b2be8d2bf487bf7612480bef16029a494a474000cd901f62`); Lighthouse reports are [#13579431398](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42385338254/artifacts/13579431398). This verifies the provider build and CI artifact; direct served-root and critical-route readback remains NOT_VERIFIED, so keep A5 `blocked_external`.
+- Published learning data remains empty/noindex (0 items, words, genuine phrases or sentences). The synthetic fixture is intercepted inside Playwright and absent from `dist`; no private engine records or restricted source content were transferred.
+- Readiness: ENGINEERING_READY = YES for the verified desktop/mobile synthetic flows; DATA_READY = NO; PUBLICATION_READY = NO; LEARNING_READY = NO; MONETIZATION_READY = DEFERRED.
+- Next: add a synthetic 320px touch check for the due-first daily-practice link and its first answer/scheduling; retain the existing 375px touch flashcard-review coverage. Continue PWA/privacy/performance work independently and keep live production readback unverified until a supported client can inspect the served routes.
+
+
 ## Latest checkpoint — 2026-11-07 14:44 UTC / 2026-11-07 21:44 WIB (post-merge A3 / PR #131)
 
 - PUBLIC `main` is `dd9ba13f8c95b55eaa4ac62df05a02ef47c82182` / tree `1662e2f4502351d513b12001de0dad634cfe91a9`. [PR #131](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/131) adds a synthetic 320px sentence-mode browser regression covering touch and keyboard input, focus transitions, horizontal overflow, mistake review and saved progress. The same work fixes wrapping of long feedback text on narrow screens. No learning data was added.
