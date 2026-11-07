@@ -341,6 +341,74 @@ test("mobile due flashcard review removes mastered cards and keeps focus on prog
   }
 });
 
+test("320px touch due flashcard review remains within the viewport", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 720 });
+  const dueItems = SYNTHETIC_WEBGAME_ITEMS.slice(0, 2);
+  await page.addInitScript(({ itemIds }) => {
+    const yesterday = Date.now() - 24 * 60 * 60 * 1000;
+    const items = Object.fromEntries(itemIds.map((itemId) => [itemId, {
+      seen: 1,
+      correctCount: 0,
+      incorrectCount: 1,
+      consecutiveCorrect: 0,
+      lastResult: "incorrect",
+      lastReviewedAt: yesterday,
+      nextReviewAt: yesterday,
+      reviewStage: 0,
+      bucket: "review",
+      saved: false,
+      difficult: false,
+    }]));
+    localStorage.setItem("batakTobaPlay.progress.v2", JSON.stringify({
+      schemaVersion: 3,
+      answered: 2,
+      correct: 0,
+      lastMode: "flashcards",
+      items,
+      sessions: [],
+    }));
+  }, { itemIds: dueItems.map((item) => item.id) });
+
+  await page.goto("/flashcards/");
+  const expectNoHorizontalOverflow = async () => {
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  };
+  await page.locator("#fc-filter").selectOption("due");
+  await expectNoHorizontalOverflow();
+  const card = page.locator("#flashcard");
+  await expect(card).toContainText(dueItems[0].batak);
+  await expect(page.locator("#flashcard-card .pill").first()).toHaveText("1/2");
+  await expectNoHorizontalOverflow();
+
+  await card.tap();
+  await expect(page.locator("#flashcard")).toContainText(dueItems[0].indonesia);
+  await expectNoHorizontalOverflow();
+  await page.getByRole("button", { name: "3 Benar", exact: true }).tap();
+  await expect(page.locator("#flashcard")).toContainText(dueItems[1].batak);
+  await expect(page.locator("#flashcard")).toBeFocused();
+  await expect(page.locator("#flashcard-toolbar")).toContainText("1 kartu");
+  await expectNoHorizontalOverflow();
+
+  await page.locator("#flashcard").tap();
+  await page.getByRole("button", { name: "3 Benar", exact: true }).tap();
+  const emptyState = page.locator("#flashcard-card [role='status']");
+  await expect(emptyState).toContainText("Tidak ada kartu untuk filter ini");
+  await expect(emptyState).toBeFocused();
+  await expect(page.locator("#flashcard-toolbar")).toContainText("0 kartu");
+  await expectNoHorizontalOverflow();
+
+  const scheduledItems = await page.evaluate((itemIds) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return itemIds.map((itemId) => progress.items?.[itemId]);
+  }, dueItems.map((item) => item.id));
+  expect(scheduledItems).toHaveLength(2);
+  for (const stats of scheduledItems) {
+    expect(stats?.reviewStage).toBe(1);
+    expect(stats?.nextReviewAt).toBeGreaterThan(Date.now());
+  }
+});
+
 test("keyboard due review advances through wrong, difficult and correct ratings", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   const dueItems = SYNTHETIC_WEBGAME_ITEMS.slice(0, 3);
