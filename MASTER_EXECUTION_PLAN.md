@@ -1,5 +1,14 @@
 # Master execution plan
 
+## Latest checkpoint — 2026-11-07 16:02 UTC / 2026-11-07 23:02 WIB (post-merge A3 daily practice / PR #135)
+
+- PUBLIC code checkpoint is `90feca5faec5b9f835bacf7b91e94dc3a5199be0` / tree `aea2277e0063534e722a33244aea2fdbd61670cb`. [PR #135](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/135) merged a synthetic-only 320px touch check for the due-first daily-practice route; it verifies the due item, answer scheduling and horizontal overflow.
+- Exact-head Verify [#42387816938](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42387816938) and post-merge main Verify [#42388361535](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42388361535) passed 232 unit tests and 70 Playwright tests (0 skipped), smoke, synthetic isolation, governance, performance budget and committed-dist drift. All 12 Lighthouse profiles passed accessibility at 100; mobile performance was 97–99 and desktop 100.
+- Cloudflare Workers Builds main build `234f407e-dfc2-4022-afd6-f1f4c23483b4` succeeded. Main CI artifact [#13580302421](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42388361535/artifacts/13580302421) is 121,155 bytes (SHA-256 `5dd81633e1247b4772aeef0f0d6d9d1696b14c51f9cbec933b36ee2b03fe0aa4`); Lighthouse reports are [#13579619441](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42388361535/artifacts/13579619441). Provider build is verified; direct live root and key-route readback remains NOT_VERIFIED.
+- Published learning data remains empty/noindex (0 items, words, genuine phrases or sentences). Synthetic fixtures remain Playwright-only and absent from `dist`; no private-engine or restricted source content was transferred.
+- Readiness: ENGINEERING_READY = YES for tested browser flows; DATA_READY = NO; PUBLICATION_READY = NO; LEARNING_READY = NO; MONETIZATION_READY = DEFERRED.
+- Next A3 action: assert the 320px progress route has no horizontal overflow before navigation and the due-first touch link meets the 44px target; continue independent PWA, privacy, accessibility and performance work. A5 remains `blocked_external` until direct live route readback is possible.
+
 ## Latest checkpoint — 2026-11-07 15:23 UTC / 2026-11-07 22:23 WIB (post-merge A3 touch lesson / PR #133)
 
 - PUBLIC code checkpoint is `721de4ea72def31794de5f1add7345196d6b5c43` / tree `876ea378e24282be51d6d5a6412b4708d67f200c`. [PR #133](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/133) adds a synthetic-only, 320px touch lesson run through recognition, typed recall, deliberate mistake review and summary, checking horizontal overflow at each transition. No runtime content or linguistic data changed.
