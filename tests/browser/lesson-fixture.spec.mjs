@@ -121,3 +121,65 @@ test.describe("published lesson flow with isolated synthetic fixture", () => {
     expect(words.items).toHaveLength(0);
   });
 });
+
+test("320px touch lesson completes through mistake review and summary", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto("/learn/angka/");
+
+  const start = page.getByRole("button", { name: "Mulai belajar", exact: true });
+  await expect(start).toBeVisible();
+  await start.tap();
+  await expect(page.locator(".prompt-text")).toBeFocused();
+
+  const assertNoHorizontalOverflow = async () => {
+    const dimensions = await page.evaluate(() => ({
+      viewport: window.innerWidth,
+      document: document.documentElement.scrollWidth,
+    }));
+    expect(dimensions.document, `horizontal overflow at ${dimensions.viewport}px`).toBeLessThanOrEqual(dimensions.viewport);
+  };
+  await assertNoHorizontalOverflow();
+
+  for (let index = 0; index < SYNTHETIC_WEBGAME_ITEMS.length; index += 1) {
+    const prompt = (await page.locator(".prompt-text").textContent())?.trim();
+    const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
+    expect(item, `synthetic lesson prompt ${prompt}`).toBeTruthy();
+
+    const options = page.locator(".option");
+    const labels = (await options.allTextContents()).map((label) => label.trim());
+    const answer = index === 0
+      ? labels.find((label) => label !== item.indonesia)
+      : item.indonesia;
+    expect(answer, "touch target must be a visible option").toBeTruthy();
+    await page.getByRole("button", { name: answer, exact: true }).tap();
+
+    const continuation = page.getByRole("button", { name: "Lanjut", exact: true });
+    await expect(continuation).toBeEnabled();
+    await expect(continuation).toBeFocused();
+    await continuation.tap();
+    await assertNoHorizontalOverflow();
+  }
+
+  for (const item of SYNTHETIC_WEBGAME_ITEMS) {
+    const input = page.locator(".typed-answer-input");
+    await expect(input).toBeVisible();
+    await input.tap();
+    await input.fill(item.indonesia);
+    await page.getByRole("button", { name: "Periksa", exact: true }).tap();
+    await expect(page.locator(".feedback").first()).toContainText("Benar");
+
+    const continuation = page.getByRole("button", { name: "Lanjut", exact: true });
+    await expect(continuation).toBeFocused();
+    await continuation.tap();
+    await assertNoHorizontalOverflow();
+  }
+
+  await expect(page.getByText("Review kesalahan")).toBeVisible();
+  await expect(page.locator(".vocab-row")).toHaveCount(1);
+  await assertNoHorizontalOverflow();
+  await page.getByRole("button", { name: "Lanjut ke ringkasan", exact: true }).tap();
+  await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeFocused();
+  await assertNoHorizontalOverflow();
+});
