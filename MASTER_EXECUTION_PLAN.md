@@ -1,5 +1,14 @@
 # Master execution plan
 
+## Latest checkpoint — 2026-11-07 17:01 UTC / 2026-11-08 00:01 WIB (post-merge A3 320px flashcard review / PR #138)
+
+- PUBLIC main is `5ac2f4ab151773f654f6a1c76aaaa6d269a83c67` / tree `9b9d7092a905a0f7a7f9d6bc425fa67e58c1d501`. [PR #138](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/138) adds a synthetic-only 320px touch flow for due flashcards, checks horizontal overflow across flipping, rating and the final empty state, and verifies spaced-repetition scheduling.
+- Exact-head Verify [#42392468903](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42392468903) and post-merge main Verify [#42393448090](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42393448090) passed 232 unit tests and 71 Playwright tests (0 skipped), smoke, synthetic isolation, governance, performance budget, committed-dist drift and all 12 Lighthouse profiles. Accessibility scored 100 throughout; mobile performance was 97–100 and desktop 100.
+- Cloudflare Workers Builds production build `84c7b04a-85b9-4339-bd92-8a50cbc2cf52` succeeded (version `72ccea67-68be-4aea-a9ad-87bbd14a1eb0`). Verified CI site artifact [#13583095164](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42393448090/artifacts/13583095164) is 121,155 bytes (SHA-256 `42e2f57921be583e228a76ef961b5fee8aa366b45881827456267c219a7c0530`); Lighthouse reports are [#13583055245](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42393448090/artifacts/13583055245). This confirms build and artifact success; direct live root and key-route readback remains NOT_VERIFIED.
+- Published learning data remains empty/noindex (0 items, words, genuine phrases or sentences). Synthetic fixtures stay isolated to Playwright and absent from `dist`; no private-engine or restricted source content was transferred.
+- Readiness: ENGINEERING_READY = YES for tested browser flows; DATA_READY = NO; PUBLICATION_READY = NO; LEARNING_READY = NO; MONETIZATION_READY = DEFERRED.
+- Next A3 action: inspect the current service-worker cache path and add synthetic-only browser coverage for offline access to the game and flashcard shells. Keep the public catalog empty/noindex until licensed content clears all publication gates. A5 remains `blocked_external` until a supported client verifies the served routes.
+
 ## Latest checkpoint — 2026-11-07 16:02 UTC / 2026-11-07 23:02 WIB (post-merge A3 daily practice / PR #135)
 
 - PUBLIC code checkpoint is `90feca5faec5b9f835bacf7b91e94dc3a5199be0` / tree `aea2277e0063534e722a33244aea2fdbd61670cb`. [PR #135](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/135) merged a synthetic-only 320px touch check for the due-first daily-practice route; it verifies the due item, answer scheduling and horizontal overflow.
