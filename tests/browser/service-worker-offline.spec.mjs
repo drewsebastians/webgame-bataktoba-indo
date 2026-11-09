@@ -77,6 +77,10 @@ test("games route falls back offline before its first visit and restores the emp
   await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
 
   await context.setOffline(false);
+  await expect.poll(
+    () => page.evaluate(() => navigator.onLine),
+    { timeout: 5000, message: "browser did not return online before revisiting games" },
+  ).toBe(true);
   await page.goto("/games/");
   await expect(page.getByRole("heading", { name: "Mode latihan Bahasa Batak Toba - Indonesia" })).toBeVisible();
   const emptyState = page.locator("#game-panel .feedback");
