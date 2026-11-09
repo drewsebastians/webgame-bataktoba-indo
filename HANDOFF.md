@@ -1,5 +1,15 @@
 # Resume handoff — 2026-11-08
 
+## Latest checkpoint — 2026-11-09 01:13 UTC / 2026-11-09 08:13 WIB (post-merge `/games/` service-worker offline coverage / PR #140)
+
+- PUBLIC code checkpoint is `8b6b5908f2266b31ba4982337fc36d0d11922ac0` / tree `fc3a58ac2ce9260b70edccf6557db49ce87854f7`. [PR #139](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/139) corrected the next-action wording so fixture-bearing tests remain service-worker-blocked. [PR #140](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/140) adds real empty-catalog coverage for an uncached offline `/games/` fallback, the online empty state, and a cached offline revisit; it changes tests only.
+- Exact-head Verify [#42542560412](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42542560412) and post-merge Verify [#42543062558](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42543062558) passed 232 unit tests and 72 Playwright tests (0 skipped), site/governance checks, build, performance budget, smoke, synthetic-fixture isolation, committed-dist drift, and all 12 Lighthouse profiles. Accessibility was 100/100 throughout; mobile performance was 97–100 and desktop performance 100.
+- Cloudflare Workers Builds reports production build [`4d512e3a-bc68-4317-b207-df8530ac63de`](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/4d512e3a-bc68-4317-b207-df8530ac63de) successful (version `187517f0-8d2c-4943-808f-92a136f83e82`). Post-merge site artifact [#13642337074](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42543062558/artifacts/13642337074) is 121,155 bytes; Lighthouse reports are artifact [#13642576272](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42543062558/artifacts/13642576272).
+- Direct live root and critical-route readback remains **NOT_VERIFIED**. The web reader could not access the configured `pages.dev` host, local DNS resolution also failed, and the connected browser session was stopped by Escape; build and artifact success are not being reported as live-page verification.
+- Published learning data remains empty/noindex; checks confirm 0 published items and synthetic fixtures absent from the public build. Readiness: ENGINEERING_READY = YES; DATA_READY = NO; PUBLICATION_READY = NO; LEARNING_READY = NO; MONETIZATION_READY = DEFERRED.
+- Next: continue responsive browser, PWA/offline, accessibility, privacy, and security work. A5 remains `blocked_external` until a supported route can read back the deployed root and key pages; keep fixture-bearing tests service-worker-blocked.
+
+
 ## Latest checkpoint — 2026-11-07 17:01 UTC / 2026-11-08 00:01 WIB (post-merge A3 320px flashcard review / PR #138)
 
 - PUBLIC main is `5ac2f4ab151773f654f6a1c76aaaa6d269a83c67` / tree `9b9d7092a905a0f7a7f9d6bc425fa67e58c1d501`. [PR #138](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/138) adds a synthetic-only 320px touch flow for due flashcards, checks horizontal overflow across flipping, rating and the final empty state, and verifies spaced-repetition scheduling.
