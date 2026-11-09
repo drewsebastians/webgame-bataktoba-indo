@@ -60,3 +60,44 @@ test("offline status is announced accessibly on every browser app route", async 
     await expect(offlineStatus).toHaveCount(0);
   }
 });
+
+test("games route falls back offline before its first visit and restores the empty catalog after caching", async ({ page, context }) => {
+  await page.goto("/");
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+  });
+  await expect.poll(
+    () => page.evaluate(() => Boolean(navigator.serviceWorker.controller)),
+    { timeout: 15000, message: "service worker did not take control of the browser page" },
+  ).toBe(true);
+
+  // The games route has not been visited or cached yet.
+  await context.setOffline(true);
+  await page.goto("/games/", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
+
+  await context.setOffline(false);
+  await page.goto("/games/");
+  await expect(page.getByRole("heading", { name: "Mode latihan Bahasa Batak Toba - Indonesia" })).toBeVisible();
+  const emptyState = page.locator("#game-panel .feedback");
+  await expect(emptyState).toHaveText("Data soal belum tersedia untuk mode ini. Coba mode lain.");
+  await expect(page.locator("#game-panel .prompt-text")).toHaveCount(0);
+  await expect(page.locator("#game-panel [data-answer]")).toHaveCount(0);
+  await expect.poll(
+    () => page.evaluate(async () => {
+      const shellName = (await caches.keys()).find((name) => name.startsWith("btp-") && name.endsWith("-shell"));
+      if (!shellName) return 0;
+      const cache = await caches.open(shellName);
+      return (await cache.match(new URL("/games/", location.origin)))?.status ?? 0;
+    }),
+    { timeout: 15000, message: "the visited games route was not saved to the shell cache" },
+  ).toBe(200);
+
+  await context.setOffline(true);
+  await page.goto("/games/");
+  await expect(page.getByRole("heading", { name: "Mode latihan Bahasa Batak Toba - Indonesia" })).toBeVisible();
+  await expect(emptyState).toHaveText("Data soal belum tersedia untuk mode ini. Coba mode lain.");
+  await expect(page.locator("#game-panel .prompt-text")).toHaveCount(0);
+  await expect(page.locator("#game-panel [data-answer]")).toHaveCount(0);
+  await context.setOffline(false);
+});
