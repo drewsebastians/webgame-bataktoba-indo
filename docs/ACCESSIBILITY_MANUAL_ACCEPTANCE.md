@@ -18,7 +18,7 @@
 - [ ] Responsive tables `vocab-table` stack at 820px
 - [ ] Forms/errors: import file too large, invalid JSON messages announced via `role=status`
 
-**Automated via Playwright:** `core.spec` covers keyboard, skip, axe, non-color, touch, reduced-motion, mobile nav. Manual items above must be ticked per release and filed in `test-results/`.
+**Automated via Playwright:** `core.spec` covers keyboard, skip, axe, non-color, touch, reduced-motion and navigation checks. The A3 `responsive-layout.spec.mjs` regression checks eight primary routes at 640 CSS px (the reflow width a 1280 CSS px viewport presents at 200% zoom), including horizontal overflow and mobile navigation. This is a narrow-layout regression; it does not replace actual browser-zoom or assistive-technology acceptance. Manual items above must be ticked per release and filed in `test-results/`.
 
 *Not claimed as performed this release unless ticked.*
 
