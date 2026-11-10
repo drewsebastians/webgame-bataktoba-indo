@@ -1,3 +1,13 @@
+## Latest checkpoint — 2026-11-10 05:48 UTC / 12:48 WIB (PR #156 merged and post-main Verify passed)
+
+- PUBLIC main: 79c9283b7bec42f1c986143de0faf87e9e94bb7d / tree ba9ec9bd51bb5f2e0afac9b66a59d90ad991c189. PR [#155](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/155) added synthetic Axe scans after quiz wrong-answer feedback, quiz summary and mistake-review summary. PR [#156](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/156) added Axe scans for the Memory game board and keyboard-selected card, with focus/pressed-state assertions.
+- Exact-head Verify #42759824285 and post-main Verify #42760997193 passed for PR #155. Exact-head Verify [#42762034672](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42762034672) and post-main Verify [#42763579131](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42763579131) passed for PR #156. The latest browser suite has 75 passed and 0 skipped; unit, build, smoke, governance, fixture-isolation, dist-drift and release checks passed.
+- All 12 Lighthouse profiles passed: accessibility 100/100 throughout, mobile performance 97–100/100, desktop performance 100/100. Verified main artifact [#13739355819](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42763579131/artifacts/13739355819) is 121,155 bytes.
+- Site and governance checks report 0 published items, words, genuine phrases and sentences. Synthetic fixtures are absent from public output. The catalog remains empty/noindex and no private Engine content has moved to this repository.
+- Main production deployment and live root/manifest/critical-route readback remain NOT_VERIFIED; A5 stays blocked_external. A CI artifact is not live deployment proof.
+- Readiness: ENGINEERING_READY=YES for the checked browser flows; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Historical Git objects remain unchanged; no history rewrite or PROGRESS_LOG edit.
+- Next: continue A3 across remaining game states and responsive keyboard/touch, offline, privacy and security work. Keep production data empty/noindex until separate publication gates pass.
+
 ## Latest checkpoint — 2026-11-10 04:49 UTC / 11:49 WIB (A3 lesson feedback/review accessibility merged and verified)
 
 - PUBLIC Webgame main is bb6037fdd8d417f93f3532ae4ac81921e6735ee8 / tree 162ce5660496a2abc995276c0e252a5c0c3d8f59. PR [#153](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/153) adds serious/critical Axe scans after synthetic wrong/correct lesson feedback, during mistake review, and at lesson summary.
