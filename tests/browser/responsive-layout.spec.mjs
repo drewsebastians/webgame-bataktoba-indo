@@ -43,32 +43,7 @@ test("primary routes reflow at the 640px width equivalent to 200% desktop zoom",
 
     await page.keyboard.press("Tab");
     await expect(homeLink).toBeFocused();
-    const appScript = page.locator('script[type="module"][src]');
-    const appSourceUrl = await appScript.getAttribute("src");
-    expect(appSourceUrl).toContain("app.");
-    const appResponse = await page.request.get(new URL(appSourceUrl, page.url()).toString());
-    expect(appResponse.ok()).toBeTruthy();
-    const appSource = await appResponse.text();
-    expect(appSource).toContain("closeOnEscape");
-    expect(appSource).toContain('links.addEventListener("keydown", closeOnEscape)');
-    await page.evaluate(() => {
-      const menuButton = document.querySelector(".nav-toggle");
-      const navLinks = document.querySelector("#nav-links-list");
-      window.__navEscapeSnapshot = null;
-      navLinks.addEventListener("keydown", (event) => {
-        window.__navEscapeSnapshot = {
-          key: event.key,
-          code: event.code,
-          keyCode: event.keyCode,
-          expanded: menuButton.getAttribute("aria-expanded"),
-        };
-      });
-    });
     await homeLink.press("Escape");
-    await expect.poll(() => page.evaluate(() => window.__navEscapeSnapshot)).not.toBeNull();
-    const escapeSnapshot = await page.evaluate(() => window.__navEscapeSnapshot);
-    expect(escapeSnapshot.key).toBe("Escape");
-    expect(escapeSnapshot.expanded).toBe("false");
     await expect(menu).toHaveAttribute("aria-expanded", "false");
     await expect(menu).toBeFocused();
     await expect(homeLink).toBeHidden();

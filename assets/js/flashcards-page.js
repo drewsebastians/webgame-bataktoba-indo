@@ -29,10 +29,19 @@ function initNavToggle() {
   const toggle = flashcardQuery(".nav-toggle");
   const links = flashcardQuery("#nav-links-list");
   if (!toggle || !links) return;
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("nav-open");
+  const setOpen = (open) => {
+    links.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
-  });
+  };
+  toggle.addEventListener("click", () => setOpen(!links.classList.contains("nav-open")));
+  const closeOnEscape = (event) => {
+    if (event.key !== "Escape" || toggle.getAttribute("aria-expanded") !== "true") return;
+    event.preventDefault();
+    setOpen(false);
+    toggle.focus();
+  };
+  toggle.addEventListener("keydown", closeOnEscape);
+  links.addEventListener("keydown", closeOnEscape);
 }
 
 function setActiveNav() {
