@@ -100,12 +100,15 @@ function initNavToggle() {
     setOpen(!links.classList.contains("nav-open"));
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || toggle.getAttribute("aria-expanded") !== "true") return;
+  const closeOnEscape = (event) => {
+    const isEscape = event.key === "Escape" || event.code === "Escape" || event.keyCode === 27;
+    if (!isEscape || toggle.getAttribute("aria-expanded") !== "true") return;
     event.preventDefault();
     setOpen(false);
     toggle.focus();
-  }, true);
+  };
+  toggle.addEventListener("keydown", closeOnEscape);
+  links.addEventListener("keydown", closeOnEscape);
 }
 
 function setActiveNav() {

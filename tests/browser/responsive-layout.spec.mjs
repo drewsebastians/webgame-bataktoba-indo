@@ -43,7 +43,7 @@ test("primary routes reflow at the 640px width equivalent to 200% desktop zoom",
 
     await page.keyboard.press("Tab");
     await expect(homeLink).toBeFocused();
-    await page.keyboard.press("Escape");
+    await homeLink.press("Escape");
     await expect(menu).toHaveAttribute("aria-expanded", "false");
     await expect(menu).toBeFocused();
     await expect(homeLink).toBeHidden();
