@@ -889,38 +889,45 @@ test("sentence quiz supports touch and keyboard at 320px with focus, review and 
   expect(persisted).toBe("correct");
 });
 
-test("320px touch daily practice opens the due item and schedules its next review", async ({ page }) => {
+test("320px touch daily practice keeps focus across multiple due reviews", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 320, height: 720 });
-  const dueItem = SYNTHETIC_WEBGAME_ITEMS[2];
-  await page.addInitScript(({ itemId }) => {
-    const yesterday = Date.now() - 24 * 60 * 60 * 1000;
-    localStorage.setItem(
-      "batakTobaPlay.progress.v2",
-      JSON.stringify({
-        schemaVersion: 3,
-        answered: 1,
-        correct: 0,
-        lastMode: "meaning",
-        items: {
-          [itemId]: {
+  const dueItems = [SYNTHETIC_WEBGAME_ITEMS[2], SYNTHETIC_WEBGAME_ITEMS[3]];
+  await page.addInitScript(({ itemIds }) => {
+    const now = Date.now();
+    const items = Object.fromEntries(
+      itemIds.map((itemId, index) => {
+        const dueAt = now - (index + 1) * 24 * 60 * 60 * 1000;
+        return [
+          itemId,
+          {
             seen: 1,
             correctCount: 0,
             incorrectCount: 1,
             consecutiveCorrect: 0,
             lastResult: "incorrect",
-            lastReviewedAt: yesterday,
-            nextReviewAt: yesterday,
+            lastReviewedAt: dueAt,
+            nextReviewAt: dueAt,
             reviewStage: 0,
             bucket: "review",
             saved: false,
             difficult: false,
           },
-        },
+        ];
+      }),
+    );
+    localStorage.setItem(
+      "batakTobaPlay.progress.v2",
+      JSON.stringify({
+        schemaVersion: 3,
+        answered: itemIds.length,
+        correct: 0,
+        lastMode: "meaning",
+        items,
         sessions: [],
       }),
     );
-  }, { itemId: dueItem.id });
+  }, { itemIds: dueItems.map((item) => item.id) });
 
   const assertNoHorizontalOverflow = async () => {
     const dimensions = await page.evaluate(() => ({
@@ -931,7 +938,7 @@ test("320px touch daily practice opens the due item and schedules its next revie
   };
 
   await page.goto("/progres/");
-  await expect(page.getByRole("status")).toContainText("1 materi siap untuk latihan harian.");
+  await expect(page.getByRole("status")).toContainText("2 materi siap untuk latihan harian.");
   await assertNoHorizontalOverflow();
   const dailyPracticeLink = page.getByRole("link", { name: "Mulai latihan harian", exact: true });
   await expect(dailyPracticeLink).toBeVisible();
@@ -940,22 +947,42 @@ test("320px touch daily practice opens the due item and schedules its next revie
   expect(touchTarget?.height).toBeGreaterThanOrEqual(44);
   await dailyPracticeLink.tap();
   await page.waitForURL((url) => url.pathname === "/games/" && !url.searchParams.has("practice"));
-  await expect(page.locator(".prompt-text")).toHaveText(dueItem.batak);
-  await expect(page.locator(".prompt-text")).toBeFocused();
+
+  const prompt = page.locator(".prompt-text");
+  const firstPrompt = await prompt.textContent();
+  const firstItem = dueItems.find((item) => item.batak === firstPrompt);
+  expect(firstItem).toBeDefined();
+  const secondItem = dueItems.find((item) => item.id !== firstItem.id);
+  expect(secondItem).toBeDefined();
+  await expect(prompt).toBeFocused();
   await assertNoHorizontalOverflow();
 
-  await page.getByRole("button", { name: dueItem.indonesia, exact: true }).tap();
+  await page.getByRole("button", { name: firstItem.indonesia, exact: true }).tap();
   const continuation = page.locator("#next-question");
   await expect(continuation).toBeEnabled();
   await expect(continuation).toBeFocused();
-  const scheduled = await page.evaluate((itemId) => {
+  const firstScheduled = await page.evaluate((itemId) => {
     const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
     return progress.items?.[itemId];
-  }, dueItem.id);
-  expect(scheduled?.lastResult).toBe("correct");
-  expect(scheduled?.reviewStage).toBeGreaterThan(0);
-  expect(scheduled?.nextReviewAt).toBeGreaterThan(Date.now());
+  }, firstItem.id);
+  expect(firstScheduled?.lastResult).toBe("correct");
+  expect(firstScheduled?.reviewStage).toBeGreaterThan(0);
+  expect(firstScheduled?.nextReviewAt).toBeGreaterThan(Date.now());
 
+  await continuation.tap();
+  await expect(prompt).toHaveText(secondItem.batak);
+  await expect(prompt).toBeFocused();
+  await assertNoHorizontalOverflow();
+
+  await page.getByRole("button", { name: secondItem.indonesia, exact: true }).tap();
+  await expect(continuation).toBeEnabled();
+  await expect(continuation).toBeFocused();
+  const secondScheduled = await page.evaluate((itemId) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.items?.[itemId];
+  }, secondItem.id);
+  expect(secondScheduled?.lastResult).toBe("correct");
+  expect(secondScheduled?.reviewStage).toBeGreaterThan(0);
   await continuation.tap();
   await assertNoHorizontalOverflow();
 });
