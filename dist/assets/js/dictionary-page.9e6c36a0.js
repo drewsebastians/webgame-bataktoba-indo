@@ -1,5 +1,6 @@
 // Focused dictionary entrypoint keeps game and lesson engines off this route.
 import { loadLearningItems, loadTopics } from "./data.a34bfabb.js";
+import { initMobileNav } from "./utils/nav-toggle.80f3042e.js";
 import { SITE_CONFIG } from "./config.6316db9b.js";
 import { getBucketIds, getProgress, initProgress, saveProgress, setSaved } from "./progress.4b6d4b51.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
@@ -23,13 +24,7 @@ function formatQuality(item) {
 }
 
 function initNavToggle() {
-  const toggle = dictionaryQuery(".nav-toggle");
-  const links = dictionaryQuery("#nav-links-list");
-  if (!toggle || !links) return;
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("nav-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
+  initMobileNav();
 }
 
 function setActiveNav() {
