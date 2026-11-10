@@ -43,6 +43,14 @@ test("primary routes reflow at the 640px width equivalent to 200% desktop zoom",
 
     await page.keyboard.press("Tab");
     await expect(homeLink).toBeFocused();
+    const appScript = page.locator('script[type="module"][src]');
+    const appSourceUrl = await appScript.getAttribute("src");
+    expect(appSourceUrl).toContain("app.");
+    const appResponse = await page.request.get(new URL(appSourceUrl, page.url()).toString());
+    expect(appResponse.ok()).toBeTruthy();
+    const appSource = await appResponse.text();
+    expect(appSource).toContain("closeOnEscape");
+    expect(appSource).toContain('links.addEventListener("keydown", closeOnEscape)');
     await page.evaluate(() => {
       const menuButton = document.querySelector(".nav-toggle");
       const navLinks = document.querySelector("#nav-links-list");
