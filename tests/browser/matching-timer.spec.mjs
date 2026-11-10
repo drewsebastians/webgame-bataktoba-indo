@@ -1,5 +1,13 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 import { installSyntheticContentRoutes } from "./helpers/synthetic-content.mjs";
+async function expectNoSeriousAccessibilityViolations(page) {
+  const scan = await new AxeBuilder({ page }).analyze();
+  const serious = scan.violations.filter(
+    (violation) => violation.impact === "serious" || violation.impact === "critical",
+  );
+  expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
+}
 
 
 test.describe.configure({ mode: "serial" });
@@ -83,5 +91,18 @@ test.describe("Matching Pairs timer (optional)", () => {
     await cards.nth(0).click();
     await cards.nth(1).click();
     await expect(page.locator(".feedback").first()).not.toBeEmpty();
+  });
+  test("memory-card selection keeps keyboard state accessible", async ({ page }) => {
+    await page.getByRole("button", { name: /^Memory/ }).click();
+    const cards = page.locator(".match-card");
+    await expect(cards).toHaveCount(12);
+    await expectNoSeriousAccessibilityViolations(page);
+
+    const firstCard = cards.first();
+    await firstCard.focus();
+    await page.keyboard.press("Enter");
+    await expect(firstCard).toHaveAttribute("aria-pressed", "true");
+    await expect(firstCard).toBeFocused();
+    await expectNoSeriousAccessibilityViolations(page);
   });
 });
