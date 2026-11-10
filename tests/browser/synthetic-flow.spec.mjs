@@ -997,6 +997,7 @@ test("320px daily practice supports touch and keyboard across multiple due revie
   expect(secondScheduled?.reviewStage).toBeGreaterThan(0);
   expect(secondScheduled?.nextReviewAt).toBeGreaterThan(Date.now());
   await page.keyboard.press("Enter");
-  await expect(page.locator("#session-summary-heading")).toBeFocused();
+  await expect(prompt).not.toHaveText(secondItem.batak);
+  await expect(prompt).toBeFocused();
   await assertNoHorizontalOverflow();
 });
