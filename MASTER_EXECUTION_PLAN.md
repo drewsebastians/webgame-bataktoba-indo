@@ -1,3 +1,15 @@
+## Latest checkpoint — 2026-11-10 08:39:28 UTC / 2026-11-10 15:39 WIB (PR #165 merged; first-visit core-route offline accessibility)
+
+- PUBLIC main: b173698833b0ded49108a99b0120914c4ca3d677 / tree 44d249b022db146706a1c355be4299eb230fd6c8. PR #165 adds first-visit offline fallback coverage and serious/critical Axe scans for /flashcards/, /progres/, /learn/sapaan/, and /learn/keluarga/.
+- Exact-head Verify #42779964755 and post-main Verify #42782076001 passed 232 unit tests and 77 Playwright browser tests, with 0 failures/skips. Site governance, fixture isolation, build, smoke, committed-dist drift and performance budgets passed; the site check found 0 published learning items, words, phrases or sentences and 0 warnings.
+- All 12 Lighthouse profiles passed: accessibility 100/100 throughout, mobile performance 97–100/100 and desktop performance 100/100. Main artifact #13745298538 is 121,155 bytes; Lighthouse reports #13745533655 are 1,304,129 bytes.
+- Cloudflare Workers Builds succeeded for main (build 99d7fdb7-3d62-4408-81a7-8d37a039285b). This confirms provider build status only. Direct live root, manifest, robots and critical-route readback remains NOT_VERIFIED; A5 stays blocked_external.
+- Production learning data remains empty/noindex and synthetic fixtures are absent from the public artifact. No private Engine content was transferred. Historical Git objects remain unchanged; no history rewrite or PROGRESS_LOG.md edit.
+- Readiness: ENGINEERING_READY=YES for the tested browser/offline flows; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 across remaining keyboard/touch, responsive, privacy/security and PWA states with isolated fixtures. Keep A5 blocked until a supported live readback can verify the served pages.
+
+---
+
 ## Latest checkpoint — 2026-11-10 07:48 UTC / 14:48 WIB (A3 first-visit lesson offline accessibility merged; post-main checks passed)
 
 - PUBLIC main: `53809ffc97013924dd2977dacccd4d78b594ed33` / tree `4a6de6b6452b7a37f409c53f66913db39a72d970`. PR [#163](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/163) adds a real-service-worker browser check and serious/critical Axe scan for the first-visit offline fallback on `/learn/angka/`, complementing the dictionary and games fallback scans.
