@@ -1,3 +1,15 @@
+## Latest checkpoint — 2026-11-10 10:31:34 UTC / 2026-11-10 17:31 WIB (PR #167 merged; keyboard-accessible mobile navigation)
+
+- PUBLIC main: `8e7621ba187228c4da3bd5182315b279c4ec5ff0` / tree `0af84b5cd6b180d8fc857f417e99f0f94a7cc1b5`. PR [#167](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/167) adds shared Escape-to-close navigation handling for the main, dictionary, flashcards and progress entrypoints; aria-expanded stays synchronized and focus returns to the menu toggle. The responsive browser test exercises this keyboard flow on all eight primary routes.
+- Exact PR Verify [#42797899806](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42797899806) and post-main Verify [#42798608420](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42798608420) passed: 232/232 unit tests, 77/77 Playwright tests (0 skipped), E2E smoke, performance budget, fixture-isolation/publication checks and committed-dist drift.
+- All 12 Lighthouse route/profile checks passed. Accessibility was 100 throughout; mobile performance was 97–100 and desktop 100. The verified post-main dist artifact [#13754854136](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42798608420/artifacts/13754854136) is 121,457 bytes (SHA-256 `d5c1a74d587db23fe4ff1a297f4a671f0c9275bd3e42b2b9d8f62efdaa51d1c5`).
+- Cloudflare Workers Builds reports production build `5f74bbd9-49d7-43a9-bbc8-4278b4772e9c` successful for this main commit. This is provider technical success only: direct live-page readback remains NOT_VERIFIED; A5 stays blocked_external.
+- The site check found 0 published items/words/phrases/sentences and 0 warnings; test-fixture markers are absent from public dist. No private Engine data moved to the public repository. Readiness: ENGINEERING_READY=YES for this navigation/browser checkpoint; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- A3 remains active for further responsive, keyboard/touch, privacy/security and PWA work. A1/A9 remain approval-gated: historical corpus-derived Git objects stay untouched; no history rewrite or `PROGRESS_LOG.md` edit.
+- Next: continue A3 from the current main, preserve empty/noindex publication, and retry A5 only through a supported direct live-readback surface.
+
+---
+
 ## Latest checkpoint — 2026-11-10 08:39:28 UTC / 2026-11-10 15:39 WIB (PR #165 merged; first-visit core-route offline accessibility)
 
 - PUBLIC main: b173698833b0ded49108a99b0120914c4ca3d677 / tree 44d249b022db146706a1c355be4299eb230fd6c8. PR #165 adds first-visit offline fallback coverage and serious/critical Axe scans for /flashcards/, /progres/, /learn/sapaan/, and /learn/keluarga/.
