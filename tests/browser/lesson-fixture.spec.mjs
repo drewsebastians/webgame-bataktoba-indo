@@ -1,9 +1,18 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 import {
   installSyntheticContentRoutes,
   completeSyntheticLesson,
   SYNTHETIC_WEBGAME_ITEMS,
 } from "./helpers/synthetic-content.mjs";
+
+async function expectNoSeriousAccessibilityViolations(page) {
+  const scan = await new AxeBuilder({ page }).analyze();
+  const serious = scan.violations.filter(
+    (violation) => violation.impact === "serious" || violation.impact === "critical",
+  );
+  expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
+}
 
 test.describe("published lesson flow with isolated synthetic fixture", () => {
   test("production empty state stays honest without fixture data", async ({ page, request }) => {
@@ -20,6 +29,55 @@ test.describe("published lesson flow with isolated synthetic fixture", () => {
     await page.goto("/games/");
     await page.locator('.mode-button[data-mode="sentence"]').click();
     await expect(page.getByRole("alert")).toHaveText("Data soal belum tersedia untuk mode ini. Coba mode lain.");
+  });
+
+  test("synthetic lesson feedback, mistake review, and summary pass axe checks", async ({ page }) => {
+    await installSyntheticContentRoutes(page);
+    await page.goto("/learn/angka/");
+    await page.getByRole("button", { name: "Mulai belajar", exact: true }).click();
+
+    for (let index = 0; index < SYNTHETIC_WEBGAME_ITEMS.length; index += 1) {
+      const prompt = (await page.locator(".prompt-text").textContent())?.trim();
+      const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
+      expect(item, `synthetic lesson prompt ${prompt}`).toBeTruthy();
+
+      const labels = (await page.locator(".option").allTextContents()).map((label) => label.trim());
+      const answer = index === 0
+        ? labels.find((label) => label !== item.indonesia)
+        : item.indonesia;
+      expect(answer, "lesson answer must be a visible option").toBeTruthy();
+      await page.getByRole("button", { name: answer, exact: true }).click();
+      await expect(page.locator(".feedback").first()).not.toBeEmpty();
+      if (index === 0) await expectNoSeriousAccessibilityViolations(page);
+
+      const continuation = page.getByRole("button", { name: "Lanjut", exact: true });
+      await expect(continuation).toBeEnabled();
+      await continuation.click();
+      if (index < SYNTHETIC_WEBGAME_ITEMS.length - 1) {
+        await expect(page.locator(".prompt-text")).toBeVisible();
+      } else {
+        await expect(page.locator(".typed-answer-input")).toBeVisible();
+      }
+    }
+
+    for (let index = 0; index < SYNTHETIC_WEBGAME_ITEMS.length; index += 1) {
+      const item = SYNTHETIC_WEBGAME_ITEMS[index];
+      await page.locator(".typed-answer-input").fill(item.indonesia);
+      await page.getByRole("button", { name: "Periksa", exact: true }).click();
+      await expect(page.locator(".feedback").first()).toContainText("Benar");
+      if (index === 0) await expectNoSeriousAccessibilityViolations(page);
+
+      const continuation = page.getByRole("button", { name: "Lanjut", exact: true });
+      await expect(continuation).toBeEnabled();
+      await continuation.click();
+    }
+
+    await expect(page.getByText("Review kesalahan")).toBeVisible();
+    await expectNoSeriousAccessibilityViolations(page);
+    await page.getByRole("button", { name: "Lanjut ke ringkasan", exact: true }).click();
+
+    await expect(page.getByRole("heading", { name: "Lesson selesai" })).toBeVisible();
+    await expectNoSeriousAccessibilityViolations(page);
   });
 
   test("synthetic mistake review focuses its continuation control", async ({ page }) => {
