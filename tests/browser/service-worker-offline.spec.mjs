@@ -134,3 +134,23 @@ test("uncached lesson route falls back offline accessibly", async ({ page, conte
   await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
   await expectNoSeriousAccessibilityViolations(page);
 });
+
+test("first-visit fallback stays accessible across remaining core routes", async ({ page, context }) => {
+  await page.goto("/");
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+  });
+  await expect.poll(
+    () => page.evaluate(() => Boolean(navigator.serviceWorker.controller)),
+    { timeout: 15000, message: "service worker did not take control of the browser page" },
+  ).toBe(true);
+
+  // A fresh browser context has only visited the root, not these app routes.
+  await context.setOffline(true);
+  for (const route of ["/flashcards/", "/progres/", "/learn/sapaan/", "/learn/keluarga/"]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
+    await expectNoSeriousAccessibilityViolations(page);
+  }
+  await context.setOffline(false);
+});
