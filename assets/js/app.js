@@ -90,9 +90,21 @@ function initNavToggle() {
   const toggle = $(".nav-toggle");
   const links = $("#nav-links-list");
   if (!toggle || !links) return;
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("nav-open");
+
+  const setOpen = (open) => {
+    links.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(!links.classList.contains("nav-open"));
+  });
+
+  toggle.closest(".nav")?.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !links.classList.contains("nav-open")) return;
+    event.preventDefault();
+    setOpen(false);
+    toggle.focus();
   });
 }
 
