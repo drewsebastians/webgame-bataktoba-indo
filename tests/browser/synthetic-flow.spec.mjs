@@ -889,7 +889,7 @@ test("sentence quiz supports touch and keyboard at 320px with focus, review and 
   expect(persisted).toBe("correct");
 });
 
-test("320px touch daily practice keeps focus across multiple due reviews", async ({ page }) => {
+test("320px daily practice supports touch and keyboard across multiple due reviews", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 320, height: 720 });
   const dueItems = [SYNTHETIC_WEBGAME_ITEMS[2], SYNTHETIC_WEBGAME_ITEMS[3]];
@@ -974,7 +974,19 @@ test("320px touch daily practice keeps focus across multiple due reviews", async
   await expect(prompt).toBeFocused();
   await assertNoHorizontalOverflow();
 
-  await page.getByRole("button", { name: secondItem.indonesia, exact: true }).tap();
+  const secondOptions = page.locator(".option");
+  await page.keyboard.press("Tab");
+  await expect(secondOptions.first()).toBeFocused();
+  const correctOptionIndex = await secondOptions.evaluateAll(
+    (options, answer) => options.findIndex((option) => option.textContent?.trim() === answer),
+    secondItem.indonesia,
+  );
+  expect(correctOptionIndex).toBeGreaterThanOrEqual(0);
+  for (let index = 0; index < correctOptionIndex; index += 1) {
+    await page.keyboard.press("Tab");
+  }
+  await expect(secondOptions.nth(correctOptionIndex)).toBeFocused();
+  await page.keyboard.press("Space");
   await expect(continuation).toBeEnabled();
   await expect(continuation).toBeFocused();
   const secondScheduled = await page.evaluate((itemId) => {
@@ -983,6 +995,9 @@ test("320px touch daily practice keeps focus across multiple due reviews", async
   }, secondItem.id);
   expect(secondScheduled?.lastResult).toBe("correct");
   expect(secondScheduled?.reviewStage).toBeGreaterThan(0);
-  await continuation.tap();
+  expect(secondScheduled?.nextReviewAt).toBeGreaterThan(Date.now());
+  await page.keyboard.press("Enter");
+  await expect(prompt).not.toHaveText(secondItem.batak);
+  await expect(prompt).toBeFocused();
   await assertNoHorizontalOverflow();
 });
