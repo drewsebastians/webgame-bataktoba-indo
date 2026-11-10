@@ -85,6 +85,7 @@ test("games route falls back offline before its first visit and restores the emp
   await context.setOffline(true);
   await page.goto("/games/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
 
   await context.setOffline(false);
   await expect.poll(
