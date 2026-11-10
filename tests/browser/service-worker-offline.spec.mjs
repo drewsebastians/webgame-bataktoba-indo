@@ -1,9 +1,18 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 
 // This file exercises the actual cache strategy with production's empty data.
 // Synthetic content routes stay in the other browser tests, where service workers
 // are blocked so fixtures cannot be persisted in a browser cache.
 test.use({ serviceWorkers: "allow" });
+
+async function expectNoSeriousAccessibilityViolations(page) {
+  const scan = await new AxeBuilder({ page }).analyze();
+  const serious = scan.violations.filter(
+    (violation) => violation.impact === "serious" || violation.impact === "critical",
+  );
+  expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
+}
 
 test("service worker restores a visited lesson offline and reconnects", async ({ page, context }) => {
   await page.goto("/");
@@ -33,6 +42,7 @@ test("service worker restores a visited lesson offline and reconnects", async ({
 
   await page.goto("/dictionary/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
 
   await context.setOffline(false);
   await page.goto("/dictionary/");
