@@ -116,3 +116,21 @@ test("games route falls back offline before its first visit and restores the emp
   await expect(page.locator("#game-panel [data-answer]")).toHaveCount(0);
   await context.setOffline(false);
 });
+
+
+test("uncached lesson route falls back offline accessibly", async ({ page, context }) => {
+  await page.goto("/");
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+  });
+  await expect.poll(
+    () => page.evaluate(() => Boolean(navigator.serviceWorker.controller)),
+    { timeout: 15000, message: "service worker did not take control of the browser page" },
+  ).toBe(true);
+
+  // A new test context has not visited or cached this topic route.
+  await context.setOffline(true);
+  await page.goto("/learn/angka/", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "Kamu sedang offline" })).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
+});
