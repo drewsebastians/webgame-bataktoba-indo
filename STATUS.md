@@ -1,3 +1,13 @@
+## Latest checkpoint — 2026-11-10 04:49 UTC / 11:49 WIB (A3 lesson feedback/review accessibility merged and verified)
+
+- PUBLIC Webgame main is bb6037fdd8d417f93f3532ae4ac81921e6735ee8 / tree 162ce5660496a2abc995276c0e252a5c0c3d8f59. PR [#153](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/153) adds serious/critical Axe scans after synthetic wrong/correct lesson feedback, during mistake review, and at lesson summary.
+- Exact-head Verify [#42756530178](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42756530178) and post-merge main Verify [#42757505048](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42757505048) passed 232 unit tests and 74 Playwright tests, 0 failures/skips. Smoke, governance, fixture isolation, dist drift and performance budgets passed.
+- All 12 Lighthouse profiles passed: accessibility 100 throughout; mobile performance 96–99; desktop performance 100. Verified public-site artifact [#13736890072](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42757505048/artifacts/13736890072) is 121,155 bytes (archive SHA-256 c53d4620d939bec9ffc6a7601867edd2431e9d0e217a1c68ec499adea766c08b).
+- Site and governance checks confirm 0 published learning items, words, genuine phrases or sentences; synthetic fixtures remain isolated. Published catalog remains empty/noindex and no Engine/private material was transferred.
+- Cloudflare PR build 40d4548f-f93a-4ce7-83fa-e2ab43e6b603 succeeded for PR head 72eddd80. This is provider build evidence only. Main production deployment and live root/critical-route readback remain NOT_VERIFIED; A5 stays blocked_external.
+- A1/A9 remain approval-gated. No history rewrite or PROGRESS_LOG.md edit was made. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue independent synthetic lesson/game work for accessibility, responsive keyboard/touch, PWA/offline and security; preserve empty/noindex production data.
+
 ## Latest checkpoint — 2026-11-10 04:11 UTC / 11:11 WIB (A3 flashcard accessibility states; PR #151 merged)
 
 - PUBLIC Webgame remains PUBLIC. Main is 127658d6204261d81424ede7464ac7633b923166 / tree 10f54ee4b19b495f1679cc59da4eb2d01e27a925. PR [#151](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/151) adds serious/critical axe checks after a keyboard flip and after a correct rating advances an isolated synthetic flashcard.
