@@ -2,6 +2,14 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { installSyntheticContentRoutes } from "./helpers/synthetic-content.mjs";
 
+async function expectNoSeriousAccessibilityViolations(page) {
+  const scan = await new AxeBuilder({ page }).analyze();
+  const serious = scan.violations.filter(
+    (violation) => violation.impact === "serious" || violation.impact === "critical",
+  );
+  expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
+}
+
 test.describe.configure({ mode: "serial" });
 
 async function getSavedFlags(page) {
@@ -92,11 +100,7 @@ test.describe("core learning flows", () => {
     await page.keyboard.press("1");
     await expect(page.locator(".option.correct")).toHaveCount(1);
 
-    const activeQuizA11y = await new AxeBuilder({ page }).analyze();
-    const serious = activeQuizA11y.violations.filter(
-      (violation) => violation.impact === "serious" || violation.impact === "critical",
-    );
-    expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
+    await expectNoSeriousAccessibilityViolations(page);
     for (const option of await page.locator(".option").all()) {
       await expect(option).toBeDisabled();
     }
@@ -165,9 +169,13 @@ test.describe("core learning flows", () => {
     await page.keyboard.press("Space");
     const after = await card.textContent();
     expect(before).not.toBe(after);
+    await expect(card).toBeFocused();
+    await expectNoSeriousAccessibilityViolations(page);
 
     await page.getByRole("button", { name: "3 Benar" }).click();
     await expect(card).toBeVisible();
+    await expect(card).toBeFocused();
+    await expectNoSeriousAccessibilityViolations(page);
 
     await page.locator("#fc-filter").selectOption("difficult");
     await expect(page.locator("#flashcard-card")).toContainText(/Tidak ada kartu|Tahap/);
