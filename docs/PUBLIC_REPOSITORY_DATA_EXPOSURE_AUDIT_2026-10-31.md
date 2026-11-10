@@ -1,4 +1,4 @@
-# Public repository data exposure audit — corrected 2026-11-01
+# Public repository data exposure audit — corrected 2026-11-10
 
 ## Finding
 
@@ -6,9 +6,7 @@ The PUBLIC repository's current tree has no corpus snapshots in `data/raw`, `dat
 
 ## Current-tree containment
 
-The current code checkpoint is main `efbe05226272d364ca3626ebebe4749523e6ec0b` / tree `fddeb9720ec43d736085fc3f9f91700d537979b6`. The repository removes current-tree raw, candidate, legacy and quality snapshots plus editorial artifacts, keeps public pools empty and topic pages noindex, and limits release imports to public-safe content. Synthetic examples stay inside browser-test fixtures; the production build and published datasets contain no synthetic or private learner data.
-
-Exact-main Verify [41322447587](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41322447587) passed its release checks; the provider reported successful production build `21a991ee-46bd-4a20-a4e7-004700e04edb`. Direct current live-page readback remains unverified.
+The current code checkpoint is PUBLIC main `8e7621ba187228c4da3bd5182315b279c4ec5ff0` / tree `0af84b5cd6b180d8fc857f417e99f0f94a7cc1b5`. The current tree excludes raw, candidate, legacy and quality snapshots plus editorial corpus artifacts; published learner pools remain empty and topic pages noindex. Exact-main Verify [#42798608420](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42798608420) passed its release checks, including 232 unit tests, 77 browser tests, fixture-isolation/publication checks and committed-dist drift. The check reported zero published learning items and no synthetic fixture markers in dist. Cloudflare Workers Builds reports production build `5f74bbd9-49d7-43a9-bbc8-4278b4772e9c` successful. Direct live-page readback remains NOT_VERIFIED.
 
 ## Historical Git and Pages exposure
 
