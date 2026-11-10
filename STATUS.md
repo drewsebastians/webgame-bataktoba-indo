@@ -1,6 +1,14 @@
 # Execution status — 2026-11-10
 
-## Latest checkpoint — 2026-11-10 01:03 UTC / 2026-11-10 08:03 WIB (A3 PR #145 merged; post-merge verification complete)
+## Latest checkpoint — 2026-11-10 02:23 UTC / 2026-11-10 09:23 WIB (A3 PR #147 merged; exact-head and post-merge validation complete)
+
+- PUBLIC Webgame main is `0b2a0773dc8ce4ddb5b794c2dfb03a0c24453269` / tree `f8548d5597e8e8ecad941b1ae313ae885bc7a124`. [PR #147](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/147) extends the synthetic-only 320px daily review regression: touch for one due item, keyboard selection and Enter continuation for the next, spaced-review scheduling, prompt focus, and no horizontal overflow. No runtime or learning data changed.
+- Exact-head Verify [#42738328874](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42738328874) and post-merge Verify [#42739127195](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42739127195) succeeded: 232 unit tests and 73 Playwright tests passed with 0 failures/skips; build, smoke, governance, fixture-isolation and dist-drift checks passed. All 12 Lighthouse profiles passed; accessibility was 100 throughout, mobile performance 97–100, desktop 100.
+- Post-merge artifact `verified-public-site-dist-42739127195` (#13728248426) is 121,155 bytes (SHA-256 `7890334a914d18dfb00f6ba73edb2943f3975de8eaea76c9a0cb832f2158a68e`); CI confirmed synthetic fixture markers are absent. Cloudflare Workers Builds check succeeded for build `1b6ee526-0285-46cb-834c-b69a34d3d5a1`. This verifies the production build and artifact, not direct served-page content.
+- Direct live root and critical-route readback remains NOT_VERIFIED because the available reader cannot reach the site. Keep A5 `blocked_external`; published learning data remains empty/noindex. No private or synthetic linguistic data appears in the production artifact.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Continue A3 responsive keyboard/touch, PWA/offline, privacy, security, and performance work. Keep A1/A9/A12 approval gates closed.
+
+## Previous checkpoint — 2026-11-10 01:03 UTC / 2026-11-10 08:03 WIB (A3 PR #145 merged; post-merge verification complete)
 
 - PUBLIC Webgame code main is 69ae2f750b1b5a3eefd28ea1e497ea716bbdc310 / tree e0ee16cdfe48a038f7b20b63738db4402a16af7a; PR #145 adds a synthetic-only regression for two due daily-review items. It checks 320px touch flow, saved spaced-repetition ratings, focus on the continuation control, and focus on the next prompt.
 - Exact-head Verify #42727978561 and post-merge main Verify #42728657641 passed: 232/232 unit tests, 73/73 Playwright tests, 0 failures and 0 skips; full build, smoke, performance, fixture-isolation and dist-drift gates passed. All 12 Lighthouse profiles passed with accessibility 100; mobile performance was 97–99 and desktop 100.
