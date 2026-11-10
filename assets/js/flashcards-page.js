@@ -1,5 +1,6 @@
 // Focused entrypoint for flashcards keeps unrelated game and lesson code off this route.
 import { loadWordPairs, loadTopics } from "./data.js";
+import { initMobileNav } from "./utils/nav-toggle.js";
 import { SITE_CONFIG } from "./config.js";
 import {
   getBucketIds,
@@ -26,13 +27,7 @@ function pill(text, extraClass = "", attrs = {}) {
 }
 
 function initNavToggle() {
-  const toggle = flashcardQuery(".nav-toggle");
-  const links = flashcardQuery("#nav-links-list");
-  if (!toggle || !links) return;
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("nav-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
+  initMobileNav();
 }
 
 function setActiveNav() {

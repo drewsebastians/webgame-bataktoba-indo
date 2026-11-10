@@ -34,8 +34,18 @@ test("primary routes reflow at the 640px width equivalent to 200% desktop zoom",
 
     const menu = page.getByRole("button", { name: "Menu" });
     await expect(menu, route + " should show the mobile navigation control").toBeVisible();
-    await menu.click();
+    await menu.focus();
+    await page.keyboard.press("Enter");
     await expect(menu).toHaveAttribute("aria-expanded", "true");
-    await expect(page.getByRole("navigation", { name: "Navigasi utama" }).getByRole("link", { name: "Home" })).toBeVisible();
+    const navigation = page.getByRole("navigation", { name: "Navigasi utama" });
+    const homeLink = navigation.getByRole("link", { name: "Home" });
+    await expect(homeLink).toBeVisible();
+
+    await page.keyboard.press("Tab");
+    await expect(homeLink).toBeFocused();
+    await homeLink.press("Escape");
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    await expect(menu).toBeFocused();
+    await expect(homeLink).toBeHidden();
   }
 });

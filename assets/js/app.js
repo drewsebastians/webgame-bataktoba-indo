@@ -1,4 +1,5 @@
 ﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.js";
+import { initMobileNav } from "./utils/nav-toggle.js";
 import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.js";
 import {
   exportProgress,
@@ -87,13 +88,7 @@ function sessionProgressNode(current, total, label = "Kemajuan sesi", unit = "so
 }
 
 function initNavToggle() {
-  const toggle = $(".nav-toggle");
-  const links = $("#nav-links-list");
-  if (!toggle || !links) return;
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("nav-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
+  initMobileNav();
 }
 
 function setActiveNav() {

@@ -1,4 +1,5 @@
 import { SITE_CONFIG } from "./config.js";
+import { initMobileNav } from "./utils/nav-toggle.js";
 import { loadLearningItems } from "./data.js";
 import {
   exportProgress,
@@ -25,13 +26,7 @@ function pill(text, extraClass = "", attrs = {}) {
 }
 
 function initNavToggle() {
-  const toggle = $(".nav-toggle");
-  const links = $("#nav-links-list");
-  if (!toggle || !links) return;
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("nav-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
+  initMobileNav();
 }
 
 function setActiveNav() {
