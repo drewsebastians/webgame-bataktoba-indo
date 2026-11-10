@@ -1,3 +1,14 @@
+## Latest checkpoint — 2026-11-10 04:11 UTC / 11:11 WIB (A3 flashcard accessibility states; PR #151 merged)
+
+- PUBLIC Webgame remains PUBLIC. Main is 127658d6204261d81424ede7464ac7633b923166 / tree 10f54ee4b19b495f1679cc59da4eb2d01e27a925. PR [#151](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/151) adds serious/critical axe checks after a keyboard flip and after a correct rating advances an isolated synthetic flashcard.
+- Exact-head Verify [#42752976771](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42752976771) and post-merge main Verify [#42753671717](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42753671717) passed 232 unit tests and 73 Playwright tests, 0 failures and 0 skips; smoke, governance, fixture-isolation, dist-drift, and performance-budget checks passed.
+- All 12 Lighthouse profiles passed. Accessibility was 100/100 throughout; mobile performance ranged 97–99 and desktop was 100. Verified production artifact [#13735165426](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/42753671717/artifacts/13735165426) is 121,155 bytes with SHA-256 ed0009e1e0c1342198f5adaed9103fdf033fb092ba7792d46dca4f597eadd302. Cloudflare production build b3365297-54ea-42a0-97d7-c7589bf682bc succeeded (version 2cbdefb8-52c8-43e4-b9b8-4a3e237ba3d4). This verifies provider build/artifact only; live-page content remains NOT_VERIFIED.
+- The production catalog is still empty/noindex: 0 published learning items, 0 words, 0 genuine phrases and 0 sentences; CI confirms synthetic fixtures are absent from public artifacts. No private Engine material was transferred. Historical corpus-like objects remain in public Git history; current tree/artifact are contained. A1 and A9 remain approval-gated, and PROGRESS_LOG.md remains untouched.
+- Readiness: ENGINEERING_READY=YES for tested browser flows; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A5 remains blocked_external pending live root/critical-route readback.
+- Next A3 step: extend isolated accessibility checks through lesson feedback, mistake-review and summary states while preserving keyboard/touch coverage. Continue independently of corpus readiness.
+
+---
+
 # Master execution plan
 
 ## Latest checkpoint — 2026-11-10 03:14 UTC / 10:14 WIB (A3 PR #149 merged; post-merge verification and read-only history audit complete)
