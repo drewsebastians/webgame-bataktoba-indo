@@ -91,6 +91,12 @@ test.describe("core learning flows", () => {
 
     await page.keyboard.press("1");
     await expect(page.locator(".option.correct")).toHaveCount(1);
+
+    const activeQuizA11y = await new AxeBuilder({ page }).analyze();
+    const serious = activeQuizA11y.violations.filter(
+      (violation) => violation.impact === "serious" || violation.impact === "critical",
+    );
+    expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
     for (const option of await page.locator(".option").all()) {
       await expect(option).toBeDisabled();
     }
