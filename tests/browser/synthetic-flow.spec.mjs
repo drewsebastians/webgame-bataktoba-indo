@@ -576,9 +576,12 @@ test("fixed-length practice exposes accessible progress across quiz modes", asyn
     } else {
       await page.locator(".option").first().click();
     }
+    await expect(page.locator("#next-question")).toBeEnabled();
+    await expectNoSeriousAccessibilityViolations(page);
     await page.locator("#next-question").click();
     await expect(progress).toHaveAttribute("value", "2");
     await expect(progress).toHaveAttribute("aria-valuetext", "2 dari 5 soal");
+    await expectNoSeriousAccessibilityViolations(page);
   }
 });
 
