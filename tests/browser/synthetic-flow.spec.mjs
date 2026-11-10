@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 import {
   installSyntheticContentRoutes,
   completeSyntheticLesson,
@@ -7,7 +8,15 @@ import {
   SYNTHETIC_TOPICS,
 } from "./helpers/synthetic-content.mjs";
 
-async function answerMeaningQuestion(page, { wrong = false } = {}) {
+async function expectNoSeriousAccessibilityViolations(page) {
+  const scan = await new AxeBuilder({ page }).analyze();
+  const serious = scan.violations.filter(
+    (violation) => violation.impact === "serious" || violation.impact === "critical",
+  );
+  expect(serious.map((violation) => `${violation.id}:${violation.nodes.length}`)).toEqual([]);
+}
+
+async function answerMeaningQuestion(page, { wrong = false, checkAccessibility = false } = {}) {
   const prompt = (await page.locator(".prompt-text").textContent())?.trim();
   const item = SYNTHETIC_WEBGAME_ITEMS.find((entry) => entry.batak === prompt);
   expect(item, `quiz prompt ${prompt}`).toBeTruthy();
@@ -19,6 +28,7 @@ async function answerMeaningQuestion(page, { wrong = false } = {}) {
   await page.getByRole("button", { name: answer, exact: true }).click();
   const continuation = page.locator("#next-question");
   await expect(continuation).toBeEnabled();
+  if (checkAccessibility) await expectNoSeriousAccessibilityViolations(page);
   await expect(continuation).toBeFocused();
   await continuation.click();
   if (await page.locator(".prompt-text").count()) {
@@ -154,11 +164,12 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
 
   const deliberateMistakes = [];
   for (let index = 0; index < 5; index += 1) {
-    const prompt = await answerMeaningQuestion(page, { wrong: index < 2 });
+    const prompt = await answerMeaningQuestion(page, { wrong: index < 2, checkAccessibility: index === 0 });
     if (index < 2) deliberateMistakes.push(prompt);
   }
   await expect(page.getByRole("heading", { name: "Sesi selesai" })).toBeVisible();
   await expect(page.locator("#review-mistakes")).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
   await page.locator("#review-mistakes").click();
   await expect(page.locator(".prompt-text")).toBeFocused();
 
@@ -184,6 +195,7 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await reviewContinuation.click();
   await expect(page.getByRole("heading", { name: "Review kesalahan selesai" })).toBeVisible();
   await expect(page.locator("#session-summary-heading")).toBeFocused();
+  await expectNoSeriousAccessibilityViolations(page);
 
   await page.goto("/flashcards/");
   await page.locator("#fc-filter").selectOption("all");
