@@ -1,3 +1,15 @@
+## Latest checkpoint — 2026-11-11 14:00 UTC / 2026-11-11 21:00 WIB (PR #169 merged; 320px mobile navigation targets)
+
+- PUBLIC main: `9a54ea2d3240bb24208e985c2d69aa4e8d246086` / tree `852964270ed699dd9425159131eca86cf93509e2`. PR [#169](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/169) raises mobile navigation targets to at least 44px and adds the 320px touch-viewport check across primary routes.
+- Post-main Verify [#43031642857](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43031642857) on this exact main SHA passed: 232/232 unit tests, 78/78 Playwright tests (0 skipped), E2E smoke, fixture/publication gates, performance budget (194,964 / 196,608 JavaScript bytes), and committed-dist drift.
+- All 12 Lighthouse route/profile checks passed. Accessibility was 100/100 in every profile; mobile performance was 97, 97, 97, 99, 99 and 100; desktop performance was 100 in all six routes. Verified artifact [#13860224540](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43031642857/artifacts/13860224540) is 121,455 bytes (SHA-256 `7e72e8d366dc808a7741e47b888ced70a2048d9d04d99405321afc8e619e9f0b`). Lighthouse reports are artifact [#13860814389](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43031642857/artifacts/13860814389).
+- Cloudflare Workers Builds check reports production build `a6a847b8-098d-4f23-88f6-549f0c31eacb` successful for this main SHA. This is provider build success only: direct readback of root, robots.txt, manifest, service worker and a lesson route remains NOT_VERIFIED; the available live reader cannot access the Pages host.
+- CI found 0 published learning items, words, phrases or sentences and 0 warnings; synthetic fixture markers are absent from public dist. The catalog remains empty/noindex and no private Engine records were transferred.
+- Readiness: ENGINEERING_READY=YES for this mobile navigation checkpoint; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A1/A9 remain approval-gated; no history rewrite or `PROGRESS_LOG.md` change was made.
+- Next: continue A3 on remaining responsive, keyboard/touch, privacy/security and PWA states with isolated synthetic fixtures. Keep A5 blocked_external until the live Pages artifact can be read directly.
+
+---
+
 ## Latest checkpoint — 2026-11-10 10:31:34 UTC / 2026-11-10 17:31 WIB (PR #167 merged; keyboard-accessible mobile navigation)
 
 - PUBLIC main: `8e7621ba187228c4da3bd5182315b279c4ec5ff0` / tree `0af84b5cd6b180d8fc857f417e99f0f94a7cc1b5`. PR [#167](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/167) adds shared Escape-to-close navigation handling for the main, dictionary, flashcards and progress entrypoints; aria-expanded stays synchronized and focus returns to the menu toggle. The responsive browser test exercises this keyboard flow on all eight primary routes.
