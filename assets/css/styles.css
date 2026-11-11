@@ -84,6 +84,9 @@ svg {
 }
 
 .nav-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   border-radius: 8px;
   color: var(--ink);
   font-size: 0.95rem;
