@@ -1,3 +1,12 @@
+## Latest checkpoint — 2026-11-11 UTC / 2026-11-12 WIB (PR #171 merged; dictionary filter accessibility)
+
+- PUBLIC `main` is `505a95856f35acfe40a9caed7b6253aaeecfad95` / tree `50671a8d23561ecd02a42019fa1d4682905eb863`. PR [#171](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/171) gives dictionary filters a 44px touch target and adds an isolated synthetic browser test for touch, keyboard focus, selection and 320px overflow.
+- Local validation on exact feature head `e72e39d6087f1b3d1dd7d4d8ce2f375a2f8ebbba` passed: `npm run check` (0 published items/words/phrases/sentences, 0 warnings), 232 unit tests, performance budgets (JavaScript 194,964/196,608 bytes; CSS 16,342/49,152), E2E smoke and 79 browser tests. Dist drift check passed; synthetic fixture markers are absent from public `dist/`.
+- Exact-head GitHub Verify run [#43053452315](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43053452315) failed before application tests at Playwright browser system-dependency installation: Ubuntu mirror DNS resolution failed. The retry failed at the same setup step; the full verification steps were skipped. This is an infrastructure failure, not a test pass. The available post-merge status/workflow query returned no run evidence.
+- The public catalog remains empty and noindex; no restricted Engine data or synthetic learning records were published. Post-merge Cloudflare production build and direct live readback of root, robots, manifest, service worker and a lesson route are NOT_VERIFIED. Keep ENGINEERING_READY=YES for this UI change; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- A3 continues with independent responsive, keyboard/touch, privacy/security and PWA work. A5 remains blocked until provider deployment and direct served-page evidence are available. No Git history rewrite or `PROGRESS_LOG.md` change was made; the separate A1/A9 approval gates remain intact.
+
+
 ## Latest checkpoint — 2026-11-11 14:00 UTC / 2026-11-11 21:00 WIB (PR #169 merged; 320px mobile navigation targets)
 
 - PUBLIC main: `9a54ea2d3240bb24208e985c2d69aa4e8d246086` / tree `852964270ed699dd9425159131eca86cf93509e2`. PR [#169](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/169) raises mobile navigation targets to at least 44px and adds the 320px touch-viewport check across primary routes.
