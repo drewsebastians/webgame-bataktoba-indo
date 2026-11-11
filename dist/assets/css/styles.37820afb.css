@@ -733,6 +733,7 @@ h3 {
 }
 
 .filter-select {
+  min-height: 44px;
   min-width: 10rem;
   padding: 0.45rem 0.6rem;
 }
