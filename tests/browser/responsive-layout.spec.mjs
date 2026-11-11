@@ -91,3 +91,47 @@ test("primary routes fit a 320px touch viewport with usable mobile navigation ta
     expect(closedDimensions.body, route + " body overflowed after closing navigation").toBeLessThanOrEqual(closedDimensions.viewport);
   }
 });
+
+test("dictionary filters meet mobile touch target size in an isolated synthetic fixture", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/dictionary/");
+
+  const filters = page.locator("#dictionary-filters");
+  await expect(filters, "the production dictionary stays empty before the isolated fixture is added").toBeHidden();
+  await filters.evaluate((container) => {
+    const label = document.createElement("label");
+    label.className = "filter-field";
+    const caption = document.createElement("span");
+    caption.textContent = "Topic";
+
+    const select = document.createElement("select");
+    select.className = "filter-select";
+    select.setAttribute("aria-label", "Synthetic filter fixture");
+    const option = document.createElement("option");
+    option.value = "synthetic-topic";
+    option.textContent = "Synthetic topic";
+    select.append(option);
+
+    label.append(caption, select);
+    container.replaceChildren(label);
+    container.dataset.testFixture = "synthetic";
+    container.hidden = false;
+  });
+
+  const control = page.getByRole("combobox", { name: "Synthetic filter fixture" });
+  await expect(control).toBeVisible();
+  const target = await control.boundingBox();
+  expect(target?.height ?? 0, "dictionary filter should be at least 44px tall for touch use").toBeGreaterThanOrEqual(44);
+
+  await control.focus();
+  await expect(control).toBeFocused();
+  await control.selectOption("synthetic-topic");
+  await expect(control).toHaveValue("synthetic-topic");
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    document: document.documentElement.scrollWidth,
+    body: document.body.scrollWidth,
+  }));
+  expect(dimensions.document, "synthetic filter overflowed the 320px viewport").toBeLessThanOrEqual(dimensions.viewport);
+  expect(dimensions.body, "synthetic filter overflowed the body").toBeLessThanOrEqual(dimensions.viewport);
+});
