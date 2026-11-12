@@ -12,7 +12,7 @@ import {
   initProgress,
   recordAnswer,
   setDifficult,
-} from "./progress.4b6d4b51.js";
+} from "./progress.ec6dc40f.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { shuffleWith } from "./game/question-engine.7a9b7d86.js";
 import { masteryLabel } from "./game/session.305509d7.js";

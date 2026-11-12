@@ -2,7 +2,7 @@
 import { loadLearningItems, loadTopics } from "./data.a34bfabb.js";
 import { initMobileNav } from "./utils/nav-toggle.80f3042e.js";
 import { SITE_CONFIG } from "./config.6316db9b.js";
-import { getBucketIds, getProgress, initProgress, saveProgress, setSaved } from "./progress.4b6d4b51.js";
+import { getBucketIds, getProgress, initProgress, saveProgress, setSaved } from "./progress.ec6dc40f.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.27d36b47.js";

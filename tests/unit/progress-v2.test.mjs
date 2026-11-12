@@ -424,4 +424,20 @@ describe("bounded storage and resilience", () => {
     assert.equal(state.answered, 0);
     assert.deepEqual(state.items, {});
   });
+
+  it("reset removes the legacy progress payload as well as current progress", () => {
+    store.setItem("batakTobaGameProgress", JSON.stringify({
+      answered: 8,
+      correct: 6,
+      lastMode: "meaning",
+      known: ["legacy-known-item"],
+      review: [],
+    }));
+
+    progress.resetProgress();
+
+    assert.equal(store.getItem("batakTobaGameProgress"), null);
+    assert.equal(progress.getProgress().answered, 0);
+    assert.deepEqual(progress.getProgress().items, {});
+  });
 });

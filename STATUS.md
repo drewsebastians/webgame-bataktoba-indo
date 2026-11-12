@@ -1,3 +1,11 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 progress-reset privacy)
+
+- PUBLIC main at batch start: `838e09c586441f399ee54d42017836c78fccebc2` / tree `396325b6138bc2caec2f896e40765c60300f0ac5`; implementation commit `545ded234809126f3046cbac49024910b4499848`.
+- Reset deletes the legacy progress key and corrupt backup while persisting an empty v3 payload. New unit/browser checks prove no old progress survives reload. Playwright uses four workers for stable local browser coverage.
+- `npm run verify:core` passed (235 unit, smoke E2E, performance budget and 80/80 browser tests); `npm run verify:drift` passed; all 12 Lighthouse mobile/desktop profiles passed (a11y 100; mobile perf 96–99; desktop 100).
+- Production catalog remains empty/noindex, zero records/warnings; no fixtures/private Engine data in `dist`. Current main's Cloudflare Workers Builds check passed, but new branch has not deployed; direct live readback remains NOT_VERIFIED and A5 stays `blocked_external`.
+- ENGINEERING_READY=YES locally; exact-head Actions/merge pending; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Next: open PR, validate exact head, merge only when green, then record main/deployment checkpoint.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #173 merged; PWA cache privacy hardening)
 
 - PUBLIC `main`: `296b88f03cb238b1e7ecfb57fdf408eb4c102f61` / tree `46642799f77caa23de7f00ef354885d6e1873d03`. PR [#173](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/173) is merged.

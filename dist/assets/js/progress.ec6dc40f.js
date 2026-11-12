@@ -657,6 +657,7 @@ export function resetProgress() {
   resetLessons(fresh);
   cached = fresh;
   persist(fresh);
+  storageRemove(LEGACY_KEY);
   storageRemove(`${V3_KEY}.corrupt-backup`);
   return fresh;
 }

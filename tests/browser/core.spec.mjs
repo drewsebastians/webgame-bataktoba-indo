@@ -248,10 +248,26 @@ test.describe("core learning flows", () => {
     const resetButton = page
       .locator("#progress-root")
       .getByRole("button", { name: /Reset progress|Yakin\?/ });
+    await page.evaluate(() => {
+      localStorage.setItem("batakTobaGameProgress", JSON.stringify({
+        answered: 8,
+        correct: 6,
+        lastMode: "meaning",
+        known: ["legacy-known-item"],
+        review: [],
+      }));
+    });
     await resetButton.click();
     await expect(resetButton).toContainText("Yakin?");
     await resetButton.click();
     await expect(statusLine).toContainText("dihapus");
+
+    await expect.poll(() => page.evaluate(() => ({
+      legacy: localStorage.getItem("batakTobaGameProgress"),
+      answered: JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}").answered,
+    }))).toEqual({ legacy: null, answered: 0 });
+    await page.reload();
+    await expect(page.locator("[role=list] .pill").first()).toHaveText("Total jawaban 0");
 
     const exportButton = page.getByRole("button", { name: /Ekspor progress/ });
     await exportButton.click();
