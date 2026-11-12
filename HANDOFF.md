@@ -1,3 +1,11 @@
+## Active handoff — A3 dictionary sense context (2026-11-12)
+
+- Start from PUBLIC `main` `c842de60e81fb0862d679b902d316093b39ef5f0` / tree `12d7cf50bb4fa07f5621323907dfbff0f370c892`; active branch `codex/a3-dictionary-sense-context-20261112`.
+- Dictionary detail now presents mapped context notes as plain text; the new browser test uses only an isolated synthetic `learning-items.json` fixture and checks alternatives plus inert rendering.
+- Local checks: `verify:core` passed (237 unit, 81 browser, site/governance, build, performance and smoke); all 12 Lighthouse checks passed (a11y 100, mobile performance 96–99, desktop 100). `verify:drift` reports only refreshed, uncommitted `dist/` output; commit generated assets, then rerun drift.
+- CI, merge, and Cloudflare build for the feature are pending. Keep live readback `NOT_VERIFIED`; keep the catalog empty/noindex and do not transfer Engine records.
+- Resume: inspect `git status`, commit source/test/dist plus checkpoint docs, verify clean committed-tree drift, push/open PR, inspect exact-head Actions, merge only after success, then record post-main SHA/tree and provider build evidence.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
 - PR #177 merged from expected head 039f499e206115a9f0b3b5ab0e2bfa7a4505731c; PUBLIC main is 69175e03b1aade0fe83c3181a017f69332251252 / tree 1ed0fc469808bda76072192dd088515b6dcb24b2.

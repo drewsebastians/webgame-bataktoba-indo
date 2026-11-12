@@ -270,6 +270,9 @@ async function initDictionary() {
     if (alternatives.length > 0) {
       container.append(el("p", { text: `Alternatif tercatat: ${alternatives.join(", ")}` }));
     }
+    if (typeof item.contextNote === "string" && item.contextNote.trim()) {
+      container.append(el("p", { text: `Konteks: ${item.contextNote.trim()}` }));
+    }
     if (item.confidenceScore != null) {
       container.append(
         el("p", { text: `Confidence corpus: ${item.confidenceScore} (${item.confidenceLabel ?? "-"})` }),
