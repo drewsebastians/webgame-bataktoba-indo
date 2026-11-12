@@ -1,3 +1,12 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 PWA cache privacy hardening; PR preparation)
+
+- Re-verified PUBLIC `main` immediately before this batch: `bb4f8da8f3b962a3d301a97f592aa27151d4a424` / tree `707ae7989b44768fe5a686e811420caeb08f955e`. Working branch: `codex/a3-pwa-privacy-20261112`.
+- Service worker now avoids persisting query-bearing navigation responses and responses marked `private` or `no-store`, and removes any exact older cached copy. Runtime responses with those cache directives are also evicted. The cache namespace was bumped; generated `dist/sw.js` reflects build `btp-919b8e778653`.
+- Added unit and browser regressions for query/private cache isolation. Added a route-ID allowlist to Lighthouse so interrupted audits can resume deterministically without accepting arbitrary URLs.
+- Local checks across the completed verification attempts: site/governance checks, build, 234 unit tests, performance budget (JavaScript 194,964/196,608 bytes; CSS 16,342/49,152), E2E smoke and committed-dist drift passed. Browser suite passed 80/80 on a 4-worker rerun after one browser timeout in the initial 10-worker run. All 12 Lighthouse profiles passed: accessibility 100/100 throughout; mobile performance 91–99 and desktop 99–100. Synthetic fixtures stayed isolated from `dist`; published learning items remain 0 and warnings 0.
+- Readiness: ENGINEERING_READY=YES for this cache/privacy and test-resilience change; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No real or synthetic learner content was added. Cloudflare production deployment and direct live artifact readback are NOT_VERIFIED; A5 remains `blocked_external`.
+- No history rewrite or `PROGRESS_LOG.md` change. Next: push this branch, open PR, require exact-head CI, merge only after it passes, then record the merged main SHA/tree and deployment evidence. A1/A9 approval gates remain intact.
+
 ## Latest checkpoint — 2026-11-11 UTC / 2026-11-12 WIB (PR #171 merged; dictionary filter accessibility)
 
 - PUBLIC `main` is `505a95856f35acfe40a9caed7b6253aaeecfad95` / tree `50671a8d23561ecd02a42019fa1d4682905eb863`. PR [#171](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/171) gives dictionary filters a 44px touch target and adds an isolated synthetic browser test for touch, keyboard focus, selection and 320px overflow.

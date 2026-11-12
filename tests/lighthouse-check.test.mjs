@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   LIGHTHOUSE_ROUTES,
+  selectLighthouseRoutes,
   SCORE_FLOORS,
   assertLighthouseScoreFloors,
   readLighthouseScores,
@@ -40,6 +41,21 @@ test("audits only the fixed local learner-facing route set", () => {
   assert.ok(LIGHTHOUSE_ROUTES.every(({ id, path }) =>
     /^[a-z0-9-]+$/.test(id) && path.startsWith("/") && !path.startsWith("//"),
   ));
+});
+
+test("resumes Lighthouse by known route IDs while preserving canonical order", () => {
+  assert.deepEqual(
+    selectLighthouseRoutes("progress,flashcards,progress").map(({ id }) => id),
+    ["flashcards", "progress"],
+  );
+  assert.deepEqual(
+    selectLighthouseRoutes([]).map(({ id }) => id),
+    LIGHTHOUSE_ROUTES.map(({ id }) => id),
+  );
+  assert.throws(
+    () => selectLighthouseRoutes("https://example.test/"),
+    /Unknown Lighthouse route id/,
+  );
 });
 
 test("runs the Windows Lighthouse CLI through Node without a shell", () => {

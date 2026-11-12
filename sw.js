@@ -7,7 +7,7 @@
  * that changes precached content.
  */
 
-const CACHE_VERSION = "btp-v1";
+const CACHE_VERSION = "btp-v2";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -41,6 +41,12 @@ function isRuntimeCacheable(url) {
   );
 }
 
+function isCacheableResponse(response) {
+  if (!response.ok) return false;
+  const cacheControl = response.headers.get("Cache-Control") ?? "";
+  return !/(?:^|,)\s*(?:private|no-store)\b/i.test(cacheControl);
+}
+
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET") return;
@@ -55,9 +61,13 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     const networkResponsePromise = fetch(request).then(async (response) => {
-      if (response.ok) {
-        const cache = await caches.open(SHELL_CACHE);
+      const cache = await caches.open(SHELL_CACHE);
+      if (url.search === "" && isCacheableResponse(response)) {
         await cache.put(request, response.clone());
+      } else {
+        // Query strings and private/no-store responses may contain user state.
+        // Clear any older copy so it cannot be restored by a later offline visit.
+        await cache.delete(request);
       }
       return response;
     });
@@ -75,7 +85,8 @@ self.addEventListener("fetch", (event) => {
     const cachePromise = caches.open(RUNTIME_CACHE);
     const networkResponsePromise = cachePromise.then(async (cache) => {
       const response = await fetch(request);
-      if (response.ok) await cache.put(request, response.clone());
+      if (isCacheableResponse(response)) await cache.put(request, response.clone());
+      else await cache.delete(request);
       return response;
     });
     event.waitUntil(networkResponsePromise.then(() => undefined).catch(() => undefined));

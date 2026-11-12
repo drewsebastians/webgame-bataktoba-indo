@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import { runInNewContext } from "node:vm";
 
 const root = new URL("../../", import.meta.url);
 
@@ -33,6 +34,74 @@ describe("service worker", () => {
     assert.match(sw, /request\.mode === "navigate"/);
     assert.match(sw, /offline\.html/);
     assert.match(sw, /fetch\(request\)/);
+  });
+
+  it("does not persist query-bearing or private/no-store navigation responses", async () => {
+    async function runNavigation(url, cacheControl) {
+      const listeners = new Map();
+      const saved = new Map();
+      saved.set(url, new Response("cached previous copy"));
+      const cache = {
+        async put(request, response) {
+          saved.set(request.url, response);
+        },
+        async delete(request) {
+          saved.delete(request.url);
+        },
+        async match(request) {
+          return saved.get(request.url);
+        },
+      };
+      const caches = {
+        async open() {
+          return cache;
+        },
+        async match() {
+          return undefined;
+        },
+        async keys() {
+          return [];
+        },
+      };
+      const self = {
+        location: new URL("https://app.example.test/sw.js"),
+        clients: { claim: async () => {} },
+        addEventListener(name, handler) {
+          listeners.set(name, handler);
+        },
+        skipWaiting: async () => {},
+      };
+      runInNewContext(sw, { self, caches, URL, fetch: async () =>
+        new Response("<html>page</html>", {
+          status: 200,
+          headers: { "Cache-Control": cacheControl },
+        }),
+      });
+
+      let responsePromise;
+      listeners.get("fetch")({
+        request: { method: "GET", mode: "navigate", url },
+        respondWith(promise) {
+          responsePromise = promise;
+        },
+      });
+      const response = await responsePromise;
+      return { response, cachedUrls: [...saved.keys()] };
+    }
+
+    const queryPage = await runNavigation(
+      "https://app.example.test/?session=synthetic-private-marker",
+      "public, max-age=3600",
+    );
+    assert.equal(queryPage.response.status, 200);
+    assert.deepEqual(queryPage.cachedUrls, []);
+
+    const privatePage = await runNavigation(
+      "https://app.example.test/privacy/",
+      "private, no-store",
+    );
+    assert.equal(privatePage.response.status, 200);
+    assert.deepEqual(privatePage.cachedUrls, []);
   });
 
   it("keeps stale-while-revalidate cache writes alive after returning a cached response", () => {
