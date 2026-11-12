@@ -3,6 +3,7 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "tests/browser",
   timeout: 30000,
+  workers: 4,
   use: {
     baseURL: "http://127.0.0.1:4183",
     viewport: { width: 390, height: 844 },
