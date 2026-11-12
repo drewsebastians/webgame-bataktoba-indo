@@ -1,3 +1,12 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #175 merged)
+
+- PR [#175](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/175) merged with expected head `351fbe7669d1078ac6f0bee39e0e3db5aea831fa`; PUBLIC `main` is `9e9fbe98b6f2fa0a7ee33632c5f77b839ed30458` / tree `1e649fd3ad5de97fb3de0fa26b28dd30de7b5ccf`.
+- Exact-head Verify [#43169061877](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43169061877) and post-main Verify [#43169933728](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43169933728) passed. Post-main evidence: 235 unit tests, E2E smoke, 80/80 browser tests, performance budget, Lighthouse, and committed-dist drift.
+- All 12 post-main Lighthouse profiles passed: accessibility 100/100 on every route; mobile performance 97, 97, 97, 99, 99 and 100; desktop performance 100 on all routes. Cloudflare Workers Builds check [#131020695666](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/131020695666) passed.
+- Provider build is technically successful, but the served production artifact remains NOT_VERIFIED: the web reader could not access the Pages host and no browser surface was available. A5 stays blocked_external.
+- Public catalog remains empty/noindex (0 items, 0 warnings); synthetic fixtures and Engine data stay out of public artifacts. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. A1/A9 approval gates remain intact; no history rewrite or `PROGRESS_LOG.md` edit.
+- Continue isolated synthetic Webgame work; keep real-content and publication gates closed.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 progress-reset privacy)
 
 - Branch `codex/a3-browser-navigation-20261112` starts at PUBLIC `main` `838e09c586441f399ee54d42017836c78fccebc2` / tree `396325b6138bc2caec2f896e40765c60300f0ac5`; code commit `545ded234809126f3046cbac49024910b4499848`.
