@@ -19,7 +19,7 @@ The private upstream collection contract and learning-item schema are available 
 5. **Lesson metadata**: slug, Indonesian title/objective, level, order, 8–12 valid items per pilot, learning outcome and publication readiness; pilot topics `angka`, `sapaan`, `keluarga`.
 6. **Lifecycle**: candidate / qualified / withheld / published / revoked, blocking reason, timestamp, public release authorization and content checksum.
 
-## Contract-to-current-staging mapping (future adapter)
+## Contract-to-current-staging mapping (fail-closed adapter)
 
 | Upstream normalized field | Existing website staging |
 |---|---|
@@ -29,7 +29,7 @@ The private upstream collection contract and learning-item schema are available 
 | indonesian_primary | `records[].indonesian` |
 | item_type | consumer type validation / distinct pool |
 | provenance_ref/evidence | `records[].sourceReference` and new provenance metadata adapter |
-| alternatives, sense_id, topic_slugs, mode eligibility | **Adapter extensions required**; never silently drop alternatives and then present ambiguous questions |
+| alternatives, sense_id, topic_slugs, mode eligibility | Mapped into the consumer item with separate game flags; topic slugs must exist in the explicit website topic map, and topic-less items cannot pass the public-release adapter |
 | license/permission | `APPROVED_FOR_INGESTION` only if source-specific public-rights and project-scope gates actually allow the transfer; never infer from private research permission |
 
 The older simple staging shape is **not** the canonical source collection schema. Do not put source text from upstream in this public Git repo merely to prove tests. For testing use visibly synthetic fixtures and test-only interception/in-memory data.
@@ -37,6 +37,8 @@ The older simple staging shape is **not** the canonical source collection schema
 ## Adapter implementation checkpoint (2026-10-31)
 
 - `assets/js/upstream-adapter.js` validates the v1 item structure, source/evidence foreign keys, independent source-family counts, conflict rules, reviewer proof, alternatives, senses, topic mapping and per-game eligibility.
+- The topic map is synchronized against all six slugs in `data/published/topics.json`; unknown Engine slugs fail closed. A parity regression requires deliberate map and site-registry changes together.
+- Publication requires a topic mapping in addition to item/source rights and authorization gates. None of these checks turns a private record into permission to publish.
 - Public release requires independently supplied public-scope and upstream-policy approval references plus source-specific public distribution, current revocation, terms, license and attribution evidence. The adapter is not wired to fetch or publish private content.
 - Browser acceptance uses fabricated `SYNTHETIC_TEST_ONLY` values intercepted in Playwright. The production published endpoints and `dist` remain separate.
 
