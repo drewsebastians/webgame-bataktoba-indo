@@ -219,6 +219,29 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
   await expect(page.locator(".result-detail")).toBeVisible();
 });
 
+test("dictionary shows per-sense context safely with recorded alternatives", async ({ page }) => {
+  const item = {
+    ...SYNTHETIC_WEBGAME_ITEMS[0],
+    indonesianAlternatives: ["SYNTHETIC_ID_ALT_001"],
+    contextNote: 'SYNTHETIC_SENSE_CONTEXT <img id="synthetic-dict-context-probe" src=x>',
+  };
+  await installSyntheticContentRoutes(page, {
+    "learning-items.json": { metadata: { schemaVersion: 2 }, items: [item] },
+  });
+
+  await page.goto("/dictionary/");
+  await page.locator("#dictionary-search").fill(item.batak);
+  const result = page.locator(".result-row").first();
+  await expect(result).toContainText(item.batak);
+  await result.click();
+
+  const detail = page.locator(".result-detail");
+  await expect(detail).toContainText("Alternatif tercatat: SYNTHETIC_ID_ALT_001");
+  await expect(detail).toContainText("Konteks: SYNTHETIC_SENSE_CONTEXT");
+  await expect(detail).toContainText('<img id="synthetic-dict-context-probe" src=x>');
+  await expect(detail.locator("#synthetic-dict-context-probe")).toHaveCount(0);
+});
+
 test("flashcard topic and deck filters refresh counts without losing keyboard focus", async ({ page }) => {
   const splitAt = 3;
   const themedItems = SYNTHETIC_WEBGAME_ITEMS.map((item, index) => ({

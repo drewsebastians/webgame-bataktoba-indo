@@ -1,3 +1,10 @@
+## Current execution checkpoint — 2026-11-12
+
+- PUBLIC `main` was rechecked at `c842de60e81fb0862d679b902d316093b39ef5f0` / tree `12d7cf50bb4fa07f5621323907dfbff0f370c892` before this A3 batch. The active worktree is `codex/a3-dictionary-sense-context-20261112`.
+- A3 slice: expose per-sense dictionary context notes safely and exercise the public consumer with isolated synthetic fixtures. Local core validation passed 237 unit tests and 81 browser tests; all 12 Lighthouse profiles passed (a11y 100, mobile performance 96–99, desktop 100).
+- Source, regression, regenerated `dist/` and initial checkpoint are committed as `45119c9431216cab055d57e32bb62a2121bb41c6`; a full post-commit `npm run verify` passed including committed-tree drift. Exact-head Actions, merge and Cloudflare evidence for this change are still pending.
+- Keep readiness separate: engineering for this UI slice is locally ready; data, publication and learner readiness are still NO. Production catalog stays empty/noindex, and no Engine content moves to PUBLIC.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
 - PR #177 merged from expected head 039f499e206115a9f0b3b5ab0e2bfa7a4505731c; PUBLIC main is 69175e03b1aade0fe83c3181a017f69332251252 / tree 1ed0fc469808bda76072192dd088515b6dcb24b2.
