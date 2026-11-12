@@ -1,11 +1,11 @@
-## A3 checkpoint — 2026-11-12 (topic-aware upstream adapter; exact-head CI pending)
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
-- Verified PUBLIC main at 653e99fde8c27ff5cccc65e46341fac31d08c969 / tree 1d1987a13d44cebcebf55bfe008d1f4b73ef783d.
-- Branch codex/a3-synthetic-adapter-eligibility-20261112 adds a fail-closed map for all six registered public topics. Unknown Engine topic slugs invalidate an item, and topic-less items cannot pass public release. Synthetic-only regressions compare the adapter map against the public topic registry and cover the publication gate.
-- Local verification passed: site and governance checks, build, 237 unit tests, performance budget, E2E smoke, 80 browser tests, committed-dist drift, and all 12 Lighthouse route/profile audits. Accessibility scored 100 on all profiles; mobile performance 95–99 and desktop performance 99–100.
-- The public catalog remains empty/noindex (0 learning items). The production artifact integrity suite confirms test-only fixtures and internal/source material are excluded from dist. No Engine/private data was transferred. Exact-head Actions are pending; this branch has not deployed. Direct live Pages readback remains NOT_VERIFIED and A5 remains blocked_external.
-- ENGINEERING_READY=YES for the adapter and regression slice; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Keep all real-content publication gates closed.
-- Next: push and open the PR, require exact-head checks, verify any post-merge Cloudflare build separately from direct live readback, then continue independent A3 and C1 work.
+- PR #177 merged from expected head 039f499e206115a9f0b3b5ab0e2bfa7a4505731c; PUBLIC main is 69175e03b1aade0fe83c3181a017f69332251252 / tree 1ed0fc469808bda76072192dd088515b6dcb24b2.
+- Exact-head Verify #43178037133 passed; post-main Verify #43178728951 passed. Cloudflare Workers Builds for the merged main also passed as check #131049554319. This verifies technical provider build/deployment status only.
+- The adapter now explicitly maps all six current public topic slugs, rejects unknown upstream slugs, and blocks topic-less public release. Synthetic-only tests enforce map parity and the publication gate. Local verification passed 237 unit, 80 browser, E2E smoke, performance, drift, governance and build checks; all 12 Lighthouse profiles passed with accessibility 100 throughout (mobile performance 95–99; desktop 99–100).
+- Production catalog remains empty/noindex with 0 learning items; test fixtures and internal/source material are absent from dist, and no Engine data was transferred.
+- Direct live Pages readback remains NOT_VERIFIED: the web reader cannot access the Pages host, and the available browser session does not expose Chrome or IAB. A5 remains blocked_external. ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 UX/accessibility/PWA work and C1 synthetic adapter compatibility independently. Retry direct live readback only through an available supported surface; keep real-content publication gates closed.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #175 merged; post-main verified)
 
