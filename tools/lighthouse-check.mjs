@@ -49,6 +49,24 @@ export const LIGHTHOUSE_ROUTES = Object.freeze([
   Object.freeze({ id: "progress", path: "/progres/" }),
 ]);
 
+export function selectLighthouseRoutes(routeIds = process.env.LIGHTHOUSE_ROUTE_IDS) {
+  const requested = Array.isArray(routeIds)
+    ? routeIds.map((id) => String(id).trim()).filter(Boolean)
+    : typeof routeIds === "string"
+      ? routeIds.split(",").map((id) => id.trim()).filter(Boolean)
+      : [];
+  if (requested.length === 0) return [...LIGHTHOUSE_ROUTES];
+
+  const knownIds = new Set(LIGHTHOUSE_ROUTES.map(({ id }) => id));
+  const unknownIds = [...new Set(requested)].filter((id) => !knownIds.has(id));
+  if (unknownIds.length) {
+    throw new Error(`Unknown Lighthouse route id(s): ${unknownIds.join(", ")}`);
+  }
+
+  const selectedIds = new Set(requested);
+  return LIGHTHOUSE_ROUTES.filter(({ id }) => selectedIds.has(id));
+}
+
 export function readLighthouseScores(report) {
   const scores = {
     performance: report?.categories?.performance?.score,
@@ -221,7 +239,7 @@ async function runAudits() {
 
   try {
     await waitForPreview(server);
-    for (const route of LIGHTHOUSE_ROUTES) {
+    for (const route of selectLighthouseRoutes()) {
       const url = new URL(route.path, PREVIEW_ORIGIN).toString();
       for (const profile of ["mobile", "desktop"]) {
         const outputPath = join(outputDirectory, `lighthouse-${route.id}-${profile}.json`);

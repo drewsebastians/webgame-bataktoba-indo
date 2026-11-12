@@ -1,3 +1,11 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 PWA cache privacy hardening; PR preparation)
+
+- Re-verified PUBLIC `main` immediately before this batch: `bb4f8da8f3b962a3d301a97f592aa27151d4a424` / tree `707ae7989b44768fe5a686e811420caeb08f955e`. Working branch: `codex/a3-pwa-privacy-20261112`.
+- Service worker avoids storing navigations with a query string or a `private`/`no-store` response; it evicts matching older cache entries. Runtime cache writes also reject and evict private/no-store responses. Cache version is bumped and generated dist is synchronized (`btp-919b8e778653`).
+- Added unit/browser coverage for these cases and resumable Lighthouse route selection. Checks passed across the verification attempts: site/governance, build, 234 unit tests, perf budget (JS 194,964/196,608 bytes; CSS 16,342/49,152), E2E smoke, dist drift, 80/80 browser tests on 4-worker rerun, and all 12 Lighthouse profiles (a11y 100 throughout; mobile perf 91–99; desktop 99–100). Initial 10-worker browser run had one timeout, cleared by the full rerun.
+- Public learning catalog remains empty/noindex; 0 published records and 0 warnings. No fixture or private Engine data was added to the production artifact. ENGINEERING_READY=YES for this code change; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Cloudflare production build and live artifact readback are NOT_VERIFIED; keep A5 `blocked_external`. No history rewrite or `PROGRESS_LOG.md` edit. Next: push/open PR, verify exact-head CI, merge only after validation, then record resulting main SHA/tree.
+
 ## Latest checkpoint — 2026-11-11 UTC / 2026-11-12 WIB (PR #171 merged; dictionary filter accessibility)
 
 - PUBLIC `main` is `505a95856f35acfe40a9caed7b6253aaeecfad95` / tree `50671a8d23561ecd02a42019fa1d4682905eb863`. PR [#171](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/171) gives dictionary filters a 44px touch target and adds an isolated synthetic browser test for touch, keyboard focus, selection and 320px overflow.

@@ -6,6 +6,28 @@ import AxeBuilder from "@axe-core/playwright";
 // are blocked so fixtures cannot be persisted in a browser cache.
 test.use({ serviceWorkers: "allow" });
 
+test("query-bearing pages are not stored in the offline shell cache", async ({ page }) => {
+  await page.goto("/");
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+  });
+  await expect.poll(
+    () => page.evaluate(() => Boolean(navigator.serviceWorker.controller)),
+    { timeout: 15000, message: "service worker did not take control of the browser page" },
+  ).toBe(true);
+
+  const response = await page.goto("/?session=synthetic-private-marker");
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("#main-content")).toBeVisible();
+  const cachedQueries = await page.evaluate(async () => {
+    const shellName = (await caches.keys()).find((name) => name.startsWith("btp-") && name.endsWith("-shell"));
+    if (!shellName) return [];
+    const cache = await caches.open(shellName);
+    return (await cache.keys()).map((request) => new URL(request.url).search).filter(Boolean);
+  });
+  expect(cachedQueries).toEqual([]);
+});
+
 async function expectNoSeriousAccessibilityViolations(page) {
   const scan = await new AxeBuilder({ page }).analyze();
   const serious = scan.violations.filter(
