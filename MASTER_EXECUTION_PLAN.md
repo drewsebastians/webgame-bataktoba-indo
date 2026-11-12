@@ -1,9 +1,9 @@
 ## Current execution checkpoint — 2026-11-12
 
-- PUBLIC `main` was rechecked at `c842de60e81fb0862d679b902d316093b39ef5f0` / tree `12d7cf50bb4fa07f5621323907dfbff0f370c892` before this A3 batch. The active worktree is `codex/a3-dictionary-sense-context-20261112`.
-- A3 slice: expose per-sense dictionary context notes safely and exercise the public consumer with isolated synthetic fixtures. Local core validation passed 237 unit tests and 81 browser tests; all 12 Lighthouse profiles passed (a11y 100, mobile performance 96–99, desktop 100).
-- Source, regression, regenerated `dist/` and initial checkpoint are committed as `45119c9431216cab055d57e32bb62a2121bb41c6`; a full post-commit `npm run verify` passed including committed-tree drift. Exact-head Actions, merge and Cloudflare evidence for this change are still pending.
-- Keep readiness separate: engineering for this UI slice is locally ready; data, publication and learner readiness are still NO. Production catalog stays empty/noindex, and no Engine content moves to PUBLIC.
+- A3 dictionary sense-context work merged as PR #179 at PUBLIC `main` `317d2a0b274fe18c07d8fe3c23be2da02eb03bb9` / tree `638507b8aaf18b9c676d1609bd764871819a1d68`.
+- Exact-head Verify #43194135585 and post-main Verify #43194832786 passed (237 unit, 81 browser; build, performance, smoke, governance and drift). All 12 Lighthouse profiles passed (accessibility 100, mobile performance 96–99, desktop 100). Cloudflare Workers Builds passed for production build `376b3e85-afb6-4aac-8a5d-ac3f62f77176`.
+- The dictionary now surfaces mapped context notes safely. The public catalog remains empty/noindex; ENGINEERING_READY=YES for this change; DATA_READY, PUBLICATION_READY and LEARNING_READY remain NO.
+- Direct Pages readback is still NOT_VERIFIED; keep A5 `blocked_external` and continue independent A3/C1 browser work.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 

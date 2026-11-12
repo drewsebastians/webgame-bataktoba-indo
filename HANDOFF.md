@@ -1,10 +1,9 @@
-## Active handoff — A3 dictionary sense context (2026-11-12)
+## Current handoff — A3 dictionary sense context merged (2026-11-12)
 
-- Start from PUBLIC `main` `c842de60e81fb0862d679b902d316093b39ef5f0` / tree `12d7cf50bb4fa07f5621323907dfbff0f370c892`; active branch `codex/a3-dictionary-sense-context-20261112`.
-- Dictionary detail now presents mapped context notes as plain text; the new browser test uses only an isolated synthetic `learning-items.json` fixture and checks alternatives plus inert rendering.
-- Commit `45119c9431216cab055d57e32bb62a2121bb41c6` contains the generated assets with source and tests. Full post-commit `npm run verify` passed (237 unit, 81 browser, site/governance, build, performance, smoke and drift); all 12 Lighthouse checks passed (a11y 100, mobile performance 96–99, desktop 100).
-- CI, merge, and Cloudflare build for the feature are pending. Keep live readback `NOT_VERIFIED`; keep the catalog empty/noindex and do not transfer Engine records.
-- Resume: inspect `git status`, commit the refreshed checkpoint docs, push/open PR, inspect exact-head Actions, merge only after success, then record post-main SHA/tree and provider build evidence.
+- PUBLIC `main` is `317d2a0b274fe18c07d8fe3c23be2da02eb03bb9` / tree `638507b8aaf18b9c676d1609bd764871819a1d68`. PR #179 merged from expected head `6d9cf7bca767a574402429ac0b3624a2a590a64d`.
+- Exact-head #43194135585 and post-main #43194832786 passed; Cloudflare Workers Builds passed for production build `376b3e85-afb6-4aac-8a5d-ac3f62f77176`. Local verification passed 237 unit/81 browser plus build, smoke, performance, governance and committed-dist drift. All 12 Lighthouse profiles passed.
+- The dictionary safely presents `context_note` and alternatives; the regression uses only a synthetic fixture. Catalog remains empty/noindex and private Engine data is absent from public output.
+- Live Pages readback remains NOT_VERIFIED; A5 stays blocked_external. Resume independent A3/C1 UX work and retry only through an available direct browser/network path.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
