@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   mapUpstreamItem,
   preparePublicRelease,
   validateUpstreamItem,
   validateUpstreamPackage,
+  WEBGAME_TOPIC_MAP,
 } from "../../assets/js/upstream-adapter.js";
 import { createSyntheticEnginePackage } from "../fixtures/synthetic-engine-package.mjs";
 
@@ -61,6 +63,23 @@ test("adapter maps alternatives, sense, topic, provenance and independent game r
   assert.equal(item.gameEligibility.spacedRepetition, true);
   assert.equal(item.publicReleaseEligible, false);
   assert.equal(item.lifecycleState, "WITHHELD");
+});
+
+test("topic mapping stays in parity with the public registry and rejects unknown slugs", () => {
+  const registry = JSON.parse(readFileSync(
+    new URL("../../data/published/topics.json", import.meta.url),
+    "utf8",
+  ));
+  const slugs = registry.topics.map((topic) => topic.slug).sort();
+  assert.deepEqual(Object.keys(WEBGAME_TOPIC_MAP).sort(), slugs);
+  for (const slug of slugs) assert.equal(WEBGAME_TOPIC_MAP[slug], slug);
+
+  const item = {
+    ...createSyntheticEnginePackage().items[0],
+    topic_slugs: ["unregistered-topic"],
+  };
+  assert.ok(validateUpstreamItem(item).errors.includes("topic:unmapped"));
+  assert.throws(() => mapUpstreamItem(item), /topic:unmapped/);
 });
 
 test("adapter preserves context and source-relevant language metadata", () => {
@@ -169,6 +188,16 @@ test("publication rejects primary evidence without a matching source record", ()
   assert.throws(
     () => preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS),
     /INVALID_UPSTREAM_PACKAGE:item:primary_provenance_missing/,
+  );
+});
+
+test("publication requires a mapped topic even when the remaining rights fixture is valid", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  payload.items[0].topic_slugs = [];
+  assert.deepEqual(validateUpstreamPackage(payload), { valid: true, errors: [] });
+  assert.throws(
+    () => preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS),
+    /ITEM_TOPIC_MAPPING_REQUIRED/,
   );
 });
 

@@ -37,6 +37,17 @@ const DISTRIBUTION_STATES = new Set([
 ]);
 const PERMISSIONS = new Set(["YES", "NO", "UNKNOWN"]);
 
+// Keep this explicit bridge in parity with data/published/topics.json.
+// New Engine topics fail closed until the public website has a route and label.
+export const WEBGAME_TOPIC_MAP = Object.freeze({
+  angka: "angka",
+  keluarga: "keluarga",
+  sapaan: "sapaan",
+  makanan: "makanan",
+  waktu: "waktu",
+  alam: "alam",
+});
+
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -74,6 +85,10 @@ export function validateUpstreamItem(item) {
   if (!["bbc", "btk", "und"].includes(item.dialect_code)) errors.push("invalid:dialect_code");
   if (!Array.isArray(item.evidence_ids) || !uniqueStringArray(item.evidence_ids)) errors.push("invalid:evidence_ids");
   if (!Array.isArray(item.topic_slugs) || !uniqueStringArray(item.topic_slugs)) errors.push("invalid:topic_slugs");
+  if (Array.isArray(item.topic_slugs) &&
+      item.topic_slugs.some((slug) => !Object.hasOwn(WEBGAME_TOPIC_MAP, slug))) {
+    errors.push("topic:unmapped");
+  }
   for (const field of ["indonesian_alternatives", "batak_alternatives", "conflict_reason_codes"]) {
     if (field in item && (!Array.isArray(item[field]) || !uniqueStringArray(item[field]))) {
       errors.push(`invalid:${field}`);
@@ -129,7 +144,7 @@ export function mapUpstreamItem(item) {
     indonesianAlternatives: [...(item.indonesian_alternatives ?? [])],
     batakAlternatives: [...(item.batak_alternatives ?? [])],
     senseId: item.sense_id,
-    themes: [...item.topic_slugs],
+    themes: item.topic_slugs.map((slug) => WEBGAME_TOPIC_MAP[slug]),
     difficulty: item.difficulty_level === "UNKNOWN" ? null : (item.difficulty_level ?? null),
     learningOrder: item.learning_order ?? null,
     partOfSpeech: item.part_of_speech ?? null,
@@ -264,6 +279,9 @@ export function preparePublicRelease(payload, authorization = {}, { requireComme
         !["AUTOMATED_SUPPORTED", "HUMAN_REVIEWED"].includes(item.quality_state) ||
         nonEmptyString(item.release_block_reason)) {
       throw new Error("ITEM_NOT_PUBLICATION_READY");
+    }
+    if (item.topic_slugs.length === 0) {
+      throw new Error("ITEM_TOPIC_MAPPING_REQUIRED");
     }
     const relatedSourceIds = new Set([
       item.source_id,
