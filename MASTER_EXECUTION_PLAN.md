@@ -1,3 +1,12 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #175 merged; post-main verified)
+
+- PR [#175](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/175) merged at PUBLIC `main` `9e9fbe98b6f2fa0a7ee33632c5f77b839ed30458` / tree `1e649fd3ad5de97fb3de0fa26b28dd30de7b5ccf`, from exact expected PR head `351fbe7669d1078ac6f0bee39e0e3db5aea831fa`.
+- Exact-head Verify [#43169061877](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43169061877) and post-main Verify [#43169933728](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43169933728) passed. Post-main: 235 unit tests, E2E smoke, 80 browser tests, performance budget, drift gate, and 12 Lighthouse profiles.
+- Lighthouse post-main scores: mobile performance 97/97/97/99/99/100, desktop 100 across six routes, accessibility 100 on all 12 profiles. Cloudflare Workers Builds check [#131020695666](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/131020695666) succeeded.
+- Direct live readback remains unavailable: web reader reports the Pages host inaccessible and the available CUA session has no browser surface. Provider build success is verified; served root/robots/manifest/service worker/lesson route remain NOT_VERIFIED. Keep A5 blocked_external.
+- Empty production catalog/noindex remains in force (0 published items, 0 warnings); synthetic fixture and private Engine content are absent from the artifact. Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 with isolated synthetic UX/accessibility work; do not publish learning content without verified rights, provenance and quality gates.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 progress-reset privacy and browser-runner stability)
 
 - Re-verified PUBLIC `main` at `838e09c586441f399ee54d42017836c78fccebc2` / tree `396325b6138bc2caec2f896e40765c60300f0ac5`; branch `codex/a3-browser-navigation-20261112` starts from that exact commit. Implementation commit: `545ded234809126f3046cbac49024910b4499848`.
