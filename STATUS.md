@@ -3,9 +3,9 @@
 - Re-verified PUBLIC `main` at `c842de60e81fb0862d679b902d316093b39ef5f0` / tree `12d7cf50bb4fa07f5621323907dfbff0f370c892`. Work branch `codex/a3-dictionary-sense-context-20261112` is based on that exact main.
 - Expanded dictionary entries now show the mapped `context_note` beside alternatives and corpus quality. It is rendered as a text node. A synthetic-only Playwright regression checks sense context, recorded alternatives, and inert rendering of markup-like fixture text.
 - `npm run verify:core` passed site/governance checks, build, 237 unit tests, performance budget, E2E smoke, and 81/81 browser tests. `npm run lighthouse:check` passed all 12 route/device profiles: accessibility 100 throughout, mobile performance 96–99, desktop performance 100.
-- `npm run verify` reached `verify:drift` after the build and reported the expected generated `dist/` changes because the refreshed assets are not committed yet. Exact-head GitHub Actions, merge, and Cloudflare build are pending; no deployment is claimed for this change.
+- Source, regression, checkpoint, and regenerated `dist/` are committed as `45119c9431216cab055d57e32bb62a2121bb41c6` (tree `58b68282a921491874249608c8832fb6b56c426e`). A full post-commit `npm run verify` passed, including committed-tree drift. Exact-head GitHub Actions, merge, and Cloudflare build are pending; no deployment is claimed for this change.
 - Published catalog remains empty/noindex (0 items); fixture data is test-only and no private Engine records were transferred. `ENGINEERING_READY=YES` for the locally verified UI change; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Direct live Pages readback remains `NOT_VERIFIED`.
-- Next: commit source, test, generated assets, and this checkpoint; rerun dist drift on the committed tree; open the PR and require exact-head checks before merge and post-main verification.
+- Next: commit this validation checkpoint, push the feature branch, open the PR, require exact-head checks before merge, and record post-main/provider evidence. The source/test/dist commit is already clean and passes drift.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
