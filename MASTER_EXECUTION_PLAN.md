@@ -1,3 +1,12 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 progress-reset privacy and browser-runner stability)
+
+- Re-verified PUBLIC `main` at `838e09c586441f399ee54d42017836c78fccebc2` / tree `396325b6138bc2caec2f896e40765c60300f0ac5`; branch `codex/a3-browser-navigation-20261112` starts from that exact commit. Implementation commit: `545ded234809126f3046cbac49024910b4499848`.
+- Reset now removes the legacy `batakTobaGameProgress` storage key as well as corrupt backups after writing an empty v3 state. Unit and browser regressions verify deletion and no resurrection after reload. Playwright now caps concurrency at four workers to avoid timeout failures under ten-worker contention.
+- Local verification passed: `npm run verify:core` (site/governance, build, 235 unit tests, performance budget, E2E smoke and 80/80 browser tests at four workers); `npm run verify:drift` passed after the build artifact commit; `npm run lighthouse:check` passed all 12 mobile/desktop profiles. Accessibility was 100/100 throughout; mobile performance ranged 96–99 and desktop performance was 100.
+- Public catalog remains empty/noindex (0 published items and 0 warnings); fixture markers and private Engine content are absent from `dist`. Cloudflare Workers Builds check for current pre-change main passed (`9ed16a91-b4ed-4f87-8c9e-a80514eed97d`), but the new branch is not deployed and direct live content remains NOT_VERIFIED; A5 is `blocked_external`.
+- Readiness: ENGINEERING_READY=YES locally; exact-head CI and merge pending. DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No `PROGRESS_LOG.md` edit, history rewrite, or private Engine transfer; A1/A9 approval gates remain intact.
+- Next: publish the branch as a PR, require exact-head Actions to pass before merge, then record the merged main SHA/tree and post-merge production evidence.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #173 merged; PWA cache privacy hardening)
 
 - Re-verified PUBLIC `main`: `296b88f03cb238b1e7ecfb57fdf408eb4c102f61` / tree `46642799f77caa23de7f00ef354885d6e1873d03`. PR [#173](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/173) merged with this main SHA.

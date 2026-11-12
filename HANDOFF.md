@@ -1,3 +1,11 @@
+## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (A3 progress-reset privacy)
+
+- Branch `codex/a3-browser-navigation-20261112` starts at PUBLIC `main` `838e09c586441f399ee54d42017836c78fccebc2` / tree `396325b6138bc2caec2f896e40765c60300f0ac5`; code commit `545ded234809126f3046cbac49024910b4499848`.
+- Reset now deletes legacy progress and corrupt-backup keys; reload cannot restore the legacy data. Added unit and isolated browser regressions; Playwright defaults to four workers.
+- Local gates passed: verify core (235 unit tests, E2E smoke, budgets, 80/80 browser tests), committed-dist drift, and 12 Lighthouse profiles (a11y 100, mobile performance 96–99, desktop 100). Exact-head Actions and merge are pending.
+- Catalog stays empty/noindex; private Engine content and synthetic markers remain out of `dist`. Current main's Cloudflare build check succeeded, but this branch is not deployed; direct live artifact readback remains NOT_VERIFIED. A5 stays blocked.
+- Continue A3; do not rewrite Git history or edit `PROGRESS_LOG.md`; keep A1/A9 approval gates and all publication/readiness gates unchanged.
+
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #173 merged; PWA cache privacy hardening)
 
 - PUBLIC `main` is `296b88f03cb238b1e7ecfb57fdf408eb4c102f61` / tree `46642799f77caa23de7f00ef354885d6e1873d03`; PR [#173](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/173) merged.
