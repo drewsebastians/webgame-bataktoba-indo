@@ -55,6 +55,9 @@ const COPY_PATHS = [
   "_redirects",
   ".nojekyll",
 ];
+const PUBLIC_BUILD_EXCLUDED_FILES = new Set([
+  "assets/js/upstream-adapter.js",
+]);
 
 const dist = join(root, "dist");
 rmSync(dist, { recursive: true, force: true });
@@ -68,7 +71,12 @@ for (const rel of COPY_PATHS) {
   }
   const dest = join(dist, rel);
   if (statSync(src).isDirectory()) {
-    cpSync(src, dest, { recursive: true });
+    cpSync(src, dest, {
+      recursive: true,
+      filter: (sourcePath) => !PUBLIC_BUILD_EXCLUDED_FILES.has(
+        relative(root, sourcePath).replace(/\\/g, "/"),
+      ),
+    });
   } else {
     cpSync(src, dest);
   }

@@ -1,9 +1,10 @@
-## Current handoff — A3 dictionary sense context merged (2026-11-12)
+## Current handoff — A3/C1 revocation-safe adapter (2026-11-12)
 
-- PUBLIC `main` is `317d2a0b274fe18c07d8fe3c23be2da02eb03bb9` / tree `638507b8aaf18b9c676d1609bd764871819a1d68`. PR #179 merged from expected head `6d9cf7bca767a574402429ac0b3624a2a590a64d`.
-- Exact-head #43194135585 and post-main #43194832786 passed; Cloudflare Workers Builds passed for production build `376b3e85-afb6-4aac-8a5d-ac3f62f77176`. Local verification passed 237 unit/81 browser plus build, smoke, performance, governance and committed-dist drift. All 12 Lighthouse profiles passed.
-- The dictionary safely presents `context_note` and alternatives; the regression uses only a synthetic fixture. Catalog remains empty/noindex and private Engine data is absent from public output.
-- Live Pages readback remains NOT_VERIFIED; A5 stays blocked_external. Resume independent A3/C1 UX work and retry only through an available direct browser/network path.
+- Rechecked PUBLIC `main` at `d62772465bb6ca3e2116d2b75d769ffaf4077be8` / tree `dbaf32a2981e3bd66227107570215b5f664d0db0`; active branch `codex/a3-clear-legacy-progress-20261112` starts there.
+- Synthetic regressions prove revoked primary or secondary-evidence sources remove affected release descendants, keep unrelated items, and do not mutate inputs. Unknown rights remain fail-closed.
+- Adapter is source/test-only: production build excludes it until an independently authorized runtime integration. Artifact test checks runtime assets; measured budget is 181,658/196,608 JS and 16,342/49,152 CSS.
+- Local core checks passed (241 unit, 81 browser, site/governance, build, budget and smoke). Full `npm run verify` needs a post-commit rerun for the committed-dist drift gate; Lighthouse and remote CI are pending. No public catalog records, synthetic fixtures, or Engine data are shipped.
+- Next: commit, run committed-tree verification and Lighthouse, push/open PR, require exact-head Actions before merge, then record main/provider evidence. Keep A5 live readback NOT_VERIFIED; catalog empty/noindex and readiness gates closed.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
