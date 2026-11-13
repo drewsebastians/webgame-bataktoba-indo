@@ -1,5 +1,5 @@
 import { SITE_CONFIG } from "./config.6316db9b.js";
-import { initMobileNav } from "./utils/nav-toggle.80f3042e.js";
+import { initMobileNav } from "./utils/nav-toggle.00a3b847.js";
 import { loadLearningItems } from "./data.a34bfabb.js";
 import {
   exportProgress,
