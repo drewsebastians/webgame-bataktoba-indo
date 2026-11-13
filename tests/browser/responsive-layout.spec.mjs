@@ -11,6 +11,29 @@ const PRIMARY_ROUTES = [
   "/learn/keluarga/",
 ];
 
+const CURRENT_NAV_BY_ROUTE = {
+  "/": "home",
+  "/games/": "games",
+  "/flashcards/": "flashcards",
+  "/dictionary/": "dictionary",
+  "/progres/": "progres",
+};
+
+test("main navigation identifies the current top-level page without marking topic pages as Home", async ({ page }) => {
+  for (const route of PRIMARY_ROUTES) {
+    await page.goto(route);
+
+    const currentLinks = page.locator('#nav-links-list a[aria-current="page"]');
+    const expectedCurrentPage = CURRENT_NAV_BY_ROUTE[route];
+    if (expectedCurrentPage) {
+      await expect(currentLinks, route + " should have one current navigation item").toHaveCount(1);
+      await expect(currentLinks).toHaveAttribute("data-nav", expectedCurrentPage);
+    } else {
+      await expect(currentLinks, route + " should not mark an unrelated top-level page as current").toHaveCount(0);
+    }
+  }
+});
+
 test("primary routes reflow at the 640px width equivalent to 200% desktop zoom", async ({ page }) => {
   // At 200% zoom, a 1280 CSS-pixel desktop viewport exposes about 640 CSS pixels.
   // Keep this layout check on the real empty public catalog; fixture-bearing flows

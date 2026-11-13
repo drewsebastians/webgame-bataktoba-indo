@@ -1,5 +1,5 @@
 ﻿import { loadLearningItems, loadLessons, loadSentences, loadTopics, loadWordPairs } from "./data.a34bfabb.js";
-import { initMobileNav } from "./utils/nav-toggle.00a3b847.js";
+import { initMobileNav } from "./utils/nav-toggle.718330b9.js";
 import { MIN_LESSON_POOL_ITEMS, PRACTICE_MODES, SITE_CONFIG } from "./config.6316db9b.js";
 import {
   exportProgress,
