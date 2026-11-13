@@ -1,3 +1,13 @@
+## Latest execution checkpoint — 2026-11-13 07:56 UTC (PR #190 merged; A3 continues)
+
+- Webgame is PUBLIC. Current main HEAD is `50bb4549eb98d7b79c7ba69055f704e8c7e9de42` after PR #190. The GitHub connector returns commit SHA but not the associated tree object SHA, so this checkpoint records the verified head only.
+- PR [#190](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/190) adds 44px touch-target assertions to the isolated synthetic 320px due-flashcard review. It measures mobile navigation, deck/topic filters, shuffle, card flip, and review/navigation controls. It changes tests only; the published catalog and production behavior are unchanged.
+- Exact-head Verify [#43380226941](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43380226941) passed 241/241 unit tests and 84/84 Playwright tests (0 skipped), build/smoke/performance/dist-drift/artifact checks, and 12 Lighthouse audits. Accessibility scored 100 on all routes; mobile performance ranged 97–100 and desktop was 100.
+- Cloudflare PR preview build `4e5195f1-d45b-485f-a694-0796e54d2ef5` succeeded for PR head `ffbc8e5b`. A Cloudflare production build for merged main `50bb4549` is not verified. A direct live readback was attempted but browser access was unavailable; do not claim the served production artifact was inspected.
+- Production catalog remains empty/noindex; synthetic fixture data remains isolated from public artifacts; no private Engine source metadata or learner data was copied here. Issue #2's synthetic-adapter acceptance is closed; A3 responsive accessibility and browser engineering remain active. A5 remains `blocked_external`; A1/A9/A12 stay approval-gated with no Git-history rewrite.
+- Readiness: `ENGINEERING_READY=YES` for the validated browser test batch; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`.
+- Next: continue independent responsive desktop/mobile UX, keyboard/touch, PWA/offline, privacy/security and game-flow work. Select the next measured browser gap, preserve isolated synthetic fixtures and noindex empty states, and verify production only when provider/live evidence is available.
+
 ## Latest checkpoint — 2026-11-13 06:19 UTC (PR #188 post-merge verified)
 
 - PUBLIC main is de9722a394f529150b93cefed609fca24c329417 / tree 642109b391acef7b3f75880a3dfb66a7610dd5f2. PR #188 merged from expected head 3a4e27eeb2d19b910e7c8026dc65bceee11702e2. It adds a synthetic-only browser regression for focused-card 1/2/3 rating keys, local progress/scheduling semantics, and focus as the next card appears; no runtime or published data changed.
