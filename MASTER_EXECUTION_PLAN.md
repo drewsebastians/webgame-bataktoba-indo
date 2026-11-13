@@ -1,10 +1,10 @@
-## Current execution checkpoint — 2026-11-12
+## Current execution checkpoint — 2026-11-13
 
-- A3/C1 revocation-safe adapter work is based on rechecked PUBLIC `main` `d62772465bb6ca3e2116d2b75d769ffaf4077be8` / tree `dbaf32a2981e3bd66227107570215b5f664d0db0`, branch `codex/a3-clear-legacy-progress-20261112`.
-- The source/test adapter drops revoked-source descendants while retaining independent items, and keeps unknown rights blocked. The public build now excludes this not-yet-integrated adapter; synthetic regressions verify revocation and artifact isolation.
-- Code/artifact commit `e8ed4dbfd94326428db567165fe5c8d2f0538f96` passed full `npm run verify` (241 unit, 81 browser, build, budget, smoke, governance and committed-dist drift). All 12 Lighthouse profiles passed (accessibility 100; mobile performance 95–99; desktop 98–100). Exact-head GitHub Actions remain pending. Measured budget: 181,658/196,608 JS, 16,342/49,152 CSS.
-- Production catalog remains empty/noindex (0 records), with no synthetic fixtures or Engine data in dist. `ENGINEERING_READY=YES` for this safety slice; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Live Pages readback remains NOT_VERIFIED and A5 remains `blocked_external`.
-- Next: push/open a PR, require exact-head checks before expected-head merge, then record post-main/provider evidence. Continue data collection privately and website work independently.
+- A3/C1 revocation-safe adapter merged as PR #181 from expected head `4a36b17e92ee988f0657da717c70ba51427e8e53`; PUBLIC `main` is `2711f14dcc4b0187f18a9270e332583e0db8adf7` / tree `b5e7a8b33b95ce8791eec3f37c48ac76acee15bc`.
+- Exact-head Verify #43346625392, post-main Verify #43347364976, and Cloudflare production build `da3b97f8-069a-441d-adc5-226a6837fbbb` succeeded. Full verify passed (241 unit, 81 browser; build, performance budget, smoke, governance, drift); 12 Lighthouse profiles passed.
+- The adapter prunes revoked item/source/evidence descendants and fails closed on unknown rights. It remains source/test-only and is excluded from production assets pending independently authorized integration.
+- Catalog remains empty/noindex, with no synthetic fixtures or Engine data in dist. `ENGINEERING_READY=YES` for this safety slice; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Direct live Pages readback remains NOT_VERIFIED and A5 remains `blocked_external`.
+- Next: continue independent A3/C1 engineering and retry direct live readback only through an available supported reader; keep publication gates closed.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
