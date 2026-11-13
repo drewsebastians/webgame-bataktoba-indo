@@ -1,3 +1,9 @@
+## Active checkpoint — A3 flashcard keyboard scope (2026-11-13)
+
+PUBLIC main at batch start: `b9a19dbd89c73a7a27b70d020bc56580e5297109` / tree `8e1b0ec894e3e8c84a04915caa6dd2b64b276618`; PR #184's exact-head Verify #43360945108 and Workers Build #131674347571 passed. Implementation commit `78bc98c3d5e497b902708f389091594c6380f845` / tree `bb7eb7988e0add57c5af5b69be91552a902cad7c` scopes number/arrow/space shortcuts to the focused flashcard, declares `aria-keyshortcuts`, updates focus instructions and tests non-card controls with synthetic browser fixtures. Rebuilt `dist` contains a new hashed flashcard entrypoint and no fixture/private linguistic data.
+
+Local site/governance checks, build, 241 unit tests, performance budget and artifact checks passed. The environment could not connect separate test processes to its loopback server, so e2e and focused browser assertions remain unverified locally; exact-head CI is pending. Keep the production catalog empty/noindex and preserve A5's live-readback blocker. Continue browser UX work independently of corpus readiness.
+
 ## Current execution checkpoint — A3 responsive navigation (2026-11-13)
 
 - PR #183 merged from expected head `1de408e4cc34d979af831aca6c9ca7db660ae4b4`; PUBLIC main `b95afbe2c3f02d12baf34653264ffee1d975c716` / tree `b71a9681d142f048bf362aa7fbdb410ccb68d1ad`.
