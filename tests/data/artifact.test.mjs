@@ -55,6 +55,16 @@ describe("production artifact integrity", () => {
     }
   });
 
+  (hasDist ? it : it.skip)("keeps the unintegrated upstream publication adapter out of runtime assets", () => {
+    const assetRoot = fileURLToPath(new URL("dist/assets/js/", root));
+    const runtimeCode = readdirSync(assetRoot)
+      .filter((name) => name.endsWith(".js"))
+      .map((name) => readFileSync(join(assetRoot, name), "utf8"))
+      .join("\n");
+    assert.ok(!runtimeCode.includes("PUBLICATION_AUTHORIZATION_REQUIRED"));
+    assert.ok(!runtimeCode.includes("removeRevokedDescendants"));
+  });
+
   (hasDist ? it : it.skip)("gives each immutable JS/CSS URL a hash of its final bytes", () => {
     const assetRoot = fileURLToPath(new URL("dist/assets/", root));
     const hashedAssets = [];

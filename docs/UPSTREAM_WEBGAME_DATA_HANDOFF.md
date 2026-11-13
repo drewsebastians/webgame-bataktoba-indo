@@ -1,6 +1,6 @@
 # Webgame Browser — Upstream Data Requirements and Handoff v1
 
-**Upstream steward:** `drewsebastians/batak-indo-alignment-engine` (private). **Consumer:** Batak Toba Play (public website). **State:** schema contract documented; a fail-closed schema/provenance adapter and isolated synthetic browser coverage are implemented on the current work branch; outward content transfer remains NOT AUTHORIZED by upstream private research policy. Do not use publication-eligible labels as evidence of authorization without independent proof.
+**Upstream steward:** `drewsebastians/batak-indo-alignment-engine` (private). **Consumer:** Batak Toba Play (public website). **State:** schema contract documented; a fail-closed schema/provenance adapter and isolated synthetic coverage are implemented as source and tests. The adapter is deliberately excluded from the production bundle until a separately authorized runtime integration; outward content transfer remains NOT AUTHORIZED by upstream private research policy. Do not use publication-eligible labels as evidence of authorization without independent proof.
 
 See the comprehensive [private upstream field dictionary](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/docs/WEBGAME_DATA_COLLECTION_CONTRACT.md) and upstream [learning item schema](https://github.com/drewsebastians/batak-indo-alignment-engine/blob/main/schemas/webgame_learning_item.schema.json). The contract and schema are present on private upstream main; repository visibility remains private.
 
@@ -41,6 +41,13 @@ The older simple staging shape is **not** the canonical source collection schema
 - Publication requires a topic mapping in addition to item/source rights and authorization gates. None of these checks turns a private record into permission to publish.
 - Public release requires independently supplied public-scope and upstream-policy approval references plus source-specific public distribution, current revocation, terms, license and attribution evidence. The adapter is not wired to fetch or publish private content.
 - Browser acceptance uses fabricated `SYNTHETIC_TEST_ONLY` values intercepted in Playwright. The production published endpoints and `dist` remain separate.
+
+## Revocation and artifact checkpoint (2026-11-12)
+
+- `removeRevokedDescendants` filters records whose item lifecycle, primary source, or any evidence source is explicitly revoked, and drops their evidence plus unused source rows. Unrelated records remain; the input is not mutated. Unknown rights remain blocked by publication validation.
+- `preparePublicRelease` applies the same revocation filter before mapping. Synthetic-only regressions cover revoked primary and secondary evidence sources, independent item retention, and immutability.
+- `assets/js/upstream-adapter.js` is excluded from `dist/assets/js/` because it is not imported by the website runtime and no real-data publication scope has been authorized. Tests assert the adapter is absent from shipped runtime assets. Any future runtime integration requires its own authorization, privacy review, bundle budget, and exact artifact checks.
+- No private content, restricted source text, or synthetic fixture values are placed in public build output. The catalog remains empty/noindex.
 
 ## Acceptance criteria
 

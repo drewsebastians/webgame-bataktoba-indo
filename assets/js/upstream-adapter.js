@@ -257,6 +257,46 @@ function validatePackage(payload) {
   return { valid: errors.length === 0, errors };
 }
 
+function withoutRevokedDescendants(payload) {
+  const revokedSourceIds = new Set(
+    payload.sources
+      .filter((source) => source.revocation_status === "REVOKED")
+      .map((source) => source.source_id),
+  );
+  const revokedItemIds = new Set(
+    payload.items
+      .filter((item) => item.lifecycle_state === "REVOKED" || revokedSourceIds.has(item.source_id))
+      .map((item) => item.item_id),
+  );
+
+  for (const entry of payload.evidence) {
+    if (revokedSourceIds.has(entry.source_id)) revokedItemIds.add(entry.item_id);
+  }
+
+  const items = payload.items.filter((item) => !revokedItemIds.has(item.item_id));
+  const retainedItemIds = new Set(items.map((item) => item.item_id));
+  const evidence = payload.evidence.filter((entry) =>
+    retainedItemIds.has(entry.item_id) && !revokedSourceIds.has(entry.source_id));
+  const retainedSourceIds = new Set([
+    ...items.map((item) => item.source_id),
+    ...evidence.map((entry) => entry.source_id),
+  ]);
+  const sources = payload.sources.filter((source) =>
+    retainedSourceIds.has(source.source_id) && !revokedSourceIds.has(source.source_id));
+
+  return { ...payload, sources, evidence, items };
+}
+
+/**
+ * Remove explicitly revoked source records and all item/evidence descendants.
+ * Unknown rights remain in the package and are still blocked at publication.
+ */
+export function removeRevokedDescendants(payload) {
+  const checked = validatePackage(payload);
+  if (!checked.valid) throw new Error(`INVALID_UPSTREAM_PACKAGE:${checked.errors.join(",")}`);
+  return withoutRevokedDescendants(payload);
+}
+
 /**
  * Only emit mapped records after two independent scope references and every
  * source/evidence rights gate pass. References must point to actual approvals;
@@ -270,10 +310,14 @@ export function preparePublicRelease(payload, authorization = {}, { requireComme
   const checked = validatePackage(payload);
   if (!checked.valid) throw new Error(`INVALID_UPSTREAM_PACKAGE:${checked.errors.join(",")}`);
 
-  const sources = new Map(payload.sources.map((source) => [source.source_id, source]));
-  const evidence = new Map(payload.evidence.map((entry) => [entry.evidence_id, entry]));
+  const activePayload = withoutRevokedDescendants(payload);
+  const activeCheck = validatePackage(activePayload);
+  if (!activeCheck.valid) throw new Error(`INVALID_UPSTREAM_PACKAGE:${activeCheck.errors.join(",")}`);
+
+  const sources = new Map(activePayload.sources.map((source) => [source.source_id, source]));
+  const evidence = new Map(activePayload.evidence.map((entry) => [entry.evidence_id, entry]));
   const out = [];
-  for (const item of payload.items) {
+  for (const item of activePayload.items) {
     if (item.public_release_eligible !== true ||
         item.lifecycle_state !== "PUBLISHED" ||
         !["AUTOMATED_SUPPORTED", "HUMAN_REVIEWED"].includes(item.quality_state) ||

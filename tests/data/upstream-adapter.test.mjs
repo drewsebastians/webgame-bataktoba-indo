@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import {
   mapUpstreamItem,
   preparePublicRelease,
+  removeRevokedDescendants,
   validateUpstreamItem,
   validateUpstreamPackage,
   WEBGAME_TOPIC_MAP,
@@ -35,6 +36,42 @@ function createSyntheticPublicationGateCandidate() {
     lifecycle_state: "PUBLISHED",
   });
   return payload;
+}
+
+function addIndependentSyntheticPublicationCandidate(payload) {
+  const sourceA = payload.sources.find((source) => source.source_id === "synthetic-source-a");
+  const sourceC = {
+    ...sourceA,
+    source_id: "synthetic-source-c",
+    source_family_id: "synthetic-family-c",
+  };
+  payload.sources.push(sourceC);
+
+  const item = {
+    ...structuredClone(payload.items[0]),
+    item_id: "synthetic-item-002",
+    source_record_id: "synthetic-record-a-002",
+    evidence_ids: ["synthetic-evidence-a-002", "synthetic-evidence-c-002"],
+    evidence_family_count: 2,
+  };
+  payload.items.push(item);
+  payload.evidence.push(
+    {
+      ...payload.evidence[0],
+      evidence_id: "synthetic-evidence-a-002",
+      item_id: item.item_id,
+      source_record_id: item.source_record_id,
+    },
+    {
+      ...payload.evidence[1],
+      evidence_id: "synthetic-evidence-c-002",
+      item_id: item.item_id,
+      source_id: sourceC.source_id,
+      source_family_id: sourceC.source_family_id,
+      source_record_id: "synthetic-record-c-002",
+    },
+  );
+  return item.item_id;
 }
 
 const SYNTHETIC_APPROVAL_PLACEHOLDERS = {
@@ -239,4 +276,43 @@ test("publication hard-fails without both scope approvals or cleared source righ
     publicWebScopeRef: "SYNTHETIC_TEST_ONLY",
     upstreamPolicyApprovalRef: "SYNTHETIC_TEST_ONLY",
   }), /ITEM_NOT_PUBLICATION_READY/);
+});
+
+test("revoked source records remove their item and evidence descendants without mutating input", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  const sourceB = payload.sources.find((source) => source.source_id === "synthetic-source-b");
+  sourceB.revocation_status = "REVOKED";
+  addIndependentSyntheticPublicationCandidate(payload);
+  const original = structuredClone(payload);
+
+  const retained = removeRevokedDescendants(payload);
+
+  assert.deepEqual(retained.items.map((item) => item.item_id), ["synthetic-item-002"]);
+  assert.deepEqual(retained.sources.map((source) => source.source_id), ["synthetic-source-a", "synthetic-source-c"]);
+  assert.deepEqual(retained.evidence.map((entry) => entry.evidence_id), [
+    "synthetic-evidence-a-002",
+    "synthetic-evidence-c-002",
+  ]);
+  assert.deepEqual(validateUpstreamPackage(retained), { valid: true, errors: [] });
+  assert.deepEqual(payload, original);
+});
+
+test("public release omits descendants of a revoked evidence source and retains unrelated items", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  payload.sources.find((source) => source.source_id === "synthetic-source-b").revocation_status = "REVOKED";
+  addIndependentSyntheticPublicationCandidate(payload);
+
+  const released = preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS);
+
+  assert.deepEqual(released.map((item) => item.id), ["synthetic-item-002"]);
+  assert.equal(released.some((item) => item.sourceId === "synthetic-source-b"), false);
+});
+
+test("public release omits a candidate whose primary source is revoked", () => {
+  const payload = createSyntheticPublicationGateCandidate();
+  payload.sources.find((source) => source.source_id === "synthetic-source-a").revocation_status = "REVOKED";
+
+  const released = preparePublicRelease(payload, SYNTHETIC_APPROVAL_PLACEHOLDERS);
+
+  assert.deepEqual(released, []);
 });
