@@ -1,3 +1,11 @@
+## A3 responsive-navigation checkpoint — 2026-11-13 (post-merge verified)
+
+- PR [#183](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/183) merged from expected head `1de408e4cc34d979af831aca6c9ca7db660ae4b4`; PUBLIC `main` is `b95afbe2c3f02d12baf34653264ffee1d975c716` / tree `b71a9681d142f048bf362aa7fbdb410ccb68d1ad`.
+- Exact-head Verify [#43354679799](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43354679799) and post-main Verify [#43355754075](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43355754075) passed. Post-main CI reports 241/241 unit tests and 82/82 browser tests, successful build, smoke, performance budget, axe, Lighthouse, artifact upload and committed-dist drift. All 12 Lighthouse route/device profiles passed (Accessibility 100; mobile Performance 97–100; desktop 100).
+- The mobile menu now dismisses on outside pointer/focus, Escape returns focus to the toggle, and crossing back to desktop clears expanded state. Production catalog remains empty/noindex (0 learning items); no synthetic fixture or private Engine data is in `dist`.
+- Cloudflare Workers Builds succeeded on merged `main` with provider build `8cfb70e5-9fb6-48f2-8889-95a15f890605`. This confirms provider build/deployment status; direct live Pages readback remains NOT_VERIFIED. Keep A5 `blocked_external` until live routes can be read directly.
+- `ENGINEERING_READY=YES` for this responsive slice; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Continue A3 browser/PWA/security work independently of the private data track.
+
 ## A3/C1 revocation-safe adapter checkpoint — 2026-11-13 (post-merge verified)
 
 - PR [#181](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/181) merged from expected head `4a36b17e92ee988f0657da717c70ba51427e8e53`; PUBLIC `main` is `2711f14dcc4b0187f18a9270e332583e0db8adf7` / tree `b5e7a8b33b95ce8791eec3f37c48ac76acee15bc`.

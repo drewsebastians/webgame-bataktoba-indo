@@ -1,3 +1,11 @@
+## Current execution checkpoint — A3 responsive navigation (2026-11-13)
+
+- PR #183 merged from expected head `1de408e4cc34d979af831aca6c9ca7db660ae4b4`; PUBLIC main `b95afbe2c3f02d12baf34653264ffee1d975c716` / tree `b71a9681d142f048bf362aa7fbdb410ccb68d1ad`.
+- Exact Verify #43354679799 and post-main Verify #43355754075 succeeded. Latest merged-main evidence: 241 unit tests, 82 browser tests, build, smoke, performance budget, axe, 12 Lighthouse profiles and committed-dist drift all passed. Cloudflare provider build `8cfb70e5-9fb6-48f2-8889-95a15f890605` succeeded.
+- Responsive navigation now closes on outside interaction and Escape, restores focus, and resets at desktop width. Catalog is still empty/noindex; synthetic fixtures and private Engine material are absent from public `dist`.
+- `ENGINEERING_READY=YES`; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Production live readback remains NOT_VERIFIED, so A5 stays blocked_external.
+- Resume A3 responsive/accessibility/PWA/security tasks without waiting for corpus completion; keep A5 live-readback and the private data track independent.
+
 ## Current execution checkpoint — 2026-11-13
 
 - A3/C1 revocation-safe adapter merged as PR #181 from expected head `4a36b17e92ee988f0657da717c70ba51427e8e53`; PUBLIC `main` is `2711f14dcc4b0187f18a9270e332583e0db8adf7` / tree `b5e7a8b33b95ce8791eec3f37c48ac76acee15bc`.
