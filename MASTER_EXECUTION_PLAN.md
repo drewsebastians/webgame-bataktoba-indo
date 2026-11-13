@@ -1,8 +1,8 @@
-## Active checkpoint — A3 flashcard keyboard scope (2026-11-13)
+## Active checkpoint — A3 flashcard keyboard scope (2026-11-13; browser assertion corrected, CI pending)
 
 PUBLIC main at batch start: `b9a19dbd89c73a7a27b70d020bc56580e5297109` / tree `8e1b0ec894e3e8c84a04915caa6dd2b64b276618`; PR #184's exact-head Verify #43360945108 and Workers Build #131674347571 passed. Implementation commit `78bc98c3d5e497b902708f389091594c6380f845` / tree `bb7eb7988e0add57c5af5b69be91552a902cad7c` scopes number/arrow/space shortcuts to the focused flashcard, declares `aria-keyshortcuts`, updates focus instructions and tests non-card controls with synthetic browser fixtures. Rebuilt `dist` contains a new hashed flashcard entrypoint and no fixture/private linguistic data.
 
-Local site/governance checks, build, 241 unit tests, performance budget and artifact checks passed. The environment could not connect separate test processes to its loopback server, so e2e and focused browser assertions remain unverified locally; exact-head CI is pending. Keep the production catalog empty/noindex and preserve A5's live-readback blocker. Continue browser UX work independently of corpus readiness.
+Exact-head Verify #43366607107 passed site/governance, build, 241 unit tests, performance budget and e2e smoke, but one of 83 browser tests failed because the older keyboard-flip assertion did not focus the card first. Updated the test to match the intentional focus-scoped shortcut. Local checks, 241 unit tests, performance budget and dist drift pass; local browser server isolation prevents local browser assertions. Push the test correction and require green exact-head CI before merge. Keep the production catalog empty/noindex and preserve A5's live-readback blocker. Continue browser UX work independently of corpus completion.
 
 ## Current execution checkpoint — A3 responsive navigation (2026-11-13)
 
