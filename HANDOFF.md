@@ -1,10 +1,10 @@
-## Current handoff — A3/C1 revocation-safe adapter (2026-11-12)
+## Current handoff — A3/C1 revocation-safe adapter merged (2026-11-13)
 
-- Rechecked PUBLIC `main` at `d62772465bb6ca3e2116d2b75d769ffaf4077be8` / tree `dbaf32a2981e3bd66227107570215b5f664d0db0`; active branch `codex/a3-clear-legacy-progress-20261112` starts there.
-- Synthetic regressions prove revoked primary or secondary-evidence sources remove affected release descendants, keep unrelated items, and do not mutate inputs. Unknown rights remain fail-closed.
-- Adapter is source/test-only: production build excludes it until an independently authorized runtime integration. Artifact test checks runtime assets; measured budget is 181,658/196,608 JS and 16,342/49,152 CSS.
-- Code/artifact commit `e8ed4dbfd94326428db567165fe5c8d2f0538f96` passed full `npm run verify` (241 unit + 81 browser; build, performance, smoke, governance and committed-dist drift). All 12 Lighthouse profiles passed (accessibility 100; mobile performance 95–99; desktop 98–100). Exact-head remote CI remains pending. No catalog records, fixtures, or Engine data are shipped.
-- Next: push the clean branch, open PR, require exact-head Actions before expected-head merge, then record main/provider evidence. Keep A5 live readback NOT_VERIFIED; catalog empty/noindex and readiness gates closed.
+- PR #181 merged from expected head `4a36b17e92ee988f0657da717c70ba51427e8e53`; PUBLIC `main` is `2711f14dcc4b0187f18a9270e332583e0db8adf7` / tree `b5e7a8b33b95ce8791eec3f37c48ac76acee15bc`.
+- Exact-head Verify #43346625392 and post-main Verify #43347364976 passed; Cloudflare Workers Builds passed for production build `da3b97f8-069a-441d-adc5-226a6837fbbb`. Local full verify: 241 unit/81 browser, build, performance, smoke, governance, drift; 12 Lighthouse profiles passed.
+- Revoked source descendants are pruned before mapping; unknown rights fail closed. Adapter remains excluded from public runtime pending separate authorization; synthetic regressions cover revocation and artifact isolation.
+- Production catalog remains empty/noindex. No synthetic fixture or private Engine data is shipped. Live Pages routes remain NOT_VERIFIED; A5 stays blocked_external.
+- Next: maintain independent browser/accessibility/PWA work and resume live readback through an available supported route. Keep content readiness gates closed.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
