@@ -110,3 +110,9 @@ A corrected public history audit now records the July 2026 Git snapshot and a su
 PR #47 is merged at application main `3ff59a4e55213b6031a488d2721301cc3afc4d23`. Progress export/import uses a shared 1 MiB limit and validates/whitelists imported session summaries. The Windows Lighthouse command now resolves npx using Windows path semantics even when its resolver test runs on a POSIX CI host.
 
 Exact-main Verify [41372157370](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/41372157370) passed 221 unit tests, E2E smoke, 39/39 browser tests, budgets, 12 Lighthouse audits and dist drift. All Accessibility scores were 100; mobile Performance ranged 98–100, desktop was 100 on all routes. Cloudflare provider build succeeded; direct live readback remains unverified. Public learning content remains empty/noindex, and synthetic fixtures remain test-only.
+
+## A3 verified continuation checkpoint — 2026-11-13 06:19 UTC
+
+PR #188 merged as main de9722a394f529150b93cefed609fca24c329417 / tree 642109b391acef7b3f75880a3dfb66a7610dd5f2. The synthetic Playwright regression covers focused-card 1/2/3 flashcard ratings, immediate wrong-answer review, correct-answer spaced scheduling, the independent difficult flag, and focus on each next card. Exact-head Verify #43376001221 and post-main Verify #43377158957 passed 241/241 unit and 84/84 browser tests (0 skipped), build/smoke/performance/drift, and all 12 Lighthouse profiles. Cloudflare merged-main build 3b0e8833-339c-487d-96fb-0acae2f0447d succeeded.
+
+This is engineering evidence only: production catalog remains empty/noindex, no synthetic/private content is in dist, and live readback remains NOT_VERIFIED. Continue with a 320px touch flashcard check and other A3 browser UX independently from corpus readiness. A5 remains blocked_external; preserve public Git history and keep A1/A9/A12 approval-gated.

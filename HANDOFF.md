@@ -735,3 +735,11 @@
 - Cloudflare production build 762a5b23-6aa1-4cca-b838-86855f273940 / version 52c3f077-3682-473d-801a-88ccc497cdc7 succeeded. Direct live readback was attempted but the available web reader cannot access the host; A5 remains blocked_external.
 - Catalog remains empty/noindex; no test fixtures, private Engine data or unpublished language content are in the production artifact. No historical Git rewrite was done; A1/A9/A12 remain blocked_approval.
 - Next: continue A3 browser learning-loop, touch/keyboard, responsive, PWA and privacy/security work using isolated synthetic fixtures. Keep production catalog empty until publication gates pass.
+
+## Latest resume checkpoint — 2026-11-13 06:19 UTC
+
+- Current PUBLIC main/tree: de9722a394f529150b93cefed609fca24c329417 / 642109b391acef7b3f75880a3dfb66a7610dd5f2. PR #188 merged from 3a4e27eeb2d19b910e7c8026dc65bceee11702e2.
+- Exact-head run #43376001221 and post-main run #43377158957 passed 241 unit (0 skipped), 84 browser (0 skipped), build, smoke, performance budget, drift/artifact checks, and all 12 Lighthouse profiles (accessibility 100; mobile performance 97–99; desktop 100). Main Workers production build 3b0e8833-339c-487d-96fb-0acae2f0447d / version 28b4dddd-feea-492f-ba95-cd66135d43dd succeeded.
+- The added test covers 1 wrong / 2 difficult / 3 correct on a focused synthetic flashcard, immediate review timing, spaced-repetition advancement, the separate difficult flag, and focus retention. No production runtime or learning data changed. Local Playwright could not start because dependencies are absent in this worktree; GitHub CI installed dependencies and completed all checks.
+- Direct live readback remains unverified because the available web reader cannot access the host. Keep A5 blocked_external; production catalog empty/noindex. No private or synthetic learning data is in dist.
+- Next: verify the 320px flashcard touch/filter/action layout with isolated synthetic fixtures; continue A3 responsive, accessibility, privacy/security and PWA engineering independently.
