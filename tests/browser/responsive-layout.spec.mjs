@@ -120,7 +120,7 @@ test("mobile navigation closes on outside interaction and resets when returning 
   await menu.click();
   await expect(menu).toHaveAttribute("aria-expanded", "true");
   await page.setViewportSize({ width: 1024, height: 900 });
-  await expect(menu).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator(".nav-toggle")).toHaveAttribute("aria-expanded", "false");
   await expect(navigation.getByRole("link", { name: "Home" })).toBeVisible();
 
   await page.setViewportSize({ width: 640, height: 900 });
