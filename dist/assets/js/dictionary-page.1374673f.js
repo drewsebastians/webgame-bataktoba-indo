@@ -1,6 +1,6 @@
 // Focused dictionary entrypoint keeps game and lesson engines off this route.
 import { loadLearningItems, loadTopics } from "./data.a34bfabb.js";
-import { initMobileNav } from "./utils/nav-toggle.00a3b847.js";
+import { initMobileNav } from "./utils/nav-toggle.718330b9.js";
 import { SITE_CONFIG } from "./config.6316db9b.js";
 import { getBucketIds, getProgress, initProgress, saveProgress, setSaved } from "./progress.ec6dc40f.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";

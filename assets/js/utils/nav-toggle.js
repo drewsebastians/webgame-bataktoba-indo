@@ -1,7 +1,18 @@
 export function initMobileNav() {
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector("#nav-links-list");
-  if (!toggle || !links) return;
+  if (!links) return;
+
+  const currentPage = document.body?.dataset.page;
+  links.querySelectorAll("a[data-nav]").forEach((link) => {
+    if (link.dataset.nav === currentPage) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
+  if (!toggle) return;
 
   const nav = toggle.closest(".nav") || toggle.parentElement;
 
