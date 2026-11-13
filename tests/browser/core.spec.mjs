@@ -166,6 +166,7 @@ test.describe("core learning flows", () => {
     expect(scripts.some((path) => /\/assets\/js\/onboarding\.[\da-f]{8}\.js$/.test(path))).toBe(false);
 
     const before = await card.textContent();
+    await card.focus();
     await page.keyboard.press("Space");
     const after = await card.textContent();
     expect(before).not.toBe(after);

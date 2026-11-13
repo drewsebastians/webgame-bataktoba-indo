@@ -316,6 +316,33 @@ test("flashcard keyboard activation preserves focus and native rating buttons", 
   await expect(nextCard).not.toHaveText(firstCardText ?? "");
 });
 
+test("flashcard shortcuts only run while the card is focused", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("all");
+
+  const card = page.locator("#flashcard");
+  const firstItem = SYNTHETIC_WEBGAME_ITEMS[0];
+  await expect(card).toContainText(firstItem.batak);
+
+  const correctButton = page.getByRole("button", { name: "3 Benar", exact: true });
+  await correctButton.focus();
+  await page.keyboard.press("1");
+  await page.keyboard.press("ArrowRight");
+  await expect(card).toContainText(firstItem.batak);
+  await expect(correctButton).toBeFocused();
+  expect(await page.evaluate(() => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.answered ?? 0;
+  })).toBe(0);
+
+  await card.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(card).toContainText(SYNTHETIC_WEBGAME_ITEMS[1].batak);
+  await expect(card).toBeFocused();
+  await expect(card).toHaveAttribute("aria-keyshortcuts", "Space 1 2 3 ArrowLeft ArrowRight");
+});
+
 test("mobile due flashcard review removes mastered cards and keeps focus on progress", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 375, height: 812 });

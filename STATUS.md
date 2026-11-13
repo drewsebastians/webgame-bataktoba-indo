@@ -1,3 +1,11 @@
+## A3 flashcard keyboard-scope checkpoint — 2026-11-13 (browser regression fix pending CI)
+
+- Fresh PUBLIC baseline: `main` `b9a19dbd89c73a7a27b70d020bc56580e5297109` / tree `8e1b0ec894e3e8c84a04915caa6dd2b64b276618`. PR #184 exact-head Verify #43360945108 and Workers Build #131674347571 both passed.
+- Implementation commit `78bc98c3d5e497b902708f389091594c6380f845` / tree `bb7eb7988e0add57c5af5b69be91552a902cad7c` scopes flashcard keyboard shortcuts to the focused card, adds `aria-keyshortcuts` and focus-aware instructions, and adds isolated synthetic browser regression coverage. `dist` has been rebuilt with the new hashed entrypoint; no published or synthetic learning content changed.
+- Exact-head Verify #43366607107 passed check, build, 241/241 unit tests (0 skipped), performance budget (182,071 / 196,608 JS; 16,342 / 49,152 CSS), and e2e smoke, but browser testing exposed one stale assertion in `tests/browser/core.spec.mjs`: its Space flip test did not focus the card before expecting a flip. The behavior is intentional. The test now focuses the card before pressing Space; local site/governance, build, 241/241 unit tests, performance and dist-drift checks pass. Local browser server isolation still prevents local Playwright assertions; rerun exact-head CI after the correction.
+- Production catalog stays empty/noindex (0 items); the artifact integrity tests passed and fixtures/private Engine data are not shipped. Cloudflare provider build for the prior merged main succeeded, while direct live Pages readback remains NOT_VERIFIED. A5 stays `blocked_external`.
+- Readiness: `ENGINEERING_READY=PENDING corrected exact-head CI`; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`.
+
 ## A3 responsive-navigation checkpoint — 2026-11-13 (post-merge verified)
 
 - PR [#183](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/183) merged from expected head `1de408e4cc34d979af831aca6c9ca7db660ae4b4`; PUBLIC `main` is `b95afbe2c3f02d12baf34653264ffee1d975c716` / tree `b71a9681d142f048bf362aa7fbdb410ccb68d1ad`.

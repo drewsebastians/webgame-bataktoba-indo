@@ -184,15 +184,10 @@ async function initFlashcards() {
 
   function handleKeydown(event) {
     const target = event.target;
-    if (target instanceof HTMLElement && (
-      ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName) || target.isContentEditable
-    )) {
-      return;
-    }
+    // Card shortcuts must not hijack arrow/number keys while a user is moving
+    // through navigation, filters, rating controls, or other page controls.
+    if (!(target instanceof Element) || !target.closest("#flashcard")) return;
     if (event.key === " ") {
-      // Let buttons keep their native Space activation. The flashcard itself
-      // flips through its click handler, while rating controls must still work.
-      if (target instanceof Element && target.closest("button, a, [role=button]")) return;
       event.preventDefault();
       flipCard();
     } else if (event.key === "1") advance(1, "wrong");
@@ -229,7 +224,11 @@ async function initFlashcards() {
 
     const card = el(
       "button",
-      { className: "flashcard", id: "flashcard", attrs: { type: "button" } },
+      {
+        className: "flashcard",
+        id: "flashcard",
+        attrs: { type: "button", "aria-keyshortcuts": "Space 1 2 3 ArrowLeft ArrowRight" },
+      },
       el("strong", { text: flipped ? item.indonesia : item.batak }),
       el("span", { text: `${flipped ? "Indonesia" : "Batak Toba"} - klik atau tekan spasi untuk balik` }),
     );
@@ -281,7 +280,7 @@ async function initFlashcards() {
     el("div", { id: "flashcard-card" }),
     el("p", {
       className: "feedback",
-      text: "Pintasan keyboard: spasi = balik kartu, 1 = salah, 2 = sulit, 3 = benar, panah kiri/kanan = navigasi.",
+      text: "Saat kartu difokuskan: spasi = balik kartu, 1 = salah, 2 = sulit, 3 = benar, panah kiri/kanan = navigasi.",
     }),
   );
 

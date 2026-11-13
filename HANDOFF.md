@@ -1,3 +1,11 @@
+## Current handoff — A3 flashcard keyboard scope (2026-11-13; correcting browser assertion)
+
+- Baseline PUBLIC main: `b9a19dbd89c73a7a27b70d020bc56580e5297109` / tree `8e1b0ec894e3e8c84a04915caa6dd2b64b276618`; PR #184's exact-head Verify #43360945108 and Workers Build #131674347571 passed.
+- Implementation commit `78bc98c3d5e497b902708f389091594c6380f845` / tree `bb7eb7988e0add57c5af5b69be91552a902cad7c` limits global card shortcuts to focused-card use and declares the shortcuts accessibly. A synthetic Playwright regression covers that other controls retain focus and behavior.
+- Exact-head Verify #43366607107 confirmed site/governance, build, 241/241 unit tests, performance budget, smoke and artifact checks. Its 83-test Playwright run found one stale Space-flip assertion that omitted card focus. Updated that synthetic browser test to focus the card before Space. Local checks, all 241 unit tests, performance and committed-dist drift pass; local browser server isolation prevents Playwright assertions, so rerun exact-head CI before merge.
+- Catalog stays empty/noindex; fixtures and private Engine material remain outside `dist`. Previous merged-main provider build succeeded; live Pages readback remains NOT_VERIFIED, so A5 stays `blocked_external`.
+- Next: push the focused-test correction with an expected-head lease, run exact-head CI, merge only if every required check is green, then record post-main check/build status and continue A3 browser/PWA/security work independently.
+
 ## Current handoff — A3 responsive navigation merged (2026-11-13)
 
 - PR #183 merged from expected head `1de408e4cc34d979af831aca6c9ca7db660ae4b4`; PUBLIC `main` is `b95afbe2c3f02d12baf34653264ffee1d975c716` / tree `b71a9681d142f048bf362aa7fbdb410ccb68d1ad`.
