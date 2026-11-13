@@ -1,10 +1,10 @@
-## Current handoff — A3 flashcard keyboard scope (2026-11-13; correcting browser assertion)
+## Current handoff — A3 flashcard keyboard scope (2026-11-13; post-merge verified)
 
-- Baseline PUBLIC main: `b9a19dbd89c73a7a27b70d020bc56580e5297109` / tree `8e1b0ec894e3e8c84a04915caa6dd2b64b276618`; PR #184's exact-head Verify #43360945108 and Workers Build #131674347571 passed.
-- Implementation commit `78bc98c3d5e497b902708f389091594c6380f845` / tree `bb7eb7988e0add57c5af5b69be91552a902cad7c` limits global card shortcuts to focused-card use and declares the shortcuts accessibly. A synthetic Playwright regression covers that other controls retain focus and behavior.
-- Exact-head Verify #43366607107 confirmed site/governance, build, 241/241 unit tests, performance budget, smoke and artifact checks. Its 83-test Playwright run found one stale Space-flip assertion that omitted card focus. Updated that synthetic browser test to focus the card before Space. Local checks, all 241 unit tests, performance and committed-dist drift pass; local browser server isolation prevents Playwright assertions, so rerun exact-head CI before merge.
-- Catalog stays empty/noindex; fixtures and private Engine material remain outside `dist`. Previous merged-main provider build succeeded; live Pages readback remains NOT_VERIFIED, so A5 stays `blocked_external`.
-- Next: push the focused-test correction with an expected-head lease, run exact-head CI, merge only if every required check is green, then record post-main check/build status and continue A3 browser/PWA/security work independently.
+- PR #185 merged from expected head `72b9b817340265ec2b62f5d7448f5a0da257afb2`; PUBLIC main is `91772a49aaeaa2d7ca468242dd468e8d72717fd4` / tree `f6ed3c23fa0796b146eff5b5ba8d2491e469bab7`.
+- Exact-head Verify #43368222846 and post-main Verify #43369390245 passed with 241 unit tests, 83 browser tests, build, smoke, performance, Lighthouse and committed-dist drift. Cloudflare merged-main build #131701535446 succeeded (`a4ea855f-5818-4bcb-a200-927bf80e1c7e`).
+- The focused-card shortcut change and corrected synthetic browser assertion pass exact-head and post-main verification. Production remains empty/noindex; the synthetic fixture, private Engine data and unapproved learning content are not shipped.
+- Direct live Pages readback remains NOT_VERIFIED because the web reader could not access the host and the desktop browser connection was unavailable. A5 remains `blocked_external`; provider build success does not verify served pages.
+- Next: continue A3 keyboard/touch accessibility, PWA, security and UX work independently of corpus readiness. Keep the production catalog empty and publication gates closed.
 
 ## Current handoff — A3 responsive navigation merged (2026-11-13)
 
