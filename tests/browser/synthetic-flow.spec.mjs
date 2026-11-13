@@ -483,14 +483,39 @@ test("320px touch due flashcard review remains within the viewport", async ({ pa
   };
   await page.locator("#fc-filter").selectOption("due");
   await expectNoHorizontalOverflow();
+
+  const expectTouchTarget = async (locator, label) => {
+    await expect(locator).toBeVisible();
+    const bounds = await locator.boundingBox();
+    expect(bounds, `${label} should have measurable dimensions`).not.toBeNull();
+    if (!bounds) return;
+    expect(bounds.width, `${label} should be at least 44px wide`).toBeGreaterThanOrEqual(44);
+    expect(bounds.height, `${label} should be at least 44px high`).toBeGreaterThanOrEqual(44);
+  };
+  for (const [locator, label] of [
+    [page.locator(".nav-toggle"), "mobile navigation menu"],
+    [page.locator("#fc-filter"), "flashcard deck filter"],
+    [page.locator("#fc-theme"), "flashcard topic filter"],
+    [page.locator("#fc-shuffle"), "flashcard shuffle control"],
+  ]) {
+    await expectTouchTarget(locator, label);
+  }
+
   const card = page.locator("#flashcard");
   await expect(card).toContainText(dueItems[0].batak);
+  await expectTouchTarget(card, "flashcard flip control");
   await expect(page.locator("#flashcard-card .pill").first()).toHaveText("1/2");
   await expectNoHorizontalOverflow();
 
   await card.tap();
   await expect(page.locator("#flashcard")).toContainText(dueItems[0].indonesia);
   await expectNoHorizontalOverflow();
+  for (const label of ["< Sebelumnya", "1 Salah", "2 Sulit", "3 Benar", "Berikutnya >"]) {
+    await expectTouchTarget(
+      page.getByRole("button", { name: label, exact: true }),
+      `flashcard action ${label}`,
+    );
+  }
   await page.getByRole("button", { name: "3 Benar", exact: true }).tap();
   await expect(page.locator("#flashcard")).toContainText(dueItems[1].batak);
   await expect(page.locator("#flashcard")).toBeFocused();
