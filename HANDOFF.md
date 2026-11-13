@@ -1,3 +1,10 @@
+## Current handoff — A3 responsive navigation merged (2026-11-13)
+
+- PR #183 merged from expected head `1de408e4cc34d979af831aca6c9ca7db660ae4b4`; PUBLIC `main` is `b95afbe2c3f02d12baf34653264ffee1d975c716` / tree `b71a9681d142f048bf362aa7fbdb410ccb68d1ad`.
+- Exact-head Verify #43354679799 and post-main Verify #43355754075 passed. Post-main CI: 241/241 unit tests, 82/82 Playwright tests, build, smoke, performance budget, axe, 12 Lighthouse profiles and dist drift all passed. Accessibility scored 100 across profiles; mobile Performance scored 97–100 and desktop 100.
+- Cloudflare's merged-main provider build `8cfb70e5-9fb6-48f2-8889-95a15f890605` succeeded. Direct live Pages readback is still NOT_VERIFIED; do not claim production content inspection. Catalog remains empty/noindex and no synthetic/private data is shipped.
+- Next: continue independent A3 browser UX, PWA, accessibility and security work. Keep A5 `blocked_external` until supported live readback is available; preserve the separate content readiness gates.
+
 ## Current handoff — A3/C1 revocation-safe adapter merged (2026-11-13)
 
 - PR #181 merged from expected head `4a36b17e92ee988f0657da717c70ba51427e8e53`; PUBLIC `main` is `2711f14dcc4b0187f18a9270e332583e0db8adf7` / tree `b5e7a8b33b95ce8791eec3f37c48ac76acee15bc`.
