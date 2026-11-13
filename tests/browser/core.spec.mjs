@@ -204,7 +204,7 @@ test.describe("core learning flows", () => {
 
     // This is an isolated synthetic browser fixture; it is never bundled for production.
     await page.locator("#dictionary-search").fill("SYNTHETIC_BT_001");
-    const firstRow = page.locator(".result-row").first();
+    const firstRow = page.locator(".result-row-toggle").first();
     await expect(firstRow).toContainText("SYNTHETIC_BT_001");
     await firstRow.click();
     const correction = page.getByRole("link", { name: "Lapor koreksi" }).first();
@@ -213,7 +213,7 @@ test.describe("core learning flows", () => {
     expect(href).toContain("github.com");
     expect(href).toContain("issues/new");
 
-    const expandedRow = page.locator('.result-row[aria-expanded="true"]');
+    const expandedRow = page.locator(".result-row.is-expanded");
     await expandedRow.getByRole("button", { name: "Simpan ke daftar latihan" }).click();
     await expect(expandedRow.getByRole("button", { name: "Tersimpan" })).toBeVisible();
     await expect.poll(async () => getSavedFlags(page)).toHaveLength(1);

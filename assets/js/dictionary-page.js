@@ -329,38 +329,39 @@ async function initDictionary() {
       practiceButton,
       correctionLink,
     );
-    // keep clicks on actions from bubbling to the row's expand/collapse toggle
-    actionsRow.addEventListener("click", (event) => event.stopPropagation());
     container.append(actionsRow);
     return container;
   }
 
   function resultRow(item) {
-    const row = el("article", { className: "result-row" });
+    const isExpanded = expandedId === item.id;
+    const row = el("article", {
+      className: `result-row${isExpanded ? " is-expanded" : ""}`,
+    });
     const query = normalizeSearch(input.value.trim());
-    row.append(
+    const toggle = el(
+      "button",
+      {
+        className: "result-row-toggle",
+        attrs: {
+          type: "button",
+          "aria-expanded": String(isExpanded),
+          "data-dictionary-toggle": item.id,
+        },
+      },
       el("strong", {}, ...highlightNodes(item.batak, query)),
       el("span", {}, ...highlightNodes(item.indonesia, query)),
       pill(formatQuality(item), "", { "data-source-flag": item.sourceType || "corpus-derived" }),
     );
-    row.setAttribute("role", "button");
-    row.tabIndex = 0;
-    row.setAttribute("aria-expanded", String(expandedId === item.id));
-    const toggle = () => {
+    toggle.addEventListener("click", () => {
       expandedId = expandedId === item.id ? null : item.id;
       render();
-    };
-    row.addEventListener("click", (event) => {
-      if (event.target instanceof Element && event.target.closest(".result-detail")) return; // action clicks must not collapse the detail
-      toggle(event);
+      const nextToggle = [...results.querySelectorAll("[data-dictionary-toggle]")]
+        .find((button) => button.dataset.dictionaryToggle === item.id);
+      nextToggle?.focus({ preventScroll: true });
     });
-    row.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        toggle();
-      }
-    });
-    if (expandedId === item.id) row.append(detailNode(item));
+    row.append(toggle);
+    if (isExpanded) row.append(detailNode(item));
     return row;
   }
 

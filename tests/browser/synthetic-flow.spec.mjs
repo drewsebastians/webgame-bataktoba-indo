@@ -213,7 +213,7 @@ test("five-minute lesson → quiz → mistake review → spaced repetition → d
 
   await page.goto("/dictionary/");
   await page.locator("#dictionary-search").fill("SYNTHETIC_BT_001");
-  const firstResult = page.locator(".result-row").first();
+  const firstResult = page.locator(".result-row-toggle").first();
   await expect(firstResult).toContainText("SYNTHETIC_BT_001");
   await firstResult.click();
   await expect(page.locator(".result-detail")).toBeVisible();
@@ -231,7 +231,7 @@ test("dictionary shows per-sense context safely with recorded alternatives", asy
 
   await page.goto("/dictionary/");
   await page.locator("#dictionary-search").fill(item.batak);
-  const result = page.locator(".result-row").first();
+  const result = page.locator(".result-row-toggle").first();
   await expect(result).toContainText(item.batak);
   await result.click();
 
@@ -240,6 +240,58 @@ test("dictionary shows per-sense context safely with recorded alternatives", asy
   await expect(detail).toContainText("Konteks: SYNTHETIC_SENSE_CONTEXT");
   await expect(detail).toContainText('<img id="synthetic-dict-context-probe" src=x>');
   await expect(detail.locator("#synthetic-dict-context-probe")).toHaveCount(0);
+});
+
+test("dictionary disclosures use native keyboard controls and accessible mobile targets", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/dictionary/");
+  await page.locator("#dictionary-search").fill("SYNTHETIC_BT_001");
+
+  const toggle = page.locator(".result-row-toggle").first();
+  await expect(toggle).toBeVisible();
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    document: document.documentElement.scrollWidth,
+    body: document.body.scrollWidth,
+  }));
+  expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport);
+  expect(dimensions.body).toBeLessThanOrEqual(dimensions.viewport);
+
+  const collapsedTarget = await toggle.boundingBox();
+  expect(collapsedTarget?.width ?? 0).toBeGreaterThanOrEqual(44);
+  expect(collapsedTarget?.height ?? 0).toBeGreaterThanOrEqual(44);
+  await toggle.focus();
+  await page.keyboard.press("Enter");
+
+  const expandedToggle = page.locator(".result-row-toggle").first();
+  const detail = page.locator(".result-detail");
+  await expect(expandedToggle).toHaveAttribute("aria-expanded", "true");
+  await expect(expandedToggle).toBeFocused();
+  await expect(detail).toBeVisible();
+  const row = page.locator(".result-row").first();
+  await expect(row).not.toHaveAttribute("role", "button");
+  await expect(row.locator(".result-detail button")).toHaveCount(2);
+  await expect(row.locator(".result-detail a")).toHaveCount(1);
+  await expectNoSeriousAccessibilityViolations(page);
+
+  const actions = detail.locator(".action-row > *");
+  await expect(actions).toHaveCount(3);
+  for (let index = 0; index < await actions.count(); index += 1) {
+    const target = await actions.nth(index).boundingBox();
+    expect(target?.width ?? 0, `dictionary action ${index + 1} should be at least 44px wide`).toBeGreaterThanOrEqual(44);
+    expect(target?.height ?? 0, `dictionary action ${index + 1} should be at least 44px high`).toBeGreaterThanOrEqual(44);
+  }
+
+  await page.keyboard.press("Tab");
+  await expect(actions.first()).toBeFocused();
+  await expandedToggle.focus();
+  await page.keyboard.press("Space");
+  await expect(page.locator(".result-row-toggle").first()).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator(".result-row-toggle").first()).toBeFocused();
+  await expect(page.locator(".result-detail")).toHaveCount(0);
+  await expectNoSeriousAccessibilityViolations(page);
 });
 
 test("flashcard topic and deck filters refresh counts without losing keyboard focus", async ({ page }) => {

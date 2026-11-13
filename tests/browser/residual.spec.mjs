@@ -268,7 +268,7 @@ test("dictionary highlight, direction filter, and practice action use only synth
 
   await page.locator("#dict-direction").selectOption("both");
   await page.locator("#dictionary-search").fill("SYNTHETIC_BT_001");
-  const row = page.locator(".result-row").first();
+  const row = page.locator(".result-row-toggle").first();
   await row.click();
   await expect(page.locator(".result-detail")).toBeVisible();
   await Promise.all([
