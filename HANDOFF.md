@@ -728,3 +728,10 @@
 - Verified checks: PR Verify #41959632333, PR Workers Builds #127022450727, main Verify #41960577426, main Workers Builds #127026190992 — all success. Main run passed 232/232 unit and 53/53 Playwright tests (0 skipped), smoke/performance budget, and all 12 Lighthouse profiles (Accessibility 100 desktop/mobile, mobile Performance 97–99, desktop Performance 100). Main public dist artifact #13384727740 (120,002 bytes) is available; direct live Pages route readback remains NOT_VERIFIED.
 - Read [docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md](docs/PUBLIC_CONTENT_EXPOSURE_AUDIT_2026-11-05.md) before repeating the scan. It contains metadata only and records exact refs and scope.
 - Continue independent A3 website work with synthetic-only fixtures. Keep published content empty until rights and quality gates pass. A11 is complete; A12 is blocked pending explicit owner approval before any remote ref deletion or history rewrite. Do not rewrite public history.
+
+## Latest resume checkpoint — 2026-11-13 05:45 UTC
+
+- Current PUBLIC main/tree: 44eb4c5d02b551a2f509afa90e01e9745e390e6e / fb8c4dcfc9bfe972cf3adf4586fcb28dabb23412. PR #186 merged from expected head e0a5b51dbc6ce092ba7468a58a77fe92e20bca5d. Exact-head Verify #43371041780 and post-main Verify #43372080816 passed.
+- Cloudflare production build 762a5b23-6aa1-4cca-b838-86855f273940 / version 52c3f077-3682-473d-801a-88ccc497cdc7 succeeded. Direct live readback was attempted but the available web reader cannot access the host; A5 remains blocked_external.
+- Catalog remains empty/noindex; no test fixtures, private Engine data or unpublished language content are in the production artifact. No historical Git rewrite was done; A1/A9/A12 remain blocked_approval.
+- Next: continue A3 browser learning-loop, touch/keyboard, responsive, PWA and privacy/security work using isolated synthetic fixtures. Keep production catalog empty until publication gates pass.

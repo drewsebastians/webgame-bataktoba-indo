@@ -1,3 +1,11 @@
+## Latest checkpoint — 2026-11-13 05:45 UTC (PR #186 post-merge verified)
+
+- PUBLIC GitHub main is 44eb4c5d02b551a2f509afa90e01e9745e390e6e / tree fb8c4dcfc9bfe972cf3adf4586fcb28dabb23412. PR #186 merged from expected head e0a5b51dbc6ce092ba7468a58a77fe92e20bca5d after exact-head Verify #43371041780 passed. Post-main Verify #43372080816 also passed. No open Webgame PRs remain at this checkpoint; issue #2 is closed.
+- PR #185's flashcard keyboard interaction keeps Space/rating/arrow shortcuts within the focused card, declares ARIA shortcuts and gives focus-aware instructions. Its isolated synthetic browser regression passed in exact-head and post-main CI. No learner data or fixture was added to the published catalog.
+- Cloudflare Workers reported successful merged-main production build 762a5b23-6aa1-4cca-b838-86855f273940, version 52c3f077-3682-473d-801a-88ccc497cdc7. This verifies provider build/deployment status. Direct live-page readback was attempted through the available web reader and is inaccessible, so A5 remains blocked_external and live delivery is NOT_VERIFIED.
+- The production catalog remains empty/noindex (0 published items); synthetic test fixtures and private Alignment Engine data are absent from the public build. A1/A9/A12 history and exposure decisions remain blocked_approval; preserve Git history and continue prospective artifact containment. Do not edit PROGRESS_LOG.md while its approval gate remains unresolved.
+- Readiness: ENGINEERING_READY=YES for the tested keyboard-accessibility slice; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Continue A3 desktop/mobile browser UX, testing, PWA, accessibility, privacy and security independently of the private-data blockers.
+
 ## A3 flashcard keyboard-scope checkpoint — 2026-11-13 (PR #185 post-merge verified)
 
 - PR [#185](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/185) merged from expected head `72b9b817340265ec2b62f5d7448f5a0da257afb2`; PUBLIC `main` is `91772a49aaeaa2d7ca468242dd468e8d72717fd4` / tree `f6ed3c23fa0796b146eff5b5ba8d2491e469bab7`.
