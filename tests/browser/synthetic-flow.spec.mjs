@@ -343,6 +343,51 @@ test("flashcard shortcuts only run while the card is focused", async ({ page }) 
   await expect(card).toHaveAttribute("aria-keyshortcuts", "Space 1 2 3 ArrowLeft ArrowRight");
 });
 
+test("flashcard 1/2/3 shortcuts rate synthetic cards and keep the next card focused", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("all");
+
+  const card = page.locator("#flashcard");
+  const [wrongItem, difficultItem, correctItem] = SYNTHETIC_WEBGAME_ITEMS;
+  await expect(card).toContainText(wrongItem.batak);
+  await card.focus();
+  await page.keyboard.press("1");
+  await expect(card).toContainText(difficultItem.batak);
+  await expect(card).toBeFocused();
+
+  let stats = await page.evaluate((id) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return { progress, item: progress.items?.[id] };
+  }, wrongItem.id);
+  expect(stats.progress.answered).toBe(1);
+  expect(stats.progress.correct).toBe(0);
+  expect(stats.item).toMatchObject({ lastResult: "incorrect", bucket: "review", reviewStage: 0 });
+  expect(stats.item.nextReviewAt).toBeLessThanOrEqual(Date.now());
+
+  await page.keyboard.press("2");
+  await expect(card).toContainText(correctItem.batak);
+  await expect(card).toBeFocused();
+  stats = await page.evaluate(({ id, difficultId }) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return { progress, item: progress.items?.[id], difficult: progress.items?.[difficultId] };
+  }, { id: wrongItem.id, difficultId: difficultItem.id });
+  expect(stats.progress.answered).toBe(1);
+  expect(stats.difficult.difficult).toBe(true);
+
+  await page.keyboard.press("3");
+  await expect(card).toContainText(SYNTHETIC_WEBGAME_ITEMS[3].batak);
+  await expect(card).toBeFocused();
+  stats = await page.evaluate((id) => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return { progress, item: progress.items?.[id] };
+  }, correctItem.id);
+  expect(stats.progress.answered).toBe(2);
+  expect(stats.progress.correct).toBe(1);
+  expect(stats.item).toMatchObject({ lastResult: "correct", reviewStage: 1 });
+  expect(stats.item.nextReviewAt).toBeGreaterThan(Date.now());
+});
+
 test("mobile due flashcard review removes mastered cards and keeps focus on progress", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 375, height: 812 });
