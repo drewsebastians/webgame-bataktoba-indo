@@ -92,6 +92,42 @@ test("primary routes fit a 320px touch viewport with usable mobile navigation ta
   }
 });
 
+test("mobile navigation closes on outside interaction and resets when returning to desktop", async ({ page }) => {
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.goto("/");
+
+  const menu = page.getByRole("button", { name: "Menu" });
+  const navigation = page.getByRole("navigation", { name: "Navigasi utama" });
+  const heading = page.locator("#main-content h1").first();
+
+  await menu.click();
+  await expect(menu).toHaveAttribute("aria-expanded", "true");
+  await heading.click();
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+
+  await menu.click();
+  await heading.evaluate((node) => {
+    node.setAttribute("tabindex", "-1");
+    node.focus();
+  });
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+
+  await menu.click();
+  await page.keyboard.press("Escape");
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+  await expect(menu).toBeFocused();
+
+  await menu.click();
+  await expect(menu).toHaveAttribute("aria-expanded", "true");
+  await page.setViewportSize({ width: 1024, height: 900 });
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+  await expect(navigation.getByRole("link", { name: "Home" })).toBeVisible();
+
+  await page.setViewportSize({ width: 640, height: 900 });
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+  await expect(navigation.getByRole("link", { name: "Home" })).toBeHidden();
+});
+
 test("dictionary filters meet mobile touch target size in an isolated synthetic fixture", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/dictionary/");
