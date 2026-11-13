@@ -1,11 +1,11 @@
-## A3/C1 revocation-safe adapter checkpoint — 2026-11-12 (branch validation; remote CI pending)
+## A3/C1 revocation-safe adapter checkpoint — 2026-11-13 (local validation complete; remote CI pending)
 
 - Rechecked PUBLIC `main` at `d62772465bb6ca3e2116d2b75d769ffaf4077be8` / tree `dbaf32a2981e3bd66227107570215b5f664d0db0`; branch `codex/a3-clear-legacy-progress-20261112` starts at that exact commit.
 - The adapter now removes items and evidence descendants of explicitly revoked sources, including revocation cited by secondary evidence; unrelated items survive and input objects are unchanged. Unknown or uncleared rights still block release. Synthetic-only regressions cover primary and secondary source revocation.
 - The adapter remains source/test-only and is now excluded from public `dist/` until a separately authorized runtime integration. An artifact regression enforces its absence. Build budget: JavaScript 181,658/196,608 bytes across 18 files; CSS 16,342/49,152 bytes. Current generated output also removes the previously bundled unused adapter and revises the service-worker cache key.
-- `npm run verify:core` passed: site/governance, build, 241 unit tests, performance budget, E2E smoke and 81 browser tests (0 failed/skipped). A pre-commit `npm run verify` reached the final drift gate and reported the intended uncommitted `dist/` changes; rerun the full command after committing. Lighthouse and exact-head GitHub Actions are pending.
+- Code/artifact commit `e8ed4dbfd94326428db567165fe5c8d2f0538f96` passed full `npm run verify`: site/governance, build, 241 unit tests, performance budget, E2E smoke, 81 browser tests, and committed-dist drift (0 failures/skips). `npm run lighthouse:check` passed all 12 route/device profiles: accessibility 100 throughout; mobile performance 95–99; desktop 98–100. Exact-head GitHub Actions are pending.
 - Production catalog remains empty/noindex (0 learning items); fixtures and Engine data are absent from production output. `ENGINEERING_READY=YES` for this adapter safety slice; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Live Pages readback remains NOT_VERIFIED; A5 stays `blocked_external`.
-- Next: commit the validated source/tests/build/checkpoint, rerun full verification and Lighthouse on the committed tree, then open a PR and merge only after exact-head checks pass. Preserve empty/noindex publication and private Engine boundaries.
+- Next: push the clean branch, open a PR, require exact-head Actions to pass, then merge with the expected PR head and verify post-main/provider state. Preserve empty/noindex publication and private Engine boundaries.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 

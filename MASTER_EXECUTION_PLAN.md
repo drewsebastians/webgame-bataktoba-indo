@@ -2,9 +2,9 @@
 
 - A3/C1 revocation-safe adapter work is based on rechecked PUBLIC `main` `d62772465bb6ca3e2116d2b75d769ffaf4077be8` / tree `dbaf32a2981e3bd66227107570215b5f664d0db0`, branch `codex/a3-clear-legacy-progress-20261112`.
 - The source/test adapter drops revoked-source descendants while retaining independent items, and keeps unknown rights blocked. The public build now excludes this not-yet-integrated adapter; synthetic regressions verify revocation and artifact isolation.
-- Local core verification passed 241 unit and 81 browser tests, site/governance, build, bundle budget and E2E smoke. A full post-commit verify is needed to pass dist drift; Lighthouse and exact-head GitHub Actions are pending. Measured budget: 181,658/196,608 JS, 16,342/49,152 CSS.
+- Code/artifact commit `e8ed4dbfd94326428db567165fe5c8d2f0538f96` passed full `npm run verify` (241 unit, 81 browser, build, budget, smoke, governance and committed-dist drift). All 12 Lighthouse profiles passed (accessibility 100; mobile performance 95–99; desktop 98–100). Exact-head GitHub Actions remain pending. Measured budget: 181,658/196,608 JS, 16,342/49,152 CSS.
 - Production catalog remains empty/noindex (0 records), with no synthetic fixtures or Engine data in dist. `ENGINEERING_READY=YES` for this safety slice; `DATA_READY=NO`; `PUBLICATION_READY=NO`; `LEARNING_READY=NO`; `MONETIZATION_READY=DEFERRED`. Live Pages readback remains NOT_VERIFIED and A5 remains `blocked_external`.
-- Next: commit, rerun full verification and Lighthouse, then push/open a PR and require exact-head checks before merge. Continue data collection privately and website work independently.
+- Next: push/open a PR, require exact-head checks before expected-head merge, then record post-main/provider evidence. Continue data collection privately and website work independently.
 
 ## Latest checkpoint — 2026-11-12 UTC / 2026-11-12 WIB (PR #177 merged; post-main verified)
 
