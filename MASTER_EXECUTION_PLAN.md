@@ -1,3 +1,11 @@
+## Latest checkpoint — 2026-11-13 06:19 UTC (PR #188 post-merge verified)
+
+- PUBLIC main is de9722a394f529150b93cefed609fca24c329417 / tree 642109b391acef7b3f75880a3dfb66a7610dd5f2. PR #188 merged from expected head 3a4e27eeb2d19b910e7c8026dc65bceee11702e2. It adds a synthetic-only browser regression for focused-card 1/2/3 rating keys, local progress/scheduling semantics, and focus as the next card appears; no runtime or published data changed.
+- Exact-head Verify #43376001221 and post-main Verify #43377158957 passed: 241/241 unit tests, 84/84 browser tests, 0 skipped; build, site/governance, smoke, performance budget, committed-dist drift and artifact upload passed. All 12 Lighthouse route/device audits passed: Accessibility 100; mobile Performance 97–99; desktop Performance 100. Exact-head Workers preview and production-main Workers build succeeded.
+- Cloudflare merged-main build 3b0e8833-339c-487d-96fb-0acae2f0447d / version 28b4dddd-feea-492f-ba95-cd66135d43dd succeeded. This confirms provider build/deployment status only. Direct live-page readback was attempted and the available web reader cannot access the host; A5 remains blocked_external and served content NOT_VERIFIED.
+- Public catalog remains empty/noindex (0 published items); synthetic test data and private Engine records are absent from production artifacts. A1/A9/A12 remain blocked_approval; no Git history was rewritten. Webgame issue #2 is closed; the live Data Engine issue #2 remains its separate work queue.
+- Readiness: ENGINEERING_READY=YES for the keyboard-rating regression and release pipeline; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. Continue A3 desktop/mobile browser work independently of the corpus.
+
 ## Latest checkpoint — 2026-11-13 05:45 UTC (PR #186 post-merge verified)
 
 - PUBLIC GitHub main is 44eb4c5d02b551a2f509afa90e01e9745e390e6e / tree fb8c4dcfc9bfe972cf3adf4586fcb28dabb23412. PR #186 merged from expected head e0a5b51dbc6ce092ba7468a58a77fe92e20bca5d after exact-head Verify #43371041780 passed. Post-main Verify #43372080816 also passed. No open Webgame PRs remain at this checkpoint; issue #2 is closed.
