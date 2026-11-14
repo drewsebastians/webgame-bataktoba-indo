@@ -107,6 +107,39 @@ test.describe("core learning flows", () => {
     await expect(page.locator("#next-question")).toBeEnabled();
   });
 
+  test("quiz answer shortcuts ignore modifiers and focused editable controls", async ({ page }) => {
+    await installSyntheticContentRoutes(page);
+    await page.goto("/games/");
+    await expect(page.locator(".option")).toHaveCount(4);
+
+    const modifiedShortcutWasPrevented = await page.evaluate(() => {
+      const event = new KeyboardEvent("keydown", {
+        key: "1",
+        ctrlKey: true,
+        bubbles: true,
+        cancelable: true,
+      });
+      document.dispatchEvent(event);
+      return event.defaultPrevented;
+    });
+    expect(modifiedShortcutWasPrevented).toBe(false);
+    await expect(page.locator(".option.correct")).toHaveCount(0);
+    await expect(page.locator("#next-question")).toBeDisabled();
+
+    await page.evaluate(() => {
+      const input = document.createElement("input");
+      input.setAttribute("aria-label", "Shortcut regression input");
+      document.querySelector("#game-panel")?.prepend(input);
+      input.focus();
+    });
+    const input = page.getByRole("textbox", { name: "Shortcut regression input" });
+    await expect(input).toBeFocused();
+    await page.keyboard.press("2");
+    await expect(input).toHaveValue("2");
+    await expect(page.locator(".option.correct")).toHaveCount(0);
+    await expect(page.locator("#next-question")).toBeDisabled();
+  });
+
   test("typed answer: grades input and shows feedback", async ({ page }) => {
     await installSyntheticContentRoutes(page);
     await page.goto("/games/");
