@@ -1221,7 +1221,7 @@ async function initGames() {
     ) {
       return;
     }
-    const options = $(".option", panel);
+    const options = $$(".option", panel);
     const index = Number(event.key) - 1;
     const option = options[index];
     if (option && !option.disabled && !state.locked) {

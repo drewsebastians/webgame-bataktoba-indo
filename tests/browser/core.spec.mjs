@@ -138,6 +138,14 @@ test.describe("core learning flows", () => {
     await expect(input).toHaveValue("2");
     await expect(page.locator(".option.correct")).toHaveCount(0);
     await expect(page.locator("#next-question")).toBeDisabled();
+
+    await input.evaluate((element) => element.remove());
+    const firstOption = page.locator(".option").first();
+    await firstOption.focus();
+    await page.keyboard.press("1");
+    await expect(page.locator(".option.correct, .option.wrong")).toHaveCount(1);
+    await expect(page.locator(".option:disabled")).toHaveCount(4);
+    await expect(page.locator("#next-question")).toBeEnabled();
   });
 
   test("typed answer: grades input and shows feedback", async ({ page }) => {
