@@ -1203,9 +1203,22 @@ async function initGames() {
 
   function handleQuizKeyboard(event) {
     if (state.mode === "memory" || state.mode === "matching") return;
+    if (
+      event.defaultPrevented ||
+      event.isComposing ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey
+    ) {
+      return;
+    }
     if (!["1", "2", "3", "4"].includes(event.key)) return;
     const target = event.target;
-    if (target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) {
+    if (
+      target instanceof HTMLElement &&
+      (["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName) || target.isContentEditable)
+    ) {
       return;
     }
     const options = $$(".option", panel);
