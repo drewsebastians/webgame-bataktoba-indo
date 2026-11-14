@@ -143,7 +143,7 @@ test.describe("core learning flows", () => {
     const firstOption = page.locator(".option").first();
     await firstOption.focus();
     await page.keyboard.press("1");
-    await expect(page.locator(".option.correct, .option.wrong")).toHaveCount(1);
+    await expect(page.locator(".option.correct")).toHaveCount(1);
     await expect(page.locator(".option:disabled")).toHaveCount(4);
     await expect(page.locator("#next-question")).toBeEnabled();
   });
