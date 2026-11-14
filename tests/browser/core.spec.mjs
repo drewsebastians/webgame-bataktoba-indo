@@ -123,6 +123,53 @@ test.describe("core learning flows", () => {
       return event.defaultPrevented;
     });
     expect(modifiedShortcutWasPrevented).toBe(false);
+    const ignoredShortcutResults = await page.evaluate(() => {
+      const ignoredKeys = [
+        { key: "1", altKey: true },
+        { key: "2", metaKey: true },
+        { key: "3", shiftKey: true },
+        { key: "4", isComposing: true },
+      ];
+      return ignoredKeys.map((init) => {
+        const event = new KeyboardEvent("keydown", {
+          bubbles: true,
+          cancelable: true,
+          ...init,
+        });
+        document.dispatchEvent(event);
+        return event.defaultPrevented;
+      });
+    });
+    expect(ignoredShortcutResults).toEqual([false, false, false, false]);
+
+    const prehandledShortcutRemainedPrevented = await page.evaluate(() => {
+      const event = new KeyboardEvent("keydown", {
+        key: "1",
+        bubbles: true,
+        cancelable: true,
+      });
+      event.preventDefault();
+      document.dispatchEvent(event);
+      return event.defaultPrevented;
+    });
+    expect(prehandledShortcutRemainedPrevented).toBe(true);
+
+    const contentEditableShortcutWasPrevented = await page.evaluate(() => {
+      const editor = document.createElement("div");
+      editor.contentEditable = "true";
+      document.querySelector("#game-panel")?.prepend(editor);
+      const event = new KeyboardEvent("keydown", {
+        key: "1",
+        bubbles: true,
+        cancelable: true,
+      });
+      editor.dispatchEvent(event);
+      editor.remove();
+      return event.defaultPrevented;
+    });
+    expect(contentEditableShortcutWasPrevented).toBe(false);
+    await expect(page.locator(".option.correct")).toHaveCount(0);
+    await expect(page.locator("#next-question")).toBeDisabled();
     await expect(page.locator(".option.correct")).toHaveCount(0);
     await expect(page.locator("#next-question")).toBeDisabled();
 
