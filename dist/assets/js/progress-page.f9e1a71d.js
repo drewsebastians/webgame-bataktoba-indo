@@ -14,7 +14,7 @@ import {
   resetProgress,
 } from "./progress.ec6dc40f.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
-import { computeStreak } from "./game/session.305509d7.js";
+import { computeStreak } from "./game/session.de83a926.js";
 import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.0e73c5d9.js";
 import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.2ec2a9a9.js";
 
