@@ -376,10 +376,11 @@ test("flashcards remain touch-friendly at 320px through flip and rating", async 
 
   const card = page.locator("#flashcard");
   await expect(card).toBeVisible();
+  await card.scrollIntoViewIfNeeded();
   const cardBox = await card.boundingBox();
   expect(cardBox?.width ?? 0).toBeGreaterThanOrEqual(44);
   expect(cardBox?.height ?? 0).toBeGreaterThanOrEqual(44);
-  await page.touchscreen.tap(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+  await card.tap();
   await expect(page.locator("#flashcard")).toContainText(SYNTHETIC_WEBGAME_ITEMS[0].indonesia);
 
   const labels = ["1 Salah", "2 Sulit", "3 Benar"];
@@ -394,8 +395,7 @@ test("flashcards remain touch-friendly at 320px through flip and rating", async 
   }
 
   const correctButton = page.getByRole("button", { name: "3 Benar", exact: true });
-  const correctBox = await correctButton.boundingBox();
-  await page.touchscreen.tap(correctBox.x + correctBox.width / 2, correctBox.y + correctBox.height / 2);
+  await correctButton.tap();
   await expect(page.locator("#flashcard")).toContainText(SYNTHETIC_WEBGAME_ITEMS[1].batak);
   await expect(page.locator("#flashcard")).toBeFocused();
   await expectNoSeriousAccessibilityViolations(page);
