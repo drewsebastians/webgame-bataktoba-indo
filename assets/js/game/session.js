@@ -29,7 +29,8 @@ function todayKey(atMs = Date.now()) {
  * statsById: Map<string, itemStats-like> or plain object.
  */
 export function buildDailyQueue(pool, statsById, { size = 10, now = Date.now(), random = Math.random } = {}) {
-  const statsFor = (id) => statsById?.[id] ?? null;
+  const statsFor = (id) =>
+    statsById instanceof Map ? statsById.get(id) ?? null : statsById?.[id] ?? null;
 
   function bucketOf(item) {
     const stats = statsFor(item.id);
