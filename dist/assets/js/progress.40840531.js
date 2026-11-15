@@ -213,7 +213,9 @@ export function validateProgressPayload(payload) {
   if (payload.schemaVersion !== PROGRESS_SCHEMA_VERSION) return null;
   const progress = createEmptyProgress();
   progress.answered = clampInt(payload.answered, 0, 1e9, 0);
-  progress.correct = clampInt(payload.correct, 0, 1e9, 0);
+  // Imported backups are untrusted: aggregate correct answers cannot exceed
+  // the total number answered, or the displayed accuracy could exceed 100%.
+  progress.correct = clampInt(payload.correct, 0, progress.answered, 0);
   progress.lastMode = typeof payload.lastMode === "string" ? payload.lastMode.slice(0, 40) : "meaning";
   progress.migratedFromLegacy = Boolean(payload.migratedFromLegacy);
   progress.migratedAt =
