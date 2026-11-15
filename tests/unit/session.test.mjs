@@ -46,6 +46,26 @@ describe("buildDailyQueue", () => {
     );
   });
 
+  it("uses Map-backed item statistics for priority ordering", () => {
+    const items = pool(6);
+    const stats = new Map([
+      [items[0].id, { seen: 2, nextReviewAt: NOW - 1000 }], // due
+      [items[1].id, { seen: 5, incorrectCount: 4 }], // often wrong
+    ]);
+
+    const mapIds = buildDailyQueue(items, stats, { size: 10, now: NOW, random: rng(5) }).map(
+      (item) => item.id,
+    );
+    const objectIds = buildDailyQueue(items, Object.fromEntries(stats), {
+      size: 10,
+      now: NOW,
+      random: rng(5),
+    }).map((item) => item.id);
+
+    assert.deepEqual(mapIds, objectIds);
+    assert.deepEqual(mapIds.slice(0, 2), [items[0].id, items[1].id]);
+  });
+
   it("respects the requested session size", () => {
     const queue = buildDailyQueue(pool(30), {}, { size: 5, random: rng(2) });
     assert.equal(queue.length, 5);
