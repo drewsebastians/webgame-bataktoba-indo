@@ -368,6 +368,47 @@ test("flashcard keyboard activation preserves focus and native rating buttons", 
   await expect(nextCard).not.toHaveText(firstCardText ?? "");
 });
 
+test("flashcards remain touch-friendly at 320px through flip and rating", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("all");
+
+  const card = page.locator("#flashcard");
+  await expect(card).toBeVisible();
+  const cardBox = await card.boundingBox();
+  expect(cardBox?.width ?? 0).toBeGreaterThanOrEqual(44);
+  expect(cardBox?.height ?? 0).toBeGreaterThanOrEqual(44);
+  await page.touchscreen.tap(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+  await expect(page.locator("#flashcard")).toContainText(SYNTHETIC_WEBGAME_ITEMS[0].indonesia);
+
+  const labels = ["1 Salah", "2 Sulit", "3 Benar"];
+  for (const label of labels) {
+    const button = page.getByRole("button", { name: label, exact: true });
+    await button.scrollIntoViewIfNeeded();
+    const box = await button.boundingBox();
+    expect(box?.width ?? 0, label + " should be at least 44px wide for touch").toBeGreaterThanOrEqual(44);
+    expect(box?.height ?? 0, label + " should be at least 44px high for touch").toBeGreaterThanOrEqual(44);
+    expect(box?.x ?? -1).toBeGreaterThanOrEqual(0);
+    expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(320);
+  }
+
+  const correctButton = page.getByRole("button", { name: "3 Benar", exact: true });
+  const correctBox = await correctButton.boundingBox();
+  await page.touchscreen.tap(correctBox.x + correctBox.width / 2, correctBox.y + correctBox.height / 2);
+  await expect(page.locator("#flashcard")).toContainText(SYNTHETIC_WEBGAME_ITEMS[1].batak);
+  await expect(page.locator("#flashcard")).toBeFocused();
+  await expectNoSeriousAccessibilityViolations(page);
+
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    document: document.documentElement.scrollWidth,
+    body: document.body.scrollWidth,
+  }));
+  expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport);
+  expect(dimensions.body).toBeLessThanOrEqual(dimensions.viewport);
+});
+
 test("flashcard shortcuts only run while the card is focused", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.goto("/flashcards/");
