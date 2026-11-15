@@ -191,8 +191,10 @@ async function initProgressPage(notice = '') {
     const link = el("a", {
       attrs: { href: url, download: `batak-toba-progress-${localDateKey()}.json` },
     });
+    document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(url);
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     statusLine.textContent = "Progress diekspor sebagai file JSON.";
     track("progress_exported");
   });
