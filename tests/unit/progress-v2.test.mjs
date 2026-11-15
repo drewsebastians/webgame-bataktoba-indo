@@ -270,6 +270,25 @@ describe("corrupted storage handling", () => {
     assert.equal(progress.exportProgress(), before);
   });
 
+  it("bounds imported correct answers by the total answered", () => {
+    const result = progress.importProgress(JSON.stringify({
+      schemaVersion: 3,
+      answered: 2,
+      correct: 9,
+    }));
+
+    assert.equal(result.ok, true);
+    assert.equal(result.progress.answered, 2);
+    assert.equal(result.progress.correct, 2);
+
+    const empty = progress.validateProgressPayload({
+      schemaVersion: 3,
+      answered: 0,
+      correct: 5,
+    });
+    assert.equal(empty.correct, 0);
+  });
+
   it("accepts valid exports round-trip", () => {
     progress.recordAnswer(true, "meaning", "word-ab12cd34ef");
     const exported = progress.exportProgress();
