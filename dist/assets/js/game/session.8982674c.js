@@ -13,7 +13,7 @@
  * two consecutive missed days break it (non-punishing by design).
  */
 
-import { normalizeLabel } from "../utils/normalize.js";
+import { normalizeLabel } from "../utils/normalize.9471d62c.js";
 
 export const SESSION_SIZES = [5, 10, 20];
 
