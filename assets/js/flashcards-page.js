@@ -187,6 +187,8 @@ async function initFlashcards() {
     // Card shortcuts must not hijack arrow/number keys while a user is moving
     // through navigation, filters, rating controls, or other page controls.
     if (!(target instanceof Element) || !target.closest("#flashcard")) return;
+    // Modified shortcuts belong to the browser, assistive technology, or IME.
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing) return;
     if (event.key === " ") {
       event.preventDefault();
       flipCard();

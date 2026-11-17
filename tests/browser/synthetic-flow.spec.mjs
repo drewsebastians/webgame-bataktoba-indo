@@ -436,6 +436,35 @@ test("flashcard shortcuts only run while the card is focused", async ({ page }) 
   await expect(card).toHaveAttribute("aria-keyshortcuts", "Space 1 2 3 ArrowLeft ArrowRight");
 });
 
+test("flashcard shortcuts ignore modified key combinations", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("all");
+
+  const firstItem = SYNTHETIC_WEBGAME_ITEMS[0];
+  const card = page.locator("#flashcard");
+  await expect(card).toContainText(firstItem.batak);
+  await card.focus();
+  await page.evaluate(() => {
+    const target = document.querySelector("#flashcard");
+    for (const event of [
+      new KeyboardEvent("keydown", { key: " ", shiftKey: true, bubbles: true, cancelable: true }),
+      new KeyboardEvent("keydown", { key: "1", ctrlKey: true, bubbles: true, cancelable: true }),
+      new KeyboardEvent("keydown", { key: "ArrowRight", metaKey: true, bubbles: true, cancelable: true }),
+      new KeyboardEvent("keydown", { key: "ArrowLeft", altKey: true, bubbles: true, cancelable: true }),
+    ]) {
+      target.dispatchEvent(event);
+    }
+  });
+
+  await expect(card).toContainText(firstItem.batak);
+  await expect(card).not.toContainText(firstItem.indonesia);
+  expect(await page.evaluate(() => {
+    const progress = JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}");
+    return progress.answered ?? 0;
+  })).toBe(0);
+});
+
 test("flashcard 1/2/3 shortcuts rate synthetic cards and keep the next card focused", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.goto("/flashcards/");
