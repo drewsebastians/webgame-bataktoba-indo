@@ -1,3 +1,14 @@
+## Latest execution checkpoint — 2026-11-17 02:20 UTC (Web PR #212 verified)
+
+- PUBLIC Webgame main is `10b417d791a1d21a36ff4b1bc4431b517a2f454b` / tree `be54b523eb4b424eded799f6f8b1af8093ccf8e2`. The Alignment Engine remains PRIVATE; its checkpoint and data stay in that repository.
+- Web PR [#212](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/212) merged the 320px successful progress-import coverage. Exact-head and post-main Verify [#43997010341](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43997010341) passed 243/243 unit/data tests and 90/90 browser tests (0 skipped), plus build/smoke, performance budget, committed-dist drift, artifact integrity, and synthetic-fixture isolation. All 12 Lighthouse profiles passed: Accessibility 100, mobile Performance 97–99, desktop Performance 100.
+- The public artifact was 118,155 bytes (SHA-256 `0230f53e3517f9e544a95b5a5087ee2f7b14caa0532c4c78bdb39a4308bb2bbd`). Cloudflare Workers Builds reported a successful production build/version `57bc1d85-03b3-4ef8-9085-cc5f6ca7b4ed`; direct live Pages readback remains NOT_VERIFIED.
+- Published learning data remains empty and noindex; synthetic records remain isolated to automated tests. No private or restricted linguistic data was added to public source or build output.
+- Private-track status remains separate: DATA_READY=NO, PUBLICATION_READY=NO. Cross-repo readiness remains ENGINEERING_READY=YES for browser engineering; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue the highest-value browser UX/lesson-flow work with isolated synthetic fixtures; retain artifact and fixture-exclusion gates. Retry direct live-site verification when the configured production endpoint is reachable.
+
+---
+
 ## Latest execution checkpoint — 2026-11-16 01:03 UTC (Web PR #210 and Engine PR #278 verified)
 
 - Reverified repository visibility and cross-repository refs: Webgame is PUBLIC at main `aeda5750179cc76032ef40c1d2aed87ad9aa21a4` / tree `49bbaf3a7d7ee175412c136116e241cf1819dc4f`; Alignment Engine is PRIVATE at main `e0d4f847a0bf6c3aa6a483972a81c9af93cd6783` / tree `32c93f1699186df3dce4cbc88242fd2d01c0a5e9`. No private linguistic content was transferred to Webgame.
