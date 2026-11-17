@@ -1,3 +1,15 @@
+## Latest execution checkpoint — 2026-11-17 06:57 UTC (Web PR #219 merged; cross-repository gates rechecked)
+
+- Reverified GitHub visibility and current main refs/tree: Webgame is PUBLIC at `3a5dcd63a734c641b0db9b4313a5188c42faaf75` / `2fd3bde68c24340c061905cd0ad97d92a2e407bc`; Alignment Engine is PRIVATE at `a03313f558b425afa2a8ca80d7cba4262e09483f` / `ad670fc37bc2929524b935d3bfb3f185a07dddba`. The public checkpoint records only the private revision and readiness gates.
+- Web PR [#219](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/219) fixes flashcard keyboard shortcuts so modified key combinations and IME composition are left to the browser/input method. An isolated synthetic Playwright regression covers the behavior. It merged at main commit `3a5dcd63a734c641b0db9b4313a5188c42faaf75`.
+- Exact-head Verify [#44032398426](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44032398426) passed: 244/244 unit/data tests and 91/91 Playwright tests, 0 skipped; build, smoke, axe, budgets, committed-dist drift, artifact integrity and synthetic-fixture isolation passed. Twelve Lighthouse profiles passed with Accessibility 100 throughout, mobile Performance 97–99 and desktop Performance 100. The verified CI artifact was 118,345 bytes with archive SHA-256 `d3c08060622b781d820d47f4301c5b99d989ea4b0570f8b50c83ed899e27bfba`.
+- Cloudflare Workers Builds reported a successful PR preview for head `070eff359aaf0006b3cd217c2ecc622ac691c3db` (build `7d30fe9e-6241-4a15-9a6d-35723447b13c`). This is preview evidence only. Available live reads of the homepage and `/flashcards/` were inaccessible, so merged-main production deployment and served-artifact identity remain NOT_VERIFIED; keep A5 `blocked_external`.
+- Production content remains empty/noindex (0 published learning items); synthetic fixtures stay test-only. No private linguistic data was transferred. Readiness: ENGINEERING_READY=YES for this verified code slice; DATA_READY=NO, PUBLICATION_READY=NO, LEARNING_READY=NO, MONETIZATION_READY=DEFERRED.
+- The private Engine checkpoint is current at the revision above; aggregate DATA_READY and PUBLICATION_READY remain NO. No private source details are copied into this repository.
+- Resume with the next independent A3 browser UX/lesson-flow task using isolated synthetic fixtures, while keeping production data empty/noindex and the adapter fail-closed. Keep A5 blocked until main deployment and a live artifact readback can be matched.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 05:56 UTC (Web PR #217 merged; cross-repo gates rechecked)
 
 - PUBLIC Webgame main is `2ca1f0a3200434620b54a9c76f2d511b823ff195` / tree `146a43de4d83dc7f7c9909e0731b287409148899`; PRIVATE Alignment Engine main is `83da066a3d49e6b91ae5bbe31a8307d4cfb1e995` / tree `282b56a36004ce3e5f296738acc3bc052516de22`. Repository visibility was reverified. Public documentation records only the private revision and aggregate readiness, with no private source details.
