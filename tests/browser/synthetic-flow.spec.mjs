@@ -563,6 +563,7 @@ test("mobile due flashcard review removes mastered cards and keeps focus on prog
   await page.goto("/flashcards/");
   await page.locator("#fc-filter").selectOption("due");
   const card = page.locator("#flashcard");
+  const announcement = page.locator("#flashcard-announcement");
   await expect(card).toContainText(dueItems[0].batak);
   await expect(page.locator("#flashcard-card .pill").first()).toHaveText("1/2");
 
@@ -570,6 +571,7 @@ test("mobile due flashcard review removes mastered cards and keeps focus on prog
   await expect(page.locator("#flashcard")).toContainText(dueItems[0].indonesia);
   await page.getByRole("button", { name: "3 Benar", exact: true }).tap();
   await expect(page.locator("#flashcard")).toContainText(dueItems[1].batak);
+  await expect(announcement).toHaveText("Ditandai benar. Kartu 1 dari 1.");
   await expect(page.locator("#flashcard")).toBeFocused();
   await expect(page.locator("#flashcard-toolbar")).toContainText("1 kartu");
 
@@ -578,6 +580,7 @@ test("mobile due flashcard review removes mastered cards and keeps focus on prog
   const emptyState = page.locator("#flashcard-card [role='status']");
   await expect(emptyState).toContainText("Tidak ada kartu untuk filter ini");
   await expect(emptyState).toBeFocused();
+  await expect(announcement).toHaveText("Ditandai benar. Tumpukan review sudah selesai.");
   await expect(page.locator("#flashcard-toolbar")).toContainText("0 kartu");
 
   const scheduledItems = await page.evaluate((itemIds) => {
