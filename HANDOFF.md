@@ -1,11 +1,11 @@
-## Latest execution checkpoint — 2026-11-17 02:20 UTC (Web PR #212 verified)
+## Latest execution checkpoint — 2026-11-17 03:3x UTC (Web PR #214 merged; exact-main verification passed)
 
-- PUBLIC Webgame main is `10b417d791a1d21a36ff4b1bc4431b517a2f454b` / tree `be54b523eb4b424eded799f6f8b1af8093ccf8e2`. The Alignment Engine remains PRIVATE; its checkpoint and data stay in that repository.
-- Web PR [#212](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/212) merged the 320px successful progress-import coverage. Exact-head and post-main Verify [#43997010341](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/43997010341) passed 243/243 unit/data tests and 90/90 browser tests (0 skipped), plus build/smoke, performance budget, committed-dist drift, artifact integrity, and synthetic-fixture isolation. All 12 Lighthouse profiles passed: Accessibility 100, mobile Performance 97–99, desktop Performance 100.
-- The public artifact was 118,155 bytes (SHA-256 `0230f53e3517f9e544a95b5a5087ee2f7b14caa0532c4c78bdb39a4308bb2bbd`). Cloudflare Workers Builds reported a successful production build/version `57bc1d85-03b3-4ef8-9085-cc5f6ca7b4ed`; direct live Pages readback remains NOT_VERIFIED.
-- Published learning data remains empty and noindex; synthetic records remain isolated to automated tests. No private or restricted linguistic data was added to public source or build output.
-- Private-track status remains separate: DATA_READY=NO, PUBLICATION_READY=NO. Cross-repo readiness remains ENGINEERING_READY=YES for browser engineering; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
-- Next: continue the highest-value browser UX/lesson-flow work with isolated synthetic fixtures; retain artifact and fixture-exclusion gates. Retry direct live-site verification when the configured production endpoint is reachable.
+- PUBLIC Webgame main is `d884d024956af65169ac5e55185fbd11b395b308` / tree `d5efa25b09c18749029274d5d2a39dd67b26c503`. PR [#214](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/214) silences the once-per-second Matching Pairs timer for screen readers and makes progress-export revocation ordering deterministic.
+- Exact-head Verify [#44009679173](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44009679173) and post-main Verify [#44010457011](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44010457011) passed. Local release verification passed 243/243 unit/data checks, 90/90 browser checks (0 skipped), smoke, drift, budgets, and 12 Lighthouse profiles; Accessibility was 100 on every profile, mobile Performance 96–99 and desktop 100.
+- Cloudflare Workers Builds check [#133796209695](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/133796209695) completed successfully for the merged main commit. This verifies the provider build signal; direct live Pages readback remains NOT_VERIFIED.
+- Published learning data remains empty/noindex; synthetic records remain test-only. The public artifact and repository contain no private or restricted learner data. DATA_READY=NO, PUBLICATION_READY=NO, LEARNING_READY=NO, and MONETIZATION_READY=DEFERRED.
+- Continue independent browser UX/lesson-flow, PWA, accessibility, and synthetic-fixture work. Keep the upstream adapter fail-closed and retry live readback when the configured endpoint is reachable.
+
 
 ---
 
