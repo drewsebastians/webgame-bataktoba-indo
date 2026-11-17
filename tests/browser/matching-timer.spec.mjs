@@ -30,6 +30,7 @@ test.describe("Matching Pairs timer (optional)", () => {
     await expect(timerToggle).toHaveAttribute("aria-pressed", "true");
     await expect(timerToggle).toContainText("aktif");
     const timePill = page.locator("#matching-time");
+    await expect(timePill).toHaveAttribute("aria-live", "off");
     await expect(timePill).toHaveText("Waktu 0 dtk");
     await expect.poll(async () => {
       const text = await timePill.textContent();
@@ -76,7 +77,9 @@ test.describe("Matching Pairs timer (optional)", () => {
     await page.getByRole("button", { name: /^Matching Pairs/ }).click();
     const backToggle = page.getByRole("button", { name: /Timer:/ });
     await expect(backToggle).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator("#matching-time")).toHaveText("Waktu 0 dtk");
+    const resumedTime = page.locator("#matching-time");
+    await expect(resumedTime).toHaveAttribute("aria-live", "off");
+    await expect(resumedTime).toHaveText("Waktu 0 dtk");
   });
 
   test("new board respects timer OFF (no score penalty)", async ({ page }) => {

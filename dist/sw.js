@@ -7,7 +7,7 @@
  * that changes precached content.
  */
 
-const CACHE_VERSION = "btp-614012d7b314";
+const CACHE_VERSION = "btp-8438c479eff1";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
