@@ -1,3 +1,15 @@
+## Latest execution checkpoint — 2026-11-17 10:15 UTC (PR #224 merged; cross-repository state rechecked)
+
+- Reverified visibility and refs: Webgame is PUBLIC at main `f0d35541fd8a7dccc25b432b95824bce3f9e9890` / tree `11f3e7da6c3b03053249c2339a43b962af497509`; Alignment Engine is PRIVATE at main `399b1956022c4c8ab32ad258b10572f7997a4885` / tree `bc7aeda2c14ade8edfc33cbf504e505bdca6d576`. Public docs carry only the private revision pointer and aggregate readiness.
+- Web PR [#223](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/223) merged as the documentation checkpoint. Web PR [#224](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/224) added synthetic mobile-browser assertions for due-card position and the final review-complete announcement; it did not change production content or code.
+- Exact-head Verify [#44058784948](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44058784948) for PR #223 and [#44060965356](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44060965356) for PR #224 succeeded. The latter passed 244/244 unit/data tests, 92/92 Playwright tests, 0 skips, E2E smoke, build, performance budget, synthetic-fixture and artifact-integrity gates, and 12 Lighthouse profiles (Accessibility 100 on every profile; mobile Performance 97–99; desktop 100).
+- CI artifact `verified-public-site-dist-44060965356` (#14318307455; 118,517 bytes) and Lighthouse reports (#14318875669) are available. Public learning arrays remain empty, topic routes noindex, and synthetic markers absent from the artifact. This artifact is CI evidence, not a live production readback.
+- No post-merge main run/status for #223 or #224 was confirmed in the available Actions view; the exact-head PR validations passed. Cloudflare production deployment and live served-artifact identity remain NOT_VERIFIED.
+- Readiness remains separate: ENGINEERING_READY=YES for the verified browser work; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No private language records or learner data were transferred.
+- Continue A3 responsive and short-session browser improvements with isolated synthetic fixtures. Keep A5 blocked until a supported production route and served assets can be matched to a current main artifact. Preserve A1/A9/A12 approval gates and historical Git objects.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 09:43 UTC (Web PR #222 merged; paired repository state rechecked)
 
 - Reverified visibility and main refs: Webgame is PUBLIC at `ec2370e728dada3dc59477a42f01522d9895c226` / tree `21f55d200ffe2f09e076c0eed746ed8e7ab508a6`; Alignment Engine is PRIVATE at `030a7b1d61a62a832daae6bb0dfca6a1217a979b` / tree `c800fdbd9aba68c07436703a753b0d65ce68e7c8`. This public checkpoint includes only the private revision pointer and aggregate readiness.
