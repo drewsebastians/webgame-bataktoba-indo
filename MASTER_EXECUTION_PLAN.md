@@ -1,14 +1,13 @@
-## Latest execution checkpoint — 2026-11-17 03:40 UTC (Web PR #214 merged; exact-main verification passed)
+## Latest execution checkpoint — 2026-11-17 05:56 UTC (Web PR #217 merged; cross-repo gates rechecked)
 
-- PUBLIC Webgame main is `d884d024956af65169ac5e55185fbd11b395b308` / tree `d5efa25b09c18749029274d5d2a39dd67b26c503`. PR [#214](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/214) silences the once-per-second Matching Pairs timer for screen readers and makes progress-export revocation ordering deterministic.
-- Exact-head Verify [#44009679173](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44009679173) and post-main Verify [#44010457011](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44010457011) passed. Local release verification passed 243/243 unit/data checks, 90/90 browser checks (0 skipped), smoke, drift, budgets, and 12 Lighthouse profiles; Accessibility was 100 on every profile, mobile Performance 96–99 and desktop 100.
-- Cloudflare Workers Builds check [#133796209695](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/133796209695) completed successfully for the merged main commit. This verifies the provider build signal; direct live Pages readback remains NOT_VERIFIED.
-- Published learning data remains empty/noindex; synthetic records remain test-only. The public artifact and repository contain no private or restricted learner data. DATA_READY=NO, PUBLICATION_READY=NO, LEARNING_READY=NO, and MONETIZATION_READY=DEFERRED.
-- Continue independent browser UX/lesson-flow, PWA, accessibility, and synthetic-fixture work. Keep the upstream adapter fail-closed and retry live readback when the configured endpoint is reachable.
-
+- PUBLIC Webgame main is `2ca1f0a3200434620b54a9c76f2d511b823ff195` / tree `146a43de4d83dc7f7c9909e0731b287409148899`; PRIVATE Alignment Engine main is `83da066a3d49e6b91ae5bbe31a8307d4cfb1e995` / tree `282b56a36004ce3e5f296738acc3bc052516de22`. Repository visibility was reverified. Public documentation records only the private revision and aggregate readiness, with no private source details.
+- Web PR [#217](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/217) fixes daily practice so a normalized Batak prompt is not repeated with conflicting Indonesian meanings; a synthetic regression covers competing senses. The published catalog remains empty/noindex.
+- Exact-head Verify [#44022422887](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44022422887) passed 244 unit/data tests, 90 browser tests, smoke, committed-dist drift, budgets, artifact integrity, fixture isolation, and 12 Lighthouse profiles. Accessibility was 100 on every profile; mobile Performance 96–99 and desktop Performance 100.
+- Cloudflare Workers Builds reported success for the PR preview [#133834602547](https://github.com/drewsebastians/webgame-bataktoba-indo/runs/133834602547). Merged-main production deployment and live readback remain NOT_VERIFIED; provider preview success is not production verification.
+- Readiness: ENGINEERING_READY=YES for this website change; DATA_READY=NO, PUBLICATION_READY=NO, LEARNING_READY=NO, MONETIZATION_READY=DEFERRED. No private linguistic content was transferred. Synthetic fixtures remain isolated to tests; public learning data remains empty/noindex.
+- Continue website UX, lesson-flow, PWA, accessibility, performance, and security work independently of corpus progress. Keep the upstream adapter fail-closed and public content empty until rights and quality gates clear.
 
 ---
-
 ## Latest execution checkpoint — 2026-11-16 01:03 UTC (Web PR #210 and Engine PR #278 verified)
 
 - Reverified repository visibility and cross-repository refs: Webgame is PUBLIC at main `aeda5750179cc76032ef40c1d2aed87ad9aa21a4` / tree `49bbaf3a7d7ee175412c136116e241cf1819dc4f`; Alignment Engine is PRIVATE at main `e0d4f847a0bf6c3aa6a483972a81c9af93cd6783` / tree `32c93f1699186df3dce4cbc88242fd2d01c0a5e9`. No private linguistic content was transferred to Webgame.
