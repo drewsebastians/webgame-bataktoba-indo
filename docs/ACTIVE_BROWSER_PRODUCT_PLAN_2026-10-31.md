@@ -1,3 +1,14 @@
+## Latest execution checkpoint — 2026-11-17 07:47 UTC (cross-repository state after private metadata checkpoint)
+
+- Reverified GitHub visibility and refs: Webgame is PUBLIC at main `e3434ba752b28c8bba0c48a52cd05e2d5f533212` / tree `d419a0cd3849986bd0fdd502e834b8f6c6ef34e0`; Alignment Engine is PRIVATE at main `6be9d5d407d4634d9717956d4eb391151293e0c0` / tree `2e6f0007dc5b6f1c496115a9b3d242320f88b32c`. This public checkpoint records only the private revision pointer and aggregate readiness.
+- Web PR [#219](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/219) shipped the flashcard shortcut guard for modified key combinations and IME composition, covered by isolated synthetic Playwright fixtures. Exact-head Verify [#44032398426](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44032398426) passed 244 unit/data tests and 91 browser tests with 0 skips, plus build, smoke, accessibility, budget, artifact-integrity and fixture-isolation checks.
+- Public checkpoint PR [#220](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/220) merged; its exact-head and post-merge Verify runs [#44036195142](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44036195142) and [#44037017105](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44037017105) succeeded.
+- Readiness stays separate: ENGINEERING_READY=YES for validated browser and synthetic-data flows; DATA_READY=NO, PUBLICATION_READY=NO, LEARNING_READY=NO, and MONETIZATION_READY=DEFERRED. No private corpus or learner data was transferred.
+- The published catalog remains empty and noindex. A PR preview and CI artifacts do not establish production deployment; merged-main production artifact and live readback remain NOT_VERIFIED.
+- Continue A3 browser UX, accessibility, offline/PWA, privacy/security and performance improvements independently of the data gate. Keep A5 blocked until a current production artifact can be matched through live readback; preserve A1/A9/A12 approval gates and do not rewrite history.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 06:57 UTC (Web PR #219 verified)
 
 - Current PUBLIC main/tree: `3a5dcd63a734c641b0db9b4313a5188c42faaf75` / `2fd3bde68c24340c061905cd0ad97d92a2e407bc`; PRIVATE Engine aggregate readiness remains DATA_READY=NO and PUBLICATION_READY=NO.
