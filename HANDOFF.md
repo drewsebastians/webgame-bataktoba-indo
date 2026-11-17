@@ -1,4 +1,4 @@
-## Latest execution checkpoint — 2026-11-17 06:57 UTC (Web PR #219 and private Engine PR #288 merged)
+## Latest execution checkpoint — 2026-11-17 06:57 UTC (Web PR #219 merged; cross-repository gates rechecked)
 
 - Reverified GitHub visibility and current main refs/tree: Webgame is PUBLIC at `3a5dcd63a734c641b0db9b4313a5188c42faaf75` / `2fd3bde68c24340c061905cd0ad97d92a2e407bc`; Alignment Engine is PRIVATE at `a03313f558b425afa2a8ca80d7cba4262e09483f` / `ad670fc37bc2929524b935d3bfb3f185a07dddba`. The public checkpoint records only the private revision and readiness gates.
 - Web PR [#219](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/219) fixes flashcard keyboard shortcuts so modified key combinations and IME composition are left to the browser/input method. An isolated synthetic Playwright regression covers the behavior. It merged at main commit `3a5dcd63a734c641b0db9b4313a5188c42faaf75`.
