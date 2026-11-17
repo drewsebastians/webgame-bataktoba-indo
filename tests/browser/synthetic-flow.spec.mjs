@@ -26,6 +26,11 @@ async function answerMeaningQuestion(page, { wrong = false, checkAccessibility =
     : item.indonesia;
   expect(answer).toBeTruthy();
   await page.getByRole("button", { name: answer, exact: true }).click();
+  const feedback = page.locator("#feedback");
+  await expect(feedback).toHaveAttribute("aria-live", "polite");
+  await expect(feedback).toHaveText(
+    wrong ? `Belum tepat. Jawaban yang dicari: ${item.indonesia}.` : "Benar.",
+  );
   const continuation = page.locator("#next-question");
   await expect(continuation).toBeEnabled();
   if (checkAccessibility) await expectNoSeriousAccessibilityViolations(page);
