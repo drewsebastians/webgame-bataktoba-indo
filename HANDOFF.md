@@ -1,3 +1,14 @@
+## Latest execution checkpoint — 2026-11-17 09:43 UTC (Web PR #222 merged; paired repository state rechecked)
+
+- Reverified visibility and main refs: Webgame is PUBLIC at `ec2370e728dada3dc59477a42f01522d9895c226` / tree `21f55d200ffe2f09e076c0eed746ed8e7ab508a6`; Alignment Engine is PRIVATE at `030a7b1d61a62a832daae6bb0dfca6a1217a979b` / tree `c800fdbd9aba68c07436703a753b0d65ce68e7c8`. This public checkpoint includes only the private revision pointer and aggregate readiness.
+- Web PR [#222](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/222) added polite screen-reader announcements for flashcard ratings, current deck position, and deck completion. Exact-head Verify [#44049840241](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44049840241) and post-merge main Verify [#44051743237](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44051743237) passed: 244/244 unit/data tests, 92/92 browser tests, 0 skips, E2E smoke, build, performance budget, artifact-integrity and synthetic-fixture-isolation checks.
+- All 12 Lighthouse profiles passed; Accessibility was 100 on every profile, desktop Performance was 100, and mobile Performance ranged from 96 to 99. The main workflow produced verified public artifact `verified-public-site-dist-44051743237` (118,517 bytes; artifact ID 14313369419). Published learning arrays remain empty and topic routes noindex; no synthetic markers or private linguistic records are present in the production artifact.
+- Cloudflare's PR-triggered build signal succeeded for the PR head. This is not evidence of a merged-main production deployment or live artifact identity: production/live readback remains NOT_VERIFIED.
+- Current readiness: ENGINEERING_READY=YES for browser/product engineering; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED. No private corpus or learner data was transferred.
+- Continue A3 responsive, accessibility, and short-session browser improvements with isolated synthetic fixtures. Keep A5 blocked until a supported live route and its served assets can be matched to a current main artifact. Preserve A1/A9/A12 approval gates and leave historical Git objects untouched.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 07:47 UTC (cross-repository state after private metadata checkpoint)
 
 - Reverified GitHub visibility and refs: Webgame is PUBLIC at main `e3434ba752b28c8bba0c48a52cd05e2d5f533212` / tree `d419a0cd3849986bd0fdd502e834b8f6c6ef34e0`; Alignment Engine is PRIVATE at main `6be9d5d407d4634d9717956d4eb391151293e0c0` / tree `2e6f0007dc5b6f1c496115a9b3d242320f88b32c`. This public checkpoint records only the private revision pointer and aggregate readiness.
