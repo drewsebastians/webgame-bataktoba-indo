@@ -1,3 +1,13 @@
+## Latest execution checkpoint — 2026-11-17 06:57 UTC (Web PR #219 verified)
+
+- Current PUBLIC main/tree: `3a5dcd63a734c641b0db9b4313a5188c42faaf75` / `2fd3bde68c24340c061905cd0ad97d92a2e407bc`; PRIVATE Engine aggregate readiness remains DATA_READY=NO and PUBLICATION_READY=NO.
+- Flashcards now ignore keyboard shortcuts with Shift/Alt/Ctrl/Meta modifiers and during IME composition. The regression uses isolated synthetic fixtures.
+- Exact-head Verify [#44032398426](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44032398426) passed 244 unit/data and 91 browser tests with no skips, build/smoke/axe/budgets/dist-drift/artifact-isolation checks, and 12 Lighthouse profiles (Accessibility 100; mobile Performance 97–99; desktop 100).
+- PR-preview build succeeded; merged-main production deployment and live homepage/flashcards readback remain NOT_VERIFIED. Public learning catalog remains empty/noindex and no private content was transferred.
+- Continue independent browser UX, lesson-flow, PWA/offline, accessibility, privacy/security and performance work. Production verification remains A5 `blocked_external`.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 06:03 UTC (Web PR #217 merged; current cross-repo gates)
 
 - PUBLIC Webgame main `2ca1f0a3200434620b54a9c76f2d511b823ff195` / tree `146a43de4d83dc7f7c9909e0731b287409148899`; PRIVATE Engine main `83da066a3d49e6b91ae5bbe31a8307d4cfb1e995` / tree `282b56a36004ce3e5f296738acc3bc052516de22`. Visibility was rechecked. This public plan stores only the private revision and aggregate readiness.
