@@ -510,6 +510,27 @@ test("flashcard 1/2/3 shortcuts rate synthetic cards and keep the next card focu
   expect(stats.item.nextReviewAt).toBeGreaterThan(Date.now());
 });
 
+test("flashcard ratings announce the result and next card position", async ({ page }) => {
+  await installSyntheticContentRoutes(page);
+  await page.goto("/flashcards/");
+  await page.locator("#fc-filter").selectOption("all");
+
+  const card = page.locator("#flashcard");
+  const announcement = page.locator("#flashcard-announcement");
+  await expect(card).toContainText(SYNTHETIC_WEBGAME_ITEMS[0].batak);
+  await expect(announcement).toHaveAttribute("role", "status");
+  await expect(announcement).toHaveAttribute("aria-live", "polite");
+  await expect(announcement).toHaveAttribute("aria-atomic", "true");
+
+  await page.getByRole("button", { name: "1 Salah", exact: true }).click();
+  await expect(announcement).toHaveText(/Ditandai salah\. Kartu 2 dari \d+\./);
+  await expect(card).toBeFocused();
+
+  await page.getByRole("button", { name: "3 Benar", exact: true }).click();
+  await expect(announcement).toHaveText(/Ditandai benar\. Kartu 3 dari \d+\./);
+  await expect(card).toBeFocused();
+});
+
 test("mobile due flashcard review removes mastered cards and keeps focus on progress", async ({ page }) => {
   await installSyntheticContentRoutes(page);
   await page.setViewportSize({ width: 375, height: 812 });
