@@ -1,3 +1,15 @@
+## Latest execution checkpoint — 2026-11-17 11:13 UTC (Web PR #226 merged; both main verifications passed)
+
+- Reverified repository visibility and refs: Webgame is PUBLIC at main `e9f5aa4d510686decde9660d6d6c165765a387f0` / tree `0c4c176e44b9d943973d330ae0390b7a31f1e59f`; Alignment Engine is PRIVATE at main `8b0bd8419114435d07ed2156884c7762968234b4` / tree `381549700d3acce92ee5a324b73173ae4452a055`. Public records contain only the private revision pointer and aggregate readiness.
+- Web PR [#226](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/226) merged at `e9f5aa4d510686decde9660d6d6c165765a387f0`. Its synthetic browser helper now checks that correct and incorrect quiz answers produce the complete expected message in the polite live region; no runtime, published data, or `dist` files changed.
+- Exact-head Verify [#44070533457](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44070533457) and post-main Verify [#44071432735](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44071432735) succeeded. Main verification passed 244/244 unit tests, 92/92 browser tests, 0 skips, E2E smoke, performance budget, fixture/public-data/artifact gates, committed-dist drift and 12 Lighthouse profiles (Accessibility 100 throughout; mobile Performance 97–99; desktop 100).
+- Main artifact [#14322362752](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44071432735/artifacts/14322362752) is 118,517 bytes (SHA-256 `018a849363127e8458f882a191a4bcea936a6dec2eb973cf86d910ddf5995635`); Lighthouse report artifact is [#14322582303](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44071432735/artifacts/14322582303).
+- The Cloudflare Workers Builds check for the merged main completed successfully ([production build](https://dash.cloudflare.com/2276352cabac46c2c87ee34742cebd6b/workers/services/view/webgame-bataktoba-indo/production/builds/522e657d-1a90-427b-891c-119e1eaccb15)). Direct live reads for the homepage, flashcards, manifest, robots file and service worker were inaccessible through the available reader, so served-artifact identity remains NOT_VERIFIED and A5 stays blocked_external.
+- Published learning arrays remain empty/noindex; CI confirmed no synthetic fixture markers in `dist` and no private Engine content was transferred. Readiness remains ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- A1/A9/A12 approval gates and Git history are unchanged. Next: continue A3 short-session, keyboard/touch and accessibility work with isolated synthetic fixtures; keep data/publication gates independent.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 10:15 UTC (PR #224 merged; cross-repository state rechecked)
 
 - Reverified visibility and refs: Webgame is PUBLIC at main `f0d35541fd8a7dccc25b432b95824bce3f9e9890` / tree `11f3e7da6c3b03053249c2339a43b962af497509`; Alignment Engine is PRIVATE at main `399b1956022c4c8ab32ad258b10572f7997a4885` / tree `bc7aeda2c14ade8edfc33cbf504e505bdca6d576`. Public docs carry only the private revision pointer and aggregate readiness.
