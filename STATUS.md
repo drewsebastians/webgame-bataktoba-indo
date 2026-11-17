@@ -1,4 +1,4 @@
-## Latest execution checkpoint — 2026-11-17 03:3x UTC (Web PR #214 merged; exact-main verification passed)
+## Latest execution checkpoint — 2026-11-17 03:40 UTC (Web PR #214 merged; exact-main verification passed)
 
 - PUBLIC Webgame main is `d884d024956af65169ac5e55185fbd11b395b308` / tree `d5efa25b09c18749029274d5d2a39dd67b26c503`. PR [#214](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/214) silences the once-per-second Matching Pairs timer for screen readers and makes progress-export revocation ordering deterministic.
 - Exact-head Verify [#44009679173](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44009679173) and post-main Verify [#44010457011](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44010457011) passed. Local release verification passed 243/243 unit/data checks, 90/90 browser checks (0 skipped), smoke, drift, budgets, and 12 Lighthouse profiles; Accessibility was 100 on every profile, mobile Performance 96–99 and desktop 100.
