@@ -22,7 +22,7 @@ import { el, replaceChildren } from "./utils/dom.742eac8c.js";
 import { normalizeSearch } from "./utils/normalize.9471d62c.js";
 import { buildCorrectionUrl } from "./utils/corrections.27d36b47.js";
 import { createQuizRunner, makeQuestion, shuffleWith } from "./game/question-engine.7a9b7d86.js";
-import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.8982674c.js";
+import { buildDailyQueue, computeStreak, masteryLabel, summarizeSession } from "./game/session.702a108d.js";
 import { buildLessonPlan, collectMistakes, recommendNext } from "./game/lesson-engine.b8e8ea35.js";
 import {
   recordLessonCompletion,
