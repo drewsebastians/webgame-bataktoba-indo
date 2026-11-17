@@ -114,10 +114,18 @@ test("320px progress import restores sanitized session summaries", async ({ page
 test("progress export downloads a sanitized backup before revoking its object URL", async ({ page }) => {
   await page.addInitScript(() => {
     window.__revokedBlobUrls = [];
+    window.__revokedUrlsAtDownloadClick = null;
     const revokeObjectURL = URL.revokeObjectURL.bind(URL);
     URL.revokeObjectURL = (url) => {
       window.__revokedBlobUrls.push(url);
       return revokeObjectURL(url);
+    };
+    const anchorClick = HTMLAnchorElement.prototype.click;
+    HTMLAnchorElement.prototype.click = function (...args) {
+      if (this.download?.startsWith("batak-toba-progress-")) {
+        window.__revokedUrlsAtDownloadClick = [...window.__revokedBlobUrls];
+      }
+      return anchorClick.apply(this, args);
     };
     localStorage.setItem(
       "batakTobaPlay.progress.v2",
@@ -140,13 +148,12 @@ test("progress export downloads a sanitized backup before revoking its object UR
   const [download] = await Promise.all([page.waitForEvent("download"), exportButton.click()]);
 
   expect(download.suggestedFilename()).toMatch(/^batak-toba-progress-\d{4}-\d{2}-\d{2}\.json$/);
+  expect(await page.evaluate(() => window.__revokedUrlsAtDownloadClick)).toEqual([]);
   const backup = JSON.parse(await readFile(await download.path(), "utf8"));
   expect(backup.answered).toBe(2);
   expect(backup.correct).toBe(2);
   expect(backup).not.toHaveProperty("email");
   expect(backup).not.toHaveProperty("rawSourceText");
   expect(JSON.stringify(backup)).not.toContain("SYNTHETIC_PRIVATE_FIXTURE");
-  expect(await page.evaluate(() => window.__revokedBlobUrls)).toEqual([]);
-
   await expect.poll(() => page.evaluate(() => window.__revokedBlobUrls.length), { timeout: 3000 }).toBe(1);
 });

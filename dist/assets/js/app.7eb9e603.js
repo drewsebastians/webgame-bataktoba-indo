@@ -1328,7 +1328,10 @@ async function initGames() {
       timerToggle.textContent = state.matchingTimerOn ? "Timer: aktif" : "Timer: mati";
       if (state.matchingTimerOn) {
         state.matchingStartedAt = Date.now();
-        $("#matching-scorebar", panel)?.append(pill("Waktu 0 dtk", "", { id: "matching-time" }));
+        // The game panel is a live region; don't announce a clock update every second.
+        $("#matching-scorebar", panel)?.append(
+          pill("Waktu 0 dtk", "", { id: "matching-time", "aria-live": "off" }),
+        );
         startMatchingTimer();
       } else {
         stopMatchingTimer();
@@ -1349,7 +1352,11 @@ async function initGames() {
         pill("Matching Pairs"),
         pill(`${state.matched.size}/${state.matchingTotalPairs} cocok`),
         state.matchingTimerOn
-          ? pill(`Waktu ${Math.floor((Date.now() - state.matchingStartedAt) / 1000)} dtk`, "", { id: "matching-time" })
+          ? pill(
+              `Waktu ${Math.floor((Date.now() - state.matchingStartedAt) / 1000)} dtk`,
+              "",
+              { id: "matching-time", "aria-live": "off" },
+            )
           : null,
       ),
       el("div", { className: "action-row" }, sizeButtons),
