@@ -1,3 +1,14 @@
+## Latest execution checkpoint — 2026-11-17 06:03 UTC (Web PR #217 merged; current cross-repo gates)
+
+- PUBLIC Webgame main `2ca1f0a3200434620b54a9c76f2d511b823ff195` / tree `146a43de4d83dc7f7c9909e0731b287409148899`; PRIVATE Engine main `83da066a3d49e6b91ae5bbe31a8307d4cfb1e995` / tree `282b56a36004ce3e5f296738acc3bc052516de22`. Visibility was rechecked. This public plan stores only the private revision and aggregate readiness.
+- PR [#217](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/217) merged a daily-quiz queue fix: equivalent normalized Batak prompts now appear only once when senses have conflicting Indonesian meanings. A synthetic regression checks that the due/high-priority item wins.
+- Exact-head Verify [#44022422887](https://github.com/drewsebastians/webgame-bataktoba-indo/actions/runs/44022422887) passed 244/244 unit/data checks, 90/90 browser checks, smoke, drift, budgets, fixture isolation, and 12 Lighthouse profiles (Accessibility 100 throughout; mobile Performance 96–99; desktop 100).
+- Cloudflare Workers Builds preview signal #133834602547 succeeded for the PR. Main production deployment and direct live readback remain NOT_VERIFIED.
+- The public catalog remains empty/noindex; synthetic records remain test-only. ENGINEERING_READY=YES for this code change; DATA_READY=NO, PUBLICATION_READY=NO, LEARNING_READY=NO, MONETIZATION_READY=DEFERRED. No private Engine data or source details were transferred.
+- Continue independent desktop/mobile browser UX, short lesson flow, accessibility, PWA/offline, security, and adapter work with synthetic fixtures. Keep A5 blocked until deployed production HTML/assets can be read and matched to the main artifact.
+
+---
+
 ## Latest execution checkpoint — 2026-11-17 03:40 UTC (Web PR #214 merged; exact-main verification passed)
 
 - PUBLIC Webgame main is `d884d024956af65169ac5e55185fbd11b395b308` / tree `d5efa25b09c18749029274d5d2a39dd67b26c503`. PR [#214](https://github.com/drewsebastians/webgame-bataktoba-indo/pull/214) silences the once-per-second Matching Pairs timer for screen readers and makes progress-export revocation ordering deterministic.
