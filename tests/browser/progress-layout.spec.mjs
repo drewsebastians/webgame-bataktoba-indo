@@ -55,19 +55,20 @@ test("320px progress import restores sanitized session summaries", async ({ page
 
   const privateMarker = "SYNTHETIC_PRIVATE_FIXTURE";
   const completedAt = Date.now();
+  const sessionDateKey = new Date(completedAt).toISOString().slice(0, 10);
   const backup = {
     schemaVersion: 3,
-    answered: 2,
-    correct: 1,
+    answered: 5,
+    correct: 3,
     lastMode: "meaning",
     items: {},
     lessons: {},
     sessions: [
       {
-        dateKey: "2026-11-16",
+        dateKey: sessionDateKey,
         mode: "meaning",
-        answered: 2,
-        correct: 1,
+        answered: 5,
+        correct: 3,
         completedAt,
         email: "private@example.invalid",
         rawSourceText: privateMarker,
@@ -86,16 +87,18 @@ test("320px progress import restores sanitized session summaries", async ({ page
 
   const status = page.locator("#progress-root [role='status']");
   await expect(status).toContainText("Progress berhasil diimpor.");
-  await expect(page.getByRole("listitem", { name: "Total jawaban 2" })).toBeVisible();
-  await expect(page.getByRole("listitem", { name: "Benar 1" })).toBeVisible();
+  const stats = page.locator(".scorebar");
+  await expect(stats).toContainText("Total jawaban 5");
+  await expect(stats).toContainText("Benar 3");
+  await expect(stats.locator("[role=\"listitem\"]")).toHaveCount(8);
 
   const imported = await page.evaluate(() =>
     JSON.parse(localStorage.getItem("batakTobaPlay.progress.v2") ?? "{}"),
   );
-  expect(imported.answered).toBe(2);
-  expect(imported.correct).toBe(1);
+  expect(imported.answered).toBe(5);
+  expect(imported.correct).toBe(3);
   expect(imported.sessions).toEqual([
-    { dateKey: "2026-11-16", mode: "meaning", answered: 2, correct: 1, completedAt },
+    { dateKey: sessionDateKey, mode: "meaning", answered: 5, correct: 3, completedAt },
   ]);
   expect(JSON.stringify(imported)).not.toContain(privateMarker);
   expect(JSON.stringify(imported)).not.toContain("private@example.invalid");
