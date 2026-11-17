@@ -180,6 +180,16 @@ async function initFlashcards() {
     flipped = false;
     renderCard({ focusCard: true });
     updateProgressBadges();
+    const ratingText = {
+      wrong: "Ditandai salah.",
+      difficult: "Ditandai sulit.",
+      correct: "Ditandai benar.",
+    }[action] ?? "";
+    const positionText = deck.length
+      ? `Kartu ${index + 1} dari ${deck.length}.`
+      : "Tumpukan review sudah selesai.";
+    const announcement = flashcardQuery("#flashcard-announcement");
+    if (announcement) announcement.textContent = [ratingText, positionText].filter(Boolean).join(" ");
   }
 
   function handleKeydown(event) {
@@ -282,6 +292,16 @@ async function initFlashcards() {
     el("div", { id: "flashcard-card" }),
     el("p", {
       className: "feedback",
+      text: "",
+      attrs: {
+        id: "flashcard-announcement",
+        role: "status",
+        "aria-live": "polite",
+        "aria-atomic": "true",
+      },
+    }),
+    el("p", {
+      className: "feedback",
       text: "Saat kartu difokuskan: spasi = balik kartu, 1 = salah, 2 = sulit, 3 = benar, panah kiri/kanan = navigasi.",
     }),
   );
@@ -379,3 +399,4 @@ async function main() {
 }
 
 main().catch((error) => showError(flashcardQuery("main"), error && error.message ? error.message : "Kesalahan tidak diketahui."));
+

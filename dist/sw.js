@@ -7,7 +7,7 @@
  * that changes precached content.
  */
 
-const CACHE_VERSION = "btp-8ba98e918301";
+const CACHE_VERSION = "btp-9a18158e5dfd";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -106,3 +106,4 @@ self.addEventListener("fetch", (event) => {
   }
   // else: plain network request, no interception
 });
+
