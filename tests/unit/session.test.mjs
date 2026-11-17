@@ -82,6 +82,21 @@ describe("buildDailyQueue", () => {
     const keys = queue.map((item) => `${item.batak}|${item.indonesia}`);
     assert.equal(new Set(keys).size, keys.length);
   });
+
+  it("keeps only the highest-priority item when senses share a Batak prompt", () => {
+    const items = [
+      { id: "word-sense-one", batak: "Horas", indonesia: "salam" },
+      { id: "word-sense-two", batak: " horas ", indonesia: "sehat" },
+      { id: "word-unique", batak: "Mauliate", indonesia: "terima kasih" },
+    ];
+    const stats = {
+      "word-sense-two": { seen: 1, nextReviewAt: NOW - 1000 },
+    };
+
+    const queue = buildDailyQueue(items, stats, { size: 10, now: NOW, random: rng(9) });
+
+    assert.deepEqual(queue.map((item) => item.id), ["word-sense-two", "word-unique"]);
+  });
 });
 
 describe("summarizeSession", () => {

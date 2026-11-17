@@ -15,7 +15,7 @@ import {
 } from "./progress.40840531.js";
 import { el, replaceChildren, showError } from "./utils/dom.742eac8c.js";
 import { shuffleWith } from "./game/question-engine.7a9b7d86.js";
-import { masteryLabel } from "./game/session.8982674c.js";
+import { masteryLabel } from "./game/session.702a108d.js";
 import { track } from "./analytics.0e73c5d9.js";
 import { sweepPlaceholders } from "./ads.2ec2a9a9.js";
 

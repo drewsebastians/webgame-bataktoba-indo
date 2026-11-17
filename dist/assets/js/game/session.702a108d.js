@@ -54,11 +54,13 @@ export function buildDailyQueue(pool, statsById, { size = 10, now = Date.now(), 
     ordered.push(...shuffle(group, random));
   }
 
-  // Never include duplicate visible prompts within one session.
+  // Daily practice is always the forward meaning quiz. A Batak surface shared
+  // by different senses is still the same visible prompt, so keep only its
+  // highest-priority occurrence in a session.
   const seenPrompts = new Set();
   const uniquePrompts = [];
   for (const item of ordered) {
-    const promptKey = `${normalizeLabel(item.batak)}\u0000${normalizeLabel(item.indonesia)}`;
+    const promptKey = normalizeLabel(item.batak);
     if (seenPrompts.has(promptKey)) continue;
     seenPrompts.add(promptKey);
     uniquePrompts.push(item);
