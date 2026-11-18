@@ -39,6 +39,7 @@ import {
 } from "./game/modes.15a43a12.js";
 import { track, hasAnalyticsConsent, grantAnalyticsConsent, revokeAnalyticsConsent } from "./analytics.0e73c5d9.js";
 import { sweepPlaceholders, readAdsConsent, grantAdsConsent, revokeAdsConsent } from "./ads.2ec2a9a9.js";
+import { initPwaInstallPrompt } from "./pwa-install.467f6a9c.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -2011,6 +2012,7 @@ async function initProgressPage(notice = '') {
 }
 
 async function main() {
+  if (SITE_CONFIG.features.pwa) initPwaInstallPrompt();
   await initProgress();
   showLastModified();
   initNavToggle();

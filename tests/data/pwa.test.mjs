@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { runInNewContext } from "node:vm";
+import { initPwaInstallPrompt } from "../../assets/js/pwa-install.js";
 
 const root = new URL("../../", import.meta.url);
 
@@ -119,6 +120,83 @@ describe("service worker", () => {
     const app = readFileSync(new URL("assets/js/app.js", root), "utf8");
     assert.ok(app.includes("SITE_CONFIG.features.pwa"));
     assert.ok(!/"\/sw\.js"/.test(app), "must resolve sw path via import.meta.url, not root-absolute");
+  });
+});
+
+function createInstallHarness() {
+  const windowListeners = new Map();
+  const buttonListeners = new Map();
+  const button = {
+    hidden: true,
+    disabled: false,
+    addEventListener(name, handler) {
+      buttonListeners.set(name, handler);
+    },
+    async click() {
+      await buttonListeners.get("click")?.();
+    },
+  };
+  const status = { hidden: true, textContent: "" };
+  const documentRef = {
+    querySelector(selector) {
+      return selector === "#install-pwa" ? button : selector === "#install-pwa-status" ? status : null;
+    },
+  };
+  const windowRef = {
+    addEventListener(name, handler) {
+      windowListeners.set(name, handler);
+    },
+    dispatch(name, event = {}) {
+      windowListeners.get(name)?.(event);
+    },
+  };
+  return { button, status, windowRef, documentRef };
+}
+
+describe("browser PWA install prompt", () => {
+  it("keeps the action hidden until a browser offers installation", () => {
+    const harness = createInstallHarness();
+    initPwaInstallPrompt(harness);
+    harness.windowRef.dispatch("beforeinstallprompt", {});
+    assert.equal(harness.button.hidden, true);
+    assert.equal(harness.status.hidden, true);
+  });
+
+  it("prompts only after the learner activates the button and announces acceptance", async () => {
+    const harness = createInstallHarness();
+    initPwaInstallPrompt(harness);
+    let prevented = false;
+    let promptCount = 0;
+    harness.windowRef.dispatch("beforeinstallprompt", {
+      preventDefault() { prevented = true; },
+      async prompt() { promptCount += 1; },
+      userChoice: Promise.resolve({ outcome: "accepted" }),
+    });
+
+    assert.equal(prevented, true);
+    assert.equal(harness.button.hidden, false);
+    await harness.button.click();
+    await harness.button.click();
+    assert.equal(promptCount, 1);
+    assert.equal(harness.button.hidden, true);
+    assert.equal(harness.status.hidden, false);
+    assert.match(harness.status.textContent, /diterima/i);
+  });
+
+  it("announces dismissal and installation without storing or sending state", async () => {
+    const harness = createInstallHarness();
+    initPwaInstallPrompt(harness);
+    harness.windowRef.dispatch("beforeinstallprompt", {
+      preventDefault() {},
+      async prompt() {},
+      userChoice: Promise.resolve({ outcome: "dismissed" }),
+    });
+    await harness.button.click();
+    assert.match(harness.status.textContent, /dibatalkan/i);
+
+    harness.windowRef.dispatch("appinstalled");
+    assert.equal(harness.button.hidden, true);
+    assert.match(harness.status.textContent, /sudah dipasang/i);
   });
 });
 
