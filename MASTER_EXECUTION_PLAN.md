@@ -1,11 +1,6 @@
-## Latest execution checkpoint — 2026-11-18 (A3 privacy-header regression; exact CI pending)
+## Latest execution checkpoint — 2026-11-18 10:13 UTC
 
-- Verified the PUBLIC Webgame main baseline before editing: `666e2b7473c7e3085ab8afaafdf193c99ba05001` / tree `0ed7cda6f751594e51827e0239dedeff778c0bcd`. The paired Alignment Engine remains private; its run metadata and revision pointers stay in that repository.
-- Added regression coverage requiring the built response policy to preserve Content Security, Permissions, Referrer, MIME-sniffing, and frame-protection headers. The browser response assertion also requires camera, microphone, and geolocation access to remain disabled.
-- Local verification: 244/244 Node tests passed with 0 skips; site and governance checks passed; build passed; performance budget passed (JavaScript 184,475/196,608 bytes; CSS 16,615/49,152 bytes); generated `dist/` matches committed output. Exact-PR Playwright, E2E, Lighthouse, and full release checks are pending.
-- No application runtime or learning data changed. The public catalog remains empty and topic routes remain noindex; no synthetic or private language content was added.
-- Production deployment remains unchanged by this test-only batch. Current-main GitHub Verify run #44257268050 and Cloudflare Workers Builds check #134663481930 both succeeded for the verified public main commit. These confirm CI and the provider build only; direct canonical Pages readback did not return an HTTP response, so live served artifact identity remains NOT_VERIFIED.
-- Resume: open the PR from this branch, wait for exact-head verification, fix any failures, merge only after required checks pass, then verify the post-main run and update this checkpoint with final evidence. Continue A3 work independently of data readiness.
+The verified PUBLIC main baseline is 8e40692b232f73a94d60f125b518305f95c87ae9 / tree 791fac304b545c0680d9bf29349a854d68d9dad1. PR #235 is merged; its exact-head Verify #44278302025 and post-main Verify #44281381267 passed 244 unit tests (0 skipped), 95 Playwright checks, E2E smoke, build, performance, fixture/artifact isolation, dist parity, and 12 Lighthouse profiles. Cloudflare Workers Builds #134722994420 succeeded for provider build b374533b-001b-4223-b4dd-c8fe59547592; canonical Pages readback returned no HTTP response, so live served-artifact identity remains NOT_VERIFIED. The release still has an empty published catalog and noindex topic routes. No private or synthetic language data was added. Continue independent A3 browser work; next is the 320px flashcard touch/filter/action path. Keep engineering, data, publication, learning, and monetization readiness distinct.
 
 ---
 
