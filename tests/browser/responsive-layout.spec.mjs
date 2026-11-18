@@ -194,3 +194,36 @@ test("dictionary filters meet mobile touch target size in an isolated synthetic 
   expect(dimensions.document, "synthetic filter overflowed the 320px viewport").toBeLessThanOrEqual(dimensions.viewport);
   expect(dimensions.body, "synthetic filter overflowed the body").toBeLessThanOrEqual(dimensions.viewport);
 });
+
+test("reduced-motion preference reduces animation, transition, and smooth-scroll motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const motion = await page.evaluate(() => {
+    const probe = document.createElement("div");
+    probe.style.animationDuration = "1s";
+    probe.style.animationIterationCount = "infinite";
+    probe.style.transitionDuration = "1s";
+    probe.style.scrollBehavior = "smooth";
+    document.body.append(probe);
+
+    const computed = getComputedStyle(probe);
+    const milliseconds = (value) =>
+      value.endsWith("ms") ? Number.parseFloat(value) : Number.parseFloat(value) * 1000;
+    const result = {
+      preference: matchMedia("(prefers-reduced-motion: reduce)").matches,
+      animationDuration: milliseconds(computed.animationDuration),
+      animationIterations: computed.animationIterationCount,
+      transitionDuration: milliseconds(computed.transitionDuration),
+      scrollBehavior: computed.scrollBehavior,
+    };
+    probe.remove();
+    return result;
+  });
+
+  expect(motion.preference).toBe(true);
+  expect(motion.animationDuration).toBeLessThanOrEqual(0.02);
+  expect(motion.animationIterations).toBe("1");
+  expect(motion.transitionDuration).toBeLessThanOrEqual(0.02);
+  expect(motion.scrollBehavior).toBe("auto");
+});
