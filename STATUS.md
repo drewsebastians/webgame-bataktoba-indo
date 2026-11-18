@@ -1,11 +1,11 @@
-## Latest execution checkpoint — 2026-11-18 (A3 privacy-header regression; exact CI pending)
+## Latest execution checkpoint — 2026-11-18 10:13 UTC (A3 security response regression merged)
 
-- Verified the PUBLIC Webgame main baseline before editing: `666e2b7473c7e3085ab8afaafdf193c99ba05001` / tree `0ed7cda6f751594e51827e0239dedeff778c0bcd`. The paired Alignment Engine remains private; its run metadata and revision pointers stay in that repository.
-- Added regression coverage requiring the built response policy to preserve Content Security, Permissions, Referrer, MIME-sniffing, and frame-protection headers. The browser response assertion also requires camera, microphone, and geolocation access to remain disabled.
-- Local verification: 244/244 Node tests passed with 0 skips; site and governance checks passed; build passed; performance budget passed (JavaScript 184,475/196,608 bytes; CSS 16,615/49,152 bytes); generated `dist/` matches committed output. Exact-PR Playwright, E2E, Lighthouse, and full release checks are pending.
-- No application runtime or learning data changed. The public catalog remains empty and topic routes remain noindex; no synthetic or private language content was added.
-- Production deployment remains unchanged by this test-only batch. Current-main GitHub Verify run #44257268050 and Cloudflare Workers Builds check #134663481930 both succeeded for the verified public main commit. These confirm CI and the provider build only; direct canonical Pages readback did not return an HTTP response, so live served artifact identity remains NOT_VERIFIED.
-- Resume: open the PR from this branch, wait for exact-head verification, fix any failures, merge only after required checks pass, then verify the post-main run and update this checkpoint with final evidence. Continue A3 work independently of data readiness.
+- GitHub confirms this PUBLIC repository's main is 8e40692b232f73a94d60f125b518305f95c87ae9 / tree 791fac304b545c0680d9bf29349a854d68d9dad1. PR #235 merged at that main commit.
+- Exact-head Verify #44278302025 and post-merge Verify #44281381267 succeeded. The merged workflow reports 244 unit tests (0 skipped), 95 Playwright checks, E2E smoke, build, performance budget, synthetic-fixture/artifact isolation, committed-dist parity, and 12 Lighthouse profiles. Accessibility scored 100 on every profile; mobile Performance scored 97–99 and desktop 100.
+- Cloudflare Workers Builds check #134722994420 succeeded for provider build b374533b-001b-4223-b4dd-c8fe59547592. This confirms the provider build. A direct canonical Pages readback returned no HTTP response through the available reader, so served artifact identity remains NOT_VERIFIED.
+- This batch changes regression coverage only; no application runtime or learning data changed. The published catalog remains empty and topic pages remain noindex. Synthetic test fixtures and private data are absent from the production catalog/artifact.
+- Readiness: ENGINEERING_READY=YES for the verified site and test harness; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Next: continue A3 with the narrow 320px flashcard touch/filter/action flow, plus responsive/accessibility/PWA checks using isolated synthetic fixtures. Keep A5 live artifact identity NOT_VERIFIED until an actual served response is observed.
 
 ---
 
