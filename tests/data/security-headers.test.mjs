@@ -44,6 +44,15 @@ test("source and built CSP disallow inline executable scripts", () => {
   const sourceCsp = headerValue(sourceHeaders, "Content-Security-Policy");
   const builtCsp = headerValue(builtHeaders, "Content-Security-Policy");
 
+  for (const name of [
+    "Content-Security-Policy",
+    "Permissions-Policy",
+    "Referrer-Policy",
+    "X-Content-Type-Options",
+    "X-Frame-Options",
+  ]) {
+    assert.equal(headerValue(builtHeaders, name), headerValue(sourceHeaders, name), `built output must preserve ${name}`);
+  }
   assert.equal(builtCsp, sourceCsp, "built output must preserve the source CSP");
   assert.deepEqual(directiveValue(sourceCsp, "default-src"), ["'self'"]);
   const scriptSources = directiveValue(sourceCsp, "script-src");
@@ -61,6 +70,9 @@ test("source and built CSP disallow inline executable scripts", () => {
     assert.deepEqual(directiveValue(sourceCsp, name), expected);
   }
   assert.equal(headerValue(sourceHeaders, "X-Frame-Options"), "DENY");
+  assert.equal(headerValue(sourceHeaders, "X-Content-Type-Options"), "nosniff");
+  assert.equal(headerValue(sourceHeaders, "Referrer-Policy"), "strict-origin-when-cross-origin");
+  assert.equal(headerValue(sourceHeaders, "Permissions-Policy"), "camera=(), microphone=(), geolocation=()");
 });
 
 test("source HTML has no inline executable scripts, event handlers, or javascript URLs", () => {

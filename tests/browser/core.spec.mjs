@@ -402,6 +402,8 @@ test.describe("security & privacy invariants", () => {
     expect(csp).toContain("default-src 'self'");
     expect(csp).not.toContain("unsafe-eval");
     expect(response.headers()["x-content-type-options"]).toBe("nosniff");
+    expect(response.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+    expect(response.headers()["permissions-policy"]).toBe("camera=(), microphone=(), geolocation=()");
     expect(response.headers()["x-frame-options"]).toBe("DENY");
   });
 
