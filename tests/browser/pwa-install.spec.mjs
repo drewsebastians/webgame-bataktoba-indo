@@ -24,11 +24,6 @@ test("browser install action stays hidden until an explicit prompt and then repo
   });
 
   await expect(installButton).toBeVisible();
-  await installButton.focus();
-  await installButton.press("Enter");
-  await expect(status).toContainText(/permintaan pemasangan diterima/i);
-  await expect(installButton).toBeHidden();
-  await expect.poll(() => page.evaluate(() => window.__pwaPromptCount)).toBe(1);
   const layout = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,
     scrollWidth: document.documentElement.scrollWidth,
@@ -36,4 +31,9 @@ test("browser install action stays hidden until an explicit prompt and then repo
   }));
   expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth);
   expect(layout.installHeight).toBeGreaterThanOrEqual(44);
+  await installButton.focus();
+  await installButton.press("Enter");
+  await expect(status).toContainText(/permintaan pemasangan diterima/i);
+  await expect(installButton).toBeHidden();
+  await expect.poll(() => page.evaluate(() => window.__pwaPromptCount)).toBe(1);
 });
