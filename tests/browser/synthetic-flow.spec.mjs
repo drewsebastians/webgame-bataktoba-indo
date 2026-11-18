@@ -1287,3 +1287,28 @@ test("320px daily practice supports touch and keyboard across multiple due revie
   await expect(prompt).toBeFocused();
   await assertNoHorizontalOverflow();
 });
+
+test("daily practice ends when its eligible pool is shorter than the selected session size", async ({ page }) => {
+  const shortDailyPool = SYNTHETIC_WEBGAME_ITEMS.slice(0, 3);
+  await installSyntheticContentRoutes(page, {
+    "word-pairs.json": { schemaVersion: 1, items: shortDailyPool },
+  });
+  await page.goto("/games/");
+
+  await page.getByRole("button", { name: "5 soal", exact: true }).click();
+  await expect(page.locator(".session-progress")).toHaveAttribute("max", "5");
+  await page.getByRole("button", { name: "Latihan Harian", exact: true }).click();
+  await expect(page.locator(".session-progress")).toHaveAttribute("max", "3");
+  await expect(page.getByRole("button", { name: "5 soal", exact: true })).toHaveAttribute("aria-pressed", "true");
+
+  for (let index = 0; index < shortDailyPool.length; index += 1) {
+    await answerMeaningQuestion(page);
+  }
+
+  await expect(page.getByRole("heading", { name: "Sesi selesai", exact: true })).toBeFocused();
+  await expect(page.getByText("3 soal", { exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "Reverse Quiz" }).click();
+  await expect(page.locator(".session-progress")).toHaveAttribute("max", "5");
+  await expect(page.getByRole("button", { name: "5 soal", exact: true })).toHaveAttribute("aria-pressed", "true");
+});

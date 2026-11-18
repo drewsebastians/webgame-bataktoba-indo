@@ -589,8 +589,10 @@ async function initGames() {
     matched: new Set(),
     selected: [],
     sessionSize: getOnboarding()?.sessionSize ?? 10,
+    sessionLimit: getOnboarding()?.sessionSize ?? 10,
     sessionAnswers: [],
     inReviewMode: false,
+    startedViaDaily: false,
   };
 
   const runners = {};
@@ -634,8 +636,11 @@ async function initGames() {
       selected: [],
       startedAt: Date.now(),
       sessionSize: size,
+      sessionLimit: size,
       sessionAnswers: [],
       inReviewMode: false,
+      reviewTarget: null,
+      startedViaDaily: false,
       typedValue: "",
     };
     if (config.kind === "memory") {
@@ -666,7 +671,7 @@ async function initGames() {
   function renderQuiz() {
     const config = modes[state.mode];
     const question = state.current;
-    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionLimit : state.sessionLimit;
 
     const feedback = el("p", { className: "feedback", id: "feedback", attrs: { "aria-live": "polite" } });
     const nextButton = el("button", {
@@ -774,7 +779,7 @@ async function initGames() {
       : `Belum tepat. Jawaban yang dicari: ${correctLabel}.`;
 
     const nextButton = $("#next-question", panel);
-    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionLimit : state.sessionLimit;
     if (state.answered >= sessionLimit) {
       nextButton.textContent = "Lihat Hasil";
     } else if (state.answered + 1 === sessionLimit) {
@@ -787,7 +792,7 @@ async function initGames() {
 
   function nextQuestion({ focusPrompt = false } = {}) {
     const kind = modes[state.mode].kind;
-    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionLimit : state.sessionLimit;
     if (kind !== "memory" && state.answered >= sessionLimit) {
       if (state.inReviewMode) {
         renderSummary({ finishedReview: true });
@@ -842,7 +847,7 @@ async function initGames() {
       return;
     }
     state = { ...state, current: question, locked: false };
-    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionLimit : state.sessionLimit;
     const item = itemById(question.itemId);
     const input = el("input", {
       className: "input typed-answer-input",
@@ -945,7 +950,7 @@ async function initGames() {
     state = { ...state, current: { ...question, prompt: tf.statement }, locked: false };
 
     const feedback = el("p", { className: "feedback", attrs: { "aria-live": "polite" } });
-    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionSize : state.sessionSize;
+    const sessionLimit = state.inReviewMode ? state.reviewTarget ?? state.sessionLimit : state.sessionLimit;
 
     function answer(userSaysTrue) {
       if (state.locked) return;
@@ -1504,7 +1509,6 @@ async function initGames() {
   }
 
   function startDailyPractice() {
-    state.startedViaDaily = true;
     const progressState = getProgress();
     const queueIds = buildDailyQueue(wordPool, progressState.items, {
       size: Math.min(state.sessionSize, wordPool.length),
@@ -1519,8 +1523,10 @@ async function initGames() {
       matched: new Set(),
       selected: [],
       startedAt: Date.now(),
+      sessionLimit: queueIds.length,
       sessionAnswers: [],
       inReviewMode: false,
+      startedViaDaily: true,
     };
     saveProgress({ lastMode: "meaning" });
     $$(".mode-button[data-mode]").forEach((button) => {
