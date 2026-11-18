@@ -42,6 +42,24 @@ test.describe("core learning flows", () => {
     await expect(page.locator("#app-error")).not.toContainText("SYNTHETIC_");
   });
 
+  test("empty daily practice explains why no session starts and moves focus to the status", async ({ page }) => {
+    await page.goto("/games/");
+    const panel = page.locator("#game-panel");
+    await expect(panel).toContainText("Data soal belum tersedia untuk mode ini.");
+    await expect(panel.locator(".option")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Latihan Harian", exact: true }).click();
+
+    const status = panel.getByRole("status");
+    await expect(status).toHaveText(
+      "Latihan harian belum tersedia karena belum ada soal yang terbit. Coba lagi nanti.",
+    );
+    await expect(status).toHaveAttribute("tabindex", "-1");
+    await expect(status).toBeFocused();
+    await expect(panel.locator(".option")).toHaveCount(0);
+    await expect(panel).not.toContainText("SYNTHETIC_");
+  });
+
   test("empty topic state stays stable while the public catalog loads", async ({ page }) => {
     await page.route(/\/data\/published\/(topics|learning-items|word-pairs|lessons)\.json$/, async (route) => {
       await new Promise((resolve) => setTimeout(resolve, 150));

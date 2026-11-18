@@ -1513,7 +1513,18 @@ async function initGames() {
     const queueIds = buildDailyQueue(wordPool, progressState.items, {
       size: Math.min(state.sessionSize, wordPool.length),
     }).map((item) => item.id);
-    if (!queueIds.length) return;
+    if (!queueIds.length) {
+      replaceChildren(
+        panel,
+        el("p", {
+          className: "feedback",
+          text: "Latihan harian belum tersedia karena belum ada soal yang terbit. Coba lagi nanti.",
+          attrs: { role: "status", tabindex: "-1" },
+        }),
+      );
+      panel.firstElementChild?.focus({ preventScroll: false });
+      return;
+    }
     state = {
       ...state,
       mode: "meaning",
