@@ -179,6 +179,10 @@ h3 {
   text-decoration: none;
 }
 
+.button[hidden] {
+  display: none;
+}
+
 .button:hover {
   background: var(--red-dark);
 }
