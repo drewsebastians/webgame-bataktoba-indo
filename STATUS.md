@@ -1,3 +1,14 @@
+## Latest execution checkpoint — 2026-11-19 02:22:49 UTC (PWA install prompt merged)
+
+- PUBLIC main is 80d0937f1d1aa7f2c581e9df62abdc352127fb8c / tree 5d29e627c6f6b2237cf6c89f2b257bbb5893c5a6. Web PR #238 merged; it adds a browser-native install action shown only when supported by the browser, activated explicitly by the learner, and reports accepted, dismissed, or installed status without adding tracking or content.
+- Exact-head Verify #44318964873 and post-merge Verify #44321094591 succeeded. The exact-head run passed 247 unit tests (0 failed or skipped), 97 Playwright checks, smoke/build, performance budget, synthetic-fixture isolation, committed-dist parity, and 12 Lighthouse profiles. Accessibility scored 100 on all profiles; mobile Performance scored 97–99 and desktop 100.
+- The post-merge CI artifact verified-public-site-dist-44321094591 was uploaded (119,592 bytes). Cloudflare Workers Builds production check succeeded for build 972a54b9-678b-4c0d-8809-48308ee150cb. Technical provider build is verified; a direct readback of https://webgame-bataktoba-indo.pages.dev/ was not accessible through the available reader, so live served-artifact identity remains NOT_VERIFIED.
+- Production remains empty/noindex: CI reports no published learning items; topic routes remain noindex. Synthetic fixtures are isolated from the release artifact. No restricted linguistic data was added. Historical source-derived Git objects remain in repository history; current artifact-path gates exclude them and no history rewrite was performed.
+- Readiness: ENGINEERING_READY=YES for the verified website/PWA slice; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Session stopped at the user's request after checkpointing. On resume, continue the responsive 320px flashcard filter/action path and the remaining accessibility, privacy/security, short-session, and offline-browser checks. Keep live artifact identity NOT_VERIFIED until a served response is observed.
+
+---
+
 ## Latest execution checkpoint — 2026-11-18 10:13 UTC (A3 security response regression merged)
 
 - GitHub confirms this PUBLIC repository's main is 8e40692b232f73a94d60f125b518305f95c87ae9 / tree 791fac304b545c0680d9bf29349a854d68d9dad1. PR #235 merged at that main commit.
