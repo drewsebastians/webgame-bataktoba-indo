@@ -1,3 +1,15 @@
+## Latest execution checkpoint — 2026-11-19 02:22:49 UTC (PWA install prompt merged)
+
+- Reverified PUBLIC main at 80d0937f1d1aa7f2c581e9df62abdc352127fb8c / tree 5d29e627c6f6b2237cf6c89f2b257bbb5893c5a6; PR #238 is merged.
+- PR #238 adds a conditional install button for compatible desktop/mobile browsers. It waits for explicit user activation and shows accessible install outcome; no storage, analytics, or learning content was added.
+- Exact-head Verify #44318964873 and post-merge Verify #44321094591 succeeded: 247 unit tests (0 skipped), 97 Playwright checks, smoke/build/performance/isolation/dist checks, and 12 Lighthouse profiles. Accessibility was 100 across profiles; mobile Performance 97–99 and desktop 100.
+- Post-merge public-site artifact 14434234838 (verified-public-site-dist-44321094591, 119,592 bytes) exists. Cloudflare production build 972a54b9-678b-4c0d-8809-48308ee150cb succeeded. The provider build is verified, while direct live Pages readback remains NOT_VERIFIED because the available reader could not access the canonical URL.
+- Published catalog remains empty/noindex; fixtures are excluded from the release artifact. Historical Git objects remain untouched, and no restricted language data was transferred.
+- Readiness: ENGINEERING_READY=YES; DATA_READY=NO; PUBLICATION_READY=NO; LEARNING_READY=NO; MONETIZATION_READY=DEFERRED.
+- Execution is stopped per user request. Resume with the 320px flashcard filter/action path, then continue the open browser UX/security work.
+
+---
+
 ## Latest execution checkpoint — 2026-11-18 10:13 UTC (A3 security response regression merged)
 
 - Reverified current PUBLIC main: 8e40692b232f73a94d60f125b518305f95c87ae9 / tree 791fac304b545c0680d9bf29349a854d68d9dad1; no open PRs at checkpoint time.
